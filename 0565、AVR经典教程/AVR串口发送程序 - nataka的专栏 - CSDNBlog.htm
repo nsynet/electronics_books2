@@ -1,0 +1,841 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0059)http://blog.csdn.net/nataka/archive/2007/04/05/1552393.aspx -->
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>AVR串口发送程序 - nataka的专栏 - CSDNBlog</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META content=nataka name=author>
+<META content=Csdn name=Copyright>
+<META 
+content="串口发送程序<br />CPU:    ATMega32<br />频率：  8.0MHz<br />编译器：CodeVisionAVR   1.24.8c" 
+name=description>
+<META content=nataka,AVR,串口通讯 name=keywords><LINK 
+href="http://profile.csdn.net/nataka/picture/1.ico" rel="Shortcut Icon"><LINK 
+media=all href="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/blue_1.css" type=text/css 
+rel=stylesheet><LINK title=RSS href="http://blog.csdn.net/nataka/rss.aspx" 
+type=application/rss+xml rel=alternate>
+<META content="MSHTML 6.00.2900.3395" name=GENERATOR></HEAD>
+<BODY id=defaultuser>
+<DIV id=csdnblog_allwrap>
+<FORM language=javascript id=Form1 name=Form1 
+onsubmit="javascript:return WebForm_OnSubmit();" action=1552393.aspx 
+method=post><INPUT id=__EVENTTARGET type=hidden name=__EVENTTARGET> <INPUT 
+id=__EVENTARGUMENT type=hidden name=__EVENTARGUMENT> <INPUT 
+id="&#13;&#10;__VIEWSTATE" type=hidden name=__VIEWSTATE>
+<SCRIPT type=text/javascript>
+<!--
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</SCRIPT>
+
+<SCRIPT src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/WebResource.axd" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>
+//<![CDATA[
+var Anthem_FormID = "Form1";
+//]]>
+</SCRIPT>
+
+<SCRIPT 
+src="F:\单片机\AVR单片机\AVR程序\AVR串口发送程序 - nataka的专栏 - CSDNBlog.files\WebResource(1).axd" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="F:\单片机\AVR单片机\AVR程序\AVR串口发送程序 - nataka的专栏 - CSDNBlog.files\WebResource(2).axd" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>
+<!--
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+// -->
+</SCRIPT>
+ 
+<DIV id=csdnblog_midwrap>
+<DIV id=csdnblog_header>
+<H1><A id=Header1_HeaderTitle 
+href="http://blog.csdn.net/nataka/">nataka的专栏</A></H1>
+<H2></H2>
+<UL id=personalnav>
+  <LI><A href="http://passport.csdn.net/UserLogin.aspx">登录</A></LI>
+  <LI><A href="http://passport.csdn.net/CSDNUserRegister.aspx">注册</A></LI></UL>
+<UL id=blogsearchsty>
+  <LI><INPUT class=bolgsearch id=inputSearch 
+onkeydown="return keyb(event)"></LI>
+  <LI class=selectsty><SELECT id=Search_ddlSearchScope 
+  name=Search:ddlSearchScope><OPTION value=all selected>全站</OPTION><OPTION 
+    value=nataka>当前博客</OPTION></SELECT></LI>
+  <LI><INPUT class=bolggobtn onclick=checkNull() type=button value=搜索></LI></UL>
+<UL id=menu>
+  <LI><A href="http://hi.csdn.net/nataka">空间</A></LI>
+  <LI><A class=on href="http://blog.csdn.net/nataka">博客</A></LI>
+  <LI><A href="http://hi.csdn.net/nataka/profile/contactlist/1.html">好友</A></LI>
+  <LI><A href="http://blog.csdn.net/nataka/Gallery.aspx">相册</A></LI>
+  <LI><A class=last 
+  href="http://hi.csdn.net/nataka/profile/notebook/1.html">留言</A></LI></UL></DIV>
+<DIV id=csdnblog_sidebar>
+<DIV class=gutter>
+<DIV class=aboutauthor>
+<DL>
+  <DT>区玉东<SPAN>ID：nataka</SPAN>
+  <DD class=middle><IMG alt="" 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/1_nataka.jpg">
+  <DD class=middle><A href="http://profile.csdn.net/8/E4/edit.html"></A>
+  <DD>共<EM>26059</EM>次访问，排名<EM>4432</EM>好友<EM>0</EM>人，关注者<EM>3</EM>人<BR>
+  <DD>
+  <DT>nataka的文章
+  <DD>原创 39 篇
+  <DD>翻译 0 篇
+  <DD>转载 5 篇
+  <DD>评论 16 篇 
+  <DT>最近评论
+  <DD>ff：<A title=点击查看《回复:计算出你和另一个人的关系，准的邪门了！！！！【转载】》 
+  href="http://blog.csdn.net/nataka/archive/2005/09/03/470498.aspx#824770">哈哈，不错</A>
+  <DD>jk：<A title=点击查看《回复:RA8822液晶模块的AVR程序》 
+  href="http://blog.csdn.net/nataka/archive/2007/04/09/1557574.aspx#789825">为甚不贴全，这样只能让看到的人恶心。</A>
+  <DD>cbq：<A title=点击查看《回复:简单的S52下载线》 
+  href="http://blog.csdn.net/nataka/archive/2006/12/05/1430577.aspx#787932">不错 
+  成功了 谢谢</A>
+  <DD>z：<A title=点击查看《回复:计算出你和另一个人的关系，准的邪门了！！！！【转载】》 
+  href="http://blog.csdn.net/nataka/archive/2005/09/03/470498.aspx#781301">?</A>
+  <DD>MAOMAO：<A title=点击查看《回复:计算出你和另一个人的关系，准的邪门了！！！！【转载】》 
+  href="http://blog.csdn.net/nataka/archive/2005/09/03/470498.aspx#777282">12 
+  爱你的人<BR>希望灵验</A> 
+  <DT>文章分类
+  <DD>
+  <DIV class=publiclist_sidebar>
+  <UL>
+    <LI><A href="http://blog.csdn.net/nataka/category/251686.aspx">51单片机</A><A 
+    href="http://blog.csdn.net/nataka/category/251686.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/143905.aspx">ASP.NET</A><A 
+    href="http://blog.csdn.net/nataka/category/143905.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/267779.aspx">AVR单片机</A><A 
+    href="http://blog.csdn.net/nataka/category/267779.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/143906.aspx">C/C++</A><A 
+    href="http://blog.csdn.net/nataka/category/143906.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/147724.aspx">Linux</A><A 
+    href="http://blog.csdn.net/nataka/category/147724.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/143907.aspx">平台</A><A 
+    href="http://blog.csdn.net/nataka/category/143907.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/158554.aspx">数据库</A><A 
+    href="http://blog.csdn.net/nataka/category/158554.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/144581.aspx">网络编程</A><A 
+    href="http://blog.csdn.net/nataka/category/144581.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/143908.aspx">杂文</A><A 
+    href="http://blog.csdn.net/nataka/category/143908.aspx/rss">(RSS)</A></LI></UL></DIV>
+  <DT>收藏
+  <DD>
+  <DIV class=publiclist_sidebar>
+  <UL></UL></DIV>
+  <DT>相册
+  <DT>ADOBE
+  <DD><A href="http://blog.csdn.net/nataka/archive/2007/04/05/www.bay800.com/id" 
+  target=_self>FittingText网站</A>
+  <DT>个人空间
+  <DD><A href="http://spaces.msn.com/members/wenguodong/" target=_self>MSN 
+  Space</A>
+  <DD><A href="http://www.fotoal.com/nataka/photos/browse" 
+target=_self>广广图片社</A>
+  <DT>存档
+  <DD>
+  <DIV class=publiclist_sidebar>
+  <UL>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2008/04.aspx">2008年04月(1)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2007/10.aspx">2007年10月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2007/05.aspx">2007年05月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2007/04.aspx">2007年04月(5)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2007/03.aspx">2007年03月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2007/01.aspx">2007年01月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2006/12.aspx">2006年12月(7)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2006/11.aspx">2006年11月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2005/11.aspx">2005年11月(5)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2005/10.aspx">2005年10月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2005/09.aspx">2005年09月(12)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2005/08.aspx">2005年08月(2)</A></LI></UL></DIV><SPAN 
+  id=RecentVisitors></SPAN>
+  <DT>软件项目交易
+  <DD><IFRAME 
+  style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 180px; PADDING-TOP: 0px; HEIGHT: 32px" 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/CsdnBlogPage.htm" frameBorder=0 
+  scrolling=no></IFRAME><SPAN id=SubscriptionList>
+  <DT>订阅我的博客
+  <DD><A href="http://blog.csdn.net/nataka/Rss.aspx"><IMG alt=XML聚合 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/xml.gif" 
+  border=0></A>&nbsp;&nbsp;<A href="http://feeds.feedsky.com/csdn.net/nataka" 
+  target=_blank><IMG alt=FeedSky 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/feedsky.gif" border=0></A>
+  <DD><A 
+  href="http://www.xianguo.com/subscribe.php?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到鲜果 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/rss_xianguo.jpg" border=0></A>
+  <DD><A 
+  href="http://fusion.google.com/add?feedurl=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到Google 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/rss_google.gif" border=0></A>
+  <DD><A 
+  href="http://www.zhuaxia.com/add_channel.php?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到抓虾 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/rss_zhuaxia.gif" border=0></A>
+  <DD><A 
+  href="http://www.bloglines.com/sub/http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到BlogLines 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/rss_bloglines.gif" border=0></A>
+  <DD><A 
+  href="http://add.my.yahoo.com/rss?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到Yahoo 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/rss_yahoo.gif" border=0></A>
+  <DD><A 
+  href="http://rss.gougou.com/find_rss.jsp?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到GouGou 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/rss_gougou.gif" border=0></A>
+  <DD><A 
+  href="http://www.pageflakes.com/subscribe.aspx?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到飞鸽 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/rss_pageflakes.gif" border=0></A>
+  <DD><A 
+  href="http://www.rojo.com/add-subscription?resource=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到Rojo 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/rss_rojo.gif" border=0></A>
+  <DD><A 
+  href="http://www.newsgator.com/ngs/subscriber/subfext.aspx?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到newsgator 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/rss_newsgator.gif" border=0></A>
+  <DD><A 
+  href="http://www.netvibes.com/subscribe.php?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到netvibes 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/rss_netvibes.gif" 
+  border=0></A></SPAN> </DD></DL></DIV></DIV></DIV>
+<DIV id=csdnblog_content>
+<DIV class=gutter>
+<DIV class=default_contents>
+<DIV class=user_article>
+<SCRIPT src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/LoadFeedbackCount.js" 
+type=text/javascript></SCRIPT>
+
+<H1><IMG height=16 alt=原创 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/authorship.gif" width=15 
+border=0>&nbsp;<A 
+href="http://blog.csdn.net/nataka/archive/2007/04/05/1552393.aspx">AVR串口发送程序</A><CITE 
+class=fav_csdnstylebykimi><A class=fav_csdnstylebykimi title=收藏到我的网摘中，并分享给我的朋友 
+href="javascript:d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(saveit=window.open('http://wz.csdn.net/storeit.aspx?t='+escape(d.title)+'&amp;u='+escape(d.location.href)+'&amp;c='+escape(t),'saveit','scrollbars=no,width=590,height=300,left=75,top=20,status=no,resizable=yes'));saveit.focus();">收藏</A></CITE></H1>
+<DIV class=blogstory><SPAN id=Post.ascx_ViewPost_PreviousAndNextEntriesUp>
+<H3><A 
+href="http://blog.csdn.net/nataka/archive/2007/04/09/1557574.aspx">新一篇:&nbsp;RA8822液晶模块的AVR程序</A>&nbsp;|&nbsp;<A 
+href="http://blog.csdn.net/nataka/archive/2007/03/29/1544818.aspx">旧一篇:&nbsp;onsubmit的用法</A></H3></SPAN>
+<SCRIPT>function StorePage(){d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(keyit=window.open('http://www.365key.com/storeit.aspx?t='+escape(d.title)+'&u='+escape(d.location.href)+'&c='+escape(t),'keyit','scrollbars=no,width=475,height=575,left=75,top=20,status=no,resizable=yes'));keyit.focus();}</SCRIPT>
+
+<DIV 
+style="BORDER-RIGHT: windowtext 0.5pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 0.5pt solid; PADDING-LEFT: 5.4pt; BACKGROUND: #e6e6e6; PADDING-BOTTOM: 4px; BORDER-LEFT: windowtext 0.5pt solid; WIDTH: 95%; WORD-BREAK: break-all; PADDING-TOP: 4px; BORDER-BOTTOM: windowtext 0.5pt solid">
+<DIV><IMG id=_0_69_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_0_69_Open_Text').style.display='none'; document.getElementById('_0_69_Closed_Image').style.display='inline'; document.getElementById('_0_69_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top><IMG id=_0_69_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_0_69_Closed_Text').style.display='none'; document.getElementById('_0_69_Open_Image').style.display='inline'; document.getElementById('_0_69_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top><SPAN id=_0_69_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">/**/</SPAN><SPAN 
+id=_0_69_Open_Text><SPAN style="COLOR: #008000">/*</SPAN><SPAN 
+style="COLOR: #008000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>CPU:&nbsp;&nbsp;&nbsp;&nbsp;ATMega32<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>频率：&nbsp;&nbsp;8.0MHz<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>编译器：CodeVisionAVR&nbsp;&nbsp;&nbsp;1.24.8c<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top><BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>串口发送程序<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" 
+align=top></SPAN><SPAN style="COLOR: #008000">*/</SPAN></SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top>#include&nbsp;</SPAN><SPAN style="COLOR: #000000">&lt;</SPAN><SPAN 
+style="COLOR: #000000">mega32.h</SPAN><SPAN 
+style="COLOR: #000000">&gt;</SPAN><SPAN style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top>#include&nbsp;</SPAN><SPAN style="COLOR: #000000">&lt;</SPAN><SPAN 
+style="COLOR: #000000">delay.h</SPAN><SPAN 
+style="COLOR: #000000">&gt;</SPAN><SPAN style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top>#include&nbsp;</SPAN><SPAN style="COLOR: #000000">&lt;</SPAN><SPAN 
+style="COLOR: #000000">stdio.h</SPAN><SPAN 
+style="COLOR: #000000">&gt;</SPAN><SPAN style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;uchar&nbsp;unsigned&nbsp;char&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">&nbsp;0~255</SPAN><SPAN style="COLOR: #000000"><BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top></SPAN><SPAN style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;uint&nbsp;unsigned&nbsp;int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">&nbsp;0~65535&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;_SPK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTB.2</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;_LED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTB.3</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;CLI()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#asm("cli")</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;SEI()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#asm("sei")</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG 
+id=_339_349_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_339_349_Open_Text').style.display='none'; document.getElementById('_339_349_Closed_Image').style.display='inline'; document.getElementById('_339_349_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top><IMG id=_339_349_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_339_349_Closed_Text').style.display='none'; document.getElementById('_339_349_Open_Image').style.display='inline'; document.getElementById('_339_349_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top></SPAN><SPAN id=_339_349_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">/**/</SPAN><SPAN 
+id=_339_349_Open_Text><SPAN style="COLOR: #008000">/*</SPAN><SPAN 
+style="COLOR: #008000">&nbsp;UCSRA&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">*/</SPAN></SPAN><SPAN style="COLOR: #000000"><BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top></SPAN><SPAN style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;RXC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;TXC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;UDRE&nbsp;&nbsp;&nbsp;&nbsp;5</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;FE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;DOR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;PE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;U2X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;MPCM&nbsp;&nbsp;&nbsp;&nbsp;0</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG 
+id=_496_506_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_496_506_Open_Text').style.display='none'; document.getElementById('_496_506_Closed_Image').style.display='inline'; document.getElementById('_496_506_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top><IMG id=_496_506_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_496_506_Closed_Text').style.display='none'; document.getElementById('_496_506_Open_Image').style.display='inline'; document.getElementById('_496_506_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top></SPAN><SPAN id=_496_506_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">/**/</SPAN><SPAN 
+id=_496_506_Open_Text><SPAN style="COLOR: #008000">/*</SPAN><SPAN 
+style="COLOR: #008000">&nbsp;UCSRB&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">*/</SPAN></SPAN><SPAN style="COLOR: #000000"><BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top></SPAN><SPAN style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;RXCIE&nbsp;&nbsp;&nbsp;7</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;TXCIE&nbsp;&nbsp;&nbsp;6</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;UDRIE&nbsp;&nbsp;&nbsp;5</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;RXEN&nbsp;&nbsp;&nbsp;&nbsp;4</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;TXEN&nbsp;&nbsp;&nbsp;&nbsp;3</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;UCSZ2&nbsp;&nbsp;&nbsp;2</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;RXB8&nbsp;&nbsp;&nbsp;&nbsp;1</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;TXB8&nbsp;&nbsp;&nbsp;&nbsp;0</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG 
+id=_653_663_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_653_663_Open_Text').style.display='none'; document.getElementById('_653_663_Closed_Image').style.display='inline'; document.getElementById('_653_663_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top><IMG id=_653_663_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_653_663_Closed_Text').style.display='none'; document.getElementById('_653_663_Open_Image').style.display='inline'; document.getElementById('_653_663_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top></SPAN><SPAN id=_653_663_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">/**/</SPAN><SPAN 
+id=_653_663_Open_Text><SPAN style="COLOR: #008000">/*</SPAN><SPAN 
+style="COLOR: #008000">&nbsp;UCSRC&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">*/</SPAN></SPAN><SPAN style="COLOR: #000000"><BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top></SPAN><SPAN style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;URSEL&nbsp;&nbsp;&nbsp;7</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;UMSEL&nbsp;&nbsp;&nbsp;6</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;UPM1&nbsp;&nbsp;&nbsp;&nbsp;5</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;UPM0&nbsp;&nbsp;&nbsp;&nbsp;4</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;USBS&nbsp;&nbsp;&nbsp;&nbsp;3</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;UCSZ1&nbsp;&nbsp;&nbsp;2</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;UCSZ0&nbsp;&nbsp;&nbsp;1</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;UCPOL&nbsp;&nbsp;&nbsp;0</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">=============================================================================<BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top></SPAN><SPAN style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">&nbsp;初始化，闪亮LED<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">=============================================================================</SPAN><SPAN 
+style="COLOR: #008000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">void</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;initport(</SPAN><SPAN 
+style="COLOR: #0000ff">void</SPAN><SPAN style="COLOR: #000000">)<BR><IMG 
+id=_1003_1155_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_1003_1155_Open_Text').style.display='none'; document.getElementById('_1003_1155_Closed_Image').style.display='inline'; document.getElementById('_1003_1155_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top><IMG id=_1003_1155_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_1003_1155_Closed_Text').style.display='none'; document.getElementById('_1003_1155_Open_Image').style.display='inline'; document.getElementById('_1003_1155_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top></SPAN><SPAN id=_1003_1155_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">...</SPAN><SPAN 
+id=_1003_1155_Open_Text><SPAN style="COLOR: #000000">{<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;uchar&nbsp;i;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;DDRB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">0xFF</SPAN><SPAN style="COLOR: #000000">;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;PORTB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">0xFF</SPAN><SPAN style="COLOR: #000000">;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff">for</SPAN><SPAN style="COLOR: #000000">(i</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">0</SPAN><SPAN 
+style="COLOR: #000000">;&nbsp;i</SPAN><SPAN 
+style="COLOR: #000000">&lt;</SPAN><SPAN style="COLOR: #000000">20</SPAN><SPAN 
+style="COLOR: #000000">;&nbsp;i</SPAN><SPAN 
+style="COLOR: #000000">++</SPAN><SPAN style="COLOR: #000000">)<BR><IMG 
+id=_1077_1113_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_1077_1113_Open_Text').style.display='none'; document.getElementById('_1077_1113_Closed_Image').style.display='inline'; document.getElementById('_1077_1113_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top><IMG id=_1077_1113_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_1077_1113_Closed_Text').style.display='none'; document.getElementById('_1077_1113_Open_Image').style.display='inline'; document.getElementById('_1077_1113_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN id=_1077_1113_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">...</SPAN><SPAN 
+id=_1077_1113_Open_Text><SPAN style="COLOR: #000000">{<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_LED&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">~</SPAN><SPAN style="COLOR: #000000">_LED;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delay_ms(</SPAN><SPAN 
+style="COLOR: #000000">100</SPAN><SPAN style="COLOR: #000000">);<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;_SPK&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">0</SPAN><SPAN style="COLOR: #000000">;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;delay_ms(</SPAN><SPAN 
+style="COLOR: #000000">500</SPAN><SPAN style="COLOR: #000000">);<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;_SPK&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">1</SPAN><SPAN style="COLOR: #000000">;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" 
+align=top>}</SPAN></SPAN><SPAN style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top></SPAN><SPAN style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;BAUDRATE&nbsp;&nbsp;&nbsp;&nbsp;9600</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">#define</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;F_CPU&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8000000</SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">void</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;init_USART(</SPAN><SPAN 
+style="COLOR: #0000ff">void</SPAN><SPAN style="COLOR: #000000">)</SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">USART&nbsp;初始化</SPAN><SPAN 
+style="COLOR: #008000"><BR><IMG id=_1273_1586_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_1273_1586_Open_Text').style.display='none'; document.getElementById('_1273_1586_Closed_Image').style.display='inline'; document.getElementById('_1273_1586_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top><IMG id=_1273_1586_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_1273_1586_Closed_Text').style.display='none'; document.getElementById('_1273_1586_Open_Image').style.display='inline'; document.getElementById('_1273_1586_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top></SPAN><SPAN id=_1273_1586_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">...</SPAN><SPAN 
+id=_1273_1586_Open_Text><SPAN style="COLOR: #000000">{<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">USART&nbsp;9600&nbsp;8,&nbsp;n,1&nbsp;&nbsp;PC上位机软件(超级终端等)也要设成同样的设置才能通讯</SPAN><SPAN 
+style="COLOR: #008000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top></SPAN><SPAN 
+style="COLOR: #000000">&nbsp;&nbsp;&nbsp;&nbsp;UCSRC&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;(</SPAN><SPAN 
+style="COLOR: #000000">1</SPAN><SPAN style="COLOR: #000000">&lt;&lt;</SPAN><SPAN 
+style="COLOR: #000000">URSEL)&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">|</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">0x06</SPAN><SPAN 
+style="COLOR: #000000">;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">异步，8位数据，无奇偶校验，一个停止位，无倍速&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #008000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top></SPAN><SPAN 
+style="COLOR: #000000">&nbsp;&nbsp;&nbsp;&nbsp;UBRRL</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;(F_CPU</SPAN><SPAN 
+style="COLOR: #000000">/</SPAN><SPAN style="COLOR: #000000">BAUDRATE</SPAN><SPAN 
+style="COLOR: #000000">/</SPAN><SPAN style="COLOR: #000000">16</SPAN><SPAN 
+style="COLOR: #000000">-</SPAN><SPAN style="COLOR: #000000">1</SPAN><SPAN 
+style="COLOR: #000000">)</SPAN><SPAN style="COLOR: #000000">%</SPAN><SPAN 
+style="COLOR: #000000">256</SPAN><SPAN style="COLOR: #000000">;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;UBRRH</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;(F_CPU</SPAN><SPAN 
+style="COLOR: #000000">/</SPAN><SPAN style="COLOR: #000000">BAUDRATE</SPAN><SPAN 
+style="COLOR: #000000">/</SPAN><SPAN style="COLOR: #000000">16</SPAN><SPAN 
+style="COLOR: #000000">-</SPAN><SPAN style="COLOR: #000000">1</SPAN><SPAN 
+style="COLOR: #000000">)</SPAN><SPAN style="COLOR: #000000">/</SPAN><SPAN 
+style="COLOR: #000000">256</SPAN><SPAN style="COLOR: #000000">;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;UCSRA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">0x00</SPAN><SPAN style="COLOR: #000000">;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">&nbsp;UCSRB&nbsp;=&nbsp;(1&lt;&lt;RXCIE)|(1&lt;&lt;RXEN)|(1&lt;&lt;TXEN);&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">使能接收中断，使能接收，使能发送</SPAN><SPAN 
+style="COLOR: #008000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top></SPAN><SPAN 
+style="COLOR: #000000">&nbsp;&nbsp;&nbsp;&nbsp;UCSRB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;(</SPAN><SPAN 
+style="COLOR: #000000">1</SPAN><SPAN style="COLOR: #000000">&lt;&lt;</SPAN><SPAN 
+style="COLOR: #000000">TXEN);&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">&nbsp;使能发送</SPAN><SPAN style="COLOR: #008000"><BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" 
+align=top></SPAN><SPAN style="COLOR: #000000">}</SPAN></SPAN><SPAN 
+style="COLOR: #000000">&nbsp;&nbsp;&nbsp;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">void</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;put_c(unsigned&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff">char</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;c)&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">发送采用查询方式</SPAN><SPAN style="COLOR: #008000"><BR><IMG 
+id=_1631_1673_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_1631_1673_Open_Text').style.display='none'; document.getElementById('_1631_1673_Closed_Image').style.display='inline'; document.getElementById('_1631_1673_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top><IMG id=_1631_1673_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_1631_1673_Closed_Text').style.display='none'; document.getElementById('_1631_1673_Open_Image').style.display='inline'; document.getElementById('_1631_1673_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top></SPAN><SPAN id=_1631_1673_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">...</SPAN><SPAN 
+id=_1631_1673_Open_Text><SPAN style="COLOR: #000000">{<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff">while</SPAN><SPAN 
+style="COLOR: #000000">(&nbsp;</SPAN><SPAN style="COLOR: #000000">!</SPAN><SPAN 
+style="COLOR: #000000">(UCSRA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">&amp;</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;(</SPAN><SPAN style="COLOR: #000000">1</SPAN><SPAN 
+style="COLOR: #000000">&lt;&lt;</SPAN><SPAN 
+style="COLOR: #000000">UDRE))&nbsp;);<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;UDR</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">c;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" 
+align=top>}</SPAN></SPAN><SPAN style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">void</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;put_s(unsigned&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff">char</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;</SPAN><SPAN style="COLOR: #000000">*</SPAN><SPAN 
+style="COLOR: #000000">ptr)<BR><IMG id=_1707_1786_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_1707_1786_Open_Text').style.display='none'; document.getElementById('_1707_1786_Closed_Image').style.display='inline'; document.getElementById('_1707_1786_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top><IMG id=_1707_1786_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_1707_1786_Closed_Text').style.display='none'; document.getElementById('_1707_1786_Open_Image').style.display='inline'; document.getElementById('_1707_1786_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top></SPAN><SPAN id=_1707_1786_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">...</SPAN><SPAN 
+id=_1707_1786_Open_Text><SPAN style="COLOR: #000000">{<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff">while</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;(</SPAN><SPAN style="COLOR: #000000">*</SPAN><SPAN 
+style="COLOR: #000000">ptr)<BR><IMG id=_1724_1744_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_1724_1744_Open_Text').style.display='none'; document.getElementById('_1724_1744_Closed_Image').style.display='inline'; document.getElementById('_1724_1744_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top><IMG id=_1724_1744_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_1724_1744_Closed_Text').style.display='none'; document.getElementById('_1724_1744_Open_Image').style.display='inline'; document.getElementById('_1724_1744_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN id=_1724_1744_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">...</SPAN><SPAN 
+id=_1724_1744_Open_Text><SPAN style="COLOR: #000000">{<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;put_c(</SPAN><SPAN 
+style="COLOR: #000000">*</SPAN><SPAN style="COLOR: #000000">ptr</SPAN><SPAN 
+style="COLOR: #000000">++</SPAN><SPAN style="COLOR: #000000">);<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;put_c(</SPAN><SPAN 
+style="COLOR: #000000">0x0D</SPAN><SPAN style="COLOR: #000000">);<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;put_c(</SPAN><SPAN 
+style="COLOR: #000000">0x0A</SPAN><SPAN 
+style="COLOR: #000000">);&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #008000">//</SPAN><SPAN 
+style="COLOR: #008000">结尾发送回车换行</SPAN><SPAN style="COLOR: #008000"><BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" 
+align=top></SPAN><SPAN style="COLOR: #000000">}</SPAN></SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">char</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;ss[</SPAN><SPAN 
+style="COLOR: #000000">10</SPAN><SPAN style="COLOR: #000000">]&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">"</SPAN><SPAN style="COLOR: #000000">12345</SPAN><SPAN 
+style="COLOR: #000000">"</SPAN><SPAN style="COLOR: #000000">;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top></SPAN><SPAN 
+style="COLOR: #0000ff">void</SPAN><SPAN 
+style="COLOR: #000000">&nbsp;main()<BR><IMG id=_1824_1976_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_1824_1976_Open_Text').style.display='none'; document.getElementById('_1824_1976_Closed_Image').style.display='inline'; document.getElementById('_1824_1976_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top><IMG id=_1824_1976_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_1824_1976_Closed_Text').style.display='none'; document.getElementById('_1824_1976_Open_Image').style.display='inline'; document.getElementById('_1824_1976_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top></SPAN><SPAN id=_1824_1976_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">...</SPAN><SPAN 
+id=_1824_1976_Open_Text><SPAN style="COLOR: #000000">{<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;DDRB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">0xFF</SPAN><SPAN style="COLOR: #000000">;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;PORTB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">0xFF</SPAN><SPAN style="COLOR: #000000">;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;init_USART();<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;initport();<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff">while</SPAN><SPAN style="COLOR: #000000">(</SPAN><SPAN 
+style="COLOR: #000000">1</SPAN><SPAN style="COLOR: #000000">)<BR><IMG 
+id=_1916_1974_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_1916_1974_Open_Text').style.display='none'; document.getElementById('_1916_1974_Closed_Image').style.display='inline'; document.getElementById('_1916_1974_Closed_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top><IMG id=_1916_1974_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_1916_1974_Closed_Text').style.display='none'; document.getElementById('_1916_1974_Open_Image').style.display='inline'; document.getElementById('_1916_1974_Open_Text').style.display='inline';" 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN id=_1916_1974_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff">...</SPAN><SPAN 
+id=_1916_1974_Open_Text><SPAN style="COLOR: #000000">{<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_LED&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">=</SPAN><SPAN style="COLOR: #000000">&nbsp;</SPAN><SPAN 
+style="COLOR: #000000">~</SPAN><SPAN style="COLOR: #000000">_LED;<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delay_ms(</SPAN><SPAN 
+style="COLOR: #000000">500</SPAN><SPAN style="COLOR: #000000">);<BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;put_s(ss);<BR><IMG 
+alt="" src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" 
+align=top>&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" 
+align=top>}</SPAN></SPAN><SPAN style="COLOR: #000000"><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top><BR><IMG alt="" 
+src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/None.gif" 
+align=top></SPAN></DIV></DIV>&nbsp;
+<P class="right articalinfo">发表于 @ <A title=permalink 
+href="http://blog.csdn.net/nataka/archive/2007/04/05/1552393.aspx">2007年04月05日 
+03:39:00</A>|<A title=评论 
+href="http://blog.csdn.net/nataka/archive/2007/04/05/1552393.aspx#FeedBack">评论(<SPAN 
+id=FeedbackCount_1552393>loading...</SPAN>
+<SCRIPT type=text/javascript>AddFeedbackCountStack("1552393")</SCRIPT>
+)</A>|<A title=编辑 
+href="http://writeblog.csdn.net/PostEdit.aspx?entryId=1552393">编辑</A></P><SPAN 
+id=Post.ascx_ViewPost_PreviousAndNextEntriesDown>
+<H3><A 
+href="http://blog.csdn.net/nataka/archive/2007/04/09/1557574.aspx">新一篇:&nbsp;RA8822液晶模块的AVR程序</A>&nbsp;|&nbsp;<A 
+href="http://blog.csdn.net/nataka/archive/2007/03/29/1544818.aspx">旧一篇:&nbsp;onsubmit的用法</A></H3></SPAN></DIV></DIV>
+<DIV class=commentslist><SPAN id=Anthem_Post.ascx_Comments_ltlComments__><SPAN 
+id=Post.ascx_Comments_ltlComments>
+<DIV id=commentslist>
+<H3>评论：没有评论。</H3></DIV></SPAN></SPAN></DIV>
+<DIV class=spacecommment>
+<DIV id=Anthem_Post.ascx_PostComment_CommentUpdatePanel__>
+<DIV id=Post.ascx_PostComment_CommentUpdatePanel>
+<FIELDSET><LEGEND>发表评论</LEGEND>
+<UL>
+  <LI>姓&nbsp;&nbsp;&nbsp;名：<INPUT id=Post.ascx_PostComment_tbName maxLength=32 
+  size=40 name=Post.ascx:PostComment:tbName><SPAN 
+  id=Post.ascx_PostComment_RequiredFieldValidator2 
+  style="VISIBILITY: hidden; COLOR: red" initialvalue="" 
+  evaluationfunction="RequiredFieldValidatorEvaluateIsValid" 
+  errormessage="请输入名字" 
+  controltovalidate="Post.ascx_PostComment_tbName">请输入名字</SPAN> 
+  <LI>主&nbsp;&nbsp;&nbsp;页：<INPUT id=Post.ascx_PostComment_tbUrl maxLength=256 
+  size=40 name=Post.ascx:PostComment:tbUrl> 
+  <LI>
+  <DIV id=Post.ascx_PostComment_AntiBotImageRegion>校验码： <INPUT 
+  id=Post.ascx_PostComment_tbAntiBotImage style="WIDTH: 75px" 
+  name=Post.ascx:PostComment:tbAntiBotImage> <SPAN 
+  id=Post.ascx_PostComment_valAntiBotImage style="DISPLAY: none; COLOR: red" 
+  evaluationfunction="CustomValidatorEvaluateIsValid" 
+  display="Dynamic">检验码无效!</SPAN> <SPAN 
+  id=Anthem_Post.ascx_PostComment_imgAntiBotImage__><IMG 
+  id=Post.ascx_PostComment_imgAntiBotImage alt="" 
+  src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/AntiBotImage.jpg" align=absMiddle 
+  border=0></SPAN> <SPAN 
+  id=Anthem_Post.ascx_PostComment_lbCreateAntiBotImage__><A 
+  id=Post.ascx_PostComment_lbCreateAntiBotImage 
+  onclick="javascript:Anthem_FireCallBackEvent(this,event,'Post.ascx:PostComment:lbCreateAntiBotImage','',false,'','','',true,null,null,null,true,true);return false;" 
+  href="javascript:__doPostBack('Post.ascx$PostComment$lbCreateAntiBotImage','')">看不清,换一张</A></SPAN> 
+  </DIV></LI></UL><SPAN id=Post.ascx_PostComment_RequiredFieldValidator3 
+style="VISIBILITY: hidden; COLOR: red" initialvalue="" 
+evaluationfunction="RequiredFieldValidatorEvaluateIsValid" errormessage="请输入评论" 
+controltovalidate="Post.ascx_PostComment_tbComment">请输入评论</SPAN><BR><TEXTAREA id=Post.ascx_PostComment_tbComment name=Post.ascx:PostComment:tbComment rows=10 cols=50></TEXTAREA><BR><SPAN 
+id=Anthem_Post.ascx_PostComment_btnSubmit__><INPUT language=javascript id=Post.ascx_PostComment_btnSubmit onclick="javascript:Anthem_FireCallBackEvent(this,event,'Post.ascx:PostComment:btnSubmit','',true,'','','正在处理...',false,null,null,null,true,true);return false;WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;Post.ascx:PostComment:btnSubmit&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" type=submit value=提交 name=Post.ascx:PostComment:btnSubmit></SPAN> 
+<BR><SPAN id=Post.ascx_PostComment_Message style="COLOR: red"><A 
+href="http://passport.csdn.net/member/UserLogin.aspx?from=http://blog.csdn.net/nataka/archive/2007/04/05/1552393.aspx">登录</A></SPAN> 
+</FIELDSET> </DIV></DIV></DIV>
+<SCRIPT type=text/javascript>
+    LoadFeedbackCount();//加载评论
+    document.write("<img src='http://counter.csdn.net/pv.aspx?id=24' border=0 width=0 height=0>");// 计数器
+    </SCRIPT>
+
+<SCRIPT src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/HighLighter.js" 
+type=text/javascript></SCRIPT>
+</DIV></DIV></DIV>
+<DIV id=pubfooter>
+<DL>
+  <DT>
+  <DD>Csdn Blog version 3.1a 
+  <DD>Copyright © nataka </DD></DL></DIV></DIV>
+<SCRIPT type=text/javascript>
+<!--
+var Page_Validators =  new Array(document.getElementById("Post.ascx_PostComment_RequiredFieldValidator2"), document.getElementById("Post.ascx_PostComment_valAntiBotImage"), document.getElementById("Post.ascx_PostComment_RequiredFieldValidator3"));
+// -->
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+<!--
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+// -->
+</SCRIPT>
+</FORM>
+<SCRIPT src="AVR串口发送程序 - nataka的专栏 - CSDNBlog.files/counter.js" 
+type=text/javascript></SCRIPT>
+</DIV></BODY></HTML>

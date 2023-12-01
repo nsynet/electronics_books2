@@ -1,0 +1,17 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+D:\项目&方案\项目-语音识别\LD3320最新下载\B-LD3320开发软件包\ICR_RUN\LD_Demo.uv2
+Project File Date:  05/09/2011
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+compiling LDChip.c...
+compiling Reg_RW.c...
+linking...
+Program Size: data=63.0 xdata=32 code=3643
+creating hex file from "ICR_RUN"...
+"ICR_RUN" - 0 Error(s), 0 Warning(s).

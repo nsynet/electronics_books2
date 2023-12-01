@@ -1,0 +1,54 @@
+#include<reg52.h>
+#define uchar unsigned char
+sbit P3_4=P3^4;
+//code uchar tab[10]={0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10,};
+//code uchar tab[10]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,};
+code uchar tab[10]={0xFB,0x68,0xDD,0xFC,0x6E,0xBE,0xBF,0xE8,0xFF,0xFE};
+uchar sz[2];
+int qw,bw,sw,gw,a,b,c;
+b=0;
+void disp(void)
+{
+for(c=1;c>=0;c--)
+{
+SBUF=tab[sz[c]];
+while(!TI);
+TI=0;
+}
+}
+void scjs(void)interrupt 3
+{
+TH1=0X3C;
+TL1=0xB0;
+a=a+1;
+if(a==4)
+{
+a=0;
+P3_4=!P3_4;
+if(P3_4==0)
+{
+b++;
+//TH0*256+TL0;
+///yw=sz[0]=b/100000;
+//ww=sz[0]=b/10000%10;
+//qw=sz[0]=b/1000%10;
+//bw=sz[0]=b/100%10;
+sw=sz[1]=b/10%10;
+gw=sz[0]=b%10;
+disp();
+}
+}
+}
+main()
+{
+TMOD=0x15;
+IE=0X88;
+TH1=0X3C;
+TL1=0XB0;
+TR0=1;
+TR1=1;
+a=0;
+while(1);
+}
+
+

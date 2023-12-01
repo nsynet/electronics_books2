@@ -1,0 +1,498 @@
+                         .module sound.c
+                         .area vector(rom, abs)
+                         .org 14
+ 000E 0EC0              rjmp _timer0
+                         .org 8
+ 0008 22C0              rjmp _timer1
+                         .area lit(rom, con, rel)
+ 0000                 _music_data::
+ 0000 B801              .word 440
+ 0002 5802              .word 600
+ 0004 EE01              .word 494
+ 0006 C800              .word 200
+ 0008 0B02              .word 523
+ 000A 5802              .word 600
+ 000C B801              .word 440
+ 000E C800              .word 200
+ 0010 0B02              .word 523
+ 0012 9001              .word 400
+ 0014 EE01              .word 494
+ 0016 C800              .word 200
+ 0018 B801              .word 440
+ 001A C800              .word 200
+ 001C EE01              .word 494
+ 001E 9001              .word 400
+ 0020 4A01              .word 330
+ 0022 9001              .word 400
+ 0024 EE01              .word 494
+ 0026 5802              .word 600
+ 0028 0B02              .word 523
+ 002A C800              .word 200
+ 002C 4202              .word 578
+ 002E 5802              .word 600
+ 0030 EE01              .word 494
+ 0032 C800              .word 200
+ 0034 4202              .word 578
+ 0036 9001              .word 400
+ 0038 0B02              .word 523
+ 003A C800              .word 200
+ 003C EE01              .word 494
+ 003E C800              .word 200
+ 0040 B801              .word 440
+ 0042 2003              .word 800
+ 0044 9302              .word 659
+ 0046 9001              .word 400
+ 0048 7003              .word 880
+ 004A 9001              .word 400
+ 004C 1003              .word 784
+ 004E 9001              .word 400
+ 0050 7003              .word 880
+ 0052 C800              .word 200
+ 0054 1003              .word 784
+ 0056 C800              .word 200
+ 0058 BA02              .word 698
+ 005A 9001              .word 400
+ 005C 9302              .word 659
+ 005E C800              .word 200
+ 0060 4202              .word 578
+ 0062 C800              .word 200
+ 0064 9302              .word 659
+ 0066 9001              .word 400
+ 0068 B801              .word 440
+ 006A 9001              .word 400
+ 006C 0000              .word 0
+ 006E C800              .word 200
+ 0070 BA02              .word 698
+ 0072 9001              .word 400
+ 0074 4202              .word 578
+ 0076 C800              .word 200
+ 0078 9302              .word 659
+ 007A 5802              .word 600
+ 007C 0B02              .word 523
+ 007E C800              .word 200
+ 0080 EE01              .word 494
+ 0082 C800              .word 200
+ 0084 4A01              .word 330
+ 0086 C800              .word 200
+ 0088 0B02              .word 523
+ 008A C800              .word 200
+ 008C EE01              .word 494
+ 008E C800              .word 200
+ 0090 B801              .word 440
+ 0092 2003              .word 800
+ 0094 9302              .word 659
+ 0096 9001              .word 400
+ 0098 7003              .word 880
+ 009A 9001              .word 400
+ 009C 1003              .word 784
+ 009E 9001              .word 400
+ 00A0 7003              .word 880
+ 00A2 C800              .word 200
+ 00A4 1003              .word 784
+ 00A6 C800              .word 200
+ 00A8 BA02              .word 698
+ 00AA 9001              .word 400
+ 00AC 9302              .word 659
+ 00AE C800              .word 200
+ 00B0 4202              .word 578
+ 00B2 C800              .word 200
+ 00B4 9302              .word 659
+ 00B6 9001              .word 400
+ 00B8 B801              .word 440
+ 00BA 9001              .word 400
+ 00BC 0000              .word 0
+ 00BE C800              .word 200
+ 00C0 BA02              .word 698
+ 00C2 9001              .word 400
+ 00C4 4202              .word 578
+ 00C6 C800              .word 200
+ 00C8 9302              .word 659
+ 00CA 5802              .word 600
+ 00CC 0B02              .word 523
+ 00CE C800              .word 200
+ 00D0 EE01              .word 494
+ 00D2 C800              .word 200
+ 00D4 4A01              .word 330
+ 00D6 C800              .word 200
+ 00D8 0B02              .word 523
+ 00DA C800              .word 200
+ 00DC EE01              .word 494
+ 00DE C800              .word 200
+ 00E0 B801              .word 440
+ 00E2 2003              .word 800
+ 00E4 0000              .word 0
+ 00E6 0000              .word 0
+ 00E8                   .dbfile D:\ICC-AVR\examples.sl\music\sound.c
+ 00E8                   .dbsym s music_data _music_data A[232:58:2]i
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\music\sound.c
+ 0000                 _delay::
+ 0000                   .blkb 2
+                         .area idata
+ 0000 0000              .word 0
+                         .area data(ram, con, rel)
+ 0002                   .dbfile D:\ICC-AVR\examples.sl\music\sound.c
+ 0002                   .dbsym s delay _delay i
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\music\sound.c
+ 0000                   .dbfunc s music_init _music_init fI
+                         .even
+ 0000                 _music_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 42
+                       ; /**********************************************
+                       ;              http://www.sl.com.cn
+                       ;       双龙电子公司----电脑音乐演示程序(ICCAVR)
+                       ;                  作者：詹卫前
+                       ;           1、学习定时器T0溢出中断的使用
+                       ;           2、学习定时器T1比较中断的使用
+                       ;           3、学习电脑音乐的产生
+                       ; **********************************************/
+                       ; #include <io8515.h>
+                       ; #include <macros.h>
+                       ; #pragma interrupt_handler timer0:IT_TIMER0_OVF
+                       ; #pragma interrupt_handler timer1:IT_TIMER1_COMPA
+                       ; const unsigned int music_data[][2]=
+                       ; /*******************************************
+                       ;        卡秋莎音乐数据{x,y}
+                       ;        x:对应音符音阶(频率),0表示休止符
+                       ;        y:对应音符节拍
+                       ; ********************************************/
+                       ; {
+                       ; {440,600} ,{494,200} ,{523,600} ,{440,200},
+                       ; {523,400} ,{494,200} ,{440,200} ,{494,400},
+                       ; {330,400} ,{494,600} ,{523,200} ,{578,600},
+                       ; {494,200} ,{578,400} ,{523,200} ,{494,200},
+                       ; {440,800} ,{659,400} ,{880,400} ,{784,400},
+                       ; {880,200} ,{784,200} ,{698,400} ,{659,200},
+                       ; {578,200} ,{659,400} ,{440,400} ,{  0,200},//休止符
+                       ; {698,400} ,{578,200} ,{659,600} ,{523,200},
+                       ; {494,200} ,{330,200} ,{523,200} ,{494,200},
+                       ; {440,800} ,{659,400} ,{880,400} ,{784,400},
+                       ; {880,200} ,{784,200} ,{698,400} ,{659,200},
+                       ; {578,200} ,{659,400} ,{440,400} ,{  0,200},//休止符
+                       ; {698,400} ,{578,200}, {659,600} ,{523,200},
+                       ; {494,200} ,{330,200}, {523,200} ,{494,200},
+                       ; {440,800} ,
+                       ; {0,0}};
+                       ; #pragma data:data
+                       ; unsigned int delay=0;
+                       ; /*******************************
+                       ;        MCU初始化
+                       ; *******************************/
+                       ; void music_init(void)
+                       ;  {
+ 0000                   .dbline 43
+                       ;   MCUCR=0x00;
+ 0000 2224              clr R2
+ 0002 25BE              out 0x35,R2
+ 0004                   .dbline 44
+                       ;   DDRC=0x01;
+ 0004 81E0              ldi R24,1
+ 0006 84BB              out 0x14,R24
+ 0008                   .dbline 45
+                       ;   TCCR1A=0x00;
+ 0008 2FBC              out 0x2f,R2
+ 000A                   .dbline 46
+                       ;   TCCR1B=0x09;
+ 000A 89E0              ldi R24,9
+ 000C 8EBD              out 0x2e,R24
+ 000E                   .dbline 47
+                       ;   TCCR0=0x03;
+ 000E 83E0              ldi R24,3
+ 0010 83BF              out 0x33,R24
+ 0012                   .dbline 48
+                       ;   TCNT0=0x19;
+ 0012 89E1              ldi R24,25
+ 0014 82BF              out 0x32,R24
+ 0016                   .dbline 49
+                       ;   TIMSK=(1<<OCIE1A)|(1<<TOIE0);
+ 0016 82E4              ldi R24,66
+ 0018 89BF              out 0x39,R24
+ 001A                   .dbline -2
+ 001A                   .dbline 50
+                       ;   }
+ 001A                 L1:
+ 001A                   .dbline 0 ; func end
+ 001A 0895              ret
+ 001C                   .dbfunc s timer0 _timer0 fI
+                         .even
+ 001C                 _timer0::
+ 001C 8A93              st -y,R24
+ 001E 9A93              st -y,R25
+ 0020 8FB7              in R24,0x3f
+ 0022 8A93              st -y,R24
+ 0024                   .dbline -1
+ 0024                   .dbline 55
+                       ; /**************************************************
+                       ;       T0中断程序，产生音乐节拍
+                       ; **************************************************/  
+                       ; void timer0(void) 
+                       ;     {
+ 0024                   .dbline 56
+                       ;      delay++;
+ 0024 80910000          lds R24,_delay
+ 0028 90910100          lds R25,_delay+1
+ 002C 0196              adiw R24,1
+ 002E 90930100          sts _delay+1,R25
+ 0032 80930000          sts _delay,R24
+ 0036                   .dbline 57
+                       ;      TCNT0=0x19;
+ 0036 89E1              ldi R24,25
+ 0038 82BF              out 0x32,R24
+ 003A                   .dbline -2
+ 003A                   .dbline 58
+                       ;     }
+ 003A                 L2:
+ 003A 8991              ld R24,y+
+ 003C 8FBF              out 0x3f,R24
+ 003E 9991              ld R25,y+
+ 0040 8991              ld R24,y+
+ 0042                   .dbline 0 ; func end
+ 0042 1895              reti
+ 0044                   .dbfunc s timer1 _timer1 fI
+                         .even
+ 0044                 _timer1::
+ 0044 2A92              st -y,R2
+ 0046 8A93              st -y,R24
+ 0048 2FB6              in R2,0x3f
+ 004A 2A92              st -y,R2
+ 004C                   .dbline -1
+ 004C                   .dbline 63
+                       ; /**************************************************
+                       ;       T1中断程序，根据SOUND函数输出一定频率的方波
+                       ; **************************************************/  
+                       ; void timer1(void) 
+                       ;     {
+ 004C                   .dbline 64
+                       ;      PORTC^=0x01;
+ 004C 81E0              ldi R24,1
+ 004E 25B2              in R2,0x15
+ 0050 2826              eor R2,R24
+ 0052 25BA              out 0x15,R2
+ 0054                   .dbline -2
+ 0054                   .dbline 65
+                       ;     }
+ 0054                 L3:
+ 0054 2990              ld R2,y+
+ 0056 2FBE              out 0x3f,R2
+ 0058 8991              ld R24,y+
+ 005A 2990              ld R2,y+
+ 005C                   .dbline 0 ; func end
+ 005C 1895              reti
+ 005E                   .dbfunc s sound _sound fI
+                       ;              y -> R10,R11
+                       ;              x -> R12,R13
+                         .even
+ 005E                 _sound::
+ 005E 00D0              rcall push_gset4
+ 0060 A22E              mov R10,R18
+ 0062 B32E              mov R11,R19
+ 0064 C02E              mov R12,R16
+ 0066 D12E              mov R13,R17
+ 0068                   .dbline -1
+ 0068                   .dbline 72
+                       ; /*****************************************************
+                       ;       SOUND程序，输出频率为 x HZ的方波,延时 y MS
+                       ;        x:100~20000 HZ, 0表示不发声
+                       ;        y:0~65536 MS
+                       ; *****************************************************/     
+                       ; void sound(unsigned int x,unsigned int y)
+                       ;     {
+ 0068                   .dbline 73
+                       ;        SEI(); 
+ 0068 7894              sei
+ 006A                   .dbline 74
+                       ;        delay=0; 
+ 006A 2224              clr R2
+ 006C 3324              clr R3
+ 006E 30920100          sts _delay+1,R3
+ 0072 20920000          sts _delay,R2
+ 0076                   .dbline 75
+                       ;        if (x!=0)
+ 0076 CC20              tst R12
+ 0078 11F4              brne X0
+ 007A DD20              tst R13
+ 007C 59F1              breq L5
+ 007E                 X0:
+ 007E                   .dbline 76
+                       ;         {         
+ 007E                   .dbline 77
+                       ;          x=4000000/x; 
+ 007E 2C2C              mov R2,R12
+ 0080 3D2C              mov R3,R13
+ 0082 4424              clr R4
+ 0084 5524              clr R5
+ 0086 40E0              ldi R20,0
+ 0088 59E0              ldi R21,9
+ 008A 6DE3              ldi R22,61
+ 008C 70E0              ldi R23,0
+ 008E 5A92              st -y,R5
+ 0090 4A92              st -y,R4
+ 0092 3A92              st -y,R3
+ 0094 2A92              st -y,R2
+ 0096 042F              mov R16,R20
+ 0098 152F              mov R17,R21
+ 009A 262F              mov R18,R22
+ 009C 372F              mov R19,R23
+ 009E 00D0              rcall div32s
+ 00A0 C02E              mov R12,R16
+ 00A2 D12E              mov R13,R17
+ 00A4                   .dbline 78
+                       ;          OCR1A=x;   
+ 00A4 D0924B00          sts 74+1,R13
+ 00A8 C0924A00          sts 74,R12
+ 00AC                   .dbline 79
+                       ;          TCNT1=0x00;
+ 00AC 2224              clr R2
+ 00AE 3324              clr R3
+ 00B0 30924D00          sts 76+1,R3
+ 00B4 20924C00          sts 76,R2
+ 00B8                   .dbline 80
+                       ;          TIMSK|=(1<<OCIE1A);
+ 00B8 89B7              in R24,0x39
+ 00BA 8064              ori R24,64
+ 00BC 89BF              out 0x39,R24
+ 00BE                 L7:
+ 00BE                   .dbline 82
+ 00BE                 L8:
+ 00BE                   .dbline 81
+                       ;           while(delay<y)
+ 00BE 20900000          lds R2,_delay
+ 00C2 30900100          lds R3,_delay+1
+ 00C6 2A14              cp R2,R10
+ 00C8 3B04              cpc R3,R11
+ 00CA C8F3              brlo L7
+ 00CC                   .dbline 83
+                       ;           ;
+                       ;           TIMSK&=~(1<<OCIE1A);      
+ 00CC 89B7              in R24,0x39
+ 00CE 8F7B              andi R24,191
+ 00D0 89BF              out 0x39,R24
+ 00D2                   .dbline 84
+                       ;          }
+ 00D2 0AC0              rjmp L6
+ 00D4                 L5:
+ 00D4                   .dbline 86
+                       ;       else
+                       ;          {
+ 00D4                   .dbline 87
+                       ;           TIMSK&=~(1<<OCIE1A);
+ 00D4 89B7              in R24,0x39
+ 00D6 8F7B              andi R24,191
+ 00D8 89BF              out 0x39,R24
+ 00DA                 L10:
+ 00DA                   .dbline 89
+ 00DA                 L11:
+ 00DA                   .dbline 88
+                       ;           while(delay<y)
+ 00DA 20900000          lds R2,_delay
+ 00DE 30900100          lds R3,_delay+1
+ 00E2 2A14              cp R2,R10
+ 00E4 3B04              cpc R3,R11
+ 00E6 C8F3              brlo L10
+ 00E8                   .dbline 90
+                       ;           ;
+                       ;           }
+ 00E8                 L6:
+ 00E8                   .dbline 91
+                       ;       CLI(); 
+ 00E8 F894              cli
+ 00EA                   .dbline -2
+ 00EA                   .dbline 93
+                       ;              
+                       ;     }
+ 00EA                 L4:
+ 00EA 00D0              rcall pop_gset4
+ 00EC                   .dbline 0 ; func end
+ 00EC 0895              ret
+ 00EE                   .dbsym r y 10 i
+ 00EE                   .dbsym r x 12 i
+ 00EE                   .dbfunc s main _main fI
+                       ;              i -> R20
+                         .even
+ 00EE                 _main::
+ 00EE                   .dbline -1
+ 00EE                   .dbline 98
+                       ; /*******************************
+                       ;           主程序
+                       ; *******************************/  
+                       ; void main(void)
+                       ;   {
+ 00EE                   .dbline 99
+                       ;    unsigned char i=0;
+ 00EE 4427              clr R20
+ 00F0                   .dbline 100
+                       ;    music_init();  
+ 00F0 87DF              rcall _music_init
+ 00F2 27C0              rjmp L15
+ 00F4                 X1:
+ 00F4                   .dbline 102
+                       ;    while(1)
+                       ;       { 
+ 00F4                 L17:
+ 00F4                   .dbline 104
+ 00F4                   .dbline 105
+ 00F4 242E              mov R2,R20
+ 00F6 3324              clr R3
+ 00F8 220C              lsl R2
+ 00FA 331C              rol R3
+ 00FC 220C              lsl R2
+ 00FE 331C              rol R3
+ 0100 80E0              ldi R24,<_music_data+2
+ 0102 90E0              ldi R25,>_music_data+2
+ 0104 022D              mov R16,R2
+ 0106 132D              mov R17,R3
+ 0108 080F              add R16,R24
+ 010A 191F              adc R17,R25
+ 010C 00D0              rcall lpm16
+ 010E 202F              mov R18,R16
+ 0110 312F              mov R19,R17
+ 0112 80E0              ldi R24,<_music_data
+ 0114 90E0              ldi R25,>_music_data
+ 0116 022D              mov R16,R2
+ 0118 132D              mov R17,R3
+ 011A 080F              add R16,R24
+ 011C 191F              adc R17,R25
+ 011E 00D0              rcall lpm16
+ 0120 9EDF              rcall _sound
+ 0122                   .dbline 106
+ 0122 4395              inc R20
+ 0124                   .dbline 107
+ 0124                 L18:
+ 0124                   .dbline 103
+ 0124 80E0              ldi R24,<_music_data+2
+ 0126 90E0              ldi R25,>_music_data+2
+ 0128 042F              mov R16,R20
+ 012A 1127              clr R17
+ 012C 000F              lsl R16
+ 012E 111F              rol R17
+ 0130 000F              lsl R16
+ 0132 111F              rol R17
+ 0134 080F              add R16,R24
+ 0136 191F              adc R17,R25
+ 0138 00D0              rcall lpm16
+ 013A 0030              cpi R16,0
+ 013C 0107              cpc R16,R17
+ 013E D1F6              brne L17
+ 0140                   .dbline 108
+ 0140 4427              clr R20
+ 0142                   .dbline 109
+ 0142                 L15:
+ 0142                   .dbline 101
+ 0142 F0CF              rjmp L18
+ 0144                 X2:
+ 0144                   .dbline -2
+ 0144                   .dbline 110
+                       ;        while(music_data[i][1]!=0)
+                       ;            {
+                       ;             sound(music_data[i][0],music_data[i][1]);
+                       ;             i++;
+                       ;             }
+                       ;        i=0;     
+                       ;        }
+                       ;    }
+ 0144                 L13:
+ 0144                   .dbline 0 ; func end
+ 0144 0895              ret
+ 0146                   .dbsym r i 20 c

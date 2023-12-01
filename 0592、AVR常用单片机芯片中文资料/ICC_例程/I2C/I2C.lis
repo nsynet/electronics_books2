@@ -1,0 +1,615 @@
+                         .module I2C.c
+                         .area code(ram, con, rel)
+                         .area lit(rom, con, rel)
+ 0000                 _tabel::
+ 0000 3F06              .byte 63,6
+ 0002 5B4F              .byte 91,'O
+ 0004 666D              .byte 'f,'m
+ 0006 7D07              .byte 125,7
+ 0008 7F6F              .byte 127,'o
+ 000A 777C              .byte 'w,124
+ 000C 395E              .byte 57,94
+ 000E 7971              .byte 'y,'q
+ 0010                   .dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+ 0010                   .dbsym s tabel _tabel Ac[16:16]
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+ 0000                 _ledbuff::
+ 0000                   .blkb 2
+                         .area idata
+ 0000 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0002                   .dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+ 0002                   .blkb 2
+                         .area idata
+ 0002 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0004                   .dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+ 0004                   .blkb 2
+                         .area idata
+ 0004 0000              .byte 0,0
+                         .area data(ram, con, rel)
+ 0006                   .dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+ 0006                   .dbsym s ledbuff _ledbuff Ac[6:6]
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+ 0000                   .dbfunc s i2c_Write _i2c_Write fI
+                       ;     RomAddress -> R22
+                       ;          Wdata -> R20
+                         .even
+ 0000                 _i2c_Write::
+ 0000 00D0              rcall push_gset2
+ 0002 622F              mov R22,R18
+ 0004 402F              mov R20,R16
+ 0006                   .dbline 25{
+                       ; /**********************************************
+                       ;              http://www.sl.com.cn
+                       ;       双龙电子公司----I2C总线演示程序(ICCAVR)
+                       ;                  作者：詹卫前
+                       ;           1、以访问AT24C02为例
+                       ;           2、SDA ：PORTA.0
+                       ;           3、SCL : PORTA.1
+                       ;     使用注意：1、应包含头文件slavr.h
+                       ;               2、在工程选项中的Additional Lib中填入slavr
+                       ;                  使用编译器使用附加库文件libslavr.a
+                       ; ***********************************************/
+                       ; #include <io8515.h>
+                       ; #include <slavr.h>
+                       ;           /*   七段译码字形表     */
+                       ; #pragma data:code                 
+                       ; const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+                       ; #pragma data:data
+                       ;           /*     显示缓冲区       */
+                       ; unsigned char ledbuff[]={0x3f,0x3f,0x3f,0x3f,0x00,0x00};
+                       ; unsigned char at24_add,at24_data;
+                       ; /******************************************
+                       ;                I2C总线写一个字节
+                       ; *******************************************/
+                       ; void i2c_Write(unsigned char Wdata,unsigned char RomAddress) 
+                       ; {
+ 0006                   .dbline 26
+                       ;       Start();
+ 0006 00D0              rcall _Start
+ 0008                   .dbline 27
+                       ;       Write8Bit(0xa0);
+ 0008 00EA              ldi R16,160
+ 000A 00D0              rcall _Write8Bit
+ 000C                   .dbline 28
+                       ;       TestAck();
+ 000C 00D0              rcall _TestAck
+ 000E                   .dbline 29
+                       ;       Write8Bit(RomAddress);
+ 000E 062F              mov R16,R22
+ 0010 00D0              rcall _Write8Bit
+ 0012                   .dbline 30
+                       ;       TestAck();    
+ 0012 00D0              rcall _TestAck
+ 0014                   .dbline 31
+                       ;       Write8Bit(Wdata);
+ 0014 042F              mov R16,R20
+ 0016 00D0              rcall _Write8Bit
+ 0018                   .dbline 32
+                       ;       TestAck();        
+ 0018 00D0              rcall _TestAck
+ 001A                   .dbline 33
+                       ;       Stop();
+ 001A 00D0              rcall _Stop
+ 001C                   .dbline 34
+                       ;       delay_ms(10);
+ 001C 0AE0              ldi R16,10
+ 001E 10E0              ldi R17,0
+ 0020 00D0              rcall _delay_ms
+ 0022                   .dbline 35}
+                       ; }
+ 0022                 L1:
+ 0022 00D0              rcall pop_gset2
+ 0024 0895              ret
+ 0026                   .dbsym r RomAddress 22 c
+ 0026                   .dbsym r Wdata 20 c
+ 0026                   .dbfunc s i2c_Read _i2c_Read fI
+                       ;           temp -> R20
+                       ;     RomAddress -> R20
+                         .even
+ 0026                 _i2c_Read::
+ 0026 00D0              rcall push_gset1
+ 0028 402F              mov R20,R16
+ 002A                   .dbline 40{
+                       ; /******************************************
+                       ;                I2C总线读一个字节
+                       ; *******************************************/
+                       ; unsigned char i2c_Read(unsigned char RomAddress) 
+                       ;       {
+ 002A                   .dbline 42
+                       ;        unsigned char temp;
+                       ;        Start();
+ 002A 00D0              rcall _Start
+ 002C                   .dbline 43
+                       ;        Write8Bit(0xa0); 
+ 002C 00EA              ldi R16,160
+ 002E 00D0              rcall _Write8Bit
+ 0030                   .dbline 44
+                       ;        TestAck();
+ 0030 00D0              rcall _TestAck
+ 0032                   .dbline 45
+                       ;        Write8Bit(RomAddress);
+ 0032 042F              mov R16,R20
+ 0034 00D0              rcall _Write8Bit
+ 0036                   .dbline 46
+                       ;        TestAck();
+ 0036 00D0              rcall _TestAck
+ 0038                   .dbline 47
+                       ;        Start();
+ 0038 00D0              rcall _Start
+ 003A                   .dbline 48
+                       ;        Write8Bit(0xa1);
+ 003A 01EA              ldi R16,161
+ 003C 00D0              rcall _Write8Bit
+ 003E                   .dbline 49
+                       ;        TestAck();   
+ 003E 00D0              rcall _TestAck
+ 0040                   .dbline 50
+                       ;        temp=Read8Bit();
+ 0040 00D0              rcall _Read8Bit
+ 0042 202E              mov R2,R16
+ 0044 312E              mov R3,R17
+ 0046 422D              mov R20,R2
+ 0048                   .dbline 51
+                       ;        NoAck();
+ 0048 00D0              rcall _NoAck
+ 004A                   .dbline 52
+                       ;        Stop();
+ 004A 00D0              rcall _Stop
+ 004C                   .dbline 53
+                       ;        return temp;
+ 004C 042F              mov R16,R20
+ 004E 1127              clr R17
+ 0050                 L2:
+ 0050 00D0              rcall pop_gset1
+ 0052 0895              ret
+ 0054                   .dbline 54}
+ 0054                   .dbsym r temp 20 c
+ 0054                   .dbsym r RomAddress 20 c
+ 0054                   .dbfunc s port_init _port_init fI
+                         .even
+ 0054                 _port_init::
+ 0054                   .dbline 59{
+                       ;       }   
+                       ; /******************************************
+                       ;                端口初始化
+                       ; *******************************************/
+                       ; void port_init(void)
+                       ;  {
+ 0054                   .dbline 60
+                       ;   DDRD=0x3f;
+ 0054 8FE3              ldi R24,63
+ 0056 81BB              out 0x11,R24
+ 0058                   .dbline 61
+                       ;   DDRB=0xff;
+ 0058 8FEF              ldi R24,255
+ 005A 87BB              out 0x17,R24
+ 005C                   .dbline 62
+                       ;   PORTD=0xff;
+ 005C 82BB              out 0x12,R24
+ 005E                   .dbline 63
+                       ;   PORTB=0xff;
+ 005E 88BB              out 0x18,R24
+ 0060                   .dbline 64}
+                       ;  }
+ 0060                 L3:
+ 0060 0895              ret
+ 0062                   .dbfunc s display _display fI
+                       ;              i -> R20
+                         .even
+ 0062                 _display::
+ 0062 00D0              rcall push_gset1
+ 0064                   .dbline 69{
+                       ; /******************************************
+                       ;           六路动态扫描显示电路
+                       ; *******************************************/
+                       ; void display(void)
+                       ; {
+ 0064                   .dbline 71
+                       ;  unsigned char i;
+                       ;   i=at24_data%16;
+ 0064 10E1              ldi R17,16
+ 0066 00910000          lds R16,_at24_data
+ 006A 00D0              rcall mod8u
+ 006C 402F              mov R20,R16
+ 006E                   .dbline 72
+                       ;   ledbuff[0]=tabel[i];
+ 006E 80E0              ldi R24,<_tabel
+ 0070 90E0              ldi R25,>_tabel
+ 0072 242E              mov R2,R20
+ 0074 3324              clr R3
+ 0076 280E              add R2,R24
+ 0078 391E              adc R3,R25
+ 007A E22D              mov R30,R2
+ 007C F32D              mov R31,R3
+ 007E C895              lpm
+ 0080 00920000          sts _ledbuff,R0
+ 0084                   .dbline 73
+                       ;   i=at24_data/16;
+ 0084 10E1              ldi R17,16
+ 0086 00910000          lds R16,_at24_data
+ 008A 00D0              rcall div8u
+ 008C 402F              mov R20,R16
+ 008E                   .dbline 74
+                       ;   ledbuff[1]=tabel[i];
+ 008E 80E0              ldi R24,<_tabel
+ 0090 90E0              ldi R25,>_tabel
+ 0092 242E              mov R2,R20
+ 0094 3324              clr R3
+ 0096 280E              add R2,R24
+ 0098 391E              adc R3,R25
+ 009A E22D              mov R30,R2
+ 009C F32D              mov R31,R3
+ 009E C895              lpm
+ 00A0 00920100          sts _ledbuff+1,R0
+ 00A4                   .dbline 75
+                       ;   i=at24_add%16;
+ 00A4 10E1              ldi R17,16
+ 00A6 00910100          lds R16,_at24_add
+ 00AA 00D0              rcall mod8u
+ 00AC 402F              mov R20,R16
+ 00AE                   .dbline 76
+                       ;   ledbuff[2]=tabel[i];
+ 00AE 80E0              ldi R24,<_tabel
+ 00B0 90E0              ldi R25,>_tabel
+ 00B2 242E              mov R2,R20
+ 00B4 3324              clr R3
+ 00B6 280E              add R2,R24
+ 00B8 391E              adc R3,R25
+ 00BA E22D              mov R30,R2
+ 00BC F32D              mov R31,R3
+ 00BE C895              lpm
+ 00C0 00920200          sts _ledbuff+2,R0
+ 00C4                   .dbline 77
+                       ;   i=at24_add/16;
+ 00C4 10E1              ldi R17,16
+ 00C6 00910100          lds R16,_at24_add
+ 00CA 00D0              rcall div8u
+ 00CC 402F              mov R20,R16
+ 00CE                   .dbline 78
+                       ;   ledbuff[3]=tabel[i];
+ 00CE 80E0              ldi R24,<_tabel
+ 00D0 90E0              ldi R25,>_tabel
+ 00D2 242E              mov R2,R20
+ 00D4 3324              clr R3
+ 00D6 280E              add R2,R24
+ 00D8 391E              adc R3,R25
+ 00DA E22D              mov R30,R2
+ 00DC F32D              mov R31,R3
+ 00DE C895              lpm
+ 00E0 00920300          sts _ledbuff+3,R0
+ 00E4                   .dbline 79
+                       ;  for (i=0;i<6;i++)
+ 00E4 4427              clr R20
+ 00E6 16C0              rjmp L11
+ 00E8                 L8:
+ 00E8                   .dbline 80
+ 00E8                   .dbline 81
+ 00E8 80E0              ldi R24,<_ledbuff
+ 00EA 90E0              ldi R25,>_ledbuff
+ 00EC E42F              mov R30,R20
+ 00EE FF27              clr R31
+ 00F0 E80F              add R30,R24
+ 00F2 F91F              adc R31,R25
+ 00F4 2080              ldd R2,z+0
+ 00F6 28BA              out 0x18,R2
+ 00F8                   .dbline 82
+ 00F8 01E0              ldi R16,1
+ 00FA 142F              mov R17,R20
+ 00FC 00D0              rcall lsl8
+ 00FE 202E              mov R2,R16
+ 0100 2094              com R2
+ 0102 22BA              out 0x12,R2
+ 0104                   .dbline 83
+ 0104 00D0              rcall _delay_1ms
+ 0106                   .dbline 84
+ 0106 01E0              ldi R16,1
+ 0108 142F              mov R17,R20
+ 010A 00D0              rcall lsl8
+ 010C 22B2              in R2,0x12
+ 010E 202A              or R2,R16
+ 0110 22BA              out 0x12,R2
+ 0112                   .dbline 85
+ 0112                 L9:
+ 0112                   .dbline 79
+ 0112 4395              inc R20
+ 0114                 L11:
+ 0114                   .dbline 79
+ 0114 4630              cpi R20,6
+ 0116 40F3              brlo L8
+ 0118                   .dbline 86}
+                       ;   {
+                       ;    PORTB=ledbuff[i];//将显示缓冲区数据送PORTB口
+                       ;    PORTD=~(1<<i);   //开始显示
+                       ;    delay_1ms();     //每一位显示保持一定时间
+                       ;    PORTD|=(1<<i);   //关闭显示
+                       ;   }
+                       ; }
+ 0118                 L4:
+ 0118 00D0              rcall pop_gset1
+ 011A 0895              ret
+ 011C                   .dbsym r i 20 c
+ 011C                   .dbfunc s main _main fI
+                       ;          index -> R22
+                       ;           flag -> R10
+                       ;           key1 -> R12
+                       ;           key2 -> R14
+                         .even
+ 011C                 _main::
+ 011C                   .dbline 99{
+                       ; /******************************************
+                       ;     主程序功能：演示了读写AT24C02的过程
+                       ;     说明：1、键盘上0~F键用于输入地址或数据，
+                       ;              SHIFT键用于切换状态
+                       ;           2、上电复位后，按数字键只可以修改地
+                       ;              址,程序自动显示AT24C02单元内容。
+                       ;           3、按一次SHIFT键，最高位LED小数点亮
+                       ;              此时可以修改数字，再按一次SHIFT键
+                       ;              程序将修改后的数字写入AT24C02，然
+                       ;              后回到上电复位后的状态     
+                       ; *******************************************/
+                       ; void main(void)
+                       ; {
+ 011C                   .dbline 102
+                       ;  unsigned char key1,key2;
+                       ;  unsigned char index,flag;
+                       ;  MCUCR=0;
+ 011C 2224              clr R2
+ 011E 25BE              out 0x35,R2
+ 0120                   .dbline 103
+                       ;  at24_add=0;
+ 0120 20920100          sts _at24_add,R2
+ 0124                   .dbline 104
+                       ;  at24_data=0;
+ 0124 20920000          sts _at24_data,R2
+ 0128                   .dbline 105
+                       ;  index=0;
+ 0128 6627              clr R22
+ 012A                   .dbline 106
+                       ;  flag=0;
+ 012A AA24              clr R10
+ 012C                   .dbline 107
+                       ;  port_init(); //端口初始化
+ 012C 93DF              rcall _port_init
+ 012E 68C0              rjmp L14
+ 0130                 L13:
+ 0130                   .dbline 109
+                       ;  while(1)
+                       ;   {  
+ 0130                   .dbline 110
+                       ;      key1=scan_key();
+ 0130 00D0              rcall _scan_key
+ 0132 202E              mov R2,R16
+ 0134 312E              mov R3,R17
+ 0136 C22C              mov R12,R2
+ 0138                   .dbline 111
+                       ;      if (key1!=0x7f)
+ 0138 8C2D              mov R24,R12
+ 013A 8F37              cpi R24,127
+ 013C 09F4              brne X2
+ 013E 56C0              rjmp L16
+ 0140                 X2:
+ 0140                   .dbline 112
+                       ;         {
+ 0140                 L18:
+ 0140                   .dbline 114
+                       ;          do 
+                       ;            {
+ 0140                   .dbline 115
+                       ;             key2=scan_key();//检查按键释放
+ 0140 00D0              rcall _scan_key
+ 0142 202E              mov R2,R16
+ 0144 312E              mov R3,R17
+ 0146 E22C              mov R14,R2
+ 0148                   .dbline 116
+                       ;             display();
+ 0148 8CDF              rcall _display
+ 014A                   .dbline 117
+                       ;             }
+ 014A                 L19:
+ 014A                   .dbline 118
+                       ;          while(key1==key2);
+ 014A CE14              cp R12,R14
+ 014C C9F3              breq L18
+ 014E                   .dbline 119
+                       ;          if (key1>=0x80)
+ 014E 8C2D              mov R24,R12
+ 0150 8038              cpi R24,128
+ 0152 78F0              brlo L21
+ 0154                   .dbline 120
+                       ;             {
+ 0154                   .dbline 121
+                       ;              if (flag!=0x00)//SHIFT键切换数据和地址修改
+ 0154 AA20              tst R10
+ 0156 39F0              breq L23
+ 0158                   .dbline 122
+                       ;                  { 
+ 0158                   .dbline 123
+                       ;                    i2c_Write(at24_data,at24_add);
+ 0158 20910100          lds R18,_at24_add
+ 015C 00910000          lds R16,_at24_data
+ 0160 4FDF              rcall _i2c_Write
+ 0162                   .dbline 124
+                       ;                    flag=0x00;
+ 0162 AA24              clr R10
+ 0164                   .dbline 125
+                       ;                   }          
+ 0164 02C0              rjmp L24
+ 0166                 L23:
+ 0166                   .dbline 126
+                       ;              else flag=0x80;
+ 0166 80E8              ldi R24,128
+ 0168 A82E              mov R10,R24
+ 016A                 L24:
+ 016A                   .dbline 127
+                       ;              ledbuff[5]=0x00^flag;
+ 016A A0920500          sts _ledbuff+5,R10
+ 016E                   .dbline 128
+                       ;              index=0;
+ 016E 6627              clr R22
+ 0170                   .dbline 129
+                       ;              }
+ 0170 3DC0              rjmp L22
+ 0172                 L21:
+ 0172                   .dbline 131
+                       ;          else
+                       ;             {
+ 0172                   .dbline 132
+                       ;              switch (index)
+ 0172 462F              mov R20,R22
+ 0174 5527              clr R21
+ 0176 4030              cpi R20,0
+ 0178 4507              cpc R20,R21
+ 017A 29F0              breq L29
+ 017C 4130              cpi R20,1
+ 017E E0E0              ldi R30,0
+ 0180 5E07              cpc R21,R30
+ 0182 E1F0              breq L32
+ 0184 33C0              rjmp L26
+ 0186                 X0:
+ 0186                   .dbline 133
+                       ;                {
+ 0186                 L29:
+ 0186                   .dbline 134
+                       ;                 case 0:{if (flag==0x00)
+ 0186                   .dbline 134
+ 0186 AA20              tst R10
+ 0188 61F4              brne L30
+ 018A                   .dbline 135
+                       ;                            {key2=at24_add&0x0f;
+ 018A                   .dbline 135
+ 018A 80910100          lds R24,_at24_add
+ 018E 8F70              andi R24,15
+ 0190 E82E              mov R14,R24
+ 0192                   .dbline 136
+                       ;                             at24_add=key2|(key1<<4);
+ 0192 8C2D              mov R24,R12
+ 0194 8F70              andi R24,#0x0F
+ 0196 8295              swap R24
+ 0198 2E2C              mov R2,R14
+ 019A 282A              or R2,R24
+ 019C 20920100          sts _at24_add,R2
+ 01A0                   .dbline 137
+                       ;                             }
+ 01A0 0BC0              rjmp L31
+ 01A2                 L30:
+ 01A2                   .dbline 139
+                       ;                         else
+                       ;                            {key2=at24_data&0x0f;
+ 01A2                   .dbline 139
+ 01A2 80910000          lds R24,_at24_data
+ 01A6 8F70              andi R24,15
+ 01A8 E82E              mov R14,R24
+ 01AA                   .dbline 140
+                       ;                             at24_data=key2|(key1<<4);
+ 01AA 8C2D              mov R24,R12
+ 01AC 8F70              andi R24,#0x0F
+ 01AE 8295              swap R24
+ 01B0 2E2C              mov R2,R14
+ 01B2 282A              or R2,R24
+ 01B4 20920000          sts _at24_data,R2
+ 01B8                   .dbline 141
+                       ;                             }
+ 01B8                 L31:
+ 01B8                   .dbline 142
+                       ;                         index=01;                           
+ 01B8 61E0              ldi R22,1
+ 01BA                   .dbline 143
+                       ;                         break;       
+ 01BA 18C0              rjmp L27
+ 01BC                 L32:
+ 01BC                   .dbline 145
+                       ;                        }
+                       ;                 case 1:{if (flag==0x00)
+ 01BC                   .dbline 145
+ 01BC AA20              tst R10
+ 01BE 59F4              brne L33
+ 01C0                   .dbline 146
+                       ;                            {key2=at24_add&0xf0;
+ 01C0                   .dbline 146
+ 01C0 80910100          lds R24,_at24_add
+ 01C4 807F              andi R24,240
+ 01C6 E82E              mov R14,R24
+ 01C8                   .dbline 147
+                       ;                             at24_add=key2|(key1&0x0f);
+ 01C8 8C2D              mov R24,R12
+ 01CA 8F70              andi R24,15
+ 01CC 2E2C              mov R2,R14
+ 01CE 282A              or R2,R24
+ 01D0 20920100          sts _at24_add,R2
+ 01D4                   .dbline 148
+                       ;                             }
+ 01D4 0AC0              rjmp L34
+ 01D6                 L33:
+ 01D6                   .dbline 150
+                       ;                         else
+                       ;                            {key2=at24_data&0xf0;
+ 01D6                   .dbline 150
+ 01D6 80910000          lds R24,_at24_data
+ 01DA 807F              andi R24,240
+ 01DC E82E              mov R14,R24
+ 01DE                   .dbline 151
+                       ;                             at24_data=key2|(key1&0x0f);
+ 01DE 8C2D              mov R24,R12
+ 01E0 8F70              andi R24,15
+ 01E2 2E2C              mov R2,R14
+ 01E4 282A              or R2,R24
+ 01E6 20920000          sts _at24_data,R2
+ 01EA                   .dbline 152
+                       ;                             }
+ 01EA                 L34:
+ 01EA                   .dbline 153
+                       ;                         index=00;   
+ 01EA 6627              clr R22
+ 01EC                   .dbline 154
+                       ;                         break;  
+ 01EC                 L26:
+ 01EC                 L27:
+ 01EC                   .dbline 157
+                       ;                        }
+                       ;                }                
+                       ;             }   
+ 01EC                 L22:
+ 01EC                   .dbline 158
+                       ;          }                                    
+ 01EC                 L16:
+ 01EC                   .dbline 159
+                       ;      if (flag==0x00)
+ 01EC AA20              tst R10
+ 01EE 39F4              brne L35
+ 01F0                   .dbline 160
+                       ;      at24_data=i2c_Read(at24_add);
+ 01F0 00910100          lds R16,_at24_add
+ 01F4 18DF              rcall _i2c_Read
+ 01F6 202E              mov R2,R16
+ 01F8 312E              mov R3,R17
+ 01FA 20920000          sts _at24_data,R2
+ 01FE                 L35:
+ 01FE                   .dbline 161
+ 01FE 31DF              rcall _display
+ 0200                   .dbline 162
+ 0200                 L14:
+ 0200                   .dbline 108
+ 0200 97CF              rjmp L13
+ 0202                 X1:
+ 0202                   .dbline 163}
+                       ;      display();   
+                       ;   }
+                       ; }
+ 0202                 L12:
+ 0202 0895              ret
+ 0204                   .dbsym r index 22 c
+ 0204                   .dbsym r flag 10 c
+ 0204                   .dbsym r key1 12 c
+ 0204                   .dbsym r key2 14 c
+                         .area bss(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+ 0000                 _at24_data::
+ 0000                   .blkb 1
+ 0001                   .dbsym s at24_data _at24_data c
+ 0001                 _at24_add::
+ 0001                   .blkb 1
+ 0002                   .dbsym s at24_add _at24_add c

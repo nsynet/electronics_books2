@@ -1,0 +1,195 @@
+                         .module led.c
+                         .area text(rom, con, rel)
+--- 0000                   .dbfile D:\ICC-AVR\examples.sl\LED\led.c
+--- 0000                   .dbfunc s Delay _Delay fI
+                       ;              a -> R16
+                       ;              b -> R18
+                         .even
+ 002D                  _Delay::
+ 002D                    .dbline 6{
+                       ; #include <io8515.h>
+                       ; /********************************************************** 
+                       ; 为了可以看见LED的图案变化，每次LED图案变化需要保持一定时间
+                       ;  *********************************************************/
+                       ; void Delay()
+                       ;     {
+ 002D                    .dbline 9
+                       ;     unsigned char a, b;
+                       ; 
+                       ;     for (a = 1; a; a++)
+ 002D  E001              ldi R16,1
+ 002E  C006              rjmp L5
+ 002F                  L2:
+ 002F                    .dbline 10
+                       ;         for (b = 1; b; b++)
+ 002F  E021              ldi R18,1
+ 0030  C001              rjmp L9
+ 0031                  L6:
+ 0031                    .dbline 11
+ 0031                  L7:
+ 0031                    .dbline 10
+ 0031  9523              inc R18
+ 0032                  L9:
+ 0032                    .dbline 10
+ 0032  2322              tst R18
+ 0033  F7E9              brne L6
+ 0034                  L3:
+ 0034                    .dbline 9
+ 0034  9503              inc R16
+ 0035                  L5:
+ 0035                    .dbline 9
+ 0035  2300              tst R16
+ 0036  F7C1              brne L2
+ 0037                    .dbline 12}
+                       ;             ;
+                       ;     }
+ 0037                  L1:
+ 0037  9508              ret
+ 0038                    .dbsym r a 16 c
+ 0038                    .dbsym r b 18 c
+ 0038                    .dbfunc s LED_On _LED_On fI
+                       ;              i -> R20,R21
+                         .even
+ 0038                  _LED_On::
+ 0038  D043              rcall push_gset1
+ 0039  2F40              mov R20,R16
+ 003A  2F51              mov R21,R17
+ 003B                    .dbline 15{
+                       ; 
+                       ; void LED_On(int i)
+                       ;     {
+ 003B                    .dbline 16
+                       ;     PORTB=~(1<<i);  /* 输出低电平，使LED发光 */
+ 003B  E001              ldi R16,1
+ 003C  E010              ldi R17,0
+ 003D  2F24              mov R18,R20
+ 003E  2F35              mov R19,R21
+ 003F  D053              rcall lsl16
+ 0040  2E20              mov R2,R16
+ 0041  2E31              mov R3,R17
+ 0042  9420              com R2
+ 0043  9430              com R3
+ 0044  BA28              out 0x18,R2
+ 0045                    .dbline 17
+                       ;     Delay();
+ 0045  DFE7              rcall _Delay
+ 0046                    .dbline 18}
+                       ;     }
+ 0046                  L10:
+ 0046  D038              rcall pop_gset1
+ 0047  9508              ret
+ 0048                    .dbsym r i 20 I
+ 0048                    .dbfunc s main _main fI
+                       ;              i -> R20,R21
+                         .even
+ 0048                  _main::
+ 0048                    .dbline 21{
+                       ; 
+                       ; void main()
+                       ;     {
+ 0048                    .dbline 23
+                       ;     int i;
+                       ;     DDRB = 0xFF;    /* 定义B口为输出*/
+ 0048  EF8F              ldi R24,255
+ 0049  BB87              out 0x17,R24
+ 004A                    .dbline 24
+                       ;     PORTB = 0xFF;   /* 关闭全部LED */
+ 004A  BB88              out 0x18,R24
+ 004B  C02E              rjmp L13
+ 004C                  L12:
+ 004C                    .dbline 27
+                       ; 
+                       ;     while (1)
+                       ;         {
+ 004C                    .dbline 29
+                       ;         /* 往前步进 */
+                       ;         for (i = 0; i < 8; i++)
+ 004C  2744              clr R20
+ 004D  2755              clr R21
+ 004E                  L15:
+ 004E                    .dbline 30
+ 004E  2F04              mov R16,R20
+ 004F  2F15              mov R17,R21
+ 0050  DFE7              rcall _LED_On
+ 0051                  L16:
+ 0051                    .dbline 29
+ 0051  5F4F              subi R20,255  ; offset = 1
+ 0052  4F5F              sbci R21,255
+ 0053                    .dbline 29
+ 0053  3048              cpi R20,8
+ 0054  E0E0              ldi R30,0
+ 0055  075E              cpc R21,R30
+ 0056  F3BC              brlt L15
+ 0057                    .dbline 32
+                       ;             LED_On(i);
+                       ;         /* 往后步进 */
+                       ;         for (i = 8; i > 0; i--)
+ 0057  E048              ldi R20,8
+ 0058  E050              ldi R21,0
+ 0059                  L19:
+ 0059                    .dbline 33
+ 0059  2F04              mov R16,R20
+ 005A  2F15              mov R17,R21
+ 005B  DFDC              rcall _LED_On
+ 005C                  L20:
+ 005C                    .dbline 32
+ 005C  5041              subi R20,1
+ 005D  4050              sbci R21,0
+ 005E                    .dbline 32
+ 005E  2422              clr R2
+ 005F  2433              clr R3
+ 0060  1624              cp R2,R20
+ 0061  0635              cpc R3,R21
+ 0062  F3B4              brlt L19
+ 0063                    .dbline 35
+                       ;             LED_On(i);
+                       ;         /*  跳 跃  */
+                       ;         for (i = 0; i < 8; i += 2)
+ 0063  2744              clr R20
+ 0064  2755              clr R21
+ 0065                  L23:
+ 0065                    .dbline 36
+ 0065  2F04              mov R16,R20
+ 0066  2F15              mov R17,R21
+ 0067  DFD0              rcall _LED_On
+ 0068                  L24:
+ 0068                    .dbline 35
+ 0068  5F4E              subi R20,254  ; offset = 2
+ 0069  4F5F              sbci R21,255
+ 006A                    .dbline 35
+ 006A  3048              cpi R20,8
+ 006B  E0E0              ldi R30,0
+ 006C  075E              cpc R21,R30
+ 006D  F3BC              brlt L23
+ 006E                    .dbline 37
+                       ;             LED_On(i);
+                       ;         for (i = 7; i > 0; i -= 2)
+ 006E  E047              ldi R20,7
+ 006F  E050              ldi R21,0
+ 0070                  L27:
+ 0070                    .dbline 38
+ 0070  2F04              mov R16,R20
+ 0071  2F15              mov R17,R21
+ 0072  DFC5              rcall _LED_On
+ 0073                  L28:
+ 0073                    .dbline 37
+ 0073  5042              subi R20,2
+ 0074  4050              sbci R21,0
+ 0075                    .dbline 37
+ 0075  2422              clr R2
+ 0076  2433              clr R3
+ 0077  1624              cp R2,R20
+ 0078  0635              cpc R3,R21
+ 0079  F3B4              brlt L27
+ 007A                    .dbline 39
+ 007A                  L13:
+ 007A                    .dbline 26
+ 007A  CFD1              rjmp L12
+ 007B                  X0:
+ 007B                    .dbline 40}
+                       ;             LED_On(i);
+                       ;         }
+                       ;     }
+ 007B                  L11:
+ 007B  9508              ret
+ 007C                    .dbsym r i 20 I

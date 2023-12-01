@@ -1,0 +1,634 @@
+                         .module DTMF.c
+                         .area vector(rom, abs)
+                         .org 12
+ 000C 00C0              rjmp _ISR_T1_Overflow
+                         .area lit(rom, con, rel)
+ 0000                 _auc_SinParam::
+ 0000 4043              .byte 64,'C
+ 0002 4649              .byte 'F,'I
+ 0004 4C4F              .byte 'L,'O
+ 0006 5255              .byte 'R,'U
+ 0008 585B              .byte 'X,91
+ 000A 5E60              .byte 94,96
+ 000C 6366              .byte 'c,'f
+ 000E 686A              .byte 'h,'j
+ 0010 6D6F              .byte 'm,'o
+ 0012 7173              .byte 'q,'s
+ 0014 7576              .byte 'u,'v
+ 0016 7879              .byte 'x,'y
+ 0018 7B7C              .byte 123,124
+ 001A 7D7E              .byte 125,126
+ 001C 7E7F              .byte 126,127
+ 001E 7F7F              .byte 127,127
+ 0020 7F7F              .byte 127,127
+ 0022 7F7F              .byte 127,127
+ 0024 7E7E              .byte 126,126
+ 0026 7D7C              .byte 125,124
+ 0028 7B79              .byte 123,'y
+ 002A 7876              .byte 'x,'v
+ 002C 7573              .byte 'u,'s
+ 002E 716F              .byte 'q,'o
+ 0030 6D6A              .byte 'm,'j
+ 0032 6866              .byte 'h,'f
+ 0034 6360              .byte 'c,96
+ 0036 5E5B              .byte 94,91
+ 0038 5855              .byte 'X,'U
+ 003A 524F              .byte 'R,'O
+ 003C 4C49              .byte 'L,'I
+ 003E 4643              .byte 'F,'C
+ 0040 403C              .byte 64,60
+ 0042 3936              .byte 57,54
+ 0044 3330              .byte 51,48
+ 0046 2D2A              .byte 45,42
+ 0048 2724              .byte 39,36
+ 004A 211F              .byte 33,31
+ 004C 1C19              .byte 28,25
+ 004E 1715              .byte 23,21
+ 0050 1210              .byte 18,16
+ 0052 0E0C              .byte 14,12
+ 0054 0A09              .byte 10,9
+ 0056 0706              .byte 7,6
+ 0058 0403              .byte 4,3
+ 005A 0201              .byte 2,1
+ 005C 0100              .byte 1,0
+ 005E 0000              .byte 0,0
+ 0060 0000              .byte 0,0
+ 0062 0000              .byte 0,0
+ 0064 0101              .byte 1,1
+ 0066 0203              .byte 2,3
+ 0068 0406              .byte 4,6
+ 006A 0709              .byte 7,9
+ 006C 0A0C              .byte 10,12
+ 006E 0E10              .byte 14,16
+ 0070 1215              .byte 18,21
+ 0072 1719              .byte 23,25
+ 0074 1C1F              .byte 28,31
+ 0076 2124              .byte 33,36
+ 0078 272A              .byte 39,42
+ 007A 2D30              .byte 45,48
+ 007C 3336              .byte 51,54
+ 007E 393C              .byte 57,60
+ 0080                   .dbfile D:\ICC-AVR\examples.sl\DTMF\DTMF.c
+ 0080                   .dbsym s auc_SinParam _auc_SinParam Ac[128:128]
+ 0080                 _auc_frequencyH::
+ 0080 6B60              .byte 'k,96
+ 0082 574F              .byte 'W,'O
+ 0084                   .dbsym s auc_frequencyH _auc_frequencyH Ac[4:4]
+ 0084                 _auc_frequencyL::
+ 0084 3D38              .byte 61,56
+ 0086 322E              .byte 50,46
+ 0088                   .dbsym s auc_frequencyL _auc_frequencyL Ac[4:4]
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\DTMF\DTMF.c
+ 0000                 _x_SWa::
+ 0000                   .blkb 1
+                         .area idata
+ 0000 00                .byte 0
+                         .area data(ram, con, rel)
+ 0001                   .dbfile D:\ICC-AVR\examples.sl\DTMF\DTMF.c
+ 0001                   .dbsym s x_SWa _x_SWa c
+ 0001                 _x_SWb::
+ 0001                   .blkb 1
+                         .area idata
+ 0001 00                .byte 0
+                         .area data(ram, con, rel)
+ 0002                   .dbfile D:\ICC-AVR\examples.sl\DTMF\DTMF.c
+ 0002                   .dbsym s x_SWb _x_SWb c
+ 0002                 _X_LUTaExt::
+ 0002                   .blkb 2
+                         .area idata
+ 0002 0000              .word 0
+                         .area data(ram, con, rel)
+ 0004                   .dbfile D:\ICC-AVR\examples.sl\DTMF\DTMF.c
+ 0004                   .dbsym s X_LUTaExt _X_LUTaExt i
+ 0004                 _X_LUTbExt::
+ 0004                   .blkb 2
+                         .area idata
+ 0004 0000              .word 0
+                         .area data(ram, con, rel)
+ 0006                   .dbfile D:\ICC-AVR\examples.sl\DTMF\DTMF.c
+ 0006                   .dbsym s X_LUTbExt _X_LUTbExt i
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\DTMF\DTMF.c
+ 0000                   .dbfunc s ISR_T1_Overflow _ISR_T1_Overflow fI
+                         .even
+ 0000                 _ISR_T1_Overflow::
+ 0000 0A92              st -y,R0
+ 0002 2A92              st -y,R2
+ 0004 3A92              st -y,R3
+ 0006 4A92              st -y,R4
+ 0008 5A92              st -y,R5
+ 000A 0A93              st -y,R16
+ 000C 1A93              st -y,R17
+ 000E 2A93              st -y,R18
+ 0010 3A93              st -y,R19
+ 0012 8A93              st -y,R24
+ 0014 9A93              st -y,R25
+ 0016 EA93              st -y,R30
+ 0018 FA93              st -y,R31
+ 001A 0FB6              in R0,0x3f
+ 001C 0A92              st -y,R0
+ 001E                   .dbline 129{
+                       ; /********************************************************
+                       ;                    http://www.sl.com.cn
+                       ;          Ë«Áúµç×Ó¹«Ë¾----Ë«ÒôÆµÐÅºÅ(DTMF)ÑÝÊ¾³ÌÐò
+                       ;          ¼üÅÌ²¼ÖÃÍ¼£º
+                       ;                      1 2 3 A--PB4
+                       ;                      4 5 6 B--PB5
+                       ;                      7 8 9 C--PB6
+                       ;                      * 0 # D--PB7
+                       ;                      | | | |
+                       ;                      P P P P
+                       ;                      B B B B
+                       ;                      0 1 2 3
+                       ;          À®°È½ÓÏßÍ¼£ºPD5(OC1A)--1Kµç×è--À®°È             
+                       ; ********************************************************/ 
+                       ; #include <io8515.h>
+                       ; #include <macros.h>
+                       ; #define  Xtal       8000000          // ÏµÍ³Ê±ÖÓÆµÂÊ
+                       ; #define  prescaler  1                // T1Ô¤·ÖÆµÏµÊý
+                       ; #define  N_samples  128              // ÔÚ²éÕÒ±íÖÐµÄÑù±¾Êý
+                       ; #define  Fck        Xtal/prescaler   // T1¹¤×÷ÆµÂÊ
+                       ; #define  delaycyc   10               // ¶ÁÈ¡port C¿ÚÑÓÊ±Ñ­»·Êý
+                       ; #pragma interrupt_handler ISR_T1_Overflow:7
+                       ; /*************************** ÕýÏÒ±í *****************************
+                       ;        Ñù±¾±í: Ò»¸öÖÜÆÚ·Ö³É128¸öµã£¬Ã¿µã°´7Î»½øÐÐÁ¿»¯
+                       ; ****************************************************************/
+                       ; flash unsigned char auc_SinParam [128] = {
+                       ; 64,67,
+                       ; 70,73,
+                       ; 76,79,
+                       ; 82,85,
+                       ; 88,91,
+                       ; 94,96,
+                       ; 99,102,
+                       ; 104,106,
+                       ; 109,111,
+                       ; 113,115,
+                       ; 117,118,
+                       ; 120,121,
+                       ; 123,124,
+                       ; 125,126,
+                       ; 126,127,
+                       ; 127,127,
+                       ; 127,127,
+                       ; 127,127,
+                       ; 126,126,
+                       ; 125,124,
+                       ; 123,121,
+                       ; 120,118,
+                       ; 117,115,
+                       ; 113,111,
+                       ; 109,106,
+                       ; 104,102,
+                       ; 99,96,
+                       ; 94,91,
+                       ; 88,85,
+                       ; 82,79,
+                       ; 76,73,
+                       ; 70,67,
+                       ; 64,60,
+                       ; 57,54,
+                       ; 51,48,
+                       ; 45,42,
+                       ; 39,36,
+                       ; 33,31,
+                       ; 28,25,
+                       ; 23,21,
+                       ; 18,16,
+                       ; 14,12,
+                       ; 10,9,
+                       ; 7,6,
+                       ; 4,3,
+                       ; 2,1,
+                       ; 1,0,
+                       ; 0,0,
+                       ; 0,0,
+                       ; 0,0,
+                       ; 1,1,
+                       ; 2,3,
+                       ; 4,6,
+                       ; 7,9,
+                       ; 10,12,
+                       ; 14,16,
+                       ; 18,21,
+                       ; 23,25,
+                       ; 28,31,
+                       ; 33,36,
+                       ; 39,42,
+                       ; 45,48,
+                       ; 51,54,
+                       ; 57,60};
+                       ; 
+                       ; //***************************  x_SW  *************************
+                       ; //   x_SW ±í(8±¶): x_SW = ROUND(8*N_samples*f*510/Fck)
+                       ; //************************************************************
+                       ; 
+                       ; //¸ßÆµ(ÁÐ)
+                       ; //1209hz  ---> x_SW = 79
+                       ; //1336hz  ---> x_SW = 87
+                       ; //1477hz  ---> x_SW = 96
+                       ; //1633hz  ---> x_SW = 107
+                       ; 
+                       ; const unsigned char auc_frequencyH [4] = {
+                       ; 107,96,
+                       ; 87,79};
+                       ; 
+                       ; //µÍÆµ(ÐÐ)
+                       ; //697hz  ---> x_SW = 46
+                       ; //770hz  ---> x_SW = 50
+                       ; //852hz  ---> x_SW = 56
+                       ; //941hz  ---> x_SW = 61
+                       ; 
+                       ; const unsigned char auc_frequencyL [4] = {
+                       ; 61,56,
+                       ; 50,46};
+                       ; 
+                       ; 
+                       ; //**************************  È«¾Ö±äÁ¿ ****************************
+                       ; unsigned char x_SWa = 0x00;               // ¸ßÆµÐÅºÅÂö³å¿í¶È
+                       ; unsigned char x_SWb = 0x00;               // µÍÆµÐÅºÅÂö³å¿í¶È
+                       ; unsigned int  X_LUTaExt = 0;              
+                       ; unsigned int  X_LUTbExt = 0;              
+                       ; unsigned int  X_LUTa;                   
+                       ; unsigned int  X_LUTb;                     
+                       ; 
+                       ; /*****************************************************************
+                       ;                     ¶¨Ê±Æ÷Òç³öÖÐ¶Ï·þÎñ³ÌÐò
+                       ; ******************************************************************/
+                       ; void ISR_T1_Overflow (void)
+                       ; { 
+ 001E                   .dbline 130
+                       ;   X_LUTaExt += x_SWa;       
+ 001E 20900000          lds R2,_x_SWa
+ 0022 3324              clr R3
+ 0024 50900300          lds R5,_X_LUTaExt+1
+ 0028 40900200          lds R4,_X_LUTaExt
+ 002C 420C              add R4,R2
+ 002E 531C              adc R5,R3
+ 0030 50920300          sts _X_LUTaExt+1,R5
+ 0034 40920200          sts _X_LUTaExt,R4
+ 0038                   .dbline 131
+                       ;   X_LUTbExt += x_SWb;
+ 0038 20900100          lds R2,_x_SWb
+ 003C 3324              clr R3
+ 003E 50900500          lds R5,_X_LUTbExt+1
+ 0042 40900400          lds R4,_X_LUTbExt
+ 0046 420C              add R4,R2
+ 0048 531C              adc R5,R3
+ 004A 50920500          sts _X_LUTbExt+1,R5
+ 004E 40920400          sts _X_LUTbExt,R4
+ 0052                   .dbline 133
+                       ;             // Êý¾Ý¹æ¸ñ»¯
+                       ;   X_LUTa  =  (char)(((X_LUTaExt+4) >> 3)&(0x007F)); 
+ 0052 23E0              ldi R18,3
+ 0054 30E0              ldi R19,0
+ 0056 10910300          lds R17,_X_LUTaExt+1
+ 005A 00910200          lds R16,_X_LUTaExt
+ 005E 0C5F              subi R16,252  ; offset = 4
+ 0060 1F4F              sbci R17,255
+ 0062 00D0              rcall lsr16
+ 0064 802F              mov R24,R16
+ 0066 912F              mov R25,R17
+ 0068 8F77              andi R24,127
+ 006A 9070              andi R25,0
+ 006C 282E              mov R2,R24
+ 006E 3324              clr R3
+ 0070 30920300          sts _X_LUTa+1,R3
+ 0074 20920200          sts _X_LUTa,R2
+ 0078                   .dbline 134
+                       ;   X_LUTb  =  (char)(((X_LUTbExt+4) >> 3)&(0x007F));
+ 0078 23E0              ldi R18,3
+ 007A 30E0              ldi R19,0
+ 007C 10910500          lds R17,_X_LUTbExt+1
+ 0080 00910400          lds R16,_X_LUTbExt
+ 0084 0C5F              subi R16,252  ; offset = 4
+ 0086 1F4F              sbci R17,255
+ 0088 00D0              rcall lsr16
+ 008A 802F              mov R24,R16
+ 008C 912F              mov R25,R17
+ 008E 8F77              andi R24,127
+ 0090 9070              andi R25,0
+ 0092 282E              mov R2,R24
+ 0094 3324              clr R3
+ 0096 30920100          sts _X_LUTb+1,R3
+ 009A 20920000          sts _X_LUTb,R2
+ 009E                   .dbline 136
+                       ;            // ¼ÆËã PWM Öµ: ¸ßÆµÖµ + 3/4 µÍÆµÖµ
+                       ;   OCR1A = (auc_SinParam[X_LUTa] + (auc_SinParam[X_LUTb]-(auc_SinParam[X_LUTb]>>2)));
+ 009E 80E0              ldi R24,<_auc_SinParam
+ 00A0 90E0              ldi R25,>_auc_SinParam
+ 00A2 30900100          lds R3,_X_LUTb+1
+ 00A6 20900000          lds R2,_X_LUTb
+ 00AA 280E              add R2,R24
+ 00AC 391E              adc R3,R25
+ 00AE E22D              mov R30,R2
+ 00B0 F32D              mov R31,R3
+ 00B2 C895              lpm
+ 00B4 202C              mov R2,R0
+ 00B6 3324              clr R3
+ 00B8 22E0              ldi R18,2
+ 00BA 30E0              ldi R19,0
+ 00BC 022D              mov R16,R2
+ 00BE 132D              mov R17,R3
+ 00C0 00D0              rcall asr16
+ 00C2 201A              sub R2,R16
+ 00C4 310A              sbc R3,R17
+ 00C6 80E0              ldi R24,<_auc_SinParam
+ 00C8 90E0              ldi R25,>_auc_SinParam
+ 00CA 50900300          lds R5,_X_LUTa+1
+ 00CE 40900200          lds R4,_X_LUTa
+ 00D2 480E              add R4,R24
+ 00D4 591E              adc R5,R25
+ 00D6 E42D              mov R30,R4
+ 00D8 F52D              mov R31,R5
+ 00DA C895              lpm
+ 00DC 402C              mov R4,R0
+ 00DE 5524              clr R5
+ 00E0 420C              add R4,R2
+ 00E2 531C              adc R5,R3
+ 00E4 50924B00          sts 74+1,R5
+ 00E8 40924A00          sts 74,R4
+ 00EC                   .dbline 137}
+                       ; }
+ 00EC                 L1:
+ 00EC 0990              ld R0,y+
+ 00EE 0FBE              out 0x3f,R0
+ 00F0 F991              ld R31,y+
+ 00F2 E991              ld R30,y+
+ 00F4 9991              ld R25,y+
+ 00F6 8991              ld R24,y+
+ 00F8 3991              ld R19,y+
+ 00FA 2991              ld R18,y+
+ 00FC 1991              ld R17,y+
+ 00FE 0991              ld R16,y+
+ 0100 5990              ld R5,y+
+ 0102 4990              ld R4,y+
+ 0104 3990              ld R3,y+
+ 0106 2990              ld R2,y+
+ 0108 0990              ld R0,y+
+ 010A 1895              reti
+ 010C                   .dbfunc s init _init fI
+                         .even
+ 010C                 _init::
+ 010C                   .dbline 143{
+                       ; 
+                       ; /***********************************************************
+                       ;                         ³õÊ¼»¯
+                       ; ***********************************************************/
+                       ; void init (void)
+                       ; {
+ 010C                   .dbline 144
+                       ;   MCUCR=0x00;
+ 010C 2224              clr R2
+ 010E 25BE              out 0x35,R2
+ 0110                   .dbline 145
+                       ;   TIMSK  = 0x80;                     // T1 Òç³öÖÐ¶ÏÊ¹ÄÜ
+ 0110 80E8              ldi R24,128
+ 0112 89BF              out 0x39,R24
+ 0114                   .dbline 146
+                       ;   TCCR1A = (1<<COM1A1)+(1<<PWM10);   // ²»·­×ª¡¢8Î»PWM
+ 0114 81E8              ldi R24,129
+ 0116 8FBD              out 0x2f,R24
+ 0118                   .dbline 147
+                       ;   TCCR1B = (1<<CS10);                // Ô¤·ÖÆµÏµÊýÎª1¡¢¼´CLK/1
+ 0118 81E0              ldi R24,1
+ 011A 8EBD              out 0x2e,R24
+ 011C                   .dbline 148
+                       ;   DDRD   = (1 <<PD5);               // PD5 (OC1A)ÓÃ×÷Êä³ö
+ 011C 80E2              ldi R24,32
+ 011E 81BB              out 0x11,R24
+ 0120                   .dbline 149
+                       ;   _SEI();                            // È«¾ÖÖÐ¶ÏÊ¹ÄÜ
+ 0120 7894              sei
+ 0122                   .dbline 150}
+                       ; }
+ 0122                 L2:
+ 0122 0895              ret
+ 0124                   .dbfunc s Delay _Delay fI
+                       ;              i -> R16,R17
+                         .even
+ 0124                 _Delay::
+ 0124                   .dbline 156{
+                       ; 
+                       ; /*********************************************************************
+                       ;       Îª´ÓPORT C¿Ú¶ÁÈ¡ÎÈ¶¨µÄ°´¼üÊý¾Ý£¬Ëù±ØÐëµÄÑÓÊ±³ÌÐò£¨Ïû¶¶ÑÓÊ±£©
+                       ; *********************************************************************/
+                       ; void Delay (void)
+                       ; {
+ 0124                   .dbline 158
+ 0124 0027              clr R16
+ 0126 1127              clr R17
+ 0128                 L4:
+ 0128                   .dbline 158
+ 0128 0000              nop
+ 012A                 L5:
+ 012A                   .dbline 158
+                       ;   int i;
+                       ;   for (i = 0; i < delaycyc; i++) _NOP();
+ 012A 0F5F              subi R16,255  ; offset = 1
+ 012C 1F4F              sbci R17,255
+ 012E                   .dbline 158
+ 012E 0A30              cpi R16,10
+ 0130 E0E0              ldi R30,0
+ 0132 1E07              cpc R17,R30
+ 0134 CCF3              brlt L4
+ 0136                   .dbline 159}
+                       ; }
+ 0136                 L3:
+ 0136 0895              ret
+ 0138                   .dbsym r i 16 I
+ 0138                   .dbfunc s main _main fI
+                       ;     uc_Counter -> R20
+                       ;       uc_Input -> R22
+                         .even
+ 0138                 _main::
+ 0138                   .dbline 170{
+                       ; 
+                       ; /********************************************************************
+                       ;                             Ö÷³ÌÐò
+                       ;       ´ÓPORT C¿Ú¶ÁÈ¡°´¼üÊý¾Ý(Èç£ºSL¡ AVRÊµÑé°å) £¬À´È·¶¨²úÉúÄÄ¸ö
+                       ;       ¸ßÆµ(ÁÐ)ºÍµÍÆµ(ÐÐ)ÐÅºÅµÄ»ìºÏÐÅºÅ£¬²¢ÇÒÐÞÕý x_SWa ºÍ x_SWb¡£
+                       ;                    ÐÐ  -> PINC ¸ßËÄÎ»
+                       ;                    ÁÐ  -> PINC µÍËÄÎ»
+                       ; *********************************************************************/
+                       ; 
+                       ; void main (void)
+                       ; {
+ 0138                   .dbline 172
+                       ;   unsigned char uc_Input;
+                       ;   unsigned char uc_Counter = 0;
+ 0138 4427              clr R20
+ 013A                   .dbline 173
+                       ;   init();
+ 013A E8DF              rcall _init
+ 013C                   .dbline 174
+ 013C                 L9:
+ 013C                   .dbline 174
+                       ;   for(;;){ 
+ 013C                   .dbline 176
+                       ;      // ¸ßËÄÎ» - ÐÐ
+                       ;     DDRC  = 0x0F;           // ¸ßËÄÎ»ÊäÈë¡¢µÍËÄÎ»Êä³ö
+ 013C 8FE0              ldi R24,15
+ 013E 84BB              out 0x14,R24
+ 0140                   .dbline 177
+                       ;     PORTC = 0xF0;           // ¸ßËÄÎ»´ò¿ªÉÏÎ»¡¢µÍËÄÎ»Êä³öµÍµçÆ½
+ 0140 80EF              ldi R24,240
+ 0142 85BB              out 0x15,R24
+ 0144                   .dbline 178
+                       ;     uc_Counter = 0;
+ 0144 4427              clr R20
+ 0146                   .dbline 179
+                       ;     Delay();                          // ÑÓÊ±µÈ´ý Port C µçÆ½ÎÈ¶¨
+ 0146 EEDF              rcall _Delay
+ 0148                   .dbline 180
+                       ;     uc_Input = PINC;                  // ¶ÁÈ¡ Port C
+ 0148 63B3              in R22,0x13
+ 014A                 L13:
+ 014A                   .dbline 182
+                       ;     do 
+                       ;     {
+ 014A                   .dbline 183
+                       ;       if(!(uc_Input & 0x80))          // ¼ì²éMSBÊÇ·ñÎªµÍ
+ 014A 67FD              sbrc R22,7
+ 014C 0DC0              rjmp L16
+ 014E                   .dbline 184
+                       ;       {
+ 014E                   .dbline 186
+                       ;                                       // È¡µÍÒôÂö³å¿í¶È²¢½áÊøÑ­»·
+                       ;         x_SWb = auc_frequencyL[uc_Counter];  
+ 014E 80E0              ldi R24,<_auc_frequencyL
+ 0150 90E0              ldi R25,>_auc_frequencyL
+ 0152 242E              mov R2,R20
+ 0154 3324              clr R3
+ 0156 280E              add R2,R24
+ 0158 391E              adc R3,R25
+ 015A E22D              mov R30,R2
+ 015C F32D              mov R31,R3
+ 015E C895              lpm
+ 0160 00920100          sts _x_SWb,R0
+ 0164                   .dbline 187
+                       ;         uc_Counter = 4;
+ 0164 44E0              ldi R20,4
+ 0166                   .dbline 188
+                       ;       }
+ 0166 03C0              rjmp L17
+ 0168                 L16:
+ 0168                   .dbline 190
+                       ;       else
+                       ;       {
+ 0168                   .dbline 191
+                       ;         x_SWb = 0;                    // Ã»ÓÐÆµÂÊµ÷ÖÆÒªÇó
+ 0168 2224              clr R2
+ 016A 20920100          sts _x_SWb,R2
+ 016E                   .dbline 192
+                       ;       }
+ 016E                 L17:
+ 016E                   .dbline 193
+                       ;       uc_Counter++;
+ 016E 4395              inc R20
+ 0170                   .dbline 194
+                       ;       uc_Input = uc_Input << 1;       // ×óÒÆÒ»Î»
+ 0170 660F              lsl R22
+ 0172                   .dbline 195
+ 0172                 L14:
+ 0172                   .dbline 195
+                       ;     } while ((uc_Counter < 4));
+ 0172 4430              cpi R20,4
+ 0174 50F3              brlo L13
+ 0176                   .dbline 198
+                       ;  
+                       ;     // µÍËÄÎ» - ÁÐ
+                       ;     DDRC  = 0xF0;          // ¸ßËÄÎ»Êä³ö¡¢µÍËÄÎ»ÊäÈë
+ 0176 80EF              ldi R24,240
+ 0178 84BB              out 0x14,R24
+ 017A                   .dbline 199
+                       ;     PORTC = 0x0F;          // ¸ßËÄÎ»Êä³öµÍµçÆ½¡¢µÍËÄÎ»´ò¿ªÉÏÀ­
+ 017A 8FE0              ldi R24,15
+ 017C 85BB              out 0x15,R24
+ 017E                   .dbline 200
+                       ;     uc_Counter = 0;
+ 017E 4427              clr R20
+ 0180                   .dbline 201
+                       ;     Delay();               // ÑÓÊ±µÈ´ý Port C µçÆ½ÎÈ¶¨
+ 0180 D1DF              rcall _Delay
+ 0182                   .dbline 202
+                       ;     uc_Input = PINC;
+ 0182 63B3              in R22,0x13
+ 0184                   .dbline 203
+                       ;     uc_Input = uc_Input << 4;     
+ 0184 862F              mov R24,R22
+ 0186 8F70              andi R24,#0x0F
+ 0188 8295              swap R24
+ 018A 682F              mov R22,R24
+ 018C                 L18:
+ 018C                   .dbline 205
+                       ;     do 
+                       ;     {
+ 018C                   .dbline 206
+                       ;       if(!(uc_Input & 0x80))    // ¼ì²é MSB ÊÇ·ñÎªµÍ
+ 018C 67FD              sbrc R22,7
+ 018E 0DC0              rjmp L21
+ 0190                   .dbline 207
+                       ;       {
+ 0190                   .dbline 209
+                       ;                                 
+                       ;         x_SWa = auc_frequencyH[uc_Counter];//È¡¸ßÒôÂö³å¿í¶È²¢½áÊøÑ­»·
+ 0190 80E0              ldi R24,<_auc_frequencyH
+ 0192 90E0              ldi R25,>_auc_frequencyH
+ 0194 242E              mov R2,R20
+ 0196 3324              clr R3
+ 0198 280E              add R2,R24
+ 019A 391E              adc R3,R25
+ 019C E22D              mov R30,R2
+ 019E F32D              mov R31,R3
+ 01A0 C895              lpm
+ 01A2 00920000          sts _x_SWa,R0
+ 01A6                   .dbline 210
+                       ;         uc_Counter = 4;
+ 01A6 44E0              ldi R20,4
+ 01A8                   .dbline 211
+                       ;       }
+ 01A8 03C0              rjmp L22
+ 01AA                 L21:
+ 01AA                   .dbline 213
+                       ;       else 
+                       ;       {
+ 01AA                   .dbline 214
+                       ;         x_SWa = 0;                 
+ 01AA 2224              clr R2
+ 01AC 20920000          sts _x_SWa,R2
+ 01B0                   .dbline 215
+                       ;       }
+ 01B0                 L22:
+ 01B0                   .dbline 216
+                       ;       uc_Counter++;
+ 01B0 4395              inc R20
+ 01B2                   .dbline 217
+                       ;       uc_Input = uc_Input << 1;
+ 01B2 660F              lsl R22
+ 01B4                   .dbline 218
+ 01B4                 L19:
+ 01B4                   .dbline 218
+                       ;     } while (uc_Counter < 4);
+ 01B4 4430              cpi R20,4
+ 01B6 50F3              brlo L18
+ 01B8                   .dbline 219
+                       ;   } 
+ 01B8                   .dbline 174
+ 01B8                   .dbline 174
+ 01B8 C1CF              rjmp L9
+ 01BA                 X0:
+ 01BA                 L8:
+ 01BA 0895              ret
+ 01BC                   .dbline 175}
+ 01BC                   .dbsym r uc_Counter 20 c
+ 01BC                   .dbsym r uc_Input 22 c
+                         .area bss(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\DTMF\DTMF.c
+ 0000                 _X_LUTb::
+ 0000                   .blkb 2
+ 0002                   .dbsym s X_LUTb _X_LUTb i
+ 0002                 _X_LUTa::
+ 0002                   .blkb 2
+ 0004                   .dbsym s X_LUTa _X_LUTa i

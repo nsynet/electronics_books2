@@ -1,0 +1,770 @@
+__text_start:
+__start:
+    0018 E5CF      LDI	R28,0x5F
+    0019 E0D2      LDI	R29,2
+    001A BFCD      OUT	P3D,R28
+    001B BFDE      OUT	P3E,R29
+    001C 51C0      SUBI	R28,0x10
+    001D 40D0      SBCI	R29,0
+    001E EA0A      LDI	R16,0xAA
+    001F 8308      STD	R16,0+Y
+    0020 2400      CLR	R0
+    0021 E6E6      LDI	R30,0x66
+    0022 E0F0      LDI	R31,0
+    0023 E010      LDI	R17,0
+    0024 36E8      CPI	R30,0x68
+    0025 07F1      CPC	R31,R17
+    0026 F011      BEQ	0x0029
+    0027 9201      ST	R0,Z+
+    0028 CFFB      RJMP	0x0024
+    0029 8300      STD	R16,0+Z
+    002A E2EA      LDI	R30,0x2A
+    002B E0F0      LDI	R31,0
+    002C E6A0      LDI	R26,0x60
+    002D E0B0      LDI	R27,0
+    002E E010      LDI	R17,0
+    002F 33E0      CPI	R30,0x30
+    0030 07F1      CPC	R31,R17
+    0031 F021      BEQ	0x0036
+    0032 95C8      LPM
+    0033 9631      ADIW	R30,1
+    0034 920D      ST	R0,X+
+    0035 CFF9      RJMP	0x002F
+    0036 D08F      RCALL	_main
+_exit:
+    0037 CFFF      RJMP	_exit
+_i2c_Write:
+  RomAddress           --> R22
+  Wdata                --> R20
+    0038 D21B      RCALL	push_gset2
+    0039 2F62      MOV	R22,R18
+    003A 2F40      MOV	R20,R16
+FILE: D:\ICC-AVR\examples.sl\I2C\I2C.c
+(0000) /**********************************************
+(0001)              http://www.sl.com.cn
+(0002)       双龙电子公司----I2C总线演示程序(ICCAVR)
+(0003) 	             作者：詹卫前
+(0004) 		  1、以访问AT24C02为例
+(0005) 		  2、SDA ：PORTA.0
+(0006) 		  3、SCL : PORTA.1
+(0007) 	使用注意：1、应包含头文件slavr.h
+(0008)               2、在工程选项中的Additional Lib中填入slavr
+(0009) 		         使用编译器使用附加库文件libslavr.a
+(0010) ***********************************************/
+(0011) #include <io8515.h>
+(0012) #include <slavr.h>
+(0013)           /*   七段译码字形表     */
+(0014) #pragma data:code		          
+(0015) const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+(0016) #pragma data:data
+(0017)           /*     显示缓冲区       */
+(0018) unsigned char ledbuff[]={0x3f,0x3f,0x3f,0x3f,0x00,0x00};
+(0019) unsigned char at24_add,at24_data;
+(0020) /******************************************
+(0021)                I2C总线写一个字节
+(0022) *******************************************/
+(0023) void i2c_Write(unsigned char Wdata,unsigned char RomAddress) 
+(0024) {
+(0025) 	  Start();
+    003B D104      RCALL	_Start
+(0026) 	  Write8Bit(0xa0);
+    003C EA00      LDI	R16,0xA0
+    003D D13B      RCALL	_Write8Bit
+(0027) 	  TestAck();
+    003E D117      RCALL	_TestAck
+(0028) 	  Write8Bit(RomAddress);
+    003F 2F06      MOV	R16,R22
+    0040 D138      RCALL	_Write8Bit
+(0029) 	  TestAck();	
+    0041 D114      RCALL	_TestAck
+(0030) 	  Write8Bit(Wdata);
+    0042 2F04      MOV	R16,R20
+    0043 D135      RCALL	_Write8Bit
+(0031) 	  TestAck();		
+    0044 D111      RCALL	_TestAck
+(0032) 	  Stop();
+    0045 D103      RCALL	_Stop
+(0033)  	  delay_ms(10);
+    0046 E00A      LDI	R16,0xA
+    0047 E010      LDI	R17,0
+    0048 D14F      RCALL	_delay_ms
+(0034) }
+    0049 D213      RCALL	pop_gset2
+    004A 9508      RET
+_i2c_Read:
+  temp                 --> R20
+  RomAddress           --> R20
+    004B D1F1      RCALL	push_gset1
+    004C 2F40      MOV	R20,R16
+(0035) /******************************************
+(0036)                I2C总线读一个字节
+(0037) *******************************************/
+(0038) unsigned char i2c_Read(unsigned char RomAddress) 
+(0039)       {
+(0040) 	   unsigned char temp;
+(0041) 	   Start();
+    004D D0F2      RCALL	_Start
+(0042) 	   Write8Bit(0xa0); 
+    004E EA00      LDI	R16,0xA0
+    004F D129      RCALL	_Write8Bit
+(0043) 	   TestAck();
+    0050 D105      RCALL	_TestAck
+(0044) 	   Write8Bit(RomAddress);
+    0051 2F04      MOV	R16,R20
+    0052 D126      RCALL	_Write8Bit
+(0045) 	   TestAck();
+    0053 D102      RCALL	_TestAck
+(0046) 	   Start();
+    0054 D0EB      RCALL	_Start
+(0047) 	   Write8Bit(0xa1);
+    0055 EA01      LDI	R16,0xA1
+    0056 D122      RCALL	_Write8Bit
+(0048) 	   TestAck();	
+    0057 D0FE      RCALL	_TestAck
+(0049) 	   temp=Read8Bit();
+    0058 D109      RCALL	_Read8Bit
+    0059 2E20      MOV	R2,R16
+    005A 2E31      MOV	R3,R17
+    005B 2D42      MOV	R20,R2
+(0050) 	   NoAck();
+    005C D0F3      RCALL	_NoAck
+(0051)        Stop();
+    005D D0EB      RCALL	_Stop
+(0052) 	   return temp;
+    005E 2F04      MOV	R16,R20
+    005F 2711      CLR	R17
+    0060 D1DF      RCALL	pop_gset1
+    0061 9508      RET
+(0053)       }   
+(0054) /******************************************
+(0055)                端口初始化
+(0056) *******************************************/
+(0057) void port_init(void)
+(0058)  {
+(0059)   DDRD=0x3f;
+_port_init:
+    0062 E38F      LDI	R24,0x3F
+    0063 BB81      OUT	P11,R24
+(0060)   DDRB=0xff;
+    0064 EF8F      LDI	R24,0xFF
+    0065 BB87      OUT	P17,R24
+(0061)   PORTD=0xff;
+    0066 BB82      OUT	P12,R24
+(0062)   PORTB=0xff;
+    0067 BB88      OUT	P18,R24
+(0063)  }
+    0068 9508      RET
+_display:
+  i                    --> R20
+    0069 D1D3      RCALL	push_gset1
+(0064) /******************************************
+(0065)           六路动态扫描显示电路
+(0066) *******************************************/
+(0067) void display(void)
+(0068) {
+(0069)  unsigned char i;
+(0070)   i=at24_data%16;
+    006A E110      LDI	R17,0x10
+    006B 91000066  LDS	R16,_at24_data
+    006D D1BA      RCALL	mod8u
+    006E 2F40      MOV	R20,R16
+(0071)   ledbuff[0]=tabel[i];
+    006F E18A      LDI	R24,0x1A
+    0070 E090      LDI	R25,0
+    0071 2E24      MOV	R2,R20
+    0072 2433      CLR	R3
+    0073 0E28      ADD	R2,R24
+    0074 1E39      ADC	R3,R25
+    0075 2DE2      MOV	R30,R2
+    0076 2DF3      MOV	R31,R3
+    0077 95C8      LPM
+    0078 92000060  STS	R0,0x60
+(0072)   i=at24_data/16;
+    007A E110      LDI	R17,0x10
+    007B 91000066  LDS	R16,_at24_data
+    007D D1AC      RCALL	div8u
+    007E 2F40      MOV	R20,R16
+(0073)   ledbuff[1]=tabel[i];
+    007F E18A      LDI	R24,0x1A
+    0080 E090      LDI	R25,0
+    0081 2E24      MOV	R2,R20
+    0082 2433      CLR	R3
+    0083 0E28      ADD	R2,R24
+    0084 1E39      ADC	R3,R25
+    0085 2DE2      MOV	R30,R2
+    0086 2DF3      MOV	R31,R3
+    0087 95C8      LPM
+    0088 92000061  STS	R0,0x61
+(0074)   i=at24_add%16;
+    008A E110      LDI	R17,0x10
+    008B 91000067  LDS	R16,_at24_add
+    008D D19A      RCALL	mod8u
+    008E 2F40      MOV	R20,R16
+(0075)   ledbuff[2]=tabel[i];
+    008F E18A      LDI	R24,0x1A
+    0090 E090      LDI	R25,0
+    0091 2E24      MOV	R2,R20
+    0092 2433      CLR	R3
+    0093 0E28      ADD	R2,R24
+    0094 1E39      ADC	R3,R25
+    0095 2DE2      MOV	R30,R2
+    0096 2DF3      MOV	R31,R3
+    0097 95C8      LPM
+    0098 92000062  STS	R0,0x62
+(0076)   i=at24_add/16;
+    009A E110      LDI	R17,0x10
+    009B 91000067  LDS	R16,_at24_add
+    009D D18C      RCALL	div8u
+    009E 2F40      MOV	R20,R16
+(0077)   ledbuff[3]=tabel[i];
+    009F E18A      LDI	R24,0x1A
+    00A0 E090      LDI	R25,0
+    00A1 2E24      MOV	R2,R20
+    00A2 2433      CLR	R3
+    00A3 0E28      ADD	R2,R24
+    00A4 1E39      ADC	R3,R25
+    00A5 2DE2      MOV	R30,R2
+    00A6 2DF3      MOV	R31,R3
+    00A7 95C8      LPM
+    00A8 92000063  STS	R0,0x63
+(0078)  for (i=0;i<6;i++)
+    00AA 2744      CLR	R20
+    00AB C016      RJMP	0x00C2
+(0079)   {
+(0080)    PORTB=ledbuff[i];//将显示缓冲区数据送PORTB口
+    00AC E680      LDI	R24,0x60
+    00AD E090      LDI	R25,0
+    00AE 2FE4      MOV	R30,R20
+    00AF 27FF      CLR	R31
+    00B0 0FE8      ADD	R30,R24
+    00B1 1FF9      ADC	R31,R25
+    00B2 8020      LDD	R2,0+Z
+    00B3 BA28      OUT	P18,R2
+(0081)    PORTD=~(1<<i);   //开始显示
+    00B4 E001      LDI	R16,1
+    00B5 2F14      MOV	R17,R20
+    00B6 D1AA      RCALL	lsl8
+    00B7 2E20      MOV	R2,R16
+    00B8 9420      COM	R2
+    00B9 BA22      OUT	P12,R2
+(0082)    delay_1ms();     //每一位显示保持一定时间
+    00BA D0D3      RCALL	_delay_1ms
+(0083)    PORTD|=(1<<i);   //关闭显示
+    00BB E001      LDI	R16,1
+    00BC 2F14      MOV	R17,R20
+    00BD D1A3      RCALL	lsl8
+    00BE B222      IN	R2,P12
+    00BF 2A20      OR	R2,R16
+    00C0 BA22      OUT	P12,R2
+(0084)   }
+    00C1 9543      INC	R20
+    00C2 3046      CPI	R20,6
+    00C3 F340      BCS	0x00AC
+(0085) }
+    00C4 D17B      RCALL	pop_gset1
+    00C5 9508      RET
+(0086) /******************************************
+(0087)     主程序功能：演示了读写AT24C02的过程
+(0088) 	说明：1、键盘上0~F键用于输入地址或数据，
+(0089) 	         SHIFT键用于切换状态
+(0090) 		  2、上电复位后，按数字键只可以修改地
+(0091) 		     址,程序自动显示AT24C02单元内容。
+(0092) 		  3、按一次SHIFT键，最高位LED小数点亮
+(0093) 		     此时可以修改数字，再按一次SHIFT键
+(0094) 			 程序将修改后的数字写入AT24C02，然
+(0095) 			 后回到上电复位后的状态		
+(0096) *******************************************/
+(0097) void main(void)
+(0098) {
+(0099)  unsigned char key1,key2;
+(0100)  unsigned char index,flag;
+(0101)  MCUCR=0;
+_main:
+  index                --> R22
+  flag                 --> R10
+  key1                 --> R12
+  key2                 --> R14
+    00C6 2422      CLR	R2
+    00C7 BE25      OUT	P35,R2
+(0102)  at24_add=0;
+    00C8 92200067  STS	R2,_at24_add
+(0103)  at24_data=0;
+    00CA 92200066  STS	R2,_at24_data
+(0104)  index=0;
+    00CC 2766      CLR	R22
+(0105)  flag=0;
+    00CD 24AA      CLR	R10
+(0106)  port_init(); //端口初始化
+    00CE DF93      RCALL	_port_init
+    00CF C068      RJMP	0x0138
+(0107)  while(1)
+(0108)   {  
+(0109)      key1=scan_key();
+    00D0 D0D5      RCALL	_scan_key
+    00D1 2E20      MOV	R2,R16
+    00D2 2E31      MOV	R3,R17
+    00D3 2CC2      MOV	R12,R2
+(0110)   	 if (key1!=0x7f)
+    00D4 2D8C      MOV	R24,R12
+    00D5 378F      CPI	R24,0x7F
+    00D6 F409      BNE	0x00D8
+    00D7 C056      RJMP	0x012E
+(0111) 	    {
+(0112) 		 do 
+(0113) 		   {
+(0114) 		    key2=scan_key();//检查按键释放
+    00D8 D0CD      RCALL	_scan_key
+    00D9 2E20      MOV	R2,R16
+    00DA 2E31      MOV	R3,R17
+    00DB 2CE2      MOV	R14,R2
+(0115) 	  	    display();
+    00DC DF8C      RCALL	_display
+(0116) 			}
+(0117) 		 while(key1==key2);
+    00DD 14CE      CP	R12,R14
+    00DE F3C9      BEQ	0x00D8
+(0118) 		 if (key1>=0x80)
+    00DF 2D8C      MOV	R24,R12
+    00E0 3880      CPI	R24,0x80
+    00E1 F078      BCS	0x00F1
+(0119) 		    {
+(0120) 			 if (flag!=0x00)//SHIFT键切换数据和地址修改
+    00E2 20AA      TST	R10
+    00E3 F039      BEQ	0x00EB
+(0121) 			     { 
+(0122) 				   i2c_Write(at24_data,at24_add);
+    00E4 91200067  LDS	R18,_at24_add
+    00E6 91000066  LDS	R16,_at24_data
+    00E8 DF4F      RCALL	_i2c_Write
+(0123) 				   flag=0x00;
+    00E9 24AA      CLR	R10
+(0124) 				  }			 
+    00EA C002      RJMP	0x00ED
+(0125) 			 else flag=0x80;
+    00EB E880      LDI	R24,0x80
+    00EC 2EA8      MOV	R10,R24
+(0126) 			 ledbuff[5]=0x00^flag;
+    00ED 92A00065  STS	R10,0x65
+(0127) 			 index=0;
+    00EF 2766      CLR	R22
+(0128) 			 }
+    00F0 C03D      RJMP	0x012E
+(0129) 		 else
+(0130) 		    {
+(0131) 			 switch (index)
+    00F1 2F46      MOV	R20,R22
+    00F2 2755      CLR	R21
+    00F3 3040      CPI	R20,0
+    00F4 0745      CPC	R20,R21
+    00F5 F029      BEQ	0x00FB
+    00F6 3041      CPI	R20,1
+    00F7 E0E0      LDI	R30,0
+    00F8 075E      CPC	R21,R30
+    00F9 F0E1      BEQ	0x0116
+    00FA C033      RJMP	0x012E
+(0132) 			   {
+(0133) 			    case 0:{if (flag==0x00)
+    00FB 20AA      TST	R10
+    00FC F461      BNE	0x0109
+(0134) 				           {key2=at24_add&0x0f;
+    00FD 91800067  LDS	R24,_at24_add
+    00FF 708F      ANDI	R24,0xF
+    0100 2EE8      MOV	R14,R24
+(0135) 						    at24_add=key2|(key1<<4);
+    0101 2D8C      MOV	R24,R12
+    0102 708F      ANDI	R24,0xF
+    0103 9582      SWAP	R24
+    0104 2C2E      MOV	R2,R14
+    0105 2A28      OR	R2,R24
+    0106 92200067  STS	R2,_at24_add
+(0136) 						    }
+    0108 C00B      RJMP	0x0114
+(0137) 				        else
+(0138) 						   {key2=at24_data&0x0f;
+    0109 91800066  LDS	R24,_at24_data
+    010B 708F      ANDI	R24,0xF
+    010C 2EE8      MOV	R14,R24
+(0139) 						    at24_data=key2|(key1<<4);
+    010D 2D8C      MOV	R24,R12
+    010E 708F      ANDI	R24,0xF
+    010F 9582      SWAP	R24
+    0110 2C2E      MOV	R2,R14
+    0111 2A28      OR	R2,R24
+    0112 92200066  STS	R2,_at24_data
+(0140) 							}
+(0141) 						index=01;							
+    0114 E061      LDI	R22,1
+(0142) 						break;	     
+    0115 C018      RJMP	0x012E
+(0143) 				       }
+(0144) 				case 1:{if (flag==0x00)
+    0116 20AA      TST	R10
+    0117 F459      BNE	0x0123
+(0145) 				           {key2=at24_add&0xf0;
+    0118 91800067  LDS	R24,_at24_add
+    011A 7F80      ANDI	R24,0xF0
+    011B 2EE8      MOV	R14,R24
+(0146) 						    at24_add=key2|(key1&0x0f);
+    011C 2D8C      MOV	R24,R12
+    011D 708F      ANDI	R24,0xF
+    011E 2C2E      MOV	R2,R14
+    011F 2A28      OR	R2,R24
+    0120 92200067  STS	R2,_at24_add
+(0147) 						    }
+    0122 C00A      RJMP	0x012D
+(0148) 				        else
+(0149) 						   {key2=at24_data&0xf0;
+    0123 91800066  LDS	R24,_at24_data
+    0125 7F80      ANDI	R24,0xF0
+    0126 2EE8      MOV	R14,R24
+(0150) 						    at24_data=key2|(key1&0x0f);
+    0127 2D8C      MOV	R24,R12
+    0128 708F      ANDI	R24,0xF
+    0129 2C2E      MOV	R2,R14
+    012A 2A28      OR	R2,R24
+    012B 92200066  STS	R2,_at24_data
+(0151) 							}
+(0152) 						index=00;	
+    012D 2766      CLR	R22
+(0153) 						break;	
+(0154) 				       }
+(0155) 			   }    			
+(0156) 			} 	
+(0157) 		 }	 	 		 		 			  
+(0158)      if (flag==0x00)
+    012E 20AA      TST	R10
+    012F F439      BNE	0x0137
+(0159) 	 at24_data=i2c_Read(at24_add);
+    0130 91000067  LDS	R16,_at24_add
+    0132 DF18      RCALL	_i2c_Read
+    0133 2E20      MOV	R2,R16
+    0134 2E31      MOV	R3,R17
+    0135 92200066  STS	R2,_at24_data
+(0160) 	 display();	  
+    0137 DF31      RCALL	_display
+(0161)   }
+    0138 CF97      RJMP	0x00D0
+(0162) }FILE: <library>
+    0139 9508      RET
+_wait:
+    013A 2700      CLR	R16
+    013B C001      RJMP	0x013D
+    013C 9503      INC	R16
+    013D 3001      CPI	R16,1
+    013E F3E8      BCS	0x013C
+    013F 9508      RET
+_Start:
+    0140 E083      LDI	R24,3
+    0141 BB8A      OUT	P1A,R24
+    0142 9AD8      SBI	P1B,0
+    0143 9AD9      SBI	P1B,1
+    0144 DFF5      RCALL	_wait
+    0145 98D8      CBI	P1B,0
+    0146 DFF3      RCALL	_wait
+    0147 98D9      CBI	P1B,1
+    0148 9508      RET
+_Stop:
+    0149 9AD9      SBI	P1B,1
+    014A 98D8      CBI	P1B,0
+    014B DFEE      RCALL	_wait
+    014C 9AD8      SBI	P1B,0
+    014D DFEC      RCALL	_wait
+    014E 98D9      CBI	P1B,1
+    014F 9508      RET
+_NoAck:
+    0150 9AD8      SBI	P1B,0
+    0151 9AD9      SBI	P1B,1
+    0152 DFE7      RCALL	_wait
+    0153 98D9      CBI	P1B,1
+    0154 98D8      CBI	P1B,0
+    0155 9508      RET
+_TestAck:
+    0156 2700      CLR	R16
+    0157 E082      LDI	R24,2
+    0158 BB8A      OUT	P1A,R24
+    0159 9AD9      SBI	P1B,1
+    015A B309      IN	R16,P19
+    015B 7001      ANDI	R16,1
+    015C 98D9      CBI	P1B,1
+    015D 0000      NOP
+    015E E083      LDI	R24,3
+    015F BB8A      OUT	P1A,R24
+    0160 2711      CLR	R17
+    0161 9508      RET
+_Read8Bit:
+    0162 D0F1      RCALL	push_gset2
+    0163 2766      CLR	R22
+    0164 E048      LDI	R20,0x8
+    0165 C00D      RJMP	0x0173
+    0166 E082      LDI	R24,2
+    0167 BB8A      OUT	P1A,R24
+    0168 9AD8      SBI	P1B,0
+    0169 DFD0      RCALL	_wait
+    016A 9AD9      SBI	P1B,1
+    016B 0F66      LSL	R22
+    016C B389      IN	R24,P19
+    016D 7081      ANDI	R24,1
+    016E 2B68      OR	R22,R24
+    016F 98D9      CBI	P1B,1
+    0170 E083      LDI	R24,3
+    0171 BB8A      OUT	P1A,R24
+    0172 954A      DEC	R20
+    0173 2344      TST	R20
+    0174 F789      BNE	0x0166
+    0175 2F06      MOV	R16,R22
+    0176 2711      CLR	R17
+    0177 D0E5      RCALL	pop_gset2
+    0178 9508      RET
+_Write8Bit:
+    0179 D0DA      RCALL	push_gset2
+    017A 2F60      MOV	R22,R16
+    017B E048      LDI	R20,0x8
+    017C C00C      RJMP	0x0189
+    017D 2F86      MOV	R24,R22
+    017E 7880      ANDI	R24,0x80
+    017F 3880      CPI	R24,0x80
+    0180 F411      BNE	0x0183
+    0181 9AD8      SBI	P1B,0
+    0182 C001      RJMP	0x0184
+    0183 98D8      CBI	P1B,0
+    0184 9AD9      SBI	P1B,1
+    0185 DFB4      RCALL	_wait
+    0186 98D9      CBI	P1B,1
+    0187 0F66      LSL	R22
+    0188 954A      DEC	R20
+    0189 2344      TST	R20
+    018A F791      BNE	0x017D
+    018B 98D8      CBI	P1B,0
+    018C D0D0      RCALL	pop_gset2
+    018D 9508      RET
+_delay_1ms:
+    018E E001      LDI	R16,1
+    018F E010      LDI	R17,0
+    0190 C002      RJMP	0x0193
+    0191 5F0F      SUBI	R16,0xFF
+    0192 4F1F      SBCI	R17,0xFF
+    0193 3706      CPI	R16,0x76
+    0194 E0E4      LDI	R30,4
+    0195 071E      CPC	R17,R30
+    0196 F3D0      BCS	0x0191
+    0197 9508      RET
+_delay_ms:
+    0198 D0BB      RCALL	push_gset2
+    0199 2F60      MOV	R22,R16
+    019A 2F71      MOV	R23,R17
+    019B 2744      CLR	R20
+    019C 2755      CLR	R21
+    019D C003      RJMP	0x01A1
+    019E DFEF      RCALL	_delay_1ms
+    019F 5F4F      SUBI	R20,0xFF
+    01A0 4F5F      SBCI	R21,0xFF
+    01A1 1746      CP	R20,R22
+    01A2 0757      CPC	R21,R23
+    01A3 F3D0      BCS	0x019E
+    01A4 D0B8      RCALL	pop_gset2
+    01A5 9508      RET
+_scan_key:
+    01A6 D0B3      RCALL	push_gset4
+    01A7 24AA      CLR	R10
+    01A8 24BB      CLR	R11
+    01A9 E08F      LDI	R24,0xF
+    01AA BB84      OUT	P14,R24
+    01AB EF8F      LDI	R24,0xFF
+    01AC BB85      OUT	P15,R24
+    01AD B381      IN	R24,P11
+    01AE 778F      ANDI	R24,0x7F
+    01AF BB81      OUT	P11,R24
+    01B0 2744      CLR	R20
+    01B1 C06F      RJMP	0x0221
+    01B2 E001      LDI	R16,1
+    01B3 2F14      MOV	R17,R20
+    01B4 D0AC      RCALL	lsl8
+    01B5 2E20      MOV	R2,R16
+    01B6 9420      COM	R2
+    01B7 BA25      OUT	P15,R2
+    01B8 DFD5      RCALL	_delay_1ms
+    01B9 B383      IN	R24,P13
+    01BA 7F80      ANDI	R24,0xF0
+    01BB 2EC8      MOV	R12,R24
+    01BC 9987      SBIC	P10,7
+    01BD C002      RJMP	0x01C0
+    01BE 6081      ORI	R24,1
+    01BF 2EC8      MOV	R12,R24
+    01C0 2D8C      MOV	R24,R12
+    01C1 3F80      CPI	R24,0xF0
+    01C2 F409      BNE	0x01C4
+    01C3 C05A      RJMP	0x021E
+    01C4 E005      LDI	R16,5
+    01C5 E010      LDI	R17,0
+    01C6 DFD1      RCALL	_delay_ms
+    01C7 B383      IN	R24,P13
+    01C8 7F80      ANDI	R24,0xF0
+    01C9 2EC8      MOV	R12,R24
+    01CA 9987      SBIC	P10,7
+    01CB C006      RJMP	0x01D2
+    01CC 6081      ORI	R24,1
+    01CD 2EC8      MOV	R12,R24
+    01CE E081      LDI	R24,1
+    01CF E090      LDI	R25,0
+    01D0 2EA8      MOV	R10,R24
+    01D1 2EB9      MOV	R11,R25
+    01D2 2D8C      MOV	R24,R12
+    01D3 3F80      CPI	R24,0xF0
+    01D4 F409      BNE	0x01D6
+    01D5 C048      RJMP	0x021E
+    01D6 7F80      ANDI	R24,0xF0
+    01D7 2EC8      MOV	R12,R24
+    01D8 2D6C      MOV	R22,R12
+    01D9 2777      CLR	R23
+    01DA 3B60      CPI	R22,0xB0
+    01DB E0E0      LDI	R30,0
+    01DC 077E      CPC	R23,R30
+    01DD F0F1      BEQ	0x01FC
+    01DE EB80      LDI	R24,0xB0
+    01DF E090      LDI	R25,0
+    01E0 1786      CP	R24,R22
+    01E1 0797      CPC	R25,R23
+    01E2 F02C      BLT	0x01E8
+    01E3 3760      CPI	R22,0x70
+    01E4 E0E0      LDI	R30,0
+    01E5 077E      CPC	R23,R30
+    01E6 F071      BEQ	0x01F5
+    01E7 C029      RJMP	0x0211
+    01E8 3D60      CPI	R22,0xD0
+    01E9 E0E0      LDI	R30,0
+    01EA 077E      CPC	R23,R30
+    01EB F0B9      BEQ	0x0203
+    01EC 3D60      CPI	R22,0xD0
+    01ED E0E0      LDI	R30,0
+    01EE 077E      CPC	R23,R30
+    01EF F10C      BLT	0x0211
+    01F0 3E60      CPI	R22,0xE0
+    01F1 E0E0      LDI	R30,0
+    01F2 077E      CPC	R23,R30
+    01F3 F0B1      BEQ	0x020A
+    01F4 C01C      RJMP	0x0211
+    01F5 2E24      MOV	R2,R20
+    01F6 0C22      LSL	R2
+    01F7 0C22      LSL	R2
+    01F8 E08F      LDI	R24,0xF
+    01F9 2EC8      MOV	R12,R24
+    01FA 18C2      SUB	R12,R2
+    01FB C017      RJMP	0x0213
+    01FC 2E24      MOV	R2,R20
+    01FD 0C22      LSL	R2
+    01FE 0C22      LSL	R2
+    01FF E08E      LDI	R24,0xE
+    0200 2EC8      MOV	R12,R24
+    0201 18C2      SUB	R12,R2
+    0202 C010      RJMP	0x0213
+    0203 2E24      MOV	R2,R20
+    0204 0C22      LSL	R2
+    0205 0C22      LSL	R2
+    0206 E08D      LDI	R24,0xD
+    0207 2EC8      MOV	R12,R24
+    0208 18C2      SUB	R12,R2
+    0209 C009      RJMP	0x0213
+    020A 2E24      MOV	R2,R20
+    020B 0C22      LSL	R2
+    020C 0C22      LSL	R2
+    020D E08C      LDI	R24,0xC
+    020E 2EC8      MOV	R12,R24
+    020F 18C2      SUB	R12,R2
+    0210 C002      RJMP	0x0213
+    0211 E78F      LDI	R24,0x7F
+    0212 2EC8      MOV	R12,R24
+    0213 E081      LDI	R24,1
+    0214 E090      LDI	R25,0
+    0215 16A8      CP	R10,R24
+    0216 06B9      CPC	R11,R25
+    0217 F419      BNE	0x021B
+    0218 2D8C      MOV	R24,R12
+    0219 6880      ORI	R24,0x80
+    021A 2EC8      MOV	R12,R24
+    021B 2D0C      MOV	R16,R12
+    021C 2711      CLR	R17
+    021D C008      RJMP	0x0226
+    021E EF8F      LDI	R24,0xFF
+    021F BB85      OUT	P15,R24
+    0220 9543      INC	R20
+    0221 3044      CPI	R20,4
+    0222 F408      BCC	0x0224
+    0223 CF8E      RJMP	0x01B2
+    0224 E70F      LDI	R16,0x7F
+    0225 E010      LDI	R17,0
+    0226 D038      RCALL	pop_gset4
+    0227 9508      RET
+mod8u:
+    0228 9468      BSET	6
+    0229 C001      RJMP	0x022B
+div8u:
+    022A 94E8      BCLR	6
+    022B 92FA      ST	R15,-Y
+    022C 18FF      SUB	R15,R15
+    022D E029      LDI	R18,0x9
+    022E 1F00      ROL	R16
+    022F 952A      DEC	R18
+    0230 F421      BNE	0x0235
+    0231 F40E      BRTC	0x0233
+    0232 2D0F      MOV	R16,R15
+    0233 90F9      LD	R15,Y+
+    0234 9508      RET
+    0235 1CFF      ROL	R15
+    0236 1AF1      SUB	R15,R17
+    0237 F418      BCC	0x023B
+    0238 0EF1      ADD	R15,R17
+    0239 9488      BCLR	0
+    023A CFF3      RJMP	0x022E
+    023B 9408      BSET	0
+    023C CFF1      RJMP	0x022E
+push_gset1:
+    023D 935A      ST	R21,-Y
+    023E 934A      ST	R20,-Y
+    023F 9508      RET
+pop_gset1:
+    0240 E0E1      LDI	R30,1
+pop:
+    0241 9149      LD	R20,Y+
+    0242 9159      LD	R21,Y+
+    0243 FDE0      SBRC	R30,0
+    0244 9508      RET
+    0245 9169      LD	R22,Y+
+    0246 9179      LD	R23,Y+
+    0247 FDE1      SBRC	R30,1
+    0248 9508      RET
+    0249 90A9      LD	R10,Y+
+    024A 90B9      LD	R11,Y+
+    024B FDE2      SBRC	R30,2
+    024C 9508      RET
+    024D 90C9      LD	R12,Y+
+    024E 90D9      LD	R13,Y+
+    024F FDE3      SBRC	R30,3
+    0250 9508      RET
+    0251 90E9      LD	R14,Y+
+    0252 90F9      LD	R15,Y+
+    0253 9508      RET
+push_gset2:
+    0254 937A      ST	R23,-Y
+    0255 936A      ST	R22,-Y
+    0256 CFE6      RJMP	push_gset1
+push_gset3:
+    0257 92BA      ST	R11,-Y
+    0258 92AA      ST	R10,-Y
+    0259 CFFA      RJMP	push_gset2
+push_gset4:
+    025A 92DA      ST	R13,-Y
+    025B 92CA      ST	R12,-Y
+    025C CFFA      RJMP	push_gset3
+pop_gset2:
+    025D E0E2      LDI	R30,2
+    025E CFE2      RJMP	pop
+pop_gset4:
+    025F E0E8      LDI	R30,0x8
+    0260 CFE0      RJMP	pop
+lsl8:
+    0261 2311      TST	R17
+    0262 F019      BEQ	0x0266
+    0263 0F00      LSL	R16
+    0264 951A      DEC	R17
+    0265 CFFB      RJMP	lsl8
+    0266 9508      RET

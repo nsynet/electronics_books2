@@ -1,0 +1,174 @@
+                         .module keyboard2.c
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard2.c
+ 0000                   .dbfunc s main _main fI
+                       ;         keyval -> R20
+                       ;              i -> R22
+                         .even
+ 0000                 _main::
+ 0000                   .dbline 14{
+                       ; /*****************************************************
+                       ;             HTTP://WWW.SL.COM.CN
+                       ;                    双龙电子
+                       ;  使用注意：1、应包含头文件slavr.h
+                       ;            2、在工程选项中的Additional Lib中填入slavr
+                       ;               使用编译器使用附加库文件libslavr.a
+                       ;            3、本例采用了作按键释放检查的函数，适用于显
+                       ;               示电路不需频繁刷新的程序,如静态显示、LCD
+                       ;               模块电路等。    
+                       ; ******************************************************/
+                       ; #include <io8515.h>
+                       ; #include <slavr.h>
+                       ; void main(void)
+                       ;     {
+ 0000                   .dbline 16
+                       ;      unsigned char keyval,i;
+                       ;      lcd_init();
+ 0000 00D0              rcall _lcd_init
+ 0002                   .dbline 17
+                       ;      lcd_gotoxy(1,0);
+ 0002 2227              clr R18
+ 0004 01E0              ldi R16,1
+ 0006 00D0              rcall _lcd_gotoxy
+ 0008                   .dbline 18
+                       ;      lcd_puts("www.sl.com.cn");
+ 0008 00E0              ldi R16,<L2
+ 000A 10E0              ldi R17,>L2
+ 000C 00D0              rcall _lcd_puts
+ 000E                   .dbline 19
+                       ;      lcd_gotoxy(0,1);    
+ 000E 21E0              ldi R18,1
+ 0010 0027              clr R16
+ 0012 00D0              rcall _lcd_gotoxy
+ 0014                   .dbline 20
+                       ;      lcd_puts("INPUT: ");
+ 0014 00E0              ldi R16,<L3
+ 0016 10E0              ldi R17,>L3
+ 0018 00D0              rcall _lcd_puts
+ 001A 27C0              rjmp L5
+ 001C                 L4:
+ 001C                   .dbline 22
+                       ;      while(1)
+                       ;       {                 
+ 001C                   .dbline 23
+                       ;        keyval=keypad();
+ 001C 00D0              rcall _keypad
+ 001E 202E              mov R2,R16
+ 0020 312E              mov R3,R17
+ 0022 422D              mov R20,R2
+ 0024                   .dbline 24
+                       ;        if (keyval<16)//对应0~F的键盘输入
+ 0024 4031              cpi R20,16
+ 0026 38F4              brsh L7
+ 0028                   .dbline 25
+                       ;           {
+ 0028                   .dbline 26
+                       ;            if (keyval<10)
+ 0028 4A30              cpi R20,10
+ 002A 10F4              brsh L9
+ 002C                   .dbline 27
+                       ;                keyval=0x30+keyval;
+ 002C 405D              subi R20,208    ; addi 48
+ 002E 01C0              rjmp L10
+ 0030                 L9:
+ 0030                   .dbline 29
+                       ;            else
+                       ;                keyval=55 +keyval;     
+ 0030 495C              subi R20,201    ; addi 55
+ 0032                 L10:
+ 0032                   .dbline 30
+                       ;            lcd_write_data(keyval);
+ 0032 042F              mov R16,R20
+ 0034 00D0              rcall _lcd_write_data
+ 0036                   .dbline 31
+                       ;           }
+ 0036                 L7:
+ 0036                   .dbline 32
+                       ;        if((keyval&0x80)==0x80)//对应SHIF的键盘输入
+ 0036 842F              mov R24,R20
+ 0038 8078              andi R24,128
+ 003A 8038              cpi R24,128
+ 003C B1F4              brne L11
+ 003E                   .dbline 33
+                       ;           {        
+ 003E                   .dbline 34
+                       ;            for(i=0;i<7;i++)
+ 003E 6627              clr R22
+ 0040 07C0              rjmp L16
+ 0042                 L13:
+ 0042                   .dbline 35
+ 0042                   .dbline 36
+ 0042 22E7              ldi R18,114
+ 0044 01E0              ldi R16,1
+ 0046 00D0              rcall _lcd_shift
+ 0048                   .dbline 37
+ 0048 04EF              ldi R16,500
+ 004A 11E0              ldi R17,1
+ 004C 00D0              rcall _delay_ms
+ 004E                   .dbline 38
+ 004E                 L14:
+ 004E                   .dbline 34
+ 004E 6395              inc R22
+ 0050                 L16:
+ 0050                   .dbline 34
+ 0050 6730              cpi R22,7
+ 0052 B8F3              brlo L13
+ 0054                   .dbline 39
+                       ;               {
+                       ;                lcd_shift(1,'r');
+                       ;                delay_ms(500);
+                       ;                }
+                       ;            for(i=0;i<7;i++)
+ 0054 6627              clr R22
+ 0056 07C0              rjmp L20
+ 0058                 L17:
+ 0058                   .dbline 40
+ 0058                   .dbline 41
+ 0058 2CE6              ldi R18,108
+ 005A 01E0              ldi R16,1
+ 005C 00D0              rcall _lcd_shift
+ 005E                   .dbline 42
+ 005E 04EF              ldi R16,500
+ 0060 11E0              ldi R17,1
+ 0062 00D0              rcall _delay_ms
+ 0064                   .dbline 43
+ 0064                 L18:
+ 0064                   .dbline 39
+ 0064 6395              inc R22
+ 0066                 L20:
+ 0066                   .dbline 39
+ 0066 6730              cpi R22,7
+ 0068 B8F3              brlo L17
+ 006A                   .dbline 44
+                       ;               {
+                       ;                lcd_shift(1,'l');
+                       ;                delay_ms(500);
+                       ;               }   
+                       ;           }    
+ 006A                 L11:
+ 006A                   .dbline 45
+ 006A                 L5:
+ 006A                   .dbline 21
+ 006A D8CF              rjmp L4
+ 006C                 X0:
+ 006C                   .dbline 46}
+                       ;       }     
+                       ;      }
+ 006C                 L1:
+ 006C 0895              ret
+ 006E                   .dbsym r keyval 20 c
+ 006E                   .dbsym r i 22 c
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard2.c
+ 0000                 L3:
+ 0000                   .blkb 8
+                         .area idata
+ 0000 494E5055543A2000   .byte 'I,'N,'P,'U,'T,58,32,0
+                         .area data(ram, con, rel)
+ 0008                   .dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard2.c
+ 0008                 L2:
+ 0008                   .blkb 14
+                         .area idata
+ 0008 7777772E736C2E636F6D2E636E00   .byte 'w,'w,'w,46,'s,'l,46,'c,'o,'m,46,'c,'n,0
+                         .area data(ram, con, rel)
+ 0016                   .dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard2.c

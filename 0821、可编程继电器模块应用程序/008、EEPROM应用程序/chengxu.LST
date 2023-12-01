@@ -1,0 +1,203 @@
+C51 COMPILER V8.05a   CHENGXU                                                              01/02/2012 21:28:12 PAGE 1   
+
+
+C51 COMPILER V8.05a, COMPILATION OF MODULE CHENGXU
+OBJECT MODULE PLACED IN chengxu.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE chengxu.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /********************************************************************
+   2                                      汇诚科技
+   3          
+   4          实现功能:EEPROM应用程序
+   5          使用芯片：STC15F104E
+   6          晶振：12MHZ
+   7          编译环境：Keil
+   8          作者：zhangxinchunleo
+   9          网站：www.ourhc.cn
+  10          淘宝店：汇诚科技 http://shop36330473.taobao.com
+  11          【声明】此程序仅用于学习与参考，引用请注明版权和作者信息！     
+  12          
+  13          *********************************************************************/
+  14          /********************************************************************/
+  15          #include "reg52.h" 
+  16          #include <intrins.H>
+  17          #define uchar unsigned char //宏定义字符型变量
+  18          #define uint  unsigned int      //宏定义整型变量
+  19          /********************************************************************
+  20                                      寄存器设置
+  21          *********************************************************************/ 
+  22          sfr IAP_DATA  =0xc2;     //数据寄存器
+  23          sfr IAP_ADDRH =0xc3;     //地址寄存器
+  24          sfr IAP_ADDRL =0xc4;     //地址寄存器
+  25          sfr IAP_CMD   =0xc5;     //命令寄存器
+  26          sfr IAP_TRIG  =0xc6;     //触发寄存器
+  27          sfr IAP_CONTR =0xc7;     //擦除寄存器
+  28          
+  29          sbit  P33=P3^3;                  //定义继电器控制输出脚
+  30          /********************************************************************
+  31                                      命令定义
+  32          *********************************************************************/
+  33          #define CMD_IDLE     0   //EEPROM无操作
+  34          #define CMD_READ     1   //读取字节
+  35          #define CMD_PROGRAM  2   //写入字节
+  36          #define CMD_ERASE    3   //擦除字节
+  37          /********************************************************************
+  38                                 编程周期由晶振决定
+  39          *********************************************************************/
+  40          //#define ENABLE_IAP 0X80        //编程周期由晶振决定（如果<30MHZ选用此项）
+  41          //#define ENABLE_IAP 0X81        //编程周期由晶振决定（如果<24MHZ选用此项）
+  42          //#define ENABLE_IAP 0X82        //编程周期由晶振决定（如果<20MHZ选用此项）
+  43            #define ENABLE_IAP 0X83        //编程周期由晶振决定（如果<12MHZ选用此项）
+  44          //#define ENABLE_IAP 0X84        //编程周期由晶振决定（如果<6MHZ选用此项）
+  45          //#define ENABLE_IAP 0X85        //编程周期由晶振决定（如果<3MHZ选用此项）
+  46          //#define ENABLE_IAP 0X86        //编程周期由晶振决定（如果<2MHZ选用此项）
+  47          //#define ENABLE_IAP 0X87        //编程周期由晶振决定（如果<1MHZ选用此项）
+  48          
+  49          #define IAP_ADDRESS 0X0000       //内部EEPROM地址
+  50          /********************************************************************
+  51                                 函数初始化
+  52          *********************************************************************/
+  53          void Delay(uchar n);                     //延时函数
+  54          void IapIdle();                          //操作函数
+  55          uchar IapReadByte(uint addr); //读取函数
+C51 COMPILER V8.05a   CHENGXU                                                              01/02/2012 21:28:12 PAGE 2   
+
+  56          void IapProgramByte(uint addr,uchar dat); //写入函数
+  57          void IapEraseSector(uint addr); //擦除函数
+  58          /********************************************************************
+  59                                      主函数
+  60          *********************************************************************/
+  61          void main()
+  62          {
+  63   1       uint i; //定义整型变量i
+  64   1       P33=0;
+  65   1       Delay(10);//延时
+  66   1      
+  67   1       IapEraseSector(IAP_ADDRESS);  //擦除扇区
+  68   1       for(i=0;i<512;i++)                        //擦除512个字节的扇区
+  69   1       {
+  70   2         if(IapReadByte(IAP_ADDRESS+i)!=0xff)//判断是否完全擦除
+  71   2         goto Error;                                             //如果没有擦除跳转到报错位置
+  72   2        }
+  73   1      
+  74   1      
+  75   1      Delay(10); //延时
+  76   1      for(i=0;i<512;i++)//对512个字节进行数据写入
+  77   1      {
+  78   2      IapProgramByte(IAP_ADDRESS+i,(uchar)i);  //写入数据
+  79   2      }
+  80   1      
+  81   1       Delay(10);//延时
+  82   1       for(i=0;i<512;i++)//读取512个字节的数据
+  83   1       {
+  84   2         if(IapReadByte(IAP_ADDRESS+i)!=(uchar)i)//判断数据是否完整
+  85   2         goto Error;                                                     //如果没有擦除跳转到报错位置
+  86   2        }
+  87   1      
+  88   1      while(1);  //循环一次
+  89   1      Error:     //错误标志位
+  90   1      P33=1;     //如果错误执行此操作
+  91   1      while(1);  //循环一次
+  92   1      }
+  93          /********************************************************************
+  94                                      延时函数
+  95          *********************************************************************/
+  96          void Delay(uchar n)
+  97          {
+  98   1       uint x;
+  99   1       while(n--)
+ 100   1       {
+ 101   2       x=0;
+ 102   2       while(++x);
+ 103   2       }
+ 104   1      }
+ 105          /********************************************************************
+ 106                                      操作函数
+ 107          *********************************************************************/
+ 108          void IapIdle()
+ 109          {
+ 110   1      IAP_CONTR=0;
+ 111   1      IAP_CMD=0;
+ 112   1      IAP_TRIG=0;
+ 113   1      IAP_ADDRH=0X80;
+ 114   1      IAP_ADDRL=0;
+ 115   1      }
+ 116          
+ 117          /********************************************************************
+C51 COMPILER V8.05a   CHENGXU                                                              01/02/2012 21:28:12 PAGE 3   
+
+ 118                                      读取一个字节函数
+ 119          *********************************************************************/
+ 120          uchar IapReadByte(uint addr)
+ 121          {
+ 122   1      uchar dat;  
+ 123   1      IAP_CONTR=ENABLE_IAP;
+ 124   1      IAP_CMD=CMD_READ;
+ 125   1      IAP_ADDRL=addr;
+ 126   1      IAP_ADDRH=addr>>8;
+ 127   1      IAP_TRIG=0X5A;
+ 128   1      IAP_TRIG=0XA5;
+ 129   1      _nop_();
+ 130   1      _nop_();
+ 131   1      _nop_();
+ 132   1      dat=IAP_DATA;
+ 133   1      IapIdle();
+ 134   1      return dat;
+ 135   1      }
+ 136          
+ 137          /********************************************************************
+ 138                                      写入一个字节函数
+ 139          *********************************************************************/
+ 140          void IapProgramByte(uint addr,uchar dat)
+ 141          {
+ 142   1      
+ 143   1      IAP_CONTR=ENABLE_IAP;
+ 144   1      IAP_CMD=CMD_PROGRAM;
+ 145   1      IAP_ADDRL=addr;
+ 146   1      IAP_ADDRH=addr>>8;
+ 147   1      IAP_DATA=dat;
+ 148   1      IAP_TRIG=0X5A;
+ 149   1      IAP_TRIG=0XA5;
+ 150   1      _nop_();
+ 151   1      _nop_();
+ 152   1      _nop_();
+ 153   1      IapIdle();
+ 154   1      }
+ 155          /********************************************************************
+ 156                                      擦除一个字节函数
+ 157          *********************************************************************/
+ 158          void IapEraseSector(uint addr)
+ 159          {
+ 160   1      IAP_CONTR=ENABLE_IAP;
+ 161   1      IAP_CMD=CMD_ERASE;
+ 162   1      IAP_ADDRL=addr;
+ 163   1      IAP_ADDRH=addr>>8;
+ 164   1      IAP_TRIG=0X5A;
+ 165   1      IAP_TRIG=0XA5;
+ 166   1      _nop_();
+ 167   1      _nop_();
+ 168   1      _nop_();
+ 169   1      IapIdle();
+ 170   1      }
+ 171           
+ 172          /********************************************************************
+ 173                                      结束
+ 174          *********************************************************************/
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    224    ----
+   CONSTANT SIZE    =   ----    ----
+C51 COMPILER V8.05a   CHENGXU                                                              01/02/2012 21:28:12 PAGE 4   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

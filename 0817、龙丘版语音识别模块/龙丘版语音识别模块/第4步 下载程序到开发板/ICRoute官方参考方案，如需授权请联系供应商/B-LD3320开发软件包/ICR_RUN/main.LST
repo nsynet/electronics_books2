@@ -1,0 +1,429 @@
+C51 COMPILER V7.10   MAIN                                                                  09/17/2011 14:04:10 PAGE 1   
+
+
+C51 COMPILER V7.10, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c OPTIMIZE(SIZE) BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /************************************************************************************/
+   2          //      版权所有：Copyright (c) 2005 - 2010 ICRoute INC.
+   3          /************************************************************************************/
+   4          
+   5          #include "STC10F08XE.H"
+   6          #include "LDchip.h"
+   7          #include "Reg_RW.h"
+   8          #include "FlashDef.h"
+   9          #include "SubFuncs.h"
+  10          
+  11          sbit LED0=P3^4;
+  12          sbit LED1=P3^5;
+  13          
+  14          sbit KEY0=P4^2;
+  15          sbit KEY1=P4^1;
+  16          sbit KEY2=P4^0;
+  17          sbit KEY3=P4^3;
+  18          sbit TP1=P4^4;
+  19          sbit P45=P4^5;
+  20          
+  21          /************************************************************************************/
+  22          //      nAsrStatus 用来在main主程序中表示程序运行的状态，不是LD3320芯片内部的状态寄存器
+  23          //      LD_ASR_NONE:            表示没有在作ASR识别
+  24          //      LD_ASR_RUNING：         表示LD3320正在作ASR识别中
+  25          //      LD_ASR_FOUNDOK:         表示一次识别流程结束后，有一个识别结果
+  26          //      LD_ASR_FOUNDZERO:       表示一次识别流程结束后，没有识别结果
+  27          //      LD_ASR_ERROR:           表示一次识别流程中LD3320芯片内部出现不正确的状态
+  28          /***********************************************************************************/
+  29          uint8 idata nAsrStatus=0;       
+  30          
+  31          extern void          _nop_     (void);
+  32          
+  33          void MCU_init();
+  34          void FlashLED(uint8 nTimes);
+  35          void PlaySound(uint8 nCode);
+  36          uint8 RunASR();
+  37          void ProcessInt0();
+  38          void UART_init();
+  39          void OutputIO(uint8 nRes);
+  40          
+  41          
+  42          /************************************************************************************/
+  43          //      这个示范程序是基于STC10L08XE编译的完整地，可以执行的程序
+  44          //      事先了识别和播放的功能
+  45          //      根据用户说出不同的关键词语，识别后播放对应的mp3声音
+  46          //
+  47          //      与LD3320芯片有关的函数功能，都在"开发手册.pdf"中有详细说明
+  48          //      请开发者对照"开发手册.pdf“阅读
+  49          //      
+  50          //      开发者在学习LD3320开始时，可以直接把在这个main函数拷贝到自己单片机中编译运行
+  51          //      如果只实现ASR语音识别功能，可以把程序中PlaySound()函数的调用注释掉就可以
+  52          //      
+  53          //      当然，用户要根据自己实际的单片机去修改 mcu_init ，以及对应的管脚连接的定义，中断定义
+  54          /************************************************************************************/
+  55          
+C51 COMPILER V7.10   MAIN                                                                  09/17/2011 14:04:10 PAGE 2   
+
+  56          void  main()
+  57          {
+  58   1              uint8 idata nAsrRes;
+  59   1      
+  60   1              FlashLED(3);
+  61   1      
+  62   1              MCU_init();
+  63   1              UART_init();
+  64   1              LD_reset();
+  65   1      
+  66   1              nAsrStatus = LD_ASR_NONE;               //      初始状态：没有在作ASR
+  67   1              PlaySound(0);                                   //      播放提示音：为第一条声音
+  68   1              while(1)
+  69   1              {
+  70   2                      if (bMp3Play!=0)                        //      如果还在播放MP3中，则等待，直到MP3播放完毕 即bMp3Play==0
+  71   2                              continue;                               //      bMp3Play 是定义的一个全局变量用来记录MP3播放的状态，不是LD3320芯片内部的寄存器
+  72   2      
+  73   2                      switch(nAsrStatus)
+  74   2                      {
+  75   3                              case LD_ASR_RUNING:
+  76   3                              case LD_ASR_ERROR:              
+  77   3                                      break;
+  78   3                              case LD_ASR_NONE:
+  79   3                              {
+  80   4                                      FlashLED(4);
+  81   4                                      nAsrStatus=LD_ASR_RUNING;
+  82   4                                      if (RunASR()==0)        //      启动一次ASR识别流程：ASR初始化，ASR添加关键词语，启动ASR运算
+  83   4                                      {
+  84   5                                              nAsrStatus = LD_ASR_ERROR;
+  85   5                                              LED0=0;
+  86   5                                              LED1=0;
+  87   5                                      }
+  88   4                                      break;
+  89   4                              }
+  90   3                              case LD_ASR_FOUNDOK:
+  91   3                              {
+  92   4                                      FlashLED(2);
+  93   4                                      nAsrRes = LD_GetResult();       //      一次ASR识别流程结束，去取ASR识别结果
+  94   4                                      OutputIO(nAsrRes);                      //  根据识别结果，在相应的IO管脚上输出1秒钟左右的低电平，开发者可以通过IO管脚输出
+             -到其他设备进行声控。
+  95   4                                      PlaySound(nAsrRes);
+  96   4                                      nAsrStatus = LD_ASR_NONE;
+  97   4                                      break;
+  98   4                              }
+  99   3                              case LD_ASR_FOUNDZERO:
+ 100   3                              default:
+ 101   3                              {
+ 102   4                                      FlashLED(1);
+ 103   4                                      //PlaySound(0);
+ 104   4                                      nAsrStatus = LD_ASR_NONE;
+ 105   4                                      break;
+ 106   4                              }
+ 107   3                      }// switch
+ 108   2              }// while
+ 109   1      
+ 110   1      }
+ 111          
+ 112          void MCU_init()
+ 113          {
+ 114   1              P1M0 |= 1;
+ 115   1              P3M0 |= 8;
+ 116   1              P4SW = 0xFF;
+C51 COMPILER V7.10   MAIN                                                                  09/17/2011 14:04:10 PAGE 3   
+
+ 117   1      
+ 118   1              LED0=0;
+ 119   1              LED1=0;
+ 120   1              P0 = 0xff;
+ 121   1              P1 = 0xff;
+ 122   1              P2 = 0xff;
+ 123   1              P3 = 0xf7;
+ 124   1              P4 = 0x3f;
+ 125   1      
+ 126   1      
+ 127   1      #if defined (SOFT_SPI_PORT)             //      软件模拟SPI读写
+ 128   1              LD_MODE = 1;                            //      设置MD管脚为高
+ 129   1      #elif defined (HARD_SPI_PORT)   //      硬件实现SPI读写
+                      LD_MODE = 1;                            //      设置MD管脚为高
+              #else                                                   //      并行读写 （硬件实现或者软件模拟）
+                      LD_MODE = 0;                            //      设置MD管脚为低
+              #endif
+ 134   1      
+ 135   1      
+ 136   1              IP=0;
+ 137   1              IPH=0;
+ 138   1      
+ 139   1              PX0=1; 
+ 140   1              PT0=1;
+ 141   1              PS=1;
+ 142   1              IPH |= 1;       
+ 143   1              
+ 144   1              EX0=0;
+ 145   1              EX1=0;
+ 146   1              EA=1;
+ 147   1      }
+ 148          
+ 149          void  delay(unsigned long uldata)
+ 150          {
+ 151   1              unsigned int j  =  0;
+ 152   1              unsigned long g  =  0;
+ 153   1              for (j=0;j<5;j++)
+ 154   1              {
+ 155   2                      for (g=0;g<uldata;g++)
+ 156   2                      {
+ 157   3                              _nop_();
+ 158   3                              _nop_();
+ 159   3                              _nop_();
+ 160   3                      }
+ 161   2              }
+ 162   1      }
+ 163          
+ 164          /*********************************************************************
+ 165          //为了消除编译时的 警告 *** WARNING L15: MULTIPLE CALL TO SEGMENT
+ 166          //把在中断函数中需要调用的函数重新复制并命名
+ 167          //消除警告 Warning L15，并且避免由于函数重入可能带来的隐藏Bug
+ 168          /*********************************************************************/
+ 169          
+ 170          void  delay_2(unsigned long uldata)
+ 171          {
+ 172   1              unsigned int j  =  0;
+ 173   1              unsigned long g  =  0;
+ 174   1              for (j=0;j<5;j++)
+ 175   1              {
+ 176   2                      for (g=0;g<uldata;g++)
+ 177   2                      {
+ 178   3                              _nop_();
+C51 COMPILER V7.10   MAIN                                                                  09/17/2011 14:04:10 PAGE 4   
+
+ 179   3                              _nop_();
+ 180   3                              _nop_();
+ 181   3                      }
+ 182   2              }
+ 183   1      }
+ 184          
+ 185          void FlashLED(uint8 nTimes)
+ 186          {
+ 187   1              uint8 k;
+ 188   1              for (k=0; k<nTimes; k++)
+ 189   1              {
+ 190   2                      LED0=0;
+ 191   2                      LED1=0;
+ 192   2                      delay(10000);
+ 193   2                      LED0=1;
+ 194   2                      LED1=1;
+ 195   2                      delay(10000);
+ 196   2              }
+ 197   1      }
+ 198          
+ 199          /************************************************************************************/
+ 200          //      IO_Send_Byte()是主控MCU向spi-flash (型号为华邦的 W25X40)发送指令
+ 201          //      开发者应该根据自己使用的存储芯片去写具体的函数
+ 202          //
+ 203          //      ICroute公司无法对存储芯片的读写提供技术支持，
+ 204          //      开发者需要自己向自己使用的存储芯片的厂商获得技术支持
+ 205          //      或者在网络上搜索相关代码和文档
+ 206          //
+ 207          //      华邦的spi-flash的技术支持的文档页面在：
+ 208          //      http://www.winbond.com.tw/hq/cht/ProductAndSales/ProductLines/FlashMemory/SerialFlash/
+ 209          //      http://www.xtdpj.com/show_hdr.php?xname=915RL41&dname=23T0M41&xpos=84
+ 210          /************************************************************************************/
+ 211          
+ 212          void IO_Send_Byte(uint8 dataout)
+ 213          {
+ 214   1               uint8 i = 0; 
+ 215   1               FLASH_CS = 0;
+ 216   1               for (i=0; i<8; i++)
+ 217   1               {
+ 218   2                        if ((dataout & 0x80) == 0x80) 
+ 219   2                                 FLASH_DIO = 1;
+ 220   2                        else
+ 221   2                                 FLASH_DIO = 0;
+ 222   2                        FLASH_CLK = 1;
+ 223   2                        dataout = (dataout << 1); 
+ 224   2                        FLASH_CLK = 0;   
+ 225   2               }
+ 226   1      }
+ 227          
+ 228          
+ 229          /************************************************************************************/
+ 230          //      RunASR()函数实现了一次完整的ASR语音识别流程
+ 231          //      LD_AsrStart() 函数实现了ASR初始化
+ 232          //      LD_AsrAddFixed() 函数实现了添加关键词语到LD3320芯片中
+ 233          //      LD_AsrRun()     函数启动了一次ASR语音识别流程
+ 234          //
+ 235          //      任何一次ASR识别流程，都需要按照这个顺序，从初始化开始进行
+ 236          /************************************************************************************/
+ 237          
+ 238          uint8 RunASR()
+ 239          {
+ 240   1              uint8 i=0;
+C51 COMPILER V7.10   MAIN                                                                  09/17/2011 14:04:10 PAGE 5   
+
+ 241   1              uint8 asrflag=0;
+ 242   1              for (i=0; i<5; i++)                     //      防止由于硬件原因导致LD3320芯片工作不正常，所以一共尝试5次启动ASR识别流程
+ 243   1              {
+ 244   2                      LD_AsrStart();
+ 245   2                      delay(100);
+ 246   2                      if (LD_AsrAddFixed()==0)
+ 247   2                      {
+ 248   3                              LD_reset();                     //      LD3320芯片内部出现不正常，立即重启LD3320芯片
+ 249   3                              delay(100);                     //      并从初始化开始重新ASR识别流程
+ 250   3                              continue;
+ 251   3                      }
+ 252   2                      delay(10);
+ 253   2                      if (LD_AsrRun() == 0)
+ 254   2                      {
+ 255   3                              LD_reset();                     //      LD3320芯片内部出现不正常，立即重启LD3320芯片
+ 256   3                              delay(100);                     //      并从初始化开始重新ASR识别流程
+ 257   3                              continue;
+ 258   3                      }
+ 259   2      
+ 260   2                      asrflag=1;
+ 261   2                      break;                                  //      ASR流程启动成功，退出当前for循环。开始等待LD3320送出的中断信号
+ 262   2              }
+ 263   1      
+ 264   1              return asrflag;
+ 265   1      }
+ 266          
+ 267          void ExtInt0Handler(void) interrupt 0  
+ 268          {
+ 269   1              ProcessInt0();                          //      LD3320 送出中断信号，包括ASR和播放MP3的中断，需要在中断处理函数中分别处理
+ 270   1      }
+ 271          
+ 272          //-------------------------------------------------------
+ 273          void UART_init()                        //进行串口的相关信息初始化工作
+ 274          {
+ 275   1      #define   RELOAD_COUNT   0XFA
+ 276   1      
+ 277   1              SCON  =  0x50;             //0101，0000  8位可变波特率，无奇偶校验位
+ 278   1              BRT   =  RELOAD_COUNT;     ////定义波特率发生器重载值，晶体频率22.1184M,1T,SMOD=0;波特率115200bps    
+ 279   1              AUXR  =  0x15;  //将BRTR=1，BRTx12=1(1T模式)，SBRS=1
+ 280   1                            //T0x12,T1x12,UART_M0x6,BRTR,S2SMOD,BRTx12,XRAM,SBRS
+ 281   1                            //Baud=Fosc/(256-RELOAD_COUNT)/32/12  (12T模式)
+ 282   1                            //Baud=Fosc/(256-RELOAD_COUNT)/32     (1T模式)
+ 283   1                            //BRTR=1，启动独立波特率发生器
+ 284   1                            //S1BRS=1，串口1选择独立波特率发生器作为波特率发生器
+ 285   1                            //此时定时器1可以释放出来作为定时器，计数器，时钟输出使用
+ 286   1              //AUXR1=0x80；//释放该行指令，则串行口从P3切换到P1，设计串口在P1,不支持
+ 287   1      
+ 288   1      
+ 289   1              TMOD = 0x21;    // 0010 0001 
+ 290   1                                              //设置定时器0为16位计数器
+ 291   1                                              //设置定时器1为8位自动重载计数器
+ 292   1      
+ 293   1              TR0 = 0;
+ 294   1              TR1 = 0;        // 前面设置了专用波特率发生器。不使用Timer1.
+ 295   1      
+ 296   1              ES    =   1;      //允许串口中断
+ 297   1              EA    =   1;      //开总中断    
+ 298   1                                                  
+ 299   1      }
+ 300          
+ 301          //以下几个函数为从串口打印信息到PC机的函数，开发者可以直接调用
+ 302          void SendChar (uint8 data_to_tx) 
+C51 COMPILER V7.10   MAIN                                                                  09/17/2011 14:04:10 PAGE 6   
+
+ 303          {
+ 304   1      #ifdef LD_DEBUG
+ 305   1              ES        =             0;  //关串口中断
+ 306   1              TI    =   0;  //清零串口发送完成中断请求标志
+ 307   1              SBUF  =  data_to_tx;
+ 308   1              while(TI==0); //等待发送完成
+ 309   1              TI    =   0;
+ 310   1              ES    =   1;  //允许串口中断
+ 311   1      #endif
+ 312   1      }
+ 313          
+ 314          void SendLineEnd(void) 
+ 315          {
+ 316   1      #ifdef LD_DEBUG
+ 317   1              SendChar(0x0D);
+ 318   1              SendChar(0x0A);
+ 319   1      #endif
+ 320   1      }
+ 321          
+ 322          void SendString(unsigned char *pt)
+ 323          {
+ 324   1      #ifdef LD_DEBUG
+ 325   1          while(*pt)
+ 326   1                      SendChar(*(pt++));
+ 327   1      #endif
+ 328   1      }
+ 329          
+ 330          void SendByteHex (uint8 value)
+ 331          {
+ 332   1      #ifdef LD_DEBUG
+ 333   1              uint8 idata ch1 = value & 0xF0;
+ 334   1              ch1 = ch1>>4;
+ 335   1              if (ch1>9)
+ 336   1                      ch1 = 'A' + ch1 - 10;
+ 337   1              else 
+ 338   1                      ch1 = '0' + ch1;
+ 339   1              SendChar(ch1);
+ 340   1              ch1 = value & 0x0F;
+ 341   1              if (ch1>9)
+ 342   1                      ch1 = 'A' + ch1 - 10;
+ 343   1              else 
+ 344   1                      ch1 = '0' + ch1;
+ 345   1              SendChar(ch1);
+ 346   1              SendChar(' ');
+ 347   1      #endif
+ 348   1      }
+ 349          
+ 350          void SendLongHex (uint32 value)
+ 351          {
+ 352   1      #ifdef LD_DEBUG
+ 353   1              uint8 idata bt;
+ 354   1              SendChar('[');
+ 355   1              bt = (uint8)(value>>24);
+ 356   1              SendByteHex(bt);
+ 357   1              bt = (uint8)((value&0x00FF0000L)>>16);
+ 358   1              SendByteHex(bt);
+ 359   1              bt = (uint8)((value&0x0000FF00L)>>8);
+ 360   1              SendByteHex(bt);
+ 361   1              bt = (uint8)((value&0x000000FFL));
+ 362   1              SendByteHex(bt);
+ 363   1              SendChar(']');
+ 364   1              SendChar(' ');
+C51 COMPILER V7.10   MAIN                                                                  09/17/2011 14:04:10 PAGE 7   
+
+ 365   1      #endif
+ 366   1      }
+ 367          
+ 368          
+ 369          //在某个IO管脚上输出低电平，持续大概1秒钟左右
+ 370          //如果开发者不需要这一步骤，可以去除，从而减少识别结束到播放声音的延时
+ 371          void OutputIO(uint8 nRes)
+ 372          {
+ 373   1              switch(nRes)
+ 374   1              {
+ 375   2              case 0:
+ 376   2                      KEY0=0; delay(60000); KEY0=1; break;
+ 377   2              case 1:
+ 378   2                      LED0=0; delay(60000); LED0=1; break;
+ 379   2              case 2:
+ 380   2                      KEY3=0; delay(60000); KEY3=1; break;
+ 381   2              case 3:
+ 382   2                      LED1=0; delay(60000); LED1=1; break;
+ 383   2              case 4:
+ 384   2                      TP1=0; delay(60000); TP1=1; break;
+ 385   2              case 5:
+ 386   2                      P45=0; delay(60000); P45=1; break;
+ 387   2              case 6:
+ 388   2                      KEY1=0; delay(60000); KEY1=1; break;
+ 389   2              case 7:
+ 390   2                      KEY2=0; delay(60000); KEY2=1; break;
+ 391   2              }
+ 392   1      }
+ 393          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    867    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      27
+   IDATA SIZE       =      1       3
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,1253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0044)http://www.c51.cn/avr/avrjc/200804/7785.html -->
+<HTML 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>AVR教程（1）：AVR单片机介绍</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="" name=Keywords>
+<META content="" name=Description><LINK href="AVR教程（1）：AVR单片机介绍.files/style.css" 
+type=text/css rel=stylesheet>
+<SCRIPT src="AVR教程（1）：AVR单片机介绍.files/chinaz.js" type=text/javascript></SCRIPT>
+
+<SCRIPT src="AVR教程（1）：AVR单片机介绍.files/prototype.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（1）：AVR单片机介绍.files/scriptaculous.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（1）：AVR单片机介绍.files/checklogin.js"></SCRIPT>
+
+<SCRIPT language=JavaScript>
+<!--
+//改变图片大小
+function resizepic(thispic)
+{
+  return true;
+}
+//无级缩放图片大小
+function bbimg(o)
+{
+  return true;
+}
+-->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3395" name=GENERATOR></HEAD>
+<BODY>
+<DIV class=container>
+<DIV class="clearfix header">
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width="100%" 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle>
+      <DIV id=UserLogin>载入中…
+      <SCRIPT language=JavaScript 
+      type=text/JavaScript>LoadUserLogin('/',1,2);</SCRIPT>
+       </DIV></TD>
+    <TD align=middle width="14%">
+      <SCRIPT language=javascript 
+src="AVR教程（1）：AVR单片机介绍.files/Date.js"></SCRIPT>
+      　</TD></TR></TBODY></TABLE>
+<DIV class=topnav>
+<P align=center><A href="http://www.c51.cn/">http://www.c51.cn/</A> | <A 
+title="" href="http://www.c51.cn/honews/Index.html">新闻中心</A> | <A 
+href="http://www.c51.cn/mcu/Index.html">51单片机</A> | <A 
+href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+href="http://www.c51.cn/avr/Index.html">AVR单片机</A> | <A 
+href="http://www.c51.cn/holtek/Index.html">合泰单片机</A> | <A title="" 
+href="http://www.c51.cn/Photo/Index.html">电路图站</A> | <A title="" 
+href="http://www.c51.cn/pcb/">EDA技术</A> | <A title="" 
+href="http://www.c51.cn/power/">电源技术</A> | <A title="" 
+href="http://www.c51.cn/cgq/">传感技术</A> | <A title="" 
+href="http://www.c51.cn/GuestBook/Index.asp">雁过留声</A> | <A title="" 
+href="http://www.stcmcu.cn/bbs/">技术论坛</A> | <A 
+href="http://www.c51.cn/avr/avrjc/200804/" name=StranLink>切换到繁體中文</A>
+<SCRIPT language=javascript src="AVR教程（1）：AVR单片机介绍.files/gb_big5.js"></SCRIPT>
+ |</P></DIV>
+<DIV class=brand><A class=site-logo title=中国单片机资讯网官方网站 href="http://www.c51.cn/" 
+rel=home><IMG height=60 alt=中国单片机资讯网官方网站 src="AVR教程（1）：AVR单片机介绍.files/logo.gif" 
+width=165></A> </DIV>
+<DIV class=ad-banner>
+<SCRIPT language=javascript src="AVR教程（1）：AVR单片机介绍.files/19.js"></SCRIPT>
+</DIV>
+<DIV class=ad-text>
+<SCRIPT language=JavaScript src="AVR教程（1）：AVR单片机介绍.files/text_link.htm" 
+charset=gb2312></SCRIPT>
+
+<TABLE id=table1 cellSpacing=0 cellPadding=2 width=255 border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff0000><IMG 
+      src="AVR教程（1）：AVR单片机介绍.files/td_icon.gif" align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/hdfk/index.html"><FONT 
+      color=#ff0000>货到付款网点</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（1）：AVR单片机介绍.files/top_ico8.gif" align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wzhelp/200807/8109.html">订购方法</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（1）：AVR单片机介绍.files/top_ico2.gif" align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A></TD></TR>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff00ff><IMG 
+      src="AVR教程（1）：AVR单片机介绍.files/td_icon.gif" align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/wwwgl/200508/23.html"><FONT 
+      color=#ff00ff>银行汇款帐号</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（1）：AVR单片机介绍.files/top_ico8.gif" align=absBottom></SPAN><A 
+      href="http://shop35907817.taobao.com/">淘宝商店</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（1）：AVR单片机介绍.files/top_ico2.gif" align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200808/8156.html">VIP申请</A></TD></TR></TBODY></TABLE></DIV></DIV>
+<DIV class=nav>
+<DIV class=navinner>
+<UL class=navlist>
+  <LI><A href="http://www.c51.cn/">首页</A> </LI>
+  <LI><A id=nav_1 onmouseover="showMenu('nav_1','subnav1')" 
+  href="http://www.c51.cn/mcu/">单片机站</A> 
+  <DIV class="subnav disable" id=subnav1>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/mcu/">MCS-51单片机</A> | <A 
+  href="http://www.c51.cn/avr/">AVR单片机</A> | <A 
+  href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+  href="http://www.c51.cn/stc/">STC单片机</A> | <A 
+  href="http://www.c51.cn/mp430/">MSP430单片机</A> | <A 
+  href="http://www.c51.cn/holtek/">合泰单片机</A> | <A 
+  href="http://www.c51.cn/emc/">义隆单片机</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_2 onmouseover="showMenu('nav_2','subnav2')" 
+  href="http://www.c51.cn/shop/">网站商城</A> 
+  <DIV class="subnav disable" id=subnav2>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Shop/mcukf/">开发板/学习板</A> | <A 
+  href="http://www.c51.cn/Shop/gkong/">工业控制板</A> | <A 
+  href="http://www.c51.cn/Shop/bcq/">编程器</A> | <A 
+  href="http://www.c51.cn/Shop/fzq/">仿真器</A> | <A 
+  href="http://www.c51.cn/Shop/ic/">电子元器件</A> | <A 
+  href="http://www.c51.cn/Shop/cygj/">常用小工具</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_3 onmouseover="showMenu('nav_3','subnav3')" 
+  href="http://www.c51.cn/cpsm/Index.html">产品帮助</A> 
+  <DIV class="subnav disable" id=subnav3>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/cpsm/sl2000/">SL2000</A> | <A 
+  href="http://www.c51.cn/cpsm/sl800/">SL1800</A> | <A 
+  href="http://www.c51.cn/cpsm/sl480/">SL480+</A> | <A 
+  href="http://www.c51.cn/cpsm/sl300/">成功三号</A> | <A 
+  href="http://www.c51.cn/cpsm/sl200/">SL200</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc15/">NPLC-15</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc24/">NPLC-24</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc25/">NPLC-25</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc28/">NPLC-28</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_4 onmouseover="showMenu('nav_4','subnav4')" 
+  href="http://www.c51.cn/Article/">技术论文</A> 
+  <DIV class="subnav disable" id=subnav4>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Article/mcuzh/">开发论文</A> | <A 
+  href="http://www.c51.cn/Article/lexu/">嵌入式系统</A> | <A 
+  href="http://www.c51.cn/Article/arm/">ARM专栏</A> | <A 
+  href="http://www.c51.cn/Article/dsp/">DSP专栏</A> | <A 
+  href="http://www.c51.cn/Article/tx/">通信技术 | <A 
+  href="http://www.c51.cn/Article/ycx/">各类源程序</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_5 onmouseover="showMenu('nav_5','subnav5')" 
+  href="http://www.c51.cn/iczldata/">资料查询</A> 
+  <DIV class="subnav disable" id=subnav5>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/iczldata/ttl74/">74XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/cd40/">CD4XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/ram/">存储器系列</A> | <A 
+  href="http://www.c51.cn/iczldata/adda/">A/D&amp;DA</A> | <A 
+  href="http://www.c51.cn/iczldata/yf/">运算放大器</A> | <A 
+  href="http://www.c51.cn/iczldata/power/">电源管理IC</A> | <A 
+  href="http://www.c51.cn/iczldata/scr/">可控硅</A> | <A 
+  href="http://www.c51.cn/iczldata/yp/">音频视频</A> | <A 
+  href="http://www.c51.cn/iczldata/fmic/">通信IC</A> | <A 
+  href="http://www.c51.cn/iczldata/guou/">光电耦合器</A> | <A 
+  href="http://www.c51.cn/iczldata/dv/">二、三极管</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_6 onmouseover="showMenu('nav_6','subnav6')" 
+  href="http://www.c51.cn/soft">资源下载</A> 
+  <DIV class="subnav disable" id=subnav6>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/soft/kfgj/">开发工具</A> | <A 
+  href="http://www.c51.cn/soft/gjrj/">常用工具</A> | <A 
+  href="http://www.c51.cn/soft/spjc/">视频教程</A> | <A 
+  href="http://www.c51.cn/soft/dzbooks/">电子书籍</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_7 onmouseover="showMenu('nav_7','subnav7')" 
+  href="http://www.c51.cn/dzjs/">电子技术</A> 
+  <DIV class="subnav disable" id=subnav7>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/dzjs/yjcs/index.html">电子基础</A> | <A 
+  href="http://www.c51.cn/dzjs/szdl/">数字电路</A> | <A 
+  href="http://www.c51.cn/dzjs/mndl/">模拟电路</A> | <A 
+  href="http://www.c51.cn/dzjs/io/">接口电路</A> | <A 
+  href="http://www.c51.cn/dzjs/xpyy/">芯片应用</A> | <A 
+  href="http://www.c51.cn/dzjs/zhzl/">综合资料</A> | <A 
+  href="http://www.c51.cn/dzjs/wqj/">元件常识</A> 
+</SPAN></P></DIV></LI></UL></DIV></DIV>
+<DIV class=note><SPAN><A href="http://www.c51.cn/User/Index.asp"><IMG 
+src="AVR教程（1）：AVR单片机介绍.files/td_icon.gif" align=absBottom> 我要投稿</A> <A 
+href="http://www.c51.cn/glwz/wwwgl/200602/1853.html"><IMG 
+src="AVR教程（1）：AVR单片机介绍.files/tg_icon.gif" align=absBottom> 投稿指南</A> <A 
+href="http://www.c51.cn/xml/Rss.xml"><IMG src="AVR教程（1）：AVR单片机介绍.files/rss.gif" 
+align=absBottom> RSS订阅</A></SPAN> <B>网站通告:</B> 
+<MARQUEE onmouseover=this.stop() style="WIDTH: 477px; HEIGHT: 15px" 
+onmouseout=this.start() scrollAmount=1 scrollDelay=4 width=477 align="left">
+<P>&nbsp;&nbsp;没有公告</P></MARQUEE></DIV>
+<FORM name=search action=search.asp method=post>
+<DIV class=weizhi><SPAN><B>搜索:</B> <INPUT type=hidden value=0 name=kwtype> 
+<INPUT id=Keyword maxLength=50 value=关键字 name=Keyword> <INPUT class=searchtxt 
+id=Field type=hidden value=Title name=Field> <OPTION selected="selected" 
+value="title">搜索标题</OPTION> </SELECT><INPUT type=image 
+src="AVR教程（1）：AVR单片机介绍.files/topsearch_submit.gif"> </SPAN>您现在的位置：&nbsp;<A 
+class=LinkPath href="http://www.c51.cn/">中国单片机资讯网</A>&nbsp;&gt;&gt;&nbsp;<A 
+class=LinkPath 
+href="http://www.c51.cn/avr/Index.html">AVR单片机站</A>&nbsp;&gt;&gt;&nbsp;<A 
+class=LinkPath 
+href="http://www.c51.cn/avr/avrjc/Index.html">教程</A>&nbsp;&gt;&gt;&nbsp;正文 
+</DIV></FORM><!--列表左边:开始--><!--列表左边:开始-->
+<DIV class="clearfix wrap layout-cols2">
+<DIV class=col1>
+<DIV id=news>
+<H1>AVR教程（1）：AVR单片机介绍</H1>
+<DIV class=times>2008-06-10 13:50:46 来源:<A 
+href="http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net">http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net</A> 
+作者:<A title=微雪电子 
+href="http://www.c51.cn/ShowAuthor.asp?ChannelID=1035&amp;AuthorName=微雪电子">微雪电子</A> 
+【<A href="javascript:doZoom(16)">大</A> <A href="javascript:doZoom(14)">中</A> <A 
+href="javascript:doZoom(12)">小</A>】 <A class=fsource 
+href="http://www.c51.cn/avr/avrjc/200804/7785.html#plshow">点击：<FONT 
+id=feedcounttop color=red>
+<SCRIPT language=javascript src="AVR教程（1）：AVR单片机介绍.files/GetHits.htm"></SCRIPT>
+</FONT> 次</A> </DIV>
+<DIV class=content id=textbody>
+<SCRIPT language=javascript src="AVR教程（1）：AVR单片机介绍.files/28.js"></SCRIPT>
+</DIV>
+<DIV class=content>
+<P style="LINE-HEIGHT: 15pt"><FONT face=宋体><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt">AVR</SPAN><SPAN style="FONT-SIZE: 9pt">，它来源于：<SPAN 
+lang=EN-US>1997</SPAN>年，由<SPAN lang=EN-US>ATMEL</SPAN>公司挪威设计中心的<SPAN 
+lang=EN-US>A</SPAN>先生与<SPAN lang=EN-US>V</SPAN>先生利用<SPAN 
+lang=EN-US>ATMEL</SPAN>公司的<SPAN lang=EN-US>Flash</SPAN>新技术，共同研发出<SPAN 
+lang=EN-US>RISC</SPAN>精简指令集的高速<SPAN lang=EN-US>8</SPAN>位单片机，简称<SPAN 
+lang=EN-US>AVR</SPAN>。 <SPAN lang=EN-US></SPAN></SPAN></FONT></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">AVR</SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">单片机特点</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P class=type1 style="MARGIN: auto 0cm; TEXT-INDENT: 21pt"><SPAN 
+style="COLOR: windowtext"><FONT face=宋体 size=2>每种<SPAN 
+lang=EN-US>MCU</SPAN>都有自身的优点与缺点，与其它<SPAN lang=EN-US>8-bit MCU</SPAN>相比，<SPAN 
+lang=EN-US>AVR 8-bit MCU</SPAN>最大的特点是：</FONT><SPAN lang=EN-US><BR><FONT face=宋体 
+size=2>● </FONT></SPAN><FONT face=宋体 size=2>哈佛结构，具备<SPAN lang=EN-US>1MIPS / 
+MHz</SPAN>的高速运行处理能力；</FONT><SPAN lang=EN-US><BR><FONT face=宋体 size=2>● 
+</FONT></SPAN><FONT face=宋体 size=2>超功能精简指令集（<SPAN 
+lang=EN-US>RISC</SPAN>），具有<SPAN lang=EN-US>32</SPAN>个通用工作寄存器，克服了如<SPAN 
+lang=EN-US>8051 MCU</SPAN>采用单一<SPAN 
+lang=EN-US>ACC</SPAN>进行处理造成的瓶颈现象；</FONT><SPAN lang=EN-US><BR><FONT face=宋体 
+size=2>● </FONT></SPAN><FONT face=宋体 
+size=2>快速的存取寄存器组、单周期指令系统，大大优化了目标代码的大小、执行效率，部分型号<SPAN 
+lang=EN-US>FLASH</SPAN>非常大，特别适用于使用高级语言进行开发；</FONT><SPAN lang=EN-US><BR><FONT 
+face=宋体 size=2>● </FONT></SPAN><FONT face=宋体 size=2>作输出时与<SPAN 
+lang=EN-US>PIC</SPAN>的<SPAN lang=EN-US>HI/LOW</SPAN>相同，可输出<SPAN 
+lang=EN-US>40mA</SPAN>（单一输出），作输入时可设置为三态高阻抗输入或带上拉电阻输入，具备<SPAN 
+lang=EN-US>10mA-20mA</SPAN>灌电流的能力；</FONT><SPAN lang=EN-US><BR><FONT face=宋体 
+size=2>● </FONT></SPAN><FONT face=宋体 size=2>片内集成多种频率的<SPAN 
+lang=EN-US>RC</SPAN>振荡器、上电自动复位、看门狗、启动延时等功能，外围电路更加简单，系统更加稳定可靠；</FONT><SPAN 
+lang=EN-US><BR><FONT face=宋体 size=2>● </FONT></SPAN><FONT face=宋体 
+size=2>大部分<SPAN lang=EN-US>AVR</SPAN>片上资源丰富：带<SPAN 
+lang=EN-US>E2PROM</SPAN>，<SPAN lang=EN-US>PWM</SPAN>，<SPAN 
+lang=EN-US>RTC</SPAN>，<SPAN lang=EN-US>SPI</SPAN>，<SPAN 
+lang=EN-US>UART</SPAN>，<SPAN lang=EN-US>TWI</SPAN>，<SPAN 
+lang=EN-US>ISP</SPAN>，<SPAN lang=EN-US>AD</SPAN>，<SPAN lang=EN-US>Analog 
+Comparator</SPAN>，<SPAN lang=EN-US>WDT</SPAN>等；</FONT><SPAN lang=EN-US><BR><FONT 
+face=宋体 size=2>● </FONT></SPAN><FONT face=宋体 size=2>大部分<SPAN 
+lang=EN-US>AVR</SPAN>除了有<SPAN lang=EN-US>ISP</SPAN>功能外，还有<SPAN 
+lang=EN-US>IAP</SPAN>功能，方便升级或销毁应用程序。</FONT><SPAN lang=EN-US><BR><FONT face=宋体 
+size=2>● </FONT></SPAN><FONT size=2><FONT face=宋体>性价比高。<SPAN 
+lang=EN-US></SPAN></FONT></FONT></SPAN></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">开发</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">AVR</SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">单片机，需要哪些编译器、调试器？</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<TABLE class=MsoNormalTable 
+style="WIDTH: 416.65pt; mso-padding-alt: 0cm 0cm 0cm 0cm; mso-cellspacing: .7pt" 
+cellSpacing=1 cellPadding=0 width=556 border=0>
+  <TBODY>
+  <TR style="HEIGHT: 17.7pt; mso-yfti-irow: 0; mso-yfti-firstrow: yes">
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #006666; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 67.3pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=90>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN 
+      style="COLOR: white; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">软件名称<SPAN 
+      lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #006666; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 54pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=72>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN 
+      style="COLOR: white; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">类型<SPAN 
+      lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #006666; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 208.3pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=278>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN 
+      style="COLOR: white; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">简介<SPAN 
+      lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #006666; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 83.55pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=111>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN 
+      style="COLOR: white; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">官方网址<SPAN 
+      lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD></TR>
+  <TR style="HEIGHT: 36.85pt; mso-yfti-irow: 1">
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 36.85pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">AVR 
+      Studio</SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 54pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 36.85pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=72>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">IDE</SPAN><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">、汇编编译器<SPAN 
+      lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 208.3pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 36.85pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=278>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: left; mso-pagination: widow-orphan" 
+      align=left><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">　　<SPAN 
+      lang=EN-US>ATMEL AVR Studio</SPAN>集成开发环境<SPAN 
+      lang=EN-US>(IDE)</SPAN>，可使用汇编语言进行开发（使用其它语言需第三方软件协助），集软硬件仿真、调试、下载编程于一体。<SPAN 
+      lang=EN-US>ATMEL</SPAN>官方及市面上通用的<SPAN lang=EN-US>AVR</SPAN>开发工具都支持<SPAN 
+      lang=EN-US>AVRStudio</SPAN>。<SPAN lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 36.85pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt"><A 
+      href="http://www.atmel.com/" target=_blank><SPAN 
+      style="COLOR: white; FONT-FAMILY: Arial; mso-bidi-font-size: 12.0pt"><U>www.atmel.com</U></SPAN></A></SPAN></P>
+      <P><U></U></P></TD></TR>
+  <TR style="HEIGHT: 38.25pt; mso-yfti-irow: 2">
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 38.25pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">GCCAVR 
+      (WinAVR) </SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 54pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 38.25pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=72>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">C</SPAN><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">编译器<SPAN 
+      lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 208.3pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 38.25pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=278>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: left; mso-pagination: widow-orphan; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto" 
+      align=left><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">　　<SPAN 
+      lang=EN-US>GCC</SPAN>是<SPAN lang=EN-US>Linux</SPAN>的唯一开发语言。<SPAN 
+      lang=EN-US>GCC</SPAN>的编译器优化程度可以说是目前世界上民用软件中做的最好的，另外，它有一个非常大优点是，免费！在国外，使用它的人几乎是最多的。但，相对而言，它的缺点是，使用操作较为麻烦。<SPAN 
+      lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 38.25pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt"><A 
+      href="http://sourceforge.net/" target=_blank><SPAN 
+      style="COLOR: white; FONT-FAMILY: Arial; mso-bidi-font-size: 12.0pt"><U>sourceforge.net 
+      </U></SPAN></A></SPAN></P>
+      <P><U></U></P></TD></TR>
+  <TR style="HEIGHT: 34.7pt; mso-yfti-irow: 3">
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 34.7pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">ICC 
+      AVR</SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 54pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 34.7pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=72>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">C</SPAN><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">编译器<SPAN 
+      lang=EN-US><BR></SPAN>（集烧写程序功能）<SPAN lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 208.3pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 34.7pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=278>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: left; mso-pagination: widow-orphan" 
+      align=left><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">　　市面上<SPAN 
+      lang=EN-US>(</SPAN>大陆<SPAN 
+      lang=EN-US>)</SPAN>的教科书使用它作为例程的较多，集成代码生成向导，虽然它的各方面性能均不是特别突出，但使用较为方便。虽然<SPAN 
+      lang=EN-US>ICCAVR</SPAN>软件不是免费的，但，它有<SPAN lang=EN-US>Demo</SPAN>版本，在<SPAN 
+      lang=EN-US>45</SPAN>天内是完全版。<SPAN lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 34.7pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt"><A 
+      href="http://www.imagecraft.com/" target=_blank><SPAN 
+      style="COLOR: white; FONT-FAMILY: Arial; mso-bidi-font-size: 12.0pt"><U>www.imagecraft.com 
+      </U></SPAN></A></SPAN></P>
+      <P><U></U></P></TD></TR>
+  <TR style="HEIGHT: 34pt; mso-yfti-irow: 4">
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 34pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">CodeVision 
+      AVR </SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 54pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 34pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=72>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">C</SPAN><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">编译器<SPAN 
+      lang=EN-US><BR></SPAN>（集烧写程序功能）<SPAN lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 208.3pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 34pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=278>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: left; mso-pagination: widow-orphan; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto" 
+      align=left><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">　　与<SPAN 
+      lang=EN-US>KeilC51</SPAN>的代码风格最为相似，集成较多常用外围器件的操作函数，集成代码生成向导，有软件模块，不是免费软件，<SPAN 
+      lang=EN-US>Demo</SPAN>版为限<SPAN lang=EN-US>2KB</SPAN>版。<SPAN 
+      lang=EN-US>&nbsp;</SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 34pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt"><A 
+      href="http://www.hpinfotech.ro/" target=_blank><SPAN 
+      style="COLOR: white; FONT-FAMILY: Arial; mso-bidi-font-size: 12.0pt"><U>www.hpinfotech.ro 
+      </U></SPAN></A></SPAN></P>
+      <P><U></U></P></TD></TR>
+  <TR style="HEIGHT: 17.7pt; mso-yfti-irow: 5">
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">ATman 
+      AVR </SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 54pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=72>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">C</SPAN><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">编译器<SPAN 
+      lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 208.3pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=278>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">支持多个模块调试（<SPAN 
+      lang=EN-US>AVRStudio</SPAN>不支持多个模块调试）。<SPAN lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #333333; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt"><A 
+      href="http://www.atmanecl.com/" target=_blank><SPAN 
+      style="COLOR: white; FONT-FAMILY: Arial; mso-bidi-font-size: 12.0pt"><U>www.atmanecl.com</U></SPAN></A></SPAN></P>
+      <P><U></U></P></TD></TR>
+  <TR style="HEIGHT: 17.7pt; mso-yfti-irow: 6; mso-yfti-lastrow: yes">
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">IAR 
+      AVR </SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 54pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=72>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">C</SPAN><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">编译器<SPAN 
+      lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; WIDTH: 208.3pt; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8" 
+    width=278>
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: left; mso-pagination: widow-orphan" 
+      align=left><SPAN 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt">　　<SPAN 
+      lang=EN-US>IAR</SPAN>实际上在国外比较多人使用，但它的价格较为昂贵，所以，中国大陆内，使用它的开发人员较少，只有习惯用<SPAN 
+      lang=EN-US>IAR</SPAN>的工程师才会去使用它。<SPAN lang=EN-US></SPAN></SPAN></P>
+      <P></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-COLOR: #ece9d8; BACKGROUND: #003366; BORDER-BOTTOM-COLOR: #ece9d8; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: #ece9d8; PADDING-TOP: 0cm; HEIGHT: 17.7pt; BORDER-RIGHT-COLOR: #ece9d8">
+      <P class=MsoNormal 
+      style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: 15pt; TEXT-ALIGN: center; mso-pagination: widow-orphan" 
+      align=center><SPAN lang=EN-US 
+      style="FONT-SIZE: 9pt; COLOR: #ff9900; FONT-FAMILY: 宋体; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt"><A 
+      href="http://www.iar.com/" target=_blank><SPAN 
+      style="COLOR: white; FONT-FAMILY: Arial; mso-bidi-font-size: 12.0pt"><U>www.iar.com</U></SPAN></A></SPAN></P>
+      <P><U></U></P></TD></TR></TBODY></TABLE>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">AVR</SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">的仿真方式</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">一般来说，</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">有三种仿真方式：</SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>1</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">仿真方式，适用于具备</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">仿真接口的</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">。如：</SPAN><SPAN 
+lang=EN-US>Atmega16/32</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，</SPAN><SPAN 
+lang=EN-US>Atmega64/128</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">等。</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">是</SPAN><SPAN 
+lang=EN-US>IEEE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的标准规范，</SPAN> <SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">通过这个标准，可对具有</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">接口的芯片的硬件电路进行边界扫描和故障检测。部分</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">型号带</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">仿真调试接口，可使用</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">仿真方式。</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>2</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">仿真方式，适用于具备</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">仿真接口的</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">。如：</SPAN><SPAN 
+lang=EN-US>Attiny13/24/2313</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，</SPAN><SPAN 
+lang=EN-US>Atmega48/88/168</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">等。</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+lang=EN-US>debugWIRE </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">是用以降低成本和调试引脚的开销，</SPAN><SPAN 
+lang=EN-US>ATMEL</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">在</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">器件上使用的新的调试接口：</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，与</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">相比其主要区别在于仅使用一根信号线（</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">），即可完成调试信息的交互，达到控制程序流向，执行指令以及编程熔丝位的功能。它的总的连接图如下：</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: "><IMG hspace=0 
+src="AVR教程（1）：AVR单片机介绍.files/20080402000055425.jpg" align=baseline 
+border=0></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US></SPAN>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US><SHAPETYPE 
+id=_x0000_t75 stroked="f" filled="f" path="m@4@5l@4@11@9@11@9@5xe" 
+o:preferrelative="t" o:spt="75" coordsize="21600,21600" /><STROKE 
+joinstyle="miter" /><FORMULAS /><F eqn="if lineDrawn pixelLineWidth 0" /><F 
+eqn="sum @0 1 0" /><F eqn="sum 0 0 @1" /><F eqn="prod @2 1 2" /><F 
+eqn="prod @3 21600 pixelWidth" /><F eqn="prod @3 21600 pixelHeight" /><F 
+eqn="sum @0 0 1" /><F eqn="prod @6 1 2" /><F eqn="prod @7 21600 pixelWidth" /><F 
+eqn="sum @8 21600 0" /><F eqn="prod @7 21600 pixelHeight" /><F 
+eqn="sum @10 21600 0" /></FORMULAS /><PATH o:connecttype="rect" 
+gradientshapeok="t" o:extrusionok="f" /><LOCK aspectratio="t" v:ext="edit" 
+/></SHAPETYPE /></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">这里的</SPAN><SPAN lang=EN-US> 
+RESET </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">信号被用于传递调试信息。</SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>3</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）采用仿真头替代</SPAN><SPAN 
+lang=EN-US>AVR MCU</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">仿真方式，适用于不带仿真接口的</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">。如</SPAN><SPAN 
+lang=EN-US>Attiny26</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，</SPAN><SPAN 
+lang=EN-US>Atmega8</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，</SPAN><SPAN 
+lang=EN-US>Atmega8515</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">等。</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+lang=EN-US></SPAN>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">AVR</SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">的烧写方式</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">一般来说，</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的编程方式有：</SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>1</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）串行编程（即</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">编程）</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">是</SPAN><SPAN lang=EN-US>In 
+System Program</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的缩写，意思是在系统编程。目前的</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">芯片基本上都具备</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">接口，可通过</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">接口进行编程。它一共使用了两条电源线：</SPAN><SPAN 
+lang=EN-US>VCC</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">、</SPAN><SPAN 
+lang=EN-US>GND</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，三条信号线：</SPAN><SPAN 
+lang=EN-US>SCK</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">、</SPAN><SPAN 
+lang=EN-US>MOSI</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">、</SPAN><SPAN 
+lang=EN-US>MISO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，以及复位线：</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">。由于仅仅使用了几条数据线，所以我们亦常将其称为串行编程。值得注意的是，虽然下载器端使用的信号线名为</SPAN><SPAN 
+lang=EN-US>SCK</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">、</SPAN><SPAN 
+lang=EN-US>MOSI</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">、</SPAN><SPAN 
+lang=EN-US>MISO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，但</SPAN><SPAN lang=EN-US>AVR 
+MCU</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的信号端不一定是名为</SPAN><SPAN 
+lang=EN-US>SCK</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">、</SPAN><SPAN 
+lang=EN-US>MOSI</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">、</SPAN><SPAN 
+lang=EN-US>MISO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">。</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt 21pt"><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的串行编程方式有很多种，如：</SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>1</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN><SPAN 
+lang=EN-US>STK200/STK300</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">：并口下载器多采用该烧写方式，最早期的一种烧写方式，支持型号少，烧写速度低，不支持</SPAN><SPAN 
+lang=EN-US>AVR Studio</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">。</SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>2</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN><SPAN 
+lang=EN-US>STK500</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">：</SPAN><SPAN 
+lang=EN-US>ATMEL</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">最推荐的编程方式，由于采用</SPAN><SPAN 
+lang=EN-US>ATMEL</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">官方的</SPAN><SPAN 
+lang=EN-US>STK500</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">固件，使得它可烧写全系列</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（若对固件进行升级亦可支持未来的</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">型号），烧写速度非常快，支持</SPAN><SPAN 
+lang=EN-US>AVR Studio</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">。</SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>3</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN><SPAN 
+lang=EN-US>AVRISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（准</SPAN><SPAN 
+lang=EN-US>STK500</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）：由于采用</SPAN><SPAN 
+lang=EN-US>ATMEL</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">官方的</SPAN><SPAN 
+lang=EN-US>STK500</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">固件，使得它可烧写大部分</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（若对固件进行升级亦可支持未来的</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">型号），烧写速度非常快，支持</SPAN><SPAN 
+lang=EN-US>AVR Studio</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">。</SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>4</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN><SPAN 
+lang=EN-US>AVRISPmkII</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">：由于采用</SPAN><SPAN 
+lang=EN-US>ATMEL</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">官方的</SPAN><SPAN 
+lang=EN-US>AVRISPmkII</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">固件，使得它可烧写大部分</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（若对固件进行升级亦可支持未来的</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">型号），烧写速度非常快，支持</SPAN><SPAN 
+lang=EN-US>AVR Studio</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">。</SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>5</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）当然还有其它的</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">方式，但已经那些均不是最为常见的串行编程方式，在此不在作一一介绍。</SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt 21pt; TEXT-INDENT: -21pt; mso-char-indent-count: -2.0"><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>2</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）高压</SPAN><SPAN 
+lang=EN-US>/</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">并行编程</SPAN><SPAN 
+lang=EN-US><BR>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的高压编程</SPAN><SPAN 
+lang=EN-US>/</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">并行编程，实际上是更早出现的编程方法，它功能强大，但需要：</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt 21pt"><SPAN 
+lang=EN-US>1</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）连接较多的引脚（故称</SPAN><SPAN 
+lang=EN-US>“</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">并行编程</SPAN><SPAN 
+lang=EN-US>”</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN><SPAN 
+lang=EN-US><BR>2</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）使用</SPAN><SPAN 
+lang=EN-US>12V</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">电压（故称</SPAN><SPAN 
+lang=EN-US>“</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">高压编程</SPAN><SPAN 
+lang=EN-US>”</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt 42pt"><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">联合起来一般叫高压</SPAN><SPAN 
+lang=EN-US>/</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">并行编程。实际上，有些编程是高压</SPAN><SPAN 
+lang=EN-US>/</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">串行编程，如</SPAN><SPAN 
+lang=EN-US>Attiny13</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">。（</SPAN><SPAN 
+lang=EN-US>Attiny13</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">端口非常少）高压</SPAN><SPAN 
+lang=EN-US>/</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">并行编程（理论上）能修复任何熔丝位，例如：</SPAN><SPAN 
+lang=EN-US><BR>1</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN><SPAN 
+lang=EN-US>Attiny13/24/2313</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">、</SPAN><SPAN 
+lang=EN-US>Atmega8/48/88/168</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">等</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">端口与</SPAN><SPAN 
+lang=EN-US>IO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">端口是共用的，由于这类</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的引脚一般较少，（如</SPAN><SPAN 
+lang=EN-US>Attiny13</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">仅有</SPAN><SPAN 
+lang=EN-US>6</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">个</SPAN><SPAN 
+lang=EN-US>IO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">口），经常出现</SPAN><SPAN 
+lang=EN-US>IO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">不够用的情况，需要将</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">端口设置为</SPAN><SPAN 
+lang=EN-US>IO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">端口使用，然而，一旦将</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">设置为</SPAN><SPAN 
+lang=EN-US>IO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，便无法再进行</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">编程了，更无法使用</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">恢复</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能，因为</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">编程需要</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能。然而，这种情况下，使用高压</SPAN><SPAN 
+lang=EN-US>/</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">并行编程，可以恢复</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能，（注意：</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">端口与</SPAN><SPAN 
+lang=EN-US>IO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">端口是共用的</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，具备</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能，</SPAN><SPAN 
+lang=EN-US>“dW”</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">熔丝位必须为启动状态）因为高压</SPAN><SPAN 
+lang=EN-US>/</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">并行编程不需要</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能。</SPAN><SPAN 
+lang=EN-US><BR>2</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）当设置错了熔丝位导致芯片锁死，这种情况下，使用高压</SPAN><SPAN 
+lang=EN-US>/</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">并行编程，可恢复熔丝位。</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>3</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">编程</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">烧写方式仅适用于带</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">接口的</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，另外，</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">对比</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">烧写方式主要有个缺点：必须占用</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">对应的</SPAN><SPAN 
+lang=EN-US>IO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">端口。例如，</SPAN><SPAN 
+lang=EN-US>ATMEGA16</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">必须占用</SPAN><SPAN 
+lang=EN-US>PC2-PC5</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">这几个端口。然而，有时候，缺点也是优点，因为对于</SPAN><SPAN 
+lang=EN-US>IO</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">够用的</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">来说，在产品开发过程，可以用</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">接口来仿真调试，产品量产后，产品板预留的</SPAN><SPAN 
+lang=EN-US>JTAG</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">接口还可以用来烧写程序。</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">（</SPAN><SPAN 
+lang=EN-US>4</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">）</SPAN><SPAN 
+lang=EN-US>IAP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">编程</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+lang=EN-US>AVR MCU</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能和</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能是互斥的，也就是说，使能了</SPAN><SPAN 
+lang=EN-US>AVR MCU</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的</SPAN><SPAN lang=EN-US> 
+debugWIRE </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能后</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能就无法使用，使能了</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能后</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能就无法使用。</SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">　　那么，怎样确定</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的</SPAN><SPAN 
+lang=EN-US>RESET</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">引脚</SPAN> <SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">为</SPAN><SPAN 
+lang=EN-US>ISP</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能使用还是</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能使用呢？</SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">　　在具备</SPAN><SPAN 
+lang=EN-US>debugWIRE </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的</SPAN><SPAN lang=EN-US>AVR 
+</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">器件中，有一个可编程的熔丝位</SPAN><SPAN 
+lang=EN-US>DWEN</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">，如果该熔丝被编程（且</SPAN><SPAN 
+lang=EN-US>lockbits</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">未被编程），则</SPAN><SPAN 
+lang=EN-US>debugWIRE </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能被启用，</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">的</SPAN><SPAN lang=EN-US>RESET 
+</SPAN><SPAN style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">引脚将被作为</SPAN><SPAN 
+lang=EN-US>debugWIRE </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能使用，可与调试器进行</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">仿真通信（此时，</SPAN><SPAN 
+lang=EN-US>ISP </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能被禁用）。</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">芯片出厂时，</SPAN><SPAN 
+lang=EN-US>DWEN</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">熔丝位是未编程的，也即是说</SPAN><SPAN 
+lang=EN-US>ISP </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能是使能的，</SPAN><SPAN 
+lang=EN-US>debugWIRE </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">被禁用。使用</SPAN><SPAN 
+lang=EN-US>ISP </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能时，通过调试器对</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">熔丝进行编程使能，可启用</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能；使用</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能时，对通过调试器对</SPAN><SPAN 
+lang=EN-US>debugWIRE</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">熔丝禁止，可使能</SPAN><SPAN 
+lang=EN-US>ISP </SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: ">功能。</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US></SPAN>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">编程语言建议使用</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">C</SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">而不是汇编开发</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">AVR</SPAN></B></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">首先说说</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">C</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的优点。</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>1</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">、直观，可读性强：这点很重要。对于一个产品，周期是很长的，即使出第一台产品之后，还有很长的维护时间。这中间维护人员可能经常变动，如果可读性强，将给维护工作省下很大的成本。即使是在开发，可读性强的程序也便于查错。</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> <BR>2</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">、模块化可以做的很好：这点也是很重要的。模块化做得好，当然程序得重用性就高。对于公司来说，这一点是关系到公司长远发展的。程序可以重用，说明下一次开发的投入就可以减少，时间也可以加快，多好的事呀。</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">　　</SPAN><SPAN 
+style="FONT-SIZE: 9pt">&nbsp;</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">还有很多有点，当然也就是高级语言相对于汇编语言的优点，这里就不一一列举了。</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">　　</SPAN><SPAN 
+style="FONT-SIZE: 9pt">&nbsp;</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">再来看看汇编的优点：应该来说，汇编语言操作硬件直观，对于硬件非常熟悉的人来说，直接操作很方便。另外可能就是很多人说的效率要高了。</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> <BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">　　</SPAN><SPAN 
+style="FONT-SIZE: 9pt">&nbsp;</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">针对以上两点我来说说，首先</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">“</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">汇编语言操作硬件直观</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">”</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">，这是在代码编写阶段，对于整个产品周期来说，应该是要避免使用汇编语言的，这个在</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">C</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">语言的优点中已经说明。对于第二点，效率问题，目前</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">C</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">语言的编译器优化也做的很好，对于一个汇编不是很熟练的来说，</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">C</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">编出来的程序应该不会效率比汇编低。当然这样就对开发人员的要求降低了很多，人员的限制也就没有那么严格。另外是否真的是效率问题呢。我觉得应该是一个整体效率和局部效率的均衡问题。需要提高的是整体的效率。一个好的软件架构，远远比一个好的函数效率要高的多。因此主要的精力应该放在软件的架构上。另外现在</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">CPU</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的速度不停的往上提，</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">CPU</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">越来越快，这点应该也可以弥补程序的效率吧。</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> <BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">　　</SPAN><SPAN 
+style="FONT-SIZE: 9pt">&nbsp;</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">当然，我的意思不是不学习汇编。汇编对于熟悉硬件有很大的好处，应此汇编语言在学习初期一定是要学习的。在基本的硬件熟悉之后，就可以转向</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">C</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">了。</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"></SPAN></P></DIV>
+<DIV class=pagebreak></DIV>
+<DIV class=ding_box>
+<DIV align=left>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD align=middle width=700></TD></TR></TBODY></TABLE></DIV>
+<DIV align=left>
+<SCRIPT language=javascript src="AVR教程（1）：AVR单片机介绍.files/25.js"></SCRIPT>
+</DIV></DIV>
+<DIV class=text_tag>
+<H5>Tags：<B> AVR单片机学习 </B>&nbsp; </H5><SPAN>责任编辑：尘封往事</SPAN> 
+<LI style="DISPLAY: none">
+<SCRIPT language=javascript src="AVR教程（1）：AVR单片机介绍.files/count.htm"></SCRIPT>
+</LI></DIV>
+<DIV align=right>【<A href="http://www.c51.cn/avr/Comment.asp?ArticleID=7785" 
+target=_blank>发表评论</A>】【<A 
+href="http://www.c51.cn/User/User_Favorite.asp?Action=Add&amp;ChannelID=1035&amp;InfoID=7785" 
+target=_blank>加入收藏</A>】【<A 
+href="http://www.c51.cn/avr/SendMail.asp?ArticleID=7785" 
+target=_blank>告诉好友</A>】【<A href="http://www.c51.cn/avr/Print.asp?ArticleID=7785" 
+target=_blank>打印此文</A>】【<A href="javascript:window.close();">关闭窗口</A>】 
+&nbsp;&nbsp; </DIV>
+<DIV class=xg>
+<LI>上一篇文章： <A class=LinkPrevArticle 
+title="文章标题：AVR教程（2）：AVR单片机基本硬件设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:57:33" 
+href="http://www.c51.cn/avr/avrjc/200804/7784.html">AVR教程（2）：AVR单片机基本硬件设计</A> 
+</LI>
+<LI>下一篇文章： <A class=LinkNextArticle 
+title="文章标题：ATmega8原理与应用[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:36:31" 
+href="http://www.c51.cn/avr/avrjc/200805/7893.html">ATmega8原理与应用[电子书]</A> 
+</LI></DIV>
+<DIV class=box_xgimg>
+<DIV class=title_xg>最新图文 </DIV>
+<TABLE cellSpacing=5 cellPadding=0 width="100%" align=center border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" target=_blank><IMG 
+      class=pic1 height=95 src="AVR教程（1）：AVR单片机介绍.files/20080807105131440.jpg" 
+      width=125 border=0></A><BR><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+      target=_blank>基于AVR单片机的通用U…</A></TD>
+    <TD align=middle><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" target=_blank><IMG 
+      class=pic1 height=95 src="AVR教程（1）：AVR单片机介绍.files/20080807104931309.jpg" 
+      width=125 border=0></A><BR><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+      target=_blank>IP视频监控系统中云台…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" target=_blank><IMG 
+      class=pic1 height=95 src="AVR教程（1）：AVR单片机介绍.files/20080402000055425.jpg" 
+      width=125 border=0></A><BR><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+      target=_blank>AVR教程（1）：AVR单片…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" target=_blank><IMG 
+      class=pic1 height=95 src="AVR教程（1）：AVR单片机介绍.files/20080401235756587.jpg" 
+      width=125 border=0></A><BR><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+      target=_blank>AVR教程（2）：AVR单片…</A></TD></TR>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" target=_blank><IMG 
+      class=pic1 height=95 src="AVR教程（1）：AVR单片机介绍.files/20080401235700490.jpg" 
+      width=125 border=0></A><BR><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" 
+      target=_blank>AVR教程（3）：ICCAVR…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" target=_blank><IMG 
+      class=pic1 height=95 src="AVR教程（1）：AVR单片机介绍.files/20080401235536700.jpg" 
+      width=125 border=0></A><BR><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" 
+      target=_blank>AVR教程（4）：AVRStu…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" target=_blank><IMG 
+      class=pic1 height=95 src="AVR教程（1）：AVR单片机介绍.files/20080401235450679.jpg" 
+      width=125 border=0></A><BR><A class="" 
+      title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" 
+      target=_blank>AVR教程（5）：使用AV…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" target=_blank><IMG 
+      class=pic1 height=95 src="AVR教程（1）：AVR单片机介绍.files/20080401235250334.jpg" 
+      width=125 border=0></A><BR><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" 
+      target=_blank>AVR教程（6）：ATmega…</A></TD></TR></TBODY></TABLE></DIV>
+<DIV class=box_xg>
+<DIV class=title_xg>相关文章列表 </DIV>
+<UL>
+  <LI><A class=LinkArticleCorrelative 
+  title="文章标题：嵌入式C编程与Atmel&nbsp;AVR[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:48" 
+  href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_self>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A><BR><A 
+  class=LinkArticleCorrelative 
+  title="文章标题：winAVR的安装[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:02" 
+  href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_self>winAVR的安装[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：winAVR背景知识[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:52:27" 
+  href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_self>winAVR背景知识[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR系列单片机C语言编程与应用实例[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:50:44" 
+  href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_self>AVR系列单片机C语言编程与应用实例[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：avr库函数介绍[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:49:07" 
+  href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_self>avr库函数介绍[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR高速嵌入式单片机原理与应用（修订版）[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:48:21" 
+  href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_self>AVR高速嵌入式单片机原理与应用（修订版）[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR单片机应用设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:47:36" 
+  href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_self>AVR单片机应用设计</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：ATmega8原理与应用[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:36:31" 
+  href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_self>ATmega8原理与应用[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（2）：AVR单片机基本硬件设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:57:33" 
+  href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+  target=_self>AVR教程（2）：AVR单片机基本硬件设计</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（3）：ICCAVR快速使用&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:56:44" 
+  href="http://www.c51.cn/avr/avrjc/200804/7783.html" 
+  target=_self>AVR教程（3）：ICCAVR快速使用</A><BR></LI></UL></DIV>
+<FORM name=form1 onsubmit="return Check();" action=Comment.asp method=post>
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width=600 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=right width=110>姓 名：</TD>
+    <TD width=180><INPUT maxLength=16 name=Name> <FONT color=red>*</FONT> </TD>
+    <TD align=right width=60>Oicq：</TD>
+    <TD width=170><INPUT maxLength=15 name=Oicq> </TD></TR>
+  <TR>
+    <TD align=right width=110>评 分：</TD>
+    <TD colSpan=3><INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=1 name=Score> 1分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=2 name=Score> 2分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio CHECKED value=3 name=Score> 3分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=4 name=Score> 4分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=5 name=Score> 5分 </TD></TR>
+  <TR>
+    <TD align=right>评论内容：</TD>
+    <TD colSpan=3><TEXTAREA id=Content name=Content rows=6 cols=80></TEXTAREA> 
+    </TD></TR>
+  <TR>
+    <TD align=middle colSpan=4><INPUT id=Action type=hidden value=Save 
+      name=Action> <INPUT id=ArticleID type=hidden value=7785 name=ArticleID> <INPUT type=submit value=" 发 表 " name=Submit> </TD></TR>
+  <TR>
+    <TD height=5></TD></TR></TBODY></TABLE></FORM></DIV></FORM>
+<DIV class=pl>
+<DIV class=pl_title></DIV>
+<SCRIPT language=javascript src="AVR教程（1）：AVR单片机介绍.files/Comment.htm"></SCRIPT>
+</DIV></DIV><!--列表左边:结束--><!--列表右边:开始-->
+<DIV class=col2>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>推荐文章 </DIV>
+<UL>
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+  target=_blank>基于AVR单片机的通用USB接口模块设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+  target=_blank>IP视频监控系统中云台控制模块的设计与…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_blank>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_blank>winAVR的安装[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_blank>winAVR背景知识[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_blank>AVR系列单片机C语言编程与应用实例[电子…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_blank>avr库函数介绍[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_blank>AVR高速嵌入式单片机原理与应用（修订版…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_blank>AVR单片机应用设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_blank>ATmega8原理与应用[电子书]</A> </LI></UL></DIV>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>联系方式及服务项目 </DIV>
+<UL>
+  <LI></A>
+  <SCRIPT language=javascript src="AVR教程（1）：AVR单片机介绍.files/17.js"></SCRIPT>
+  </LI></UL></DIV></DIV></DIV><!--列表右边:结束-->
+<DIV class=sitemap><A class=Bottom 
+onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.c51.cn');" 
+href="http://www.c51.cn/avr/avrjc/200804/7785.html#">设为首页</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="javascript:window.external.addFavorite('http://www.c51.cn','中国单片机资讯网');">加入收藏</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="mailto:c51cn@163.com">联系站长</A><FONT color=#0000ff> - </FONT><A 
+class=Bottom href="http://www.c51.cn/FriendSite/Index.asp" 
+target=_blank>友情链接</A><FONT color=#0000ff> - </FONT><A class=Bottom 
+href="http://www.c51.cn/Copyright.asp" target=_blank>版权申明</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/wwwgl/200508/26.html">广告服务</A><FONT color=#0000ff> - 
+</FONT><A href="http://www.c51.cn/glwz/wwwgl/200508/23.html">付款方式</A><FONT 
+color=#0000ff> </FONT></DIV>
+<DIV class=footer>
+<DIV class=copyright>
+<P>&copy;Copyright 2006-2008 <STRONG><A href="http://www.c51.cn/"><FONT 
+face=隶书>W</FONT></A></STRONG><A href="http://www.c51.cn/"><STRONG><FONT 
+face=隶书>ww.<FONT color=#000000>c51.Cn</FONT></FONT></STRONG></A> All Rights 
+Reserved<BR><A href="http://www.c51.cn/"><FONT color=#000000>中</FONT></A><SPAN 
+lang=zh-cn><A href="http://www.c51.cn/"><FONT color=#000000>国单片机资讯</FONT></A><A 
+href="http://www.c51.cn/" target=_blank><FONT 
+color=#000000>网</FONT></A></SPAN>　版权所有<FONT 
+color=#ff0000>（24小时服务热线:0755-27805410）</FONT><BR>本网站所有内容未经许可不得转载或用做其他用途，大部份资源均为网上搜集或网友提供，版权皆属原作者所有，请不要用作商业用途；</P>
+<P>原作者如认为本站侵犯了您的版权,请来信或电话告知,我们会立即删除!</P>
+<P><A style="COLOR: #333333; TEXT-DECORATION: none" 
+href="http://www.miibeian.gov.cn/" target=_blank><FONT 
+color=#ff0000>湘ICP备05018526号</FONT></A> E-mail:<A 
+href="mailto:c51cn@163.com">c51cn@163.com</A>&nbsp;&nbsp; <A 
+href="mailto:c51cn@126.com">c51cn@126.com</A>&nbsp; <A 
+href="msn:c51cn@live.cn">MSN:c51cn@live.cn</A>
+<SCRIPT language=JavaScript src="AVR教程（1）：AVR单片机介绍.files/cnt.htm" 
+charset=gb2312></SCRIPT>
+ </P></DIV></DIV></DIV></BODY></HTML>

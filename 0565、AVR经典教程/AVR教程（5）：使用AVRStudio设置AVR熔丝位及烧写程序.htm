@@ -1,0 +1,687 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0044)http://www.c51.cn/avr/avrjc/200804/7781.html -->
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="" name=Keywords>
+<META content="" name=Description><LINK 
+href="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/style.css" type=text/css 
+rel=stylesheet>
+<SCRIPT src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/chinaz.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/prototype.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/scriptaculous.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/checklogin.js"></SCRIPT>
+
+<SCRIPT language=JavaScript>
+<!--
+//改变图片大小
+function resizepic(thispic)
+{
+  return true;
+}
+//无级缩放图片大小
+function bbimg(o)
+{
+  return true;
+}
+-->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3395" name=GENERATOR></HEAD>
+<BODY>
+<DIV class=container>
+<DIV class="clearfix header">
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width="100%" 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle>
+      <DIV id=UserLogin>载入中…
+      <SCRIPT language=JavaScript 
+      type=text/JavaScript>LoadUserLogin('/',1,2);</SCRIPT>
+       </DIV></TD>
+    <TD align=middle width="14%">
+      <SCRIPT language=javascript 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/Date.js"></SCRIPT>
+      　</TD></TR></TBODY></TABLE>
+<DIV class=topnav>
+<P align=center><A href="http://www.c51.cn/">http://www.c51.cn/</A> | <A 
+title="" href="http://www.c51.cn/honews/Index.html">新闻中心</A> | <A 
+href="http://www.c51.cn/mcu/Index.html">51单片机</A> | <A 
+href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+href="http://www.c51.cn/avr/Index.html">AVR单片机</A> | <A 
+href="http://www.c51.cn/holtek/Index.html">合泰单片机</A> | <A title="" 
+href="http://www.c51.cn/Photo/Index.html">电路图站</A> | <A title="" 
+href="http://www.c51.cn/pcb/">EDA技术</A> | <A title="" 
+href="http://www.c51.cn/power/">电源技术</A> | <A title="" 
+href="http://www.c51.cn/cgq/">传感技术</A> | <A title="" 
+href="http://www.c51.cn/GuestBook/Index.asp">雁过留声</A> | <A title="" 
+href="http://www.stcmcu.cn/bbs/">技术论坛</A> | <A 
+href="http://www.c51.cn/avr/avrjc/200804/" name=StranLink>切换到繁體中文</A>
+<SCRIPT language=javascript 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/gb_big5.js"></SCRIPT>
+ |</P></DIV>
+<DIV class=brand><A class=site-logo title=中国单片机资讯网官方网站 href="http://www.c51.cn/" 
+rel=home><IMG height=60 alt=中国单片机资讯网官方网站 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/logo.gif" width=165></A> </DIV>
+<DIV class=ad-banner>
+<SCRIPT language=javascript 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/19.js"></SCRIPT>
+</DIV>
+<DIV class=ad-text>
+<SCRIPT language=JavaScript 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/text_link.htm" 
+charset=gb2312></SCRIPT>
+
+<TABLE id=table1 cellSpacing=0 cellPadding=2 width=255 border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff0000><IMG 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/td_icon.gif" 
+      align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/hdfk/index.html"><FONT 
+      color=#ff0000>货到付款网点</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/top_ico8.gif" 
+      align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wzhelp/200807/8109.html">订购方法</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/top_ico2.gif" 
+      align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A></TD></TR>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff00ff><IMG 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/td_icon.gif" 
+      align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/wwwgl/200508/23.html"><FONT 
+      color=#ff00ff>银行汇款帐号</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/top_ico8.gif" 
+      align=absBottom></SPAN><A 
+    href="http://shop35907817.taobao.com/">淘宝商店</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/top_ico2.gif" 
+      align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200808/8156.html">VIP申请</A></TD></TR></TBODY></TABLE></DIV></DIV>
+<DIV class=nav>
+<DIV class=navinner>
+<UL class=navlist>
+  <LI><A href="http://www.c51.cn/">首页</A> </LI>
+  <LI><A id=nav_1 onmouseover="showMenu('nav_1','subnav1')" 
+  href="http://www.c51.cn/mcu/">单片机站</A> 
+  <DIV class="subnav disable" id=subnav1>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/mcu/">MCS-51单片机</A> | <A 
+  href="http://www.c51.cn/avr/">AVR单片机</A> | <A 
+  href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+  href="http://www.c51.cn/stc/">STC单片机</A> | <A 
+  href="http://www.c51.cn/mp430/">MSP430单片机</A> | <A 
+  href="http://www.c51.cn/holtek/">合泰单片机</A> | <A 
+  href="http://www.c51.cn/emc/">义隆单片机</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_2 onmouseover="showMenu('nav_2','subnav2')" 
+  href="http://www.c51.cn/shop/">网站商城</A> 
+  <DIV class="subnav disable" id=subnav2>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Shop/mcukf/">开发板/学习板</A> | <A 
+  href="http://www.c51.cn/Shop/gkong/">工业控制板</A> | <A 
+  href="http://www.c51.cn/Shop/bcq/">编程器</A> | <A 
+  href="http://www.c51.cn/Shop/fzq/">仿真器</A> | <A 
+  href="http://www.c51.cn/Shop/ic/">电子元器件</A> | <A 
+  href="http://www.c51.cn/Shop/cygj/">常用小工具</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_3 onmouseover="showMenu('nav_3','subnav3')" 
+  href="http://www.c51.cn/cpsm/Index.html">产品帮助</A> 
+  <DIV class="subnav disable" id=subnav3>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/cpsm/sl2000/">SL2000</A> | <A 
+  href="http://www.c51.cn/cpsm/sl800/">SL1800</A> | <A 
+  href="http://www.c51.cn/cpsm/sl480/">SL480+</A> | <A 
+  href="http://www.c51.cn/cpsm/sl300/">成功三号</A> | <A 
+  href="http://www.c51.cn/cpsm/sl200/">SL200</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc15/">NPLC-15</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc24/">NPLC-24</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc25/">NPLC-25</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc28/">NPLC-28</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_4 onmouseover="showMenu('nav_4','subnav4')" 
+  href="http://www.c51.cn/Article/">技术论文</A> 
+  <DIV class="subnav disable" id=subnav4>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Article/mcuzh/">开发论文</A> | <A 
+  href="http://www.c51.cn/Article/lexu/">嵌入式系统</A> | <A 
+  href="http://www.c51.cn/Article/arm/">ARM专栏</A> | <A 
+  href="http://www.c51.cn/Article/dsp/">DSP专栏</A> | <A 
+  href="http://www.c51.cn/Article/tx/">通信技术 | <A 
+  href="http://www.c51.cn/Article/ycx/">各类源程序</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_5 onmouseover="showMenu('nav_5','subnav5')" 
+  href="http://www.c51.cn/iczldata/">资料查询</A> 
+  <DIV class="subnav disable" id=subnav5>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/iczldata/ttl74/">74XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/cd40/">CD4XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/ram/">存储器系列</A> | <A 
+  href="http://www.c51.cn/iczldata/adda/">A/D&amp;DA</A> | <A 
+  href="http://www.c51.cn/iczldata/yf/">运算放大器</A> | <A 
+  href="http://www.c51.cn/iczldata/power/">电源管理IC</A> | <A 
+  href="http://www.c51.cn/iczldata/scr/">可控硅</A> | <A 
+  href="http://www.c51.cn/iczldata/yp/">音频视频</A> | <A 
+  href="http://www.c51.cn/iczldata/fmic/">通信IC</A> | <A 
+  href="http://www.c51.cn/iczldata/guou/">光电耦合器</A> | <A 
+  href="http://www.c51.cn/iczldata/dv/">二、三极管</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_6 onmouseover="showMenu('nav_6','subnav6')" 
+  href="http://www.c51.cn/soft">资源下载</A> 
+  <DIV class="subnav disable" id=subnav6>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/soft/kfgj/">开发工具</A> | <A 
+  href="http://www.c51.cn/soft/gjrj/">常用工具</A> | <A 
+  href="http://www.c51.cn/soft/spjc/">视频教程</A> | <A 
+  href="http://www.c51.cn/soft/dzbooks/">电子书籍</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_7 onmouseover="showMenu('nav_7','subnav7')" 
+  href="http://www.c51.cn/dzjs/">电子技术</A> 
+  <DIV class="subnav disable" id=subnav7>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/dzjs/yjcs/index.html">电子基础</A> | <A 
+  href="http://www.c51.cn/dzjs/szdl/">数字电路</A> | <A 
+  href="http://www.c51.cn/dzjs/mndl/">模拟电路</A> | <A 
+  href="http://www.c51.cn/dzjs/io/">接口电路</A> | <A 
+  href="http://www.c51.cn/dzjs/xpyy/">芯片应用</A> | <A 
+  href="http://www.c51.cn/dzjs/zhzl/">综合资料</A> | <A 
+  href="http://www.c51.cn/dzjs/wqj/">元件常识</A> 
+</SPAN></P></DIV></LI></UL></DIV></DIV>
+<DIV class=note><SPAN><A href="http://www.c51.cn/User/Index.asp"><IMG 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/td_icon.gif" align=absBottom> 
+我要投稿</A> <A href="http://www.c51.cn/glwz/wwwgl/200602/1853.html"><IMG 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/tg_icon.gif" align=absBottom> 
+投稿指南</A> <A href="http://www.c51.cn/xml/Rss.xml"><IMG 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/rss.gif" align=absBottom> 
+RSS订阅</A></SPAN> <B>网站通告:</B> 
+<MARQUEE onmouseover=this.stop() style="WIDTH: 477px; HEIGHT: 15px" 
+onmouseout=this.start() scrollAmount=1 scrollDelay=4 width=477 align="left">
+<P>&nbsp;&nbsp;没有公告</P></MARQUEE></DIV>
+<FORM name=search action=search.asp method=post>
+<DIV class=weizhi><SPAN><B>搜索:</B> <INPUT type=hidden value=0 name=kwtype> 
+<INPUT id=Keyword maxLength=50 value=关键字 name=Keyword> <INPUT class=searchtxt 
+id=Field type=hidden value=Title name=Field> <OPTION selected="selected" 
+value="title">搜索标题</OPTION> </SELECT><INPUT type=image 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/topsearch_submit.gif"> 
+</SPAN>您现在的位置：&nbsp;<A class=LinkPath 
+href="http://www.c51.cn/">中国单片机资讯网</A>&nbsp;&gt;&gt;&nbsp;<A class=LinkPath 
+href="http://www.c51.cn/avr/Index.html">AVR单片机站</A>&nbsp;&gt;&gt;&nbsp;<A 
+class=LinkPath 
+href="http://www.c51.cn/avr/avrjc/Index.html">教程</A>&nbsp;&gt;&gt;&nbsp;正文 
+</DIV></FORM><!--列表左边:开始--><!--列表左边:开始-->
+<DIV class="clearfix wrap layout-cols2">
+<DIV class=col1>
+<DIV id=news>
+<H1>AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序</H1>
+<DIV class=times>2008-06-10 13:50:46 来源:<A 
+href="http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net">http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net</A> 
+作者:<A title=微雪电子 
+href="http://www.c51.cn/ShowAuthor.asp?ChannelID=1035&amp;AuthorName=微雪电子">微雪电子</A> 
+【<A href="javascript:doZoom(16)">大</A> <A href="javascript:doZoom(14)">中</A> <A 
+href="javascript:doZoom(12)">小</A>】 <A class=fsource 
+href="http://www.c51.cn/avr/avrjc/200804/7781.html#plshow">点击：<FONT 
+id=feedcounttop color=red>
+<SCRIPT language=javascript 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/GetHits.htm"></SCRIPT>
+</FONT> 次</A> </DIV>
+<DIV class=content id=textbody>
+<SCRIPT language=javascript 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/28.js"></SCRIPT>
+</DIV>
+<DIV class=content><FONT face=宋体 size=4>使用</FONT><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">AVRStudio</SPAN><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">设置</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">AVR</SPAN><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">熔丝位及烧写程序</SPAN><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial"></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"> 
+<P>
+<H4 class=white12px style="MARGIN: auto 0cm"><FONT size=2><SPAN lang=EN-US 
+style="COLOR: windowtext">AVR Studio</SPAN><SPAN 
+style="COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">是</SPAN><SPAN 
+lang=EN-US style="COLOR: windowtext">ATMEL</SPAN><SPAN 
+style="COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">指定用于开发</SPAN><SPAN 
+lang=EN-US style="COLOR: windowtext">AVR MCU</SPAN><SPAN 
+style="COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">的官方软件，其编程功能最为强大。下面介绍使用</SPAN><SPAN 
+lang=EN-US style="COLOR: windowtext">AVRStudio</SPAN><SPAN 
+style="COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">烧写程序及熔丝快速入门。</SPAN><SPAN 
+lang=EN-US style="COLOR: windowtext"> 
+<P></SPAN></FONT></H4>
+<P style="LINE-HEIGHT: 15pt"><SPAN style="FONT-SIZE: 9pt"><FONT 
+face=宋体>　　</FONT></SPAN><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext">● </SPAN></SPAN><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">使用</SPAN></SPAN><SPAN 
+class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext">AVRISP</SPAN></SPAN><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">方式烧写程序及配置熔丝位</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN style="FONT-SIZE: 9pt"><FONT 
+face=宋体>　　对软硬件进行初始配置，并正确设备连接，就可使用<SPAN 
+lang=EN-US>AVRISP</SPAN>进行联机了。</FONT><SPAN lang=EN-US><BR></SPAN><FONT 
+face=宋体>　　打开<SPAN lang=EN-US>AVRStudio</SPAN>，点击主窗口中的图标</FONT><SPAN 
+lang=EN-US><SHAPETYPE id=_x0000_t75 stroked="f" filled="f" 
+path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" 
+coordsize="21600,21600"><FONT face=宋体><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235431375.jpg" 
+align=baseline border=0><STROKE joinstyle="miter" /><FORMULAS><F 
+eqn="if lineDrawn pixelLineWidth 0" /><F eqn="sum @0 1 0" /><F eqn="sum 0 0 @1" 
+/><F eqn="prod @2 1 2" /><F eqn="prod @3 21600 pixelWidth" /><F 
+eqn="prod @3 21600 pixelHeight" /><F eqn="sum @0 0 1" /><F eqn="prod @6 1 2" 
+/><F eqn="prod @7 21600 pixelWidth" /><F eqn="sum @8 21600 0" /><F 
+eqn="prod @7 21600 pixelHeight" /><F eqn="sum @10 21600 0" /></FORMULAS><PATH 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f" /><LOCK 
+aspectratio="t" v:ext="edit" /></FONT></SHAPETYPE></SPAN><FONT face=宋体>前面标有<SPAN 
+lang=EN-US>Con</SPAN>的那个图标。出现如下图画面：</FONT></SPAN></P>
+<P style="LINE-HEIGHT: 15pt"><SPAN style="FONT-SIZE: 9pt"><FONT face=宋体><SPAN 
+lang=EN-US>
+<P><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235432899.jpg" 
+align=baseline border=0></P></SPAN></FONT></SPAN>
+<P></P>
+<P style="LINE-HEIGHT: 15pt"><SPAN style="FONT-SIZE: 9pt"><FONT face=宋体><SPAN 
+lang=EN-US>
+<P>在左边，选择“STK500 or 
+AVRISP”，在右边，选择“Auto”（或具体的COM口），点击“Connect”进行联机。</P></SPAN></FONT></SPAN>
+<P></P>
+<P align=left>　　正常联机后，将弹出如下窗口：<BR>　　（1）程序编程面板：</P>
+<P align=left><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235433789.jpg" 
+align=baseline border=0></P>
+<P align=left>●　Device里面选择好对应的芯片类型，后面的Erase Device可以擦除芯片。<BR>●　Programming 
+mode编程模式：注意这里必须是ISP mod，表示用的ISP编程模式；Erase Device Before 
+选项：编程前先擦除芯片，建议选上，如果不选芯片内部残留的程序可能会对新的程序造成干扰。Verity Device After 
+Program：下载完毕后校验程序内容，建议选上。<BR>●　Flash 下载区：Input HEX 
+File，找到要写的hex文件格式为*.hex、*.e90。Program，编程点此按钮，将会把Input HEX 
+File对应文件下载到芯片中去，如果路径有错误或者文件格式不正确会有提示报警。Verify 
+校验命令，用于检测芯片内程序是否和文件中的一致。Read读命令，此命令可以读出未加密芯片内的程序，自动弹出一个对话框提示保存。<BR>●　EEPROM下载区，和Flash 
+下载区类似，格式为.hex、.e90和.eep，此功能用于下载比较多的需要存在EEPROM中的内容时使用。Program、Verify、Read于Flash下载区有对应EEPROM的同样的功能，不在赘述。<BR>●　状态指示区，这里显示目前的操作状态。</P>
+<P align=left>　　（2）熔丝位设置面板：</P>
+<P align=left><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235435901.jpg" 
+align=baseline border=0></P>
+<P 
+align=left>●　配置熔丝位有一定的危险性，可能锁死芯片，在不知道具体在做什么操作之前，请不要急于动手。<BR>●　熔丝位状态显示框，显示芯片的各个熔丝位的详细状况，AVR的熔丝位打勾表示0，表示启用该选项；取消表示1，表示不启用该选项，需要注意。<BR>●　Auto 
+Verity 选项选中时，程序会自己进行校验，建议选中。Smart 
+Warning选项选中时，在对一些特殊的具有一定危险性的熔丝位进行编程时会弹出警告信息，建议选中。<BR>●　Program、Verify和Read分别对应编程、校验和读取，正确的配置熔丝的方法是先读取，先后修改需要修改的地方，再编程写回。在Auto 
+Verity选项选中时无需再点Verify按钮进行校验。<BR>●　为了安全起见，在ISP模式下，SPEEN熔丝是不允许编程的。<BR>●　芯片锁死的主要原因是设错熔丝位，主要有两种情况：<BR>（1）JTAGEN和SPIEN两个熔丝位都为1（不打勾），不能再进行编程，此时只能用高压并行编程或者有源晶振恢复。 
+<BR>（2）将熔丝位选择了外部晶振或外部RC振荡，而没有接外部晶振或外部RC振荡，或者外接的振荡频率不匹配，导致芯片不能工作，这种情况，需要外挂相应晶体才能再次操作芯片，用户应尽量记起当时设错熔丝的情况，比如错误设置成了外部3-8M晶振，那么外挂一个3-8M晶振即可进行相应操作。 
+<BR>　　当然还有其它方面的原因导致芯片锁死，在此处不再一一赘述。<BR>　　下面以ATmega16为例，对其熔丝位进行简单描述：</P>
+<P align=left><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235437435.jpg" 
+align=baseline border=0></P>
+<P align=left>（3）锁定位设置面板：</P>
+<P align=left><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235440715.jpg" 
+align=baseline border=0></P>
+<P 
+align=left>●　通过编程锁定位，允许用户对AVR芯片内数据进行加密，不同的锁定位对应不同的加密保护程度，加密位共有三位，每位的数越大加密程度越高，否则越低。<BR>●　被加密后的芯片依然可以读出熔丝位和加密位的情况，一旦试图对加密位进行修改，芯片内的程序将会被修改或擦除，不能再使用。<BR>●　加密位可以通过编程界面的芯片擦除功能擦除到初始状态，使得芯片可以重复使用。<BR>●　锁定位编程界面有与熔丝位编程界面相同的选项和操作按钮，功能类似，不再赘述。<BR>●　锁定位编程应该在熔丝位编程之后进行，通常编程锁定位是生产过程中写芯片环节的最后一步。 
+<BR>　　下面以ATmega16为例，对其所定位进行简单描述： </P>
+<P align=left><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235442207.jpg" 
+align=baseline border=0></P>
+<P align=left>（4）高级设置面板：</P>
+<P align=left><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235444509.jpg" 
+align=baseline border=0></P>
+<P align=left>●　Signature 
+Bytes，芯片型号标识位，点右边的Read读按钮可以读出芯片内的ID。如果在编程面板里面选的芯片型号与读出的芯片型号对应，下面会提示Signature 
+matches selected device，如果不匹配会出现WARNING: Signature does not match selected 
+device! <BR>●　Oscillator Calibration byte，内部RC振荡校准。这里选择不同的频率，点Read Cal. Byte 
+，可以读出对应的频率下的校准值，然后将这个值复制到Write区，选择将校准值写到Flash还是EEPROM，点击Write to 
+Memory写按钮，即可完成对应频率下的内部RC振荡校准。<BR>●　写入到flash区域的校准字芯片启动时自动读取并校准RC振荡，如果写到EEPROM中，需要程序中进行处理。<BR>●　Communication 
+Settings串行通讯设定。</P>
+<P align=left>　　（5）对目标板控制面板：</P>
+<P align=left><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235445889.jpg" 
+align=baseline border=0></P>
+<P align=left>●　Voltages 
+通过本面板可以查看目标板的电压和写参考电压，参考电压需要实际测得，再写入，可以帮助仿真器准确读取目标板电压值以供参考。本功能在ISP编程模式下不可用，需要在JTAG模式下使用。<BR>●　Oscillator 
+and ISP Clock 
+读写速率设定，这里可以读写仿真器内ISP编程的速率，ISP模式下STK500选项为灰色。注意速率一定要小于芯片时钟频率的1/4，否则无法正确下载。<BR>●　Revision 
+版本号及升级，这里显示当前hex文件的版本号，如果AVR 
+studio内的软件版本高于仿真器的版本，右边的Upgrade会可用，如果匹配则该按钮为灰色。<BR>●　当Upgrade按钮为可用状态时，可以点击它进入自动升级，在此之前请确认仿真器是否支持自动升级，以免造成麻烦。</P>
+<P align=left>　　（5）自动烧写面板：</P>
+<P align=left><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235447584.jpg" 
+align=baseline border=0></P>
+<P 
+align=left>●　自动烧写面板在生产的时候非常管用，程序会记录上次进行批处理的各个选项，一旦设置好之后，可以连续进行烧写。<BR>●　请慎用本功能，在不知情的情况下使用本功能，锁死芯片的几率将大大增加。<BR>●　自动处理：擦除芯片、检测芯片ID号、写flash、写EEPROM、写熔丝位、写锁定位以及他们对应的校验，一次完成，状态栏会显示正在进行的操作。<BR>●　所有的操作需要在前面对应的面板设置好，比如选择好下载的HEX及EEPROM文件，选好熔丝位，选好锁定位，写好内部RC校正位等。请一定确保各个选项正确，特别是熔丝需要格外小心，可以先在每个面板里面进行操作确认没有问题再进行批处理操作。<BR>●　在进行批处理之前，请先在高级选项里面设置好通讯速率，确保速率小于晶振的四分之一，否则会出错。<BR>●　可以选中右边的Log 
+to file选项从而记录操作日志。</P>
+<P align=left>　　<SPAN class=white_12px>● 
+使用JTAG方式烧写程序及熔丝位<BR></SPAN>　　对软硬件进行初始配置，并正确设备连接，就可使用JTAG进行联机了。<BR>　　打开AVRStudio，点击主窗口中的图标<IMG 
+hspace=0 src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235449852.jpg" 
+align=baseline border=0>前面标有Con的那个图标。出现如下图画面：</P>
+<P align=left><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235450679.jpg" 
+align=baseline border=0></P>
+<P align=left><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: " AR-SA? 
+mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 1.0pt; 
+mso-bidi-font-family: mso-font-kerning: New ?Times mso-hansi-font-family: 
+Roman?; Times>在左边，选择</SPAN><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; FONT-FAMILY: " AR-SA? mso-bidi-language: ZH-CN; 
+mso-fareast-language: EN-US; mso-ansi-language: 1.0pt; mso-font-kerning: New 
+Roman?; Times 宋体; mso-fareast-font-family:>“JTAG ICE”</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: " AR-SA? 
+mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 1.0pt; 
+mso-bidi-font-family: mso-font-kerning: New ?Times mso-hansi-font-family: 
+Roman?; Times>，在右边，选择</SPAN><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; FONT-FAMILY: " AR-SA? mso-bidi-language: ZH-CN; 
+mso-fareast-language: EN-US; mso-ansi-language: 1.0pt; mso-font-kerning: New 
+Roman?; Times 宋体; mso-fareast-font-family:>“Auto”</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: " AR-SA? 
+mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 1.0pt; 
+mso-bidi-font-family: mso-font-kerning: New ?Times mso-hansi-font-family: 
+Roman?; Times>（或具体的</SPAN><SPAN lang=EN-US style="FONT-SIZE: 9pt; FONT-FAMILY: " 
+AR-SA? mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 
+1.0pt; mso-font-kerning: New Roman?; Times 宋体; 
+mso-fareast-font-family:>COM</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: " AR-SA? 
+mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 1.0pt; 
+mso-bidi-font-family: mso-font-kerning: New ?Times mso-hansi-font-family: 
+Roman?; Times>口），点击</SPAN><SPAN lang=EN-US style="FONT-SIZE: 9pt; FONT-FAMILY: " 
+AR-SA? mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 
+1.0pt; mso-font-kerning: New Roman?; Times 宋体; 
+mso-fareast-font-family:>“Connect”</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: " AR-SA? 
+mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 1.0pt; 
+mso-bidi-font-family: mso-font-kerning: New ?Times mso-hansi-font-family: 
+Roman?; Times>进行联机。</SPAN><SPAN lang=EN-US style="FONT-SIZE: 9pt; FONT-FAMILY: " 
+AR-SA? mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 
+1.0pt; mso-font-kerning: New Roman?; Times 宋体; 
+mso-fareast-font-family:><BR></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: " AR-SA? 
+mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 1.0pt; 
+mso-bidi-font-family: mso-font-kerning: New ?Times mso-hansi-font-family: 
+Roman?; Times><FONT color=#ff9900>下面步骤基本与上面<FONT 
+color=#000000>AVRISP方式</FONT>相同</FONT></SPAN></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: " AR-SA? 
+mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 1.0pt; 
+mso-bidi-font-family: mso-font-kerning: New ?Times mso-hansi-font-family: 
+Roman?; Times>。</SPAN></P>
+<P align=left><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: " AR-SA? 
+mso-bidi-language: ZH-CN; mso-fareast-language: EN-US; mso-ansi-language: 1.0pt; 
+mso-bidi-font-family: mso-font-kerning: New ?Times mso-hansi-font-family: 
+Roman?; Times><FONT color=#68a5ff><SPAN class=blue12px1><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">提示：由于</SPAN><SPAN 
+lang=EN-US 
+style="FONT-SIZE: 9pt; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-fareast-font-family: 宋体"><FONT 
+face=Arial>AVRStudio</FONT></SPAN></SPAN><SPAN class=blue12px1><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">会记忆用户使用的设备是</SPAN><SPAN 
+lang=EN-US 
+style="FONT-SIZE: 9pt; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-fareast-font-family: 宋体"><FONT 
+face=Arial>STK500</FONT></SPAN></SPAN><SPAN class=blue12px1><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">或</SPAN><SPAN 
+lang=EN-US 
+style="FONT-SIZE: 9pt; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-fareast-font-family: 宋体"><FONT 
+face=Arial>JTAG</FONT></SPAN></SPAN><SPAN class=blue12px1><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">并且同时会记忆用户使用的</SPAN><SPAN 
+lang=EN-US 
+style="FONT-SIZE: 9pt; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-fareast-font-family: 宋体"><FONT 
+face=Arial>COM</FONT></SPAN></SPAN><SPAN class=blue12px1><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">号，如果下次和上次使用的是相同的设备并且没有更换</SPAN><SPAN 
+lang=EN-US 
+style="FONT-SIZE: 9pt; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-fareast-font-family: 宋体"><FONT 
+face=Arial>COM</FONT></SPAN></SPAN><SPAN class=blue12px1><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">口，那么下次使用的时候直接点击</SPAN></SPAN></FONT><SPAN 
+lang=EN-US 
+style="FONT-SIZE: 9pt; FONT-FAMILY: Arial; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-fareast-font-family: 宋体"><SHAPETYPE 
+id=_x0000_t75 stroked="f" filled="f" path="m@4@5l@4@11@9@11@9@5xe" 
+o:preferrelative="t" o:spt="75" coordsize="21600,21600"><IMG hspace=0 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235449852.jpg" 
+align=baseline border=0><STROKE joinstyle="miter" /><FORMULAS><F 
+eqn="if lineDrawn pixelLineWidth 0" /><F eqn="sum @0 1 0" /><F eqn="sum 0 0 @1" 
+/><F eqn="prod @2 1 2" /><F eqn="prod @3 21600 pixelWidth" /><F 
+eqn="prod @3 21600 pixelHeight" /><F eqn="sum @0 0 1" /><F eqn="prod @6 1 2" 
+/><F eqn="prod @7 21600 pixelWidth" /><F eqn="sum @8 21600 0" /><F 
+eqn="prod @7 21600 pixelHeight" /><F eqn="sum @10 21600 0" /></FORMULAS><PATH 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f" /><LOCK 
+aspectratio="t" v:ext="edit" /></SHAPETYPE></SPAN><FONT color=#68a5ff><SPAN 
+class=blue12px1><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">右边标有</SPAN><SPAN 
+lang=EN-US 
+style="FONT-SIZE: 9pt; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-fareast-font-family: 宋体"><FONT 
+face=Arial>“AVR”</FONT></SPAN></SPAN><SPAN class=blue12px1><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">的那个图标即快速进入联机状态；</SPAN></SPAN></FONT></SPAN></P>
+<P></P></SPAN></DIV>
+<DIV class=pagebreak></DIV>
+<DIV class=ding_box>
+<DIV align=left>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD align=middle width=700></TD></TR></TBODY></TABLE></DIV>
+<DIV align=left>
+<SCRIPT language=javascript 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/25.js"></SCRIPT>
+</DIV></DIV>
+<DIV class=text_tag>
+<H5>Tags：<B> AVR单片机学习 </B>&nbsp; </H5><SPAN>责任编辑：尘封往事</SPAN> 
+<LI style="DISPLAY: none">
+<SCRIPT language=javascript 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/count.htm"></SCRIPT>
+</LI></DIV>
+<DIV align=right>【<A href="http://www.c51.cn/avr/Comment.asp?ArticleID=7781" 
+target=_blank>发表评论</A>】【<A 
+href="http://www.c51.cn/User/User_Favorite.asp?Action=Add&amp;ChannelID=1035&amp;InfoID=7781" 
+target=_blank>加入收藏</A>】【<A 
+href="http://www.c51.cn/avr/SendMail.asp?ArticleID=7781" 
+target=_blank>告诉好友</A>】【<A href="http://www.c51.cn/avr/Print.asp?ArticleID=7781" 
+target=_blank>打印此文</A>】【<A href="javascript:window.close();">关闭窗口</A>】 
+&nbsp;&nbsp; </DIV>
+<DIV class=xg>
+<LI>上一篇文章： <A class=LinkPrevArticle 
+title="文章标题：AVR教程（6）：ATmega16&nbsp;简介（一）&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:52:28" 
+href="http://www.c51.cn/avr/avrjc/200804/7780.html">AVR教程（6）：ATmega16&nbsp;简介（一）…</A> 
+</LI>
+<LI>下一篇文章： <A class=LinkNextArticle 
+title="文章标题：AVR教程（4）：AVRStudio仿真调试快速入门&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:55:11" 
+href="http://www.c51.cn/avr/avrjc/200804/7782.html">AVR教程（4）：AVRStudio仿真调试快速入门</A> 
+</LI></DIV>
+<DIV class=box_xgimg>
+<DIV class=title_xg>最新图文 </DIV>
+<TABLE cellSpacing=5 cellPadding=0 width="100%" align=center border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080807105131440.jpg" 
+      width=125 border=0></A><BR><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+      target=_blank>基于AVR单片机的通用U…</A></TD>
+    <TD align=middle><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080807104931309.jpg" 
+      width=125 border=0></A><BR><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+      target=_blank>IP视频监控系统中云台…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080402000055425.jpg" 
+      width=125 border=0></A><BR><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+      target=_blank>AVR教程（1）：AVR单片…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235756587.jpg" 
+      width=125 border=0></A><BR><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+      target=_blank>AVR教程（2）：AVR单片…</A></TD></TR>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235700490.jpg" 
+      width=125 border=0></A><BR><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" 
+      target=_blank>AVR教程（3）：ICCAVR…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235536700.jpg" 
+      width=125 border=0></A><BR><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" 
+      target=_blank>AVR教程（4）：AVRStu…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235450679.jpg" 
+      width=125 border=0></A><BR><A class="" 
+      title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" 
+      target=_blank>AVR教程（5）：使用AV…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/20080401235250334.jpg" 
+      width=125 border=0></A><BR><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" 
+      target=_blank>AVR教程（6）：ATmega…</A></TD></TR></TBODY></TABLE></DIV>
+<DIV class=box_xg>
+<DIV class=title_xg>相关文章列表 </DIV>
+<UL>
+  <LI><A class=LinkArticleCorrelative 
+  title="文章标题：嵌入式C编程与Atmel&nbsp;AVR[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:48" 
+  href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_self>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A><BR><A 
+  class=LinkArticleCorrelative 
+  title="文章标题：winAVR的安装[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:02" 
+  href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_self>winAVR的安装[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：winAVR背景知识[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:52:27" 
+  href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_self>winAVR背景知识[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR系列单片机C语言编程与应用实例[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:50:44" 
+  href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_self>AVR系列单片机C语言编程与应用实例[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：avr库函数介绍[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:49:07" 
+  href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_self>avr库函数介绍[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR高速嵌入式单片机原理与应用（修订版）[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:48:21" 
+  href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_self>AVR高速嵌入式单片机原理与应用（修订版）[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR单片机应用设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:47:36" 
+  href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_self>AVR单片机应用设计</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：ATmega8原理与应用[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:36:31" 
+  href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_self>ATmega8原理与应用[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（1）：AVR单片机介绍&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:58:21" 
+  href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+  target=_self>AVR教程（1）：AVR单片机介绍</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（2）：AVR单片机基本硬件设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:57:33" 
+  href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+  target=_self>AVR教程（2）：AVR单片机基本硬件设计</A><BR></LI></UL></DIV>
+<FORM name=form1 onsubmit="return Check();" action=Comment.asp method=post>
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width=600 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=right width=110>姓 名：</TD>
+    <TD width=180><INPUT maxLength=16 name=Name> <FONT color=red>*</FONT> </TD>
+    <TD align=right width=60>Oicq：</TD>
+    <TD width=170><INPUT maxLength=15 name=Oicq> </TD></TR>
+  <TR>
+    <TD align=right width=110>评 分：</TD>
+    <TD colSpan=3><INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=1 name=Score> 1分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=2 name=Score> 2分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio CHECKED value=3 name=Score> 3分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=4 name=Score> 4分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=5 name=Score> 5分 </TD></TR>
+  <TR>
+    <TD align=right>评论内容：</TD>
+    <TD colSpan=3><TEXTAREA id=Content name=Content rows=6 cols=80></TEXTAREA> 
+    </TD></TR>
+  <TR>
+    <TD align=middle colSpan=4><INPUT id=Action type=hidden value=Save 
+      name=Action> <INPUT id=ArticleID type=hidden value=7781 name=ArticleID> <INPUT type=submit value=" 发 表 " name=Submit> </TD></TR>
+  <TR>
+    <TD height=5></TD></TR></TBODY></TABLE></FORM></DIV></FORM>
+<DIV class=pl>
+<DIV class=pl_title></DIV>
+<SCRIPT language=javascript 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/Comment.htm"></SCRIPT>
+</DIV></DIV><!--列表左边:结束--><!--列表右边:开始-->
+<DIV class=col2>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>推荐文章 </DIV>
+<UL>
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+  target=_blank>基于AVR单片机的通用USB接口模块设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+  target=_blank>IP视频监控系统中云台控制模块的设计与…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_blank>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_blank>winAVR的安装[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_blank>winAVR背景知识[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_blank>AVR系列单片机C语言编程与应用实例[电子…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_blank>avr库函数介绍[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_blank>AVR高速嵌入式单片机原理与应用（修订版…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_blank>AVR单片机应用设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_blank>ATmega8原理与应用[电子书]</A> </LI></UL></DIV>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>联系方式及服务项目 </DIV>
+<UL>
+  <LI></A>
+  <SCRIPT language=javascript 
+  src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/17.js"></SCRIPT>
+  </LI></UL></DIV></DIV></DIV><!--列表右边:结束-->
+<DIV class=sitemap><A class=Bottom 
+onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.c51.cn');" 
+href="http://www.c51.cn/avr/avrjc/200804/7781.html#">设为首页</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="javascript:window.external.addFavorite('http://www.c51.cn','中国单片机资讯网');">加入收藏</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="mailto:c51cn@163.com">联系站长</A><FONT color=#0000ff> - </FONT><A 
+class=Bottom href="http://www.c51.cn/FriendSite/Index.asp" 
+target=_blank>友情链接</A><FONT color=#0000ff> - </FONT><A class=Bottom 
+href="http://www.c51.cn/Copyright.asp" target=_blank>版权申明</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/wwwgl/200508/26.html">广告服务</A><FONT color=#0000ff> - 
+</FONT><A href="http://www.c51.cn/glwz/wwwgl/200508/23.html">付款方式</A><FONT 
+color=#0000ff> </FONT></DIV>
+<DIV class=footer>
+<DIV class=copyright>
+<P>&copy;Copyright 2006-2008 <STRONG><A href="http://www.c51.cn/"><FONT 
+face=隶书>W</FONT></A></STRONG><A href="http://www.c51.cn/"><STRONG><FONT 
+face=隶书>ww.<FONT color=#000000>c51.Cn</FONT></FONT></STRONG></A> All Rights 
+Reserved<BR><A href="http://www.c51.cn/"><FONT color=#000000>中</FONT></A><SPAN 
+lang=zh-cn><A href="http://www.c51.cn/"><FONT color=#000000>国单片机资讯</FONT></A><A 
+href="http://www.c51.cn/" target=_blank><FONT 
+color=#000000>网</FONT></A></SPAN>　版权所有<FONT 
+color=#ff0000>（24小时服务热线:0755-27805410）</FONT><BR>本网站所有内容未经许可不得转载或用做其他用途，大部份资源均为网上搜集或网友提供，版权皆属原作者所有，请不要用作商业用途；</P>
+<P>原作者如认为本站侵犯了您的版权,请来信或电话告知,我们会立即删除!</P>
+<P><A style="COLOR: #333333; TEXT-DECORATION: none" 
+href="http://www.miibeian.gov.cn/" target=_blank><FONT 
+color=#ff0000>湘ICP备05018526号</FONT></A> E-mail:<A 
+href="mailto:c51cn@163.com">c51cn@163.com</A>&nbsp;&nbsp; <A 
+href="mailto:c51cn@126.com">c51cn@126.com</A>&nbsp; <A 
+href="msn:c51cn@live.cn">MSN:c51cn@live.cn</A>
+<SCRIPT language=JavaScript 
+src="AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序.files/cnt.htm" charset=gb2312></SCRIPT>
+ </P></DIV></DIV></DIV></BODY></HTML>

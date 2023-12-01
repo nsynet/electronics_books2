@@ -1,0 +1,1141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0044)http://www.c51.cn/avr/avrjc/200804/7774.html -->
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>AVR教程（12）：ATmega16 简介（六）</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="" name=Keywords>
+<META content="" name=Description><LINK 
+href="AVR教程（12）：ATmega16 简介（六）.files/style.css" type=text/css rel=stylesheet>
+<SCRIPT src="AVR教程（12）：ATmega16 简介（六）.files/chinaz.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="AVR教程（12）：ATmega16 简介（六）.files/prototype.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（12）：ATmega16 简介（六）.files/scriptaculous.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（12）：ATmega16 简介（六）.files/checklogin.js"></SCRIPT>
+
+<SCRIPT language=JavaScript>
+<!--
+//改变图片大小
+function resizepic(thispic)
+{
+  return true;
+}
+//无级缩放图片大小
+function bbimg(o)
+{
+  return true;
+}
+-->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3395" name=GENERATOR></HEAD>
+<BODY>
+<DIV class=container>
+<DIV class="clearfix header">
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width="100%" 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle>
+      <DIV id=UserLogin>载入中…
+      <SCRIPT language=JavaScript 
+      type=text/JavaScript>LoadUserLogin('/',1,2);</SCRIPT>
+       </DIV></TD>
+    <TD align=middle width="14%">
+      <SCRIPT language=javascript 
+      src="AVR教程（12）：ATmega16 简介（六）.files/Date.js"></SCRIPT>
+      　</TD></TR></TBODY></TABLE>
+<DIV class=topnav>
+<P align=center><A href="http://www.c51.cn/">http://www.c51.cn/</A> | <A 
+title="" href="http://www.c51.cn/honews/Index.html">新闻中心</A> | <A 
+href="http://www.c51.cn/mcu/Index.html">51单片机</A> | <A 
+href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+href="http://www.c51.cn/avr/Index.html">AVR单片机</A> | <A 
+href="http://www.c51.cn/holtek/Index.html">合泰单片机</A> | <A title="" 
+href="http://www.c51.cn/Photo/Index.html">电路图站</A> | <A title="" 
+href="http://www.c51.cn/pcb/">EDA技术</A> | <A title="" 
+href="http://www.c51.cn/power/">电源技术</A> | <A title="" 
+href="http://www.c51.cn/cgq/">传感技术</A> | <A title="" 
+href="http://www.c51.cn/GuestBook/Index.asp">雁过留声</A> | <A title="" 
+href="http://www.stcmcu.cn/bbs/">技术论坛</A> | <A 
+href="http://www.c51.cn/avr/avrjc/200804/" name=StranLink>切换到繁體中文</A>
+<SCRIPT language=javascript 
+src="AVR教程（12）：ATmega16 简介（六）.files/gb_big5.js"></SCRIPT>
+ |</P></DIV>
+<DIV class=brand><A class=site-logo title=中国单片机资讯网官方网站 href="http://www.c51.cn/" 
+rel=home><IMG height=60 alt=中国单片机资讯网官方网站 
+src="AVR教程（12）：ATmega16 简介（六）.files/logo.gif" width=165></A> </DIV>
+<DIV class=ad-banner>
+<SCRIPT language=javascript src="AVR教程（12）：ATmega16 简介（六）.files/19.js"></SCRIPT>
+</DIV>
+<DIV class=ad-text>
+<SCRIPT language=JavaScript src="AVR教程（12）：ATmega16 简介（六）.files/text_link.htm" 
+charset=gb2312></SCRIPT>
+
+<TABLE id=table1 cellSpacing=0 cellPadding=2 width=255 border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff0000><IMG 
+      src="AVR教程（12）：ATmega16 简介（六）.files/td_icon.gif" align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/hdfk/index.html"><FONT 
+      color=#ff0000>货到付款网点</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（12）：ATmega16 简介（六）.files/top_ico8.gif" 
+      align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wzhelp/200807/8109.html">订购方法</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（12）：ATmega16 简介（六）.files/top_ico2.gif" 
+      align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A></TD></TR>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff00ff><IMG 
+      src="AVR教程（12）：ATmega16 简介（六）.files/td_icon.gif" align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/wwwgl/200508/23.html"><FONT 
+      color=#ff00ff>银行汇款帐号</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（12）：ATmega16 简介（六）.files/top_ico8.gif" 
+      align=absBottom></SPAN><A 
+    href="http://shop35907817.taobao.com/">淘宝商店</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（12）：ATmega16 简介（六）.files/top_ico2.gif" 
+      align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200808/8156.html">VIP申请</A></TD></TR></TBODY></TABLE></DIV></DIV>
+<DIV class=nav>
+<DIV class=navinner>
+<UL class=navlist>
+  <LI><A href="http://www.c51.cn/">首页</A> </LI>
+  <LI><A id=nav_1 onmouseover="showMenu('nav_1','subnav1')" 
+  href="http://www.c51.cn/mcu/">单片机站</A> 
+  <DIV class="subnav disable" id=subnav1>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/mcu/">MCS-51单片机</A> | <A 
+  href="http://www.c51.cn/avr/">AVR单片机</A> | <A 
+  href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+  href="http://www.c51.cn/stc/">STC单片机</A> | <A 
+  href="http://www.c51.cn/mp430/">MSP430单片机</A> | <A 
+  href="http://www.c51.cn/holtek/">合泰单片机</A> | <A 
+  href="http://www.c51.cn/emc/">义隆单片机</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_2 onmouseover="showMenu('nav_2','subnav2')" 
+  href="http://www.c51.cn/shop/">网站商城</A> 
+  <DIV class="subnav disable" id=subnav2>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Shop/mcukf/">开发板/学习板</A> | <A 
+  href="http://www.c51.cn/Shop/gkong/">工业控制板</A> | <A 
+  href="http://www.c51.cn/Shop/bcq/">编程器</A> | <A 
+  href="http://www.c51.cn/Shop/fzq/">仿真器</A> | <A 
+  href="http://www.c51.cn/Shop/ic/">电子元器件</A> | <A 
+  href="http://www.c51.cn/Shop/cygj/">常用小工具</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_3 onmouseover="showMenu('nav_3','subnav3')" 
+  href="http://www.c51.cn/cpsm/Index.html">产品帮助</A> 
+  <DIV class="subnav disable" id=subnav3>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/cpsm/sl2000/">SL2000</A> | <A 
+  href="http://www.c51.cn/cpsm/sl800/">SL1800</A> | <A 
+  href="http://www.c51.cn/cpsm/sl480/">SL480+</A> | <A 
+  href="http://www.c51.cn/cpsm/sl300/">成功三号</A> | <A 
+  href="http://www.c51.cn/cpsm/sl200/">SL200</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc15/">NPLC-15</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc24/">NPLC-24</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc25/">NPLC-25</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc28/">NPLC-28</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_4 onmouseover="showMenu('nav_4','subnav4')" 
+  href="http://www.c51.cn/Article/">技术论文</A> 
+  <DIV class="subnav disable" id=subnav4>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Article/mcuzh/">开发论文</A> | <A 
+  href="http://www.c51.cn/Article/lexu/">嵌入式系统</A> | <A 
+  href="http://www.c51.cn/Article/arm/">ARM专栏</A> | <A 
+  href="http://www.c51.cn/Article/dsp/">DSP专栏</A> | <A 
+  href="http://www.c51.cn/Article/tx/">通信技术 | <A 
+  href="http://www.c51.cn/Article/ycx/">各类源程序</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_5 onmouseover="showMenu('nav_5','subnav5')" 
+  href="http://www.c51.cn/iczldata/">资料查询</A> 
+  <DIV class="subnav disable" id=subnav5>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/iczldata/ttl74/">74XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/cd40/">CD4XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/ram/">存储器系列</A> | <A 
+  href="http://www.c51.cn/iczldata/adda/">A/D&amp;DA</A> | <A 
+  href="http://www.c51.cn/iczldata/yf/">运算放大器</A> | <A 
+  href="http://www.c51.cn/iczldata/power/">电源管理IC</A> | <A 
+  href="http://www.c51.cn/iczldata/scr/">可控硅</A> | <A 
+  href="http://www.c51.cn/iczldata/yp/">音频视频</A> | <A 
+  href="http://www.c51.cn/iczldata/fmic/">通信IC</A> | <A 
+  href="http://www.c51.cn/iczldata/guou/">光电耦合器</A> | <A 
+  href="http://www.c51.cn/iczldata/dv/">二、三极管</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_6 onmouseover="showMenu('nav_6','subnav6')" 
+  href="http://www.c51.cn/soft">资源下载</A> 
+  <DIV class="subnav disable" id=subnav6>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/soft/kfgj/">开发工具</A> | <A 
+  href="http://www.c51.cn/soft/gjrj/">常用工具</A> | <A 
+  href="http://www.c51.cn/soft/spjc/">视频教程</A> | <A 
+  href="http://www.c51.cn/soft/dzbooks/">电子书籍</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_7 onmouseover="showMenu('nav_7','subnav7')" 
+  href="http://www.c51.cn/dzjs/">电子技术</A> 
+  <DIV class="subnav disable" id=subnav7>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/dzjs/yjcs/index.html">电子基础</A> | <A 
+  href="http://www.c51.cn/dzjs/szdl/">数字电路</A> | <A 
+  href="http://www.c51.cn/dzjs/mndl/">模拟电路</A> | <A 
+  href="http://www.c51.cn/dzjs/io/">接口电路</A> | <A 
+  href="http://www.c51.cn/dzjs/xpyy/">芯片应用</A> | <A 
+  href="http://www.c51.cn/dzjs/zhzl/">综合资料</A> | <A 
+  href="http://www.c51.cn/dzjs/wqj/">元件常识</A> 
+</SPAN></P></DIV></LI></UL></DIV></DIV>
+<DIV class=note><SPAN><A href="http://www.c51.cn/User/Index.asp"><IMG 
+src="AVR教程（12）：ATmega16 简介（六）.files/td_icon.gif" align=absBottom> 我要投稿</A> <A 
+href="http://www.c51.cn/glwz/wwwgl/200602/1853.html"><IMG 
+src="AVR教程（12）：ATmega16 简介（六）.files/tg_icon.gif" align=absBottom> 投稿指南</A> <A 
+href="http://www.c51.cn/xml/Rss.xml"><IMG 
+src="AVR教程（12）：ATmega16 简介（六）.files/rss.gif" align=absBottom> RSS订阅</A></SPAN> 
+<B>网站通告:</B> 
+<MARQUEE onmouseover=this.stop() style="WIDTH: 477px; HEIGHT: 15px" 
+onmouseout=this.start() scrollAmount=1 scrollDelay=4 width=477 align="left">
+<P>&nbsp;&nbsp;没有公告</P></MARQUEE></DIV>
+<FORM name=search action=search.asp method=post>
+<DIV class=weizhi><SPAN><B>搜索:</B> <INPUT type=hidden value=0 name=kwtype> 
+<INPUT id=Keyword maxLength=50 value=关键字 name=Keyword> <INPUT class=searchtxt 
+id=Field type=hidden value=Title name=Field> <OPTION selected="selected" 
+value="title">搜索标题</OPTION> </SELECT><INPUT type=image 
+src="AVR教程（12）：ATmega16 简介（六）.files/topsearch_submit.gif"> 
+</SPAN>您现在的位置：&nbsp;<A class=LinkPath 
+href="http://www.c51.cn/">中国单片机资讯网</A>&nbsp;&gt;&gt;&nbsp;<A class=LinkPath 
+href="http://www.c51.cn/avr/Index.html">AVR单片机站</A>&nbsp;&gt;&gt;&nbsp;<A 
+class=LinkPath 
+href="http://www.c51.cn/avr/avrjc/Index.html">教程</A>&nbsp;&gt;&gt;&nbsp;正文 
+</DIV></FORM><!--列表左边:开始--><!--列表左边:开始-->
+<DIV class="clearfix wrap layout-cols2">
+<DIV class=col1>
+<DIV id=news>
+<H1>AVR教程（12）：ATmega16&nbsp;简介（六）</H1>
+<DIV class=times>2008-06-10 13:50:46 来源:<A 
+href="http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net">http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net</A> 
+作者:<A title=微雪电子 
+href="http://www.c51.cn/ShowAuthor.asp?ChannelID=1035&amp;AuthorName=微雪电子">微雪电子</A> 
+【<A href="javascript:doZoom(16)">大</A> <A href="javascript:doZoom(14)">中</A> <A 
+href="javascript:doZoom(12)">小</A>】 <A class=fsource 
+href="http://www.c51.cn/avr/avrjc/200804/7774.html#plshow">点击：<FONT 
+id=feedcounttop color=red>
+<SCRIPT language=javascript 
+src="AVR教程（12）：ATmega16 简介（六）.files/GetHits.htm"></SCRIPT>
+</FONT> 次</A> </DIV>
+<DIV class=content id=textbody>
+<SCRIPT language=javascript src="AVR教程（12）：ATmega16 简介（六）.files/28.js"></SCRIPT>
+</DIV>
+<DIV class=content>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">控制和状态寄存器</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">MCUCSR</SPAN></B></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><FONT 
+face=宋体><SPAN lang=EN-US style="FONT-SIZE: 9pt">AVR </SPAN><SPAN 
+style="FONT-SIZE: 9pt">控制和状态寄存器提供了有关引起<SPAN 
+lang=EN-US>AVR</SPAN>复位的复位源的信息。</SPAN></FONT></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><FONT face=宋体>? Bit 4 – JTRF: JTAG 
+</FONT></SPAN><SPAN style="FONT-SIZE: 9pt"><FONT face=宋体>复位标志</FONT><SPAN 
+lang=EN-US><BR></SPAN><FONT face=宋体>通过<SPAN lang=EN-US>JTAG </SPAN>指令<SPAN 
+lang=EN-US>AVR_RESET </SPAN>可以使<SPAN lang=EN-US>JTAG </SPAN>复位寄存器置位，并引发<SPAN 
+lang=EN-US>MCU </SPAN>复位，并使<SPAN lang=EN-US>JTRF </SPAN>置位。上电复位将使其清零，也可以通过写<SPAN 
+lang=EN-US>”<CHMETCNV w:st="on" unitname="”" sourcevalue="0" hasspace="False" 
+negative="False" numbertype="1" tcsc="0" />0”</CHMETCNV /> 
+</SPAN>来清除。</FONT><SPAN lang=EN-US><BR><FONT face=宋体>? Bit 3 – WDRF: 
+</FONT></SPAN><FONT face=宋体>看门狗复位标志</FONT><SPAN lang=EN-US><BR></SPAN><FONT 
+face=宋体>看门狗复位发生时置位。上电复位将使其清零，也可以通过写<SPAN lang=EN-US>”<CHMETCNV w:st="on" 
+unitname="”" sourcevalue="0" hasspace="False" negative="False" numbertype="1" 
+tcsc="0" />0”</CHMETCNV /> </SPAN>来清除。</FONT><SPAN lang=EN-US><BR><FONT 
+face=宋体>? Bit 2 – BORF: </FONT></SPAN><FONT face=宋体>掉电检测复位标志</FONT><SPAN 
+lang=EN-US><BR></SPAN><FONT face=宋体>掉电检测复位发生时置位。上电复位将使其清零，也可以通过写<SPAN 
+lang=EN-US>”<CHMETCNV w:st="on" unitname="”" sourcevalue="0" hasspace="False" 
+negative="False" numbertype="1" tcsc="0" />0”</CHMETCNV /> 
+</SPAN>来清除。</FONT><SPAN lang=EN-US><BR><FONT face=宋体>? Bit 1 – EXTRF: 
+</FONT></SPAN><FONT face=宋体>外部复位标志</FONT><SPAN lang=EN-US><BR></SPAN><FONT 
+face=宋体>外部复位发生时置位。上电复位将使其清零，也可以通过写<SPAN lang=EN-US>”<CHMETCNV w:st="on" 
+unitname="”" sourcevalue="0" hasspace="False" negative="False" numbertype="1" 
+tcsc="0" />0”</CHMETCNV /> </SPAN>来清除。</FONT><SPAN lang=EN-US><BR><FONT 
+face=宋体>? Bit 0 – PORF: </FONT></SPAN><FONT face=宋体>上电复位标志</FONT><SPAN 
+lang=EN-US><BR></SPAN><FONT face=宋体>上电复位发生时置位。只能通过写<SPAN lang=EN-US>”<CHMETCNV 
+w:st="on" unitname="”" sourcevalue="0" hasspace="False" negative="False" 
+numbertype="1" tcsc="0" />0”</CHMETCNV /> 
+</SPAN>来清除。为了使用这些复位标志来识别复位条件，用户应该尽早读取此寄存器的数据，然后将其复位。如果在其他复位发生之前将此寄存器复位，则后续复位源可以通过检查复位标志来了解。 
+</FONT></SPAN></P><SPAN style="FONT-SIZE: 9pt"><FONT face=宋体>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">基准电压使能信号和启动时间</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">ATmega16 </SPAN><SPAN 
+style="FONT-SIZE: 9pt">具有片内能隙基准源，用于掉电检测，或者是作为模拟比较器或<SPAN 
+lang=EN-US>ADC</SPAN>的输入。<SPAN lang=EN-US>ADC </SPAN>的<SPAN lang=EN-US>2.56V 
+</SPAN>基准电压由此片内能隙基准源产生。<SPAN 
+lang=EN-US><BR><BR></SPAN>电压基准的启动时间可能影响其工作方式。启动时间列于<SPAN lang=EN-US>Table 
+16</SPAN>。为了降低功耗，可以控制基准源仅在如下情况打开：<SPAN lang=EN-US><BR>1. BOD </SPAN>使能<SPAN 
+lang=EN-US> ( </SPAN>熔丝位<SPAN lang=EN-US>BODEN </SPAN>被编程<SPAN 
+lang=EN-US>)<BR>2. </SPAN>能隙基准源连接到模拟比较器<SPAN lang=EN-US>(ACSR </SPAN>寄存器的<SPAN 
+lang=EN-US>ACBG </SPAN>置位<SPAN lang=EN-US>)<BR>3. ADC </SPAN>使能<SPAN 
+lang=EN-US><BR></SPAN>因此，当<SPAN lang=EN-US>BOD </SPAN>被禁止时，置位<SPAN 
+lang=EN-US>ACBG </SPAN>或使能<SPAN lang=EN-US>ADC 
+</SPAN>后要启动基准源。为了降低掉电模式的功耗，用户可以禁止上述三种条件，并在进入掉电模式之前关闭基准源。&nbsp;</SPAN></P><SPAN 
+style="FONT-SIZE: 9pt"></SPAN></FONT></SPAN>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US></SPAN>
+<P><SPAN lang=EN-US>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">看门狗定时器</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>看门狗定时器由独立的<SPAN lang=EN-US>1 Mhz 
+</SPAN>片内振荡器驱动。这是<SPAN lang=EN-US>VCC = 5V </SPAN>时的典型值。请参见特性数据以了解其他<SPAN 
+lang=EN-US>VCC </SPAN>电平下的典型值。通过设置看门狗定时器的预分频器可以调节看门狗复位的时间间隔，如<SPAN 
+lang=EN-US>P41Table 17 </SPAN>所示。看门狗复位指令<SPAN lang=EN-US>WDR 
+</SPAN>用来复位看门狗定时器。此外，禁止看门狗定时器或发生复位时定时器也被复位。复位时间有<SPAN lang=EN-US>8 
+</SPAN>个选项。如果没有及时复位定时器，一旦时间超过复位周期，<SPAN lang=EN-US> ATmega16 
+</SPAN>就复位，并执行复位向量指向的程序。具体的看门狗复位时序在<SPAN lang=EN-US>P39 </SPAN>有说明。</FONT><SPAN 
+lang=EN-US><BR><BR></SPAN><FONT 
+face=宋体>为了防止无意之间禁止看门狗定时器，在看门狗禁用后必须跟一个特定的修改序列。详见看门狗定时器控制寄存器。<SPAN 
+lang=EN-US></SPAN></FONT></SPAN></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><SHAPETYPE id=_x0000_t75 stroked="f" 
+filled="f" path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" 
+coordsize="21600,21600" /><STROKE joinstyle="miter" /><FORMULAS /><F 
+eqn="if lineDrawn pixelLineWidth 0" /><F eqn="sum @0 1 0" /><F eqn="sum 0 0 @1" 
+/><F eqn="prod @2 1 2" /><F eqn="prod @3 21600 pixelWidth" /><F 
+eqn="prod @3 21600 pixelHeight" /><F eqn="sum @0 0 1" /><F eqn="prod @6 1 2" 
+/><F eqn="prod @7 21600 pixelWidth" /><F eqn="sum @8 21600 0" /><F 
+eqn="prod @7 21600 pixelHeight" /><F eqn="sum @10 21600 0" /></FORMULAS /><PATH 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f" /><LOCK 
+aspectratio="t" v:ext="edit" /></SHAPETYPE /></SPAN></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial"><IMG 
+hspace=0 src="AVR教程（12）：ATmega16 简介（六）.files/20080401234557323.jpg" 
+align=baseline border=0></SPAN></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">看门狗定时器控制寄存器－</SPAN></SPAN><FONT 
+face=Arial><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext">WDTCR </SPAN></SPAN><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"></SPAN></FONT></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"></SPAN></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><FONT 
+face=宋体><SPAN class=type11><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><IMG hspace=0 
+src="AVR教程（12）：ATmega16 简介（六）.files/20080401234559937.jpg" align=baseline 
+border=0></SPAN></SPAN></FONT></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><FONT 
+face=宋体><SPAN class=type11><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext">? Bits 7..5 – Res: </SPAN></SPAN><SPAN 
+class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">保留位</SPAN></SPAN></FONT><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT face=宋体>ATmega16 
+</FONT></SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT 
+face=宋体>保留位，读操作返回值为零。</FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT face=宋体>? Bit 4 – WDTOE: 
+</FONT></SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT 
+face=宋体>看门狗修改使能</FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT 
+face=宋体>清零<SPAN lang=EN-US>WDE </SPAN>时必须置位<SPAN 
+lang=EN-US>WDTOE</SPAN>，否则不能禁止看门狗。一旦置位，硬件将在紧接的<SPAN lang=EN-US>4 
+</SPAN>个时钟周期之后将其清零。请参考有关<SPAN lang=EN-US>WDE 
+</SPAN>的说明来禁止看门狗。</FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT face=宋体>? Bit 3 – WDE: 
+</FONT></SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT 
+face=宋体>使能看门狗</FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT 
+face=宋体>WDE</FONT></SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=宋体>为<SPAN lang=EN-US>"1“ 
+</SPAN>时，看门狗使能，否则看门狗将被禁止。只有在<SPAN lang=EN-US>WDTOE</SPAN>为<SPAN lang=EN-US>"1“ 
+</SPAN>时<SPAN lang=EN-US>WDE </SPAN>才能清零。以下为关闭看门狗的步骤：</FONT></SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT face=宋体>1. 
+</FONT></SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=宋体>在同一个指令内对<SPAN 
+lang=EN-US>WDTOE </SPAN>和<SPAN lang=EN-US>WDE </SPAN>写<SPAN 
+lang=EN-US>"1“</SPAN>，即使<SPAN lang=EN-US>WDE </SPAN>已经为<SPAN 
+lang=EN-US>"1“</SPAN></FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT face=宋体>2. 
+</FONT></SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=宋体>在紧接的<SPAN lang=EN-US>4 
+</SPAN>个时钟周期之内对<SPAN lang=EN-US>WDE </SPAN>写<SPAN lang=EN-US>"<CHMETCNV 
+w:st="on" unitname="”" sourcevalue="0" hasspace="False" negative="False" 
+numbertype="1" tcsc="0" />0”</CHMETCNV /></SPAN></FONT></SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT face=宋体>? Bits 2..0 – WDP2, 
+WDP1, WDP0: </FONT></SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=宋体>看门狗定时器预分频器<SPAN 
+lang=EN-US>2, 1 </SPAN>和<SPAN lang=EN-US> 0</SPAN></FONT></SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT 
+face=宋体>WDP2</FONT></SPAN></SPAN></SPAN><FONT face=宋体><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">、<SPAN lang=EN-US>WDP1 </SPAN>和<SPAN 
+lang=EN-US>WDP0 </SPAN>决定看门狗定时器的预分频器，如<SPAN lang=EN-US>Table 17 
+</SPAN>所示。</SPAN></SPAN><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"></SPAN></FONT></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"></SPAN></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: "><IMG 
+hspace=0 src="AVR教程（12）：ATmega16 简介（六）.files/20080401234600379.jpg" 
+align=baseline border=0></SPAN></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: ">下面的例子分别用汇编和</SPAN></SPAN><SPAN 
+class=type11><SPAN lang=EN-US style="FONT-SIZE: 9pt; COLOR: windowtext">C 
+</SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: ">语言实现了关闭</SPAN></SPAN><SPAN 
+class=type11><SPAN lang=EN-US style="FONT-SIZE: 9pt; COLOR: windowtext">WDT 
+</SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的操作。在此假定中断处于用户控制之下</SPAN></SPAN><SPAN 
+class=type11><SPAN lang=EN-US style="FONT-SIZE: 9pt; COLOR: windowtext"> ( 
+</SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: ">比如禁止全局中断</SPAN></SPAN><SPAN 
+class=type11><SPAN lang=EN-US style="FONT-SIZE: 9pt; COLOR: windowtext">) 
+</SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: ">，因而在执行下面程序时中断不会发生。</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> <BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">汇编代码例程</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>WDT_off:<BR>; WDT </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">复位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>WDR<BR>; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">置位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> WDTOE </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">和</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> WDE<BR>in r16, WDTCR<BR>ori r16, 
+(1&lt;&lt;WDTOE)|(1&lt;&lt;WDE)<BR>out WDTCR, r16<BR>; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">关闭</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">WDT<BR>ldi r16, (0&lt;&lt;WDE)<BR>out WDTCR, 
+r16<BR>ret<BR>C </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">代码例程</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>void WDT_off(void)<BR>{<BR>/* WDT 
+</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">复位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">*/<BR>_WDR();<BR>/* </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">置位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> WDTOE </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">和</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> WDE*/<BR>WDTCR |= (1&lt;&lt;WDTOE) | 
+(1&lt;&lt;WDE);<BR>/* </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">关闭</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">WDT */<BR>WDTCR = 0x00;<BR>}</SPAN>&nbsp;</P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">中断向量</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>本节描述<SPAN 
+lang=EN-US>ATmega16</SPAN>的中断处理。</FONT></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><FONT 
+face=宋体><SPAN lang=EN-US style="FONT-SIZE: 9pt"><IMG hspace=0 
+src="AVR教程（12）：ATmega16 简介（六）.files/20080401234602155.jpg" align=baseline 
+border=0></SPAN></FONT></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><FONT 
+face=宋体><SPAN lang=EN-US style="FONT-SIZE: 9pt">Table 19</SPAN><SPAN 
+style="FONT-SIZE: 9pt">给出了不同的<SPAN 
+lang=EN-US>BOOTRST/IVSEL</SPAN>设置下的复位和中断向量的位置。如果程序永远不使能中断，中断向量就没有意义。用户可以在此直接写程序。同样，如果复位向量位于应用区，而其他中断向量位于<SPAN 
+lang=EN-US>Boot </SPAN>区，则复位向量之后可以直接写程序。反过来亦是如此。 <SPAN 
+lang=EN-US></SPAN></SPAN></FONT></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"></SPAN></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"><IMG hspace=0 
+src="AVR教程（12）：ATmega16 简介（六）.files/20080401234604725.jpg" align=baseline 
+border=0></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt">ATmega16 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">典型的复位和中断设置如下：</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">地址</SPAN><SPAN 
+style="FONT-SIZE: 9pt">&nbsp;</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">符号代码说明</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$000 jmp RESET ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">复位中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$002 jmp EXT_INT0 ; IRQ0 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$004 jmp EXT_INT1 ; IRQ1 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$006 jmp TIM2_COMP ; Timer2 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">比较中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$008 jmp TIM2_OVF ; Timer2 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">溢出中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="a" 
+sourcevalue="0" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>00A</CHMETCNV /> jmp TIM1_CAPT ; Timer1 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">捕捉中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="0" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>00C</CHMETCNV /> jmp TIM1_COMPA ; Timer1 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">比较</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">A </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$00E jmp TIM1_COMPB ; Timer1 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">比较</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">B </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$010 jmp TIM1_OVF ; Timer1 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">溢出中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$012 jmp TIM0_OVF ; Timer0 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">溢出中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$014 jmp SPI_STC ; SPI </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">传输结束中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$016 jmp USART_RXC ; USART RX </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">结束中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$018 jmp USART_UDRE ; UDR </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">空中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="a" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>01A</CHMETCNV /> jmp USART_TXC ; USART TX </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">结束中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>01C</CHMETCNV /> jmp ADC ; ADC </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">转换结束中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$01E jmp EE_RDY ; EEPROM </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">就绪中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$020 jmp ANA_COMP ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">模拟比较器中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$022 jmp TWSI ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">两线串行接口中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$024 jmp EXT_INT2 ; IRQ2 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$026 jmp TIM0_COMP ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">定时器</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">0 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">比较中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$028 jmp SPM_RDY ; SPM </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">就绪中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>;<BR>$<CHMETCNV w:st="on" unitname="a" 
+sourcevalue="2" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>02A</CHMETCNV /> RESET: ldi r16,high(RAMEND) ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">主程序</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$02B out SPH,r16 ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">设置堆栈指针为</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">RAM </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的顶部</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="2" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>02C</CHMETCNV /> ldi r16,low(RAMEND)<BR>$02D out SPL,r16<BR>$02E sei ; 
+</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">使能中断</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="F" 
+sourcevalue="2" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>02F</CHMETCNV /> &lt;instr&gt; xxx<BR>... ... ...<BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">当熔丝位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">BOOTRST </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">未编程，</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">区为</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> 2K </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">字节，且寄存器</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">GICR </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVSEL </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">置位时，典</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">型的复位和中断设置如下：</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">地址符号代码说明</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$000 RESET: ldi r16,high(RAMEND) ; 
+</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">主程序</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$001 out SPH,r16 ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">设置堆栈指针为</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">RAM </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的顶部</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$002 ldi r16,low(RAMEND)<BR>$003 out 
+SPL,r16<BR>$004 sei ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">使能中断</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$005 &lt;instr&gt; xxx<BR>;<BR>.org 
+$<CHMETCNV w:st="on" unitname="C" sourcevalue="1" hasspace="False" 
+negative="False" numbertype="1" tcsc="0" />1C</CHMETCNV />02<BR>$<CHMETCNV 
+w:st="on" unitname="C" sourcevalue="1" hasspace="False" negative="False" 
+numbertype="1" tcsc="0" />1C</CHMETCNV />02 jmp EXT_INT0 ; IRQ0 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />04 jmp EXT_INT1 ; IRQ1 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>... .... .. ;<BR>$<CHMETCNV w:st="on" 
+unitname="C" sourcevalue="1" hasspace="False" negative="False" numbertype="1" 
+tcsc="0" />1C</CHMETCNV />28 jmp SPM_RDY ; SPM </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">就绪中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">当熔丝位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">BOOTRST </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">已编程，且</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">区为</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> 2K </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">字节时，典型的复位和中断设置如下：</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">地址符号代码说明</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>.org $002<BR>$002 jmp EXT_INT0 ; IRQ0 
+</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$004 jmp EXT_INT1 ; IRQ1 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>... .... .. ;<BR>$028 jmp SPM_RDY ; SPM 
+</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">就绪中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>;<BR>.org $<CHMETCNV w:st="on" 
+unitname="C" sourcevalue="1" hasspace="False" negative="False" numbertype="1" 
+tcsc="0" />1C</CHMETCNV />00<BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />00 RESET: ldi r16,high(RAMEND) ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">主程序</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />01 out SPH,r16 ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">设置堆栈指针为</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">RAM </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的顶部</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />02 ldi r16,low(RAMEND)<BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />03 out SPL,r16<BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />04 sei ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">使能中断</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />05 &lt;instr&gt; xxx<BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">当熔丝位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">BOOTRST </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">已编程，</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">区为</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">2K </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">字节，且寄存器</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">GICR </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVSEL </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">置位时，典</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">型的复位和中断设置如下：</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">地址符号代码说明</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>.org $<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />00<BR>$<CHMETCNV w:st="on" unitname="C" sourcevalue="1" 
+hasspace="False" negative="False" numbertype="1" tcsc="0" />1C</CHMETCNV />00 
+jmp RESET ; Reset </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />02 jmp EXT_INT0 ; IRQ0 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />04 jmp EXT_INT1 ; IRQ1 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>... .... .. ;<BR>$<CHMETCNV w:st="on" 
+unitname="C" sourcevalue="1" hasspace="False" negative="False" numbertype="1" 
+tcsc="0" />1C</CHMETCNV />28 jmp SPM_RDY ; SPM </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">就绪中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>;<BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV /><CHMETCNV w:st="on" unitname="a" sourcevalue="2" 
+hasspace="False" negative="False" numbertype="1" tcsc="0" />2A</CHMETCNV /> 
+RESET: ldi r16,high(RAMEND) ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">主程序</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV />2B out SPH,r16 ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">设置堆栈指针为</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">RAM </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的顶部</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV /><CHMETCNV w:st="on" unitname="C" sourcevalue="2" 
+hasspace="False" negative="False" numbertype="1" tcsc="0" />2C</CHMETCNV /> ldi 
+r16,low(RAMEND)<BR>$<CHMETCNV w:st="on" unitname="C" sourcevalue="1" 
+hasspace="False" negative="False" numbertype="1" tcsc="0" />1C</CHMETCNV />2D 
+out SPL,r16<BR>$<CHMETCNV w:st="on" unitname="C" sourcevalue="1" 
+hasspace="False" negative="False" numbertype="1" tcsc="0" />1C</CHMETCNV />2E 
+sei ; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">使能中断</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>$<CHMETCNV w:st="on" unitname="C" 
+sourcevalue="1" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>1C</CHMETCNV /><CHMETCNV w:st="on" unitname="F" sourcevalue="2" 
+hasspace="False" negative="False" numbertype="1" tcsc="0" />2F</CHMETCNV /> 
+&lt;instr&gt; xxx<BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">在应用区和</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">区之间移动中断向量</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> <BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">通用中断控制寄存器决定中断向量表的放置地址</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">通用中断控制寄存器－</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> GICR<BR><BR>? Bit 1 – IVSEL: </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量选择</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">当</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVSEL </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">为</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">"0“ </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">时，中断向量位于</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Flash </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">存储器的起始地址；当</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVSEL </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">为</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">"1“ </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">时，中断向量转移到</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">区的起始地址。实际的</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">区起始地址由熔丝位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">BOOTSZ </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">确定。具体请参考</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">P234“ </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">支持引导装入程序</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> – </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">在写的同时可以读</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">(RWW, Read-While-Write) </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的自我编程能力</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">” </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">。</SPAN><SPAN 
+style="FONT-SIZE: 9pt">&nbsp;</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">为了防止无意识地改变中断向量表，修改</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVSEL </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">时需要遵照如下过程：</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>1. </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">置位中断向量修改使能位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVCE<BR>2. </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">在紧接的</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">4 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">个时钟周期里将需要的数据写入</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVSEL</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">，同时对</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVCE </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">写</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">”<CHMETCNV w:st="on" unitname="”" 
+sourcevalue="0" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>0”</CHMETCNV /><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">执行上述序列时中断自动被禁止。其实，在置位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVCE </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">时中断就被禁止了，并一直保持到写</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVSEL </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">操作之后的下一条语句。如果没有</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVSEL </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">写操作，则中断在置位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVCE </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">之后的</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">4 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">个时钟周期保持禁止。需要注意的是，虽然中断被自动禁止，但状态寄存器的位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">I </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的值并不受此操作的影响。</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>Note: </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">若中断向量位于</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">区，且</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">锁定位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">BLB02</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">被编程，则执行应用区的程序时中断被禁止；若中断向量位于应用区，且</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">锁定位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">BLB12 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">被编程，</SPAN><SPAN 
+style="FONT-SIZE: 9pt">&nbsp;</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">则执行</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">区的程序时中断被禁止。有关</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">Boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">锁定位的细节请参见</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">P234“ </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">支持引导装入程序</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> – </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">在写的同时可以读</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>(RWW, Read-While-Write) </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">的自我编程能力</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">” </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">。</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR>? Bit 0 – IVCE: </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">中断向量修改使能</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">改变</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVSEL </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">时</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVCE </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">必须置位。在</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVCE </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">或</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVSEL </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">写操作之后</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">4 </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">个时钟周期，</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> IVCE </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">被硬件清零。如前面所述，置位</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">IVCE </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">将禁止中断。代码如下：</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">汇编代码例程：</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>Move_interrupts:<BR>; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">使能中断向量的修改</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>ldi r16, (1&lt;&lt;IVCE)<BR>out GICR, 
+r16<BR>; </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">将中断向量转移到</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">区</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>ldi r16, (1&lt;&lt;IVSEL)<BR>out GICR, 
+r16<BR>ret<BR>C </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">代码例程</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>void Move_interrupts(void)<BR>{<BR>/* 
+</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">使能中断向量的修改</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">*/<BR>GICR = (1&lt;&lt;IVCE);<BR>/* 
+</SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">将中断向量转移到</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">boot </SPAN><SPAN 
+style="FONT-SIZE: 9pt; FONT-FAMILY: 宋体; mso-ascii-font-family: ">区</SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"> */<BR>GICR = (1&lt;&lt;IVSEL);<BR>} 
+</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">通用中断控制寄存器</SPAN></B><B><SPAN 
+lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">GICR&nbsp;</SPAN></B></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B><SPAN lang=EN-US 
+style="mso-bidi-font-size: 9.0pt"><SPAN style="mso-spacerun: yes"><FONT 
+face=宋体><IMG hspace=0 src="AVR教程（12）：ATmega16 简介（六）.files/20080401234606495.jpg" 
+align=baseline border=0>&nbsp;</FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"><SHAPETYPE id=_x0000_t75 stroked="f" filled="f" 
+path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" 
+coordsize="21600,21600" /><FONT face=宋体> <STROKE joinstyle="miter" /><FORMULAS 
+/><F eqn="if lineDrawn pixelLineWidth 0" /><F eqn="sum @0 1 0" /><F 
+eqn="sum 0 0 @1" /><F eqn="prod @2 1 2" /><F eqn="prod @3 21600 pixelWidth" /><F 
+eqn="prod @3 21600 pixelHeight" /><F eqn="sum @0 0 1" /><F eqn="prod @6 1 2" 
+/><F eqn="prod @7 21600 pixelWidth" /><F eqn="sum @8 21600 0" /><F 
+eqn="prod @7 21600 pixelHeight" /><F eqn="sum @10 21600 0" /></FORMULAS /><PATH 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f" /><LOCK 
+aspectratio="t" v:ext="edit" /></FONT></SHAPETYPE /></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN lang=EN-US style="FONT-SIZE: 9pt"><FONT 
+face=宋体>? Bit 1 – IVSEL: </FONT></SPAN><SPAN style="FONT-SIZE: 9pt"><FONT 
+face=宋体>中断向量选择</FONT><SPAN lang=EN-US><BR></SPAN><FONT face=宋体>当<SPAN 
+lang=EN-US>IVSEL </SPAN>为<SPAN lang=EN-US>"0“ </SPAN>时，中断向量位于<SPAN 
+lang=EN-US>Flash </SPAN>存储器的起始地址；当<SPAN lang=EN-US>IVSEL </SPAN>为<SPAN 
+lang=EN-US>"1“ </SPAN>时，中断向量转移到<SPAN lang=EN-US>Boot </SPAN>区的起始地址。实际的<SPAN 
+lang=EN-US>Boot </SPAN>区起始地址由熔丝位<SPAN lang=EN-US>BOOTSZ </SPAN>确定。具体请参考<SPAN 
+lang=EN-US>P234“ </SPAN>支持引导装入程序<SPAN lang=EN-US> – </SPAN>在写的同时可以读<SPAN 
+lang=EN-US>(RWW, Read-While-Write) </SPAN>的自我编程能力<SPAN lang=EN-US>” </SPAN>。 
+为了防止无意识地改变中断向量表，修改<SPAN lang=EN-US>IVSEL </SPAN>时需要遵照如下过程：</FONT><SPAN 
+lang=EN-US><BR><FONT face=宋体>1. </FONT></SPAN><FONT 
+face=宋体>置位中断向量修改使能位</FONT><FONT face=宋体><SPAN lang=EN-US>IVCE<BR>2. 
+</SPAN>在紧接的<SPAN lang=EN-US>4 </SPAN>个时钟周期里将需要的数据写入<SPAN 
+lang=EN-US>IVSEL</SPAN>，同时对<SPAN lang=EN-US>IVCE </SPAN>写</FONT><FONT 
+face=宋体><SPAN lang=EN-US>”<CHMETCNV w:st="on" unitname="”" sourcevalue="0" 
+hasspace="False" negative="False" numbertype="1" tcsc="0" />0”</CHMETCNV 
+/><BR></SPAN>执行上述序列时中断自动被禁止。其实，在置位<SPAN lang=EN-US>IVCE 
+</SPAN>时中断就被禁止了，并一直保持到写<SPAN lang=EN-US>IVSEL </SPAN>操作之后的下一条语句。如果没有<SPAN 
+lang=EN-US>IVSEL </SPAN>写操作，则中断在置位<SPAN lang=EN-US>IVCE </SPAN>之后的<SPAN 
+lang=EN-US>4 </SPAN>个时钟周期保持禁止。需要注意的是，虽然中断被自动禁止，但状态寄存器的位<SPAN lang=EN-US>I 
+</SPAN>的值并不受此操作的影响。</FONT><SPAN lang=EN-US><BR><FONT face=宋体>Note: 
+</FONT></SPAN><FONT face=宋体>若中断向量位于<SPAN lang=EN-US>Boot</SPAN>区，且<SPAN 
+lang=EN-US>Boot</SPAN>锁定位<SPAN 
+lang=EN-US>BLB02</SPAN>被编程，则执行应用区的程序时中断被禁止；若中断向量位于应用区，且<SPAN lang=EN-US>Boot 
+</SPAN>锁定位<SPAN lang=EN-US>BLB12 </SPAN>被编程， 则执行<SPAN lang=EN-US>Boot 
+</SPAN>区的程序时中断被禁止。有关<SPAN lang=EN-US>Boot </SPAN>锁定位的细节请参见<SPAN lang=EN-US>P234“ 
+</SPAN>支持引导装入程序<SPAN lang=EN-US> – </SPAN>在写的同时可以读</FONT><SPAN 
+lang=EN-US><BR><FONT face=宋体>(RWW, Read-While-Write) </FONT></SPAN><FONT 
+face=宋体>的自我编程能力<SPAN lang=EN-US>” </SPAN>。</FONT><SPAN lang=EN-US><BR><FONT 
+face=宋体>? Bit 0 – IVCE: </FONT></SPAN><FONT face=宋体>中断向量修改使能</FONT><SPAN 
+lang=EN-US><BR></SPAN><FONT face=宋体>改变<SPAN lang=EN-US>IVSEL </SPAN>时<SPAN 
+lang=EN-US>IVCE </SPAN>必须置位。在<SPAN lang=EN-US>IVCE </SPAN>或<SPAN 
+lang=EN-US>IVSEL </SPAN>写操作之后<SPAN lang=EN-US>4 </SPAN>个时钟周期，<SPAN lang=EN-US> 
+IVCE </SPAN>被硬件清零。如前面所述，置位<SPAN lang=EN-US>IVCE </SPAN>将禁止中断。代码如下：</FONT><SPAN 
+lang=EN-US><BR></SPAN><FONT face=宋体>汇编代码例程：</FONT><SPAN lang=EN-US><BR><FONT 
+face=宋体>Move_interrupts:<BR>; </FONT></SPAN><FONT face=宋体>使能中断向量的修改</FONT><SPAN 
+lang=EN-US><BR><FONT face=宋体>ldi r16, (1&lt;&lt;IVCE)<BR>out GICR, r16<BR>; 
+</FONT></SPAN><FONT face=宋体>将中断向量转移到<SPAN lang=EN-US>boot </SPAN>区</FONT><SPAN 
+lang=EN-US><BR><FONT face=宋体>ldi r16, (1&lt;&lt;IVSEL)<BR>out GICR, 
+r16<BR>ret<BR>C </FONT></SPAN><FONT face=宋体>代码例程</FONT><SPAN 
+lang=EN-US><BR><FONT face=宋体>void Move_interrupts(void)<BR>{<BR>/* 
+</FONT></SPAN><FONT face=宋体>使能中断向量的修改</FONT><FONT face=宋体><SPAN 
+lang=EN-US>*/<BR>GICR = (1&lt;&lt;IVCE);<BR>/* </SPAN>将中断向量转移到<SPAN 
+lang=EN-US>boot </SPAN>区</FONT><SPAN lang=EN-US><FONT face=宋体> */<BR>GICR = 
+(1&lt;&lt;IVSEL);<BR>} </FONT></SPAN></SPAN></P>
+<P></SPAN></P>
+<P><IMG hspace=0 src="AVR教程（12）：ATmega16 简介（六）.files/20080401234607119.jpg" 
+align=baseline border=0></P></DIV>
+<DIV class=pagebreak></DIV>
+<DIV class=ding_box>
+<DIV align=left>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD align=middle width=700></TD></TR></TBODY></TABLE></DIV>
+<DIV align=left>
+<SCRIPT language=javascript src="AVR教程（12）：ATmega16 简介（六）.files/25.js"></SCRIPT>
+</DIV></DIV>
+<DIV class=text_tag>
+<H5>Tags：<B> AVR单片机学习 </B>&nbsp; </H5><SPAN>责任编辑：尘封往事</SPAN> 
+<LI style="DISPLAY: none">
+<SCRIPT language=javascript 
+src="AVR教程（12）：ATmega16 简介（六）.files/count.htm"></SCRIPT>
+</LI></DIV>
+<DIV align=right>【<A href="http://www.c51.cn/avr/Comment.asp?ArticleID=7774" 
+target=_blank>发表评论</A>】【<A 
+href="http://www.c51.cn/User/User_Favorite.asp?Action=Add&amp;ChannelID=1035&amp;InfoID=7774" 
+target=_blank>加入收藏</A>】【<A 
+href="http://www.c51.cn/avr/SendMail.asp?ArticleID=7774" 
+target=_blank>告诉好友</A>】【<A href="http://www.c51.cn/avr/Print.asp?ArticleID=7774" 
+target=_blank>打印此文</A>】【<A href="javascript:window.close();">关闭窗口</A>】 
+&nbsp;&nbsp; </DIV>
+<DIV class=xg>
+<LI>上一篇文章： <A class=LinkPrevArticle 
+title="文章标题：AVR教程（13）：AVR&nbsp;IO输出之LED显示程序&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:44:35" 
+href="http://www.c51.cn/avr/avrjc/200804/7773.html">AVR教程（13）：AVR&nbsp;IO输出之LED显示程序…</A> 
+</LI>
+<LI>下一篇文章： <A class=LinkNextArticle 
+title="文章标题：AVR教程（11）：ATmega16&nbsp;简介（五）&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:46:40" 
+href="http://www.c51.cn/avr/avrjc/200804/7775.html">AVR教程（11）：ATmega16&nbsp;简介（五）…</A> 
+</LI></DIV>
+<DIV class=box_xgimg>
+<DIV class=title_xg>最新图文 </DIV>
+<TABLE cellSpacing=5 cellPadding=0 width="100%" align=center border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（12）：ATmega16 简介（六）.files/20080807105131440.jpg" width=125 
+      border=0></A><BR><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+      target=_blank>基于AVR单片机的通用U…</A></TD>
+    <TD align=middle><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（12）：ATmega16 简介（六）.files/20080807104931309.jpg" width=125 
+      border=0></A><BR><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+      target=_blank>IP视频监控系统中云台…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（12）：ATmega16 简介（六）.files/20080402000055425.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+      target=_blank>AVR教程（1）：AVR单片…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（12）：ATmega16 简介（六）.files/20080401235756587.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+      target=_blank>AVR教程（2）：AVR单片…</A></TD></TR>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（12）：ATmega16 简介（六）.files/20080401235700490.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" 
+      target=_blank>AVR教程（3）：ICCAVR…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（12）：ATmega16 简介（六）.files/20080401235536700.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" 
+      target=_blank>AVR教程（4）：AVRStu…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（12）：ATmega16 简介（六）.files/20080401235450679.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" 
+      target=_blank>AVR教程（5）：使用AV…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（12）：ATmega16 简介（六）.files/20080401235250334.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" 
+      target=_blank>AVR教程（6）：ATmega…</A></TD></TR></TBODY></TABLE></DIV>
+<DIV class=box_xg>
+<DIV class=title_xg>相关文章列表 </DIV>
+<UL>
+  <LI><A class=LinkArticleCorrelative 
+  title="文章标题：嵌入式C编程与Atmel&nbsp;AVR[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:48" 
+  href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_self>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A><BR><A 
+  class=LinkArticleCorrelative 
+  title="文章标题：winAVR的安装[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:02" 
+  href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_self>winAVR的安装[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：winAVR背景知识[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:52:27" 
+  href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_self>winAVR背景知识[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR系列单片机C语言编程与应用实例[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:50:44" 
+  href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_self>AVR系列单片机C语言编程与应用实例[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：avr库函数介绍[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:49:07" 
+  href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_self>avr库函数介绍[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR高速嵌入式单片机原理与应用（修订版）[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:48:21" 
+  href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_self>AVR高速嵌入式单片机原理与应用（修订版）[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR单片机应用设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:47:36" 
+  href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_self>AVR单片机应用设计</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：ATmega8原理与应用[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:36:31" 
+  href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_self>ATmega8原理与应用[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（1）：AVR单片机介绍&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:58:21" 
+  href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+  target=_self>AVR教程（1）：AVR单片机介绍</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（2）：AVR单片机基本硬件设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:57:33" 
+  href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+  target=_self>AVR教程（2）：AVR单片机基本硬件设计</A><BR></LI></UL></DIV>
+<FORM name=form1 onsubmit="return Check();" action=Comment.asp method=post>
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width=600 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=right width=110>姓 名：</TD>
+    <TD width=180><INPUT maxLength=16 name=Name> <FONT color=red>*</FONT> </TD>
+    <TD align=right width=60>Oicq：</TD>
+    <TD width=170><INPUT maxLength=15 name=Oicq> </TD></TR>
+  <TR>
+    <TD align=right width=110>评 分：</TD>
+    <TD colSpan=3><INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=1 name=Score> 1分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=2 name=Score> 2分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio CHECKED value=3 name=Score> 3分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=4 name=Score> 4分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=5 name=Score> 5分 </TD></TR>
+  <TR>
+    <TD align=right>评论内容：</TD>
+    <TD colSpan=3><TEXTAREA id=Content name=Content rows=6 cols=80></TEXTAREA> 
+    </TD></TR>
+  <TR>
+    <TD align=middle colSpan=4><INPUT id=Action type=hidden value=Save 
+      name=Action> <INPUT id=ArticleID type=hidden value=7774 name=ArticleID> <INPUT type=submit value=" 发 表 " name=Submit> </TD></TR>
+  <TR>
+    <TD height=5></TD></TR></TBODY></TABLE></FORM></DIV></FORM>
+<DIV class=pl>
+<DIV class=pl_title></DIV>
+<SCRIPT language=javascript 
+src="AVR教程（12）：ATmega16 简介（六）.files/Comment.htm"></SCRIPT>
+</DIV></DIV><!--列表左边:结束--><!--列表右边:开始-->
+<DIV class=col2>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>推荐文章 </DIV>
+<UL>
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+  target=_blank>基于AVR单片机的通用USB接口模块设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+  target=_blank>IP视频监控系统中云台控制模块的设计与…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_blank>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_blank>winAVR的安装[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_blank>winAVR背景知识[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_blank>AVR系列单片机C语言编程与应用实例[电子…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_blank>avr库函数介绍[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_blank>AVR高速嵌入式单片机原理与应用（修订版…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_blank>AVR单片机应用设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_blank>ATmega8原理与应用[电子书]</A> </LI></UL></DIV>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>联系方式及服务项目 </DIV>
+<UL>
+  <LI></A>
+  <SCRIPT language=javascript 
+  src="AVR教程（12）：ATmega16 简介（六）.files/17.js"></SCRIPT>
+  </LI></UL></DIV></DIV></DIV><!--列表右边:结束-->
+<DIV class=sitemap><A class=Bottom 
+onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.c51.cn');" 
+href="http://www.c51.cn/avr/avrjc/200804/7774.html#">设为首页</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="javascript:window.external.addFavorite('http://www.c51.cn','中国单片机资讯网');">加入收藏</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="mailto:c51cn@163.com">联系站长</A><FONT color=#0000ff> - </FONT><A 
+class=Bottom href="http://www.c51.cn/FriendSite/Index.asp" 
+target=_blank>友情链接</A><FONT color=#0000ff> - </FONT><A class=Bottom 
+href="http://www.c51.cn/Copyright.asp" target=_blank>版权申明</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/wwwgl/200508/26.html">广告服务</A><FONT color=#0000ff> - 
+</FONT><A href="http://www.c51.cn/glwz/wwwgl/200508/23.html">付款方式</A><FONT 
+color=#0000ff> </FONT></DIV>
+<DIV class=footer>
+<DIV class=copyright>
+<P>&copy;Copyright 2006-2008 <STRONG><A href="http://www.c51.cn/"><FONT 
+face=隶书>W</FONT></A></STRONG><A href="http://www.c51.cn/"><STRONG><FONT 
+face=隶书>ww.<FONT color=#000000>c51.Cn</FONT></FONT></STRONG></A> All Rights 
+Reserved<BR><A href="http://www.c51.cn/"><FONT color=#000000>中</FONT></A><SPAN 
+lang=zh-cn><A href="http://www.c51.cn/"><FONT color=#000000>国单片机资讯</FONT></A><A 
+href="http://www.c51.cn/" target=_blank><FONT 
+color=#000000>网</FONT></A></SPAN>　版权所有<FONT 
+color=#ff0000>（24小时服务热线:0755-27805410）</FONT><BR>本网站所有内容未经许可不得转载或用做其他用途，大部份资源均为网上搜集或网友提供，版权皆属原作者所有，请不要用作商业用途；</P>
+<P>原作者如认为本站侵犯了您的版权,请来信或电话告知,我们会立即删除!</P>
+<P><A style="COLOR: #333333; TEXT-DECORATION: none" 
+href="http://www.miibeian.gov.cn/" target=_blank><FONT 
+color=#ff0000>湘ICP备05018526号</FONT></A> E-mail:<A 
+href="mailto:c51cn@163.com">c51cn@163.com</A>&nbsp;&nbsp; <A 
+href="mailto:c51cn@126.com">c51cn@126.com</A>&nbsp; <A 
+href="msn:c51cn@live.cn">MSN:c51cn@live.cn</A>
+<SCRIPT language=JavaScript src="AVR教程（12）：ATmega16 简介（六）.files/cnt.htm" 
+charset=gb2312></SCRIPT>
+ </P></DIV></DIV></DIV></BODY></HTML>

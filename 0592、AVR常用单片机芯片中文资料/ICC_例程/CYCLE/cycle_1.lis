@@ -1,0 +1,436 @@
+                         .module cycle_1.c
+                         .area vector(rom, abs)
+                         .org 6
+ 0006 9FC0              rjmp _Icp_timer1
+                         .area lit(rom, con, rel)
+ 0000                 _tabel::
+ 0000 3F06              .byte 63,6
+ 0002 5B4F              .byte 91,'O
+ 0004 666D              .byte 'f,'m
+ 0006 7D07              .byte 125,7
+ 0008 7F6F              .byte 127,'o
+ 000A 777C              .byte 'w,124
+ 000C 395E              .byte 57,94
+ 000E 7971              .byte 'y,'q
+ 0010                   .dbfile D:\ICC-AVR\examples.sl\CYCLE\cycle_1.c
+ 0010                   .dbsym s tabel _tabel Ac[16:16]
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\CYCLE\cycle_1.c
+ 0000                 _ledbuff::
+ 0000                   .blkb 2
+                         .area idata
+ 0000 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0002                   .dbfile D:\ICC-AVR\examples.sl\CYCLE\cycle_1.c
+ 0002                   .blkb 2
+                         .area idata
+ 0002 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0004                   .dbfile D:\ICC-AVR\examples.sl\CYCLE\cycle_1.c
+ 0004                   .blkb 2
+                         .area idata
+ 0004 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0006                   .dbfile D:\ICC-AVR\examples.sl\CYCLE\cycle_1.c
+ 0006                   .dbsym s ledbuff _ledbuff Ac[6:6]
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\CYCLE\cycle_1.c
+ 0000                   .dbfunc s delay_1ms _delay_1ms fI
+                       ;              i -> R16,R17
+                         .even
+ 0000                 _delay_1ms::
+ 0000                   .dbline 20{
+                       ; /**********************************************
+                       ;              http://www.sl.com.cn
+                       ;       双龙电子公司----占空比测量演示程序(ICCAVR)
+                       ;                  作者：詹卫前
+                       ;           1、学习定时器T1捕捉(捕获)中断的使用         
+                       ; **********************************************/
+                       ; #include <io8515.h>
+                       ; #include <math.h>
+                       ; #pragma interrupt_handler Icp_timer1:4   //   设置ICP中断
+                       ;           /*   七段译码字形表     */        
+                       ; const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+                       ;           /*     显示缓冲区       */
+                       ; unsigned char ledbuff[]={0x3f,0x3f,0x3f,0x3f,0x3f,0x3f};
+                       ; unsigned int count_l;
+                       ; unsigned int count_h;
+                       ; /******************************
+                       ;          1ms延时程序
+                       ; ******************************/ 
+                       ; void delay_1ms(void)
+                       ; { 
+ 0000                   .dbline 22
+                       ;  unsigned int i;
+                       ;  for(i=1;i<1142;i++)
+ 0000 01E0              ldi R16,1
+ 0002 10E0              ldi R17,0
+ 0004 02C0              rjmp L5
+ 0006                 L2:
+ 0006                   .dbline 23
+ 0006                 L3:
+ 0006                   .dbline 22
+ 0006 0F5F              subi R16,255  ; offset = 1
+ 0008 1F4F              sbci R17,255
+ 000A                 L5:
+ 000A                   .dbline 22
+ 000A 0637              cpi R16,118
+ 000C E4E0              ldi R30,4
+ 000E 1E07              cpc R17,R30
+ 0010 D0F3              brlo L2
+ 0012                   .dbline 24}
+                       ;     ;
+                       ; }
+ 0012                 L1:
+ 0012 0895              ret
+ 0014                   .dbsym r i 16 i
+ 0014                   .dbfunc s display _display fI
+                       ;              i -> R20
+                         .even
+ 0014                 _display::
+ 0014 00D0              rcall push_gset1
+ 0016                   .dbline 29{
+                       ; /******************************
+                       ;       六路动态扫描显示电路
+                       ; ******************************/ 
+                       ; void display(void)
+                       ; {
+ 0016                   .dbline 31
+                       ;  unsigned char i;
+                       ;  for (i=0;i<6;i++)
+ 0016 4427              clr R20
+ 0018 16C0              rjmp L10
+ 001A                 L7:
+ 001A                   .dbline 32
+ 001A                   .dbline 33
+ 001A 80E0              ldi R24,<_ledbuff
+ 001C 90E0              ldi R25,>_ledbuff
+ 001E E42F              mov R30,R20
+ 0020 FF27              clr R31
+ 0022 E80F              add R30,R24
+ 0024 F91F              adc R31,R25
+ 0026 2080              ldd R2,z+0
+ 0028 28BA              out 0x18,R2
+ 002A                   .dbline 34
+ 002A 01E0              ldi R16,1
+ 002C 142F              mov R17,R20
+ 002E 00D0              rcall lsl8
+ 0030 202E              mov R2,R16
+ 0032 2094              com R2
+ 0034 22BA              out 0x12,R2
+ 0036                   .dbline 35
+ 0036 E4DF              rcall _delay_1ms
+ 0038                   .dbline 36
+ 0038 01E0              ldi R16,1
+ 003A 142F              mov R17,R20
+ 003C 00D0              rcall lsl8
+ 003E 22B2              in R2,0x12
+ 0040 202A              or R2,R16
+ 0042 22BA              out 0x12,R2
+ 0044                   .dbline 37
+ 0044                 L8:
+ 0044                   .dbline 31
+ 0044 4395              inc R20
+ 0046                 L10:
+ 0046                   .dbline 31
+ 0046 4630              cpi R20,6
+ 0048 40F3              brlo L7
+ 004A                   .dbline 38}
+                       ;   {
+                       ;    PORTB=ledbuff[i];//将显示缓冲区数据送PORTB口
+                       ;    PORTD=~(1<<i);   //开始显示
+                       ;    delay_1ms();     //每一位显示保持一定时间
+                       ;    PORTD|=(1<<i);   //关闭显示
+                       ;   }
+                       ; }
+ 004A                 L6:
+ 004A 00D0              rcall pop_gset1
+ 004C 0895              ret
+ 004E                   .dbsym r i 20 c
+ 004E                   .dbfunc s hextobcd _hextobcd fI
+                       ;           temp -> R20
+                       ;              i -> R22
+                       ;          count -> R10,R11
+                         .even
+ 004E                 _hextobcd::
+ 004E 00D0              rcall push_gset3
+ 0050 A02E              mov R10,R16
+ 0052 B12E              mov R11,R17
+ 0054                   .dbline 43{
+                       ; /************************************
+                       ;   将count十六进制数据转换为LED七段码
+                       ; ************************************/
+                       ; void hextobcd(unsigned int count)
+                       ; {
+ 0054                   .dbline 45
+                       ;   unsigned char i,temp;
+                       ;   for (i=0;i<6;i++)
+ 0054 6627              clr R22
+ 0056 1FC0              rjmp L15
+ 0058                 L12:
+ 0058                   .dbline 46
+ 0058                   .dbline 46
+ 0058 2AE0              ldi R18,10
+ 005A 30E0              ldi R19,0
+ 005C 0A2D              mov R16,R10
+ 005E 1B2D              mov R17,R11
+ 0060 00D0              rcall mod16u
+ 0062 402F              mov R20,R16
+ 0064 512F              mov R21,R17
+ 0066                   .dbline 47
+ 0066 80E0              ldi R24,<_tabel
+ 0068 90E0              ldi R25,>_tabel
+ 006A 242E              mov R2,R20
+ 006C 3324              clr R3
+ 006E 280E              add R2,R24
+ 0070 391E              adc R3,R25
+ 0072 E22D              mov R30,R2
+ 0074 F32D              mov R31,R3
+ 0076 C895              lpm
+ 0078 80E0              ldi R24,<_ledbuff
+ 007A 90E0              ldi R25,>_ledbuff
+ 007C E62F              mov R30,R22
+ 007E FF27              clr R31
+ 0080 E80F              add R30,R24
+ 0082 F91F              adc R31,R25
+ 0084 0082              std z+0,R0
+ 0086                   .dbline 48
+ 0086 2AE0              ldi R18,10
+ 0088 30E0              ldi R19,0
+ 008A 0A2D              mov R16,R10
+ 008C 1B2D              mov R17,R11
+ 008E 00D0              rcall div16u
+ 0090 A02E              mov R10,R16
+ 0092 B12E              mov R11,R17
+ 0094                   .dbline 49
+ 0094                 L13:
+ 0094                   .dbline 45
+ 0094 6395              inc R22
+ 0096                 L15:
+ 0096                   .dbline 45
+ 0096 6630              cpi R22,6
+ 0098 F8F2              brlo L12
+ 009A                   .dbline 50}
+                       ;   {temp=count%10;
+                       ;    ledbuff[i]=tabel[temp];
+                       ;    count=count/10;
+                       ;   }
+                       ; }
+ 009A                 L11:
+ 009A 00D0              rcall pop_gset3
+ 009C 0895              ret
+ 009E                   .dbsym r temp 20 c
+ 009E                   .dbsym r i 22 c
+ 009E                   .dbsym r count 10 i
+ 009E                   .dbfunc s mcu_init _mcu_init fI
+                         .even
+ 009E                 _mcu_init::
+ 009E                   .dbline 55{
+                       ; /******************************
+                       ;           MCU初始化
+                       ; ******************************/ 
+                       ; void mcu_init(void)
+                       ;  {
+ 009E                   .dbline 56
+                       ;   DDRD=0x3f;
+ 009E 8FE3              ldi R24,63
+ 00A0 81BB              out 0x11,R24
+ 00A2                   .dbline 57
+                       ;   DDRB=0xff;
+ 00A2 8FEF              ldi R24,255
+ 00A4 87BB              out 0x17,R24
+ 00A6                   .dbline 58
+                       ;   PORTD=0xff;
+ 00A6 82BB              out 0x12,R24
+ 00A8                   .dbline 59
+                       ;   PORTB=0xff;//端口初始化
+ 00A8 88BB              out 0x18,R24
+ 00AA                   .dbline 60
+                       ;   TIMSK =0x08;//使能T1捕捉中断
+ 00AA 88E0              ldi R24,8
+ 00AC 89BF              out 0x39,R24
+ 00AE                   .dbline 61
+                       ;   TCCR1A=0x00;
+ 00AE 2224              clr R2
+ 00B0 2FBC              out 0x2f,R2
+ 00B2                   .dbline 62
+                       ;   TCCR1B=0xC2;//CK/8，捕捉周期的单位为1us
+ 00B2 82EC              ldi R24,194
+ 00B4 8EBD              out 0x2e,R24
+ 00B6                   .dbline 63
+                       ;   ICR1=0;            
+ 00B6 3324              clr R3
+ 00B8 30924500          sts 68+1,R3
+ 00BC 20924400          sts 68,R2
+ 00C0                   .dbline 64
+                       ;   TCNT1=0;          
+ 00C0 30924D00          sts 76+1,R3
+ 00C4 20924C00          sts 76,R2
+ 00C8                   .dbline 65}
+                       ;  }
+ 00C8                 L16:
+ 00C8 0895              ret
+ 00CA                   .dbfunc s main _main fI
+                       ;              y -> y+4
+                       ;              x -> y+0
+                       ;              n -> R10
+                         .even
+ 00CA                 _main::
+ 00CA 2897              sbiw R28,8
+ 00CC                   .dbline 70{
+                       ; /************************************************
+                       ;         主程序：测量ICP引脚上信号的占空比
+                       ; ************************************************/ 
+                       ; void main()
+                       ; {
+ 00CC                   .dbline 73
+                       ;  unsigned char n;
+                       ;  unsigned long x,y;
+                       ;  mcu_init();  
+ 00CC E8DF              rcall _mcu_init
+ 00CE                   .dbline 74
+                       ;  SREG|=0x80;     //使能全局中断
+ 00CE 7894              bset 7
+ 00D0                   .dbline 75
+                       ;  for(;;)
+ 00D0                 L18:
+ 00D0                   .dbline 76
+                       ;     { 
+ 00D0                   .dbline 77
+                       ;      x=count_h*100;
+ 00D0 30910100          lds R19,_count_h+1
+ 00D4 20910000          lds R18,_count_h
+ 00D8 04E6              ldi R16,100
+ 00DA 10E0              ldi R17,0
+ 00DC 00D0              rcall mpy16s
+ 00DE 202E              mov R2,R16
+ 00E0 312E              mov R3,R17
+ 00E2 4424              clr R4
+ 00E4 5524              clr R5
+ 00E6 EC2F              mov R30,R28
+ 00E8 FD2F              mov R31,R29
+ 00EA 2082              std z+0,R2
+ 00EC 3182              std z+1,R3
+ 00EE 4282              std z+2,R4
+ 00F0 5382              std z+3,R5
+ 00F2                   .dbline 78
+                       ;      y=count_l+count_h;
+ 00F2 30900100          lds R3,_count_h+1
+ 00F6 20900000          lds R2,_count_h
+ 00FA 50900300          lds R5,_count_l+1
+ 00FE 40900200          lds R4,_count_l
+ 0102 420C              add R4,R2
+ 0104 531C              adc R5,R3
+ 0106 242C              mov R2,R4
+ 0108 352C              mov R3,R5
+ 010A 4424              clr R4
+ 010C 5524              clr R5
+ 010E 2482              std z+4,R2
+ 0110 3582              std z+5,R3
+ 0112 4682              std z+6,R4
+ 0114 5782              std z+7,R5
+ 0116                   .dbline 79
+                       ;      n=x/y;       //计算占空比
+ 0116 6080              ldd R6,z+0
+ 0118 7180              ldd R7,z+1
+ 011A 8280              ldd R8,z+2
+ 011C 9380              ldd R9,z+3
+ 011E 5A92              st -y,R5
+ 0120 4A92              st -y,R4
+ 0122 3A92              st -y,R3
+ 0124 2A92              st -y,R2
+ 0126 062D              mov R16,R6
+ 0128 172D              mov R17,R7
+ 012A 282D              mov R18,R8
+ 012C 392D              mov R19,R9
+ 012E 00D0              rcall div32u
+ 0130 A02E              mov R10,R16
+ 0132                   .dbline 80
+                       ;      hextobcd(n);   
+ 0132 1127              clr R17
+ 0134 8CDF              rcall _hextobcd
+ 0136                   .dbline 81
+                       ;      display();  //显示测量值 
+ 0136 6EDF              rcall _display
+ 0138                   .dbline 82
+                       ;     }
+ 0138                   .dbline 75
+ 0138                   .dbline 75
+ 0138 CBCF              rjmp L18
+ 013A                 X0:
+ 013A                 L17:
+ 013A 2896              adiw R28,8
+ 013C 0895              ret
+ 013E                   .dbline 76}
+ 013E                   .dbsym l y 4 l
+ 013E                   .dbsym l x 0 l
+ 013E                   .dbsym r n 10 c
+ 013E                   .dbfunc s Icp_timer1 _Icp_timer1 fI
+                         .even
+ 013E                 _Icp_timer1::
+ 013E 2A92              st -y,R2
+ 0140 3A92              st -y,R3
+ 0142 8A93              st -y,R24
+ 0144 2FB6              in R2,0x3f
+ 0146 2A92              st -y,R2
+ 0148                   .dbline 88{
+                       ; }
+                       ; /**************************************
+                       ;              捕捉中断处理程序
+                       ; **************************************/
+                       ; void Icp_timer1(void)       
+                       ; {
+ 0148                   .dbline 89
+                       ;  if (TCCR1B&0x40)
+ 0148 2EB4              in R2,0x2e
+ 014A 26FE              sbrs R2,6
+ 014C 07C0              rjmp L23
+ 014E                   .dbline 90
+                       ;    count_l=ICR1; //脉冲低电平宽度
+ 014E 24B4              in R2,0x24
+ 0150 35B4              in R3,0x25
+ 0152 30920300          sts _count_l+1,R3
+ 0156 20920200          sts _count_l,R2
+ 015A 06C0              rjmp L24
+ 015C                 L23:
+ 015C                   .dbline 92
+                       ;  else
+                       ;    count_h=ICR1; //脉冲高电平宽度
+ 015C 24B4              in R2,0x24
+ 015E 35B4              in R3,0x25
+ 0160 30920100          sts _count_h+1,R3
+ 0164 20920000          sts _count_h,R2
+ 0168                 L24:
+ 0168                   .dbline 93
+                       ;  ICR1=0;
+ 0168 2224              clr R2
+ 016A 3324              clr R3
+ 016C 30924500          sts 68+1,R3
+ 0170 20924400          sts 68,R2
+ 0174                   .dbline 94
+                       ;  TCNT1=0; 
+ 0174 30924D00          sts 76+1,R3
+ 0178 20924C00          sts 76,R2
+ 017C                   .dbline 95
+                       ;  TCCR1B^=0x40;
+ 017C 80E4              ldi R24,64
+ 017E 2EB4              in R2,0x2e
+ 0180 2826              eor R2,R24
+ 0182 2EBC              out 0x2e,R2
+ 0184                   .dbline 96}
+                       ; }
+ 0184                 L22:
+ 0184 2990              ld R2,y+
+ 0186 2FBE              out 0x3f,R2
+ 0188 8991              ld R24,y+
+ 018A 3990              ld R3,y+
+ 018C 2990              ld R2,y+
+ 018E 1895              reti
+                         .area bss(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\CYCLE\cycle_1.c
+ 0000                 _count_h::
+ 0000                   .blkb 2
+ 0002                   .dbsym s count_h _count_h i
+ 0002                 _count_l::
+ 0002                   .blkb 2
+ 0004                   .dbsym s count_l _count_l i

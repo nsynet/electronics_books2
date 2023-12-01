@@ -1,0 +1,625 @@
+__start:
+__text_start:
+    009E E5CF      LDI	R28,0x5F
+    009F E0D2      LDI	R29,2
+    00A0 BFCD      OUT	P3D,R28
+    00A1 BFDE      OUT	P3E,R29
+    00A2 51C0      SUBI	R28,0x10
+    00A3 40D0      SBCI	R29,0
+    00A4 EA0A      LDI	R16,0xAA
+    00A5 8308      STD	R16,0+Y
+    00A6 2400      CLR	R0
+    00A7 E7E1      LDI	R30,0x71
+    00A8 E0F0      LDI	R31,0
+    00A9 E010      LDI	R17,0
+    00AA 3BE8      CPI	R30,0xB8
+    00AB 07F1      CPC	R31,R17
+    00AC F011      BEQ	0x00AF
+    00AD 9201      ST	R0,Z+
+    00AE CFFB      RJMP	0x00AA
+    00AF 8300      STD	R16,0+Z
+    00B0 E2EA      LDI	R30,0x2A
+    00B1 E0F1      LDI	R31,1
+    00B2 E6A0      LDI	R26,0x60
+    00B3 E0B0      LDI	R27,0
+    00B4 E011      LDI	R17,1
+    00B5 33EB      CPI	R30,0x3B
+    00B6 07F1      CPC	R31,R17
+    00B7 F021      BEQ	0x00BC
+    00B8 95C8      LPM
+    00B9 9631      ADIW	R30,1
+    00BA 920D      ST	R0,X+
+    00BB CFF9      RJMP	0x00B5
+    00BC D00C      RCALL	_main
+_exit:
+    00BD CFFF      RJMP	_exit
+FILE: D:\ICC-AVR\examples.sl\pc_8515\pc_8515.c
+(0001) /*******************************************/
+(0002) /*             PC机键盘演示程序            */
+(0003) /*           广州双龙电子有限公司          */
+(0004) /*           http://www.sl.com.cn          */
+(0005) /*               作者：詹卫前              */
+(0006) /*          MCU:AT90S8515 晶振:8MHZ        */
+(0007) /*  使用ICCAVR的终端调试窗口观察PC键盘数据 */
+(0008) /*          连线说明:SL-AVR+               */
+(0009) /*			1、PC键盘clock--PD.2		   */
+(0010) /*			2、PC键盘data---PD.3		   */
+(0011) /*			3、D232.T-------PD.1		   */
+(0012) /*			4、D232.R-------PD.0		   */
+(0013) /*******************************************/
+(0014) #include<io8515.h>
+(0015) #include<stdio.h>
+(0016) extern unsigned char get_char(void);
+(0017) extern void init_kb(void);
+(0018) //UART初始化
+(0019) void uart0_init(void)
+(0020) 	 {
+(0021)  	  UCR  = 0x00;
+_uart0_init:
+    00BE 2422      CLR	R2
+    00BF B82A      OUT	P0A,R2
+(0022)  	  UBRR = 0x19;//BAUD=19200
+    00C0 E189      LDI	R24,0x19
+    00C1 B989      OUT	P09,R24
+(0023)  	  UCR|=(1<<TXEN) ;//使能发送
+    00C2 9A53      SBI	P0A,3
+(0024)  	 }
+    00C3 9508      RET
+(0025) //端口初始化	 
+(0026) void port_init(void)
+(0027) 	 {
+(0028) 	  DDRD=0x02;
+_port_init:
+    00C4 E082      LDI	R24,2
+    00C5 BB81      OUT	P11,R24
+(0029) 	  PORTD=0xff;
+    00C6 EF8F      LDI	R24,0xFF
+    00C7 BB82      OUT	P12,R24
+(0030) 	 }
+    00C8 9508      RET
+(0031) //PC键盘演示程序,SHIFT键和按键同时按下时为大写 
+(0032) void main(void)
+(0033) 	 {
+(0034) 	  unsigned char key;
+(0035) 	  port_init();
+_main:
+  key                  --> R20
+    00C9 DFFA      RCALL	_port_init
+(0036) 	  uart0_init();
+    00CA DFF3      RCALL	_uart0_init
+(0037) 	  init_kb();
+    00CB D045      RCALL	_init_kb
+(0038) 	  puts("PC键盘演示程序");
+    00CC E600      LDI	R16,0x60
+    00CD E010      LDI	R17,0
+    00CE D15E      RCALL	_puts
+(0039) 	  putchar(0x0d);
+    00CF E00D      LDI	R16,0xD
+    00D0 D147      RCALL	_putchar
+    00D1 C00D      RJMP	0x00DF
+(0040) 	  while(1)
+(0041) 	  		 {
+(0042) 			  key=get_char();
+    00D2 D022      RCALL	_get_char
+    00D3 2F40      MOV	R20,R16
+(0043) 			  if(key!=0) 
+    00D4 2300      TST	R16
+    00D5 F049      BEQ	0x00DF
+(0044) 			      {
+(0045) 				   if (key==0x0d)//回车键处理
+    00D6 300D      CPI	R16,0xD
+    00D7 F429      BNE	0x00DD
+(0046) 				      {					   
+(0047) 					   putchar('\n');
+    00D8 E00A      LDI	R16,0xA
+    00D9 D13E      RCALL	_putchar
+(0048) 					   putchar(key);					   
+    00DA 2F04      MOV	R16,R20
+    00DB D13C      RCALL	_putchar
+(0049) 					  }
+    00DC C002      RJMP	0x00DF
+(0050) 				   else				   	  
+(0051) 				   	  putchar(key);
+    00DD 2F04      MOV	R16,R20
+    00DE D139      RCALL	_putchar
+(0052) 				  }
+(0053) 			 }	  
+    00DF CFF2      RJMP	0x00D2
+(0054) 	 }	 	 
+    00E0 9508      RET
+FILE: D:\ICC-AVR\examples.sl\pc_8515\kbc.c
+(0001) #include <io8515.h>
+(0002) #include <macros.h>
+(0003) #include "pindefs.h"
+(0004) #include "scancodes.h"
+(0005) #define BUFF_SIZE 64
+(0006) //const ascii[16]={0x30,0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,
+(0007) //                 0x39,0x41,0x42,0x43,0x44,0x45,0x46};
+(0008) unsigned char bitcount;//PC键盘数据长度计数 
+(0009) unsigned char kb_buffer[BUFF_SIZE];//键盘缓冲区
+(0010) unsigned char input=0;//缓冲区读指针
+(0011) unsigned char output=0;//缓冲区写指针
+(0012) //送键盘按键ASCII码到键盘缓冲区
+(0013) void put_kbbuff(unsigned char c)
+(0014)  {
+(0015)   kb_buffer[input]=c;
+_put_kbbuff:
+  c                    --> R16
+    00E1 E785      LDI	R24,0x75
+    00E2 E090      LDI	R25,0
+    00E3 91E0006F  LDS	R30,0x6F
+    00E5 27FF      CLR	R31
+    00E6 0FE8      ADD	R30,R24
+    00E7 1FF9      ADC	R31,R25
+    00E8 8300      STD	R16,0+Z
+(0016)   if (input<(BUFF_SIZE-1))
+    00E9 9180006F  LDS	R24,0x6F
+    00EB 338F      CPI	R24,0x3F
+    00EC F420      BCC	0x00F1
+(0017)      input++; 
+    00ED 5F8F      SUBI	R24,0xFF
+    00EE 9380006F  STS	R24,0x6F
+    00F0 C003      RJMP	0x00F4
+(0018)   else
+(0019)      input=0;	 
+    00F1 2422      CLR	R2
+    00F2 9220006F  STS	R2,0x6F
+(0020)  }
+    00F4 9508      RET
+(0021) //从键盘缓冲区读取按键的ASCII码 
+(0022) unsigned char get_char(void)
+(0023)   {
+(0024)    unsigned char temp;
+(0025)    if(output==input)
+_get_char:
+  temp                 --> R16
+    00F5 9020006F  LDS	R2,0x6F
+    00F7 90300070  LDS	R3,0x70
+    00F9 1432      CP	R3,R2
+    00FA F411      BNE	0x00FD
+(0026)        return 0;
+    00FB 2700      CLR	R16
+    00FC C013      RJMP	0x0110
+(0027)    else
+(0028)       {
+(0029) 	   temp=kb_buffer[output];
+    00FD E785      LDI	R24,0x75
+    00FE E090      LDI	R25,0
+    00FF 91E00070  LDS	R30,0x70
+    0101 27FF      CLR	R31
+    0102 0FE8      ADD	R30,R24
+    0103 1FF9      ADC	R31,R25
+    0104 8100      LDD	R16,0+Z
+(0030) 	   if(output<(BUFF_SIZE-1))
+    0105 91800070  LDS	R24,0x70
+    0107 338F      CPI	R24,0x3F
+    0108 F420      BCC	0x010D
+(0031) 	     {
+(0032) 		  output++;
+    0109 5F8F      SUBI	R24,0xFF
+    010A 93800070  STS	R24,0x70
+(0033) 		 }
+    010C C003      RJMP	0x0110
+(0034) 	   else
+(0035) 	     output=0;
+    010D 2422      CLR	R2
+    010E 92200070  STS	R2,0x70
+(0036) 	   return temp;	  
+    0110 9508      RET
+(0037) 	  }	     
+(0038)   }
+(0039) //为运行读取PC键盘程序进行初始化  
+(0040) void init_kb(void)
+(0041)     {
+(0042) 	 MCUCR=0x02;//设置8515的INT0为下降沿触发中断 
+_init_kb:
+    0111 E082      LDI	R24,2
+    0112 BF85      OUT	P35,R24
+(0043)      GIMSK|=(1<<INT0);//使能INT0中断
+    0113 B78B      IN	R24,P3B
+    0114 6480      ORI	R24,0x40
+    0115 BF8B      OUT	P3B,R24
+(0044)      SEI(); //开中断
+    0116 9478      BSET	7
+(0045)      bitcount = 11;
+    0117 E08B      LDI	R24,0xB
+    0118 938000B5  STS	R24,_bitcount
+(0046)     }
+    011A 9508      RET
+_decode:
+  i                    --> R20
+  sc                   --> R22
+    011B D0F7      RCALL	push_gset3
+    011C 2F60      MOV	R22,R16
+(0047) //对PC键盘的扫描码进行解码	
+(0048) void decode(unsigned char sc)
+(0049)     {
+(0050)       static unsigned char shift,up,shiftup;
+(0051) 	  unsigned char i;
+(0052) 	  if (sc==0xf0)//按键释放
+    011D 3F60      CPI	R22,0xF0
+    011E F421      BNE	0x0123
+(0053) 	      {
+(0054) 		   up=1;
+    011F E081      LDI	R24,1
+    0120 93800072  STS	R24,0x72
+(0055) 		   return;
+    0122 C06C      RJMP	0x018F
+(0056) 		  }
+(0057) 	  if (up==1)//SHIF键开关
+    0123 91800072  LDS	R24,0x72
+    0125 3081      CPI	R24,1
+    0126 F501      BNE	0x0147
+(0058) 	  	  {
+(0059) 		   up=0;
+    0127 2422      CLR	R2
+    0128 92200072  STS	R2,0x72
+(0060) 		   if ((sc==0x12)|(sc==0x59)) shift=0;
+    012A 3162      CPI	R22,0x12
+    012B F429      BNE	0x0131
+    012C E081      LDI	R24,1
+    012D E090      LDI	R25,0
+    012E 2EA8      MOV	R10,R24
+    012F 2EB9      MOV	R11,R25
+    0130 C002      RJMP	0x0133
+    0131 24AA      CLR	R10
+    0132 24BB      CLR	R11
+    0133 3569      CPI	R22,0x59
+    0134 F419      BNE	0x0138
+    0135 E041      LDI	R20,1
+    0136 E050      LDI	R21,0
+    0137 C002      RJMP	0x013A
+    0138 2744      CLR	R20
+    0139 2755      CLR	R21
+    013A 2C2A      MOV	R2,R10
+    013B 2C3B      MOV	R3,R11
+    013C 2A24      OR	R2,R20
+    013D 2A35      OR	R3,R21
+    013E 2022      TST	R2
+    013F F419      BNE	0x0143
+    0140 2033      TST	R3
+    0141 F409      BNE	0x0143
+    0142 C04C      RJMP	0x018F
+    0143 2422      CLR	R2
+    0144 92200071  STS	R2,0x71
+(0061) 		   return;
+    0146 C048      RJMP	0x018F
+(0062) 		  }	  	   
+(0063) 	  switch (sc)
+    0147 2F46      MOV	R20,R22
+    0148 2755      CLR	R21
+    0149 3142      CPI	R20,0x12
+    014A E0E0      LDI	R30,0
+    014B 075E      CPC	R21,R30
+    014C F049      BEQ	0x0156
+    014D 3142      CPI	R20,0x12
+    014E E0E0      LDI	R30,0
+    014F 075E      CPC	R21,R30
+    0150 F03C      BLT	0x0158
+    0151 3549      CPI	R20,0x59
+    0152 E0E0      LDI	R30,0
+    0153 075E      CPC	R21,R30
+    0154 F011      BEQ	0x0157
+    0155 C002      RJMP	0x0158
+(0064) 	    {
+(0065) 		 case 0x12:{//检测左SHIF键
+(0066) 					shift=1;		
+    0156 D0FC      RCALL	0x0253
+    0157 D0FB      RCALL	0x0253
+(0067) 					shiftup=1;
+(0068) 		           }		           
+(0069) 		 case 0x59:{//检测右SHIF键
+(0070) 				    shift=1;	
+(0071) 					shiftup=1;
+(0072) 		           }		           
+(0073) 		 default:{
+(0074) 		          if (shift==0)
+    0158 90200071  LDS	R2,0x71
+    015A 2022      TST	R2
+    015B F009      BEQ	0x015D
+    015C C01A      RJMP	0x0177
+(0075) 					 {
+(0076) 					 for(i = 0;unshifted[i][0]!=sc && unshifted[i][0]; i++);
+    015D 2744      CLR	R20
+    015E C001      RJMP	0x0160
+    015F 9543      INC	R20
+    0160 E18A      LDI	R24,0x1A
+    0161 D0E0      RCALL	<created procedures>
+    0162 2C20      MOV	R2,R0
+    0163 2433      CLR	R3
+    0164 2E46      MOV	R4,R22
+    0165 2455      CLR	R5
+    0166 1424      CP	R2,R4
+    0167 0435      CPC	R3,R5
+    0168 F021      BEQ	0x016D
+    0169 2022      TST	R2
+    016A F7A1      BNE	0x015F
+    016B 2033      TST	R3
+    016C F791      BNE	0x015F
+(0077)                      if (unshifted[i][0] == sc)
+    016D E18A      LDI	R24,0x1A
+    016E D0D3      RCALL	<created procedures>
+    016F 1606      CP	R0,R22
+    0170 F009      BEQ	0x0172
+    0171 C01D      RJMP	0x018F
+(0078) 						  put_kbbuff(unshifted[i][1]);	 
+    0172 E18B      LDI	R24,0x1B
+    0173 D0CE      RCALL	<created procedures>
+    0174 2D00      MOV	R16,R0
+    0175 DF6B      RCALL	_put_kbbuff
+(0079) 					 }
+    0176 C018      RJMP	0x018F
+(0080) 				  else
+(0081) 				     {
+(0082) 					 for(i = 0;shifted[i][0]!=sc && shifted[i][0]; i++);
+    0177 2744      CLR	R20
+    0178 C001      RJMP	0x017A
+    0179 9543      INC	R20
+    017A EA82      LDI	R24,0xA2
+    017B D0C6      RCALL	<created procedures>
+    017C 2C20      MOV	R2,R0
+    017D 2433      CLR	R3
+    017E 2E46      MOV	R4,R22
+    017F 2455      CLR	R5
+    0180 1424      CP	R2,R4
+    0181 0435      CPC	R3,R5
+    0182 F021      BEQ	0x0187
+    0183 2022      TST	R2
+    0184 F7A1      BNE	0x0179
+    0185 2033      TST	R3
+    0186 F791      BNE	0x0179
+(0083)                      if (shifted[i][0] == sc)
+    0187 EA82      LDI	R24,0xA2
+    0188 D0B9      RCALL	<created procedures>
+    0189 1606      CP	R0,R22
+    018A F421      BNE	0x018F
+(0084)                          {
+(0085) 						  put_kbbuff(shifted[i][1]);						  
+    018B EA83      LDI	R24,0xA3
+    018C D0B5      RCALL	<created procedures>
+    018D 2D00      MOV	R16,R0
+    018E DF52      RCALL	_put_kbbuff
+(0086) 						 }	 	 						 
+(0087) 					 } 
+(0088) 		         }		         
+(0089) 		} 	
+(0090)     }
+    018F D086      RCALL	pop_gset3
+    0190 9508      RET
+_int0_isr:
+    0191 D039      RCALL	push_lset
+    0192 D066      RCALL	push_gset1
+(0091) //键盘数据读取程序	
+(0092) #pragma interrupt_handler int0_isr:2
+(0093) void int0_isr(void)
+(0094)    {
+(0095)     static unsigned char data;   	
+(0096)     switch (bitcount)
+    0193 914000B5  LDS	R20,_bitcount
+    0195 2755      CLR	R21
+    0196 3041      CPI	R20,1
+    0197 E0E0      LDI	R30,0
+    0198 075E      CPC	R21,R30
+    0199 F0A1      BEQ	0x01AE
+    019A 3042      CPI	R20,2
+    019B E0E0      LDI	R30,0
+    019C 075E      CPC	R21,R30
+    019D F071      BEQ	0x01AC
+    019E 3041      CPI	R20,1
+    019F E0E0      LDI	R30,0
+    01A0 075E      CPC	R21,R30
+    01A1 F0D4      BLT	0x01BC
+    01A2 304B      CPI	R20,0xB
+    01A3 E0E0      LDI	R30,0
+    01A4 075E      CPC	R21,R30
+    01A5 F009      BEQ	0x01A7
+    01A6 C015      RJMP	0x01BC
+(0097) 	  {
+(0098) 	   case 11:{
+(0099) 	            if ((PIN_KB&(1<<DATAPIN))!=0)
+    01A7 9B83      SBIS	P10,3
+    01A8 C001      RJMP	0x01AA
+(0100) 				     return;
+    01A9 C01E      RJMP	0x01C8
+(0101) 			    else		 
+(0102) 	   			    bitcount--;
+    01AA D0A2      RCALL	0x024D
+(0103) 	    		break;}
+    01AB C01C      RJMP	0x01C8
+(0104) 	   case 2:{
+(0105) 	   			bitcount--;	   		   
+    01AC D0A0      RCALL	0x024D
+(0106) 			    break;}
+    01AD C01A      RJMP	0x01C8
+(0107) 	   case 1:{
+(0108) 	   			bitcount--;	 
+    01AE D09E      RCALL	0x024D
+(0109) 				if ((PIN_KB&(1<<DATAPIN))==0)
+    01AF 9983      SBIC	P10,3
+    01B0 C004      RJMP	0x01B5
+(0110) 				    {
+(0111) 					 bitcount=11;
+    01B1 E08B      LDI	R24,0xB
+    01B2 938000B5  STS	R24,_bitcount
+(0112) 					 return;
+    01B4 C013      RJMP	0x01C8
+(0113) 					}
+(0114) 				else
+(0115) 				   {
+(0116) 				    bitcount=11;
+    01B5 E08B      LDI	R24,0xB
+    01B6 938000B5  STS	R24,_bitcount
+(0117) 		            decode(data);
+    01B8 91000074  LDS	R16,0x74
+    01BA DF60      RCALL	_decode
+(0118) 				   }	  
+(0119) 	   	        break;}
+    01BB C00C      RJMP	0x01C8
+(0120) 	   default:{
+(0121) 	   	        data = (data >> 1);
+    01BC 90200074  LDS	R2,0x74
+    01BE 9426      LSR	R2
+    01BF 92200074  STS	R2,0x74
+(0122)                 if((PIN_KB&(1<<DATAPIN))!=0)
+    01C1 9B83      SBIS	P10,3
+    01C2 C004      RJMP	0x01C7
+(0123)                     data|=0x80;
+    01C3 2D82      MOV	R24,R2
+    01C4 6880      ORI	R24,0x80
+    01C5 93800074  STS	R24,0x74
+(0124) 				bitcount--;
+    01C7 D085      RCALL	0x024D
+(0125) 	            }		
+(0126) 	  }		 		 	  	
+(0127)     } 
+FILE: <library>
+    01C8 D033      RCALL	pop_gset1
+    01C9 D018      RCALL	pop_lset
+    01CA 9518      RETI
+push_lset:
+    01CB 93FA      ST	R31,-Y
+    01CC 93EA      ST	R30,-Y
+    01CD 93BA      ST	R27,-Y
+    01CE 93AA      ST	R26,-Y
+    01CF 939A      ST	R25,-Y
+    01D0 938A      ST	R24,-Y
+    01D1 933A      ST	R19,-Y
+    01D2 932A      ST	R18,-Y
+    01D3 931A      ST	R17,-Y
+    01D4 930A      ST	R16,-Y
+    01D5 929A      ST	R9,-Y
+    01D6 928A      ST	R8,-Y
+    01D7 927A      ST	R7,-Y
+    01D8 926A      ST	R6,-Y
+    01D9 925A      ST	R5,-Y
+    01DA 924A      ST	R4,-Y
+    01DB 923A      ST	R3,-Y
+    01DC 922A      ST	R2,-Y
+    01DD 921A      ST	R1,-Y
+    01DE 920A      ST	R0,-Y
+    01DF B60F      IN	R0,P3F
+    01E0 920A      ST	R0,-Y
+    01E1 9508      RET
+pop_lset:
+    01E2 9009      LD	R0,Y+
+    01E3 BE0F      OUT	P3F,R0
+    01E4 9009      LD	R0,Y+
+    01E5 9019      LD	R1,Y+
+    01E6 9029      LD	R2,Y+
+    01E7 9039      LD	R3,Y+
+    01E8 9049      LD	R4,Y+
+    01E9 9059      LD	R5,Y+
+    01EA 9069      LD	R6,Y+
+    01EB 9079      LD	R7,Y+
+    01EC 9089      LD	R8,Y+
+    01ED 9099      LD	R9,Y+
+    01EE 9109      LD	R16,Y+
+    01EF 9119      LD	R17,Y+
+    01F0 9129      LD	R18,Y+
+    01F1 9139      LD	R19,Y+
+    01F2 9189      LD	R24,Y+
+    01F3 9199      LD	R25,Y+
+    01F4 91A9      LD	R26,Y+
+    01F5 91B9      LD	R27,Y+
+    01F6 91E9      LD	R30,Y+
+    01F7 91F9      LD	R31,Y+
+    01F8 9508      RET
+push_gset1:
+    01F9 935A      ST	R21,-Y
+    01FA 934A      ST	R20,-Y
+    01FB 9508      RET
+pop_gset1:
+    01FC E0E1      LDI	R30,1
+pop:
+    01FD 9149      LD	R20,Y+
+    01FE 9159      LD	R21,Y+
+    01FF FDE0      SBRC	R30,0
+    0200 9508      RET
+    0201 9169      LD	R22,Y+
+    0202 9179      LD	R23,Y+
+    0203 FDE1      SBRC	R30,1
+    0204 9508      RET
+    0205 90A9      LD	R10,Y+
+    0206 90B9      LD	R11,Y+
+    0207 FDE2      SBRC	R30,2
+    0208 9508      RET
+    0209 90C9      LD	R12,Y+
+    020A 90D9      LD	R13,Y+
+    020B FDE3      SBRC	R30,3
+    020C 9508      RET
+    020D 90E9      LD	R14,Y+
+    020E 90F9      LD	R15,Y+
+    020F 9508      RET
+push_gset2:
+    0210 937A      ST	R23,-Y
+    0211 936A      ST	R22,-Y
+    0212 CFE6      RJMP	push_gset1
+push_gset3:
+    0213 92BA      ST	R11,-Y
+    0214 92AA      ST	R10,-Y
+    0215 CFFA      RJMP	push_gset2
+pop_gset3:
+    0216 E0E4      LDI	R30,4
+    0217 CFE5      RJMP	pop
+_putchar:
+    0218 DFE0      RCALL	push_gset1
+    0219 2F40      MOV	R20,R16
+    021A 903000B7  LDS	R3,__textmode+1
+    021C 902000B6  LDS	R2,__textmode
+    021E 2022      TST	R2
+    021F F411      BNE	0x0222
+    0220 2033      TST	R3
+    0221 F021      BEQ	0x0226
+    0222 304A      CPI	R20,0xA
+    0223 F411      BNE	0x0226
+    0224 E00D      LDI	R16,0xD
+    0225 DFF2      RCALL	_putchar
+    0226 9B5D      SBIS	P0B,5
+    0227 CFFE      RJMP	0x0226
+    0228 B94C      OUT	P0C,R20
+    0229 2F04      MOV	R16,R20
+    022A 2711      CLR	R17
+    022B DFD0      RCALL	pop_gset1
+    022C 9508      RET
+_puts:
+    022D DFCB      RCALL	push_gset1
+    022E 2F40      MOV	R20,R16
+    022F 2F51      MOV	R21,R17
+    0230 C006      RJMP	0x0237
+    0231 2FE4      MOV	R30,R20
+    0232 2FF5      MOV	R31,R21
+    0233 8100      LDD	R16,0+Z
+    0234 DFE3      RCALL	_putchar
+    0235 5F4F      SUBI	R20,0xFF
+    0236 4F5F      SBCI	R21,0xFF
+    0237 2FE4      MOV	R30,R20
+    0238 2FF5      MOV	R31,R21
+    0239 8020      LDD	R2,0+Z
+    023A 2022      TST	R2
+    023B F7A9      BNE	0x0231
+    023C E00A      LDI	R16,0xA
+    023D DFDA      RCALL	_putchar
+    023E E001      LDI	R16,1
+    023F E010      LDI	R17,0
+    0240 DFBB      RCALL	pop_gset1
+    0241 9508      RET
+<created procedures>:
+    0242 E090      LDI	R25,0
+    0243 2E24      MOV	R2,R20
+    0244 2433      CLR	R3
+    0245 0C22      LSL	R2
+    0246 1C33      ROL	R3
+    0247 0E28      ADD	R2,R24
+    0248 1E39      ADC	R3,R25
+    0249 2DE2      MOV	R30,R2
+    024A 2DF3      MOV	R31,R3
+    024B 95C8      LPM
+    024C 9508      RET
+    024D 918000B5  LDS	R24,_bitcount
+    024F 5081      SUBI	R24,1
+    0250 938000B5  STS	R24,_bitcount
+    0252 9508      RET
+    0253 E081      LDI	R24,1
+    0254 93800071  STS	R24,0x71
+    0256 93800073  STS	R24,0x73
+    0258 9508      RET

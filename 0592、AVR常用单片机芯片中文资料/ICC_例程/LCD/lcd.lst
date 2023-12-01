@@ -1,0 +1,335 @@
+__start:
+__text_start:
+    0021 E5CF      LDI	R28,0x5F
+    0022 E0D2      LDI	R29,2
+    0023 BFCD      OUT	P3D,R28
+    0024 BFDE      OUT	P3E,R29
+    0025 51C0      SUBI	R28,0x10
+    0026 40D0      SBCI	R29,0
+    0027 EA0A      LDI	R16,0xAA
+    0028 8308      STD	R16,0+Y
+    0029 2400      CLR	R0
+    002A E8E3      LDI	R30,0x83
+    002B E0F0      LDI	R31,0
+    002C E010      LDI	R17,0
+    002D 38E3      CPI	R30,0x83
+    002E 07F1      CPC	R31,R17
+    002F F011      BEQ	0x0032
+    0030 9201      ST	R0,Z+
+    0031 CFFB      RJMP	0x002D
+    0032 8300      STD	R16,0+Z
+    0033 E1EE      LDI	R30,0x1E
+    0034 E0F0      LDI	R31,0
+    0035 E6A0      LDI	R26,0x60
+    0036 E0B0      LDI	R27,0
+    0037 E010      LDI	R17,0
+    0038 34E1      CPI	R30,0x41
+    0039 07F1      CPC	R31,R17
+    003A F021      BEQ	0x003F
+    003B 95C8      LPM
+    003C 9631      ADIW	R30,1
+    003D 920D      ST	R0,X+
+    003E CFF9      RJMP	0x0038
+    003F D001      RCALL	_main
+_exit:
+    0040 CFFF      RJMP	_exit
+FILE: D:\ICC-AVR\examples.sl\LCD\lcd.c
+(0000) /******************************************************
+(0001)              http://www.sl.com.cn
+(0002)       双龙电子公司----2*16 LCD控制演示程序(ICCAVR)
+(0003) 	             作者：詹卫前		
+(0004) 	使用注意：1、应包含头文件slavr.h
+(0005)               2、在工程选项中的Additional Lib中填入slavr
+(0006) 		         使用编译器使用附加库文件libslavr.a
+(0007) *******************************************************/
+(0008) #include <io8515.h>
+(0009) #include <slavr.h>
+(0010) void main(void)
+(0011) {
+(0012)  MCUCR=0;
+_main:
+    0041 2422      CLR	R2
+    0042 BE25      OUT	P35,R2
+(0013)  lcd_init();
+    0043 D08D      RCALL	_lcd_init
+    0044 C01A      RJMP	0x005F
+(0014)  while(1)
+(0015)     {
+(0016)      lcd_gotoxy(2,0);
+    0045 2722      CLR	R18
+    0046 E002      LDI	R16,2
+    0047 D019      RCALL	_lcd_gotoxy
+(0017)      lcd_puts("Hello World!");
+    0048 E706      LDI	R16,0x76
+    0049 E010      LDI	R17,0
+    004A D0BE      RCALL	_lcd_puts
+(0018)      delay_ms(2000);
+    004B ED00      LDI	R16,0xD0
+    004C E017      LDI	R17,7
+    004D D02E      RCALL	_delay_ms
+(0019)      lcd_clear();
+    004E D0CE      RCALL	_lcd_clear
+(0020)      lcd_gotoxy(4,0);
+    004F 2722      CLR	R18
+    0050 E004      LDI	R16,4
+    0051 D00F      RCALL	_lcd_gotoxy
+(0021)      lcd_puts("HTTP://");
+    0052 E60E      LDI	R16,0x6E
+    0053 E010      LDI	R17,0
+    0054 D0B4      RCALL	_lcd_puts
+(0022)      lcd_gotoxy(1,1);
+    0055 E021      LDI	R18,1
+    0056 E001      LDI	R16,1
+    0057 D009      RCALL	_lcd_gotoxy
+(0023)      lcd_puts("www.sl.com.cn");
+    0058 E600      LDI	R16,0x60
+    0059 E010      LDI	R17,0
+    005A D0AE      RCALL	_lcd_puts
+(0024) 	 delay_ms(2000);
+    005B ED00      LDI	R16,0xD0
+    005C E017      LDI	R17,7
+    005D D01E      RCALL	_delay_ms
+(0025) 	 lcd_clear();
+    005E D0BE      RCALL	_lcd_clear
+(0026)      }
+    005F CFE5      RJMP	0x0045
+(0027)  }FILE: <library>
+    0060 9508      RET
+_lcd_gotoxy:
+    0061 D0D8      RCALL	push_gset2
+    0062 2F42      MOV	R20,R18
+    0063 2F60      MOV	R22,R16
+    0064 3041      CPI	R20,1
+    0065 F419      BNE	0x0069
+    0066 2F46      MOV	R20,R22
+    0067 5440      SUBI	R20,0x40
+    0068 C002      RJMP	0x006B
+    0069 2F46      MOV	R20,R22
+    006A 5840      SUBI	R20,0x80
+    006B 2722      CLR	R18
+    006C 2733      CLR	R19
+    006D 2F04      MOV	R16,R20
+    006E 2711      CLR	R17
+    006F D02B      RCALL	_write_lcd
+    0070 D0CC      RCALL	pop_gset2
+    0071 9508      RET
+_delay_1ms:
+    0072 E001      LDI	R16,1
+    0073 E010      LDI	R17,0
+    0074 C002      RJMP	0x0077
+    0075 5F0F      SUBI	R16,0xFF
+    0076 4F1F      SBCI	R17,0xFF
+    0077 3706      CPI	R16,0x76
+    0078 E0E4      LDI	R30,4
+    0079 071E      CPC	R17,R30
+    007A F3D0      BCS	0x0075
+    007B 9508      RET
+_delay_ms:
+    007C D0BD      RCALL	push_gset2
+    007D 2F60      MOV	R22,R16
+    007E 2F71      MOV	R23,R17
+    007F 2744      CLR	R20
+    0080 2755      CLR	R21
+    0081 C003      RJMP	0x0085
+    0082 DFEF      RCALL	_delay_1ms
+    0083 5F4F      SUBI	R20,0xFF
+    0084 4F5F      SBCI	R21,0xFF
+    0085 1746      CP	R20,R22
+    0086 0757      CPC	R21,R23
+    0087 F3D0      BCS	0x0082
+    0088 D0B4      RCALL	pop_gset2
+    0089 9508      RET
+_lcd_port_init:
+    008A 2422      CLR	R2
+    008B BA27      OUT	P17,R2
+    008C BA28      OUT	P18,R2
+    008D EF8F      LDI	R24,0xFF
+    008E BB81      OUT	P11,R24
+    008F BB82      OUT	P12,R24
+    0090 9508      RET
+_delay:
+    0091 2700      CLR	R16
+    0092 2711      CLR	R17
+    0093 C002      RJMP	0x0096
+    0094 5F0F      SUBI	R16,0xFF
+    0095 4F1F      SBCI	R17,0xFF
+    0096 310E      CPI	R16,0x1E
+    0097 E0E0      LDI	R30,0
+    0098 071E      CPC	R17,R30
+    0099 F3D0      BCS	0x0094
+    009A 9508      RET
+_write_lcd:
+    009B D09E      RCALL	push_gset2
+    009C 2F62      MOV	R22,R18
+    009D 2F40      MOV	R20,R16
+    009E 2422      CLR	R2
+    009F BA27      OUT	P17,R2
+    00A0 BA28      OUT	P18,R2
+    00A1 9893      CBI	P12,3
+    00A2 9A94      SBI	P12,4
+    00A3 9A95      SBI	P12,5
+    00A4 DFEC      RCALL	_delay
+    00A5 B386      IN	R24,P16
+    00A6 7880      ANDI	R24,0x80
+    00A7 3880      CPI	R24,0x80
+    00A8 F3E1      BEQ	0x00A5
+    00A9 9895      CBI	P12,5
+    00AA 2366      TST	R22
+    00AB F411      BNE	0x00AE
+    00AC 9893      CBI	P12,3
+    00AD C001      RJMP	0x00AF
+    00AE 9A93      SBI	P12,3
+    00AF 9894      CBI	P12,4
+    00B0 EF8F      LDI	R24,0xFF
+    00B1 BB87      OUT	P17,R24
+    00B2 BB48      OUT	P18,R20
+    00B3 9A95      SBI	P12,5
+    00B4 DFDC      RCALL	_delay
+    00B5 9895      CBI	P12,5
+    00B6 DFDA      RCALL	_delay
+    00B7 2422      CLR	R2
+    00B8 BA27      OUT	P17,R2
+    00B9 BA28      OUT	P18,R2
+    00BA D082      RCALL	pop_gset2
+    00BB 9508      RET
+_read_lcd:
+    00BC D066      RCALL	push_gset1
+    00BD 2F40      MOV	R20,R16
+    00BE 2422      CLR	R2
+    00BF BA27      OUT	P17,R2
+    00C0 BA28      OUT	P18,R2
+    00C1 2344      TST	R20
+    00C2 F411      BNE	0x00C5
+    00C3 9893      CBI	P12,3
+    00C4 C001      RJMP	0x00C6
+    00C5 9A93      SBI	P12,3
+    00C6 9A94      SBI	P12,4
+    00C7 9A95      SBI	P12,5
+    00C8 DFC8      RCALL	_delay
+    00C9 B346      IN	R20,P16
+    00CA 774F      ANDI	R20,0x7F
+    00CB 9895      CBI	P12,5
+    00CC DFC4      RCALL	_delay
+    00CD 2F04      MOV	R16,R20
+    00CE 2711      CLR	R17
+    00CF D056      RCALL	pop_gset1
+    00D0 9508      RET
+_lcd_init:
+    00D1 D051      RCALL	push_gset1
+    00D2 DFB7      RCALL	_lcd_port_init
+    00D3 2744      CLR	R20
+    00D4 C00F      RJMP	0x00E4
+    00D5 2722      CLR	R18
+    00D6 2733      CLR	R19
+    00D7 E18A      LDI	R24,0x1A
+    00D8 E090      LDI	R25,0
+    00D9 2E24      MOV	R2,R20
+    00DA 2433      CLR	R3
+    00DB 0E28      ADD	R2,R24
+    00DC 1E39      ADC	R3,R25
+    00DD 2DE2      MOV	R30,R2
+    00DE 2DF3      MOV	R31,R3
+    00DF 95C8      LPM
+    00E0 2D00      MOV	R16,R0
+    00E1 2711      CLR	R17
+    00E2 DFB8      RCALL	_write_lcd
+    00E3 9543      INC	R20
+    00E4 3044      CPI	R20,4
+    00E5 F378      BCS	0x00D5
+    00E6 D03F      RCALL	pop_gset1
+    00E7 9508      RET
+_lcd_putc:
+    00E8 D03A      RCALL	push_gset1
+    00E9 2F40      MOV	R20,R16
+    00EA 304A      CPI	R20,0xA
+    00EB F4B1      BNE	0x0102
+    00EC 2700      CLR	R16
+    00ED 2711      CLR	R17
+    00EE DFCD      RCALL	_read_lcd
+    00EF 2E20      MOV	R2,R16
+    00F0 2E31      MOV	R3,R17
+    00F1 E08F      LDI	R24,0xF
+    00F2 E090      LDI	R25,0
+    00F3 1582      CP	R24,R2
+    00F4 0593      CPC	R25,R3
+    00F5 F434      BGE	0x00FC
+    00F6 2722      CLR	R18
+    00F7 2733      CLR	R19
+    00F8 E002      LDI	R16,2
+    00F9 E010      LDI	R17,0
+    00FA DFA0      RCALL	_write_lcd
+    00FB C00B      RJMP	0x0107
+    00FC 2722      CLR	R18
+    00FD 2733      CLR	R19
+    00FE EC00      LDI	R16,0xC0
+    00FF E010      LDI	R17,0
+    0100 DF9A      RCALL	_write_lcd
+    0101 C005      RJMP	0x0107
+    0102 E021      LDI	R18,1
+    0103 E030      LDI	R19,0
+    0104 2F04      MOV	R16,R20
+    0105 2711      CLR	R17
+    0106 DF94      RCALL	_write_lcd
+    0107 D01E      RCALL	pop_gset1
+    0108 9508      RET
+_lcd_puts:
+    0109 D019      RCALL	push_gset1
+    010A 2F40      MOV	R20,R16
+    010B 2F51      MOV	R21,R17
+    010C C009      RJMP	0x0116
+    010D 2E24      MOV	R2,R20
+    010E 2E35      MOV	R3,R21
+    010F 5F4F      SUBI	R20,0xFF
+    0110 4F5F      SBCI	R21,0xFF
+    0111 2DE2      MOV	R30,R2
+    0112 2DF3      MOV	R31,R3
+    0113 8100      LDD	R16,0+Z
+    0114 2711      CLR	R17
+    0115 DFD2      RCALL	_lcd_putc
+    0116 2FE4      MOV	R30,R20
+    0117 2FF5      MOV	R31,R21
+    0118 8020      LDD	R2,0+Z
+    0119 2022      TST	R2
+    011A F791      BNE	0x010D
+    011B D00A      RCALL	pop_gset1
+    011C 9508      RET
+_lcd_clear:
+    011D 2722      CLR	R18
+    011E 2733      CLR	R19
+    011F E001      LDI	R16,1
+    0120 E010      LDI	R17,0
+    0121 DF79      RCALL	_write_lcd
+    0122 9508      RET
+push_gset1:
+    0123 935A      ST	R21,-Y
+    0124 934A      ST	R20,-Y
+    0125 9508      RET
+pop_gset1:
+    0126 E0E1      LDI	R30,1
+pop:
+    0127 9149      LD	R20,Y+
+    0128 9159      LD	R21,Y+
+    0129 FDE0      SBRC	R30,0
+    012A 9508      RET
+    012B 9169      LD	R22,Y+
+    012C 9179      LD	R23,Y+
+    012D FDE1      SBRC	R30,1
+    012E 9508      RET
+    012F 90A9      LD	R10,Y+
+    0130 90B9      LD	R11,Y+
+    0131 FDE2      SBRC	R30,2
+    0132 9508      RET
+    0133 90C9      LD	R12,Y+
+    0134 90D9      LD	R13,Y+
+    0135 FDE3      SBRC	R30,3
+    0136 9508      RET
+    0137 90E9      LD	R14,Y+
+    0138 90F9      LD	R15,Y+
+    0139 9508      RET
+push_gset2:
+    013A 937A      ST	R23,-Y
+    013B 936A      ST	R22,-Y
+    013C CFE6      RJMP	push_gset1
+pop_gset2:
+    013D E0E2      LDI	R30,2
+    013E CFE8      RJMP	pop

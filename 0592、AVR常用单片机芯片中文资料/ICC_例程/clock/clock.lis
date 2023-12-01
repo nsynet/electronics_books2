@@ -1,0 +1,772 @@
+                         .module clock.c
+                         .area vector(rom, abs)
+                         .org 12
+ 000C 6AC1              rjmp _timer1
+                         .area code(ram, con, rel)
+                         .area lit(rom, con, rel)
+ 0000                 _tabel::
+ 0000 3F06              .byte 63,6
+ 0002 5B4F              .byte 91,'O
+ 0004 666D              .byte 'f,'m
+ 0006 7D07              .byte 125,7
+ 0008 7F6F              .byte 127,'o
+ 000A 777C              .byte 'w,124
+ 000C 395E              .byte 57,94
+ 000E 7971              .byte 'y,'q
+ 0010                   .dbfile D:\ICC-AVR\examples.sl\clock\clock.c
+ 0010                   .dbsym s tabel _tabel Ac[16:16]
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\clock\clock.c
+ 0000                 _ledbuff::
+ 0000                   .blkb 2
+                         .area idata
+ 0000 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0002                   .dbfile D:\ICC-AVR\examples.sl\clock\clock.c
+ 0002                   .blkb 2
+                         .area idata
+ 0002 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0004                   .dbfile D:\ICC-AVR\examples.sl\clock\clock.c
+ 0004                   .blkb 2
+                         .area idata
+ 0004 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0006                   .dbfile D:\ICC-AVR\examples.sl\clock\clock.c
+ 0006                   .dbsym s ledbuff _ledbuff Ac[6:6]
+ 0006                 _time::
+ 0006                   .blkb 2
+                         .area idata
+ 0006 0000              .byte 0,0
+                         .area data(ram, con, rel)
+ 0008                   .dbfile D:\ICC-AVR\examples.sl\clock\clock.c
+ 0008                   .blkb 1
+                         .area idata
+ 0008 00                .byte 0
+                         .area data(ram, con, rel)
+ 0009                   .dbfile D:\ICC-AVR\examples.sl\clock\clock.c
+ 0009                   .dbsym s time _time Ac[3:3]
+ 0009                 _flag::
+ 0009                   .blkb 1
+                         .area idata
+ 0009 00                .byte 0
+                         .area data(ram, con, rel)
+ 000A                   .dbfile D:\ICC-AVR\examples.sl\clock\clock.c
+ 000A                   .dbsym s flag _flag c
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\clock\clock.c
+ 0000                   .dbfunc s port_init _port_init fI
+                         .even
+ 0000                 _port_init::
+ 0000                   .dbline 28{
+                       ; /**********************************************
+                       ;              http://www.sl.com.cn
+                       ;       双龙电子公司----电脑时钟演示程序(ICCAVR)
+                       ;                  作者：詹卫前
+                       ;           1、学习定时器T1溢出中断的使用
+                       ;           2、学习电脑时钟的编程方法
+                       ;           3、在程序运行时按SHIFT进行校时
+                       ;     使用注意：1、应包含头文件slavr.h
+                       ;               2、在工程选项中的Additional Lib中填入slavr
+                       ;                  使用编译器使用附加库文件libslavr.a
+                       ; ***********************************************/
+                       ; #include <io8515.h>
+                       ; #include <macros.h>
+                       ; #include <slavr.h>
+                       ; #pragma interrupt_handler timer1:7
+                       ; #pragma data:code
+                       ;           /*   七段译码字形表     */        
+                       ; const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+                       ; #pragma data:data
+                       ;           /*     显示缓冲区       */
+                       ; unsigned char ledbuff[]={0x3f,0x3f,0x3f,0x3f,0x3f,0x3f};
+                       ; unsigned char time[3]={0,0,0};
+                       ; unsigned char flag=0;
+                       ; /*****************************************
+                       ;                初始化
+                       ; *****************************************/
+                       ; void port_init(void)
+                       ;  {
+ 0000                   .dbline 29
+                       ;   DDRD=0x3f;
+ 0000 8FE3              ldi R24,63
+ 0002 81BB              out 0x11,R24
+ 0004                   .dbline 30
+                       ;   DDRB=0xff;
+ 0004 8FEF              ldi R24,255
+ 0006 87BB              out 0x17,R24
+ 0008                   .dbline 31
+                       ;   PORTD=0xff;
+ 0008 82BB              out 0x12,R24
+ 000A                   .dbline 32
+                       ;   PORTB=0xff;
+ 000A 88BB              out 0x18,R24
+ 000C                   .dbline 33
+                       ;   TIMSK=0x80;//开放T1溢出中断
+ 000C 80E8              ldi R24,128
+ 000E 89BF              out 0x39,R24
+ 0010                   .dbline 34
+                       ;   TCCR1A=0x00;
+ 0010 2224              clr R2
+ 0012 2FBC              out 0x2f,R2
+ 0014                   .dbline 35
+                       ;   TCCR1B=0x04;
+ 0014 84E0              ldi R24,4
+ 0016 8EBD              out 0x2e,R24
+ 0018                   .dbline 36
+                       ;   TCNT1=0x85ee;
+ 0018 8EEE              ldi R24,-31250
+ 001A 95E8              ldi R25,-123
+ 001C 90934D00          sts 76+1,R25
+ 0020 80934C00          sts 76,R24
+ 0024                   .dbline 37
+                       ;   SEI();
+ 0024 7894              sei
+ 0026                   .dbline 38}
+                       ;  }
+ 0026                 L1:
+ 0026 0895              ret
+ 0028                   .dbfunc s hextobcd _hextobcd fI
+                       ;           temp -> R20
+                       ;              i -> R22
+                         .even
+ 0028                 _hextobcd::
+ 0028 00D0              rcall push_gset2
+ 002A                   .dbline 43{
+                       ; /*****************************************
+                       ;              刷新LED显示缓冲区
+                       ; *****************************************/
+                       ; void hextobcd (void)
+                       ;    {
+ 002A                   .dbline 45
+                       ;     unsigned char i,temp;
+                       ;     for (i=0;i<3;i++)
+ 002A 6627              clr R22
+ 002C 4CC0              rjmp L6
+ 002E                 L3:
+ 002E                   .dbline 46
+ 002E                   .dbline 47
+ 002E 80E0              ldi R24,<_time
+ 0030 90E0              ldi R25,>_time
+ 0032 E62F              mov R30,R22
+ 0034 FF27              clr R31
+ 0036 E80F              add R30,R24
+ 0038 F91F              adc R31,R25
+ 003A 0081              ldd R16,z+0
+ 003C 1AE0              ldi R17,10
+ 003E 00D0              rcall div8u
+ 0040 402F              mov R20,R16
+ 0042                   .dbline 48
+ 0042 1AE0              ldi R17,10
+ 0044 00D0              rcall mod8u
+ 0046 402F              mov R20,R16
+ 0048                   .dbline 49
+ 0048 262E              mov R2,R22
+ 004A 3324              clr R3
+ 004C 220C              lsl R2
+ 004E 331C              rol R3
+ 0050 E5E0              ldi R30,5
+ 0052 F0E0              ldi R31,0
+ 0054 E219              sub R30,R2
+ 0056 F309              sbc R31,R3
+ 0058 80E0              ldi R24,<_ledbuff
+ 005A 90E0              ldi R25,>_ledbuff
+ 005C E80F              add R30,R24
+ 005E F91F              adc R31,R25
+ 0060 80E0              ldi R24,<_tabel
+ 0062 90E0              ldi R25,>_tabel
+ 0064 242E              mov R2,R20
+ 0066 3324              clr R3
+ 0068 280E              add R2,R24
+ 006A 391E              adc R3,R25
+ 006C FA93              st -y,R31
+ 006E EA93              st -y,R30
+ 0070 E22D              mov R30,R2
+ 0072 F32D              mov R31,R3
+ 0074 C895              lpm
+ 0076 E991              ld R30,y+
+ 0078 F991              ld R31,y+
+ 007A 0082              std z+0,R0
+ 007C                   .dbline 50
+ 007C 80E0              ldi R24,<_time
+ 007E 90E0              ldi R25,>_time
+ 0080 E62F              mov R30,R22
+ 0082 FF27              clr R31
+ 0084 E80F              add R30,R24
+ 0086 F91F              adc R31,R25
+ 0088 0081              ldd R16,z+0
+ 008A 1AE0              ldi R17,10
+ 008C 00D0              rcall mod8u
+ 008E 402F              mov R20,R16
+ 0090                   .dbline 51
+ 0090 262E              mov R2,R22
+ 0092 3324              clr R3
+ 0094 220C              lsl R2
+ 0096 331C              rol R3
+ 0098 E4E0              ldi R30,4
+ 009A F0E0              ldi R31,0
+ 009C E219              sub R30,R2
+ 009E F309              sbc R31,R3
+ 00A0 80E0              ldi R24,<_ledbuff
+ 00A2 90E0              ldi R25,>_ledbuff
+ 00A4 E80F              add R30,R24
+ 00A6 F91F              adc R31,R25
+ 00A8 80E0              ldi R24,<_tabel
+ 00AA 90E0              ldi R25,>_tabel
+ 00AC 242E              mov R2,R20
+ 00AE 3324              clr R3
+ 00B0 280E              add R2,R24
+ 00B2 391E              adc R3,R25
+ 00B4 FA93              st -y,R31
+ 00B6 EA93              st -y,R30
+ 00B8 E22D              mov R30,R2
+ 00BA F32D              mov R31,R3
+ 00BC C895              lpm
+ 00BE E991              ld R30,y+
+ 00C0 F991              ld R31,y+
+ 00C2 0082              std z+0,R0
+ 00C4                   .dbline 52
+ 00C4                 L4:
+ 00C4                   .dbline 45
+ 00C4 6395              inc R22
+ 00C6                 L6:
+ 00C6                   .dbline 45
+ 00C6 6330              cpi R22,3
+ 00C8 08F4              brsh X0
+ 00CA B1CF              rjmp L3
+ 00CC                 X0:
+ 00CC                   .dbline 53}
+                       ;     {
+                       ;     temp=time[i]/10;
+                       ;     temp=temp%10;
+                       ;     ledbuff[5-2*i]=tabel[temp];
+                       ;     temp=time[i]%10;
+                       ;     ledbuff[4-2*i]=tabel[temp];
+                       ;     }
+                       ;    } 
+ 00CC                 L2:
+ 00CC 00D0              rcall pop_gset2
+ 00CE 0895              ret
+ 00D0                   .dbsym r temp 20 c
+ 00D0                   .dbsym r i 22 c
+ 00D0                   .dbfunc s display _display fI
+                       ;              i -> R20
+                         .even
+ 00D0                 _display::
+ 00D0 00D0              rcall push_gset1
+ 00D2                   .dbline 58{
+                       ; /*****************************************
+                       ;           六路动态扫描显示电路
+                       ; *****************************************/   
+                       ; void display(void)
+                       ; {
+ 00D2                   .dbline 60
+                       ;  unsigned char i;
+                       ;  for (i=0;i<6;i++)
+ 00D2 4427              clr R20
+ 00D4 16C0              rjmp L11
+ 00D6                 L8:
+ 00D6                   .dbline 61
+ 00D6                   .dbline 62
+ 00D6 80E0              ldi R24,<_ledbuff
+ 00D8 90E0              ldi R25,>_ledbuff
+ 00DA E42F              mov R30,R20
+ 00DC FF27              clr R31
+ 00DE E80F              add R30,R24
+ 00E0 F91F              adc R31,R25
+ 00E2 2080              ldd R2,z+0
+ 00E4 28BA              out 0x18,R2
+ 00E6                   .dbline 63
+ 00E6 01E0              ldi R16,1
+ 00E8 142F              mov R17,R20
+ 00EA 00D0              rcall lsl8
+ 00EC 202E              mov R2,R16
+ 00EE 2094              com R2
+ 00F0 22BA              out 0x12,R2
+ 00F2                   .dbline 64
+ 00F2 00D0              rcall _delay_1ms
+ 00F4                   .dbline 65
+ 00F4 01E0              ldi R16,1
+ 00F6 142F              mov R17,R20
+ 00F8 00D0              rcall lsl8
+ 00FA 22B2              in R2,0x12
+ 00FC 202A              or R2,R16
+ 00FE 22BA              out 0x12,R2
+ 0100                   .dbline 66
+ 0100                 L9:
+ 0100                   .dbline 60
+ 0100 4395              inc R20
+ 0102                 L11:
+ 0102                   .dbline 60
+ 0102 4630              cpi R20,6
+ 0104 40F3              brlo L8
+ 0106                   .dbline 67}
+                       ;   {
+                       ;    PORTB=ledbuff[i];//将显示缓冲区数据送PORTB口
+                       ;    PORTD=~(1<<i);   //开始显示
+                       ;    delay_1ms();     //每一位显示保持一定时间
+                       ;    PORTD|=(1<<i);   //关闭显示
+                       ;   }
+                       ; }
+ 0106                 L7:
+ 0106 00D0              rcall pop_gset1
+ 0108 0895              ret
+ 010A                   .dbsym r i 20 c
+ 010A                   .dbfunc s settime _settime fI
+                       ;             t1 -> R20
+                       ;             t3 -> R22
+                       ;             t2 -> R10
+                         .even
+ 010A                 _settime::
+ 010A 00D0              rcall push_gset3
+ 010C                   .dbline 72{
+                       ; /*****************************************
+                       ;           设定校时时间
+                       ; *****************************************/  
+                       ; void settime(void)
+                       ;    { 
+ 010C                   .dbline 74
+                       ;     unsigned char t1,t2,t3;
+                       ;     for (t1=0;t1<3;t1++)
+ 010C 4427              clr R20
+ 010E 97C0              rjmp L16
+ 0110                 L13:
+ 0110                   .dbline 75
+                       ;     { 
+ 0110                   .dbline 76
+                       ;        ledbuff[5-2*t1]|=0x80;
+ 0110 242E              mov R2,R20
+ 0112 3324              clr R3
+ 0114 220C              lsl R2
+ 0116 331C              rol R3
+ 0118 85E0              ldi R24,5
+ 011A 90E0              ldi R25,0
+ 011C 8219              sub R24,R2
+ 011E 9309              sbc R25,R3
+ 0120 E0E0              ldi R30,<_ledbuff
+ 0122 F0E0              ldi R31,>_ledbuff
+ 0124 8E0F              add R24,R30
+ 0126 9F1F              adc R25,R31
+ 0128 282E              mov R2,R24
+ 012A 392E              mov R3,R25
+ 012C E22D              mov R30,R2
+ 012E F32D              mov R31,R3
+ 0130 8081              ldd R24,z+0
+ 0132 8068              ori R24,128
+ 0134 8083              std z+0,R24
+ 0136                 L17:
+ 0136                   .dbline 78
+                       ;        do
+                       ;          {
+ 0136                   .dbline 79
+                       ;          t2=scan_key();
+ 0136 00D0              rcall _scan_key
+ 0138 202E              mov R2,R16
+ 013A 312E              mov R3,R17
+ 013C A22C              mov R10,R2
+ 013E                   .dbline 80
+                       ;          display();
+ 013E C8DF              rcall _display
+ 0140                   .dbline 81
+                       ;          }
+ 0140                 L18:
+ 0140                   .dbline 82
+                       ;        while(t2==0x7f);  
+ 0140 8A2D              mov R24,R10
+ 0142 8F37              cpi R24,127
+ 0144 C1F3              breq L17
+ 0146                 L20:
+ 0146                   .dbline 84
+                       ;        do 
+                       ;          {
+ 0146                   .dbline 85
+                       ;          t3=scan_key();
+ 0146 00D0              rcall _scan_key
+ 0148 202E              mov R2,R16
+ 014A 312E              mov R3,R17
+ 014C 622D              mov R22,R2
+ 014E                   .dbline 86
+                       ;          display();     
+ 014E C0DF              rcall _display
+ 0150                   .dbline 87
+                       ;          }
+ 0150                 L21:
+ 0150                   .dbline 88
+                       ;        while (t2==t3);
+ 0150 A616              cp R10,R22
+ 0152 C9F3              breq L20
+ 0154                   .dbline 89
+                       ;        time[t1]=time[t1]%10+t2*10;
+ 0154 80E0              ldi R24,<_time
+ 0156 90E0              ldi R25,>_time
+ 0158 242E              mov R2,R20
+ 015A 3324              clr R3
+ 015C 280E              add R2,R24
+ 015E 391E              adc R3,R25
+ 0160 0AE0              ldi R16,10
+ 0162 1A2D              mov R17,R10
+ 0164 00D0              rcall mpy8s
+ 0166 402E              mov R4,R16
+ 0168 1AE0              ldi R17,10
+ 016A E22D              mov R30,R2
+ 016C F32D              mov R31,R3
+ 016E 0081              ldd R16,z+0
+ 0170 00D0              rcall mod8u
+ 0172 502E              mov R5,R16
+ 0174 540C              add R5,R4
+ 0176 E22D              mov R30,R2
+ 0178 F32D              mov R31,R3
+ 017A 5082              std z+0,R5
+ 017C                   .dbline 90
+                       ;        hextobcd();
+ 017C 55DF              rcall _hextobcd
+ 017E                   .dbline 91
+                       ;        ledbuff[5-2*t1]&=0x7f;
+ 017E 242E              mov R2,R20
+ 0180 3324              clr R3
+ 0182 220C              lsl R2
+ 0184 331C              rol R3
+ 0186 85E0              ldi R24,5
+ 0188 90E0              ldi R25,0
+ 018A 8219              sub R24,R2
+ 018C 9309              sbc R25,R3
+ 018E E0E0              ldi R30,<_ledbuff
+ 0190 F0E0              ldi R31,>_ledbuff
+ 0192 8E0F              add R24,R30
+ 0194 9F1F              adc R25,R31
+ 0196 282E              mov R2,R24
+ 0198 392E              mov R3,R25
+ 019A E22D              mov R30,R2
+ 019C F32D              mov R31,R3
+ 019E 8081              ldd R24,z+0
+ 01A0 8F77              andi R24,127
+ 01A2 8083              std z+0,R24
+ 01A4                   .dbline 92
+                       ;        ledbuff[4-2*t1]|=0x80;
+ 01A4 242E              mov R2,R20
+ 01A6 3324              clr R3
+ 01A8 220C              lsl R2
+ 01AA 331C              rol R3
+ 01AC 84E0              ldi R24,4
+ 01AE 90E0              ldi R25,0
+ 01B0 8219              sub R24,R2
+ 01B2 9309              sbc R25,R3
+ 01B4 E0E0              ldi R30,<_ledbuff
+ 01B6 F0E0              ldi R31,>_ledbuff
+ 01B8 8E0F              add R24,R30
+ 01BA 9F1F              adc R25,R31
+ 01BC 282E              mov R2,R24
+ 01BE 392E              mov R3,R25
+ 01C0 E22D              mov R30,R2
+ 01C2 F32D              mov R31,R3
+ 01C4 8081              ldd R24,z+0
+ 01C6 8068              ori R24,128
+ 01C8 8083              std z+0,R24
+ 01CA                 L23:
+ 01CA                   .dbline 94
+                       ;        do
+                       ;          {
+ 01CA                   .dbline 95
+                       ;          t2=scan_key();
+ 01CA 00D0              rcall _scan_key
+ 01CC 202E              mov R2,R16
+ 01CE 312E              mov R3,R17
+ 01D0 A22C              mov R10,R2
+ 01D2                   .dbline 96
+                       ;          display();
+ 01D2 7EDF              rcall _display
+ 01D4                   .dbline 97
+                       ;          }
+ 01D4                 L24:
+ 01D4                   .dbline 98
+                       ;        while(t2==0x7f);  
+ 01D4 8A2D              mov R24,R10
+ 01D6 8F37              cpi R24,127
+ 01D8 C1F3              breq L23
+ 01DA                 L26:
+ 01DA                   .dbline 100
+                       ;        do 
+                       ;          {
+ 01DA                   .dbline 101
+                       ;          t3=scan_key();
+ 01DA 00D0              rcall _scan_key
+ 01DC 202E              mov R2,R16
+ 01DE 312E              mov R3,R17
+ 01E0 622D              mov R22,R2
+ 01E2                   .dbline 102
+                       ;          display();     
+ 01E2 76DF              rcall _display
+ 01E4                   .dbline 103
+                       ;          }
+ 01E4                 L27:
+ 01E4                   .dbline 104
+ 01E4 A616              cp R10,R22
+ 01E6 C9F3              breq L26
+ 01E8                   .dbline 105
+ 01E8 80E0              ldi R24,<_time
+ 01EA 90E0              ldi R25,>_time
+ 01EC E42F              mov R30,R20
+ 01EE FF27              clr R31
+ 01F0 E80F              add R30,R24
+ 01F2 F91F              adc R31,R25
+ 01F4 0081              ldd R16,z+0
+ 01F6 1AE0              ldi R17,10
+ 01F8 00D0              rcall div8u
+ 01FA 602F              mov R22,R16
+ 01FC                   .dbline 106
+ 01FC 0AE0              ldi R16,10
+ 01FE 162F              mov R17,R22
+ 0200 00D0              rcall mpy8s
+ 0202 202E              mov R2,R16
+ 0204 2A0C              add R2,R10
+ 0206 80E0              ldi R24,<_time
+ 0208 90E0              ldi R25,>_time
+ 020A E42F              mov R30,R20
+ 020C FF27              clr R31
+ 020E E80F              add R30,R24
+ 0210 F91F              adc R31,R25
+ 0212 2082              std z+0,R2
+ 0214                   .dbline 107
+ 0214 242E              mov R2,R20
+ 0216 3324              clr R3
+ 0218 220C              lsl R2
+ 021A 331C              rol R3
+ 021C 84E0              ldi R24,4
+ 021E 90E0              ldi R25,0
+ 0220 8219              sub R24,R2
+ 0222 9309              sbc R25,R3
+ 0224 E0E0              ldi R30,<_ledbuff
+ 0226 F0E0              ldi R31,>_ledbuff
+ 0228 8E0F              add R24,R30
+ 022A 9F1F              adc R25,R31
+ 022C 282E              mov R2,R24
+ 022E 392E              mov R3,R25
+ 0230 E22D              mov R30,R2
+ 0232 F32D              mov R31,R3
+ 0234 8081              ldd R24,z+0
+ 0236 8F77              andi R24,127
+ 0238 8083              std z+0,R24
+ 023A                   .dbline 108
+ 023A F6DE              rcall _hextobcd
+ 023C                   .dbline 109
+ 023C                 L14:
+ 023C                   .dbline 74
+ 023C 4395              inc R20
+ 023E                 L16:
+ 023E                   .dbline 74
+ 023E 4330              cpi R20,3
+ 0240 08F4              brsh X1
+ 0242 66CF              rjmp L13
+ 0244                 X1:
+ 0244                   .dbline 110}
+                       ;        while (t2==t3);
+                       ;        t3=time[t1]/10;
+                       ;        time[t1]=t3*10+t2;
+                       ;        ledbuff[4-2*t1]&=0x7f;
+                       ;        hextobcd();                  
+                       ;     }
+                       ;     }
+ 0244                 L12:
+ 0244 00D0              rcall pop_gset3
+ 0246 0895              ret
+ 0248                   .dbsym r t1 20 c
+ 0248                   .dbsym r t3 22 c
+ 0248                   .dbsym r t2 10 c
+ 0248                   .dbfunc s main _main fI
+                       ;              i -> R20
+                       ;              j -> R22
+                         .even
+ 0248                 _main::
+ 0248                   .dbline 115{
+                       ; /*****************************************
+                       ; 主程序功能：演示了电脑时钟程序的工作过程
+                       ; *****************************************/
+                       ; void main(void)
+                       ; {
+ 0248                   .dbline 117
+                       ;  unsigned char i,j;
+                       ;  MCUCR=0;
+ 0248 2224              clr R2
+ 024A 25BE              out 0x35,R2
+ 024C                   .dbline 118
+                       ;  flag=0;
+ 024C 20920900          sts _flag,R2
+ 0250                   .dbline 119
+                       ;  port_init(); //端口初始化
+ 0250 D7DE              rcall _port_init
+ 0252                   .dbline 120
+                       ;  i=scan_key();
+ 0252 00D0              rcall _scan_key
+ 0254 202E              mov R2,R16
+ 0256 312E              mov R3,R17
+ 0258 422D              mov R20,R2
+ 025A 3AC0              rjmp L31
+ 025C                 L30:
+ 025C                   .dbline 122
+                       ;  while(1)
+                       ;   {
+ 025C                   .dbline 123
+                       ;    i=scan_key(); 
+ 025C 00D0              rcall _scan_key
+ 025E 202E              mov R2,R16
+ 0260 312E              mov R3,R17
+ 0262 422D              mov R20,R2
+ 0264                   .dbline 124
+                       ;    if (i!=0x7f)
+ 0264 4F37              cpi R20,127
+ 0266 61F0              breq L33
+ 0268                   .dbline 125
+                       ;      {
+ 0268                 L35:
+ 0268                   .dbline 127
+                       ;       do 
+                       ;        {
+ 0268                   .dbline 128
+                       ;         j=scan_key();
+ 0268 00D0              rcall _scan_key
+ 026A 202E              mov R2,R16
+ 026C 312E              mov R3,R17
+ 026E 622D              mov R22,R2
+ 0270                   .dbline 129
+                       ;         display();      
+ 0270 2FDF              rcall _display
+ 0272                   .dbline 130
+                       ;        }
+ 0272                 L36:
+ 0272                   .dbline 131
+                       ;       while (i==j); 
+ 0272 4617              cp R20,R22
+ 0274 C9F3              breq L35
+ 0276                   .dbline 132
+                       ;       if ((i&0x80)==0x80) 
+ 0276 842F              mov R24,R20
+ 0278 8078              andi R24,128
+ 027A 8038              cpi R24,128
+ 027C 09F4              brne L38
+ 027E                   .dbline 133
+                       ;           settime();//设定时间
+ 027E 45DF              rcall _settime
+ 0280                 L38:
+ 0280                   .dbline 134
+                       ;      }
+ 0280                 L33:
+ 0280                   .dbline 135
+                       ;    if(flag==1)
+ 0280 80910900          lds R24,_flag
+ 0284 8130              cpi R24,1
+ 0286 19F5              brne L40
+ 0288                   .dbline 136
+                       ;     {
+ 0288                   .dbline 137
+                       ;      flag=0;
+ 0288 2224              clr R2
+ 028A 20920900          sts _flag,R2
+ 028E                   .dbline 138
+                       ;      if (time[2]>=60) 
+ 028E 80910800          lds R24,_time+2
+ 0292 8C33              cpi R24,60
+ 0294 40F0              brlo L42
+ 0296                   .dbline 139
+                       ;         {
+ 0296                   .dbline 140
+                       ;          time[2]-=60;
+ 0296 8C53              subi R24,60
+ 0298 80930800          sts _time+2,R24
+ 029C                   .dbline 141
+                       ;          time[1]++;
+ 029C 80910700          lds R24,_time+1
+ 02A0 8F5F              subi R24,255    ; addi 1
+ 02A2 80930700          sts _time+1,R24
+ 02A6                   .dbline 142
+                       ;          }
+ 02A6                 L42:
+ 02A6                   .dbline 143
+                       ;     if (time[1]>=60) 
+ 02A6 80910700          lds R24,_time+1
+ 02AA 8C33              cpi R24,60
+ 02AC 40F0              brlo L47
+ 02AE                   .dbline 144
+                       ;     {
+ 02AE                   .dbline 145
+                       ;      time[1]-=60;
+ 02AE 8C53              subi R24,60
+ 02B0 80930700          sts _time+1,R24
+ 02B4                   .dbline 146
+                       ;      time[0]++;
+ 02B4 80910600          lds R24,_time
+ 02B8 8F5F              subi R24,255    ; addi 1
+ 02BA 80930600          sts _time,R24
+ 02BE                   .dbline 147
+                       ;      } 
+ 02BE                 L47:
+ 02BE                   .dbline 148
+                       ;     if (time[0]>=24) 
+ 02BE 80910600          lds R24,_time
+ 02C2 8831              cpi R24,24
+ 02C4 18F0              brlo L51
+ 02C6                   .dbline 149
+                       ;         {
+ 02C6                   .dbline 150
+                       ;          time[0]-=24;
+ 02C6 8851              subi R24,24
+ 02C8 80930600          sts _time,R24
+ 02CC                   .dbline 151
+                       ;          }
+ 02CC                 L51:
+ 02CC                   .dbline 152
+                       ;      hextobcd();
+ 02CC ADDE              rcall _hextobcd
+ 02CE                   .dbline 153
+                       ;     }
+ 02CE                 L40:
+ 02CE                   .dbline 154
+ 02CE 00DF              rcall _display
+ 02D0                   .dbline 155
+ 02D0                 L31:
+ 02D0                   .dbline 121
+ 02D0 C5CF              rjmp L30
+ 02D2                 X2:
+ 02D2                   .dbline 156}
+                       ;    display();
+                       ;   }
+                       ; }
+ 02D2                 L29:
+ 02D2 0895              ret
+ 02D4                   .dbsym r i 20 c
+ 02D4                   .dbsym r j 22 c
+ 02D4                   .dbfunc s timer1 _timer1 fI
+                         .even
+ 02D4                 _timer1::
+ 02D4 8A93              st -y,R24
+ 02D6 9A93              st -y,R25
+ 02D8 8FB7              in R24,0x3f
+ 02DA 8A93              st -y,R24
+ 02DC                   .dbline 161{
+                       ; /*****************************************
+                       ;           T1溢出中断
+                       ; *****************************************/  
+                       ; void timer1(void)
+                       ;    {
+ 02DC                   .dbline 162
+                       ;     flag=1;
+ 02DC 81E0              ldi R24,1
+ 02DE 80930900          sts _flag,R24
+ 02E2                   .dbline 163
+                       ;     time[2]++;
+ 02E2 80910800          lds R24,_time+2
+ 02E6 8F5F              subi R24,255    ; addi 1
+ 02E8 80930800          sts _time+2,R24
+ 02EC                   .dbline 164
+                       ;     TCNT1=0x85ee;
+ 02EC 8EEE              ldi R24,-31250
+ 02EE 95E8              ldi R25,-123
+ 02F0 90934D00          sts 76+1,R25
+ 02F4 80934C00          sts 76,R24
+ 02F8                   .dbline 165}
+                       ;     }
+ 02F8                 L53:
+ 02F8 8991              ld R24,y+
+ 02FA 8FBF              out 0x3f,R24
+ 02FC 9991              ld R25,y+
+ 02FE 8991              ld R24,y+
+ 0300 1895              reti

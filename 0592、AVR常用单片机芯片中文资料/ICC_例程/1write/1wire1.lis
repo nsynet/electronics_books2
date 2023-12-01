@@ -1,0 +1,667 @@
+                         .module .1wire1.c
+                         .area code(ram, con, rel)
+                         .area lit(rom, con, rel)
+ 0000                 _tabel::
+ 0000 30313233343536373839414243444546   .byte 48,49,50,51,52,53,54,55,56,57,'A,'B,'C,'D,'E,'F
+ 0010 00                .byte 0
+ 0011                   .dbfile D:\ICC-AVR\examples.sl\1write\1wire1.c
+ 0011                   .dbsym s tabel _tabel A[17:17]c
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\1write\1wire1.c
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\1write\1wire1.c
+ 0000                   .dbfunc s ds1820_match _ds1820_match fI
+                       ;              i -> R20
+                       ;              p -> R22,R23
+                         .even
+ 0000                 _ds1820_match::
+ 0000 00D0              rcall push_gset2
+ 0002 602F              mov R22,R16
+ 0004 712F              mov R23,R17
+ 0006                   .dbline -1
+ 0006                   .dbline 21
+                       ; /**********************************************
+                       ;              http://www.sl.com.cn
+                       ;       Ë«Áúµç×Ó¹«Ë¾----µ¥×ÜÏßÑÝÊ¾³ÌÐò(ICCAVR)
+                       ;                  ×÷Õß£ºÕ²ÎÀÇ°
+                       ;           1¡¢ÒÔDS18B20Êý×ÖÎÂ¶È¼ÆÎªÀý£¬DS18B20µÄDQÒý½ÅÁ¬
+                       ;              ½ÓAT90S8515µÄPORTA.0Òý½Å£¬¿É¼Ó4.7KÉÏÀ­µç×è
+                       ;           2¡¢ÏÔÊ¾Ê¹ÓÃSL-AVRËùÅä2*16LCDÏÔÊ¾ÆÁ¢ 
+                       ;           3¡¢Ó¦°üº¬Í·ÎÄ¼þslavr.h
+                       ;           4¡¢ÔÚ¹¤³ÌÑ¡ÏîÖÐµÄAdditional LibÖÐÌîÈëslavr
+                       ;              Ê¹±àÒëÆ÷Ê¹ÓÃ¸½¼Ó¿âÎÄ¼þlibslavr.a
+                       ; **********************************************/
+                       ; #include<io8515.h> 
+                       ; #include<slavr.h>
+                       ; #pragma data:code
+                       ; const unsigned char tabel[]="0123456789ABCDEF";
+                       ; #pragma data:data 
+                       ; /*********************************************
+                       ;                 Æ¥ÅäDS1820
+                       ; *********************************************/ 
+                       ; void ds1820_match(unsigned char *p)
+                       ;   {
+ 0006                 L2:
+ 0006                   .dbline 24
+                       ;    unsigned char i;
+                       ;    do 
+                       ;      i=ds1820_ack();
+ 0006 00D0              rcall _ds1820_ack
+ 0008 202E              mov R2,R16
+ 000A 312E              mov R3,R17
+ 000C 422D              mov R20,R2
+ 000E                 L3:
+ 000E                   .dbline 25
+                       ;    while (i==0x01);
+ 000E 4130              cpi R20,1
+ 0010 D1F3              breq L2
+ 0012                   .dbline 26
+                       ;    ds1820_write(0x55);   
+ 0012 05E5              ldi R16,85
+ 0014 00D0              rcall _ds1820_write
+ 0016                   .dbline 27
+                       ;    for(i=0;i<8;i++)
+ 0016 4427              clr R20
+ 0018 07C0              rjmp L8
+ 001A                 L5:
+ 001A                   .dbline 28
+ 001A E42F              mov R30,R20
+ 001C FF27              clr R31
+ 001E E60F              add R30,R22
+ 0020 F71F              adc R31,R23
+ 0022 0081              ldd R16,z+0
+ 0024 00D0              rcall _ds1820_write
+ 0026                 L6:
+ 0026                   .dbline 27
+ 0026 4395              inc R20
+ 0028                 L8:
+ 0028                   .dbline 27
+ 0028 4830              cpi R20,8
+ 002A B8F3              brlo L5
+ 002C                   .dbline -2
+ 002C                   .dbline 29
+                       ;      ds1820_write(p[i]);
+                       ;   }
+ 002C                 L1:
+ 002C 00D0              rcall pop_gset2
+ 002E                   .dbline 0 ; func end
+ 002E 0895              ret
+ 0030                   .dbsym r i 20 c
+ 0030                   .dbsym r p 22 pc
+ 0030                   .dbfunc s asc2con _asc2con fI
+                       ;              i -> R20
+                       ;           temp -> R22
+                       ;            len -> R10
+                       ;              p -> R12,R13
+                         .even
+ 0030                 _asc2con::
+ 0030 00D0              rcall push_gset4
+ 0032 A22E              mov R10,R18
+ 0034 C02E              mov R12,R16
+ 0036 D12E              mov R13,R17
+ 0038                   .dbline -1
+ 0038                   .dbline 34
+                       ; /*********************************************
+                       ;    ½«Ê®Áù½øÖÆÊý×ª»»³ÉASC2Âë,²¢ËÍLCDÏÔÊ¾
+                       ; *********************************************/
+                       ; void asc2con(unsigned char *p,unsigned char len)
+                       ; {
+ 0038                   .dbline 36
+                       ;   unsigned char i,temp;
+                       ;   for (i=0;i<len;i++)
+ 0038 4427              clr R20
+ 003A 31C0              rjmp L13
+ 003C                 L10:
+ 003C                   .dbline 37
+ 003C                   .dbline 38
+ 003C 242E              mov R2,R20
+ 003E 3324              clr R3
+ 0040 EA2D              mov R30,R10
+ 0042 FF27              clr R31
+ 0044 3197              sbiw R30,1
+ 0046 E219              sub R30,R2
+ 0048 F309              sbc R31,R3
+ 004A EC0D              add R30,R12
+ 004C FD1D              adc R31,R13
+ 004E 6081              ldd R22,z+0
+ 0050 607F              andi R22,240
+ 0052                   .dbline 39
+ 0052 862F              mov R24,R22
+ 0054 8295              swap R24
+ 0056 8F70              andi R24,#0x0F
+ 0058 682F              mov R22,R24
+ 005A                   .dbline 40
+ 005A 80E0              ldi R24,<_tabel
+ 005C 90E0              ldi R25,>_tabel
+ 005E 262E              mov R2,R22
+ 0060 3324              clr R3
+ 0062 280E              add R2,R24
+ 0064 391E              adc R3,R25
+ 0066 E22D              mov R30,R2
+ 0068 F32D              mov R31,R3
+ 006A C895              lpm
+ 006C 002D              mov R16,R0
+ 006E 00D0              rcall _lcd_putc
+ 0070                   .dbline 41
+ 0070 242E              mov R2,R20
+ 0072 3324              clr R3
+ 0074 EA2D              mov R30,R10
+ 0076 FF27              clr R31
+ 0078 3197              sbiw R30,1
+ 007A E219              sub R30,R2
+ 007C F309              sbc R31,R3
+ 007E EC0D              add R30,R12
+ 0080 FD1D              adc R31,R13
+ 0082 6081              ldd R22,z+0
+ 0084 6F70              andi R22,15
+ 0086                   .dbline 42
+ 0086 80E0              ldi R24,<_tabel
+ 0088 90E0              ldi R25,>_tabel
+ 008A 262E              mov R2,R22
+ 008C 3324              clr R3
+ 008E 280E              add R2,R24
+ 0090 391E              adc R3,R25
+ 0092 E22D              mov R30,R2
+ 0094 F32D              mov R31,R3
+ 0096 C895              lpm
+ 0098 002D              mov R16,R0
+ 009A 00D0              rcall _lcd_putc
+ 009C                   .dbline 43
+ 009C                 L11:
+ 009C                   .dbline 36
+ 009C 4395              inc R20
+ 009E                 L13:
+ 009E                   .dbline 36
+ 009E 4A15              cp R20,R10
+ 00A0 08F4              brsh X0
+ 00A2 CCCF              rjmp L10
+ 00A4                 X0:
+ 00A4                   .dbline -2
+ 00A4                   .dbline 44
+                       ;   {  
+                       ;   temp=p[len-1-i]&0xf0;
+                       ;   temp=temp>>4;
+                       ;   lcd_putc(tabel[temp]);
+                       ;   temp=p[len-1-i]&0x0f;
+                       ;   lcd_putc(tabel[temp]);
+                       ;   }
+                       ; }
+ 00A4                 L9:
+ 00A4 00D0              rcall pop_gset4
+ 00A6                   .dbline 0 ; func end
+ 00A6 0895              ret
+ 00A8                   .dbsym r i 20 c
+ 00A8                   .dbsym r temp 22 c
+ 00A8                   .dbsym r len 10 c
+ 00A8                   .dbsym r p 12 pc
+ 00A8                   .dbfunc s main _main fI
+                       ;       rom_code -> y+9
+                       ;    ds1820_temp -> R10,R11
+                       ;          asc2p -> R12,R13
+                       ;         ds1820 -> y+0
+                       ;            crc -> R22
+                       ;              i -> R20
+                         .even
+ 00A8                 _main::
+ 00A8 6197              sbiw R28,17
+ 00AA                   .dbline -1
+ 00AA                   .dbline 49
+                       ; /*********************************************
+                       ;      ÒÔDS1820ÎªÀý£¬ÑÝÊ¾µ¥×ÜÏßÉè±¸¹¤×÷¹ý³Ì
+                       ; *********************************************/    
+                       ; void main(void)
+                       ; {
+ 00AA                   .dbline 55
+                       ;  unsigned char i,crc;
+                       ;  unsigned char ds1820[9];//´æ·Å´ÓDS18B20¶ÁÈ¡µÄ9×Ö½ÚÊý¾Ý
+                       ;  unsigned char rom_code[8];//´æ·ÅDS18B20µÄ64Î»ÐòÁÐºÅ
+                       ;  unsigned char *asc2p;
+                       ;  unsigned int ds1820_temp;//´æ·ÅÎÂ¶È¶ÁÊý
+                       ;  MCUCR=0x00;
+ 00AA 2224              clr R2
+ 00AC 25BE              out 0x35,R2
+ 00AE                   .dbline 56
+                       ;  lcd_init();//LCD³õÊ¼»¯
+ 00AE 00D0              rcall _lcd_init
+ 00B0                   .dbline 57
+                       ;  lcd_clear();//LCDÇåÆÁ
+ 00B0 00D0              rcall _lcd_clear
+ 00B2                   .dbline 58
+                       ;  lcd_gotoxy(0,0);
+ 00B2 2227              clr R18
+ 00B4 0027              clr R16
+ 00B6 00D0              rcall _lcd_gotoxy
+ 00B8                   .dbline 59
+                       ;  lcd_puts("SERIAL NUMBER IS");//ÔÚ(0,0)´¦Êä³ö×Ö·û´®
+ 00B8 00E0              ldi R16,<L15
+ 00BA 10E0              ldi R17,>L15
+ 00BC 00D0              rcall _lcd_puts
+ 00BE                 L16:
+ 00BE                   .dbline 61
+                       ;  do
+                       ;   i=ds1820_ack();//¶ÔDS18B20½øÐÐ¸´Î»
+ 00BE 00D0              rcall _ds1820_ack
+ 00C0 202E              mov R2,R16
+ 00C2 312E              mov R3,R17
+ 00C4 422D              mov R20,R2
+ 00C6                 L17:
+ 00C6                   .dbline 62
+                       ;  while (i==0x01); 
+ 00C6 4130              cpi R20,1
+ 00C8 D1F3              breq L16
+ 00CA                   .dbline 63
+                       ;  ds1820_write(0x33);//Ð´Èë0x33ROMÃüÁî
+ 00CA 03E3              ldi R16,51
+ 00CC 00D0              rcall _ds1820_write
+ 00CE                   .dbline 64
+                       ;  for (i=0;i<8;i++)
+ 00CE 4427              clr R20
+ 00D0 0CC0              rjmp L22
+ 00D2                 L19:
+ 00D2                   .dbline 65
+ 00D2                   .dbline 66
+ 00D2 00D0              rcall _ds1820_read
+ 00D4 202E              mov R2,R16
+ 00D6 312E              mov R3,R17
+ 00D8 8C2F              mov R24,R28
+ 00DA 9D2F              mov R25,R29
+ 00DC 0996              adiw R24,9
+ 00DE E42F              mov R30,R20
+ 00E0 FF27              clr R31
+ 00E2 E80F              add R30,R24
+ 00E4 F91F              adc R31,R25
+ 00E6 2082              std z+0,R2
+ 00E8                   .dbline 67
+ 00E8                 L20:
+ 00E8                   .dbline 64
+ 00E8 4395              inc R20
+ 00EA                 L22:
+ 00EA                   .dbline 64
+ 00EA 4830              cpi R20,8
+ 00EC 90F3              brlo L19
+ 00EE                   .dbline 68
+                       ;   {
+                       ;   rom_code[i]=ds1820_read();//¶Á³ö64Î»ÐòÁÐºÅ
+                       ;   }
+                       ;   asc2p=&rom_code[0];
+ 00EE 8C2F              mov R24,R28
+ 00F0 9D2F              mov R25,R29
+ 00F2 0996              adiw R24,9
+ 00F4 C82E              mov R12,R24
+ 00F6 D92E              mov R13,R25
+ 00F8                   .dbline 69
+                       ;   crc=crccheck(asc2p,8); //¼ÆËãCRCÐ£ÑéºÍ
+ 00F8 28E0              ldi R18,8
+ 00FA 0C2D              mov R16,R12
+ 00FC 1D2D              mov R17,R13
+ 00FE 00D0              rcall _crccheck
+ 0100 202E              mov R2,R16
+ 0102 312E              mov R3,R17
+ 0104 622D              mov R22,R2
+ 0106                   .dbline 70
+                       ;  if (crc==0x00)    //CRCÐ£ÑéÕýÈ·£¬ÏÔÊ¾ÐòÁÐºÅ
+ 0106 6623              tst R22
+ 0108 61F4              brne L23
+ 010A                   .dbline 71
+                       ;      {lcd_gotoxy(0,1);
+ 010A                   .dbline 71
+ 010A 21E0              ldi R18,1
+ 010C 0027              clr R16
+ 010E 00D0              rcall _lcd_gotoxy
+ 0110                   .dbline 72
+                       ;      asc2p=&rom_code[0];     
+ 0110 8C2F              mov R24,R28
+ 0112 9D2F              mov R25,R29
+ 0114 0996              adiw R24,9
+ 0116 C82E              mov R12,R24
+ 0118 D92E              mov R13,R25
+ 011A                   .dbline 73
+                       ;      asc2con(asc2p,8);  
+ 011A 28E0              ldi R18,8
+ 011C 0C2D              mov R16,R12
+ 011E 1D2D              mov R17,R13
+ 0120 87DF              rcall _asc2con
+ 0122                   .dbline 74
+                       ;      }
+ 0122                 L23:
+ 0122                   .dbline 75
+                       ;  delay_ms(2000); //ÑÓÊ±
+ 0122 00ED              ldi R16,2000
+ 0124 17E0              ldi R17,7
+ 0126 00D0              rcall _delay_ms
+ 0128 B3C0              rjmp L26
+ 012A                 L25:
+ 012A                   .dbline 77
+                       ;  while (1)
+                       ;      {
+ 012A                   .dbline 78
+                       ;      asc2p=&rom_code[0];
+ 012A 8C2F              mov R24,R28
+ 012C 9D2F              mov R25,R29
+ 012E 0996              adiw R24,9
+ 0130 C82E              mov R12,R24
+ 0132 D92E              mov R13,R25
+ 0134                   .dbline 79
+                       ;      ds1820_match(asc2p);//Æ¥ÅäDS1820
+ 0134 0C2D              mov R16,R12
+ 0136 1D2D              mov R17,R13
+ 0138 63DF              rcall _ds1820_match
+ 013A                   .dbline 80
+                       ;      ds1820_write(0x44); //Æô¶¯DS1820×ª»»
+ 013A 04E4              ldi R16,68
+ 013C 00D0              rcall _ds1820_write
+ 013E                   .dbline 81
+                       ;      delay_ms(900);//ÑÓÊ±µÈ×ª»»½áÊø£¬12Î»¸ñÊ½Ô¼Ðè750ms
+ 013E 04E8              ldi R16,900
+ 0140 13E0              ldi R17,3
+ 0142 00D0              rcall _delay_ms
+ 0144                   .dbline 82
+                       ;      asc2p=&rom_code[0];
+ 0144 8C2F              mov R24,R28
+ 0146 9D2F              mov R25,R29
+ 0148 0996              adiw R24,9
+ 014A C82E              mov R12,R24
+ 014C D92E              mov R13,R25
+ 014E                   .dbline 83
+                       ;      ds1820_match(asc2p);//Æ¥ÅäDS1820
+ 014E 0C2D              mov R16,R12
+ 0150 1D2D              mov R17,R13
+ 0152 56DF              rcall _ds1820_match
+ 0154                   .dbline 84
+                       ;      ds1820_write(0xbe); //¶Á×ª»»ºóÎÂ¶ÈÖµ
+ 0154 0EEB              ldi R16,190
+ 0156 00D0              rcall _ds1820_write
+ 0158                   .dbline 85
+                       ;      for (i=0;i<9;i++)
+ 0158 4427              clr R20
+ 015A 0BC0              rjmp L31
+ 015C                 L28:
+ 015C                   .dbline 86
+ 015C                   .dbline 87
+ 015C 00D0              rcall _ds1820_read
+ 015E 202E              mov R2,R16
+ 0160 312E              mov R3,R17
+ 0162 8C2F              mov R24,R28
+ 0164 9D2F              mov R25,R29
+ 0166 E42F              mov R30,R20
+ 0168 FF27              clr R31
+ 016A E80F              add R30,R24
+ 016C F91F              adc R31,R25
+ 016E 2082              std z+0,R2
+ 0170                   .dbline 88
+ 0170                 L29:
+ 0170                   .dbline 85
+ 0170 4395              inc R20
+ 0172                 L31:
+ 0172                   .dbline 85
+ 0172 4930              cpi R20,9
+ 0174 98F3              brlo L28
+ 0176                   .dbline 89
+                       ;          {
+                       ;           ds1820[i]=ds1820_read();
+                       ;          }   
+                       ;      lcd_clear();
+ 0176 00D0              rcall _lcd_clear
+ 0178                   .dbline 90
+                       ;      lcd_puts("Thermometer ");
+ 0178 00E0              ldi R16,<L32
+ 017A 10E0              ldi R17,>L32
+ 017C 00D0              rcall _lcd_puts
+ 017E                   .dbline 91
+                       ;      asc2p=&ds1820[0];
+ 017E 8C2F              mov R24,R28
+ 0180 9D2F              mov R25,R29
+ 0182 C82E              mov R12,R24
+ 0184 D92E              mov R13,R25
+ 0186                   .dbline 92
+                       ;      crc=crccheck(asc2p,9); //¼ÆËãCRCÐ£ÑéºÍ
+ 0186 29E0              ldi R18,9
+ 0188 0C2D              mov R16,R12
+ 018A 1D2D              mov R17,R13
+ 018C 00D0              rcall _crccheck
+ 018E 202E              mov R2,R16
+ 0190 312E              mov R3,R17
+ 0192 622D              mov R22,R2
+ 0194                   .dbline 93
+                       ;      if (crc==0x00)    //CRCÐ£ÑéÕýÈ·£¬Êä³öÎÂ¶È¶ÁÊý²¢ÏÔÊ¾HEXÊý
+ 0194 6623              tst R22
+ 0196 81F4              brne L33
+ 0198                   .dbline 94
+                       ;           {
+ 0198                   .dbline 95
+                       ;            ds1820_temp=ds1820[1];
+ 0198 A980              ldd R10,y+1
+ 019A BB24              clr R11
+ 019C                   .dbline 96
+                       ;            ds1820_temp=ds1820_temp<<8;
+ 019C BA2C              mov R11,R10
+ 019E AA24              clr R10
+ 01A0                   .dbline 97
+                       ;            ds1820_temp+=ds1820[0];
+ 01A0 2880              ldd R2,y+0
+ 01A2 3324              clr R3
+ 01A4 A20C              add R10,R2
+ 01A6 B31C              adc R11,R3
+ 01A8                   .dbline 98
+                       ;            asc2p=&ds1820[0];
+ 01A8 8C2F              mov R24,R28
+ 01AA 9D2F              mov R25,R29
+ 01AC C82E              mov R12,R24
+ 01AE D92E              mov R13,R25
+ 01B0                   .dbline 99
+                       ;            asc2con(asc2p,2);
+ 01B0 22E0              ldi R18,2
+ 01B2 0C2D              mov R16,R12
+ 01B4 1D2D              mov R17,R13
+ 01B6 3CDF              rcall _asc2con
+ 01B8                   .dbline 100
+                       ;           }
+ 01B8                 L33:
+ 01B8                   .dbline 101
+                       ;      lcd_gotoxy(0,1);       
+ 01B8 21E0              ldi R18,1
+ 01BA 0027              clr R16
+ 01BC 00D0              rcall _lcd_gotoxy
+ 01BE                   .dbline 102
+                       ;      if ((ds1820_temp&0xf800)!=0)//ÅÐ¶ÏÊÇ·ñÐ¡ÓÚ0¶È
+ 01BE 8A2D              mov R24,R10
+ 01C0 9B2D              mov R25,R11
+ 01C2 8070              andi R24,0
+ 01C4 987F              andi R25,248
+ 01C6 8030              cpi R24,0
+ 01C8 8907              cpc R24,R25
+ 01CA 51F0              breq L36
+ 01CC                   .dbline 103
+                       ;         {ds1820_temp=0-ds1820_temp;
+ 01CC                   .dbline 103
+ 01CC 2224              clr R2
+ 01CE 3324              clr R3
+ 01D0 2A18              sub R2,R10
+ 01D2 3B08              sbc R3,R11
+ 01D4 A22C              mov R10,R2
+ 01D6 B32C              mov R11,R3
+ 01D8                   .dbline 104
+                       ;          lcd_puts("-");
+ 01D8 00E0              ldi R16,<L38
+ 01DA 10E0              ldi R17,>L38
+ 01DC 00D0              rcall _lcd_puts
+ 01DE                   .dbline 105
+                       ;          }
+ 01DE 03C0              rjmp L37
+ 01E0                 L36:
+ 01E0                   .dbline 107
+                       ;      else
+                       ;         lcd_puts("+");   
+ 01E0 00E0              ldi R16,<L39
+ 01E2 10E0              ldi R17,>L39
+ 01E4 00D0              rcall _lcd_puts
+ 01E6                 L37:
+ 01E6                   .dbline 108
+                       ;      crc=ds1820_temp/16;//ÎÂ¶È¶ÁÊý×ª»»
+ 01E6 6A2D              mov R22,R10
+ 01E8 7B2D              mov R23,R11
+ 01EA 7695              lsr R23
+ 01EC 6795              ror R22
+ 01EE 7695              lsr R23
+ 01F0 6795              ror R22
+ 01F2 7695              lsr R23
+ 01F4 6795              ror R22
+ 01F6 7695              lsr R23
+ 01F8 6795              ror R22
+ 01FA                   .dbline 109
+                       ;      for(i=0;i<3;i++)
+ 01FA 4427              clr R20
+ 01FC 1EC0              rjmp L43
+ 01FE                 L40:
+ 01FE                   .dbline 110
+ 01FE                   .dbline 111
+ 01FE 2AE0              ldi R18,10
+ 0200 30E0              ldi R19,0
+ 0202 062F              mov R16,R22
+ 0204 1127              clr R17
+ 0206 00D0              rcall mod16s
+ 0208 202E              mov R2,R16
+ 020A 312E              mov R3,R17
+ 020C 80E0              ldi R24,<_tabel
+ 020E 90E0              ldi R25,>_tabel
+ 0210 280E              add R2,R24
+ 0212 391E              adc R3,R25
+ 0214 E22D              mov R30,R2
+ 0216 F32D              mov R31,R3
+ 0218 C895              lpm
+ 021A 242E              mov R2,R20
+ 021C 3324              clr R3
+ 021E E2E0              ldi R30,2
+ 0220 F0E0              ldi R31,0
+ 0222 E219              sub R30,R2
+ 0224 F309              sbc R31,R3
+ 0226 8C2F              mov R24,R28
+ 0228 9D2F              mov R25,R29
+ 022A E80F              add R30,R24
+ 022C F91F              adc R31,R25
+ 022E 0082              std z+0,R0
+ 0230                   .dbline 112
+ 0230 1AE0              ldi R17,10
+ 0232 062F              mov R16,R22
+ 0234 00D0              rcall div8u
+ 0236 602F              mov R22,R16
+ 0238                   .dbline 113
+ 0238                 L41:
+ 0238                   .dbline 109
+ 0238 4395              inc R20
+ 023A                 L43:
+ 023A                   .dbline 109
+ 023A 4330              cpi R20,3
+ 023C 00F3              brlo L40
+ 023E                   .dbline 114
+                       ;          {
+                       ;           ds1820[2-i]=tabel[crc%10];
+                       ;           crc=crc/10;        
+                       ;          }
+                       ;      ds1820[3]='.';  
+ 023E 8EE2              ldi R24,46
+ 0240 8B83              std y+3,R24
+ 0242                   .dbline 115
+                       ;      crc=ds1820_temp%16;
+ 0242 6A2D              mov R22,R10
+ 0244 7B2D              mov R23,R11
+ 0246 6F70              andi R22,15
+ 0248 7070              andi R23,0
+ 024A                   .dbline 116
+                       ;      crc=crc*10;
+ 024A 0AE0              ldi R16,10
+ 024C 162F              mov R17,R22
+ 024E 00D0              rcall mpy8s
+ 0250 602F              mov R22,R16
+ 0252                   .dbline 117
+                       ;      ds1820[4]=tabel[crc/16];        
+ 0252 20E1              ldi R18,16
+ 0254 30E0              ldi R19,0
+ 0256 1127              clr R17
+ 0258 00D0              rcall div16s
+ 025A 202E              mov R2,R16
+ 025C 312E              mov R3,R17
+ 025E 80E0              ldi R24,<_tabel
+ 0260 90E0              ldi R25,>_tabel
+ 0262 280E              add R2,R24
+ 0264 391E              adc R3,R25
+ 0266 E22D              mov R30,R2
+ 0268 F32D              mov R31,R3
+ 026A C895              lpm
+ 026C 0C82              std y+4,R0
+ 026E                   .dbline 118
+                       ;      ds1820[5]=0xdf;         
+ 026E 8FED              ldi R24,223
+ 0270 8D83              std y+5,R24
+ 0272                   .dbline 119
+                       ;      ds1820[6]='C';
+ 0272 83E4              ldi R24,67
+ 0274 8E83              std y+6,R24
+ 0276                   .dbline 120
+                       ;     for (i=0;i<7;i++)  //ÏÔÊ¾ÎÂ¶È
+ 0276 4427              clr R20
+ 0278 09C0              rjmp L51
+ 027A                 L48:
+ 027A                   .dbline 121
+ 027A 8C2F              mov R24,R28
+ 027C 9D2F              mov R25,R29
+ 027E E42F              mov R30,R20
+ 0280 FF27              clr R31
+ 0282 E80F              add R30,R24
+ 0284 F91F              adc R31,R25
+ 0286 0081              ldd R16,z+0
+ 0288 00D0              rcall _lcd_putc
+ 028A                 L49:
+ 028A                   .dbline 120
+ 028A 4395              inc R20
+ 028C                 L51:
+ 028C                   .dbline 120
+ 028C 4730              cpi R20,7
+ 028E A8F3              brlo L48
+ 0290                   .dbline 122
+ 0290                 L26:
+ 0290                   .dbline 76
+ 0290 4CCF              rjmp L25
+ 0292                 X1:
+ 0292                   .dbline -2
+ 0292                   .dbline 123
+                       ;      lcd_putc(ds1820[i]);
+                       ;       }
+                       ; }
+ 0292                 L14:
+ 0292 6196              adiw R28,17
+ 0294                   .dbline 0 ; func end
+ 0294 0895              ret
+ 0296                   .dbsym l rom_code 9 A[8:8]c
+ 0296                   .dbsym r ds1820_temp 10 i
+ 0296                   .dbsym r asc2p 12 pc
+ 0296                   .dbsym l ds1820 0 A[9:9]c
+ 0296                   .dbsym r crc 22 c
+ 0296                   .dbsym r i 20 c
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\1write\1wire1.c
+ 0000                 L39:
+ 0000                   .blkb 2
+                         .area idata
+ 0000 2B00              .byte 43,0
+                         .area data(ram, con, rel)
+ 0002                   .dbfile D:\ICC-AVR\examples.sl\1write\1wire1.c
+ 0002                 L38:
+ 0002                   .blkb 2
+                         .area idata
+ 0002 2D00              .byte 45,0
+                         .area data(ram, con, rel)
+ 0004                   .dbfile D:\ICC-AVR\examples.sl\1write\1wire1.c
+ 0004                 L32:
+ 0004                   .blkb 13
+                         .area idata
+ 0004 546865726D6F6D657465722000     .byte 'T,'h,'e,'r,'m,'o,'m,'e,'t,'e,'r,32,0
+                         .area data(ram, con, rel)
+ 0011                   .dbfile D:\ICC-AVR\examples.sl\1write\1wire1.c
+ 0011                 L15:
+ 0011                   .blkb 17
+                         .area idata
+ 0011 53455249414C204E554D424552204953   .byte 'S,'E,'R,'I,'A,'L,32,'N,'U,'M,'B,'E,'R,32,'I,'S
+ 0021 00                .byte 0
+                         .area data(ram, con, rel)
+ 0022                   .dbfile D:\ICC-AVR\examples.sl\1write\1wire1.c

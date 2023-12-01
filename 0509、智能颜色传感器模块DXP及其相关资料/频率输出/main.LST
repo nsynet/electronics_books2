@@ -1,0 +1,110 @@
+C51 COMPILER V8.05a   MAIN                                                                 07/17/2011 20:48:32 PAGE 1   
+
+
+C51 COMPILER V8.05a, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND TABS(5)
+
+line level    source
+
+   1          #include"stc12c5a60s2.h"
+   2          #define uchar unsigned char
+   3          #define uint  unsigned int    
+   4          
+   5          uchar count=0;       //计数变量
+   6          uchar time=0;        //时间累积变量     
+   7          uchar bzw=0;         //到达一秒没有
+   8          long fhz=0;          //频率
+   9          
+  10          
+  11          void delay(uint t)
+  12          {
+  13   1        uint i,j;
+  14   1         for(i=0;i<t;i++)
+  15   1         {
+  16   2            for(j=13;j>0;j--);
+  17   2            { ;
+  18   3            }
+  19   2         }
+  20   1      }
+  21          
+  22          void uart_init()
+  23          {
+  24   1           SCON  = 0x50;
+  25   1           AUXR1 = 0x00;                       //1T工作方式
+  26   1           BRT   = 0XFD;                       //设置波特率9600
+  27   1           AUXR  = 0x11;                       //启动波特率发生器       
+  28   1      }
+  29          
+  30          void time_init()
+  31          {
+  32   1           TMOD=0x15;               //一定时  零计数
+  33   1           TH0=TL0=0x00;            //清空计数
+  34   1           TH1=0x4c;
+  35   1           TL1=0x00;                //定时50ms
+  36   1      
+  37   1           EA=1;
+  38   1           ET0=1;
+  39   1           ET1=1;                   //开中断
+  40   1      
+  41   1           TR0=1;                   //开始计数
+  42   1           TR1=1;                   //秒信号发生
+  43   1      }
+  44          
+  45          void printf(uchar p)
+  46          {
+  47   1           SBUF=p;
+  48   1           while(!TI);
+  49   1           TI=0;
+  50   1      }
+  51                                        
+  52          
+  53          void count0() interrupt 1                //频率计数
+  54          {
+  55   1           TF0=0;
+C51 COMPILER V8.05a   MAIN                                                                 07/17/2011 20:48:32 PAGE 2   
+
+  56   1           count++;
+  57   1      }
+  58          
+  59          void delay1s() interrupt 3               //秒频率计算
+  60          {
+  61   1           TF1=0;    
+  62   1           TH1=0x4c;TL1=0x00;                  //50毫秒
+  63   1           time++;                            
+  64   1           if(time==20)                         //20次为1秒
+  65   1           {
+  66   2                time=0;
+  67   2                fhz=(count*65535+TH0*255+TL0)*0.043965517;
+  68   2                count=0;
+  69   2                TH0=TL0=0;
+  70   2                bzw=1;
+  71   2           }                    
+  72   1      }
+  73          
+  74          void main()
+  75          {
+  76   1           time_init();
+  77   1           uart_init();
+  78   1           while(1)
+  79   1           {
+  80   2                printf(fhz);   
+  81   2                delay(10000);       
+  82   2           }
+  83   1      }
+  84          
+  85          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    274    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      7    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,570 @@
+__start:
+__text_start:
+    0018 E5CF      LDI	R28,0x5F
+    0019 E0D2      LDI	R29,2
+    001A BFCD      OUT	P3D,R28
+    001B BFDE      OUT	P3E,R29
+    001C 51C0      SUBI	R28,0x10
+    001D 40D0      SBCI	R29,0
+    001E EA0A      LDI	R16,0xAA
+    001F 8308      STD	R16,0+Y
+    0020 2400      CLR	R0
+    0021 E6E6      LDI	R30,0x66
+    0022 E0F0      LDI	R31,0
+    0023 E010      LDI	R17,0
+    0024 36EA      CPI	R30,0x6A
+    0025 07F1      CPC	R31,R17
+    0026 F011      BEQ	0x0029
+    0027 9201      ST	R0,Z+
+    0028 CFFB      RJMP	0x0024
+    0029 8300      STD	R16,0+Z
+    002A E2EA      LDI	R30,0x2A
+    002B E0F0      LDI	R31,0
+    002C E6A0      LDI	R26,0x60
+    002D E0B0      LDI	R27,0
+    002E E010      LDI	R17,0
+    002F 33E0      CPI	R30,0x30
+    0030 07F1      CPC	R31,R17
+    0031 F021      BEQ	0x0036
+    0032 95C8      LPM
+    0033 9631      ADIW	R30,1
+    0034 920D      ST	R0,X+
+    0035 CFF9      RJMP	0x002F
+    0036 D066      RCALL	_main
+_exit:
+    0037 CFFF      RJMP	_exit
+FILE: D:\ICC-AVR\examples.sl\CYCLE\cycle_1.c
+(0000) /**********************************************
+(0001)              http://www.sl.com.cn
+(0002)       双龙电子公司----占空比测量演示程序(ICCAVR)
+(0003) 	             作者：詹卫前
+(0004) 		  1、学习定时器T1捕捉(捕获)中断的使用		  
+(0005) **********************************************/
+(0006) #include <io8515.h>
+(0007) #include <math.h>
+(0008) #pragma interrupt_handler Icp_timer1:4   //   设置ICP中断
+(0009)           /*   七段译码字形表     */        
+(0010) const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+(0011)           /*     显示缓冲区       */
+(0012) unsigned char ledbuff[]={0x3f,0x3f,0x3f,0x3f,0x3f,0x3f};
+(0013) unsigned int count_l;
+(0014) unsigned int count_h;
+(0015) /******************************
+(0016)          1ms延时程序
+(0017) ******************************/ 
+(0018) void delay_1ms(void)
+(0019) { 
+(0020)  unsigned int i;
+(0021)  for(i=1;i<1142;i++)
+_delay_1ms:
+  i                    --> R16
+    0038 E001      LDI	R16,1
+    0039 E010      LDI	R17,0
+    003A C002      RJMP	0x003D
+(0022)     ;
+    003B 5F0F      SUBI	R16,0xFF
+    003C 4F1F      SBCI	R17,0xFF
+    003D 3706      CPI	R16,0x76
+    003E E0E4      LDI	R30,4
+    003F 071E      CPC	R17,R30
+    0040 F3D0      BCS	0x003B
+(0023) }
+    0041 9508      RET
+_display:
+  i                    --> R20
+    0042 D0F0      RCALL	push_gset1
+(0024) /******************************
+(0025)       六路动态扫描显示电路
+(0026) ******************************/ 
+(0027) void display(void)
+(0028) {
+(0029)  unsigned char i;
+(0030)  for (i=0;i<6;i++)
+    0043 2744      CLR	R20
+    0044 C016      RJMP	0x005B
+(0031)   {
+(0032)    PORTB=ledbuff[i];//将显示缓冲区数据送PORTB口
+    0045 E680      LDI	R24,0x60
+    0046 E090      LDI	R25,0
+    0047 2FE4      MOV	R30,R20
+    0048 27FF      CLR	R31
+    0049 0FE8      ADD	R30,R24
+    004A 1FF9      ADC	R31,R25
+    004B 8020      LDD	R2,0+Z
+    004C BA28      OUT	P18,R2
+(0033)    PORTD=~(1<<i);   //开始显示
+    004D E001      LDI	R16,1
+    004E 2F14      MOV	R17,R20
+    004F D102      RCALL	lsl8
+    0050 2E20      MOV	R2,R16
+    0051 9420      COM	R2
+    0052 BA22      OUT	P12,R2
+(0034)    delay_1ms();     //每一位显示保持一定时间
+    0053 DFE4      RCALL	_delay_1ms
+(0035)    PORTD|=(1<<i);   //关闭显示
+    0054 E001      LDI	R16,1
+    0055 2F14      MOV	R17,R20
+    0056 D0FB      RCALL	lsl8
+    0057 B222      IN	R2,P12
+    0058 2A20      OR	R2,R16
+    0059 BA22      OUT	P12,R2
+(0036)   }
+    005A 9543      INC	R20
+    005B 3046      CPI	R20,6
+    005C F340      BCS	0x0045
+(0037) }
+    005D D0D8      RCALL	pop_gset1
+    005E 9508      RET
+_hextobcd:
+  temp                 --> R20
+  i                    --> R22
+  count                --> R10
+    005F D0ED      RCALL	push_gset3
+    0060 2EA0      MOV	R10,R16
+    0061 2EB1      MOV	R11,R17
+(0038) /************************************
+(0039)   将count十六进制数据转换为LED七段码
+(0040) ************************************/
+(0041) void hextobcd(unsigned int count)
+(0042) {
+(0043)   unsigned char i,temp;
+(0044)   for (i=0;i<6;i++)
+    0062 2766      CLR	R22
+    0063 C01F      RJMP	0x0083
+(0045)   {temp=count%10;
+    0064 E02A      LDI	R18,0xA
+    0065 E030      LDI	R19,0
+    0066 2D0A      MOV	R16,R10
+    0067 2D1B      MOV	R17,R11
+    0068 D0AB      RCALL	mod16u
+    0069 2F40      MOV	R20,R16
+    006A 2F51      MOV	R21,R17
+(0046)    ledbuff[i]=tabel[temp];
+    006B E18A      LDI	R24,0x1A
+    006C E090      LDI	R25,0
+    006D 2E24      MOV	R2,R20
+    006E 2433      CLR	R3
+    006F 0E28      ADD	R2,R24
+    0070 1E39      ADC	R3,R25
+    0071 2DE2      MOV	R30,R2
+    0072 2DF3      MOV	R31,R3
+    0073 95C8      LPM
+    0074 E680      LDI	R24,0x60
+    0075 E090      LDI	R25,0
+    0076 2FE6      MOV	R30,R22
+    0077 27FF      CLR	R31
+    0078 0FE8      ADD	R30,R24
+    0079 1FF9      ADC	R31,R25
+    007A 8200      STD	R0,0+Z
+(0047)    count=count/10;
+    007B E02A      LDI	R18,0xA
+    007C E030      LDI	R19,0
+    007D 2D0A      MOV	R16,R10
+    007E 2D1B      MOV	R17,R11
+    007F D096      RCALL	div16u
+    0080 2EA0      MOV	R10,R16
+    0081 2EB1      MOV	R11,R17
+(0048)   }
+    0082 9563      INC	R22
+    0083 3066      CPI	R22,6
+    0084 F2F8      BCS	0x0064
+(0049) }
+    0085 D0CA      RCALL	pop_gset3
+    0086 9508      RET
+(0050) /******************************
+(0051)           MCU初始化
+(0052) ******************************/ 
+(0053) void mcu_init(void)
+(0054)  {
+(0055)   DDRD=0x3f;
+_mcu_init:
+    0087 E38F      LDI	R24,0x3F
+    0088 BB81      OUT	P11,R24
+(0056)   DDRB=0xff;
+    0089 EF8F      LDI	R24,0xFF
+    008A BB87      OUT	P17,R24
+(0057)   PORTD=0xff;
+    008B BB82      OUT	P12,R24
+(0058)   PORTB=0xff;//端口初始化
+    008C BB88      OUT	P18,R24
+(0059)   TIMSK =0x08;//使能T1捕捉中断
+    008D E088      LDI	R24,0x8
+    008E BF89      OUT	P39,R24
+(0060)   TCCR1A=0x00;
+    008F 2422      CLR	R2
+    0090 BC2F      OUT	P2F,R2
+(0061)   TCCR1B=0xC2;//CK/8，捕捉周期的单位为1us
+    0091 EC82      LDI	R24,0xC2
+    0092 BD8E      OUT	P2E,R24
+(0062)   ICR1=0;            
+    0093 2433      CLR	R3
+    0094 92300045  STS	R3,0x45
+    0096 92200044  STS	R2,0x44
+(0063)   TCNT1=0;          
+    0098 9230004D  STS	R3,0x4D
+    009A 9220004C  STS	R2,0x4C
+(0064)  }
+    009C 9508      RET
+_main:
+  y                    --> Y+4
+  x                    --> Y+0
+  n                    --> R10
+    009D 9728      SBIW	R28,0x8
+(0065) /************************************************
+(0066)         主程序：测量ICP引脚上信号的占空比
+(0067) ************************************************/ 
+(0068) void main()
+(0069) {
+(0070)  unsigned char n;
+(0071)  unsigned long x,y;
+(0072)  mcu_init();  
+    009E DFE8      RCALL	_mcu_init
+(0073)  SREG|=0x80;     //使能全局中断
+    009F 9478      BSET	7
+(0074)  for(;;)
+(0075)     { 
+(0076)      x=count_h*100;
+    00A0 91300067  LDS	R19,_count_h+1
+    00A2 91200066  LDS	R18,_count_h
+    00A4 E604      LDI	R16,0x64
+    00A5 E010      LDI	R17,0
+    00A6 D059      RCALL	mpy16s
+    00A7 2E20      MOV	R2,R16
+    00A8 2E31      MOV	R3,R17
+    00A9 2444      CLR	R4
+    00AA 2455      CLR	R5
+    00AB 2FEC      MOV	R30,R28
+    00AC 2FFD      MOV	R31,R29
+    00AD 8220      STD	R2,0+Z
+    00AE 8231      STD	R3,1+Z
+    00AF 8242      STD	R4,2+Z
+    00B0 8253      STD	R5,3+Z
+(0077) 	 y=count_l+count_h;
+    00B1 90300067  LDS	R3,_count_h+1
+    00B3 90200066  LDS	R2,_count_h
+    00B5 90500069  LDS	R5,_count_l+1
+    00B7 90400068  LDS	R4,_count_l
+    00B9 0C42      ADD	R4,R2
+    00BA 1C53      ADC	R5,R3
+    00BB 2C24      MOV	R2,R4
+    00BC 2C35      MOV	R3,R5
+    00BD 2444      CLR	R4
+    00BE 2455      CLR	R5
+    00BF 8224      STD	R2,4+Z
+    00C0 8235      STD	R3,5+Z
+    00C1 8246      STD	R4,6+Z
+    00C2 8257      STD	R5,7+Z
+(0078) 	 n=x/y;       //计算占空比
+    00C3 8060      LDD	R6,0+Z
+    00C4 8071      LDD	R7,1+Z
+    00C5 8082      LDD	R8,2+Z
+    00C6 8093      LDD	R9,3+Z
+    00C7 925A      ST	R5,-Y
+    00C8 924A      ST	R4,-Y
+    00C9 923A      ST	R3,-Y
+    00CA 922A      ST	R2,-Y
+    00CB 2D06      MOV	R16,R6
+    00CC 2D17      MOV	R17,R7
+    00CD 2D28      MOV	R18,R8
+    00CE 2D39      MOV	R19,R9
+    00CF D0C9      RCALL	div32u
+    00D0 2EA0      MOV	R10,R16
+(0079) 	 hextobcd(n);	
+    00D1 2711      CLR	R17
+    00D2 DF8C      RCALL	_hextobcd
+(0080) 	 display();  //显示测量值 
+    00D3 DF6E      RCALL	_display
+(0081)     }
+    00D4 CFCB      RJMP	0x00A0
+    00D5 9628      ADIW	R28,0x8
+    00D6 9508      RET
+_Icp_timer1:
+    00D7 922A      ST	R2,-Y
+    00D8 923A      ST	R3,-Y
+    00D9 938A      ST	R24,-Y
+    00DA B62F      IN	R2,P3F
+    00DB 922A      ST	R2,-Y
+(0082) }
+(0083) /**************************************
+(0084)              捕捉中断处理程序
+(0085) **************************************/
+(0086) void Icp_timer1(void)       
+(0087) {
+(0088)  if (TCCR1B&0x40)
+    00DC B42E      IN	R2,P2E
+    00DD FE26      SBRS	R2,6
+    00DE C007      RJMP	0x00E6
+(0089)    count_l=ICR1; //脉冲低电平宽度
+    00DF B424      IN	R2,P24
+    00E0 B435      IN	R3,P25
+    00E1 92300069  STS	R3,_count_l+1
+    00E3 92200068  STS	R2,_count_l
+    00E5 C006      RJMP	0x00EC
+(0090)  else
+(0091)    count_h=ICR1; //脉冲高电平宽度
+    00E6 B424      IN	R2,P24
+    00E7 B435      IN	R3,P25
+    00E8 92300067  STS	R3,_count_h+1
+    00EA 92200066  STS	R2,_count_h
+(0092)  ICR1=0;
+    00EC 2422      CLR	R2
+    00ED 2433      CLR	R3
+    00EE 92300045  STS	R3,0x45
+    00F0 92200044  STS	R2,0x44
+(0093)  TCNT1=0; 
+    00F2 9230004D  STS	R3,0x4D
+    00F4 9220004C  STS	R2,0x4C
+(0094)  TCCR1B^=0x40;
+    00F6 E480      LDI	R24,0x40
+    00F7 B42E      IN	R2,P2E
+    00F8 2628      EOR	R2,R24
+    00F9 BC2E      OUT	P2E,R2
+(0095) }
+FILE: <library>
+    00FA 9029      LD	R2,Y+
+    00FB BE2F      OUT	P3F,R2
+    00FC 9189      LD	R24,Y+
+    00FD 9039      LD	R3,Y+
+    00FE 9029      LD	R2,Y+
+    00FF 9518      RETI
+mpy16s:
+    0100 920A      ST	R0,-Y
+    0101 921A      ST	R1,-Y
+    0102 2400      CLR	R0
+    0103 2411      CLR	R1
+    0104 3000      CPI	R16,0
+    0105 0701      CPC	R16,R17
+    0106 F041      BEQ	0x010F
+    0107 9516      LSR	R17
+    0108 9507      ROR	R16
+    0109 F410      BCC	0x010C
+    010A 0E02      ADD	R0,R18
+    010B 1E13      ADC	R1,R19
+    010C 0F22      LSL	R18
+    010D 1F33      ROL	R19
+    010E CFF5      RJMP	0x0104
+    010F 2D00      MOV	R16,R0
+    0110 2D11      MOV	R17,R1
+    0111 9019      LD	R1,Y+
+    0112 9009      LD	R0,Y+
+    0113 9508      RET
+mod16u:
+    0114 9468      BSET	6
+    0115 C001      RJMP	0x0117
+div16u:
+    0116 94E8      BCLR	6
+    0117 92EA      ST	R14,-Y
+    0118 92FA      ST	R15,-Y
+    0119 938A      ST	R24,-Y
+    011A 24EE      CLR	R14
+    011B 18FF      SUB	R15,R15
+    011C E181      LDI	R24,0x11
+    011D 1F00      ROL	R16
+    011E 1F11      ROL	R17
+    011F 958A      DEC	R24
+    0120 F439      BNE	0x0128
+    0121 F416      BRTC	0x0124
+    0122 2D0E      MOV	R16,R14
+    0123 2D1F      MOV	R17,R15
+    0124 9189      LD	R24,Y+
+    0125 90F9      LD	R15,Y+
+    0126 90E9      LD	R14,Y+
+    0127 9508      RET
+    0128 1CEE      ROL	R14
+    0129 1CFF      ROL	R15
+    012A 1AE2      SUB	R14,R18
+    012B 0AF3      SBC	R15,R19
+    012C F420      BCC	0x0131
+    012D 0EE2      ADD	R14,R18
+    012E 1EF3      ADC	R15,R19
+    012F 9488      BCLR	0
+    0130 CFEC      RJMP	0x011D
+    0131 9408      BSET	0
+    0132 CFEA      RJMP	0x011D
+push_gset1:
+    0133 935A      ST	R21,-Y
+    0134 934A      ST	R20,-Y
+    0135 9508      RET
+pop_gset1:
+    0136 E0E1      LDI	R30,1
+pop:
+    0137 9149      LD	R20,Y+
+    0138 9159      LD	R21,Y+
+    0139 FDE0      SBRC	R30,0
+    013A 9508      RET
+    013B 9169      LD	R22,Y+
+    013C 9179      LD	R23,Y+
+    013D FDE1      SBRC	R30,1
+    013E 9508      RET
+    013F 90A9      LD	R10,Y+
+    0140 90B9      LD	R11,Y+
+    0141 FDE2      SBRC	R30,2
+    0142 9508      RET
+    0143 90C9      LD	R12,Y+
+    0144 90D9      LD	R13,Y+
+    0145 FDE3      SBRC	R30,3
+    0146 9508      RET
+    0147 90E9      LD	R14,Y+
+    0148 90F9      LD	R15,Y+
+    0149 9508      RET
+push_gset2:
+    014A 937A      ST	R23,-Y
+    014B 936A      ST	R22,-Y
+    014C CFE6      RJMP	push_gset1
+push_gset3:
+    014D 92BA      ST	R11,-Y
+    014E 92AA      ST	R10,-Y
+    014F CFFA      RJMP	push_gset2
+pop_gset3:
+    0150 E0E4      LDI	R30,4
+    0151 CFE5      RJMP	pop
+lsl8:
+    0152 2311      TST	R17
+    0153 F019      BEQ	0x0157
+    0154 0F00      LSL	R16
+    0155 951A      DEC	R17
+    0156 CFFB      RJMP	lsl8
+    0157 9508      RET
+copy_quot:
+    0158 2D08      MOV	R16,R8
+    0159 2D19      MOV	R17,R9
+    015A 2D2A      MOV	R18,R10
+    015B 2D3B      MOV	R19,R11
+    015C 9508      RET
+long_prolog:
+    015D 928A      ST	R8,-Y
+    015E 929A      ST	R9,-Y
+    015F 92AA      ST	R10,-Y
+    0160 92BA      ST	R11,-Y
+    0161 93EA      ST	R30,-Y
+    0162 92CA      ST	R12,-Y
+    0163 938A      ST	R24,-Y
+    0164 939A      ST	R25,-Y
+    0165 93AA      ST	R26,-Y
+    0166 93BA      ST	R27,-Y
+    0167 858A      LDD	R24,10+Y
+    0168 859B      LDD	R25,11+Y
+    0169 85AC      LDD	R26,12+Y
+    016A 85BD      LDD	R27,13+Y
+    016B 9508      RET
+long_epilog:
+    016C 91B9      LD	R27,Y+
+    016D 91A9      LD	R26,Y+
+    016E 9199      LD	R25,Y+
+    016F 9189      LD	R24,Y+
+    0170 90C9      LD	R12,Y+
+    0171 91E9      LD	R30,Y+
+    0172 90B9      LD	R11,Y+
+    0173 90A9      LD	R10,Y+
+    0174 9099      LD	R9,Y+
+    0175 9089      LD	R8,Y+
+    0176 9624      ADIW	R28,4
+    0177 9508      RET
+NEGMANT1:
+    0178 9500      COM	R16
+    0179 9510      COM	R17
+    017A 9520      COM	R18
+    017B 9530      COM	R19
+    017C 5F0F      SUBI	R16,0xFF
+    017D 4F1F      SBCI	R17,0xFF
+    017E 4F2F      SBCI	R18,0xFF
+    017F 4F3F      SBCI	R19,0xFF
+    0180 9508      RET
+NEGMANT2:
+    0181 9580      COM	R24
+    0182 9590      COM	R25
+    0183 95A0      COM	R26
+    0184 95B0      COM	R27
+    0185 5F8F      SUBI	R24,0xFF
+    0186 4F9F      SBCI	R25,0xFF
+    0187 4FAF      SBCI	R26,0xFF
+    0188 4FBF      SBCI	R27,0xFF
+    0189 9508      RET
+TSTZERO1:
+tstzero1:
+    018A 24CC      CLR	R12
+    018B 2AC0      OR	R12,R16
+    018C 2AC1      OR	R12,R17
+    018D 2AC2      OR	R12,R18
+    018E 2AC3      OR	R12,R19
+    018F 9508      RET
+TSTZERO2:
+tstzero2:
+    0190 24CC      CLR	R12
+    0191 2AC8      OR	R12,R24
+    0192 2AC9      OR	R12,R25
+    0193 2ACA      OR	R12,R26
+    0194 2ACB      OR	R12,R27
+    0195 9508      RET
+div32s:
+    0196 DFC6      RCALL	long_prolog
+    0197 D00C      RCALL	SDIV
+    0198 CFD3      RJMP	long_epilog
+div32u:
+    0199 DFC3      RCALL	long_prolog
+    019A D014      RCALL	UDIV
+    019B CFD0      RJMP	long_epilog
+mod32s:
+    019C DFC0      RCALL	long_prolog
+    019D D006      RCALL	SDIV
+    019E DFB9      RCALL	copy_quot
+    019F CFCC      RJMP	long_epilog
+mod32u:
+    01A0 DFBC      RCALL	long_prolog
+    01A1 D00D      RCALL	UDIV
+    01A2 DFB5      RCALL	copy_quot
+    01A3 CFC8      RJMP	long_epilog
+SDIV:
+    01A4 2333      TST	R19
+    01A5 F02A      BMI	0x01AB
+    01A6 23BB      TST	R27
+    01A7 F43A      BPL	0x01AF
+    01A8 DFD8      RCALL	NEGMANT2
+    01A9 D005      RCALL	UDIV
+    01AA CFCD      RJMP	NEGMANT1
+    01AB DFCC      RCALL	NEGMANT1
+    01AC 23BB      TST	R27
+    01AD F7DA      BPL	0x01A9
+    01AE DFD2      RCALL	NEGMANT2
+UDIV:
+    01AF DFE0      RCALL	TSTZERO2
+    01B0 F131      BEQ	0x01D7
+    01B1 DFD8      RCALL	TSTZERO1
+    01B2 F101      BEQ	0x01D3
+    01B3 2488      CLR	R8
+    01B4 2499      CLR	R9
+    01B5 24AA      CLR	R10
+    01B6 24BB      CLR	R11
+    01B7 0F00      LSL	R16
+    01B8 1F11      ROL	R17
+    01B9 1F22      ROL	R18
+    01BA 1F33      ROL	R19
+    01BB E2E0      LDI	R30,0x20
+    01BC 1C88      ROL	R8
+    01BD 1C99      ROL	R9
+    01BE 1CAA      ROL	R10
+    01BF 1CBB      ROL	R11
+    01C0 1688      CP	R8,R24
+    01C1 0699      CPC	R9,R25
+    01C2 06AA      CPC	R10,R26
+    01C3 06BB      CPC	R11,R27
+    01C4 F030      BCS	0x01CB
+    01C5 1A88      SUB	R8,R24
+    01C6 0A99      SBC	R9,R25
+    01C7 0AAA      SBC	R10,R26
+    01C8 0ABB      SBC	R11,R27
+    01C9 9408      BSET	0
+    01CA C001      RJMP	0x01CC
+    01CB 9488      BCLR	0
+    01CC 1F00      ROL	R16
+    01CD 1F11      ROL	R17
+    01CE 1F22      ROL	R18
+    01CF 1F33      ROL	R19
+    01D0 95EA      DEC	R30
+    01D1 F751      BNE	0x01BC
+    01D2 9508      RET
+    01D3 2488      CLR	R8
+    01D4 2499      CLR	R9
+    01D5 24AA      CLR	R10
+    01D6 24BB      CLR	R11
+    01D7 9508      RET

@@ -1,0 +1,5 @@
+"LDChip.obj",
+"main.obj",
+"Reg_RW.obj" 
+TO "99LD332OTEST_RUN" 
+RAMSIZE(256) 

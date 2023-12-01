@@ -1,0 +1,96 @@
+C51 COMPILER V8.05a   MAIN                                                                 03/10/2012 17:46:19 PAGE 1   
+
+
+C51 COMPILER V8.05a, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "ir_send.h"
+   2          #include "extern.h"
+   3          
+   4          
+   5          
+   6          
+   7          
+   8          void delay(void)   //误差 0us
+   9          {
+  10   1          unsigned char a,b,c;
+  11   1          for(c=3;c>0;c--)
+  12   1              for(b=116;b>0;b--)
+  13   1                  for(a=214;a>0;a--);
+  14   1      }
+  15          
+  16          void key()
+  17          {
+  18   1              if(!P01)
+  19   1              {
+  20   2                      while(!P01);
+  21   2                      ir_send(0x55);                                  //节电
+  22   2              }       
+  23   1              if(!P02)
+  24   1              {
+  25   2                      while(!P02);    
+  26   2                      ir_send(0xaa);                                  //电源
+  27   2              }
+  28   1              if(!P03)
+  29   1              {
+  30   2                      while(!P03);    
+  31   2                      ir_send(0x00);                                  //冲洗
+  32   2              }
+  33   1              if(!P04)
+  34   1              {
+  35   2                      while(!P04);    
+  36   2                      ir_send(0xff);                                  //烘干
+  37   2              }
+  38   1              if(!P05)
+  39   1              {
+  40   2                      while(!P05);    
+  41   2                      ir_send(0xbb);                                  //下移
+  42   2              }
+  43   1              if(!P06)
+  44   1              {
+  45   2                      while(!P06);    
+  46   2                      ir_send(0x5a);                                  //女性
+  47   2              }
+  48   1              if(!P07)
+  49   1              {
+  50   2                      while(!P07);    
+  51   2                      ir_send(0xa5);                                  //上移
+  52   2              }
+  53   1      }
+  54          
+  55          
+C51 COMPILER V8.05a   MAIN                                                                 03/10/2012 17:46:19 PAGE 2   
+
+  56          
+  57          void main(void)
+  58          {
+  59   1              ir_init();
+  60   1      
+  61   1              P0 = 0xff;      
+  62   1              while(1)
+  63   1              {
+  64   2                      delay();
+  65   2                      key();
+  66   2              }
+  67   1      }
+  68          
+  69          
+  70          
+  71          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    105    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

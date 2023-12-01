@@ -1,0 +1,108 @@
+                         .module .8515intr.c
+                         .area vector(rom, abs)
+                         .org 12
+ 0006  C036              rjmp _timer
+                         .area data(ram, con, rel)
+ 0030                  _led_image::
+ 0030                    .blkb 1
+                         .area idata
+--- 0000 FF                .byte 255
+                         .area data(ram, con, rel)
+--- 0000                   .dbfile D:\ICC-AVR\examples.sl\interrupt\8515intr.c
+--- 0000                   .dbsym s led_image _led_image c
+                         .area text(rom, con, rel)
+--- 0000                   .dbfile D:\ICC-AVR\examples.sl\interrupt\8515intr.c
+--- 0000                   .dbfunc s main _main fI
+                         .even
+ 002E                  _main::
+ 002E                    .dbline 9{
+                       ; #include <io8515.h>
+                       ; #pragma interrupt_handler timer:TOV1
+                       ; 
+                       ; char led_image = 0xFF;  // 关闭全部LED
+                       ; /***************************************
+                       ;           主程序入口
+                       ; ***************************************/
+                       ; void main()
+                       ; {
+ 002E                    .dbline 13
+                       ; /***************************
+                       ;    初始化8515寄存器
+                       ; ***************************/
+                       ;         DDRB = 0xFF;
+ 002E  EF8F              ldi R24,255
+ 002F  BB87              out 0x17,R24
+ 0030                    .dbline 14
+                       ;         PORTB = 0x00;
+ 0030  2422              clr R2
+ 0031  BA28              out 0x18,R2
+ 0032                    .dbline 15
+                       ;         TCCR1A=0;
+ 0032  BC2F              out 0x2f,R2
+ 0033                    .dbline 16
+                       ;         TCCR1B = 0x00;          // 停止定时器1
+ 0033  BC2E              out 0x2e,R2
+ 0034                    .dbline 17
+                       ;         TCNT1H = 0x00;          // 清除定时器1
+ 0034  BC2D              out 0x2d,R2
+ 0035                    .dbline 18
+                       ;         TCNT1L = 0x00;
+ 0035  BC2C              out 0x2c,R2
+ 0036                    .dbline 19
+                       ;         TIMSK=0x80;           // 开放定时器1溢出中断
+ 0036  E880              ldi R24,128
+ 0037  BF89              out 0x39,R24
+ 0038                    .dbline 20
+                       ;         SREG|=0x80;
+ 0038  9478              bset 7
+ 0039                    .dbline 21
+                       ;         TCCR1B =0x03;          // 启动定时器1 预分频比例64
+ 0039  E083              ldi R24,3
+ 003A  BD8E              out 0x2e,R24
+ 003B                  L2:
+ 003B                    .dbline 23
+ 003B                  L3:
+ 003B                    .dbline 22
+                       ;         while (1)
+ 003B  CFFF              rjmp L2
+ 003C                  X0:
+ 003C                    .dbline 24}
+                       ;     ;
+                       ; }
+ 003C                  L1:
+ 003C  9508              ret
+ 003D                    .dbfunc s timer _timer fI
+                         .even
+ 003D                  _timer::
+ 003D  922A              st -y,R2
+ 003E  938A              st -y,R24
+ 003F  939A              st -y,R25
+ 0040  B62F              in R2,0x3f
+ 0041  922A              st -y,R2
+ 0042                    .dbline 29{
+                       ; /*************************************
+                       ;    在定时器中断中改变LED的显示状态
+                       ; *************************************/
+                       ; void timer()
+                       ; {
+ 0042                    .dbline 30
+                       ;  PORTB = ++led_image;
+ 0042  91800060          lds R24,_led_image
+ 0044  5F8F              subi R24,255    ; addi 1
+ 0045  2E28              mov R2,R24
+ 0046  92200060          sts _led_image,R2
+ 0048  BA28              out 0x18,R2
+ 0049                    .dbline 31
+                       ;  PORTC=~PORTC;
+ 0049  B225              in R2,0x15
+ 004A  9420              com R2
+ 004B  BA25              out 0x15,R2
+ 004C                    .dbline 32}
+                       ; }
+ 004C                  L5:
+ 004C  9029              ld R2,y+
+ 004D  BE2F              out 0x3f,R2
+ 004E  9199              ld R25,y+
+ 004F  9189              ld R24,y+
+ 0050  9029              ld R2,y+
+ 0051  9518              reti

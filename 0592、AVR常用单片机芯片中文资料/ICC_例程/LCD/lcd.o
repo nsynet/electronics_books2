@@ -1,0 +1,54 @@
+XL
+H 3 areas 6 global symbols
+M lcd.c
+S _lcd_gotoxy Ref0000
+S _lcd_init Ref0000
+S _delay_ms Ref0000
+S _lcd_puts Ref0000
+S _lcd_clear Ref0000
+A text size 40 flags 0
+dbfile D:\ICC-AVR\examples.sl\LCD\lcd.c
+dbfunc s main 0 fI
+dbline C 0 {
+dbline D 0
+dbline E 4
+dbline 10 8
+dbline 11 8
+dbline 12 E
+dbline 13 14
+dbline 14 1A
+dbline 15 1C
+dbline 16 22
+dbline 17 28
+dbline 18 2E
+dbline 19 34
+dbline 1A 3A
+dbline 1B 3C
+dbline F 3C
+dbline 1C 3E }
+S _main Def0000
+A data size 23 flags 20
+dbfile D:\ICC-AVR\examples.sl\LCD\lcd.c
+A idata size 23 flags 0
+T 00 00 22 24 25 BE 00 D0 1A C0 22 27 02 E0 00 D0
+R 00 00 00 00 82 06 01 00 82 0E 00 00
+T 0E 00 00 E0 10 E0
+R 00 00 00 00 20 02 01 00 16 00 40 04 01 00 16 00
+T 12 00 00 D0 00 ED 17 E0 00 D0 00 D0 22 27 04 E0
+R 00 00 00 00 82 02 03 00 82 08 02 00 82 0A 04 00
+T 20 00 00 D0 00 E0
+R 00 00 00 00 82 02 00 00 20 04 01 00 0E 00
+T 24 00 10 E0 00 D0 21 E0 01 E0
+R 00 00 00 00 40 02 01 00 0E 00 82 04 03 00
+T 2C 00 00 D0 00 E0
+R 00 00 00 00 82 02 00 00 20 04 01 00 00 00
+T 30 00 10 E0 00 D0 00 ED 17 E0
+R 00 00 00 00 40 02 01 00 00 00 82 04 03 00
+T 38 00 00 D0 00 D0 E5 CF 08 95
+R 00 00 00 00 82 02 02 00 82 04 04 00
+T 00 00 77 77 77 2E 73 6C 2E 63 6F 6D 2E 63 6E 00
+R 00 00 02 00
+T 0E 00 48 54 54 50 3A 2F 2F 00
+R 00 00 02 00
+T 16 00 48 65 6C 6C 6F 20 57 6F 72 6C 64 21 00
+R 00 00 02 00

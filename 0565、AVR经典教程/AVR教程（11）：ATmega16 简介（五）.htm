@@ -1,0 +1,740 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0044)http://www.c51.cn/avr/avrjc/200804/7775.html -->
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>AVR教程（11）：ATmega16 简介（五）</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="" name=Keywords>
+<META content="" name=Description><LINK 
+href="AVR教程（11）：ATmega16 简介（五）.files/style.css" type=text/css rel=stylesheet>
+<SCRIPT src="AVR教程（11）：ATmega16 简介（五）.files/chinaz.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="AVR教程（11）：ATmega16 简介（五）.files/prototype.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（11）：ATmega16 简介（五）.files/scriptaculous.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（11）：ATmega16 简介（五）.files/checklogin.js"></SCRIPT>
+
+<SCRIPT language=JavaScript>
+<!--
+//改变图片大小
+function resizepic(thispic)
+{
+  return true;
+}
+//无级缩放图片大小
+function bbimg(o)
+{
+  return true;
+}
+-->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3395" name=GENERATOR></HEAD>
+<BODY>
+<DIV class=container>
+<DIV class="clearfix header">
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width="100%" 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle>
+      <DIV id=UserLogin>载入中…
+      <SCRIPT language=JavaScript 
+      type=text/JavaScript>LoadUserLogin('/',1,2);</SCRIPT>
+       </DIV></TD>
+    <TD align=middle width="14%">
+      <SCRIPT language=javascript 
+      src="AVR教程（11）：ATmega16 简介（五）.files/Date.js"></SCRIPT>
+      　</TD></TR></TBODY></TABLE>
+<DIV class=topnav>
+<P align=center><A href="http://www.c51.cn/">http://www.c51.cn/</A> | <A 
+title="" href="http://www.c51.cn/honews/Index.html">新闻中心</A> | <A 
+href="http://www.c51.cn/mcu/Index.html">51单片机</A> | <A 
+href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+href="http://www.c51.cn/avr/Index.html">AVR单片机</A> | <A 
+href="http://www.c51.cn/holtek/Index.html">合泰单片机</A> | <A title="" 
+href="http://www.c51.cn/Photo/Index.html">电路图站</A> | <A title="" 
+href="http://www.c51.cn/pcb/">EDA技术</A> | <A title="" 
+href="http://www.c51.cn/power/">电源技术</A> | <A title="" 
+href="http://www.c51.cn/cgq/">传感技术</A> | <A title="" 
+href="http://www.c51.cn/GuestBook/Index.asp">雁过留声</A> | <A title="" 
+href="http://www.stcmcu.cn/bbs/">技术论坛</A> | <A 
+href="http://www.c51.cn/avr/avrjc/200804/" name=StranLink>切换到繁體中文</A>
+<SCRIPT language=javascript 
+src="AVR教程（11）：ATmega16 简介（五）.files/gb_big5.js"></SCRIPT>
+ |</P></DIV>
+<DIV class=brand><A class=site-logo title=中国单片机资讯网官方网站 href="http://www.c51.cn/" 
+rel=home><IMG height=60 alt=中国单片机资讯网官方网站 
+src="AVR教程（11）：ATmega16 简介（五）.files/logo.gif" width=165></A> </DIV>
+<DIV class=ad-banner>
+<SCRIPT language=javascript src="AVR教程（11）：ATmega16 简介（五）.files/19.js"></SCRIPT>
+</DIV>
+<DIV class=ad-text>
+<SCRIPT language=JavaScript src="AVR教程（11）：ATmega16 简介（五）.files/text_link.htm" 
+charset=gb2312></SCRIPT>
+
+<TABLE id=table1 cellSpacing=0 cellPadding=2 width=255 border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff0000><IMG 
+      src="AVR教程（11）：ATmega16 简介（五）.files/td_icon.gif" align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/hdfk/index.html"><FONT 
+      color=#ff0000>货到付款网点</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（11）：ATmega16 简介（五）.files/top_ico8.gif" 
+      align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wzhelp/200807/8109.html">订购方法</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（11）：ATmega16 简介（五）.files/top_ico2.gif" 
+      align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A></TD></TR>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff00ff><IMG 
+      src="AVR教程（11）：ATmega16 简介（五）.files/td_icon.gif" align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/wwwgl/200508/23.html"><FONT 
+      color=#ff00ff>银行汇款帐号</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（11）：ATmega16 简介（五）.files/top_ico8.gif" 
+      align=absBottom></SPAN><A 
+    href="http://shop35907817.taobao.com/">淘宝商店</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（11）：ATmega16 简介（五）.files/top_ico2.gif" 
+      align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200808/8156.html">VIP申请</A></TD></TR></TBODY></TABLE></DIV></DIV>
+<DIV class=nav>
+<DIV class=navinner>
+<UL class=navlist>
+  <LI><A href="http://www.c51.cn/">首页</A> </LI>
+  <LI><A id=nav_1 onmouseover="showMenu('nav_1','subnav1')" 
+  href="http://www.c51.cn/mcu/">单片机站</A> 
+  <DIV class="subnav disable" id=subnav1>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/mcu/">MCS-51单片机</A> | <A 
+  href="http://www.c51.cn/avr/">AVR单片机</A> | <A 
+  href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+  href="http://www.c51.cn/stc/">STC单片机</A> | <A 
+  href="http://www.c51.cn/mp430/">MSP430单片机</A> | <A 
+  href="http://www.c51.cn/holtek/">合泰单片机</A> | <A 
+  href="http://www.c51.cn/emc/">义隆单片机</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_2 onmouseover="showMenu('nav_2','subnav2')" 
+  href="http://www.c51.cn/shop/">网站商城</A> 
+  <DIV class="subnav disable" id=subnav2>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Shop/mcukf/">开发板/学习板</A> | <A 
+  href="http://www.c51.cn/Shop/gkong/">工业控制板</A> | <A 
+  href="http://www.c51.cn/Shop/bcq/">编程器</A> | <A 
+  href="http://www.c51.cn/Shop/fzq/">仿真器</A> | <A 
+  href="http://www.c51.cn/Shop/ic/">电子元器件</A> | <A 
+  href="http://www.c51.cn/Shop/cygj/">常用小工具</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_3 onmouseover="showMenu('nav_3','subnav3')" 
+  href="http://www.c51.cn/cpsm/Index.html">产品帮助</A> 
+  <DIV class="subnav disable" id=subnav3>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/cpsm/sl2000/">SL2000</A> | <A 
+  href="http://www.c51.cn/cpsm/sl800/">SL1800</A> | <A 
+  href="http://www.c51.cn/cpsm/sl480/">SL480+</A> | <A 
+  href="http://www.c51.cn/cpsm/sl300/">成功三号</A> | <A 
+  href="http://www.c51.cn/cpsm/sl200/">SL200</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc15/">NPLC-15</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc24/">NPLC-24</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc25/">NPLC-25</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc28/">NPLC-28</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_4 onmouseover="showMenu('nav_4','subnav4')" 
+  href="http://www.c51.cn/Article/">技术论文</A> 
+  <DIV class="subnav disable" id=subnav4>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Article/mcuzh/">开发论文</A> | <A 
+  href="http://www.c51.cn/Article/lexu/">嵌入式系统</A> | <A 
+  href="http://www.c51.cn/Article/arm/">ARM专栏</A> | <A 
+  href="http://www.c51.cn/Article/dsp/">DSP专栏</A> | <A 
+  href="http://www.c51.cn/Article/tx/">通信技术 | <A 
+  href="http://www.c51.cn/Article/ycx/">各类源程序</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_5 onmouseover="showMenu('nav_5','subnav5')" 
+  href="http://www.c51.cn/iczldata/">资料查询</A> 
+  <DIV class="subnav disable" id=subnav5>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/iczldata/ttl74/">74XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/cd40/">CD4XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/ram/">存储器系列</A> | <A 
+  href="http://www.c51.cn/iczldata/adda/">A/D&amp;DA</A> | <A 
+  href="http://www.c51.cn/iczldata/yf/">运算放大器</A> | <A 
+  href="http://www.c51.cn/iczldata/power/">电源管理IC</A> | <A 
+  href="http://www.c51.cn/iczldata/scr/">可控硅</A> | <A 
+  href="http://www.c51.cn/iczldata/yp/">音频视频</A> | <A 
+  href="http://www.c51.cn/iczldata/fmic/">通信IC</A> | <A 
+  href="http://www.c51.cn/iczldata/guou/">光电耦合器</A> | <A 
+  href="http://www.c51.cn/iczldata/dv/">二、三极管</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_6 onmouseover="showMenu('nav_6','subnav6')" 
+  href="http://www.c51.cn/soft">资源下载</A> 
+  <DIV class="subnav disable" id=subnav6>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/soft/kfgj/">开发工具</A> | <A 
+  href="http://www.c51.cn/soft/gjrj/">常用工具</A> | <A 
+  href="http://www.c51.cn/soft/spjc/">视频教程</A> | <A 
+  href="http://www.c51.cn/soft/dzbooks/">电子书籍</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_7 onmouseover="showMenu('nav_7','subnav7')" 
+  href="http://www.c51.cn/dzjs/">电子技术</A> 
+  <DIV class="subnav disable" id=subnav7>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/dzjs/yjcs/index.html">电子基础</A> | <A 
+  href="http://www.c51.cn/dzjs/szdl/">数字电路</A> | <A 
+  href="http://www.c51.cn/dzjs/mndl/">模拟电路</A> | <A 
+  href="http://www.c51.cn/dzjs/io/">接口电路</A> | <A 
+  href="http://www.c51.cn/dzjs/xpyy/">芯片应用</A> | <A 
+  href="http://www.c51.cn/dzjs/zhzl/">综合资料</A> | <A 
+  href="http://www.c51.cn/dzjs/wqj/">元件常识</A> 
+</SPAN></P></DIV></LI></UL></DIV></DIV>
+<DIV class=note><SPAN><A href="http://www.c51.cn/User/Index.asp"><IMG 
+src="AVR教程（11）：ATmega16 简介（五）.files/td_icon.gif" align=absBottom> 我要投稿</A> <A 
+href="http://www.c51.cn/glwz/wwwgl/200602/1853.html"><IMG 
+src="AVR教程（11）：ATmega16 简介（五）.files/tg_icon.gif" align=absBottom> 投稿指南</A> <A 
+href="http://www.c51.cn/xml/Rss.xml"><IMG 
+src="AVR教程（11）：ATmega16 简介（五）.files/rss.gif" align=absBottom> RSS订阅</A></SPAN> 
+<B>网站通告:</B> 
+<MARQUEE onmouseover=this.stop() style="WIDTH: 477px; HEIGHT: 15px" 
+onmouseout=this.start() scrollAmount=1 scrollDelay=4 width=477 align="left">
+<P>&nbsp;&nbsp;没有公告</P></MARQUEE></DIV>
+<FORM name=search action=search.asp method=post>
+<DIV class=weizhi><SPAN><B>搜索:</B> <INPUT type=hidden value=0 name=kwtype> 
+<INPUT id=Keyword maxLength=50 value=关键字 name=Keyword> <INPUT class=searchtxt 
+id=Field type=hidden value=Title name=Field> <OPTION selected="selected" 
+value="title">搜索标题</OPTION> </SELECT><INPUT type=image 
+src="AVR教程（11）：ATmega16 简介（五）.files/topsearch_submit.gif"> 
+</SPAN>您现在的位置：&nbsp;<A class=LinkPath 
+href="http://www.c51.cn/">中国单片机资讯网</A>&nbsp;&gt;&gt;&nbsp;<A class=LinkPath 
+href="http://www.c51.cn/avr/Index.html">AVR单片机站</A>&nbsp;&gt;&gt;&nbsp;<A 
+class=LinkPath 
+href="http://www.c51.cn/avr/avrjc/Index.html">教程</A>&nbsp;&gt;&gt;&nbsp;正文 
+</DIV></FORM><!--列表左边:开始--><!--列表左边:开始-->
+<DIV class="clearfix wrap layout-cols2">
+<DIV class=col1>
+<DIV id=news>
+<H1>AVR教程（11）：ATmega16&nbsp;简介（五）</H1>
+<DIV class=times>2008-06-10 13:50:46 来源:<A 
+href="http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net">http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net</A> 
+作者:<A title=微雪电子 
+href="http://www.c51.cn/ShowAuthor.asp?ChannelID=1035&amp;AuthorName=微雪电子">微雪电子</A> 
+【<A href="javascript:doZoom(16)">大</A> <A href="javascript:doZoom(14)">中</A> <A 
+href="javascript:doZoom(12)">小</A>】 <A class=fsource 
+href="http://www.c51.cn/avr/avrjc/200804/7775.html#plshow">点击：<FONT 
+id=feedcounttop color=red>
+<SCRIPT language=javascript 
+src="AVR教程（11）：ATmega16 简介（五）.files/GetHits.htm"></SCRIPT>
+</FONT> 次</A> </DIV>
+<DIV class=content id=textbody>
+<SCRIPT language=javascript src="AVR教程（11）：ATmega16 简介（五）.files/28.js"></SCRIPT>
+</DIV>
+<DIV class=content>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">减少功耗的方法</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>试图降低<SPAN lang=EN-US>AVR 
+</SPAN>控制系统的功耗时需要考虑几个问题。一般来说，要尽可能利用睡眠模式，并且使尽可能少的模块继续工作。不需要的功能必须禁止。下面的模块需要特殊考虑以达到尽可能低的功耗。</FONT><SPAN 
+lang=EN-US><BR><BR></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">模数转换器</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>使能时，<SPAN lang=EN-US> ADC 
+</SPAN>在睡眠模式下继续工作。为了降低功耗，在进入睡眠模式之前需要禁止<SPAN 
+lang=EN-US>ADC</SPAN>。重新启动后的第一次转换为扩展的转换。具体请参照<SPAN lang=EN-US>P192“ 
+</SPAN>模数转换器<SPAN lang=EN-US>” </SPAN>。</FONT><SPAN 
+lang=EN-US><BR><BR></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">模拟比较器</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>在空闲模式时，如果没有使用模拟比较器，可以将其关闭。在<SPAN 
+lang=EN-US>ADC 
+</SPAN>噪声抑制模式下也是如此。在其他睡眠模式模拟比较器是自动关闭的。如果模拟比较器使用了内部电压基准源，则不论在什么睡眠模式下都需要关闭它。否则内部电压基准源将一直使能。请参见<SPAN 
+lang=EN-US>P189“ </SPAN>模拟比较器<SPAN lang=EN-US>” </SPAN>以了解如何配置模拟比较器。</FONT><SPAN 
+lang=EN-US><BR><BR></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">掉电检测</SPAN></SPAN><SPAN 
+class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>BOD 
+</FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"><BR><BR></SPAN><SPAN style="FONT-SIZE: 9pt"><FONT 
+face=宋体>如果系统没有利用掉电检测器<SPAN lang=EN-US>BOD</SPAN>，这个模块也可以关闭。如果熔丝位<SPAN 
+lang=EN-US>BODEN </SPAN>被编程，从而使能了<SPAN lang=EN-US>BOD 
+</SPAN>功能，它将在各种休眠模式下继续工作。在深层次的休眠模式下，这个电流将占总电流的很大比重。请参看<SPAN lang=EN-US>P38“ 
+</SPAN>掉电检测<SPAN lang=EN-US>” </SPAN>以了解如何配置<SPAN 
+lang=EN-US>BOD</SPAN>。</FONT><SPAN lang=EN-US><BR><BR></SPAN></SPAN><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">片内基准电压</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>使用<SPAN lang=EN-US>BOD</SPAN>、模拟比较器和<SPAN 
+lang=EN-US>ADC 
+</SPAN>时可能需要内部电压基准源。若这些模块都禁止了，则基准源也可以禁止。重新使能后用户必须等待基准源稳定之后才可以使用它。如果基准源在休眠过程中是使能的，其输出立即可以使用。请参见<SPAN 
+lang=EN-US>P40“ </SPAN>片内基准电压<SPAN lang=EN-US>” 
+</SPAN>以了解基准源启动时间的细节。</FONT><SPAN lang=EN-US><BR><BR></SPAN></SPAN><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">看门狗定时器</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT 
+face=宋体>如果系统无需利用看门狗，这个模块也可以关闭。若使能，则在任何休眠模式下都持续工作，从而消耗电流。在深层次的睡眠模式下，这个电流将占总电流的很大比重。请参看<SPAN 
+lang=EN-US>P40“ </SPAN>看门狗定时器<SPAN lang=EN-US>” 
+</SPAN>以了解如何配置看门狗定时器。</FONT><SPAN lang=EN-US><BR><BR></SPAN></SPAN><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">端口引脚</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT 
+face=宋体>进入休眠模式时，所有的端口引脚都应该配置为只消耗最小的功耗。最重要的是避免驱动电阻性负载。在休眠模式下<SPAN lang=EN-US>I/O 
+</SPAN>时钟<SPAN lang=EN-US>clkI/O </SPAN>和<SPAN lang=EN-US>ADC </SPAN>时钟<SPAN 
+lang=EN-US>clkADC 
+</SPAN>都被停止了，输入缓冲器也禁止了，从而保证输入电路不会消耗电流。在某些情况下输入逻辑是使能的，用来检测唤醒条件。用于此功能的具体引脚请参见<SPAN 
+lang=EN-US>P52“ </SPAN>数字输入使能和休眠模式<SPAN lang=EN-US>” </SPAN>。 
+如果输入缓冲器是使能的，此时输入不能悬空，信号电平也不应该接近<SPAN 
+lang=EN-US>VCC/2</SPAN>，否则输入缓冲器会消耗额外的电流。</FONT><SPAN lang=EN-US><FONT face=宋体> 
+<BR><BR></FONT></SPAN></SPAN><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>JTAG 
+</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">接口与片上调试系统</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>如果通过熔丝位<SPAN 
+lang=EN-US>OCDEN</SPAN>使能了片上调试系统，当芯片进入掉电或省电模式时主时钟保持运行。在休眠模式中这个电流占总电流的很大比重。下面有三种替代方法：</FONT><SPAN 
+lang=EN-US><BR><FONT face=宋体>? </FONT></SPAN><FONT face=宋体>不编程</FONT><FONT 
+face=宋体><SPAN lang=EN-US>OCDEN<BR>? </SPAN>不编程</FONT><FONT face=宋体><SPAN 
+lang=EN-US>JTAGEN<BR>? </SPAN>置位<SPAN lang=EN-US>MCUCSR </SPAN>的</FONT><FONT 
+face=宋体><SPAN lang=EN-US>JTD<BR></SPAN>当<SPAN lang=EN-US>JTAG </SPAN>接口使能而<SPAN 
+lang=EN-US>JTAG TAP </SPAN>控制器没有进行数据交换时，引脚<SPAN lang=EN-US>TDO 
+</SPAN>将悬空。如果与<SPAN lang=EN-US>TDO </SPAN>引脚连接的硬件电路没有上拉电阻，功耗将增加。器件的引脚<SPAN 
+lang=EN-US>TDI </SPAN>包含一个上拉电阻，因此在扫描链中无需为下一个芯片的<SPAN lang=EN-US>TDO 
+</SPAN>引脚设置上拉电阻。通过置位<SPAN lang=EN-US>MCUCSR</SPAN>寄存器的<SPAN lang=EN-US>JTD 
+</SPAN>或不对<SPAN lang=EN-US>JTAG </SPAN>熔丝位编程可以禁止<SPAN lang=EN-US>JTAG </SPAN>接口。 
+<SPAN lang=EN-US></SPAN></FONT></SPAN></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">复位源</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">复位</SPAN></SPAN><SPAN 
+class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>AVR 
+</FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"><BR><BR></SPAN><SPAN style="FONT-SIZE: 9pt"><FONT 
+face=宋体>复位时所有的<SPAN lang=EN-US>I/O 
+</SPAN>寄存器都被设置为初始值，程序从复位向量处开始执行。复位向量处的指令必须是绝对跳转<SPAN lang=EN-US>JMP 
+</SPAN>指令，以使程序跳转到复位处理例程。如果程序永远不利用中断功能，中断向量可以由一般的程序代码所覆盖。这个处理方法同样适用于当复位向量位于应用程序区，中断向量位于<SPAN 
+lang=EN-US>Boot </SPAN>区<SPAN lang=EN-US> — </SPAN>或者反过来<SPAN lang=EN-US> — 
+</SPAN>的时候。<SPAN lang=EN-US>Figure 15 </SPAN>为复位逻辑的电路图。<SPAN lang=EN-US>Table 15 
+</SPAN>则定义了复位电路的电气参数。</FONT><SPAN lang=EN-US><BR><BR></SPAN><FONT 
+face=宋体>复位源有效时<SPAN lang=EN-US>I/O 
+</SPAN>端口立即复位为初始值。此时不要求任何时钟处于正常运行状态。</FONT><SPAN lang=EN-US><BR><BR></SPAN><FONT 
+face=宋体>所有的复位信号消失之后，芯片内部的一个延迟计数器被激活，将内部复位的时间延长。这种处理方式使得在<SPAN lang=EN-US>MCU 
+</SPAN>正常工作之前有一定的时间让电源达到稳定的电平。延迟计数器的溢出时间通过熔丝位<SPAN lang=EN-US>SUT </SPAN>与<SPAN 
+lang=EN-US>CKSEL </SPAN>设定。延迟时间的选择请参见<SPAN lang=EN-US> P23“ </SPAN>时钟源<SPAN 
+lang=EN-US>” </SPAN>。</FONT><SPAN lang=EN-US><BR><BR></SPAN></SPAN><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">复位源</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR><FONT face=宋体>ATmega16 
+</FONT></SPAN><SPAN style="FONT-SIZE: 9pt"><FONT face=宋体>有<SPAN lang=EN-US>5 
+</SPAN>个复位源：</FONT><SPAN lang=EN-US><BR><FONT face=宋体>? </FONT></SPAN><FONT 
+face=宋体>上电复位。电源电压低于上电复位门限<SPAN lang=EN-US> VPOT </SPAN>时，<SPAN lang=EN-US> MCU 
+</SPAN>复位。</FONT><SPAN lang=EN-US><BR><FONT face=宋体>? </FONT></SPAN><FONT 
+face=宋体>外部复位。引脚<SPAN lang=EN-US> RESET </SPAN>上的低电平持续时间大于最小脉冲宽度时<SPAN 
+lang=EN-US>MCU </SPAN>复位。</FONT><SPAN lang=EN-US><BR><FONT face=宋体>? 
+</FONT></SPAN><FONT face=宋体>看门狗复位。看门狗使能并且看门狗定时器溢出时复位发生。</FONT><SPAN 
+lang=EN-US><BR><FONT face=宋体>? </FONT></SPAN><FONT 
+face=宋体>掉电检测复位。掉电检测复位功能使能，且电源电压低于掉电检测复位门限<SPAN lang=EN-US> VBOT </SPAN>时<SPAN 
+lang=EN-US>MCU </SPAN>即复位。</FONT><SPAN lang=EN-US><BR><FONT face=宋体>? JTAG 
+AVR</FONT></SPAN><FONT face=宋体>复位。复位寄存器为<SPAN lang=EN-US>1</SPAN>时<SPAN 
+lang=EN-US>MCU</SPAN>复位。详见<SPAN lang=EN-US> P215“IEEE 1149.1 (JTAG) 
+</SPAN>边界扫描<SPAN lang=EN-US>”</SPAN>。</FONT></SPAN></P><SPAN 
+style="FONT-SIZE: 9pt"></SPAN>
+<P style="LINE-HEIGHT: 15pt"><SPAN lang=EN-US style="FONT-SIZE: 9pt"><FONT 
+face=宋体><IMG hspace=0 src="AVR教程（11）：ATmega16 简介（五）.files/20080401234702132.jpg" 
+align=baseline border=0></FONT></SPAN></P>
+<P style="LINE-HEIGHT: 15pt"><SPAN lang=EN-US style="FONT-SIZE: 9pt"><IMG 
+hspace=0 src="AVR教程（11）：ATmega16 简介（五）.files/20080401234703653.jpg" 
+align=baseline border=0></SPAN></P>
+<P style="LINE-HEIGHT: 15pt"><SPAN lang=EN-US style="FONT-SIZE: 9pt"><FONT 
+face=宋体>Notes: <BR>1. </FONT></SPAN><SPAN style="FONT-SIZE: 9pt"><FONT 
+face=宋体>电压下降时，只有电压低于<SPAN lang=EN-US>VPOT </SPAN>时复位才会发生。</FONT><SPAN 
+lang=EN-US><BR><FONT face=宋体>2. </FONT></SPAN><FONT face=宋体>一些器件的<SPAN 
+lang=EN-US>VBOT </SPAN>可能比标称的最小工作电压还要低。这些器件在生产测试过程中进行了<SPAN lang=EN-US>VCC = 
+VBOT </SPAN>的测试，保证在<SPAN lang=EN-US>VCC </SPAN>下降到处理器无法正常工作之前产生掉电检测复位。<SPAN 
+lang=EN-US>ATmega<CHMETCNV w:st="on" unitname="l" sourcevalue="16" 
+hasspace="False" negative="False" numbertype="1" tcsc="0" />16L</CHMETCNV /> 
+</SPAN>的测试条件为<SPAN lang=EN-US>BODLEVEL=1</SPAN>，<SPAN lang=EN-US> ATmega16 
+</SPAN>的测试条件为<SPAN lang=EN-US>BODLEVEL=0</SPAN>。<SPAN lang=EN-US>BODLEVEL=1 
+</SPAN>不适用于<SPAN lang=EN-US>ATmega16</SPAN>。<SPAN 
+lang=EN-US></SPAN></FONT></SPAN></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US></SPAN>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">上电复位</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>上电复位<SPAN lang=EN-US>(POR) 
+</SPAN>脉冲由片内检测电路产生。检测电平请参见<SPAN lang=EN-US> Table 15</SPAN>。 无论何时<SPAN 
+lang=EN-US>VCC </SPAN>低于检测电平<SPAN lang=EN-US>POR </SPAN>即发生。<SPAN lang=EN-US>POR 
+</SPAN>电路可以用来触发启动复位，或者用来检测电源故障。</FONT><SPAN lang=EN-US><BR><BR><FONT 
+face=宋体>POR</FONT></SPAN><FONT face=宋体>电路保证器件在上电时复位。<SPAN lang=EN-US>VCC 
+</SPAN>达到上电门限电压后触发延迟计数器。在计数器溢出之前器件一直保持为复位状态。当<SPAN lang=EN-US>VCC 
+</SPAN>下降时，只要低于检测门限，<SPAN lang=EN-US>RESET </SPAN>信号立即生效。</FONT></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt"><IMG hspace=0 
+src="AVR教程（11）：ATmega16 简介（五）.files/20080401234705354.jpg" align=baseline 
+border=0></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt"><IMG hspace=0 
+src="AVR教程（11）：ATmega16 简介（五）.files/20080401234706995.jpg" align=baseline 
+border=0></SPAN></P><SPAN style="FONT-SIZE: 9pt">
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">外部复位</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN style="FONT-SIZE: 9pt"><FONT 
+face=宋体>外部复位由外加于<SPAN lang=EN-US>RESET </SPAN>引脚的低电平产生。当复位低电平持续时间大于最小脉冲宽度时<SPAN 
+lang=EN-US>( </SPAN>参见<SPAN lang=EN-US>Table 15) 
+</SPAN>即触发复位过程，即使此时并没有时钟信号在运行。当外加信号达到复位门限电压<SPAN lang=EN-US>VRST( 
+</SPAN>上升沿<SPAN lang=EN-US>) </SPAN>时，<SPAN lang=EN-US> tTOUT 
+</SPAN>延时周期开始。延时结束后<SPAN lang=EN-US>MCU </SPAN>即启动。<SPAN 
+lang=EN-US></SPAN></FONT></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt; TEXT-ALIGN: center" align=center><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"><SHAPETYPE id=_x0000_t75 stroked="f" filled="f" 
+path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" 
+coordsize="21600,21600" /><STROKE joinstyle="miter" /><FORMULAS /><F 
+eqn="if lineDrawn pixelLineWidth 0" /><F eqn="sum @0 1 0" /><F eqn="sum 0 0 @1" 
+/><F eqn="prod @2 1 2" /><F eqn="prod @3 21600 pixelWidth" /><F 
+eqn="prod @3 21600 pixelHeight" /><F eqn="sum @0 0 1" /><F eqn="prod @6 1 2" 
+/><F eqn="prod @7 21600 pixelWidth" /><F eqn="sum @8 21600 0" /><F 
+eqn="prod @7 21600 pixelHeight" /><F eqn="sum @10 21600 0" /></FORMULAS /><PATH 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f" /><LOCK 
+aspectratio="t" v:ext="edit" /></SHAPETYPE /></SPAN></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US></SPAN>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US></SPAN>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">掉电检测</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><FONT face=宋体>ATmega16 </FONT></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>具有片内<SPAN lang=EN-US>BOD(Brown-out 
+Detection) </SPAN>电路，通过与固定的触发电平的对比来检测工作过程中<SPAN lang=EN-US>VCC 
+</SPAN>的变化。此触发电平通过熔丝位<SPAN lang=EN-US>BODLEVEL </SPAN>来设定，<SPAN lang=EN-US> 
+2.7V(BODLEVEL </SPAN>未编程<SPAN lang=EN-US>)</SPAN>，<SPAN lang=EN-US>4.0V 
+(BODLEVEL </SPAN>已编程<SPAN lang=EN-US>)</SPAN>。<SPAN lang=EN-US>BOD 
+</SPAN>的触发电平具有迟滞功能以消除电源尖峰的影响。这个迟滞功能可以解释为<SPAN lang=EN-US>VBOT+ = VBOT + VHYST/2 
+</SPAN>以及<SPAN lang=EN-US>VBOT- = VBOT- VHYST/2</SPAN>。</FONT><SPAN 
+lang=EN-US><BR><BR><FONT face=宋体>BOD </FONT></SPAN><FONT face=宋体>电路的开关由熔丝位<SPAN 
+lang=EN-US>BODEN</SPAN>控制。当<SPAN lang=EN-US>BOD</SPAN>使能后<SPAN 
+lang=EN-US>(BODEN</SPAN>被编程<SPAN lang=EN-US>)</SPAN>，一旦<SPAN 
+lang=EN-US>VCC</SPAN>下降到触发电平以下<SPAN lang=EN-US>(VBOT-</SPAN>，<SPAN lang=EN-US> 
+Figure 19)</SPAN>，<SPAN lang=EN-US> BOD </SPAN>复位立即被激发。当<SPAN lang=EN-US>VCC 
+</SPAN>上升到触发电平以上时<SPAN lang=EN-US>(VBOT+</SPAN>，<SPAN lang=EN-US>Figure 
+19)</SPAN>，延时计数器开始计数，一旦超过溢出时间<SPAN lang=EN-US>tTOUT</SPAN>，<SPAN 
+lang=EN-US>MCU</SPAN>即恢复工作。</FONT><SPAN lang=EN-US><BR><BR></SPAN><FONT 
+face=宋体>如果<SPAN lang=EN-US>VCC </SPAN>一直低于触发电平并保持如<SPAN lang=EN-US>Table 15 
+</SPAN>所示的时间<SPAN lang=EN-US>tBOD</SPAN>，<SPAN lang=EN-US> BOD 
+</SPAN>电路将只检测电压跌落。<SPAN lang=EN-US></SPAN></FONT></SPAN></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"><SHAPETYPE id=_x0000_t75 stroked="f" filled="f" 
+path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" 
+coordsize="21600,21600" /><STROKE joinstyle="miter" /><FORMULAS /><F 
+eqn="if lineDrawn pixelLineWidth 0" /><F eqn="sum @0 1 0" /><F eqn="sum 0 0 @1" 
+/><F eqn="prod @2 1 2" /><F eqn="prod @3 21600 pixelWidth" /><F 
+eqn="prod @3 21600 pixelHeight" /><F eqn="sum @0 0 1" /><F eqn="prod @6 1 2" 
+/><F eqn="prod @7 21600 pixelWidth" /><F eqn="sum @8 21600 0" /><F 
+eqn="prod @7 21600 pixelHeight" /><F eqn="sum @10 21600 0" /></FORMULAS /><PATH 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f" /><LOCK 
+aspectratio="t" v:ext="edit" /></SHAPETYPE /></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><IMG 
+hspace=0 src="AVR教程（11）：ATmega16 简介（五）.files/20080401234708446.jpg" 
+align=baseline border=0></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: #ff9900"><SHAPETYPE id=_x0000_t75 stroked="f" 
+filled="f" path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" 
+coordsize="21600,21600" /><STROKE joinstyle="miter" /><FORMULAS /><F 
+eqn="if lineDrawn pixelLineWidth 0" /><F eqn="sum @0 1 0" /><F eqn="sum 0 0 @1" 
+/><F eqn="prod @2 1 2" /><F eqn="prod @3 21600 pixelWidth" /><F 
+eqn="prod @3 21600 pixelHeight" /><F eqn="sum @0 0 1" /><F eqn="prod @6 1 2" 
+/><F eqn="prod @7 21600 pixelWidth" /><F eqn="sum @8 21600 0" /><F 
+eqn="prod @7 21600 pixelHeight" /><F eqn="sum @10 21600 0" /></FORMULAS /><PATH 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f" /><LOCK 
+aspectratio="t" v:ext="edit" /></SHAPETYPE /></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">看门狗复位</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>看门狗定时器溢出时将产生持续时间为<SPAN lang=EN-US>1 
+</SPAN>个<SPAN lang=EN-US>CK </SPAN>周期的复位脉冲。在脉冲的下降沿，延时定时器开始对<SPAN 
+lang=EN-US>tTOUT </SPAN>记数。请参见<SPAN lang=EN-US>P40 </SPAN>以了解看门狗定时器的具体操作过程。<SPAN 
+lang=EN-US></SPAN></FONT></SPAN></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"><SHAPETYPE id=_x0000_t75 stroked="f" filled="f" 
+path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" 
+coordsize="21600,21600" /><STROKE joinstyle="miter" /><FORMULAS /><F 
+eqn="if lineDrawn pixelLineWidth 0" /><F eqn="sum @0 1 0" /><F eqn="sum 0 0 @1" 
+/><F eqn="prod @2 1 2" /><F eqn="prod @3 21600 pixelWidth" /><F 
+eqn="prod @3 21600 pixelHeight" /><F eqn="sum @0 0 1" /><F eqn="prod @6 1 2" 
+/><F eqn="prod @7 21600 pixelWidth" /><F eqn="sum @8 21600 0" /><F 
+eqn="prod @7 21600 pixelHeight" /><F eqn="sum @10 21600 0" /></FORMULAS /><PATH 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f" /><LOCK 
+aspectratio="t" v:ext="edit" /></SHAPETYPE /></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><IMG 
+hspace=0 src="AVR教程（11）：ATmega16 简介（五）.files/20080401234709574.jpg" 
+align=baseline border=0></P>
+<P></P>
+<P>&nbsp;</P>
+<P></P>
+<P><FONT size=3><IMG hspace=0 
+src="AVR教程（11）：ATmega16 简介（五）.files/20080401234710478.jpg" align=baseline 
+border=0></FONT></P></SPAN></DIV>
+<DIV class=pagebreak></DIV>
+<DIV class=ding_box>
+<DIV align=left>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD align=middle width=700></TD></TR></TBODY></TABLE></DIV>
+<DIV align=left>
+<SCRIPT language=javascript src="AVR教程（11）：ATmega16 简介（五）.files/25.js"></SCRIPT>
+</DIV></DIV>
+<DIV class=text_tag>
+<H5>Tags：<B> AVR单片机学习 </B>&nbsp; </H5><SPAN>责任编辑：尘封往事</SPAN> 
+<LI style="DISPLAY: none">
+<SCRIPT language=javascript 
+src="AVR教程（11）：ATmega16 简介（五）.files/count.htm"></SCRIPT>
+</LI></DIV>
+<DIV align=right>【<A href="http://www.c51.cn/avr/Comment.asp?ArticleID=7775" 
+target=_blank>发表评论</A>】【<A 
+href="http://www.c51.cn/User/User_Favorite.asp?Action=Add&amp;ChannelID=1035&amp;InfoID=7775" 
+target=_blank>加入收藏</A>】【<A 
+href="http://www.c51.cn/avr/SendMail.asp?ArticleID=7775" 
+target=_blank>告诉好友</A>】【<A href="http://www.c51.cn/avr/Print.asp?ArticleID=7775" 
+target=_blank>打印此文</A>】【<A href="javascript:window.close();">关闭窗口</A>】 
+&nbsp;&nbsp; </DIV>
+<DIV class=xg>
+<LI>上一篇文章： <A class=LinkPrevArticle 
+title="文章标题：AVR教程（12）：ATmega16&nbsp;简介（六）&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:45:28" 
+href="http://www.c51.cn/avr/avrjc/200804/7774.html">AVR教程（12）：ATmega16&nbsp;简介（六）…</A> 
+</LI>
+<LI>下一篇文章： <A class=LinkNextArticle 
+title="文章标题：AVR教程（10）：ATmega16&nbsp;简介（四）&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:47:44" 
+href="http://www.c51.cn/avr/avrjc/200804/7776.html">AVR教程（10）：ATmega16&nbsp;简介（四）…</A> 
+</LI></DIV>
+<DIV class=box_xgimg>
+<DIV class=title_xg>最新图文 </DIV>
+<TABLE cellSpacing=5 cellPadding=0 width="100%" align=center border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（11）：ATmega16 简介（五）.files/20080807105131440.jpg" width=125 
+      border=0></A><BR><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+      target=_blank>基于AVR单片机的通用U…</A></TD>
+    <TD align=middle><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（11）：ATmega16 简介（五）.files/20080807104931309.jpg" width=125 
+      border=0></A><BR><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+      target=_blank>IP视频监控系统中云台…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（11）：ATmega16 简介（五）.files/20080402000055425.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+      target=_blank>AVR教程（1）：AVR单片…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（11）：ATmega16 简介（五）.files/20080401235756587.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+      target=_blank>AVR教程（2）：AVR单片…</A></TD></TR>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（11）：ATmega16 简介（五）.files/20080401235700490.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" 
+      target=_blank>AVR教程（3）：ICCAVR…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（11）：ATmega16 简介（五）.files/20080401235536700.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" 
+      target=_blank>AVR教程（4）：AVRStu…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（11）：ATmega16 简介（五）.files/20080401235450679.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" 
+      target=_blank>AVR教程（5）：使用AV…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（11）：ATmega16 简介（五）.files/20080401235250334.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" 
+      target=_blank>AVR教程（6）：ATmega…</A></TD></TR></TBODY></TABLE></DIV>
+<DIV class=box_xg>
+<DIV class=title_xg>相关文章列表 </DIV>
+<UL>
+  <LI><A class=LinkArticleCorrelative 
+  title="文章标题：嵌入式C编程与Atmel&nbsp;AVR[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:48" 
+  href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_self>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A><BR><A 
+  class=LinkArticleCorrelative 
+  title="文章标题：winAVR的安装[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:02" 
+  href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_self>winAVR的安装[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：winAVR背景知识[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:52:27" 
+  href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_self>winAVR背景知识[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR系列单片机C语言编程与应用实例[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:50:44" 
+  href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_self>AVR系列单片机C语言编程与应用实例[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：avr库函数介绍[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:49:07" 
+  href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_self>avr库函数介绍[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR高速嵌入式单片机原理与应用（修订版）[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:48:21" 
+  href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_self>AVR高速嵌入式单片机原理与应用（修订版）[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR单片机应用设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:47:36" 
+  href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_self>AVR单片机应用设计</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：ATmega8原理与应用[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:36:31" 
+  href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_self>ATmega8原理与应用[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（1）：AVR单片机介绍&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:58:21" 
+  href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+  target=_self>AVR教程（1）：AVR单片机介绍</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（2）：AVR单片机基本硬件设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:57:33" 
+  href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+  target=_self>AVR教程（2）：AVR单片机基本硬件设计</A><BR></LI></UL></DIV>
+<FORM name=form1 onsubmit="return Check();" action=Comment.asp method=post>
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width=600 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=right width=110>姓 名：</TD>
+    <TD width=180><INPUT maxLength=16 name=Name> <FONT color=red>*</FONT> </TD>
+    <TD align=right width=60>Oicq：</TD>
+    <TD width=170><INPUT maxLength=15 name=Oicq> </TD></TR>
+  <TR>
+    <TD align=right width=110>评 分：</TD>
+    <TD colSpan=3><INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=1 name=Score> 1分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=2 name=Score> 2分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio CHECKED value=3 name=Score> 3分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=4 name=Score> 4分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=5 name=Score> 5分 </TD></TR>
+  <TR>
+    <TD align=right>评论内容：</TD>
+    <TD colSpan=3><TEXTAREA id=Content name=Content rows=6 cols=80></TEXTAREA> 
+    </TD></TR>
+  <TR>
+    <TD align=middle colSpan=4><INPUT id=Action type=hidden value=Save 
+      name=Action> <INPUT id=ArticleID type=hidden value=7775 name=ArticleID> <INPUT type=submit value=" 发 表 " name=Submit> </TD></TR>
+  <TR>
+    <TD height=5></TD></TR></TBODY></TABLE></FORM></DIV></FORM>
+<DIV class=pl>
+<DIV class=pl_title></DIV>
+<SCRIPT language=javascript 
+src="AVR教程（11）：ATmega16 简介（五）.files/Comment.htm"></SCRIPT>
+</DIV></DIV><!--列表左边:结束--><!--列表右边:开始-->
+<DIV class=col2>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>推荐文章 </DIV>
+<UL>
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+  target=_blank>基于AVR单片机的通用USB接口模块设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+  target=_blank>IP视频监控系统中云台控制模块的设计与…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_blank>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_blank>winAVR的安装[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_blank>winAVR背景知识[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_blank>AVR系列单片机C语言编程与应用实例[电子…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_blank>avr库函数介绍[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_blank>AVR高速嵌入式单片机原理与应用（修订版…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_blank>AVR单片机应用设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_blank>ATmega8原理与应用[电子书]</A> </LI></UL></DIV>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>联系方式及服务项目 </DIV>
+<UL>
+  <LI></A>
+  <SCRIPT language=javascript 
+  src="AVR教程（11）：ATmega16 简介（五）.files/17.js"></SCRIPT>
+  </LI></UL></DIV></DIV></DIV><!--列表右边:结束-->
+<DIV class=sitemap><A class=Bottom 
+onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.c51.cn');" 
+href="http://www.c51.cn/avr/avrjc/200804/7775.html#">设为首页</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="javascript:window.external.addFavorite('http://www.c51.cn','中国单片机资讯网');">加入收藏</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="mailto:c51cn@163.com">联系站长</A><FONT color=#0000ff> - </FONT><A 
+class=Bottom href="http://www.c51.cn/FriendSite/Index.asp" 
+target=_blank>友情链接</A><FONT color=#0000ff> - </FONT><A class=Bottom 
+href="http://www.c51.cn/Copyright.asp" target=_blank>版权申明</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/wwwgl/200508/26.html">广告服务</A><FONT color=#0000ff> - 
+</FONT><A href="http://www.c51.cn/glwz/wwwgl/200508/23.html">付款方式</A><FONT 
+color=#0000ff> </FONT></DIV>
+<DIV class=footer>
+<DIV class=copyright>
+<P>&copy;Copyright 2006-2008 <STRONG><A href="http://www.c51.cn/"><FONT 
+face=隶书>W</FONT></A></STRONG><A href="http://www.c51.cn/"><STRONG><FONT 
+face=隶书>ww.<FONT color=#000000>c51.Cn</FONT></FONT></STRONG></A> All Rights 
+Reserved<BR><A href="http://www.c51.cn/"><FONT color=#000000>中</FONT></A><SPAN 
+lang=zh-cn><A href="http://www.c51.cn/"><FONT color=#000000>国单片机资讯</FONT></A><A 
+href="http://www.c51.cn/" target=_blank><FONT 
+color=#000000>网</FONT></A></SPAN>　版权所有<FONT 
+color=#ff0000>（24小时服务热线:0755-27805410）</FONT><BR>本网站所有内容未经许可不得转载或用做其他用途，大部份资源均为网上搜集或网友提供，版权皆属原作者所有，请不要用作商业用途；</P>
+<P>原作者如认为本站侵犯了您的版权,请来信或电话告知,我们会立即删除!</P>
+<P><A style="COLOR: #333333; TEXT-DECORATION: none" 
+href="http://www.miibeian.gov.cn/" target=_blank><FONT 
+color=#ff0000>湘ICP备05018526号</FONT></A> E-mail:<A 
+href="mailto:c51cn@163.com">c51cn@163.com</A>&nbsp;&nbsp; <A 
+href="mailto:c51cn@126.com">c51cn@126.com</A>&nbsp; <A 
+href="msn:c51cn@live.cn">MSN:c51cn@live.cn</A>
+<SCRIPT language=JavaScript src="AVR教程（11）：ATmega16 简介（五）.files/cnt.htm" 
+charset=gb2312></SCRIPT>
+ </P></DIV></DIV></DIV></BODY></HTML>

@@ -1,0 +1,485 @@
+__text_start:
+__start:
+    0086 E5CF      LDI	R28,0x5F
+    0087 E0D2      LDI	R29,2
+    0088 BFCD      OUT	P3D,R28
+    0089 BFDE      OUT	P3E,R29
+    008A 51C0      SUBI	R28,0x10
+    008B 40D0      SBCI	R29,0
+    008C EA0A      LDI	R16,0xAA
+    008D 8308      STD	R16,0+Y
+    008E 2400      CLR	R0
+    008F E6E2      LDI	R30,0x62
+    0090 E0F0      LDI	R31,0
+    0091 E010      LDI	R17,0
+    0092 36E2      CPI	R30,0x62
+    0093 07F1      CPC	R31,R17
+    0094 F011      BEQ	0x0097
+    0095 9201      ST	R0,Z+
+    0096 CFFB      RJMP	0x0092
+    0097 8300      STD	R16,0+Z
+    0098 E0EA      LDI	R30,0xA
+    0099 E0F1      LDI	R31,1
+    009A E6A0      LDI	R26,0x60
+    009B E0B0      LDI	R27,0
+    009C E011      LDI	R17,1
+    009D 30EC      CPI	R30,0xC
+    009E 07F1      CPC	R31,R17
+    009F F021      BEQ	0x00A4
+    00A0 95C8      LPM
+    00A1 9631      ADIW	R30,1
+    00A2 920D      ST	R0,X+
+    00A3 CFF9      RJMP	0x009D
+    00A4 D078      RCALL	_main
+_exit:
+    00A5 CFFF      RJMP	_exit
+FILE: D:\ICC-AVR\examples.sl\music_8535\sound.c
+(0001) /**********************************************
+(0002)              http://www.sl.com.cn
+(0003)       双龙电子公司----电脑音乐演示程序(ICCAVR)
+(0004) 	             作者：詹卫前
+(0005) 		  1、学习定时器T0溢出中断的使用
+(0006) 		  2、学习定时器T1比较中断的使用
+(0007) 		  3、学习电脑音乐的产生
+(0008) **********************************************/
+(0009) #include <io8535.h>
+(0010) #include <macros.h>
+(0011) #pragma interrupt_handler timer0:IT_TIMER0_OVF0
+(0012) #pragma interrupt_handler timer1:IT_TIMER1_COMPA
+(0013) const unsigned int music_data[][2]=
+(0014) /*******************************************
+(0015)        卡秋莎音乐数据{x,y}
+(0016) 	   x:对应音符音阶(频率),0表示休止符
+(0017) 	   y:对应音符节拍
+(0018) ********************************************/
+(0019) {
+(0020) {440,600} ,{494,200} ,{523,600} ,{440,200},
+(0021) {523,400} ,{494,200} ,{440,200} ,{494,400},
+(0022) {330,400} ,{494,600} ,{523,200} ,{578,600},
+(0023) {494,200} ,{578,400} ,{523,200} ,{494,200},
+(0024) {440,800} ,{659,400} ,{880,400} ,{784,400},
+(0025) {880,200} ,{784,200} ,{698,400} ,{659,200},
+(0026) {578,200} ,{659,400} ,{440,400} ,{  0,200},//休止符
+(0027) {698,400} ,{578,200} ,{659,600} ,{523,200},
+(0028) {494,200} ,{330,200} ,{523,200} ,{494,200},
+(0029) {440,800} ,{659,400} ,{880,400} ,{784,400},
+(0030) {880,200} ,{784,200} ,{698,400} ,{659,200},
+(0031) {578,200} ,{659,400} ,{440,400} ,{  0,200},//休止符
+(0032) {698,400} ,{578,200}, {659,600} ,{523,200},
+(0033) {494,200} ,{330,200}, {523,200} ,{494,200},
+(0034) {440,800} ,
+(0035) {0,0}};
+(0036) #pragma data:data
+(0037) unsigned int delay=0;
+(0038) /*******************************
+(0039)        MCU初始化
+(0040) *******************************/
+(0041) void music_init(void)
+(0042)  {
+(0043)   MCUCR=0x00;
+_music_init:
+    00A6 2422      CLR	R2
+    00A7 BE25      OUT	P35,R2
+(0044)   DDRC=0x01;
+    00A8 E081      LDI	R24,1
+    00A9 BB84      OUT	P14,R24
+(0045)   TCCR1A=0x00;
+    00AA BC2F      OUT	P2F,R2
+(0046)   TCCR1B=0x09;
+    00AB E089      LDI	R24,0x9
+    00AC BD8E      OUT	P2E,R24
+(0047)   TCCR0=0x03;
+    00AD E083      LDI	R24,3
+    00AE BF83      OUT	P33,R24
+(0048)   TCNT0=0x19;
+    00AF E189      LDI	R24,0x19
+    00B0 BF82      OUT	P32,R24
+(0049)   TIMSK=(1<<OCIE1A)|(1<<TOIE0);
+    00B1 E181      LDI	R24,0x11
+    00B2 BF89      OUT	P39,R24
+(0050)   }
+    00B3 9508      RET
+_timer0:
+    00B4 938A      ST	R24,-Y
+    00B5 939A      ST	R25,-Y
+    00B6 B78F      IN	R24,P3F
+    00B7 938A      ST	R24,-Y
+(0051) /**************************************************
+(0052)       T0中断程序，产生音乐节拍
+(0053) **************************************************/  
+(0054) void timer0(void) 
+(0055)     {
+(0056)      delay++;
+    00B8 91800060  LDS	R24,0x60
+    00BA 91900061  LDS	R25,0x61
+    00BC 9601      ADIW	R24,1
+    00BD 93900061  STS	R25,0x61
+    00BF 93800060  STS	R24,0x60
+(0057)      TCNT0=0x19;
+    00C1 E189      LDI	R24,0x19
+    00C2 BF82      OUT	P32,R24
+(0058)     }
+    00C3 9189      LD	R24,Y+
+    00C4 BF8F      OUT	P3F,R24
+    00C5 9199      LD	R25,Y+
+    00C6 9189      LD	R24,Y+
+    00C7 9518      RETI
+_timer1:
+    00C8 922A      ST	R2,-Y
+    00C9 938A      ST	R24,-Y
+    00CA B62F      IN	R2,P3F
+    00CB 922A      ST	R2,-Y
+(0059) /**************************************************
+(0060)       T1中断程序，根据SOUND函数输出一定频率的方波
+(0061) **************************************************/  
+(0062) void timer1(void) 
+(0063)     {
+(0064)      PORTC^=0x01;
+    00CC E081      LDI	R24,1
+    00CD B225      IN	R2,P15
+    00CE 2628      EOR	R2,R24
+    00CF BA25      OUT	P15,R2
+(0065)     }
+    00D0 9029      LD	R2,Y+
+    00D1 BE2F      OUT	P3F,R2
+    00D2 9189      LD	R24,Y+
+    00D3 9029      LD	R2,Y+
+    00D4 9518      RETI
+_sound:
+  y                    --> R10
+  x                    --> R12
+    00D5 D090      RCALL	push_gset4
+    00D6 2EA2      MOV	R10,R18
+    00D7 2EB3      MOV	R11,R19
+    00D8 2EC0      MOV	R12,R16
+    00D9 2ED1      MOV	R13,R17
+(0066) /*****************************************************
+(0067)       SOUND程序，输出频率为 x HZ的方波,延时 y MS
+(0068)        x:100~20000 HZ, 0表示不发声
+(0069)        y:0~65536 MS
+(0070) *****************************************************/     
+(0071) void sound(unsigned int x,unsigned int y)
+(0072)     {
+(0073)        SEI(); 
+    00DA 9478      BSET	7
+(0074)        delay=0; 
+    00DB 2422      CLR	R2
+    00DC 2433      CLR	R3
+    00DD 92300061  STS	R3,0x61
+    00DF 92200060  STS	R2,0x60
+(0075)        if (x!=0)
+    00E1 20CC      TST	R12
+    00E2 F411      BNE	0x00E5
+    00E3 20DD      TST	R13
+    00E4 F159      BEQ	0x0110
+(0076)         {         
+(0077)          x=4000000/x; 
+    00E5 2C2C      MOV	R2,R12
+    00E6 2C3D      MOV	R3,R13
+    00E7 2444      CLR	R4
+    00E8 2455      CLR	R5
+    00E9 E040      LDI	R20,0
+    00EA E059      LDI	R21,0x9
+    00EB E36D      LDI	R22,0x3D
+    00EC E070      LDI	R23,0
+    00ED 925A      ST	R5,-Y
+    00EE 924A      ST	R4,-Y
+    00EF 923A      ST	R3,-Y
+    00F0 922A      ST	R2,-Y
+    00F1 2F04      MOV	R16,R20
+    00F2 2F15      MOV	R17,R21
+    00F3 2F26      MOV	R18,R22
+    00F4 2F37      MOV	R19,R23
+    00F5 D0BF      RCALL	div32s
+    00F6 2EC0      MOV	R12,R16
+    00F7 2ED1      MOV	R13,R17
+(0078)          OCR1A=x;   
+    00F8 92D0004B  STS	R13,0x4B
+    00FA 92C0004A  STS	R12,0x4A
+(0079)          TCNT1=0x00;
+    00FC 2422      CLR	R2
+    00FD 2433      CLR	R3
+    00FE 9230004D  STS	R3,0x4D
+    0100 9220004C  STS	R2,0x4C
+(0080) 		 TIMSK|=(1<<OCIE1A);
+    0102 B789      IN	R24,P39
+    0103 6180      ORI	R24,0x10
+    0104 BF89      OUT	P39,R24
+(0081)          while(delay<y)
+(0082)           ;
+    0105 90200060  LDS	R2,0x60
+    0107 90300061  LDS	R3,0x61
+    0109 142A      CP	R2,R10
+    010A 043B      CPC	R3,R11
+    010B F3C8      BCS	0x0105
+(0083) 		 TIMSK&=~(1<<OCIE1A);      
+    010C B789      IN	R24,P39
+    010D 7E8F      ANDI	R24,0xEF
+    010E BF89      OUT	P39,R24
+(0084)          }
+    010F C00A      RJMP	0x011A
+(0085)       else
+(0086)          {
+(0087)           TIMSK&=~(1<<OCIE1A);
+    0110 B789      IN	R24,P39
+    0111 7E8F      ANDI	R24,0xEF
+    0112 BF89      OUT	P39,R24
+(0088)           while(delay<y)
+(0089)           ;
+    0113 90200060  LDS	R2,0x60
+    0115 90300061  LDS	R3,0x61
+    0117 142A      CP	R2,R10
+    0118 043B      CPC	R3,R11
+    0119 F3C8      BCS	0x0113
+(0090)           }
+(0091)       CLI(); 
+    011A 94F8      BCLR	7
+(0092)              
+(0093)     }
+    011B D04D      RCALL	pop_gset4
+    011C 9508      RET
+(0094) /*******************************
+(0095)           主程序
+(0096) *******************************/  
+(0097) void main(void)
+(0098)   {
+(0099)    unsigned char i=0;
+_main:
+  i                    --> R20
+    011D 2744      CLR	R20
+(0100)    music_init();  
+    011E DF87      RCALL	_music_init
+    011F C027      RJMP	0x0147
+(0101)    while(1)
+(0102)       { 
+(0103)        while(music_data[i][1]!=0)
+(0104)            {
+(0105)             sound(music_data[i][0],music_data[i][1]);
+    0120 2E24      MOV	R2,R20
+    0121 2433      CLR	R3
+    0122 0C22      LSL	R2
+    0123 1C33      ROL	R3
+    0124 0C22      LSL	R2
+    0125 1C33      ROL	R3
+    0126 E284      LDI	R24,0x24
+    0127 E090      LDI	R25,0
+    0128 2D02      MOV	R16,R2
+    0129 2D13      MOV	R17,R3
+    012A 0F08      ADD	R16,R24
+    012B 1F19      ADC	R17,R25
+    012C D03E      RCALL	lpm16
+    012D 2F20      MOV	R18,R16
+    012E 2F31      MOV	R19,R17
+    012F E282      LDI	R24,0x22
+    0130 E090      LDI	R25,0
+    0131 2D02      MOV	R16,R2
+    0132 2D13      MOV	R17,R3
+    0133 0F08      ADD	R16,R24
+    0134 1F19      ADC	R17,R25
+    0135 D035      RCALL	lpm16
+    0136 DF9E      RCALL	_sound
+(0106)             i++;
+    0137 9543      INC	R20
+(0107)             }
+    0138 E284      LDI	R24,0x24
+    0139 E090      LDI	R25,0
+    013A 2F04      MOV	R16,R20
+    013B 2711      CLR	R17
+    013C 0F00      LSL	R16
+    013D 1F11      ROL	R17
+    013E 0F00      LSL	R16
+    013F 1F11      ROL	R17
+    0140 0F08      ADD	R16,R24
+    0141 1F19      ADC	R17,R25
+    0142 D028      RCALL	lpm16
+    0143 3000      CPI	R16,0
+    0144 0701      CPC	R16,R17
+    0145 F6D1      BNE	0x0120
+(0108)        i=0;     
+    0146 2744      CLR	R20
+(0109)        }
+    0147 CFF0      RJMP	0x0138
+(0110)    }FILE: <library>
+    0148 9508      RET
+push_gset1:
+    0149 935A      ST	R21,-Y
+    014A 934A      ST	R20,-Y
+    014B 9508      RET
+pop_gset1:
+    014C E0E1      LDI	R30,1
+pop:
+    014D 9149      LD	R20,Y+
+    014E 9159      LD	R21,Y+
+    014F FDE0      SBRC	R30,0
+    0150 9508      RET
+    0151 9169      LD	R22,Y+
+    0152 9179      LD	R23,Y+
+    0153 FDE1      SBRC	R30,1
+    0154 9508      RET
+    0155 90A9      LD	R10,Y+
+    0156 90B9      LD	R11,Y+
+    0157 FDE2      SBRC	R30,2
+    0158 9508      RET
+    0159 90C9      LD	R12,Y+
+    015A 90D9      LD	R13,Y+
+    015B FDE3      SBRC	R30,3
+    015C 9508      RET
+    015D 90E9      LD	R14,Y+
+    015E 90F9      LD	R15,Y+
+    015F 9508      RET
+push_gset2:
+    0160 937A      ST	R23,-Y
+    0161 936A      ST	R22,-Y
+    0162 CFE6      RJMP	push_gset1
+push_gset3:
+    0163 92BA      ST	R11,-Y
+    0164 92AA      ST	R10,-Y
+    0165 CFFA      RJMP	push_gset2
+push_gset4:
+    0166 92DA      ST	R13,-Y
+    0167 92CA      ST	R12,-Y
+    0168 CFFA      RJMP	push_gset3
+pop_gset4:
+    0169 E0E8      LDI	R30,0x8
+    016A CFE2      RJMP	pop
+lpm16:
+    016B 93EA      ST	R30,-Y
+    016C 93FA      ST	R31,-Y
+    016D 920A      ST	R0,-Y
+    016E 2FE0      MOV	R30,R16
+    016F 2FF1      MOV	R31,R17
+    0170 95C8      LPM
+    0171 2D00      MOV	R16,R0
+    0172 9631      ADIW	R30,1
+    0173 95C8      LPM
+    0174 2D10      MOV	R17,R0
+    0175 9009      LD	R0,Y+
+    0176 91F9      LD	R31,Y+
+    0177 91E9      LD	R30,Y+
+    0178 9508      RET
+neg32:
+    0179 9500      COM	R16
+    017A 9510      COM	R17
+    017B 9520      COM	R18
+    017C 9530      COM	R19
+    017D 5F0F      SUBI	R16,0xFF
+    017E 4F1F      SBCI	R17,0xFF
+    017F 4F2F      SBCI	R18,0xFF
+    0180 4F3F      SBCI	R19,0xFF
+    0181 9508      RET
+long_prolog:
+    0182 928A      ST	R8,-Y
+    0183 929A      ST	R9,-Y
+    0184 92AA      ST	R10,-Y
+    0185 92BA      ST	R11,-Y
+    0186 93EA      ST	R30,-Y
+    0187 938A      ST	R24,-Y
+    0188 939A      ST	R25,-Y
+    0189 93AA      ST	R26,-Y
+    018A 93BA      ST	R27,-Y
+    018B 8589      LDD	R24,9+Y
+    018C 859A      LDD	R25,10+Y
+    018D 85AB      LDD	R26,11+Y
+    018E 85BC      LDD	R27,12+Y
+    018F 9508      RET
+long_epilog:
+    0190 91B9      LD	R27,Y+
+    0191 91A9      LD	R26,Y+
+    0192 9199      LD	R25,Y+
+    0193 9189      LD	R24,Y+
+    0194 91E9      LD	R30,Y+
+    0195 90B9      LD	R11,Y+
+    0196 90A9      LD	R10,Y+
+    0197 9099      LD	R9,Y+
+    0198 9089      LD	R8,Y+
+    0199 9624      ADIW	R28,4
+    019A 9508      RET
+tstzero1:
+    019B 27EE      CLR	R30
+    019C 2BE0      OR	R30,R16
+    019D 2BE1      OR	R30,R17
+    019E 2BE2      OR	R30,R18
+    019F 2BE3      OR	R30,R19
+    01A0 9508      RET
+tstzero2:
+    01A1 27EE      CLR	R30
+    01A2 2BE8      OR	R30,R24
+    01A3 2BE9      OR	R30,R25
+    01A4 2BEA      OR	R30,R26
+    01A5 2BEB      OR	R30,R27
+    01A6 9508      RET
+NEGMANT2:
+    01A7 9580      COM	R24
+    01A8 9590      COM	R25
+    01A9 95A0      COM	R26
+    01AA 95B0      COM	R27
+    01AB 5F8F      SUBI	R24,0xFF
+    01AC 4F9F      SBCI	R25,0xFF
+    01AD 4FAF      SBCI	R26,0xFF
+    01AE 4FBF      SBCI	R27,0xFF
+    01AF 9508      RET
+    01B0 2D08      MOV	R16,R8
+    01B1 2D19      MOV	R17,R9
+    01B2 2D2A      MOV	R18,R10
+    01B3 2D3B      MOV	R19,R11
+    01B4 9508      RET
+div32s:
+    01B5 DFCC      RCALL	long_prolog
+    01B6 D00C      RCALL	0x01C3
+    01B7 CFD8      RJMP	long_epilog
+div32u:
+    01B8 DFC9      RCALL	long_prolog
+    01B9 D014      RCALL	UDIV
+    01BA CFD5      RJMP	long_epilog
+mod32s:
+    01BB DFC6      RCALL	long_prolog
+    01BC D006      RCALL	0x01C3
+    01BD DFF2      RCALL	0x01B0
+    01BE CFD1      RJMP	long_epilog
+mod32u:
+    01BF DFC2      RCALL	long_prolog
+    01C0 D00D      RCALL	UDIV
+    01C1 DFEE      RCALL	0x01B0
+    01C2 CFCD      RJMP	long_epilog
+    01C3 2333      TST	R19
+    01C4 F02A      BMI	0x01CA
+    01C5 23BB      TST	R27
+    01C6 F43A      BPL	0x01CE
+    01C7 DFDF      RCALL	NEGMANT2
+    01C8 D005      RCALL	UDIV
+    01C9 CFAF      RJMP	neg32
+    01CA DFAE      RCALL	neg32
+    01CB 23BB      TST	R27
+    01CC F7DA      BPL	0x01C8
+    01CD DFD9      RCALL	NEGMANT2
+UDIV:
+    01CE DFD2      RCALL	tstzero2
+    01CF F0D9      BEQ	0x01EB
+    01D0 2488      CLR	R8
+    01D1 2499      CLR	R9
+    01D2 24AA      CLR	R10
+    01D3 24BB      CLR	R11
+    01D4 DFC6      RCALL	tstzero1
+    01D5 F0A9      BEQ	0x01EB
+    01D6 E2E0      LDI	R30,0x20
+    01D7 0F00      LSL	R16
+    01D8 1F11      ROL	R17
+    01D9 1F22      ROL	R18
+    01DA 1F33      ROL	R19
+    01DB 1C88      ROL	R8
+    01DC 1C99      ROL	R9
+    01DD 1CAA      ROL	R10
+    01DE 1CBB      ROL	R11
+    01DF 1688      CP	R8,R24
+    01E0 0699      CPC	R9,R25
+    01E1 06AA      CPC	R10,R26
+    01E2 06BB      CPC	R11,R27
+    01E3 F028      BCS	0x01E9
+    01E4 1A88      SUB	R8,R24
+    01E5 0A99      SBC	R9,R25
+    01E6 0AAA      SBC	R10,R26
+    01E7 0ABB      SBC	R11,R27
+    01E8 9503      INC	R16
+    01E9 95EA      DEC	R30
+    01EA F761      BNE	0x01D7
+    01EB 9508      RET

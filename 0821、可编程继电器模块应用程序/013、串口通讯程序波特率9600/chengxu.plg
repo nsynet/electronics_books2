@@ -1,0 +1,93 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+E:\产品整理\汇诚科技资料整理\已开板\2012年开板产品\KS121-27Y50K_可编程继电器模块\可编程继电器模块应用程序\013、串口通讯程序波特率9600\chengxu.uv2
+Project File Date:  12/15/2005
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling chengxu.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?CHENGXU
+Program Size: data=10.0 xdata=0 code=64
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?CHENGXU
+Program Size: data=10.0 xdata=0 code=64
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 1 Warning(s).
+compiling chengxu.c...
+chengxu.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?CHENGXU
+Program Size: data=10.0 xdata=0 code=64
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?CHENGXU
+Program Size: data=10.0 xdata=0 code=64
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?CHENGXU
+Program Size: data=10.0 xdata=0 code=64
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?CHENGXU
+Program Size: data=10.0 xdata=0 code=64
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling chengxu.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?CHENGXU
+Program Size: data=10.0 xdata=0 code=64
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?CHENGXU
+Program Size: data=10.0 xdata=0 code=64
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling chengxu.c...
+CHENGXU.C(50): error C202: 'AUXR': undefined identifier
+CHENGXU.C(51): error C202: 'AUXR': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling chengxu.c...
+CHENGXU.C(50): error C202: 'AUXR': undefined identifier
+CHENGXU.C(51): error C202: 'AUXR': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling chengxu.c...
+CHENGXU.C(50): error C202: 'AUXR': undefined identifier
+CHENGXU.C(51): error C202: 'AUXR': undefined identifier
+Target not created
+compiling chengxu.c...
+CHENGXU.C(50): error C202: 'AUXR': undefined identifier
+CHENGXU.C(51): error C202: 'AUXR': undefined identifier
+chengxu.c - 2 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling chengxu.c...
+CHENGXU.C(50): error C202: 'AUXR': undefined identifier
+CHENGXU.C(51): error C202: 'AUXR': undefined identifier
+Target not created

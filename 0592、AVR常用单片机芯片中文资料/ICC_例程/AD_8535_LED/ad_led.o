@@ -1,0 +1,187 @@
+XL
+H 4 areas 12 global symbols
+M ad_led.c
+S push_gset1 Ref0000
+S push_gset4 Ref0000
+S mod16u Ref0000
+S div16u Ref0000
+S mpy32u Ref0000
+S lsl8 Ref0000
+S pop_gset1 Ref0000
+S pop_gset4 Ref0000
+S lsr32 Ref0000
+S _delay_1ms Ref0000
+A lit size 10 flags 0
+dbfile D:\ICC-AVR\examples.sl\AD_8535_LED\ad_led.c
+dbsym s tabel 0 A[16:16]c
+S _tabel Def0000
+A text size 1AC flags 0
+dbfile D:\ICC-AVR\examples.sl\AD_8535_LED\ad_led.c
+dbfunc s port_init 0 fI
+dbline FFFFFFFF 0
+dbline 17 0
+dbline 18 0
+dbline 19 4
+dbline 1A 8
+dbline 1B A
+dbline FFFFFFFE C
+dbline 1C C
+dbline 0 C
+dbfunc s display E fI
+dbsym r i 14 c
+dbline FFFFFFFF 10
+dbline 1E 10
+dbline 20 10
+dbline 21 14
+dbline 22 14
+dbline 23 24
+dbline 24 30
+dbline 25 32
+dbline 26 3E
+dbline 20 3E
+dbline 20 40
+dbline FFFFFFFE 44
+dbline 27 44
+dbline 0 46
+dbfunc s adctovol 48 fI
+dbsym l char_p 1 pc
+dbsym r i A c
+dbsym r temp C i
+dbsym r adc A i
+dbline FFFFFFFF 4E
+dbline 2C 4E
+dbline 30 4E
+dbline 31 7C
+dbline 32 80
+dbline 33 80
+dbline 34 AA
+dbline 35 B8
+dbline 31 B8
+dbline 31 BA
+dbline 36 C0
+dbline 37 CE
+dbline 38 DC
+dbline 39 E2
+dbline FFFFFFFE EC
+dbline 3A EC
+dbline 0 EE
+dbfunc s adc_isr F0 fI
+dbsym r temp 10 i
+dbline FFFFFFFF FE
+dbline 3E FE
+dbline 3F FE
+dbline 41 104
+dbline 40 108
+dbline 42 110
+dbline 43 11C
+dbline FFFFFFFE 11E
+dbline 44 11E
+dbline 0 12C
+dbfunc s main 12E fI
+dbsym r i 14 c
+dbline FFFFFFFF 12E
+dbline 47 12E
+dbline 49 12E
+dbline 4A 130
+dbline 4B 134
+dbline 4C 136
+dbline 4D 13A
+dbline 4E 13C
+dbline 4F 140
+dbline 4E 160
+dbline 4E 162
+dbline 50 166
+dbline 52 16A
+dbline 53 16A
+dbline 54 19A
+dbline 55 1A4
+dbline 56 1A6
+dbline 57 1A8
+dbline 51 1A8
+dbline FFFFFFFE 1AA
+dbline 58 1AA
+dbline 0 1AA
+S _main Def012E
+S _adc_isr Def00F0
+S _port_init Def0000
+S _display Def000E
+S _adctovol Def0048
+A vector size 1E flags C
+A bss size 8 flags 20
+dbfile D:\ICC-AVR\examples.sl\AD_8535_LED\ad_led.c
+dbsym s ad_con 0 i
+dbsym s ledbuff 2 A[6:6]c
+S _ledbuff Def0002
+S _ad_con Def0000
+T 00 00 3F 06 5B 4F 66 6D 7D 07 7F 6F 77 7C 39 5E
+R 00 00 00 00
+T 0E 00 79 71
+R 00 00 00 00
+T 00 00 8F E3 81 BB 8F EF 87 BB 82 BB 88 BB 08 95
+R 00 00 01 00
+T 0E 00 00 D0 44 27 16 C0 80 E0
+R 00 00 01 00 82 02 00 00 20 08 03 00 02 00
+T 16 00 90 E0 E4 2F FF 27 E8 0F F9 1F 20 80 28 BA
+R 00 00 01 00 40 02 03 00 02 00
+T 24 00 01 E0 14 2F 00 D0 20 2E 20 94 22 BA 00 D0
+R 00 00 01 00 82 06 05 00 82 0E 09 00
+T 32 00 01 E0 14 2F 00 D0 22 B2 20 2A 22 BA 43 95
+R 00 00 01 00 82 06 05 00
+T 40 00 46 30 40 F3 00 D0 08 95
+R 00 00 01 00 82 06 06 00
+T 48 00 00 D0 A0 2E B1 2E 2A 2C 3B 2C 44 24 55 24
+R 00 00 01 00 82 02 01 00
+T 56 00 41 EF 51 E0 60 E0 70 E0 5A 92 4A 92 3A 92
+R 00 00 01 00
+T 64 00 2A 92 04 2F 15 2F 26 2F 37 2F 00 D0 8A E0
+R 00 00 01 00 82 0C 04 00
+T 72 00 90 E0 8A 93 00 D0 C0 2E D1 2E AA 24 1D C0
+R 00 00 01 00 82 06 08 00
+T 80 00 2A E0 30 E0 0C 2D 1D 2D 00 D0 20 2E 31 2E
+R 00 00 01 00 82 0A 02 00
+T 8E 00 80 E0 90 E0 28 0E 39 1E E2 2D F3 2D C8 95
+R 00 00 01 00 20 02 00 00 00 00 40 04 00 00 00 00
+T 9C 00 80 E0 90 E0 EA 2D FF 27 E8 0F F9 1F 00 82
+R 00 00 01 00 20 02 03 00 02 00 40 04 03 00 02 00
+T AA 00 2A E0 30 E0 0C 2D 1D 2D 00 D0 C0 2E D1 2E
+R 00 00 01 00 82 0A 03 00
+T B8 00 A3 94 8A 2D 83 30 00 F3 80 E0 90 E0 E8 2F
+R 00 00 01 00 20 0A 00 00 0A 00 40 0C 00 00 0A 00
+T C6 00 F9 2F C8 95 00 92 07 00 80 E0
+R 00 00 01 00 00 08 03 00 20 0A 00 00 0D 00
+T D0 00 90 E0 E8 2F F9 2F C8 95 00 92 06 00 80 E4
+R 00 00 01 00 40 02 00 00 0D 00 00 0C 03 00
+T DE 00 80 93 05 00 80 91 04 00 80 68 80 93 04 00
+R 00 00 01 00 00 04 03 00 00 08 03 00 00 0E 03 00
+T EC 00 00 D0 08 95
+R 00 00 01 00 82 02 07 00
+T 1C 00 78 C0
+R 00 00 02 00 80 02 01 00
+T F0 00 2A 92 3A 92 0A 93 1A 93 EA 93 2F B6 2A 92
+R 00 00 01 00
+T FE 00 00 27 11 27 02 C0 0F 5F 1F 4F 06 30 E0 E0
+R 00 00 01 00
+T 0C 01 1E 07 D0 F3 24 B0 35 B0 30 92 01 00 20 92
+R 00 00 01 00 00 0C 03 00
+T 1A 01 00 00 36 9A 29 90 2F BE E9 91 19 91 09 91
+R 00 00 01 00 00 02 03 00
+T 28 01 39 90 29 90 18 95
+R 00 00 01 00
+T 2E 01 68 DF 22 24 25 BE 27 B8 8E ED 86 B9 78 94
+R 00 00 01 00
+T 3C 01 44 27 11 C0 80 E0 90 E0 E4 2F FF 27 E8 0F
+R 00 00 01 00 20 06 03 00 02 00 40 08 03 00 02 00
+T 4A 01 F9 1F 80 E0 90 E0 FA 93 EA 93 E8 2F F9 2F
+R 00 00 01 00 20 04 00 00 00 00 40 06 00 00 00 00
+T 58 01 C8 95 E9 91 F9 91 00 82 43 95 46 30 68 F3
+R 00 00 01 00
+T 66 01 44 27 1F C0 4F 37 29 F4 81 E0 90 E0 A8 2E
+R 00 00 01 00
+T 74 01 B9 2E 02 C0 AA 24 BB 24 44 23 19 F4 61 E0
+R 00 00 01 00
+T 82 01 70 E0 02 C0 66 27 77 27 2A 2C 3B 2C 26 2A
+R 00 00 01 00
+T 90 01 37 2A 22 20 11 F4 33 20 29 F0 00 91 00 00
+R 00 00 01 00 00 0E 03 00
+T 9E 01 10 91 01 00 52 DF 34 DF 43 95 E0 CF 08 95
+R 00 00 01 00 00 04 03 00

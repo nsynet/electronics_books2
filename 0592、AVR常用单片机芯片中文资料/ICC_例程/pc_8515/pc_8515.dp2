@@ -1,0 +1,1 @@
+pc_8515.o: D:/ICC-AVR/include/io8515.h D:/ICC-AVR/include/stdio.h D:/ICC-AVR/include/_const.h

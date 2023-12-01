@@ -1,0 +1,140 @@
+XL
+H 5 areas 10 global symbols
+M ad_lcd.c
+S push_gset5 Ref0000
+S mod16u Ref0000
+S div16u Ref0000
+S mpy32u Ref0000
+S pop_gset5 Ref0000
+S _lcd_gotoxy Ref0000
+S _lcd_init Ref0000
+S _delay_ms Ref0000
+S lsr32 Ref0000
+S _lcd_puts Ref0000
+S _lcd_clear Ref0000
+A text size 122 flags 0
+dbfile D:\ICC-AVR\examples.sl\AD_8535_LCD\ad_lcd.c
+dbfunc s adctoasc 0 fI
+dbsym r char_p A pc
+dbsym r i C c
+dbsym r temp E i
+dbsym r adc A i
+dbline FFFFFFFF 6
+dbline 16 6
+dbline 1A 6
+dbline 1B 34
+dbline 1C 38
+dbline 1D 38
+dbline 1E 5E
+dbline 1F 6C
+dbline 1B 6C
+dbline 1B 6E
+dbline 20 74
+dbline 21 7C
+dbline 22 82
+dbline 23 88
+dbline 24 8E
+dbline 25 96
+dbline FFFFFFFE 9A
+dbline 0 9C
+dbfunc s adc_isr 9E fI
+dbsym r temp 10 i
+dbline FFFFFFFF AC
+dbline 2A AC
+dbline 2B AC
+dbline 2D B2
+dbline 2C B6
+dbline 2E BE
+dbline 2F CA
+dbline FFFFFFFE CC
+dbline 30 CC
+dbline 0 DA
+dbfunc s main DC fI
+dbline FFFFFFFF DC
+dbline 33 DC
+dbline 34 DC
+dbline 35 E0
+dbline 36 E2
+dbline 37 E6
+dbline 38 E8
+dbline 3A EC
+dbline 3B EC
+dbline 3C F2
+dbline 3D F8
+dbline 3E FE
+dbline 3F 104
+dbline 40 10A
+dbline 41 116
+dbline 42 11C
+dbline 43 11E
+dbline 39 11E
+dbline FFFFFFFE 120
+dbline 44 120
+dbline 0 120
+S _main Def00DC
+S _adc_isr Def009E
+S _adctoasc Def0000
+A vector size 1E flags C
+A bss size 8 flags 20
+dbfile D:\ICC-AVR\examples.sl\AD_8535_LCD\ad_lcd.c
+dbsym s adcval 0 A[6:6]c
+dbsym s ad_con 6 i
+S _ad_con Def0006
+S _adcval Def0000
+A data size 17 flags 20
+dbfile D:\ICC-AVR\examples.sl\AD_8535_LCD\ad_lcd.c
+A idata size 17 flags 0
+T 00 00 00 D0 A0 2E B1 2E 2A 2C 3B 2C 44 24 55 24
+R 00 00 00 00 82 02 00 00
+T 0E 00 41 EF 51 E0 60 E0 70 E0 5A 92 4A 92 3A 92
+R 00 00 00 00
+T 1C 00 2A 92 04 2F 15 2F 26 2F 37 2F 00 D0 8A E0
+R 00 00 00 00 82 0C 03 00
+T 2A 00 90 E0 8A 93 00 D0 E0 2E F1 2E CC 24 1B C0
+R 00 00 00 00 82 06 08 00
+T 38 00 2C 2C 33 24 E3 E0 F0 E0 E2 19 F3 09 80 E0
+R 00 00 00 00 20 0E 02 00 00 00
+T 46 00 90 E0 E8 0F F9 1F 2A E0 30 E0 0E 2D 1F 2D
+R 00 00 00 00 40 02 02 00 00 00
+T 54 00 00 D0 80 2F 91 2F C0 96 80 83 2A E0 30 E0
+R 00 00 00 00 82 02 01 00
+T 62 00 0E 2D 1F 2D 00 D0 E0 2E F1 2E C3 94 8C 2D
+R 00 00 00 00 82 06 02 00
+T 70 00 83 30 10 F3 20 90 01 00 20 92 00 00 8E E2
+R 00 00 00 00 00 08 02 00 00 0C 02 00
+T 7E 00 80 93 01 00 86 E5 80 93 04 00 22 24 20 92
+R 00 00 00 00 00 04 02 00 00 0A 02 00
+T 8C 00 05 00 80 E0
+R 00 00 00 00 00 02 02 00 20 04 02 00 00 00
+T 90 00 90 E0 A8 2E B9 2E 08 2F 19 2F 00 D0 08 95
+R 00 00 00 00 40 02 02 00 00 00 82 0C 04 00
+T 1C 00 4F C0
+R 00 00 01 00 80 02 00 00
+T 9E 00 2A 92 3A 92 0A 93 1A 93 EA 93 2F B6 2A 92
+R 00 00 00 00
+T AC 00 00 27 11 27 02 C0 0F 5F 1F 4F 06 30 E0 E0
+R 00 00 00 00
+T BA 00 1E 07 D0 F3 24 B0 35 B0 30 92 07 00 20 92
+R 00 00 00 00 00 0C 02 00
+T C8 00 06 00 36 9A 29 90 2F BE E9 91 19 91 09 91
+R 00 00 00 00 00 02 02 00
+T D6 00 39 90 29 90 18 95
+R 00 00 00 00
+T DC 00 22 24 25 BE 27 B8 8E ED 86 B9 00 D0 78 94
+R 00 00 00 00 82 0C 06 00
+T EA 00 19 C0 22 27 02 E0 00 D0 00 E0
+R 00 00 00 00 82 08 05 00 20 0A 03 00 09 00
+T F4 00 10 E0 00 D0 21 E0 02 E0
+R 00 00 00 00 40 02 03 00 09 00 82 04 09 00
+T FC 00 00 D0 00 E0
+R 00 00 00 00 82 02 05 00 20 04 03 00 00 00
+T 00 01 10 E0 00 D0 21 E0 0A E0
+R 00 00 00 00 40 02 03 00 00 00 82 04 09 00
+T 08 01 00 D0 00 91 06 00 10 91 07 00 76 DF
+R 00 00 00 00 82 02 05 00 00 06 02 00 00 0A 02 00
+T 14 01 00 D0 04 EF 11 E0 00 D0 00 D0 E6 CF 08 95
+R 00 00 00 00 82 02 09 00 82 08 07 00 82 0A 0A 00
+T 00 00 56 6F 6C 74 61 67 65 3A 00
+R 00 00 04 00
+T 09 00 41 44 2D 2D 43 6F 6E 76 65 72 74 65 72 00
+R 00 00 04 00

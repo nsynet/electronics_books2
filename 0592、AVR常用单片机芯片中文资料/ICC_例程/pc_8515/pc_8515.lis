@@ -1,0 +1,158 @@
+                         .module pc_8515.c
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\pc_8515\pc_8515.c
+ 0000                   .dbfunc s uart0_init _uart0_init fI
+                         .even
+ 0000                 _uart0_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 20
+                       ; /*******************************************/
+                       ; /*             PC机键盘演示程序            */
+                       ; /*           广州双龙电子有限公司          */
+                       ; /*           http://www.sl.com.cn          */
+                       ; /*               作者：詹卫前              */
+                       ; /*          MCU:AT90S8515 晶振:8MHZ        */
+                       ; /*  使用ICCAVR的终端调试窗口观察PC键盘数据 */
+                       ; /*          连线说明:SL-AVR+               */
+                       ; /*          1、PC键盘clock--PD.2           */
+                       ; /*          2、PC键盘data---PD.3           */
+                       ; /*          3、D232.T-------PD.1           */
+                       ; /*          4、D232.R-------PD.0           */
+                       ; /*******************************************/
+                       ; #include<io8515.h>
+                       ; #include<stdio.h>
+                       ; extern unsigned char get_char(void);
+                       ; extern void init_kb(void);
+                       ; //UART初始化
+                       ; void uart0_init(void)
+                       ;      {
+ 0000                   .dbline 21
+                       ;       UCR  = 0x00;
+ 0000 2224              clr R2
+ 0002 2AB8              out 0xa,R2
+ 0004                   .dbline 22
+                       ;       UBRR = 0x19;//BAUD=19200
+ 0004 89E1              ldi R24,25
+ 0006 89B9              out 0x9,R24
+ 0008                   .dbline 23
+                       ;       UCR|=(1<<TXEN) ;//使能发送
+ 0008 539A              sbi 0xa,3
+ 000A                   .dbline -2
+ 000A                   .dbline 24
+                       ;      }
+ 000A                 L1:
+ 000A                   .dbline 0 ; func end
+ 000A 0895              ret
+ 000C                   .dbfunc s port_init _port_init fI
+                         .even
+ 000C                 _port_init::
+ 000C                   .dbline -1
+ 000C                   .dbline 27
+                       ; //端口初始化     
+                       ; void port_init(void)
+                       ;      {
+ 000C                   .dbline 28
+                       ;       DDRD=0x02;
+ 000C 82E0              ldi R24,2
+ 000E 81BB              out 0x11,R24
+ 0010                   .dbline 29
+                       ;       PORTD=0xff;
+ 0010 8FEF              ldi R24,255
+ 0012 82BB              out 0x12,R24
+ 0014                   .dbline -2
+ 0014                   .dbline 30
+                       ;      }
+ 0014                 L2:
+ 0014                   .dbline 0 ; func end
+ 0014 0895              ret
+ 0016                   .dbfunc s main _main fI
+                       ;            key -> R20
+                         .even
+ 0016                 _main::
+ 0016                   .dbline -1
+ 0016                   .dbline 33
+                       ; //PC键盘演示程序,SHIFT键和按键同时按下时为大写 
+                       ; void main(void)
+                       ;      {
+ 0016                   .dbline 35
+                       ;       unsigned char key;
+                       ;       port_init();
+ 0016 FADF              rcall _port_init
+ 0018                   .dbline 36
+                       ;       uart0_init();
+ 0018 F3DF              rcall _uart0_init
+ 001A                   .dbline 37
+                       ;       init_kb();
+ 001A 00D0              rcall _init_kb
+ 001C                   .dbline 38
+                       ;       puts("PC键盘演示程序");
+ 001C 00E0              ldi R16,<L4
+ 001E 10E0              ldi R17,>L4
+ 0020 00D0              rcall _puts
+ 0022                   .dbline 39
+                       ;       putchar(0x0d);
+ 0022 0DE0              ldi R16,13
+ 0024 00D0              rcall _putchar
+ 0026 0DC0              rjmp L6
+ 0028                 L5:
+ 0028                   .dbline 41
+                       ;       while(1)
+                       ;              {
+ 0028                   .dbline 42
+                       ;               key=get_char();
+ 0028 00D0              rcall _get_char
+ 002A 402F              mov R20,R16
+ 002C                   .dbline 43
+                       ;               if(key!=0) 
+ 002C 0023              tst R16
+ 002E 49F0              breq L8
+ 0030                   .dbline 44
+                       ;                   {
+ 0030                   .dbline 45
+                       ;                    if (key==0x0d)//回车键处理
+ 0030 0D30              cpi R16,13
+ 0032 29F4              brne L10
+ 0034                   .dbline 46
+                       ;                       {                    
+ 0034                   .dbline 47
+                       ;                        putchar('\n');
+ 0034 0AE0              ldi R16,10
+ 0036 00D0              rcall _putchar
+ 0038                   .dbline 48
+                       ;                        putchar(key);                       
+ 0038 042F              mov R16,R20
+ 003A 00D0              rcall _putchar
+ 003C                   .dbline 49
+                       ;                       }
+ 003C 02C0              rjmp L11
+ 003E                 L10:
+ 003E                   .dbline 51
+                       ;                    else                   
+                       ;                       putchar(key);
+ 003E 042F              mov R16,R20
+ 0040 00D0              rcall _putchar
+ 0042                 L11:
+ 0042                   .dbline 52
+                       ;                   }
+ 0042                 L8:
+ 0042                   .dbline 53
+ 0042                 L6:
+ 0042                   .dbline 40
+ 0042 F2CF              rjmp L5
+ 0044                 X0:
+ 0044                   .dbline -2
+ 0044                   .dbline 54
+                       ;              }    
+                       ;      }       
+ 0044                 L3:
+ 0044                   .dbline 0 ; func end
+ 0044 0895              ret
+ 0046                   .dbsym r key 20 c
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\pc_8515\pc_8515.c
+ 0000                 L4:
+ 0000                   .blkb 15
+                         .area idata
+ 0000 5043BCFCC5CCD1DDCABEB3CCD0F200     .byte 'P,'C,188,252,197,204,209,221,202,190,179,204,208,242,0
+                         .area data(ram, con, rel)
+ 000F                   .dbfile D:\ICC-AVR\examples.sl\pc_8515\pc_8515.c

@@ -1,0 +1,75 @@
+XL
+H 3 areas 7 global symbols
+M pc_8515.c
+S _puts Ref0000
+S _init_kb Ref0000
+S _putchar Ref0000
+S _get_char Ref0000
+A text size 46 flags 0
+dbfile D:\ICC-AVR\examples.sl\pc_8515\pc_8515.c
+dbfunc s uart0_init 0 fI
+dbline FFFFFFFF 0
+dbline 14 0
+dbline 15 0
+dbline 16 4
+dbline 17 8
+dbline FFFFFFFE A
+dbline 18 A
+dbline 0 A
+dbfunc s port_init C fI
+dbline FFFFFFFF C
+dbline 1B C
+dbline 1C C
+dbline 1D 10
+dbline FFFFFFFE 14
+dbline 1E 14
+dbline 0 14
+dbfunc s main 16 fI
+dbsym r key 14 c
+dbline FFFFFFFF 16
+dbline 21 16
+dbline 23 16
+dbline 24 18
+dbline 25 1A
+dbline 26 1C
+dbline 27 22
+dbline 29 28
+dbline 2A 28
+dbline 2B 2C
+dbline 2C 30
+dbline 2D 30
+dbline 2E 34
+dbline 2F 34
+dbline 30 38
+dbline 31 3C
+dbline 33 3E
+dbline 34 42
+dbline 35 42
+dbline 28 42
+dbline FFFFFFFE 44
+dbline 36 44
+dbline 0 44
+S _main Def0016
+S _port_init Def000C
+S _uart0_init Def0000
+A data size F flags 20
+dbfile D:\ICC-AVR\examples.sl\pc_8515\pc_8515.c
+A idata size F flags 0
+T 00 00 22 24 2A B8 89 E1 89 B9 53 9A 08 95
+R 00 00 00 00
+T 0C 00 82 E0 81 BB 8F EF 82 BB 08 95
+R 00 00 00 00
+T 16 00 FA DF F3 DF 00 D0 00 E0
+R 00 00 00 00 82 06 01 00 20 08 01 00 00 00
+T 1E 00 10 E0 00 D0 0D E0
+R 00 00 00 00 40 02 01 00 00 00 82 04 00 00
+T 24 00 00 D0 0D C0 00 D0 40 2F 00 23 49 F0 0D 30
+R 00 00 00 00 82 02 02 00 82 06 03 00
+T 32 00 29 F4 0A E0 00 D0 04 2F 00 D0 02 C0 04 2F
+R 00 00 00 00 82 06 02 00 82 0A 02 00
+T 40 00 00 D0 F2 CF 08 95
+R 00 00 00 00 82 02 02 00
+T 00 00 50 43 BC FC C5 CC D1 DD CA BE B3 CC D0 F2
+R 00 00 02 00
+T 0E 00 00
+R 00 00 02 00

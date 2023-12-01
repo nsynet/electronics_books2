@@ -1,0 +1,559 @@
+                         .module cymometer.c
+                         .area vector(rom, abs)
+                         .org 14
+ 0007  C0CB              rjmp _timer0
+                         .org 6
+ 0003  C10C              rjmp _timer1
+                         .area code(ram, con, rel)
+                         .area lit(rom, con, rel)
+ 000D                  _tabel::
+ 000D  063F              .byte 63,6
+ 000E  4F5B              .byte 91,'O
+ 000F  6D66              .byte 'f,'m
+ 0010  077D              .byte 125,7
+ 0011  6F7F              .byte 127,'o
+ 0012  7C77              .byte 'w,124
+ 0013  5E39              .byte 57,94
+ 0014  7179              .byte 'y,'q
+ 0015                    .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+ 0015                    .dbsym s tabel _tabel Ac[16:16]
+                         .area data(ram, con, rel)
+--- 0000                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+ 0030                  _ledbuff::
+ 0030                    .blkb 2
+                         .area idata
+--- 0000 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+--- 0001                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+--- 0001                   .blkb 2
+                         .area idata
+--- 0001 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+--- 0002                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+--- 0002                   .blkb 2
+                         .area idata
+--- 0002 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+--- 0003                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+--- 0003                   .dbsym s ledbuff _ledbuff Ac[6:6]
+                         .area text(rom, con, rel)
+--- 0000                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+--- 0000                   .dbfunc s port_init _port_init fI
+                         .even
+ 0040                  _port_init::
+ 0040                    .dbline 28{
+                       ; /**********************************************
+                       ;              http://www.sl.com.cn
+                       ;       Ë«Áúµç×Ó¹«Ë¾----ÆµÂÊ¼ÆÑÝÊ¾³ÌÐò(ICCAVR)
+                       ;                  ×÷Õß£ºÕ²ÎÀÇ°
+                       ;           1¡¢Ñ§Ï°¶¨Ê±Æ÷T1²¶×½(²¶»ñ)ÖÐ¶ÏµÄÊ¹ÓÃ
+                       ;           2¡¢Ñ§Ï°ÆµÂÊ¼ÆµÄÉè¼Æ·½·¨
+                       ;           3¡¢Í¨¹ý¶ÔtimecountµÄÐÞ¸Ä£¬¿ÉÊµÏÖ¶àÁ¿³Ì
+                       ;              ÆµÂÊ¼Æ±à³Ì¡£
+                       ; **********************************************/
+                       ; #include <io8515.h>
+                       ; #include <macros.h>
+                       ; #pragma interrupt_handler timer0:8
+                       ; #pragma interrupt_handler timer1:4
+                       ; extern void delay_ms(unsigned int n);//ÒýÓÃÍâ²¿º¯Êý
+                       ; extern void delay_1ms(void); 
+                       ; #pragma data:code
+                       ;           /*   Æß¶ÎÒëÂë×ÖÐÎ±í     */        
+                       ; const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+                       ; #pragma data:data
+                       ;           /*     ÏÔÊ¾»º³åÇø       */
+                       ; unsigned char ledbuff[]={0x3f,0x3f,0x3f,0x3f,0x3f,0x3f};
+                       ; unsigned long count;//ÆµÂÊ²âÁ¿¼ÆÊý±äÁ¿
+                       ; unsigned int timecount;//ÆµÂÊ²âÁ¿Õ¢ÃÅ¿ØÖÆ±äÁ¿
+                       ; /******************************
+                       ;            ³õÊ¼»¯
+                       ; ******************************/
+                       ; void port_init(void)
+                       ;  {
+ 0040                    .dbline 29
+                       ;   MCUCR=0x00;
+ 0040  2422              clr R2
+ 0041  BE25              out 0x35,R2
+ 0042                    .dbline 30
+                       ;   DDRD=0x3f;
+ 0042  E38F              ldi R24,63
+ 0043  BB81              out 0x11,R24
+ 0044                    .dbline 31
+                       ;   DDRB=0xff;
+ 0044  EF8F              ldi R24,255
+ 0045  BB87              out 0x17,R24
+ 0046                    .dbline 32
+                       ;   PORTD=0xff;
+ 0046  BB82              out 0x12,R24
+ 0047                    .dbline 33
+                       ;   PORTB=0xff;
+ 0047  BB88              out 0x18,R24
+ 0048                    .dbline 34
+                       ;   TIMSK=0x0a;//¿ª·ÅT0Òç³öÖÐ¶ÏºÍT1²¶×½ÖÐ¶Ï
+ 0048  E08A              ldi R24,10
+ 0049  BF89              out 0x39,R24
+ 004A                    .dbline 35
+                       ;   TCCR0=0x03;
+ 004A  E083              ldi R24,3
+ 004B  BF83              out 0x33,R24
+ 004C                    .dbline 36
+                       ;   TCCR1A=0x00;
+ 004C  BC2F              out 0x2f,R2
+ 004D                    .dbline 37
+                       ;   TCCR1B=0xc0;
+ 004D  EC80              ldi R24,192
+ 004E  BD8E              out 0x2e,R24
+ 004F                    .dbline 38
+                       ;   TCNT0=0x83;
+ 004F  E883              ldi R24,131
+ 0050  BF82              out 0x32,R24
+ 0051                    .dbline 39
+                       ;   timecount=1000;
+ 0051  EE88              ldi R24,1000
+ 0052  E093              ldi R25,3
+ 0053  93900067          sts _timecount+1,R25
+ 0055  93800066          sts _timecount,R24
+ 0057                    .dbline 40}
+                       ;  }
+ 0057                  L1:
+ 0057  9508              ret
+ 0058                    .dbfunc s display _display fI
+                       ;              i -> R20
+                         .even
+ 0058                  _display::
+ 0058  D129              rcall push_gset1
+ 0059                    .dbline 45{
+                       ; /******************************
+                       ;      ÁùÂ·¶¯Ì¬É¨ÃèÏÔÊ¾µçÂ·
+                       ; ******************************/ 
+                       ; void display(void)
+                       ; {
+ 0059                    .dbline 47
+                       ;  unsigned char i;
+                       ;  for (i=0;i<6;i++)
+ 0059  2744              clr R20
+ 005A  C016              rjmp L6
+ 005B                  L3:
+ 005B                    .dbline 48
+ 005B                    .dbline 49
+ 005B  E680              ldi R24,<_ledbuff
+ 005C  E090              ldi R25,>_ledbuff
+ 005D  2FE4              mov R30,R20
+ 005E  27FF              clr R31
+ 005F  0FE8              add R30,R24
+ 0060  1FF9              adc R31,R25
+ 0061  8020              ldd R2,z+0
+ 0062  BA28              out 0x18,R2
+ 0063                    .dbline 50
+ 0063  E001              ldi R16,1
+ 0064  2F14              mov R17,R20
+ 0065  D154              rcall lsl8
+ 0066  2E20              mov R2,R16
+ 0067  9420              com R2
+ 0068  BA22              out 0x12,R2
+ 0069                    .dbline 51
+ 0069  D0D2              rcall _delay_1ms
+ 006A                    .dbline 52
+ 006A  E001              ldi R16,1
+ 006B  2F14              mov R17,R20
+ 006C  D14D              rcall lsl8
+ 006D  B222              in R2,0x12
+ 006E  2A20              or R2,R16
+ 006F  BA22              out 0x12,R2
+ 0070                    .dbline 53
+ 0070                  L4:
+ 0070                    .dbline 47
+ 0070  9543              inc R20
+ 0071                  L6:
+ 0071                    .dbline 47
+ 0071  3046              cpi R20,6
+ 0072  F340              brlo L3
+ 0073                    .dbline 54}
+                       ;   {
+                       ;    PORTB=ledbuff[i];//½«ÏÔÊ¾»º³åÇøÊý¾ÝËÍPORTB¿Ú
+                       ;    PORTD=~(1<<i);   //¿ªÊ¼ÏÔÊ¾
+                       ;    delay_1ms();     //Ã¿Ò»Î»ÏÔÊ¾±£³ÖÒ»¶¨Ê±¼ä
+                       ;    PORTD|=(1<<i);   //¹Ø±ÕÏÔÊ¾
+                       ;   }
+                       ; }
+ 0073                  L2:
+ 0073  D111              rcall pop_gset1
+ 0074  9508              ret
+ 0075                    .dbsym r i 20 c
+ 0075                    .dbfunc s hextobcd _hextobcd fI
+                       ;           temp -> R10
+                       ;              i -> R12
+                         .even
+ 0075                  _hextobcd::
+ 0075  D129              rcall push_gset4
+ 0076                    .dbline 59{
+                       ; /************************************
+                       ;   ½«countÊ®Áù½øÖÆÊý¾Ý×ª»»ÎªLEDÆß¶ÎÂë
+                       ; ************************************/
+                       ; void hextobcd(void)
+                       ; {
+ 0076                    .dbline 61
+                       ;   unsigned char i,temp;
+                       ;   for (i=0;i<6;i++)
+ 0076  24CC              clr R12
+ 0077  C042              rjmp L11
+ 0078                  L8:
+ 0078                    .dbline 62
+ 0078                    .dbline 62
+ 0078  E306              ldi R16,<L12
+ 0079  E010              ldi R17,>L12
+ 007A  D12B              rcall lpm32
+ 007B  9050006B          lds R5,_count+2+1
+ 007D  9040006A          lds R4,_count+2
+ 007F  90300069          lds R3,_count+1
+ 0081  90200068          lds R2,_count
+ 0083  933A              st -y,R19
+ 0084  932A              st -y,R18
+ 0085  931A              st -y,R17
+ 0086  930A              st -y,R16
+ 0087  2D02              mov R16,R2
+ 0088  2D13              mov R17,R3
+ 0089  2D24              mov R18,R4
+ 008A  2D35              mov R19,R5
+ 008B  D17C              rcall mod32u
+ 008C  2EA0              mov R10,R16
+ 008D                    .dbline 63
+ 008D  E18A              ldi R24,<_tabel
+ 008E  E090              ldi R25,>_tabel
+ 008F  2C2A              mov R2,R10
+ 0090  2433              clr R3
+ 0091  0E28              add R2,R24
+ 0092  1E39              adc R3,R25
+ 0093  2DE2              mov R30,R2
+ 0094  2DF3              mov R31,R3
+ 0095  95C8              lpm
+ 0096  E680              ldi R24,<_ledbuff
+ 0097  E090              ldi R25,>_ledbuff
+ 0098  2DEC              mov R30,R12
+ 0099  27FF              clr R31
+ 009A  0FE8              add R30,R24
+ 009B  1FF9              adc R31,R25
+ 009C  8200              std z+0,R0
+ 009D                    .dbline 64
+ 009D  E306              ldi R16,<L12
+ 009E  E010              ldi R17,>L12
+ 009F  D106              rcall lpm32
+ 00A0  9050006B          lds R5,_count+2+1
+ 00A2  9040006A          lds R4,_count+2
+ 00A4  90300069          lds R3,_count+1
+ 00A6  90200068          lds R2,_count
+ 00A8  933A              st -y,R19
+ 00A9  932A              st -y,R18
+ 00AA  931A              st -y,R17
+ 00AB  930A              st -y,R16
+ 00AC  2D02              mov R16,R2
+ 00AD  2D13              mov R17,R3
+ 00AE  2D24              mov R18,R4
+ 00AF  2D35              mov R19,R5
+ 00B0  D150              rcall div32u
+ 00B1  93100069          sts _count+1,R17
+ 00B3  93000068          sts _count,R16
+ 00B5  9330006B          sts _count+2+1,R19
+ 00B7  9320006A          sts _count+2,R18
+ 00B9                    .dbline 65
+ 00B9                  L9:
+ 00B9                    .dbline 61
+ 00B9  94C3              inc R12
+ 00BA                  L11:
+ 00BA                    .dbline 61
+ 00BA  2D8C              mov R24,R12
+ 00BB  3086              cpi R24,6
+ 00BC  F408              brsh X0
+ 00BD  CFBA              rjmp L8
+ 00BE                  X0:
+ 00BE                    .dbline 66}
+                       ;   {temp=count%10;
+                       ;    ledbuff[i]=tabel[temp];
+                       ;    count=count/10;
+                       ;   }  
+                       ; }
+ 00BE                  L7:
+ 00BE  D0E5              rcall pop_gset4
+ 00BF  9508              ret
+ 00C0                    .dbsym r temp 10 c
+ 00C0                    .dbsym r i 12 c
+ 00C0                    .dbfunc s main _main fI
+                       ;              j -> <dead>
+                       ;              i -> <dead>
+                         .even
+ 00C0                  _main::
+ 00C0                    .dbline 71{
+                       ; /*****************************
+                       ;         Ö÷³ÌÐò
+                       ; ******************************/
+                       ; void main(void)
+                       ; {
+ 00C0                    .dbline 73
+                       ;  unsigned char i,j;
+                       ;  MCUCR=0;
+ 00C0  2422              clr R2
+ 00C1  BE25              out 0x35,R2
+ 00C2                    .dbline 74
+                       ;  port_init(); //¶Ë¿Ú³õÊ¼»¯
+ 00C2  DF7D              rcall _port_init
+ 00C3                    .dbline 75
+                       ;  count=0;
+ 00C3  E302              ldi R16,<L14
+ 00C4  E010              ldi R17,>L14
+ 00C5  D0E0              rcall lpm32
+ 00C6  93100069          sts _count+1,R17
+ 00C8  93000068          sts _count,R16
+ 00CA  9330006B          sts _count+2+1,R19
+ 00CC  9320006A          sts _count+2,R18
+ 00CE                    .dbline 76
+                       ;  SEI();
+ 00CE  9478              sei
+ 00CF  C001              rjmp L16
+ 00D0                  L15:
+ 00D0                    .dbline 78
+ 00D0                    .dbline 79
+ 00D0  DF87              rcall _display
+ 00D1                    .dbline 80
+ 00D1                  L16:
+ 00D1                    .dbline 77
+                       ;  while(1)
+ 00D1  CFFE              rjmp L15
+ 00D2                  X1:
+ 00D2                    .dbline 81}
+                       ;   {
+                       ;    display();
+                       ;   }
+                       ; }
+ 00D2                  L13:
+ 00D2  9508              ret
+ 00D3                    .dbsym l j 1 c
+ 00D3                    .dbsym l i 1 c
+ 00D3                    .dbfunc s timer0 _timer0 fI
+                         .even
+ 00D3                  _timer0::
+ 00D3  D080              rcall push_lset
+ 00D4                    .dbline 86{
+                       ; /**************************************
+                       ;  T0Òç³öÖÐ¶Ï£¬Íê³É²âÁ¿Õ¢ÃÅ¿ØÖÆºÍÊý×Ö×ª»»
+                       ; ***************************************/
+                       ; void timer0(void)
+                       ;    {
+ 00D4                    .dbline 87
+                       ;     if (--timecount==0)
+ 00D4  91900067          lds R25,_timecount+1
+ 00D6  91800066          lds R24,_timecount
+ 00D8  9701              sbiw R24,1
+ 00D9  2E28              mov R2,R24
+ 00DA  2E39              mov R3,R25
+ 00DB  92300067          sts _timecount+1,R3
+ 00DD  92200066          sts _timecount,R2
+ 00DF  2022              tst R2
+ 00E0  F559              brne L19
+ 00E1  2033              tst R3
+ 00E2  F549              brne L19
+ 00E3                    .dbline 88
+                       ;      {
+ 00E3                    .dbline 89
+                       ;       CLI();
+ 00E3  94F8              cli
+ 00E4                    .dbline 90
+                       ;       hextobcd();
+ 00E4  DF90              rcall _hextobcd
+ 00E5                    .dbline 91
+                       ;       if (count>999999)
+ 00E5  E20E              ldi R16,<L23
+ 00E6  E010              ldi R17,>L23
+ 00E7  D0BE              rcall lpm32
+ 00E8  9050006B          lds R5,_count+2+1
+ 00EA  9040006A          lds R4,_count+2
+ 00EC  90300069          lds R3,_count+1
+ 00EE  90200068          lds R2,_count
+ 00F0  1502              cp R16,R2
+ 00F1  0513              cpc R17,R3
+ 00F2  0524              cpc R18,R4
+ 00F3  0535              cpc R19,R5
+ 00F4  F428              brsh L21
+ 00F5                    .dbline 92
+                       ;         ledbuff[0]|=0x80;
+ 00F5  91800060          lds R24,_ledbuff
+ 00F7  6880              ori R24,128
+ 00F8  93800060          sts _ledbuff,R24
+ 00FA                  L21:
+ 00FA                    .dbline 93
+                       ;       count=0;
+ 00FA  E302              ldi R16,<L14
+ 00FB  E010              ldi R17,>L14
+ 00FC  D0A9              rcall lpm32
+ 00FD  93100069          sts _count+1,R17
+ 00FF  93000068          sts _count,R16
+ 0101  9330006B          sts _count+2+1,R19
+ 0103  9320006A          sts _count+2,R18
+ 0105                    .dbline 94
+                       ;       timecount=1000;
+ 0105  EE88              ldi R24,1000
+ 0106  E093              ldi R25,3
+ 0107  93900067          sts _timecount+1,R25
+ 0109  93800066          sts _timecount,R24
+ 010B                    .dbline 95
+                       ;       SEI();
+ 010B  9478              sei
+ 010C                    .dbline 96
+                       ;      }
+ 010C                  L19:
+ 010C                    .dbline 97
+                       ;     TCNT0=0x84; 
+ 010C  E884              ldi R24,132
+ 010D  BF82              out 0x32,R24
+ 010E                    .dbline 98}
+                       ;    }
+ 010E                  L18:
+ 010E  D05C              rcall pop_lset
+ 010F  9518              reti
+ 0110                    .dbfunc s timer1 _timer1 fI
+                         .even
+ 0110                  _timer1::
+ 0110  922A              st -y,R2
+ 0111  923A              st -y,R3
+ 0112  924A              st -y,R4
+ 0113  925A              st -y,R5
+ 0114  930A              st -y,R16
+ 0115  931A              st -y,R17
+ 0116  932A              st -y,R18
+ 0117  933A              st -y,R19
+ 0118  B62F              in R2,0x3f
+ 0119  922A              st -y,R2
+ 011A                    .dbline 103{
+                       ; /*****************************
+                       ;   T1²¶×½ÖÐ¶Ï£¬Íê³ÉÂö³å¼ÆÊý
+                       ; ******************************/   
+                       ; void timer1(void)
+                       ;    {
+ 011A                    .dbline 104
+                       ;     count++;
+ 011A  E20A              ldi R16,<L25
+ 011B  E010              ldi R17,>L25
+ 011C  D089              rcall lpm32
+ 011D  9050006B          lds R5,_count+2+1
+ 011F  9040006A          lds R4,_count+2
+ 0121  90300069          lds R3,_count+1
+ 0123  90200068          lds R2,_count
+ 0125  0E20              add R2,R16
+ 0126  1E31              adc R3,R17
+ 0127  1E42              adc R4,R18
+ 0128  1E53              adc R5,R19
+ 0129  92300069          sts _count+1,R3
+ 012B  92200068          sts _count,R2
+ 012D  9250006B          sts _count+2+1,R5
+ 012F  9240006A          sts _count+2,R4
+ 0131                    .dbline 105}
+                       ;    }   
+ 0131                  L24:
+ 0131  9029              ld R2,y+
+ 0132  BE2F              out 0x3f,R2
+ 0133  9139              ld R19,y+
+ 0134  9129              ld R18,y+
+ 0135  9119              ld R17,y+
+ 0136  9109              ld R16,y+
+ 0137  9059              ld R5,y+
+ 0138  9049              ld R4,y+
+ 0139  9039              ld R3,y+
+ 013A  9029              ld R2,y+
+ 013B  9518              reti
+                         .area bss(ram, con, rel)
+--- 0000                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+ 0033                  _timecount::
+ 0033                    .blkb 2
+ 0034                    .dbsym s timecount _timecount i
+ 0034                  _count::
+ 0034                    .blkb 4
+ 0036                    .dbsym s count _count l
+                         .area lit(rom, con, rel)
+--- 0008                 L25:
+--- 0008 01000000          .word 1,0
+--- 000A                 L23:
+--- 000A 3F420F00          .word 16959,15
+--- 000C                 L14:
+--- 000C 00000000          .word 0,0
+--- 000E                 L12:
+--- 000E 0A000000          .word 10,0
+                         .module delay.c
+                         .area text(rom, con, rel)
+--- 0000                   .dbfile D:\ICC-AVR\examples.sl\cymometer\delay.c
+--- 0000                   .dbfunc s delay_1ms _delay_1ms fI
+                       ;              i -> R16,R17
+                         .even
+ 013C                  _delay_1ms::
+ 013C                    .dbline 10{
+                       ; /****************************************/
+                       ; /*  ÑÓÊ±º¯Êý(mS),ÔÚ±¾ÎÄ¼þÖÐÓ¦¶¨Òå:xtalº */
+                       ; /*      xtalÎª¶ÔÓ¦¾§ÕñÆµÂÊ,µ¥Î»ÎªMHZ    */
+                       ; /*  ÔÚµ÷ÓÃÑÓÊ±º¯ÊýµÄÎÄ¼þÖÐ,Ó¦×÷ÈçÏÂËµÃ÷ */
+                       ; /* extern void delay_ms(unsigned int n);*/
+                       ; /* extern void delay_1ms(void);         */
+                       ; /****************************************/
+                       ; #define xtal 8   
+                       ; void delay_1ms(void)
+                       ; { unsigned int i;
+ 013C                    .dbline 11
+                       ;  for(i=1;i<(unsigned int)(xtal*143-2);i++)
+ 013C  E001              ldi R16,1
+ 013D  E010              ldi R17,0
+ 013E  C002              rjmp L5
+ 013F                  L2:
+ 013F                    .dbline 12
+ 013F                  L3:
+ 013F                    .dbline 11
+ 013F  5F0F              subi R16,255  ; offset = 1
+ 0140  4F1F              sbci R17,255
+ 0141                  L5:
+ 0141                    .dbline 11
+ 0141  3706              cpi R16,118
+ 0142  E0E4              ldi R30,4
+ 0143  071E              cpc R17,R30
+ 0144  F3D0              brlo L2
+ 0145                    .dbline 13}
+                       ;     ;
+                       ; }
+ 0145                  L1:
+ 0145  9508              ret
+ 0146                    .dbsym r i 16 i
+ 0146                    .dbfunc s delay_ms _delay_ms fI
+                       ;              i -> R20,R21
+                       ;              n -> R22,R23
+                         .even
+ 0146                  _delay_ms::
+ 0146  D052              rcall push_gset2
+ 0147  2F60              mov R22,R16
+ 0148  2F71              mov R23,R17
+ 0149                    .dbline 15{
+                       ; void delay_ms(unsigned int n)
+                       ; {
+ 0149                    .dbline 16
+                       ;  unsigned int i=0;
+ 0149  2744              clr R20
+ 014A  2755              clr R21
+ 014B  C003              rjmp L8
+ 014C                  L7:
+ 014C                    .dbline 18
+ 014C                    .dbline 18
+ 014C  DFEF              rcall _delay_1ms
+ 014D                    .dbline 19
+ 014D  5F4F              subi R20,255  ; offset = 1
+ 014E  4F5F              sbci R21,255
+ 014F                    .dbline 20
+ 014F                  L8:
+ 014F                    .dbline 17
+                       ;    while(i<n)
+ 014F  1746              cp R20,R22
+ 0150  0757              cpc R21,R23
+ 0151  F3D0              brlo L7
+ 0152                    .dbline 21}
+                       ;    {delay_1ms();
+                       ;     i++;
+                       ;    }
+                       ; }
+ 0152                  L6:
+ 0152  D04F              rcall pop_gset2
+ 0153  9508              ret
+ 0154                    .dbsym r i 20 i
+ 0154                    .dbsym r n 22 i

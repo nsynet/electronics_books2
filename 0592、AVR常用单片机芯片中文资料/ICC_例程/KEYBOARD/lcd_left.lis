@@ -1,0 +1,116 @@
+                         .module lcd_left.c
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\lcd_left.c
+ 0000                   .dbfunc s lcd_shift _lcd_shift fI
+                       ;              i -> R20
+                       ;              j -> R22
+                       ;              p -> R20
+                       ;              n -> R10
+                         .even
+ 0000                 _lcd_shift::
+ 0000 00D0              rcall push_gset3
+ 0002 422F              mov R20,R18
+ 0004 A02E              mov R10,R16
+ 0006                   .dbline 7{
+                       ; /************************************************
+                       ;             LCD字符移位函数
+                       ;     n:移动的次数 
+                       ;     p:移动方向,'l'或'L'表示左移，'r'或'R'表示右移       
+                       ; *************************************************/
+                       ; void lcd_shift(unsigned char n,unsigned char p)
+                       ;       {
+ 0006                   .dbline 8
+                       ;        unsigned char i,j=1;
+ 0006 61E0              ldi R22,1
+ 0008                   .dbline 9
+                       ;        switch (p)
+ 0008 5527              clr R21
+ 000A 4235              cpi R20,82
+ 000C E0E0              ldi R30,0
+ 000E 5E07              cpc R21,R30
+ 0010 C9F0              breq L6
+ 0012 82E5              ldi R24,82
+ 0014 90E0              ldi R25,0
+ 0016 8417              cp R24,R20
+ 0018 9507              cpc R25,R21
+ 001A 2CF0              brlt L10
+ 001C                 L9:
+ 001C 4C34              cpi R20,76
+ 001E E0E0              ldi R30,0
+ 0020 5E07              cpc R21,R30
+ 0022 A1F0              breq L8
+ 0024 1DC0              rjmp L1
+ 0026                 L10:
+ 0026 4C36              cpi R20,108
+ 0028 E0E0              ldi R30,0
+ 002A 5E07              cpc R21,R30
+ 002C 69F0              breq L7
+ 002E 4C36              cpi R20,108
+ 0030 E0E0              ldi R30,0
+ 0032 5E07              cpc R21,R30
+ 0034 ACF0              brlt L1
+ 0036                 L11:
+ 0036 4237              cpi R20,114
+ 0038 E0E0              ldi R30,0
+ 003A 5E07              cpc R21,R30
+ 003C 09F0              breq L5
+ 003E 10C0              rjmp L1
+ 0040                 X0:
+ 0040                   .dbline 10
+                       ;            {
+ 0040                 L5:
+ 0040                   .dbline 11
+                       ;             case 'r':i=0x1c;break;
+ 0040 4CE1              ldi R20,28
+ 0042                   .dbline 11
+ 0042 0CC0              rjmp L13
+ 0044                 L6:
+ 0044                   .dbline 12
+                       ;             case 'R':i=0x1c;break;
+ 0044 4CE1              ldi R20,28
+ 0046                   .dbline 12
+ 0046 0AC0              rjmp L13
+ 0048                 L7:
+ 0048                   .dbline 13
+                       ;             case 'l':i=0x18;break;    
+ 0048 48E1              ldi R20,24
+ 004A                   .dbline 13
+ 004A 08C0              rjmp L13
+ 004C                 L8:
+ 004C                   .dbline 14
+                       ;             case 'L':i=0x18;break;    
+ 004C 48E1              ldi R20,24
+ 004E                   .dbline 14
+ 004E                   .dbline 15
+                       ;             default:return;
+ 004E 06C0              rjmp L13
+ 0050                 L12:
+ 0050                   .dbline 18
+ 0050                   .dbline 19
+ 0050 6395              inc R22
+ 0052                   .dbline 20
+ 0052 2227              clr R18
+ 0054 3327              clr R19
+ 0056 042F              mov R16,R20
+ 0058 1127              clr R17
+ 005A 00D0              rcall _write_lcd
+ 005C                   .dbline 21
+ 005C                 L13:
+ 005C                   .dbline 17
+                       ;             }
+                       ;        while (j<=n)
+ 005C A616              cp R10,R22
+ 005E C0F7              brsh L12
+ 0060                   .dbline 22}
+                       ;            {
+                       ;             j++;
+                       ;             write_lcd(i,0);
+                       ;            }        
+                       ;       }
+ 0060                 L1:
+ 0060 00D0              rcall pop_gset3
+ 0062 0895              ret
+ 0064                   .dbsym r i 20 c
+ 0064                   .dbsym r j 22 c
+ 0064                   .dbsym r p 20 c
+ 0064                   .dbsym r n 10 c

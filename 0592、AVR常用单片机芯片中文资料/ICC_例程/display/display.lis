@@ -1,0 +1,234 @@
+                         .module display.c
+                         .area lit(rom, con, rel)
+ 0000                 _tabel::
+ 0000 3F06              .byte 63,6
+ 0002 5B4F              .byte 91,'O
+ 0004 666D              .byte 'f,'m
+ 0006 7D07              .byte 125,7
+ 0008 7F6F              .byte 127,'o
+ 000A 777C              .byte 'w,124
+ 000C 395E              .byte 57,94
+ 000E 7971              .byte 'y,'q
+ 0010                   .dbfile D:\ICC-AVR\examples.sl\display\display.c
+ 0010                   .dbsym s tabel _tabel A[16:16]c
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\display\display.c
+ 0000                 _ledbuff::
+ 0000                   .blkb 2
+                         .area idata
+ 0000 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0002                   .dbfile D:\ICC-AVR\examples.sl\display\display.c
+ 0002                   .blkb 2
+                         .area idata
+ 0002 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0004                   .dbfile D:\ICC-AVR\examples.sl\display\display.c
+ 0004                   .blkb 2
+                         .area idata
+ 0004 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0006                   .dbfile D:\ICC-AVR\examples.sl\display\display.c
+ 0006                   .dbsym s ledbuff _ledbuff A[6:6]c
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\display\display.c
+ 0000                   .dbfunc s port_init _port_init fI
+                         .even
+ 0000                 _port_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 14
+                       ; /*********************************************
+                       ;                HTTP://WWW.SL.COM.CN
+                       ;                     双龙电子
+                       ;                六路动态扫描显示程序      
+                       ; **********************************************/
+                       ; #include <io8515.h>
+                       ; extern void delay_ms(unsigned int n);//引用外部函数
+                       ; extern void delay_1ms(void); 
+                       ;           /*   七段译码字形表     */        
+                       ; const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+                       ;           /*     显示缓冲区       */
+                       ; unsigned char ledbuff[]={0x3f,0x3f,0x3f,0x3f,0x3f,0x3f};
+                       ; void port_init(void)//端口初始化
+                       ;  {
+ 0000                   .dbline 15
+                       ;   DDRD=0x3f;
+ 0000 8FE3              ldi R24,63
+ 0002 81BB              out 0x11,R24
+ 0004                   .dbline 16
+                       ;   DDRB=0xff;
+ 0004 8FEF              ldi R24,255
+ 0006 87BB              out 0x17,R24
+ 0008                   .dbline 17
+                       ;   PORTD=0xff;
+ 0008 82BB              out 0x12,R24
+ 000A                   .dbline 18
+                       ;   PORTB=0xff;
+ 000A 88BB              out 0x18,R24
+ 000C                   .dbline -2
+ 000C                   .dbline 19
+                       ;  }
+ 000C                 L1:
+ 000C                   .dbline 0 ; func end
+ 000C 0895              ret
+ 000E                   .dbfunc s display _display fI
+                       ;              i -> R20
+                         .even
+ 000E                 _display::
+ 000E 00D0              rcall push_gset1
+ 0010                   .dbline -1
+ 0010                   .dbline 21
+                       ; void display(void)//六路动态扫描显示电路
+                       ; {
+ 0010                   .dbline 23
+                       ;  unsigned char i;
+                       ;  for (i=0;i<6;i++)
+ 0010 4427              clr R20
+ 0012 16C0              rjmp L6
+ 0014                 L3:
+ 0014                   .dbline 24
+ 0014                   .dbline 25
+ 0014 80E0              ldi R24,<_ledbuff
+ 0016 90E0              ldi R25,>_ledbuff
+ 0018 E42F              mov R30,R20
+ 001A FF27              clr R31
+ 001C E80F              add R30,R24
+ 001E F91F              adc R31,R25
+ 0020 2080              ldd R2,z+0
+ 0022 28BA              out 0x18,R2
+ 0024                   .dbline 26
+ 0024 01E0              ldi R16,1
+ 0026 142F              mov R17,R20
+ 0028 00D0              rcall lsl8
+ 002A 202E              mov R2,R16
+ 002C 2094              com R2
+ 002E 22BA              out 0x12,R2
+ 0030                   .dbline 27
+ 0030 00D0              rcall _delay_1ms
+ 0032                   .dbline 28
+ 0032 01E0              ldi R16,1
+ 0034 142F              mov R17,R20
+ 0036 00D0              rcall lsl8
+ 0038 22B2              in R2,0x12
+ 003A 202A              or R2,R16
+ 003C 22BA              out 0x12,R2
+ 003E                   .dbline 29
+ 003E                 L4:
+ 003E                   .dbline 23
+ 003E 4395              inc R20
+ 0040                 L6:
+ 0040                   .dbline 23
+ 0040 4630              cpi R20,6
+ 0042 40F3              brlo L3
+ 0044                   .dbline -2
+ 0044                   .dbline 30
+                       ;   {
+                       ;    PORTB=ledbuff[i];//将显示缓冲区数据送PORTB口
+                       ;    PORTD=~(1<<i);   //开始显示
+                       ;    delay_1ms();     //每一位显示保持一定时间
+                       ;    PORTD|=(1<<i);   //关闭显示
+                       ;   }
+                       ; }
+ 0044                 L2:
+ 0044 00D0              rcall pop_gset1
+ 0046                   .dbline 0 ; func end
+ 0046 0895              ret
+ 0048                   .dbsym r i 20 c
+ 0048                   .dbfunc s main _main fI
+                       ;              i -> R20
+                       ;              j -> R22
+                         .even
+ 0048                 _main::
+ 0048                   .dbline -1
+ 0048                   .dbline 33
+                       ; /*主程序功能：演示了一个多路动态扫描程序的工作过程*/
+                       ; void main(void)
+                       ; {
+ 0048                   .dbline 35
+                       ;  unsigned char i,j;
+                       ;  MCUCR=0;
+ 0048 2224              clr R2
+ 004A 25BE              out 0x35,R2
+ 004C                   .dbline 36
+                       ;  port_init(); //端口初始化
+ 004C D9DF              rcall _port_init
+ 004E 20C0              rjmp L9
+ 0050                 L8:
+ 0050                   .dbline 38
+                       ;  while(1)
+                       ;   {
+ 0050                   .dbline 39
+                       ;    for(i=0;i<0x10;i++)  
+ 0050 4427              clr R20
+ 0052 1CC0              rjmp L14
+ 0054                 L11:
+ 0054                   .dbline 40
+                       ;      {
+ 0054                   .dbline 41
+                       ;       for(j=0;j<6;j++)
+ 0054 6627              clr R22
+ 0056 11C0              rjmp L18
+ 0058                 L15:
+ 0058                   .dbline 42
+ 0058 80E0              ldi R24,<_tabel
+ 005A 90E0              ldi R25,>_tabel
+ 005C 242E              mov R2,R20
+ 005E 3324              clr R3
+ 0060 280E              add R2,R24
+ 0062 391E              adc R3,R25
+ 0064 E22D              mov R30,R2
+ 0066 F32D              mov R31,R3
+ 0068 C895              lpm
+ 006A 80E0              ldi R24,<_ledbuff
+ 006C 90E0              ldi R25,>_ledbuff
+ 006E E62F              mov R30,R22
+ 0070 FF27              clr R31
+ 0072 E80F              add R30,R24
+ 0074 F91F              adc R31,R25
+ 0076 0082              std z+0,R0
+ 0078                 L16:
+ 0078                   .dbline 41
+ 0078 6395              inc R22
+ 007A                 L18:
+ 007A                   .dbline 41
+ 007A 6630              cpi R22,6
+ 007C 68F3              brlo L15
+ 007E                   .dbline 43
+                       ;           ledbuff[j]=tabel[i] ;//更换显示字形
+                       ;       for (j=0;j<200;j++)    
+ 007E 6627              clr R22
+ 0080 02C0              rjmp L22
+ 0082                 L19:
+ 0082                   .dbline 44
+ 0082 C5DF              rcall _display
+ 0084                 L20:
+ 0084                   .dbline 43
+ 0084 6395              inc R22
+ 0086                 L22:
+ 0086                   .dbline 43
+ 0086 683C              cpi R22,200
+ 0088 E0F3              brlo L19
+ 008A                   .dbline 45
+ 008A                 L12:
+ 008A                   .dbline 39
+ 008A 4395              inc R20
+ 008C                 L14:
+ 008C                   .dbline 39
+ 008C 4031              cpi R20,16
+ 008E 10F3              brlo L11
+ 0090                   .dbline 46
+ 0090                 L9:
+ 0090                   .dbline 37
+ 0090 DFCF              rjmp L8
+ 0092                 X0:
+ 0092                   .dbline -2
+ 0092                   .dbline 47
+                       ;           display();          //循环显示200次
+                       ;      } 
+                       ;   }
+                       ; }
+ 0092                 L7:
+ 0092                   .dbline 0 ; func end
+ 0092 0895              ret
+ 0094                   .dbsym r i 20 c
+ 0094                   .dbsym r j 22 c

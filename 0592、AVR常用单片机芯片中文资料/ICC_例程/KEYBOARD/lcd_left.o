@@ -1,0 +1,49 @@
+XL
+H 1 areas 4 global symbols
+M lcd_left.c
+S push_gset3 Ref0000
+S _write_lcd Ref0000
+S pop_gset3 Ref0000
+A text size 64 flags 0
+dbfile D:\ICC-AVR\examples.sl\lcd_left.c
+dbfunc s lcd_shift 0 fI
+dbsym r i 14 c
+dbsym r j 16 c
+dbsym r p 14 c
+dbsym r n A c
+dbline 7 6 {
+dbline 8 6
+dbline 9 8
+dbline A 40
+dbline B 40
+dbline B 42
+dbline C 44
+dbline C 46
+dbline D 48
+dbline D 4A
+dbline E 4C
+dbline E 4E
+dbline F 4E
+dbline 12 50
+dbline 13 50
+dbline 14 52
+dbline 15 5C
+dbline 11 5C
+dbline 16 60 }
+S _lcd_shift Def0000
+T 00 00 00 D0 42 2F A0 2E 61 E0 55 27 42 35 E0 E0
+R 00 00 00 00 82 02 00 00
+T 0E 00 5E 07 C9 F0 82 E5 90 E0 84 17 95 07 2C F0
+R 00 00 00 00
+T 1C 00 4C 34 E0 E0 5E 07 A1 F0 1D C0 4C 36 E0 E0
+R 00 00 00 00
+T 2A 00 5E 07 69 F0 4C 36 E0 E0 5E 07 AC F0 42 37
+R 00 00 00 00
+T 38 00 E0 E0 5E 07 09 F0 10 C0 4C E1 0C C0 4C E1
+R 00 00 00 00
+T 46 00 0A C0 48 E1 08 C0 48 E1 06 C0 63 95 22 27
+R 00 00 00 00
+T 54 00 33 27 04 2F 11 27 00 D0 A6 16 C0 F7 00 D0
+R 00 00 00 00 82 08 01 00 82 0E 02 00
+T 62 00 08 95
+R 00 00 00 00

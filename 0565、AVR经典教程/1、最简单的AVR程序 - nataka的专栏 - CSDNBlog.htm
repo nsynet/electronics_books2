@@ -1,0 +1,1433 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0059)http://blog.csdn.net/nataka/archive/2006/12/31/1471044.aspx -->
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>1、最简单的AVR程序 - nataka的专栏 - CSDNBlog</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META content=nataka name=author>
+<META content=Csdn name=Copyright>
+<META content=最简单的AVR程序，ATmega32芯片 name=description>
+<META content=nataka,1、最简单的AVR程序 name=keywords><LINK 
+href="http://profile.csdn.net/nataka/picture/1.ico" rel="Shortcut Icon"><LINK 
+media=all href="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/blue_1.css" 
+type=text/css rel=stylesheet><LINK title=RSS 
+href="http://blog.csdn.net/nataka/rss.aspx" type=application/rss+xml 
+rel=alternate>
+<META content="MSHTML 6.00.2900.3395" name=GENERATOR></HEAD>
+<BODY id=defaultuser>
+<DIV id=csdnblog_allwrap>
+<FORM language=javascript id=Form1 name=Form1 
+onsubmit="javascript:return WebForm_OnSubmit();" action=1471044.aspx 
+method=post><INPUT id=__EVENTTARGET type=hidden name=__EVENTTARGET> <INPUT 
+id=__EVENTARGUMENT type=hidden name=__EVENTARGUMENT> <INPUT 
+id="&#13;&#10;__VIEWSTATE" type=hidden name=__VIEWSTATE>
+<SCRIPT type=text/javascript>
+<!--
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</SCRIPT>
+
+<SCRIPT src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/WebResource.axd" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>
+//<![CDATA[
+var Anthem_FormID = "Form1";
+//]]>
+</SCRIPT>
+
+<SCRIPT 
+src="F:\单片机\AVR单片机\AVR程序\1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files\WebResource(1).axd" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="F:\单片机\AVR单片机\AVR程序\1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files\WebResource(2).axd" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>
+<!--
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+// -->
+</SCRIPT>
+ 
+<DIV id=csdnblog_midwrap>
+<DIV id=csdnblog_header>
+<H1><A id=Header1_HeaderTitle 
+href="http://blog.csdn.net/nataka/">nataka的专栏</A></H1>
+<H2></H2>
+<UL id=personalnav>
+  <LI><A href="http://passport.csdn.net/UserLogin.aspx">登录</A></LI>
+  <LI><A href="http://passport.csdn.net/CSDNUserRegister.aspx">注册</A></LI></UL>
+<UL id=blogsearchsty>
+  <LI><INPUT class=bolgsearch id=inputSearch 
+onkeydown="return keyb(event)"></LI>
+  <LI class=selectsty><SELECT id=Search_ddlSearchScope 
+  name=Search:ddlSearchScope><OPTION value=all selected>全站</OPTION><OPTION 
+    value=nataka>当前博客</OPTION></SELECT></LI>
+  <LI><INPUT class=bolggobtn onclick=checkNull() type=button value=搜索></LI></UL>
+<UL id=menu>
+  <LI><A href="http://hi.csdn.net/nataka">空间</A></LI>
+  <LI><A class=on href="http://blog.csdn.net/nataka">博客</A></LI>
+  <LI><A href="http://hi.csdn.net/nataka/profile/contactlist/1.html">好友</A></LI>
+  <LI><A href="http://blog.csdn.net/nataka/Gallery.aspx">相册</A></LI>
+  <LI><A class=last 
+  href="http://hi.csdn.net/nataka/profile/notebook/1.html">留言</A></LI></UL></DIV>
+<DIV id=csdnblog_sidebar>
+<DIV class=gutter>
+<DIV class=aboutauthor>
+<DL>
+  <DT>区玉东<SPAN>ID：nataka</SPAN>
+  <DD class=middle><IMG alt="" 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/1_nataka.jpg">
+  <DD class=middle><A href="http://profile.csdn.net/8/E4/edit.html"></A>
+  <DD>共<EM>26054</EM>次访问，排名<EM>4432</EM>好友<EM>0</EM>人，关注者<EM>3</EM>人<BR>
+  <DD>
+  <DT>nataka的文章
+  <DD>原创 39 篇
+  <DD>翻译 0 篇
+  <DD>转载 5 篇
+  <DD>评论 16 篇 
+  <DT>最近评论
+  <DD>ff：<A title=点击查看《回复:计算出你和另一个人的关系，准的邪门了！！！！【转载】》 
+  href="http://blog.csdn.net/nataka/archive/2005/09/03/470498.aspx#824770">哈哈，不错</A>
+  <DD>jk：<A title=点击查看《回复:RA8822液晶模块的AVR程序》 
+  href="http://blog.csdn.net/nataka/archive/2007/04/09/1557574.aspx#789825">为甚不贴全，这样只能让看到的人恶心。</A>
+  <DD>cbq：<A title=点击查看《回复:简单的S52下载线》 
+  href="http://blog.csdn.net/nataka/archive/2006/12/05/1430577.aspx#787932">不错 
+  成功了 谢谢</A>
+  <DD>z：<A title=点击查看《回复:计算出你和另一个人的关系，准的邪门了！！！！【转载】》 
+  href="http://blog.csdn.net/nataka/archive/2005/09/03/470498.aspx#781301">?</A>
+  <DD>MAOMAO：<A title=点击查看《回复:计算出你和另一个人的关系，准的邪门了！！！！【转载】》 
+  href="http://blog.csdn.net/nataka/archive/2005/09/03/470498.aspx#777282">12 
+  爱你的人<BR>希望灵验</A> 
+  <DT>文章分类
+  <DD>
+  <DIV class=publiclist_sidebar>
+  <UL>
+    <LI><A href="http://blog.csdn.net/nataka/category/251686.aspx">51单片机</A><A 
+    href="http://blog.csdn.net/nataka/category/251686.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/143905.aspx">ASP.NET</A><A 
+    href="http://blog.csdn.net/nataka/category/143905.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/267779.aspx">AVR单片机</A><A 
+    href="http://blog.csdn.net/nataka/category/267779.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/143906.aspx">C/C++</A><A 
+    href="http://blog.csdn.net/nataka/category/143906.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/147724.aspx">Linux</A><A 
+    href="http://blog.csdn.net/nataka/category/147724.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/143907.aspx">平台</A><A 
+    href="http://blog.csdn.net/nataka/category/143907.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/158554.aspx">数据库</A><A 
+    href="http://blog.csdn.net/nataka/category/158554.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/144581.aspx">网络编程</A><A 
+    href="http://blog.csdn.net/nataka/category/144581.aspx/rss">(RSS)</A>
+    <LI><A href="http://blog.csdn.net/nataka/category/143908.aspx">杂文</A><A 
+    href="http://blog.csdn.net/nataka/category/143908.aspx/rss">(RSS)</A></LI></UL></DIV>
+  <DT>收藏
+  <DD>
+  <DIV class=publiclist_sidebar>
+  <UL></UL></DIV>
+  <DT>相册
+  <DT>ADOBE
+  <DD><A href="http://blog.csdn.net/nataka/archive/2006/12/31/www.bay800.com/id" 
+  target=_self>FittingText网站</A>
+  <DT>个人空间
+  <DD><A href="http://spaces.msn.com/members/wenguodong/" target=_self>MSN 
+  Space</A>
+  <DD><A href="http://www.fotoal.com/nataka/photos/browse" 
+target=_self>广广图片社</A>
+  <DT>存档
+  <DD>
+  <DIV class=publiclist_sidebar>
+  <UL>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2008/04.aspx">2008年04月(1)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2007/10.aspx">2007年10月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2007/05.aspx">2007年05月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2007/04.aspx">2007年04月(5)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2007/03.aspx">2007年03月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2007/01.aspx">2007年01月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2006/12.aspx">2006年12月(7)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2006/11.aspx">2006年11月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2005/11.aspx">2005年11月(5)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2005/10.aspx">2005年10月(2)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2005/09.aspx">2005年09月(12)</A>
+    <LI><A 
+    href="http://blog.csdn.net/nataka/archive/2005/08.aspx">2005年08月(2)</A></LI></UL></DIV><SPAN 
+  id=RecentVisitors></SPAN>
+  <DT>软件项目交易
+  <DD><IFRAME 
+  style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 180px; PADDING-TOP: 0px; HEIGHT: 32px" 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/CsdnBlogPage.htm" frameBorder=0 
+  scrolling=no></IFRAME><SPAN id=SubscriptionList>
+  <DT>订阅我的博客
+  <DD><A href="http://blog.csdn.net/nataka/Rss.aspx"><IMG alt=XML聚合 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/xml.gif" 
+  border=0></A>&nbsp;&nbsp;<A href="http://feeds.feedsky.com/csdn.net/nataka" 
+  target=_blank><IMG alt=FeedSky 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/feedsky.gif" border=0></A>
+  <DD><A 
+  href="http://www.xianguo.com/subscribe.php?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到鲜果 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/rss_xianguo.jpg" border=0></A>
+  <DD><A 
+  href="http://fusion.google.com/add?feedurl=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到Google 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/rss_google.gif" border=0></A>
+  <DD><A 
+  href="http://www.zhuaxia.com/add_channel.php?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到抓虾 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/rss_zhuaxia.gif" border=0></A>
+  <DD><A 
+  href="http://www.bloglines.com/sub/http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到BlogLines 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/rss_bloglines.gif" border=0></A>
+  <DD><A 
+  href="http://add.my.yahoo.com/rss?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到Yahoo 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/rss_yahoo.gif" border=0></A>
+  <DD><A 
+  href="http://rss.gougou.com/find_rss.jsp?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到GouGou 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/rss_gougou.gif" border=0></A>
+  <DD><A 
+  href="http://www.pageflakes.com/subscribe.aspx?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到飞鸽 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/rss_pageflakes.gif" 
+border=0></A>
+  <DD><A 
+  href="http://www.rojo.com/add-subscription?resource=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到Rojo 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/rss_rojo.gif" border=0></A>
+  <DD><A 
+  href="http://www.newsgator.com/ngs/subscriber/subfext.aspx?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到newsgator 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/rss_newsgator.gif" border=0></A>
+  <DD><A 
+  href="http://www.netvibes.com/subscribe.php?url=http://blog.csdn.net/nataka/Rss.aspx" 
+  target=_blank><IMG alt=订阅到netvibes 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/rss_netvibes.gif" 
+  border=0></A></SPAN> </DD></DL></DIV></DIV></DIV>
+<DIV id=csdnblog_content>
+<DIV class=gutter>
+<DIV class=default_contents>
+<DIV class=user_article>
+<SCRIPT src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/LoadFeedbackCount.js" 
+type=text/javascript></SCRIPT>
+
+<H1><IMG height=16 alt=原创 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/authorship.gif" width=15 
+border=0>&nbsp;<A 
+href="http://blog.csdn.net/nataka/archive/2006/12/31/1471044.aspx">1、最简单的AVR程序</A><CITE 
+class=fav_csdnstylebykimi><A class=fav_csdnstylebykimi title=收藏到我的网摘中，并分享给我的朋友 
+href="javascript:d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(saveit=window.open('http://wz.csdn.net/storeit.aspx?t='+escape(d.title)+'&amp;u='+escape(d.location.href)+'&amp;c='+escape(t),'saveit','scrollbars=no,width=590,height=300,left=75,top=20,status=no,resizable=yes'));saveit.focus();">收藏</A></CITE></H1>
+<DIV class=blogstory><SPAN id=Post.ascx_ViewPost_PreviousAndNextEntriesUp>
+<H3><A 
+href="http://blog.csdn.net/nataka/archive/2006/12/31/1471054.aspx">新一篇:&nbsp;2、一个简单的AVR中断程序</A>&nbsp;|&nbsp;<A 
+href="http://blog.csdn.net/nataka/archive/2006/12/27/1464595.aspx">旧一篇:&nbsp;判断闰年</A></H3></SPAN>
+<SCRIPT>function StorePage(){d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(keyit=window.open('http://www.365key.com/storeit.aspx?t='+escape(d.title)+'&u='+escape(d.location.href)+'&c='+escape(t),'keyit','scrollbars=no,width=475,height=575,left=75,top=20,status=no,resizable=yes'));keyit.focus();}</SCRIPT>
+
+<P>开机LED闪烁10次，SPEAKER鸣1次，然后PORTA端口接的6盏灯以不同花式闪烁。</P>
+<P>※PB2: SPEAKER，用于开机鸣叫<BR>※PB3: LED，用于开机闪烁&nbsp;</P>
+<P>&nbsp;</P>
+<DIV 
+style="BORDER-RIGHT: windowtext 0.5pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 0.5pt solid; PADDING-LEFT: 5.4pt; BACKGROUND: #e6e6e6; PADDING-BOTTOM: 4px; BORDER-LEFT: windowtext 0.5pt solid; WIDTH: 95%; WORD-BREAK: break-all; PADDING-TOP: 4px; BORDER-BOTTOM: windowtext 0.5pt solid" 
+twffan="done">
+<DIV twffan="done"><IMG id=_0_606_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_0_606_Open_Text').style.display='none'; document.getElementById('_0_606_Closed_Image').style.display='inline'; document.getElementById('_0_606_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top twffan="done"><IMG id=_0_606_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_0_606_Closed_Text').style.display='none'; document.getElementById('_0_606_Open_Image').style.display='inline'; document.getElementById('_0_606_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top twffan="done"><SPAN id=_0_606_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">/**/</SPAN><SPAN id=_0_606_Open_Text twffan="done"><SPAN 
+style="COLOR: #008000" twffan="done">/*</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">****************************************************<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">This&nbsp;program&nbsp;was&nbsp;produced&nbsp;by&nbsp;the<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">CodeWizardAVR&nbsp;V1.24.8d&nbsp;Professional<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Automatic&nbsp;Program&nbsp;Generator<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">?Copyright&nbsp;1998-2006&nbsp;Pavel&nbsp;Haiduc,&nbsp;HP&nbsp;InfoTech&nbsp;s.r.l.<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000; TEXT-DECORATION: underline" 
+twffan="done">http://www.hpinfotech.com</SPAN><SPAN style="COLOR: #008000" 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Project&nbsp;:&nbsp;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Version&nbsp;:&nbsp;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Date&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;2006-12-30<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Author&nbsp;&nbsp;:&nbsp;F4CG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Company&nbsp;:&nbsp;F4CG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Comments:&nbsp;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Chip&nbsp;type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;ATmega32<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Program&nbsp;type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Application<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Clock&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.000000&nbsp;MHz<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Memory&nbsp;model&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Small<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">External&nbsp;SRAM&nbsp;size&nbsp;&nbsp;:&nbsp;0<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">Data&nbsp;Stack&nbsp;size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;512<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" 
+align=top 
+twffan="done">****************************************************</SPAN><SPAN 
+style="COLOR: #008000" twffan="done">*/</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done">#include&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&lt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">mega32.h</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&gt;</SPAN><SPAN style="COLOR: #000000" twffan="done"><BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Declare&nbsp;your&nbsp;global&nbsp;variables&nbsp;here</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG id=_668_747_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_668_747_Open_Text').style.display='none'; document.getElementById('_668_747_Closed_Image').style.display='inline'; document.getElementById('_668_747_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top twffan="done"><IMG id=_668_747_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_668_747_Closed_Text').style.display='none'; document.getElementById('_668_747_Open_Image').style.display='inline'; document.getElementById('_668_747_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top twffan="done"></SPAN><SPAN id=_668_747_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">/**/</SPAN><SPAN id=_668_747_Open_Text twffan="done"><SPAN 
+style="COLOR: #008000" twffan="done">/*</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">&nbsp;This&nbsp;seems&nbsp;to&nbsp;produce&nbsp;the&nbsp;right&nbsp;amount&nbsp;of&nbsp;delay&nbsp;for&nbsp;the&nbsp;LED&nbsp;to&nbsp;be<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;*&nbsp;seen<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" align=top 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">*/</SPAN></SPAN><SPAN style="COLOR: #000000" 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #0000ff" twffan="done">void</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&nbsp;Delay()<BR><IMG 
+id=_762_826_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_762_826_Open_Text').style.display='none'; document.getElementById('_762_826_Closed_Image').style.display='inline'; document.getElementById('_762_826_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top twffan="done"><IMG id=_762_826_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_762_826_Closed_Text').style.display='none'; document.getElementById('_762_826_Open_Image').style.display='inline'; document.getElementById('_762_826_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top twffan="done"></SPAN><SPAN id=_762_826_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_762_826_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">unsigned&nbsp;</SPAN><SPAN style="COLOR: #0000ff" 
+twffan="done">char</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;a,&nbsp;b;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #0000ff" twffan="done">for</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&nbsp;(a&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">1</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;a;&nbsp;a</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">++</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #0000ff" twffan="done">for</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&nbsp;(b&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">1</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;b;&nbsp;b</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">++</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" align=top 
+twffan="done">}</SPAN></SPAN><SPAN style="COLOR: #000000" twffan="done"><BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" twffan="done">-----------------------------------<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" twffan="done">&nbsp;延时程序<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">-----------------------------------</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #0000ff" twffan="done">void</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&nbsp;delayms(unsigned&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">char</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;m)<BR><IMG id=_942_1021_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_942_1021_Open_Text').style.display='none'; document.getElementById('_942_1021_Closed_Image').style.display='inline'; document.getElementById('_942_1021_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top twffan="done"><IMG id=_942_1021_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_942_1021_Closed_Text').style.display='none'; document.getElementById('_942_1021_Open_Image').style.display='inline'; document.getElementById('_942_1021_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top twffan="done"></SPAN><SPAN id=_942_1021_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_942_1021_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;unsigned&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">char</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;a,&nbsp;b;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="COLOR: #0000ff" 
+twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;(a&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">1</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;a</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&lt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">m;&nbsp;a</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">++</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="COLOR: #0000ff" 
+twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;(b&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">1</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;b;&nbsp;b</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">++</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" align=top 
+twffan="done">}</SPAN></SPAN><SPAN style="COLOR: #000000" twffan="done"><BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done">unsigned&nbsp;</SPAN><SPAN style="COLOR: #0000ff" 
+twffan="done">int</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;k&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #0000ff" twffan="done">void</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&nbsp;main(</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">void</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">)<BR><IMG id=_1060_4201_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_1060_4201_Open_Text').style.display='none'; document.getElementById('_1060_4201_Closed_Image').style.display='inline'; document.getElementById('_1060_4201_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top twffan="done"><IMG id=_1060_4201_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_1060_4201_Closed_Text').style.display='none'; document.getElementById('_1060_4201_Open_Image').style.display='inline'; document.getElementById('_1060_4201_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top twffan="done"></SPAN><SPAN id=_1060_4201_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_1060_4201_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Declare&nbsp;your&nbsp;local&nbsp;variables&nbsp;here<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Input/Output&nbsp;Ports&nbsp;initialization<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Port&nbsp;A&nbsp;initialization<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Func7=In&nbsp;Func6=In&nbsp;Func5=In&nbsp;Func4=In&nbsp;Func3=In&nbsp;Func2=In&nbsp;Func1=In&nbsp;Func0=In&nbsp;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;State7=T&nbsp;State6=T&nbsp;State5=T&nbsp;State4=T&nbsp;State3=T&nbsp;State2=T&nbsp;State1=T&nbsp;State0=T&nbsp;</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" 
+twffan="done">PORTA</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">DDRA</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Port&nbsp;B&nbsp;initialization<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Func7=In&nbsp;Func6=In&nbsp;Func5=In&nbsp;Func4=In&nbsp;Func3=In&nbsp;Func2=In&nbsp;Func1=In&nbsp;Func0=In&nbsp;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;State7=T&nbsp;State6=T&nbsp;State5=T&nbsp;State4=T&nbsp;State3=T&nbsp;State2=T&nbsp;State1=T&nbsp;State0=T&nbsp;</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" 
+twffan="done">PORTB</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">DDRB</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Port&nbsp;C&nbsp;initialization<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Func7=In&nbsp;Func6=In&nbsp;Func5=In&nbsp;Func4=In&nbsp;Func3=In&nbsp;Func2=In&nbsp;Func1=In&nbsp;Func0=In&nbsp;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;State7=T&nbsp;State6=T&nbsp;State5=T&nbsp;State4=T&nbsp;State3=T&nbsp;State2=T&nbsp;State1=T&nbsp;State0=T&nbsp;</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" 
+twffan="done">PORTC</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">DDRC</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Port&nbsp;D&nbsp;initialization<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Func7=In&nbsp;Func6=In&nbsp;Func5=In&nbsp;Func4=In&nbsp;Func3=In&nbsp;Func2=In&nbsp;Func1=In&nbsp;Func0=In&nbsp;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;State7=T&nbsp;State6=T&nbsp;State5=T&nbsp;State4=T&nbsp;State3=T&nbsp;State2=T&nbsp;State1=T&nbsp;State0=T&nbsp;</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" 
+twffan="done">PORTD</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">DDRD</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Timer/Counter&nbsp;0&nbsp;initialization<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Clock&nbsp;source:&nbsp;System&nbsp;Clock<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Clock&nbsp;value:&nbsp;Timer&nbsp;0&nbsp;Stopped<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Mode:&nbsp;Normal&nbsp;top=FFh<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;OC0&nbsp;output:&nbsp;Disconnected</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" 
+twffan="done">TCCR0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">TCNT0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">OCR0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Timer/Counter&nbsp;1&nbsp;initialization<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Clock&nbsp;source:&nbsp;System&nbsp;Clock<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Clock&nbsp;value:&nbsp;Timer&nbsp;1&nbsp;Stopped<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Mode:&nbsp;Normal&nbsp;top=FFFFh<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;OC1A&nbsp;output:&nbsp;Discon.<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;OC1B&nbsp;output:&nbsp;Discon.<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" twffan="done">&nbsp;Noise&nbsp;Canceler:&nbsp;Off<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Input&nbsp;Capture&nbsp;on&nbsp;Falling&nbsp;Edge<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Timer&nbsp;1&nbsp;Overflow&nbsp;Interrupt:&nbsp;Off<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Input&nbsp;Capture&nbsp;Interrupt:&nbsp;Off<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Compare&nbsp;A&nbsp;Match&nbsp;Interrupt:&nbsp;Off<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Compare&nbsp;B&nbsp;Match&nbsp;Interrupt:&nbsp;Off</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" 
+twffan="done">TCCR1A</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">TCCR1B</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">TCNT1H</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">TCNT1L</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">ICR1H</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">ICR1L</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">OCR1AH</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">OCR1AL</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">OCR1BH</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">OCR1BL</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Timer/Counter&nbsp;2&nbsp;initialization<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Clock&nbsp;source:&nbsp;System&nbsp;Clock<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Clock&nbsp;value:&nbsp;Timer&nbsp;2&nbsp;Stopped<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Mode:&nbsp;Normal&nbsp;top=FFh<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;OC2&nbsp;output:&nbsp;Disconnected</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" twffan="done">ASSR</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">TCCR2</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">TCNT2</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">OCR2</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;External&nbsp;Interrupt(s)&nbsp;initialization<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" twffan="done">&nbsp;INT0:&nbsp;Off<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" twffan="done">&nbsp;INT1:&nbsp;Off<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" twffan="done">&nbsp;INT2:&nbsp;Off</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" 
+twffan="done">MCUCR</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">MCUCSR</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Timer(s)/Counter(s)&nbsp;Interrupt(s)&nbsp;initialization</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" 
+twffan="done">TIMSK</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Analog&nbsp;Comparator&nbsp;initialization<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Analog&nbsp;Comparator:&nbsp;Off<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;Analog&nbsp;Comparator&nbsp;Input&nbsp;Capture&nbsp;by&nbsp;Timer/Counter&nbsp;1:&nbsp;Off</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" twffan="done">ACSR</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x80</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">SFIOR</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x00</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG id=_3141_3152_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3141_3152_Open_Text').style.display='none'; document.getElementById('_3141_3152_Closed_Image').style.display='inline'; document.getElementById('_3141_3152_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3141_3152_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3141_3152_Closed_Text').style.display='none'; document.getElementById('_3141_3152_Open_Image').style.display='inline'; document.getElementById('_3141_3152_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;DDRB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN id=_3141_3152_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">/**/</SPAN><SPAN id=_3141_3152_Open_Text twffan="done"><SPAN 
+style="COLOR: #008000" twffan="done">/*</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">&nbsp;output&nbsp;</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">*/</SPAN></SPAN><SPAN style="COLOR: #000000" 
+twffan="done"><BR><IMG id=_3172_3184_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3172_3184_Open_Text').style.display='none'; document.getElementById('_3172_3184_Closed_Image').style.display='inline'; document.getElementById('_3172_3184_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3172_3184_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3172_3184_Closed_Text').style.display='none'; document.getElementById('_3172_3184_Open_Image').style.display='inline'; document.getElementById('_3172_3184_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;PORTB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN id=_3172_3184_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">/**/</SPAN><SPAN id=_3172_3184_Open_Text twffan="done"><SPAN 
+style="COLOR: #008000" twffan="done">/*</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">&nbsp;all&nbsp;off&nbsp;</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">*/</SPAN></SPAN><SPAN style="COLOR: #000000" 
+twffan="done"><BR><IMG id=_3203_3214_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3203_3214_Open_Text').style.display='none'; document.getElementById('_3203_3214_Closed_Image').style.display='inline'; document.getElementById('_3203_3214_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3203_3214_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3203_3214_Closed_Text').style.display='none'; document.getElementById('_3203_3214_Open_Image').style.display='inline'; document.getElementById('_3203_3214_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;DDRA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN id=_3203_3214_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">/**/</SPAN><SPAN id=_3203_3214_Open_Text twffan="done"><SPAN 
+style="COLOR: #008000" twffan="done">/*</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">&nbsp;output&nbsp;</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">*/</SPAN></SPAN><SPAN style="COLOR: #000000" 
+twffan="done"><BR><IMG id=_3234_3246_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3234_3246_Open_Text').style.display='none'; document.getElementById('_3234_3246_Closed_Image').style.display='inline'; document.getElementById('_3234_3246_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3234_3246_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3234_3246_Closed_Text').style.display='none'; document.getElementById('_3234_3246_Open_Image').style.display='inline'; document.getElementById('_3234_3246_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN id=_3234_3246_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">/**/</SPAN><SPAN id=_3234_3246_Open_Text twffan="done"><SPAN 
+style="COLOR: #008000" twffan="done">/*</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">&nbsp;all&nbsp;off&nbsp;</SPAN><SPAN style="COLOR: #008000" 
+twffan="done">*/</SPAN></SPAN><SPAN style="COLOR: #000000" 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="COLOR: #0000ff" 
+twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">(k</SPAN><SPAN style="COLOR: #000000" twffan="done">=</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&lt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">10</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">++</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_3279_3346_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3279_3346_Open_Text').style.display='none'; document.getElementById('_3279_3346_Closed_Image').style.display='inline'; document.getElementById('_3279_3346_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3279_3346_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3279_3346_Closed_Text').style.display='none'; document.getElementById('_3279_3346_Open_Image').style.display='inline'; document.getElementById('_3279_3346_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+id=_3279_3346_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_3279_3346_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xF7</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;PORTB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFB</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;Delay();<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;PORTB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;Delay();<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;TCCR0&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x04</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;TCNT0&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0x06</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="COLOR: #0000ff" 
+twffan="done">while</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;(</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">1</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_3451_4198_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3451_4198_Open_Text').style.display='none'; document.getElementById('_3451_4198_Closed_Image').style.display='inline'; document.getElementById('_3451_4198_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3451_4198_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3451_4198_Closed_Text').style.display='none'; document.getElementById('_3451_4198_Open_Image').style.display='inline'; document.getElementById('_3451_4198_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+id=_3451_4198_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_3451_4198_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">(k</SPAN><SPAN style="COLOR: #000000" twffan="done">=</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&lt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">5</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">++</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_3482_3523_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3482_3523_Open_Text').style.display='none'; document.getElementById('_3482_3523_Closed_Image').style.display='inline'; document.getElementById('_3482_3523_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3482_3523_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3482_3523_Closed_Text').style.display='none'; document.getElementById('_3482_3523_Open_Image').style.display='inline'; document.getElementById('_3482_3523_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+id=_3482_3523_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_3482_3523_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">~</SPAN><SPAN style="COLOR: #000000" twffan="done">(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">1</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&lt;&lt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">k);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">(k</SPAN><SPAN style="COLOR: #000000" twffan="done">=</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">5</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&gt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">--</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_3549_3590_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3549_3590_Open_Text').style.display='none'; document.getElementById('_3549_3590_Closed_Image').style.display='inline'; document.getElementById('_3549_3590_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3549_3590_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3549_3590_Closed_Text').style.display='none'; document.getElementById('_3549_3590_Open_Image').style.display='inline'; document.getElementById('_3549_3590_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+id=_3549_3590_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_3549_3590_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">~</SPAN><SPAN style="COLOR: #000000" twffan="done">(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">1</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&lt;&lt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">k);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">(k</SPAN><SPAN style="COLOR: #000000" twffan="done">=</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&lt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">5</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">++</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_3618_3692_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3618_3692_Open_Text').style.display='none'; document.getElementById('_3618_3692_Closed_Image').style.display='inline'; document.getElementById('_3618_3692_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3618_3692_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3618_3692_Closed_Text').style.display='none'; document.getElementById('_3618_3692_Open_Image').style.display='inline'; document.getElementById('_3618_3692_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+id=_3618_3692_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_3618_3692_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&amp;=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xE0</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">|=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">(k</SPAN><SPAN style="COLOR: #000000" twffan="done">=</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">5</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&gt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">--</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_3718_3792_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3718_3792_Open_Text').style.display='none'; document.getElementById('_3718_3792_Closed_Image').style.display='inline'; document.getElementById('_3718_3792_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3718_3792_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3718_3792_Closed_Text').style.display='none'; document.getElementById('_3718_3792_Open_Image').style.display='inline'; document.getElementById('_3718_3792_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+id=_3718_3792_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_3718_3792_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&amp;=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFB</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">|=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">(k</SPAN><SPAN style="COLOR: #000000" twffan="done">=</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">5</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&gt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">--</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_3818_3892_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3818_3892_Open_Text').style.display='none'; document.getElementById('_3818_3892_Closed_Image').style.display='inline'; document.getElementById('_3818_3892_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3818_3892_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3818_3892_Closed_Text').style.display='none'; document.getElementById('_3818_3892_Open_Image').style.display='inline'; document.getElementById('_3818_3892_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+id=_3818_3892_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_3818_3892_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&amp;=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xE4</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">|=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">(k</SPAN><SPAN style="COLOR: #000000" twffan="done">=</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">5</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&gt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">--</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_3918_3992_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_3918_3992_Open_Text').style.display='none'; document.getElementById('_3918_3992_Closed_Image').style.display='inline'; document.getElementById('_3918_3992_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_3918_3992_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_3918_3992_Closed_Text').style.display='none'; document.getElementById('_3918_3992_Open_Image').style.display='inline'; document.getElementById('_3918_3992_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+id=_3918_3992_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_3918_3992_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&amp;=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xF5</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">|=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">(k</SPAN><SPAN style="COLOR: #000000" twffan="done">=</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">5</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&gt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">--</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_4018_4092_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_4018_4092_Open_Text').style.display='none'; document.getElementById('_4018_4092_Closed_Image').style.display='inline'; document.getElementById('_4018_4092_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_4018_4092_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_4018_4092_Closed_Text').style.display='none'; document.getElementById('_4018_4092_Open_Image').style.display='inline'; document.getElementById('_4018_4092_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+id=_4018_4092_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_4018_4092_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&amp;=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xEE</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">|=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="COLOR: #0000ff" twffan="done">for</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">(k</SPAN><SPAN style="COLOR: #000000" twffan="done">=</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">5</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&gt;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">;&nbsp;k</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">--</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_4118_4192_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_4118_4192_Open_Text').style.display='none'; document.getElementById('_4118_4192_Closed_Image').style.display='inline'; document.getElementById('_4118_4192_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockStart.gif" 
+align=top twffan="done"><IMG id=_4118_4192_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_4118_4192_Closed_Text').style.display='none'; document.getElementById('_4118_4192_Open_Image').style.display='inline'; document.getElementById('_4118_4192_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedSubBlock.gif" 
+align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+id=_4118_4192_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_4118_4192_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">&amp;=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xEA</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PORTA&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">|=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedSubBlockEnd.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;}</SPAN></SPAN><SPAN 
+style="COLOR: #000000" twffan="done">;<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" align=top 
+twffan="done">}</SPAN></SPAN><SPAN style="COLOR: #000000" twffan="done"><BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #008000" twffan="done">//</SPAN><SPAN 
+style="COLOR: #008000" 
+twffan="done">&nbsp;#pragma&nbsp;interrupt_handler&nbsp;Timer0:10</SPAN><SPAN 
+style="COLOR: #008000" twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"></SPAN><SPAN style="COLOR: #000000" 
+twffan="done">interrupt&nbsp;[</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">8</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">]&nbsp;</SPAN><SPAN style="COLOR: #0000ff" 
+twffan="done">void</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;Timer0(</SPAN><SPAN style="COLOR: #0000ff" 
+twffan="done">void</SPAN><SPAN style="COLOR: #000000" twffan="done">)<BR><IMG 
+id=_4275_4343_Open_Image 
+onclick="this.style.display='none'; document.getElementById('_4275_4343_Open_Text').style.display='none'; document.getElementById('_4275_4343_Closed_Image').style.display='inline'; document.getElementById('_4275_4343_Closed_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockStart.gif" 
+align=top twffan="done"><IMG id=_4275_4343_Closed_Image style="DISPLAY: none" 
+onclick="this.style.display='none'; document.getElementById('_4275_4343_Closed_Text').style.display='none'; document.getElementById('_4275_4343_Open_Image').style.display='inline'; document.getElementById('_4275_4343_Open_Text').style.display='inline';" 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ContractedBlock.gif" 
+align=top twffan="done"></SPAN><SPAN id=_4275_4343_Closed_Text 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; DISPLAY: none; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: #ffffff" 
+twffan="done">...</SPAN><SPAN id=_4275_4343_Open_Text twffan="done"><SPAN 
+style="COLOR: #000000" twffan="done">{<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;PORTB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xF7</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;PORTB&nbsp;</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">=</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">&nbsp;</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">0xFF</SPAN><SPAN style="COLOR: #000000" twffan="done">;<BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/InBlock.gif" align=top 
+twffan="done">&nbsp;&nbsp;&nbsp;&nbsp;delayms(</SPAN><SPAN 
+style="COLOR: #000000" twffan="done">100</SPAN><SPAN style="COLOR: #000000" 
+twffan="done">);<BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/ExpandedBlockEnd.gif" align=top 
+twffan="done">}</SPAN></SPAN><SPAN style="COLOR: #000000" twffan="done"><BR><IMG 
+alt="" src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"><BR><IMG alt="" 
+src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/None.gif" align=top 
+twffan="done"></SPAN></DIV></DIV>
+<P class="right articalinfo">发表于 @ <A title=permalink 
+href="http://blog.csdn.net/nataka/archive/2006/12/31/1471044.aspx">2006年12月31日 
+14:27:00</A>|<A title=评论 
+href="http://blog.csdn.net/nataka/archive/2006/12/31/1471044.aspx#FeedBack">评论(<SPAN 
+id=FeedbackCount_1471044>loading...</SPAN>
+<SCRIPT type=text/javascript>AddFeedbackCountStack("1471044")</SCRIPT>
+)</A>|<A title=编辑 
+href="http://writeblog.csdn.net/PostEdit.aspx?entryId=1471044">编辑</A></P><SPAN 
+id=Post.ascx_ViewPost_PreviousAndNextEntriesDown>
+<H3><A 
+href="http://blog.csdn.net/nataka/archive/2006/12/31/1471054.aspx">新一篇:&nbsp;2、一个简单的AVR中断程序</A>&nbsp;|&nbsp;<A 
+href="http://blog.csdn.net/nataka/archive/2006/12/27/1464595.aspx">旧一篇:&nbsp;判断闰年</A></H3></SPAN></DIV></DIV>
+<DIV class=commentslist><SPAN id=Anthem_Post.ascx_Comments_ltlComments__><SPAN 
+id=Post.ascx_Comments_ltlComments>
+<DIV id=commentslist>
+<H3>评论：没有评论。</H3></DIV></SPAN></SPAN></DIV>
+<DIV class=spacecommment>
+<DIV id=Anthem_Post.ascx_PostComment_CommentUpdatePanel__>
+<DIV id=Post.ascx_PostComment_CommentUpdatePanel>
+<FIELDSET><LEGEND>发表评论</LEGEND>
+<UL>
+  <LI>姓&nbsp;&nbsp;&nbsp;名：<INPUT id=Post.ascx_PostComment_tbName maxLength=32 
+  size=40 name=Post.ascx:PostComment:tbName><SPAN 
+  id=Post.ascx_PostComment_RequiredFieldValidator2 
+  style="VISIBILITY: hidden; COLOR: red" initialvalue="" 
+  evaluationfunction="RequiredFieldValidatorEvaluateIsValid" 
+  errormessage="请输入名字" 
+  controltovalidate="Post.ascx_PostComment_tbName">请输入名字</SPAN> 
+  <LI>主&nbsp;&nbsp;&nbsp;页：<INPUT id=Post.ascx_PostComment_tbUrl maxLength=256 
+  size=40 name=Post.ascx:PostComment:tbUrl> 
+  <LI>
+  <DIV id=Post.ascx_PostComment_AntiBotImageRegion>校验码： <INPUT 
+  id=Post.ascx_PostComment_tbAntiBotImage style="WIDTH: 75px" 
+  name=Post.ascx:PostComment:tbAntiBotImage> <SPAN 
+  id=Post.ascx_PostComment_valAntiBotImage style="DISPLAY: none; COLOR: red" 
+  evaluationfunction="CustomValidatorEvaluateIsValid" 
+  display="Dynamic">检验码无效!</SPAN> <SPAN 
+  id=Anthem_Post.ascx_PostComment_imgAntiBotImage__><IMG 
+  id=Post.ascx_PostComment_imgAntiBotImage alt="" 
+  src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/AntiBotImage.jpg" 
+  align=absMiddle border=0></SPAN> <SPAN 
+  id=Anthem_Post.ascx_PostComment_lbCreateAntiBotImage__><A 
+  id=Post.ascx_PostComment_lbCreateAntiBotImage 
+  onclick="javascript:Anthem_FireCallBackEvent(this,event,'Post.ascx:PostComment:lbCreateAntiBotImage','',false,'','','',true,null,null,null,true,true);return false;" 
+  href="javascript:__doPostBack('Post.ascx$PostComment$lbCreateAntiBotImage','')">看不清,换一张</A></SPAN> 
+  </DIV></LI></UL><SPAN id=Post.ascx_PostComment_RequiredFieldValidator3 
+style="VISIBILITY: hidden; COLOR: red" initialvalue="" 
+evaluationfunction="RequiredFieldValidatorEvaluateIsValid" errormessage="请输入评论" 
+controltovalidate="Post.ascx_PostComment_tbComment">请输入评论</SPAN><BR><TEXTAREA id=Post.ascx_PostComment_tbComment name=Post.ascx:PostComment:tbComment rows=10 cols=50></TEXTAREA><BR><SPAN 
+id=Anthem_Post.ascx_PostComment_btnSubmit__><INPUT language=javascript id=Post.ascx_PostComment_btnSubmit onclick="javascript:Anthem_FireCallBackEvent(this,event,'Post.ascx:PostComment:btnSubmit','',true,'','','正在处理...',false,null,null,null,true,true);return false;WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;Post.ascx:PostComment:btnSubmit&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" type=submit value=提交 name=Post.ascx:PostComment:btnSubmit></SPAN> 
+<BR><SPAN id=Post.ascx_PostComment_Message style="COLOR: red"><A 
+href="http://passport.csdn.net/member/UserLogin.aspx?from=http://blog.csdn.net/nataka/archive/2006/12/31/1471044.aspx">登录</A></SPAN> 
+</FIELDSET> </DIV></DIV></DIV>
+<SCRIPT type=text/javascript>
+    LoadFeedbackCount();//加载评论
+    document.write("<img src='http://counter.csdn.net/pv.aspx?id=24' border=0 width=0 height=0>");// 计数器
+    </SCRIPT>
+
+<SCRIPT src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/HighLighter.js" 
+type=text/javascript></SCRIPT>
+</DIV></DIV></DIV>
+<DIV id=pubfooter>
+<DL>
+  <DT>
+  <DD>Csdn Blog version 3.1a 
+  <DD>Copyright © nataka </DD></DL></DIV></DIV>
+<SCRIPT type=text/javascript>
+<!--
+var Page_Validators =  new Array(document.getElementById("Post.ascx_PostComment_RequiredFieldValidator2"), document.getElementById("Post.ascx_PostComment_valAntiBotImage"), document.getElementById("Post.ascx_PostComment_RequiredFieldValidator3"));
+// -->
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+<!--
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+// -->
+</SCRIPT>
+</FORM>
+<SCRIPT src="1、最简单的AVR程序 - nataka的专栏 - CSDNBlog.files/counter.js" 
+type=text/javascript></SCRIPT>
+</DIV></BODY></HTML>

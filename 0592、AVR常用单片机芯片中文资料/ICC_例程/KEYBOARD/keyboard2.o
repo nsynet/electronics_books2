@@ -1,0 +1,80 @@
+XL
+H 3 areas 8 global symbols
+M keyboard2.c
+S _lcd_shift Ref0000
+S _lcd_write_data Ref0000
+S _lcd_gotoxy Ref0000
+S _lcd_init Ref0000
+S _delay_ms Ref0000
+S _lcd_puts Ref0000
+S _keypad Ref0000
+A text size 6E flags 0
+dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard2.c
+dbfunc s main 0 fI
+dbsym r keyval 14 c
+dbsym r i 16 c
+dbline E 0 {
+dbline 10 0
+dbline 11 2
+dbline 12 8
+dbline 13 E
+dbline 14 14
+dbline 16 1C
+dbline 17 1C
+dbline 18 24
+dbline 19 28
+dbline 1A 28
+dbline 1B 2C
+dbline 1D 30
+dbline 1E 32
+dbline 1F 36
+dbline 20 36
+dbline 21 3E
+dbline 22 3E
+dbline 23 42
+dbline 24 42
+dbline 25 48
+dbline 26 4E
+dbline 22 4E
+dbline 22 50
+dbline 27 54
+dbline 28 58
+dbline 29 58
+dbline 2A 5E
+dbline 2B 64
+dbline 27 64
+dbline 27 66
+dbline 2C 6A
+dbline 2D 6A
+dbline 15 6A
+dbline 2E 6C }
+S _main Def0000
+A data size 16 flags 20
+dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard2.c
+A idata size 16 flags 0
+T 00 00 00 D0 22 27 01 E0 00 D0
+R 00 00 00 00 82 02 03 00 82 08 02 00
+T 08 00 00 E0 10 E0
+R 00 00 00 00 20 02 01 00 08 00 40 04 01 00 08 00
+T 0C 00 00 D0 21 E0 00 27 00 D0
+R 00 00 00 00 82 02 05 00 82 08 02 00
+T 14 00 00 E0 10 E0
+R 00 00 00 00 20 02 01 00 00 00 40 04 01 00 00 00
+T 18 00 00 D0 27 C0 00 D0 20 2E 31 2E 42 2D 40 31
+R 00 00 00 00 82 02 05 00 82 06 06 00
+T 26 00 38 F4 4A 30 10 F4 40 5D 01 C0 49 5C 04 2F
+R 00 00 00 00
+T 34 00 00 D0 84 2F 80 78 80 38 B1 F4 66 27 07 C0
+R 00 00 00 00 82 02 01 00
+T 42 00 22 E7 01 E0 00 D0 04 EF 11 E0 00 D0 63 95
+R 00 00 00 00 82 06 00 00 82 0C 04 00
+T 50 00 67 30 B8 F3 66 27 07 C0 2C E6 01 E0 00 D0
+R 00 00 00 00 82 0E 00 00
+T 5E 00 04 EF 11 E0 00 D0 63 95 67 30 B8 F3 D8 CF
+R 00 00 00 00 82 06 04 00
+T 6C 00 08 95
+R 00 00 00 00
+T 00 00 49 4E 50 55 54 3A 20 00
+R 00 00 02 00
+T 08 00 77 77 77 2E 73 6C 2E 63 6F 6D 2E 63 6E 00
+R 00 00 02 00

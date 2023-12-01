@@ -1,0 +1,5 @@
+"STARTUP.obj",
+"chengxu.obj",
+"eerom.obj" 
+TO "chengxu" 
+RAMSIZE(256) 

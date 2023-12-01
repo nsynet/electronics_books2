@@ -1,0 +1,36 @@
+XL
+H 1 areas 4 global symbols
+M delay.c
+S push_gset2 Ref0000
+S pop_gset2 Ref0000
+A text size 30 flags 0
+dbfile D:\ICC-AVR\examples.sl\cymometer\delay.c
+dbfunc s delay_1ms 0 fI
+dbsym r i 10 i
+dbline A 0 {
+dbline B 0
+dbline C 6
+dbline B 6
+dbline B A
+dbline D 12 }
+dbfunc s delay_ms 14 fI
+dbsym r i 14 i
+dbsym r n 16 i
+dbline F 1A {
+dbline 10 1A
+dbline 12 20
+dbline 12 20
+dbline 13 22
+dbline 14 26
+dbline 11 26
+dbline 15 2C }
+S _delay_ms Def0014
+S _delay_1ms Def0000
+T 00 00 01 E0 10 E0 02 C0 0F 5F 1F 4F 06 37 E4 E0
+R 00 00 00 00
+T 0E 00 1E 07 D0 F3 08 95
+R 00 00 00 00
+T 14 00 00 D0 60 2F 71 2F 44 27 55 27 03 C0 EF DF
+R 00 00 00 00 82 02 00 00
+T 22 00 4F 5F 5F 4F 46 17 57 07 D0 F3 00 D0 08 95
+R 00 00 00 00 82 0C 01 00

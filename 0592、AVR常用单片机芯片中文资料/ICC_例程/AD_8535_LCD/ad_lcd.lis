@@ -1,0 +1,313 @@
+                         .module ad_lcd.c
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\AD_8535_LCD\ad_lcd.c
+ 0000                   .dbfunc s adctoasc _adctoasc fI
+                       ;         char_p -> R10,R11
+                       ;              i -> R12
+                       ;           temp -> R14,R15
+                       ;            adc -> R10,R11
+                         .even
+ 0000                 _adctoasc::
+ 0000 00D0              rcall push_gset5
+ 0002 A02E              mov R10,R16
+ 0004 B12E              mov R11,R17
+ 0006                   .dbline -1
+ 0006                   .dbline 22
+                       ; /******************************************************
+                       ;               双龙电子公司http://www.sl.com.cn
+                       ;               AT90S8535--AD转换演示程序(ICCAVR)
+                       ;                       作者：詹卫前      
+                       ;     使用注意：1、应包含头文件slavr.h
+                       ;               2、在工程选项中的Additional Lib中填入slavr
+                       ;                  使用编译器使用附加库文件libslavr.a
+                       ;               3、使用SL-AVRAD实验设备
+                       ;     接线说明：1、PA.0(PIN40)处接电平指示LED的短路块断开
+                       ;               2、A/D和VX之间的短路块闭合
+                       ;               3、AREF(PIN32)和AVCC(PIN30)接VCC
+                       ;               4、AGND(PIN31)接GND                                                             
+                       ; *******************************************************/
+                       ; #include<io8535.h>
+                       ; #include<slavr.h>
+                       ; #include<macros.h>
+                       ; unsigned int ad_con;//存放PA0的AD转换结果
+                       ; unsigned char adcval[6];//存放电压ASCII码
+                       ; /*      将AD结果转换成电压     */
+                       ; #define vref   497
+                       ; unsigned char * adctoasc(unsigned int adc)
+                       ;     {
+ 0006                   .dbline 26
+                       ;      unsigned int temp;
+                       ;      unsigned char i;
+                       ;      unsigned char *char_p;
+                       ;      temp=(unsigned int)(((unsigned long)((unsigned long)adc*vref))/1024);
+ 0006 2A2C              mov R2,R10
+ 0008 3B2C              mov R3,R11
+ 000A 4424              clr R4
+ 000C 5524              clr R5
+ 000E 41EF              ldi R20,241
+ 0010 51E0              ldi R21,1
+ 0012 60E0              ldi R22,0
+ 0014 70E0              ldi R23,0
+ 0016 5A92              st -y,R5
+ 0018 4A92              st -y,R4
+ 001A 3A92              st -y,R3
+ 001C 2A92              st -y,R2
+ 001E 042F              mov R16,R20
+ 0020 152F              mov R17,R21
+ 0022 262F              mov R18,R22
+ 0024 372F              mov R19,R23
+ 0026 00D0              rcall mpy32u
+ 0028 8AE0              ldi R24,10
+ 002A 90E0              ldi R25,0
+ 002C 8A93              st -y,R24
+ 002E 00D0              rcall lsr32
+ 0030 E02E              mov R14,R16
+ 0032 F12E              mov R15,R17
+ 0034                   .dbline 27
+                       ;      for(i=0;i<3;i++)
+ 0034 CC24              clr R12
+ 0036 1BC0              rjmp L5
+ 0038                 L2:
+ 0038                   .dbline 28
+ 0038                   .dbline 29
+ 0038 2C2C              mov R2,R12
+ 003A 3324              clr R3
+ 003C E3E0              ldi R30,3
+ 003E F0E0              ldi R31,0
+ 0040 E219              sub R30,R2
+ 0042 F309              sbc R31,R3
+ 0044 80E0              ldi R24,<_adcval
+ 0046 90E0              ldi R25,>_adcval
+ 0048 E80F              add R30,R24
+ 004A F91F              adc R31,R25
+ 004C 2AE0              ldi R18,10
+ 004E 30E0              ldi R19,0
+ 0050 0E2D              mov R16,R14
+ 0052 1F2D              mov R17,R15
+ 0054 00D0              rcall mod16u
+ 0056 802F              mov R24,R16
+ 0058 912F              mov R25,R17
+ 005A C096              adiw R24,48
+ 005C 8083              std z+0,R24
+ 005E                   .dbline 30
+ 005E 2AE0              ldi R18,10
+ 0060 30E0              ldi R19,0
+ 0062 0E2D              mov R16,R14
+ 0064 1F2D              mov R17,R15
+ 0066 00D0              rcall div16u
+ 0068 E02E              mov R14,R16
+ 006A F12E              mov R15,R17
+ 006C                   .dbline 31
+ 006C                 L3:
+ 006C                   .dbline 27
+ 006C C394              inc R12
+ 006E                 L5:
+ 006E                   .dbline 27
+ 006E 8C2D              mov R24,R12
+ 0070 8330              cpi R24,3
+ 0072 10F3              brlo L2
+ 0074                   .dbline 32
+                       ;         {
+                       ;          adcval[3-i]=temp%10+0x30;
+                       ;          temp=temp/10;
+                       ;         }
+                       ;      adcval[0]=adcval[1];
+ 0074 20900100          lds R2,_adcval+1
+ 0078 20920000          sts _adcval,R2
+ 007C                   .dbline 33
+                       ;      adcval[1]='.'; 
+ 007C 8EE2              ldi R24,46
+ 007E 80930100          sts _adcval+1,R24
+ 0082                   .dbline 34
+                       ;      adcval[4]='V'; 
+ 0082 86E5              ldi R24,86
+ 0084 80930400          sts _adcval+4,R24
+ 0088                   .dbline 35
+                       ;      adcval[5]=0;   
+ 0088 2224              clr R2
+ 008A 20920500          sts _adcval+5,R2
+ 008E                   .dbline 36
+                       ;      char_p=adcval;
+ 008E 80E0              ldi R24,<_adcval
+ 0090 90E0              ldi R25,>_adcval
+ 0092 A82E              mov R10,R24
+ 0094 B92E              mov R11,R25
+ 0096                   .dbline 37
+                       ;      return char_p;
+ 0096 082F              mov R16,R24
+ 0098 192F              mov R17,R25
+ 009A                   .dbline -2
+ 009A                 L1:
+ 009A 00D0              rcall pop_gset5
+ 009C                   .dbline 0 ; func end
+ 009C 0895              ret
+ 009E                   .dbsym r char_p 10 pc
+ 009E                   .dbsym r i 12 c
+ 009E                   .dbsym r temp 14 i
+ 009E                   .dbsym r adc 10 i
+                         .area vector(rom, abs)
+                         .org 28
+ 001C 4FC0              rjmp _adc_isr
+                         .area text(rom, con, rel)
+ 009E                   .dbfile D:\ICC-AVR\examples.sl\AD_8535_LCD\ad_lcd.c
+ 009E                   .dbfunc s adc_isr _adc_isr fI
+                       ;           temp -> R16,R17
+                         .even
+ 009E                 _adc_isr::
+ 009E 2A92              st -y,R2
+ 00A0 3A92              st -y,R3
+ 00A2 0A93              st -y,R16
+ 00A4 1A93              st -y,R17
+ 00A6 EA93              st -y,R30
+ 00A8 2FB6              in R2,0x3f
+ 00AA 2A92              st -y,R2
+ 00AC                   .dbline -1
+ 00AC                   .dbline 42
+                       ;     }
+                       ; /*      AD转换程序     */
+                       ; #pragma interrupt_handler adc_isr:IT_ADC
+                       ; void adc_isr(void)
+                       ;    {
+ 00AC                   .dbline 43
+                       ;     unsigned int temp=0;
+ 00AC 0027              clr R16
+ 00AE 1127              clr R17
+ 00B0 02C0              rjmp L12
+ 00B2                 L11:
+ 00B2                   .dbline 45
+ 00B2 0F5F              subi R16,255  ; offset = 1
+ 00B4 1F4F              sbci R17,255
+ 00B6                 L12:
+ 00B6                   .dbline 44
+                       ;     while(temp<6)
+ 00B6 0630              cpi R16,6
+ 00B8 E0E0              ldi R30,0
+ 00BA 1E07              cpc R17,R30
+ 00BC D0F3              brlo L11
+ 00BE                   .dbline 46
+                       ;         temp++;
+                       ;     ad_con=ADC;    
+ 00BE 24B0              in R2,0x4
+ 00C0 35B0              in R3,0x5
+ 00C2 30920700          sts _ad_con+1,R3
+ 00C6 20920600          sts _ad_con,R2
+ 00CA                   .dbline 47
+                       ;     ADCSR|=(1<<ADSC);//启动转换                          
+ 00CA 369A              sbi 0x6,6
+ 00CC                   .dbline -2
+ 00CC                   .dbline 48
+                       ;    } 
+ 00CC                 L10:
+ 00CC 2990              ld R2,y+
+ 00CE 2FBE              out 0x3f,R2
+ 00D0 E991              ld R30,y+
+ 00D2 1991              ld R17,y+
+ 00D4 0991              ld R16,y+
+ 00D6 3990              ld R3,y+
+ 00D8 2990              ld R2,y+
+ 00DA                   .dbline 0 ; func end
+ 00DA 1895              reti
+ 00DC                   .dbsym r temp 16 i
+ 00DC                   .dbfunc s main _main fI
+                         .even
+ 00DC                 _main::
+ 00DC                   .dbline -1
+ 00DC                   .dbline 51
+                       ; //将AD转换结果转换成电压数值，然后在LCD上显示   
+                       ; void main(void)
+                       ; {
+ 00DC                   .dbline 52
+                       ;  MCUCR=0;
+ 00DC 2224              clr R2
+ 00DE 25BE              out 0x35,R2
+ 00E0                   .dbline 53
+                       ;  ADMUX=0x00;//0通道
+ 00E0 27B8              out 0x7,R2
+ 00E2                   .dbline 54
+                       ;  ADCSR=(1<<ADEN)|(1<<ADSC)|(1<<ADIF)|(1<<ADIE)|0x06;
+ 00E2 8EED              ldi R24,222
+ 00E4 86B9              out 0x6,R24
+ 00E6                   .dbline 55
+                       ;  lcd_init();
+ 00E6 00D0              rcall _lcd_init
+ 00E8                   .dbline 56
+                       ;  SEI();
+ 00E8 7894              sei
+ 00EA 19C0              rjmp L16
+ 00EC                 L15:
+ 00EC                   .dbline 58
+ 00EC                   .dbline 59
+ 00EC 2227              clr R18
+ 00EE 02E0              ldi R16,2
+ 00F0 00D0              rcall _lcd_gotoxy
+ 00F2                   .dbline 60
+ 00F2 00E0              ldi R16,<L18
+ 00F4 10E0              ldi R17,>L18
+ 00F6 00D0              rcall _lcd_puts
+ 00F8                   .dbline 61
+ 00F8 21E0              ldi R18,1
+ 00FA 02E0              ldi R16,2
+ 00FC 00D0              rcall _lcd_gotoxy
+ 00FE                   .dbline 62
+ 00FE 00E0              ldi R16,<L19
+ 0100 10E0              ldi R17,>L19
+ 0102 00D0              rcall _lcd_puts
+ 0104                   .dbline 63
+ 0104 21E0              ldi R18,1
+ 0106 0AE0              ldi R16,10
+ 0108 00D0              rcall _lcd_gotoxy
+ 010A                   .dbline 64
+ 010A 00910600          lds R16,_ad_con
+ 010E 10910700          lds R17,_ad_con+1
+ 0112 76DF              rcall _adctoasc
+ 0114 00D0              rcall _lcd_puts
+ 0116                   .dbline 65
+ 0116 04EF              ldi R16,500
+ 0118 11E0              ldi R17,1
+ 011A 00D0              rcall _delay_ms
+ 011C                   .dbline 66
+ 011C 00D0              rcall _lcd_clear
+ 011E                   .dbline 67
+ 011E                 L16:
+ 011E                   .dbline 57
+ 011E E6CF              rjmp L15
+ 0120                 X0:
+ 0120                   .dbline -2
+ 0120                   .dbline 68
+                       ;  while(1)
+                       ;     {
+                       ;      lcd_gotoxy(2,0);
+                       ;      lcd_puts("AD--Converter");
+                       ;      lcd_gotoxy(2,1); 
+                       ;      lcd_puts("Voltage:");   
+                       ;      lcd_gotoxy(10,1);
+                       ;      lcd_puts(adctoasc(ad_con));
+                       ;      delay_ms(500);
+                       ;      lcd_clear();
+                       ;      }
+                       ;  }   
+ 0120                 L14:
+ 0120                   .dbline 0 ; func end
+ 0120 0895              ret
+                         .area bss(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\AD_8535_LCD\ad_lcd.c
+ 0000                 _adcval::
+ 0000                   .blkb 6
+ 0006                   .dbsym s adcval _adcval A[6:6]c
+ 0006                 _ad_con::
+ 0006                   .blkb 2
+ 0008                   .dbsym s ad_con _ad_con i
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\AD_8535_LCD\ad_lcd.c
+ 0000                 L19:
+ 0000                   .blkb 9
+                         .area idata
+ 0000 566F6C746167653A00     .byte 'V,'o,'l,'t,'a,'g,'e,58,0
+                         .area data(ram, con, rel)
+ 0009                   .dbfile D:\ICC-AVR\examples.sl\AD_8535_LCD\ad_lcd.c
+ 0009                 L18:
+ 0009                   .blkb 14
+                         .area idata
+ 0009 41442D2D436F6E76657274657200   .byte 'A,'D,45,45,'C,'o,'n,'v,'e,'r,'t,'e,'r,0
+                         .area data(ram, con, rel)
+ 0017                   .dbfile D:\ICC-AVR\examples.sl\AD_8535_LCD\ad_lcd.c

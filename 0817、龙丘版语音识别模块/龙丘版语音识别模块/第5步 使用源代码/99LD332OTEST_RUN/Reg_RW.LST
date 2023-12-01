@@ -1,0 +1,294 @@
+C51 COMPILER V7.10   REG_RW                                                                09/12/2011 22:11:33 PAGE 1   
+
+
+C51 COMPILER V7.10, COMPILATION OF MODULE REG_RW
+OBJECT MODULE PLACED IN Reg_RW.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Reg_RW.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /************************************************************************************/
+   2          //      版权所有：Copyright (c) 2005 - 2010 ICRoute INC.
+   3          /************************************************************************************/
+   4          
+   5          #include "STC10F08XE.H"
+   6          #include "Reg_RW.h"
+   7          
+   8          extern void _nop_(void);
+   9          
+  10          /************************************************************************************/
+  11          //      主控MCU对于LD3320读写寄存器的实现有四种：
+  12          //      #define SOFT_PARA_PORT          //      软件模拟并行读写
+  13          //      #define HARD_PARA_PORT          //      硬件实现并行读写 （需要主控MCU有硬件的WR/RD端口）
+  14          //      #define SOFT_SPI_PORT           //      软件模拟SPI读写
+  15          //      #define HARD_SPI_PORT           //      硬件实现SPI读写   （需要主控MCU有硬件SPI接口）
+  16          /************************************************************************************/
+  17          
+  18          
+  19          #ifdef SOFT_PARA_PORT
+  20          
+  21                          #define DELAY_NOP       _nop_();_nop_();_nop_();
+  22                          sbit    LD_WR   = P3^6;
+  23                          sbit    LD_RD   = P3^7;
+  24                          sbit    LD_CS   = P2^6;
+  25                          sbit    LD_A0   = P2^0;
+  26                          void LD_WriteReg( unsigned char address, unsigned char dataout )
+  27                          {
+  28   1                              P0 = address;
+  29   1                              LD_A0 = 1;
+  30   1                              LD_CS = 0;
+  31   1                              LD_WR = 0;
+  32   1                              DELAY_NOP;
+  33   1                      
+  34   1                              LD_WR = 1;
+  35   1                              LD_CS = 1;
+  36   1                              DELAY_NOP;
+  37   1                      
+  38   1                              P0 = dataout;
+  39   1                              LD_A0 = 0;
+  40   1                              LD_CS = 0;
+  41   1                              LD_WR = 0;
+  42   1                              DELAY_NOP;
+  43   1                      
+  44   1                              LD_WR = 1;
+  45   1                              LD_CS = 1;
+  46   1                              DELAY_NOP;
+  47   1                      }
+  48                          
+  49                          unsigned char LD_ReadReg( unsigned char address )
+  50                          {
+  51   1                              unsigned char datain;
+  52   1                      
+  53   1                              P0 = address;
+  54   1                              LD_A0 = 1;
+  55   1                              LD_CS = 0;
+C51 COMPILER V7.10   REG_RW                                                                09/12/2011 22:11:33 PAGE 2   
+
+  56   1                              LD_WR = 0;
+  57   1                              DELAY_NOP;
+  58   1                      
+  59   1                              LD_WR = 1;
+  60   1                              LD_CS = 1;
+  61   1                              DELAY_NOP;
+  62   1                      
+  63   1                              LD_A0 = 0;
+  64   1                              LD_CS = 0;
+  65   1                              LD_RD = 0;
+  66   1                              DELAY_NOP;
+  67   1      
+  68   1                              datain = P0;
+  69   1                              LD_RD = 1;
+  70   1                              LD_CS = 1;
+  71   1                              DELAY_NOP;
+  72   1                      
+  73   1                              return datain;
+  74   1                      }
+  75          #endif
+  76          
+  77          #ifdef HARD_PARA_PORT
+              
+                              #define LD_INDEX_PORT           (*((volatile unsigned char xdata*)(0x8100))) 
+                              #define LD_DATA_PORT            (*((volatile unsigned char xdata*)(0x8000))) 
+                              
+                              //评估板上 MCU的A8 连接到 LD芯片的AD
+                              //         MCU的A14 连接到 LD芯片的CSB
+                              //         MCU的RD、WR 连接 LD芯片的RD、WR (xdata 读写时自动产生低信号)
+                              //
+                              //0x8100的二进制是10000001 00000000             CSB=0 AD=1
+                              //                 ^     ^
+                              //0x8000的二进制是10000000 00000000             CSB=0 AD=0
+                              //                 ^     ^
+                              
+                              void LD_WriteReg( unsigned char address, unsigned char dataout )
+                              {
+                                      LD_INDEX_PORT  = address;         
+                                      LD_DATA_PORT = dataout;          
+                              }
+                              
+                              unsigned char LD_ReadReg( unsigned char address )
+                              {
+                                      LD_INDEX_PORT = address;         
+                                      return (unsigned char)LD_DATA_PORT;     
+                              }
+              #endif
+ 103          
+ 104          #ifdef SOFT_SPI_PORT
+                              #define DELAY_NOP       _nop_();_nop_();_nop_();
+                              
+                              sbit SCS=P2^6;    //芯片片选信号
+                              sbit SDCK=P0^2;   //SPI 时钟信号
+                              sbit SDI=P0^0;    //SPI 数据输入
+                              sbit SDO=P0^1;    //SPI 数据输出
+                              sbit SPIS=P3^6;   //SPI模式设置：低有效。
+              
+                              void LD_WriteReg(unsigned char address,unsigned char dataout)
+                              {
+                                      unsigned char i = 0;
+                                      unsigned char command=0x04;
+                                      SPIS =0;
+C51 COMPILER V7.10   REG_RW                                                                09/12/2011 22:11:33 PAGE 3   
+
+                                      SCS = 0;
+                                      DELAY_NOP;
+                              
+                                      //write command
+                                      for (i=0;i < 8; i++)
+                                      {
+                                              if ((command & 0x80) == 0x80) 
+                                                      SDI = 1;
+                                              else
+                                                      SDI = 0;
+                                              
+                                              DELAY_NOP;
+                                              SDCK = 0;
+                                              command = (command << 1);  
+                                              DELAY_NOP;
+                                              SDCK = 1;  
+                                      }
+                                      //write address
+                                      for (i=0;i < 8; i++)
+                                      {
+                                              if ((address & 0x80) == 0x80) 
+                                                      SDI = 1;
+                                              else
+                                                      SDI = 0;
+                                              DELAY_NOP;
+                                              SDCK = 0;
+                                              address = (address << 1); 
+                                              DELAY_NOP;
+                                              SDCK = 1;  
+                                      }
+                                      //write data
+                                      for (i=0;i < 8; i++)
+                                      {
+                                              if ((dataout & 0x80) == 0x80) 
+                                                      SDI = 1;
+                                              else
+                                                      SDI = 0;
+                                              DELAY_NOP;
+                                              SDCK = 0;
+                                              dataout = (dataout << 1); 
+                                              DELAY_NOP;
+                                              SDCK = 1;  
+                                      }
+                                      DELAY_NOP;
+                                      SCS = 1;
+                              }
+              
+                              unsigned char LD_ReadReg(unsigned char address)
+                              {
+                                      unsigned char i = 0; 
+                                      unsigned char datain =0 ;
+                                      unsigned char temp = 0; 
+                                      unsigned char command=0x05;
+                                      SPIS =0;
+                                      SCS = 0;
+                                      DELAY_NOP;
+                              
+                                      //write command
+                                      for (i=0;i < 8; i++)
+                                      {
+                                              if ((command & 0x80) == 0x80) 
+                                                      SDI = 1;
+C51 COMPILER V7.10   REG_RW                                                                09/12/2011 22:11:33 PAGE 4   
+
+                                              else
+                                                      SDI = 0;
+                                              DELAY_NOP;
+                                              SDCK = 0;
+                                              command = (command << 1);  
+                                              DELAY_NOP;
+                                              SDCK = 1;  
+                                      }
+              
+                                      //write address
+                                      for (i=0;i < 8; i++)
+                                      {
+                                              if ((address & 0x80) == 0x80) 
+                                                      SDI = 1;
+                                              else
+                                                      SDI = 0;
+                                              DELAY_NOP;
+                                              SDCK = 0;
+                                              address = (address << 1); 
+                                              DELAY_NOP;
+                                              SDCK = 1;  
+                                      }
+                                      DELAY_NOP;
+              
+                                      //Read data
+                                      for (i=0;i < 8; i++)
+                                      {
+                                              datain = (datain << 1);
+                                              temp = SDO;
+                                              DELAY_NOP;
+                                              SDCK = 0;  
+                                              if (temp == 1)  
+                                                      datain |= 0x01; 
+                                              DELAY_NOP;
+                                              SDCK = 1;  
+                                      }
+                              
+                                      DELAY_NOP;
+                                      SCS = 1;
+                                      return datain;
+                              }
+              
+              #endif
+ 223          
+ 224          #ifdef HARD_SPI_PORT
+                              /*
+                              STC单片机（带SPI口的种类）兼顾读写的函数例程
+                              unsigend char SPI_TR( unsigned char x ) 
+                              { 
+                                      SPSTAT=0xC0;  
+                                      SPDAT=x;  
+                                      while(!(SPSTAT&0x80));  
+                                      return SPDAT;
+                              }
+                              
+                              --------------------------------------------------
+                              AVR单片机（带SPI口的种类）兼顾读写的函数例程
+                              unsigend char SPI_TR( unsigned char x ) 
+                              { 
+                                      SPDR=x;  
+                                      while(!(SPSR & (1<<SPIF)));  
+                                      return SPDR;
+C51 COMPILER V7.10   REG_RW                                                                09/12/2011 22:11:33 PAGE 5   
+
+                              }
+              
+                              */
+                              void LD_WriteReg( unsigned char address, unsigned char dataout )
+                              {
+                                      // 这里添加硬件SPI口的操作代码：
+                                      SPI_TR(0x04); // 发送 0x04
+                                      SPI_TR(address); // 发送 address
+                                      SPI_TR(dataout); // 发送 dataout
+                              }
+                              unsigned char LD_ReadReg( unsigned char address )
+                              {
+                                      // 这里添加硬件SPI口的操作代码：
+                                      SPI_TR(0x05); // 发送 0x05
+                                      SPI_TR(address); // 发送 address
+                                      return (SPI_TR(0)); // 读出数据, 并返回
+                              }
+              #endif
+ 260          
+ 261          
+ 262          
+ 263          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     74    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

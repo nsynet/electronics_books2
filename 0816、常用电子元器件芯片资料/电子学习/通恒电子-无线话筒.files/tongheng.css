@@ -1,0 +1,75 @@
+BODY {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif, 宋体
+}
+P {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif, 宋体
+}
+TD {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif, 宋体
+}
+BODY {
+	SCROLLBAR-FACE-COLOR: #eeeeee; SCROLLBAR-HIGHLIGHT-COLOR: #ffffff; SCROLLBAR-SHADOW-COLOR: #dee3e7; SCROLLBAR-3DLIGHT-COLOR: #d1d7dc; SCROLLBAR-ARROW-COLOR: #efb231; SCROLLBAR-TRACK-COLOR: #ededed; SCROLLBAR-DARKSHADOW-COLOR: #800000
+}
+INPUT {
+	BORDER-TOP-WIDTH: 1px; PADDING-RIGHT: 1px; PADDING-LEFT: 1px; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: #c0c0c0; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #c0c0c0; PADDING-BOTTOM: 1px; CURSOR: hand; COLOR: #000000; BORDER-TOP-COLOR: #c0c0c0; PADDING-TOP: 1px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif, 宋体; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #c0c0c0
+}
+TEXTAREA {
+	BORDER-TOP-WIDTH: 1px; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: #c0c0c0; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #c0c0c0; CURSOR: hand; COLOR: #000000; BORDER-TOP-COLOR: #c0c0c0; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif, 宋体; BACKGROUND-COLOR: #ffffff; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #c0c0c0
+}
+SELECT {
+	BORDER-TOP-WIDTH: 1px; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: #c0c0c0; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #c0c0c0; CURSOR: hand; COLOR: #000000; BORDER-TOP-COLOR: #c0c0c0; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif, 宋体; BACKGROUND-COLOR: #ffffff; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #c0c0c0
+}
+.bg_1 {
+	BACKGROUND-COLOR: #ffffff
+}
+.bg_2 {
+	BACKGROUND-COLOR: #f7f7f7
+}
+.bg_3 {
+	BACKGROUND-COLOR: #ededed
+}
+.timtd {
+	FONT-FAMILY: Arial, 宋体, Verdana, Helvetica, sans-serif
+}
+.htd {
+	LINE-HEIGHT: 150%
+}
+.btd {
+	FONT-WEIGHT: bold
+}
+.bw {
+	WORD-WRAP: break-word
+}
+.tf {
+	TABLE-LAYOUT: fixed
+}
+.red {
+	COLOR: #ff3300
+}
+.red_2 {
+	COLOR: #990000
+}
+.red_3 {
+	COLOR: #cc3300
+}
+.end {
+	COLOR: #ffffff
+}
+.blue {
+	COLOR: #0066cc
+}
+.gray {
+	COLOR: #808080
+}
+A {
+	COLOR: #008000; TEXT-DECORATION: none
+}
+A:hover {
+	LEFT: 1px; COLOR: #ff3300; POSITION: relative; TOP: 1px
+}
+A.menu {
+	COLOR: #008000; TEXT-DECORATION: none
+}
+A.menu:hover {
+	LEFT: 1px; COLOR: #cc3300; POSITION: relative; TOP: 1px
+}

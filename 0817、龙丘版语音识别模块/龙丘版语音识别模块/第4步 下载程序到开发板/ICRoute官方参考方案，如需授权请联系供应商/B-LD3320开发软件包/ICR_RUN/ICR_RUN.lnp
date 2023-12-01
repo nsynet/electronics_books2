@@ -1,0 +1,5 @@
+"main.obj",
+"LDChip.obj",
+"Reg_RW.obj" 
+TO "ICR_RUN" 
+RAMSIZE(256) 

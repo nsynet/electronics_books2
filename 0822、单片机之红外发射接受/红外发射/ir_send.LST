@@ -1,0 +1,152 @@
+C51 COMPILER V8.05a   IR_SEND                                                              03/12/2012 15:04:09 PAGE 1   
+
+
+C51 COMPILER V8.05a, COMPILATION OF MODULE IR_SEND
+OBJECT MODULE PLACED IN ir_send.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ir_send.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "ir_send.h"
+   2          
+   3          
+   4          
+   5          /*------------初始化IO------------*/
+   6          void ir_init(void)
+   7          {
+   8   1              P2M0 = 0x80;               //P2.7强推挽
+   9   1              P2M1 = 0x00;
+  10   1              TMOD = 0x01;               //T0  16位 定时      
+  11   1              IR   = 0;
+  12   1      }
+  13          
+  14          /*-------发射数据 + 载波---------*/
+  15          void ir_t(bit BT , uint p)
+  16          {
+  17   1              TH0 = p>>8;                 
+  18   1              TL0 = p;
+  19   1          TF0=0;                             
+  20   1          TR0=1;                                                                                                 //启动定时器0
+  21   1          if(BT == 0)                                                                                            //BT=0时，不发射38KHz载波只延时；BT=1发射38KHz脉冲且延时
+  22   1              {
+  23   2                      while(!TF0);
+  24   2          }
+  25   1              else while(1)                                                                              //38KHz载波，（低电平）占空比5:26                    
+  26   1              {
+  27   2                        IR = 1;
+  28   2                        if(TF0)break;if(TF0)break;
+  29   2                        if(TF0)break;if(TF0)break;
+  30   2                        if(TF0)break;if(TF0)break;
+  31   2                        if(TF0)break;
+  32   2      
+  33   2                        IR = 0;
+  34   2                    if(TF0)break;if(TF0)break;
+  35   2                    if(TF0)break;if(TF0)break;
+  36   2                    if(TF0)break;if(TF0)break;
+  37   2                    if(TF0)break;if(TF0)break;
+  38   2                    if(TF0)break;if(TF0)break;
+  39   2                    if(TF0)break;if(TF0)break;
+  40   2                    if(TF0)break;if(TF0)break;
+  41   2                    if(TF0)break;if(TF0)break;
+  42   2                    if(TF0)break;if(TF0)break;
+  43   2                    if(TF0)break;if(TF0)break;
+  44   2                    if(TF0)break;if(TF0)break;
+  45   2                    if(TF0)break;if(TF0)break;
+  46   2                    if(TF0)break;if(TF0)break;
+  47   2                    if(TF0)break;if(TF0)break;
+  48   2                    if(TF0)break;if(TF0)break;
+  49   2                      }
+  50   1          TR0=0;                                                                                                 //关闭定时器0
+  51   1          TF0=0;                                                                                      
+  52   1          IR =0;                                                              
+  53   1      }
+  54          
+  55          
+C51 COMPILER V8.05a   IR_SEND                                                              03/12/2012 15:04:09 PAGE 2   
+
+  56          /*-----------发送一帧数据-----------*/
+  57          void ir_send_byt(uchar temp)
+  58          { 
+  59   1        uchar i;
+  60   1              for (i = 0; i < 8; i++ )                     //循环8次移位 
+  61   1              {     
+  62   2                  ir_t( 1 , m_56 );                              //高电平0.65mS                                 
+  63   2                      if( temp & 0x01 ) 
+  64   2                      ir_t( 0 , m1_6 );                                          //先发送最低位               
+  65   2                      else          
+  66   2                      ir_t( 0 , m_56 );                            
+  67   2                      temp >>= 1;                
+  68   2              }    
+  69   1      }
+  70          
+  71          /*┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+  72          函数：NEC编码发送程序
+  73          ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈*/
+  74          void ir_send(uchar p)
+  75          {  
+  76   1              ir_t( 1 , m9   );                       //高电平9mS
+  77   1              ir_t( 0 , m4_5 );                   //低电平4.5mS
+  78   1      
+  79   1        /*┈ 发送4帧数据┈*/
+  80   1              ir_send_byt( user_h );                     //用户码高8位                                                                                                               
+  81   1              ir_send_byt( user_l );                     //用户码低8位
+  82   1              ir_send_byt(  p  );                        //操作码
+  83   1              ir_send_byt( ~p  );                        //操作码反码
+  84   1      
+  85   1        /*┈┈ 结束码 ┈┈*/
+  86   1          ir_t( 1 , m_56 );
+  87   1              ir_t( 0 , m40  );
+  88   1       /*┈┈ 重复码 ┈┈*/
+  89   1              while(0)
+  90   1              {
+  91   2              ir_t( 1 , m9    );
+  92   2              ir_t( 0 , m2_25 );
+  93   2      
+  94   2              ir_t( 1 , m_56  );
+  95   2              ir_t( 0 , m40   );
+  96   2                      ir_t( 0 , m56   );                                
+  97   2          }             
+  98   1      }
+  99          
+ 100          
+ 101          
+ 102          
+ 103          
+ 104          
+ 105          
+ 106          
+ 107          
+ 108          
+ 109          
+ 110          
+ 111          
+ 112          
+ 113          
+ 114          
+ 115          
+ 116          
+ 117          
+C51 COMPILER V8.05a   IR_SEND                                                              03/12/2012 15:04:09 PAGE 3   
+
+ 118          
+ 119          
+ 120          
+ 121          
+ 122          
+ 123          
+ 124          
+ 125          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    260    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

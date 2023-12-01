@@ -1,0 +1,262 @@
+XL
+H 6 areas 19 global symbols
+M I2C.c
+S push_gset1 Ref0000
+S push_gset2 Ref0000
+S _Stop Ref0000
+S _TestAck Ref0000
+S _NoAck Ref0000
+S _Read8Bit Ref0000
+S _Start Ref0000
+S lsl8 Ref0000
+S pop_gset1 Ref0000
+S pop_gset2 Ref0000
+S _scan_key Ref0000
+S _delay_ms Ref0000
+S _Write8Bit Ref0000
+S _delay_1ms Ref0000
+S mod8u Ref0000
+S div8u Ref0000
+A code size 0 flags 20
+A lit size 10 flags 0
+dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+dbsym s tabel 0 Ac[16:16]
+S _tabel Def0000
+A data size 6 flags 20
+dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+dbsym s ledbuff 0 Ac[6:6]
+S _ledbuff Def0000
+A idata size 6 flags 0
+A text size 204 flags 0
+dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+dbfunc s i2c_Write 0 fI
+dbsym r RomAddress 16 c
+dbsym r Wdata 14 c
+dbline 19 6 {
+dbline 1A 6
+dbline 1B 8
+dbline 1C C
+dbline 1D E
+dbline 1E 12
+dbline 1F 14
+dbline 20 18
+dbline 21 1A
+dbline 22 1C
+dbline 23 22 }
+dbfunc s i2c_Read 26 fI
+dbsym r temp 14 c
+dbsym r RomAddress 14 c
+dbline 28 2A {
+dbline 2A 2A
+dbline 2B 2C
+dbline 2C 30
+dbline 2D 32
+dbline 2E 36
+dbline 2F 38
+dbline 30 3A
+dbline 31 3E
+dbline 32 40
+dbline 33 48
+dbline 34 4A
+dbline 35 4C
+dbline 36 54 }
+dbfunc s port_init 54 fI
+dbline 3B 54 {
+dbline 3C 54
+dbline 3D 58
+dbline 3E 5C
+dbline 3F 5E
+dbline 40 60 }
+dbfunc s display 62 fI
+dbsym r i 14 c
+dbline 45 64 {
+dbline 47 64
+dbline 48 6E
+dbline 49 84
+dbline 4A 8E
+dbline 4B A4
+dbline 4C AE
+dbline 4D C4
+dbline 4E CE
+dbline 4F E4
+dbline 50 E8
+dbline 51 E8
+dbline 52 F8
+dbline 53 104
+dbline 54 106
+dbline 55 112
+dbline 4F 112
+dbline 4F 114
+dbline 56 118 }
+dbfunc s main 11C fI
+dbsym r index 16 c
+dbsym r flag A c
+dbsym r key1 C c
+dbsym r key2 E c
+dbline 63 11C {
+dbline 66 11C
+dbline 67 120
+dbline 68 124
+dbline 69 128
+dbline 6A 12A
+dbline 6B 12C
+dbline 6D 130
+dbline 6E 130
+dbline 6F 138
+dbline 70 140
+dbline 72 140
+dbline 73 140
+dbline 74 148
+dbline 75 14A
+dbline 76 14A
+dbline 77 14E
+dbline 78 154
+dbline 79 154
+dbline 7A 158
+dbline 7B 158
+dbline 7C 162
+dbline 7D 164
+dbline 7E 166
+dbline 7F 16A
+dbline 80 16E
+dbline 81 170
+dbline 83 172
+dbline 84 172
+dbline 85 186
+dbline 86 186
+dbline 86 186
+dbline 87 18A
+dbline 87 18A
+dbline 88 192
+dbline 89 1A0
+dbline 8B 1A2
+dbline 8B 1A2
+dbline 8C 1AA
+dbline 8D 1B8
+dbline 8E 1B8
+dbline 8F 1BA
+dbline 91 1BC
+dbline 91 1BC
+dbline 92 1C0
+dbline 92 1C0
+dbline 93 1C8
+dbline 94 1D4
+dbline 96 1D6
+dbline 96 1D6
+dbline 97 1DE
+dbline 98 1EA
+dbline 99 1EA
+dbline 9A 1EC
+dbline 9D 1EC
+dbline 9E 1EC
+dbline 9F 1EC
+dbline A0 1F0
+dbline A1 1FE
+dbline A2 200
+dbline 6C 200
+dbline A3 202 }
+S _main Def011C
+S _port_init Def0054
+S _i2c_Read Def0026
+S _display Def0062
+S _i2c_Write Def0000
+A bss size 2 flags 20
+dbfile D:\ICC-AVR\examples.sl\I2C\I2C.c
+dbsym s at24_data 0 c
+dbsym s at24_add 1 c
+S _at24_add Def0001
+S _at24_data Def0000
+T 00 00 3F 06 5B 4F 66 6D 7D 07 7F 6F 77 7C 39 5E
+R 00 00 01 00
+T 0E 00 79 71
+R 00 00 01 00
+T 00 00 3F 3F
+R 00 00 03 00
+T 02 00 3F 3F
+R 00 00 03 00
+T 04 00 00 00
+R 00 00 03 00
+T 00 00 00 D0 62 2F 40 2F 00 D0 00 EA 00 D0
+R 00 00 04 00 82 02 01 00 82 08 06 00 82 0C 0C 00
+T 0C 00 00 D0 06 2F 00 D0 00 D0 04 2F
+R 00 00 04 00 82 02 03 00 82 06 0C 00 82 08 03 00
+T 16 00 00 D0 00 D0 00 D0 0A E0 10 E0
+R 00 00 04 00 82 02 0C 00 82 04 03 00 82 06 02 00
+T 20 00 00 D0 00 D0 08 95
+R 00 00 04 00 82 02 0B 00 82 04 09 00
+T 26 00 00 D0 40 2F 00 D0 00 EA 00 D0
+R 00 00 04 00 82 02 00 00 82 06 06 00 82 0A 0C 00
+T 30 00 00 D0 04 2F 00 D0 00 D0
+R 00 00 04 00 82 02 03 00 82 06 0C 00 82 08 03 00
+T 38 00 00 D0 01 EA 00 D0 00 D0
+R 00 00 04 00 82 02 06 00 82 06 0C 00 82 08 03 00
+T 40 00 00 D0 20 2E 31 2E 42 2D 00 D0 00 D0 04 2F
+R 00 00 04 00 82 02 05 00 82 0A 04 00 82 0C 02 00
+T 4E 00 11 27 00 D0 08 95
+R 00 00 04 00 82 04 08 00
+T 54 00 8F E3 81 BB 8F EF 87 BB 82 BB 88 BB 08 95
+R 00 00 04 00
+T 62 00 00 D0 10 E1 00 91 00 00 00 D0 40 2F
+R 00 00 04 00 82 02 00 00 00 08 05 00 82 0A 0E 00
+T 6E 00 80 E0 90 E0 24 2E 33 24 28 0E 39 1E E2 2D
+R 00 00 04 00 20 02 01 00 00 00 40 04 01 00 00 00
+T 7C 00 F3 2D C8 95 00 92 00 00 10 E1 00 91 00 00
+R 00 00 04 00 00 08 02 00 00 0E 05 00
+T 8A 00 00 D0 40 2F 80 E0
+R 00 00 04 00 82 02 0F 00 20 06 01 00 00 00
+T 90 00 90 E0 24 2E 33 24 28 0E 39 1E E2 2D F3 2D
+R 00 00 04 00 40 02 01 00 00 00
+T 9E 00 C8 95 00 92 01 00 10 E1 00 91 01 00 00 D0
+R 00 00 04 00 00 06 02 00 00 0C 05 00 82 0E 0E 00
+T AC 00 40 2F 80 E0 90 E0 24 2E 33 24 28 0E 39 1E
+R 00 00 04 00 20 04 01 00 00 00 40 06 01 00 00 00
+T BA 00 E2 2D F3 2D C8 95 00 92 02 00 10 E1 00 91
+R 00 00 04 00 00 0A 02 00
+T C8 00 01 00 00 D0 40 2F
+R 00 00 04 00 00 02 05 00 82 04 0F 00
+T CE 00 80 E0 90 E0 24 2E 33 24 28 0E 39 1E E2 2D
+R 00 00 04 00 20 02 01 00 00 00 40 04 01 00 00 00
+T DC 00 F3 2D C8 95 00 92 03 00 44 27 16 C0 80 E0
+R 00 00 04 00 00 08 02 00 20 0E 02 00 00 00
+T EA 00 90 E0 E4 2F FF 27 E8 0F F9 1F 20 80 28 BA
+R 00 00 04 00 40 02 02 00 00 00
+T F8 00 01 E0 14 2F 00 D0 20 2E 20 94 22 BA 00 D0
+R 00 00 04 00 82 06 07 00 82 0E 0D 00
+T 06 01 01 E0 14 2F 00 D0 22 B2 20 2A 22 BA 43 95
+R 00 00 04 00 82 06 07 00
+T 14 01 46 30 40 F3 00 D0 08 95
+R 00 00 04 00 82 06 08 00
+T 1C 01 22 24 25 BE 20 92 01 00 20 92 00 00 66 27
+R 00 00 04 00 00 08 05 00 00 0C 05 00
+T 2A 01 AA 24 93 DF 68 C0 00 D0 20 2E 31 2E C2 2C
+R 00 00 04 00 82 08 0A 00
+T 38 01 8C 2D 8F 37 09 F4 56 C0 00 D0 20 2E 31 2E
+R 00 00 04 00 82 0A 0A 00
+T 46 01 E2 2C 8C DF CE 14 C9 F3 8C 2D 80 38 78 F0
+R 00 00 04 00
+T 54 01 AA 20 39 F0 20 91 01 00 00 91 00 00 4F DF
+R 00 00 04 00 00 08 05 00 00 0C 05 00
+T 62 01 AA 24 02 C0 80 E8 A8 2E A0 92 05 00 66 27
+R 00 00 04 00 00 0C 02 00
+T 70 01 3D C0 46 2F 55 27 40 30 45 07 29 F0 41 30
+R 00 00 04 00
+T 7E 01 E0 E0 5E 07 E1 F0 33 C0 AA 20 61 F4 80 91
+R 00 00 04 00
+T 8C 01 01 00 8F 70 E8 2E 8C 2D 8F 70 82 95 2E 2C
+R 00 00 04 00 00 02 05 00
+T 9A 01 28 2A 20 92 01 00 0B C0 80 91 00 00 8F 70
+R 00 00 04 00 00 06 05 00 00 0C 05 00
+T A8 01 E8 2E 8C 2D 8F 70 82 95 2E 2C 28 2A 20 92
+R 00 00 04 00
+T B6 01 00 00 61 E0 18 C0 AA 20 59 F4 80 91 01 00
+R 00 00 04 00 00 02 05 00 00 0E 05 00
+T C4 01 80 7F E8 2E 8C 2D 8F 70 2E 2C 28 2A 20 92
+R 00 00 04 00
+T D2 01 01 00 0A C0 80 91 00 00 80 7F E8 2E 8C 2D
+R 00 00 04 00 00 02 05 00 00 08 05 00
+T E0 01 8F 70 2E 2C 28 2A 20 92 00 00 66 27 AA 20
+R 00 00 04 00 00 0A 05 00
+T EE 01 39 F4 00 91 01 00 18 DF 20 2E 31 2E 20 92
+R 00 00 04 00 00 06 05 00
+T FC 01 00 00 31 DF 97 CF 08 95
+R 00 00 04 00 00 02 05 00

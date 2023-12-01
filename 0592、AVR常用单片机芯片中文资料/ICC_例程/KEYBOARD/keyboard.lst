@@ -1,0 +1,298 @@
+                         .module keyboard.c
+                         .area lit(rom, con, rel)
+ 000D                  _tabel::
+ 000D  063F              .byte 63,6
+ 000E  4F5B              .byte 91,'O
+ 000F  6D66              .byte 'f,'m
+ 0010  077D              .byte 125,7
+ 0011  6F7F              .byte 127,'o
+ 0012  7C77              .byte 'w,124
+ 0013  5E39              .byte 57,94
+ 0014  7179              .byte 'y,'q
+ 0015                    .dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard.c
+ 0015                    .dbsym s tabel _tabel Ac[16:16]
+                         .area data(ram, con, rel)
+--- 0000                   .dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard.c
+ 0030                  _ledbuff::
+ 0030                    .blkb 2
+                         .area idata
+--- 0000 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+--- 0001                   .dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard.c
+--- 0001                   .blkb 2
+                         .area idata
+--- 0001 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+--- 0002                   .dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard.c
+--- 0002                   .blkb 2
+                         .area idata
+--- 0002 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+--- 0003                   .dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard.c
+--- 0003                   .dbsym s ledbuff _ledbuff Ac[6:6]
+                         .area text(rom, con, rel)
+--- 0000                   .dbfile D:\ICC-AVR\examples.sl\KEYBOARD\keyboard.c
+--- 0000                   .dbfunc s port_init _port_init fI
+                         .even
+ 0038                  _port_init::
+ 0038                    .dbline 19{
+                       ; /*****************************************************
+                       ;             HTTP://WWW.SL.COM.CN
+                       ;                    双龙电子
+                       ;  使用注意：1、应包含头文件slavr.h
+                       ;            2、在工程选项中的Additional Lib中填入slavr
+                       ;               使用编译器使用附加库文件libslavr.a
+                       ;            3、本例采用了作按键释放检查的函数，适用于显
+                       ;               示电路不需频繁刷新的程序,如静态显示、LCD
+                       ;               模块电路等。    
+                       ; ******************************************************/
+                       ; #include <io8515.h>
+                       ; #include <slavr.h>
+                       ; //字形表
+                       ; const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+                       ; //显示缓冲区
+                       ; unsigned char ledbuff[]={0x3f,0x3f,0x3f,0x3f,0x3f,0x3f};
+                       ; 
+                       ; void port_init(void)//端口初始化
+                       ;      {
+ 0038                    .dbline 20
+                       ;       DDRC=0x0f;
+ 0038  E08F              ldi R24,15
+ 0039  BB84              out 0x14,R24
+ 003A                    .dbline 21
+                       ;       DDRD=0x3f;
+ 003A  E38F              ldi R24,63
+ 003B  BB81              out 0x11,R24
+ 003C                    .dbline 22
+                       ;       DDRB=0xff;
+ 003C  EF8F              ldi R24,255
+ 003D  BB87              out 0x17,R24
+ 003E                    .dbline 23
+                       ;       PORTD=0xff;
+ 003E  BB82              out 0x12,R24
+ 003F                    .dbline 24
+                       ;       PORTB=0xff;
+ 003F  BB88              out 0x18,R24
+ 0040                    .dbline 25
+                       ;       PORTC=0xff;
+ 0040  BB85              out 0x15,R24
+ 0041                    .dbline 26}
+                       ;      }
+ 0041                  L1:
+ 0041  9508              ret
+ 0042                    .dbfunc s display _display fI
+                       ;              i -> R20
+                         .even
+ 0042                  _display::
+ 0042  D114              rcall push_gset1
+ 0043                    .dbline 28{
+                       ; void display(void)//六路动态扫描显示
+                       ; {
+ 0043                    .dbline 30
+                       ;  unsigned char i;
+                       ;  for (i=0;i<6;i++)
+ 0043  2744              clr R20
+ 0044  C016              rjmp L6
+ 0045                  L3:
+ 0045                    .dbline 31
+ 0045                    .dbline 32
+ 0045  E680              ldi R24,<_ledbuff
+ 0046  E090              ldi R25,>_ledbuff
+ 0047  2FE4              mov R30,R20
+ 0048  27FF              clr R31
+ 0049  0FE8              add R30,R24
+ 004A  1FF9              adc R31,R25
+ 004B  8020              ldd R2,z+0
+ 004C  BA28              out 0x18,R2
+ 004D                    .dbline 33
+ 004D  E001              ldi R16,1
+ 004E  2F14              mov R17,R20
+ 004F  D12B              rcall lsl8
+ 0050  2E20              mov R2,R16
+ 0051  9420              com R2
+ 0052  BA22              out 0x12,R2
+ 0053                    .dbline 34
+ 0053  D058              rcall _delay_1ms
+ 0054                    .dbline 35
+ 0054  E001              ldi R16,1
+ 0055  2F14              mov R17,R20
+ 0056  D124              rcall lsl8
+ 0057  B222              in R2,0x12
+ 0058  2A20              or R2,R16
+ 0059  BA22              out 0x12,R2
+ 005A                    .dbline 36
+ 005A                  L4:
+ 005A                    .dbline 30
+ 005A  9543              inc R20
+ 005B                  L6:
+ 005B                    .dbline 30
+ 005B  3046              cpi R20,6
+ 005C  F340              brlo L3
+ 005D                    .dbline 37}
+                       ;   {
+                       ;    PORTB=ledbuff[i];
+                       ;    PORTD=~(1<<i);
+                       ;    delay_1ms();
+                       ;    PORTD|=(1<<i);  
+                       ;   }
+                       ; }
+ 005D                  L2:
+ 005D  D0FC              rcall pop_gset1
+ 005E  9508              ret
+ 005F                    .dbsym r i 20 c
+ 005F                    .dbfunc s main _main fI
+                       ;        keyval1 -> R20
+                       ;              i -> R22
+                         .even
+ 005F                  _main::
+ 005F                    .dbline 42{
+                       ; /*主程序的功能：读取键盘扫描码，转换成相应的字形码后*/
+                       ; /*送入显示缓冲区进行显示，显示部分参考display.c     */
+                       ; /*如果shift键按下，则全部清0                        */       
+                       ; void main(void)
+                       ; {
+ 005F                    .dbline 44
+                       ;  unsigned char keyval1; 
+                       ;  unsigned char i=0;
+ 005F  2766              clr R22
+ 0060                    .dbline 45
+                       ;  MCUCR=0;
+ 0060  2422              clr R2
+ 0061  BE25              out 0x35,R2
+ 0062                    .dbline 46
+                       ;  port_init();
+ 0062  DFD5              rcall _port_init
+ 0063  C046              rjmp L9
+ 0064                  L8:
+ 0064                    .dbline 48
+                       ;   while(1)
+                       ;     { 
+ 0064                    .dbline 49
+                       ;      keyval1=keypad();//键盘扫描函数，作按键释放检查
+ 0064  D0E1              rcall _keypad
+ 0065  2E20              mov R2,R16
+ 0066  2E31              mov R3,R17
+ 0067  2D42              mov R20,R2
+ 0068                    .dbline 50
+                       ;      if (keyval1!=0x7f)
+ 0068  374F              cpi R20,127
+ 0069  F409              brne X1
+ 006A  C03E              rjmp L11
+ 006B                  X1:
+ 006B                    .dbline 51
+                       ;         { 
+ 006B                    .dbline 52
+                       ;          if ((keyval1&0x80)==0x80)
+ 006B  2F84              mov R24,R20
+ 006C  7880              andi R24,128
+ 006D  3880              cpi R24,128
+ 006E  F4B1              brne L13
+ 006F                    .dbline 53
+                       ;              {
+ 006F                    .dbline 54
+                       ;               for(i=0;i<6;i++)
+ 006F  2766              clr R22
+ 0070  C011              rjmp L18
+ 0071                  L15:
+ 0071                    .dbline 55
+ 0071  E680              ldi R24,<_ledbuff
+ 0072  E090              ldi R25,>_ledbuff
+ 0073  2FE6              mov R30,R22
+ 0074  27FF              clr R31
+ 0075  0FE8              add R30,R24
+ 0076  1FF9              adc R31,R25
+ 0077  E18A              ldi R24,<_tabel
+ 0078  E090              ldi R25,>_tabel
+ 0079  93FA              st -y,R31
+ 007A  93EA              st -y,R30
+ 007B  2FE8              mov R30,R24
+ 007C  2FF9              mov R31,R25
+ 007D  95C8              lpm
+ 007E  91E9              ld R30,y+
+ 007F  91F9              ld R31,y+
+ 0080  8200              std z+0,R0
+ 0081                  L16:
+ 0081                    .dbline 54
+ 0081  9563              inc R22
+ 0082                  L18:
+ 0082                    .dbline 54
+ 0082  3066              cpi R22,6
+ 0083  F368              brlo L15
+ 0084                    .dbline 56
+                       ;                    ledbuff[i]=tabel[0];               
+                       ;               }
+ 0084  C024              rjmp L14
+ 0085                  L13:
+ 0085                    .dbline 58
+                       ;           else
+                       ;               {for (i=0;i<5;i++)
+ 0085                    .dbline 58
+ 0085  2766              clr R22
+ 0086  C015              rjmp L22
+ 0087                  L19:
+ 0087                    .dbline 59
+ 0087                    .dbline 60
+ 0087  2E26              mov R2,R22
+ 0088  2433              clr R3
+ 0089  E0E4              ldi R30,4
+ 008A  E0F0              ldi R31,0
+ 008B  19E2              sub R30,R2
+ 008C  09F3              sbc R31,R3
+ 008D  E680              ldi R24,<_ledbuff
+ 008E  E090              ldi R25,>_ledbuff
+ 008F  0FE8              add R30,R24
+ 0090  1FF9              adc R31,R25
+ 0091  8020              ldd R2,z+0
+ 0092  2E36              mov R3,R22
+ 0093  2444              clr R4
+ 0094  E0E5              ldi R30,5
+ 0095  E0F0              ldi R31,0
+ 0096  19E3              sub R30,R3
+ 0097  09F4              sbc R31,R4
+ 0098  0FE8              add R30,R24
+ 0099  1FF9              adc R31,R25
+ 009A  8220              std z+0,R2
+ 009B                    .dbline 61
+ 009B                  L20:
+ 009B                    .dbline 58
+ 009B  9563              inc R22
+ 009C                  L22:
+ 009C                    .dbline 58
+ 009C  3065              cpi R22,5
+ 009D  F348              brlo L19
+ 009E                    .dbline 62
+                       ;                   {
+                       ;                    ledbuff[5-i]=ledbuff[4-i];//每按一次键，左移一位
+                       ;                    }
+                       ;                ledbuff[0]=tabel[keyval1&0x7f];     
+ 009E  E18A              ldi R24,<_tabel
+ 009F  E090              ldi R25,>_tabel
+ 00A0  2FE4              mov R30,R20
+ 00A1  27FF              clr R31
+ 00A2  77EF              andi R30,127
+ 00A3  70F0              andi R31,0
+ 00A4  0FE8              add R30,R24
+ 00A5  1FF9              adc R31,R25
+ 00A6  95C8              lpm
+ 00A7  92000060          sts _ledbuff,R0
+ 00A9                    .dbline 63
+                       ;               }                   
+ 00A9                  L14:
+ 00A9                    .dbline 64
+                       ;         }
+ 00A9                  L11:
+ 00A9                    .dbline 65
+ 00A9  DF98              rcall _display
+ 00AA                    .dbline 66
+ 00AA                  L9:
+ 00AA                    .dbline 47
+ 00AA  CFB9              rjmp L8
+ 00AB                  X0:
+ 00AB                    .dbline 67}
+                       ;     display();
+                       ;     }
+                       ; }        
+ 00AB                  L7:
+ 00AB  9508              ret
+ 00AC                    .dbsym r keyval1 20 c
+ 00AC                    .dbsym r i 22 c

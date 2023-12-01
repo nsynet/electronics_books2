@@ -1,0 +1,145 @@
+C51 COMPILER V8.05a   红外解码                                                             03/13/2012 09:07:49 PAGE 1   
+
+
+C51 COMPILER V8.05a, COMPILATION OF MODULE 红外解码
+OBJECT MODULE PLACED IN 红外解码.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE 红外解码.c OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "INC\STC89C52RC.H"
+   2          #include "INC\MY_SET.H"
+   3          #include "INC\IR_NEC.H"            //调用NEC解码头文件
+   4          
+   5          
+   6          
+   7          
+   8          
+   9          void _putchar(unsigned char c)
+  10          {
+  11   1          SBUF = c;
+  12   1          while(!TI);
+  13   1          TI = 0;
+  14   1              _nop_();
+  15   1      }
+  16          
+  17          void _printf(unsigned char *p)
+  18          {
+  19   1              while(*p)
+  20   1              {
+  21   2                  SBUF = *p++;
+  22   2              while(!TI);
+  23   2              TI = 0;
+  24   2                      _nop_();
+  25   2              }
+  26   1      }
+  27          
+  28          /*┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+  29          函数：遥控短按处理
+  30          ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+  31          void KZ0()
+  32          {
+  33             switch(NEC[2])            
+  34             {
+  35                case 0x12: P10 = !P10; break;
+  36                    case 0x05: break;
+  37                    case 0x1E: break;
+  38                    case 0x55: break;
+  39          
+  40                    case 0x01: break;
+  41                    case 0x1B: break;
+  42                    case 0x03: break;
+  43                    case 0x6B: break;
+  44          
+  45                    case 0x07: break;
+  46                    case 0x08: break;
+  47                    case 0x09: break;
+  48                    case 0x68: break;
+  49          
+  50                    case 0x22: break;
+  51                    case 0xE6: break;
+  52                    case 0x33: break;
+  53                    case 0xE2: break;
+  54                    default:break;
+  55             }
+C51 COMPILER V8.05a   红外解码                                                             03/13/2012 09:07:49 PAGE 2   
+
+  56          }                                                                                               */
+  57          /*┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+  58          函数：遥控长按处理
+  59          ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+  60          void KZ1()
+  61          {
+  62             switch(NEC[2])            
+  63             {
+  64                case 0x12: _printf(NEC); break;
+  65                    case 0x05: break;
+  66                    case 0x1E: break;
+  67                    case 0x55: break;
+  68          
+  69                    case 0x01: break;
+  70                    case 0x1B: break;
+  71                    case 0x03: break;
+  72                    case 0x6B: break;
+  73          
+  74                    case 0x07: break;
+  75                    case 0x08: break;
+  76                    case 0x09: break;
+  77                    case 0x68: break;
+  78          
+  79                    case 0x22: break;
+  80                    case 0xE6: break;
+  81                    case 0x33: break;
+  82                    case 0xE2: break;
+  83                    default:break;
+  84             }
+  85          }                                                                                          */
+  86          
+  87          
+  88          /***************** 主函数 ********************/
+  89          void main(void)
+  90          {
+  91   1              NEC[0]= 1;
+  92   1              NEC[1]= 2;
+  93   1              NEC[2]= 3;
+  94   1              NEC[3]= 4;
+  95   1              IR_Init();                         //红外线解码初始化
+  96   1              _printf("初始化接收完毕！");
+  97   1          _printf("开始检测！");
+  98   1              while(1)
+  99   1              { 
+ 100   2                
+ 101   2                //遥控检测
+ 102   2      
+ 103   2                if((IR_BT==2)||(IR_BT==3))                      
+ 104   2            {
+ 105   3                      if(IR_BT==2)_printf(NEC);      //短按处理                 
+ 106   3                      else        _printf(NEC);      //长按处理       
+ 107   3                      IR_BT =0;                       //清有效标志
+ 108   3                }
+ 109   2                
+ 110   2              }
+ 111   1      
+ 112   1      }
+ 113          
+ 114          /********************** 定时器0中断函数************************/
+ 115          void time0(void) interrupt 1
+ 116          { 
+ 117   1         IR_NEC(); 
+C51 COMPILER V8.05a   红外解码                                                             03/13/2012 09:07:49 PAGE 3   
+
+ 118   1      }  
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    333    ----
+   CONSTANT SIZE    =     28    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      3    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

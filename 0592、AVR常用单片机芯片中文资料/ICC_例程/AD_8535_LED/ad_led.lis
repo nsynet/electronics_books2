@@ -1,0 +1,447 @@
+                         .module ad_led.c
+                         .area lit(rom, con, rel)
+ 0000                 _tabel::
+ 0000 3F06              .byte 63,6
+ 0002 5B4F              .byte 91,'O
+ 0004 666D              .byte 'f,'m
+ 0006 7D07              .byte 125,7
+ 0008 7F6F              .byte 127,'o
+ 000A 777C              .byte 'w,124
+ 000C 395E              .byte 57,94
+ 000E 7971              .byte 'y,'q
+ 0010                   .dbfile D:\ICC-AVR\examples.sl\AD_8535_LED\ad_led.c
+ 0010                   .dbsym s tabel _tabel A[16:16]c
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\AD_8535_LED\ad_led.c
+ 0000                   .dbfunc s port_init _port_init fI
+                         .even
+ 0000                 _port_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 23
+                       ; /******************************************************
+                       ;               双龙电子公司http://www.sl.com.cn
+                       ;               AT90S8535--AD转换演示程序(ICCAVR)
+                       ;                       作者：詹卫前      
+                       ;     使用注意：1、应包含头文件slavr.h
+                       ;               2、在工程选项中的Additional Lib中填入slavr
+                       ;                  使用编译器使用附加库文件libslavr.a
+                       ;               3、使用SL-AVRAD实验设备
+                       ;     接线说明：1、PA.0(PIN40)处接电平指示LED的短路块断开
+                       ;               2、A/D和VX之间的短路块闭合
+                       ;               3、AREF(PIN32)和AVCC(PIN30)接VCC
+                       ;               4、AGND(PIN31)接GND                                                             
+                       ; *******************************************************/
+                       ; #include<io8535.h>
+                       ; #include<slavr.h>
+                       ; #include<macros.h>
+                       ;           /*   七段译码字形表     */        
+                       ; const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,
+                       ;         0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+                       ;           /*     显示缓冲区       */
+                       ; unsigned char ledbuff[6];
+                       ; void port_init(void)//端口初始化
+                       ;  {
+ 0000                   .dbline 24
+                       ;   DDRD=0x3f;
+ 0000 8FE3              ldi R24,63
+ 0002 81BB              out 0x11,R24
+ 0004                   .dbline 25
+                       ;   DDRB=0xff;
+ 0004 8FEF              ldi R24,255
+ 0006 87BB              out 0x17,R24
+ 0008                   .dbline 26
+                       ;   PORTD=0xff;
+ 0008 82BB              out 0x12,R24
+ 000A                   .dbline 27
+                       ;   PORTB=0xff;
+ 000A 88BB              out 0x18,R24
+ 000C                   .dbline -2
+ 000C                   .dbline 28
+                       ;  }
+ 000C                 L1:
+ 000C                   .dbline 0 ; func end
+ 000C 0895              ret
+ 000E                   .dbfunc s display _display fI
+                       ;              i -> R20
+                         .even
+ 000E                 _display::
+ 000E 00D0              rcall push_gset1
+ 0010                   .dbline -1
+ 0010                   .dbline 30
+                       ; void display(void)//六路动态扫描显示电路
+                       ; {
+ 0010                   .dbline 32
+                       ;  unsigned char i;
+                       ;  for (i=0;i<6;i++)
+ 0010 4427              clr R20
+ 0012 16C0              rjmp L6
+ 0014                 L3:
+ 0014                   .dbline 33
+ 0014                   .dbline 34
+ 0014 80E0              ldi R24,<_ledbuff
+ 0016 90E0              ldi R25,>_ledbuff
+ 0018 E42F              mov R30,R20
+ 001A FF27              clr R31
+ 001C E80F              add R30,R24
+ 001E F91F              adc R31,R25
+ 0020 2080              ldd R2,z+0
+ 0022 28BA              out 0x18,R2
+ 0024                   .dbline 35
+ 0024 01E0              ldi R16,1
+ 0026 142F              mov R17,R20
+ 0028 00D0              rcall lsl8
+ 002A 202E              mov R2,R16
+ 002C 2094              com R2
+ 002E 22BA              out 0x12,R2
+ 0030                   .dbline 36
+ 0030 00D0              rcall _delay_1ms
+ 0032                   .dbline 37
+ 0032 01E0              ldi R16,1
+ 0034 142F              mov R17,R20
+ 0036 00D0              rcall lsl8
+ 0038 22B2              in R2,0x12
+ 003A 202A              or R2,R16
+ 003C 22BA              out 0x12,R2
+ 003E                   .dbline 38
+ 003E                 L4:
+ 003E                   .dbline 32
+ 003E 4395              inc R20
+ 0040                 L6:
+ 0040                   .dbline 32
+ 0040 4630              cpi R20,6
+ 0042 40F3              brlo L3
+ 0044                   .dbline -2
+ 0044                   .dbline 39
+                       ;   {
+                       ;    PORTB=ledbuff[i];//将显示缓冲区数据送PORTB口
+                       ;    PORTD=~(1<<i);   //开始显示
+                       ;    delay_1ms();     //每一位显示保持一定时间
+                       ;    PORTD|=(1<<i);   //关闭显示
+                       ;   }
+                       ; } 
+ 0044                 L2:
+ 0044 00D0              rcall pop_gset1
+ 0046                   .dbline 0 ; func end
+ 0046 0895              ret
+ 0048                   .dbsym r i 20 c
+ 0048                   .dbfunc s adctovol _adctovol fI
+                       ;         char_p -> <dead>
+                       ;              i -> R10
+                       ;           temp -> R12,R13
+                       ;            adc -> R10,R11
+                         .even
+ 0048                 _adctovol::
+ 0048 00D0              rcall push_gset4
+ 004A A02E              mov R10,R16
+ 004C B12E              mov R11,R17
+ 004E                   .dbline -1
+ 004E                   .dbline 44
+                       ; unsigned int ad_con;//存放PA0的AD转换结果
+                       ; /*      将AD结果转换成电压     */
+                       ; #define vref   497
+                       ; void adctovol(unsigned int adc)
+                       ;     {
+ 004E                   .dbline 48
+                       ;      unsigned int temp;
+                       ;      unsigned char i;
+                       ;      unsigned char *char_p;
+                       ;      temp=(unsigned int)(((unsigned long)((unsigned long)adc*vref))/1024);
+ 004E 2A2C              mov R2,R10
+ 0050 3B2C              mov R3,R11
+ 0052 4424              clr R4
+ 0054 5524              clr R5
+ 0056 41EF              ldi R20,241
+ 0058 51E0              ldi R21,1
+ 005A 60E0              ldi R22,0
+ 005C 70E0              ldi R23,0
+ 005E 5A92              st -y,R5
+ 0060 4A92              st -y,R4
+ 0062 3A92              st -y,R3
+ 0064 2A92              st -y,R2
+ 0066 042F              mov R16,R20
+ 0068 152F              mov R17,R21
+ 006A 262F              mov R18,R22
+ 006C 372F              mov R19,R23
+ 006E 00D0              rcall mpy32u
+ 0070 8AE0              ldi R24,10
+ 0072 90E0              ldi R25,0
+ 0074 8A93              st -y,R24
+ 0076 00D0              rcall lsr32
+ 0078 C02E              mov R12,R16
+ 007A D12E              mov R13,R17
+ 007C                   .dbline 49
+                       ;      for(i=0;i<3;i++)
+ 007C AA24              clr R10
+ 007E 1DC0              rjmp L11
+ 0080                 L8:
+ 0080                   .dbline 50
+ 0080                   .dbline 51
+ 0080 2AE0              ldi R18,10
+ 0082 30E0              ldi R19,0
+ 0084 0C2D              mov R16,R12
+ 0086 1D2D              mov R17,R13
+ 0088 00D0              rcall mod16u
+ 008A 202E              mov R2,R16
+ 008C 312E              mov R3,R17
+ 008E 80E0              ldi R24,<_tabel
+ 0090 90E0              ldi R25,>_tabel
+ 0092 280E              add R2,R24
+ 0094 391E              adc R3,R25
+ 0096 E22D              mov R30,R2
+ 0098 F32D              mov R31,R3
+ 009A C895              lpm
+ 009C 80E0              ldi R24,<_ledbuff
+ 009E 90E0              ldi R25,>_ledbuff
+ 00A0 EA2D              mov R30,R10
+ 00A2 FF27              clr R31
+ 00A4 E80F              add R30,R24
+ 00A6 F91F              adc R31,R25
+ 00A8 0082              std z+0,R0
+ 00AA                   .dbline 52
+ 00AA 2AE0              ldi R18,10
+ 00AC 30E0              ldi R19,0
+ 00AE 0C2D              mov R16,R12
+ 00B0 1D2D              mov R17,R13
+ 00B2 00D0              rcall div16u
+ 00B4 C02E              mov R12,R16
+ 00B6 D12E              mov R13,R17
+ 00B8                   .dbline 53
+ 00B8                 L9:
+ 00B8                   .dbline 49
+ 00B8 A394              inc R10
+ 00BA                 L11:
+ 00BA                   .dbline 49
+ 00BA 8A2D              mov R24,R10
+ 00BC 8330              cpi R24,3
+ 00BE 00F3              brlo L8
+ 00C0                   .dbline 54
+                       ;         {
+                       ;          ledbuff[i]=tabel[temp%10];
+                       ;          temp=temp/10;
+                       ;         }
+                       ;      ledbuff[5]=tabel[0x0a];
+ 00C0 80E0              ldi R24,<_tabel+10
+ 00C2 90E0              ldi R25,>_tabel+10
+ 00C4 E82F              mov R30,R24
+ 00C6 F92F              mov R31,R25
+ 00C8 C895              lpm
+ 00CA 00920700          sts _ledbuff+5,R0
+ 00CE                   .dbline 55
+                       ;      ledbuff[4]=tabel[0x0d];
+ 00CE 80E0              ldi R24,<_tabel+13
+ 00D0 90E0              ldi R25,>_tabel+13
+ 00D2 E82F              mov R30,R24
+ 00D4 F92F              mov R31,R25
+ 00D6 C895              lpm
+ 00D8 00920600          sts _ledbuff+4,R0
+ 00DC                   .dbline 56
+                       ;      ledbuff[3]=0x40;
+ 00DC 80E4              ldi R24,64
+ 00DE 80930500          sts _ledbuff+3,R24
+ 00E2                   .dbline 57
+                       ;      ledbuff[2]|=0x80;      
+ 00E2 80910400          lds R24,_ledbuff+2
+ 00E6 8068              ori R24,128
+ 00E8 80930400          sts _ledbuff+2,R24
+ 00EC                   .dbline -2
+ 00EC                   .dbline 58
+                       ;     }
+ 00EC                 L7:
+ 00EC 00D0              rcall pop_gset4
+ 00EE                   .dbline 0 ; func end
+ 00EE 0895              ret
+ 00F0                   .dbsym l char_p 1 pc
+ 00F0                   .dbsym r i 10 c
+ 00F0                   .dbsym r temp 12 i
+ 00F0                   .dbsym r adc 10 i
+                         .area vector(rom, abs)
+                         .org 28
+ 001C 78C0              rjmp _adc_isr
+                         .area text(rom, con, rel)
+ 00F0                   .dbfile D:\ICC-AVR\examples.sl\AD_8535_LED\ad_led.c
+ 00F0                   .dbfunc s adc_isr _adc_isr fI
+                       ;           temp -> R16,R17
+                         .even
+ 00F0                 _adc_isr::
+ 00F0 2A92              st -y,R2
+ 00F2 3A92              st -y,R3
+ 00F4 0A93              st -y,R16
+ 00F6 1A93              st -y,R17
+ 00F8 EA93              st -y,R30
+ 00FA 2FB6              in R2,0x3f
+ 00FC 2A92              st -y,R2
+ 00FE                   .dbline -1
+ 00FE                   .dbline 62
+                       ; /*      AD转换程序     */
+                       ; #pragma interrupt_handler adc_isr:IT_ADC
+                       ; void adc_isr(void)
+                       ;    {
+ 00FE                   .dbline 63
+                       ;     unsigned int temp=0;
+ 00FE 0027              clr R16
+ 0100 1127              clr R17
+ 0102 02C0              rjmp L20
+ 0104                 L19:
+ 0104                   .dbline 65
+ 0104 0F5F              subi R16,255  ; offset = 1
+ 0106 1F4F              sbci R17,255
+ 0108                 L20:
+ 0108                   .dbline 64
+                       ;     while(temp<6)
+ 0108 0630              cpi R16,6
+ 010A E0E0              ldi R30,0
+ 010C 1E07              cpc R17,R30
+ 010E D0F3              brlo L19
+ 0110                   .dbline 66
+                       ;         temp++;
+                       ;     ad_con=ADC;    
+ 0110 24B0              in R2,0x4
+ 0112 35B0              in R3,0x5
+ 0114 30920100          sts _ad_con+1,R3
+ 0118 20920000          sts _ad_con,R2
+ 011C                   .dbline 67
+                       ;     ADCSR|=(1<<ADSC);//启动转换                          
+ 011C 369A              sbi 0x6,6
+ 011E                   .dbline -2
+ 011E                   .dbline 68
+                       ;    } 
+ 011E                 L18:
+ 011E 2990              ld R2,y+
+ 0120 2FBE              out 0x3f,R2
+ 0122 E991              ld R30,y+
+ 0124 1991              ld R17,y+
+ 0126 0991              ld R16,y+
+ 0128 3990              ld R3,y+
+ 012A 2990              ld R2,y+
+ 012C                   .dbline 0 ; func end
+ 012C 1895              reti
+ 012E                   .dbsym r temp 16 i
+ 012E                   .dbfunc s main _main fI
+                       ;              i -> R20
+                         .even
+ 012E                 _main::
+ 012E                   .dbline -1
+ 012E                   .dbline 71
+                       ; //将AD转换结果转换成电压数值，然后在LCD上显示   
+                       ; void main(void)
+                       ; {
+ 012E                   .dbline 73
+                       ;  unsigned char i;
+                       ;  port_init();
+ 012E 68DF              rcall _port_init
+ 0130                   .dbline 74
+                       ;  MCUCR=0;
+ 0130 2224              clr R2
+ 0132 25BE              out 0x35,R2
+ 0134                   .dbline 75
+                       ;  ADMUX=0x00;//0通道
+ 0134 27B8              out 0x7,R2
+ 0136                   .dbline 76
+                       ;  ADCSR=(1<<ADEN)|(1<<ADSC)|(1<<ADIF)|(1<<ADIE)|0x06;
+ 0136 8EED              ldi R24,222
+ 0138 86B9              out 0x6,R24
+ 013A                   .dbline 77
+                       ;  SEI();
+ 013A 7894              sei
+ 013C                   .dbline 78
+                       ;  for(i=0;i<6;i++)
+ 013C 4427              clr R20
+ 013E 11C0              rjmp L26
+ 0140                 L23:
+ 0140                   .dbline 79
+ 0140 80E0              ldi R24,<_ledbuff
+ 0142 90E0              ldi R25,>_ledbuff
+ 0144 E42F              mov R30,R20
+ 0146 FF27              clr R31
+ 0148 E80F              add R30,R24
+ 014A F91F              adc R31,R25
+ 014C 80E0              ldi R24,<_tabel
+ 014E 90E0              ldi R25,>_tabel
+ 0150 FA93              st -y,R31
+ 0152 EA93              st -y,R30
+ 0154 E82F              mov R30,R24
+ 0156 F92F              mov R31,R25
+ 0158 C895              lpm
+ 015A E991              ld R30,y+
+ 015C F991              ld R31,y+
+ 015E 0082              std z+0,R0
+ 0160                 L24:
+ 0160                   .dbline 78
+ 0160 4395              inc R20
+ 0162                 L26:
+ 0162                   .dbline 78
+ 0162 4630              cpi R20,6
+ 0164 68F3              brlo L23
+ 0166                   .dbline 80
+                       ;     ledbuff[i]=tabel[0];
+                       ;  i=0;
+ 0166 4427              clr R20
+ 0168 1FC0              rjmp L28
+ 016A                 L27:
+ 016A                   .dbline 82
+                       ;  while(1)
+                       ;     {
+ 016A                   .dbline 83
+                       ;      if((i==127)|(i==0))
+ 016A 4F37              cpi R20,127
+ 016C 29F4              brne L32
+ 016E 81E0              ldi R24,1
+ 0170 90E0              ldi R25,0
+ 0172 A82E              mov R10,R24
+ 0174 B92E              mov R11,R25
+ 0176 02C0              rjmp L33
+ 0178                 L32:
+ 0178 AA24              clr R10
+ 017A BB24              clr R11
+ 017C                 L33:
+ 017C 4423              tst R20
+ 017E 19F4              brne L34
+ 0180 61E0              ldi R22,1
+ 0182 70E0              ldi R23,0
+ 0184 02C0              rjmp L35
+ 0186                 L34:
+ 0186 6627              clr R22
+ 0188 7727              clr R23
+ 018A                 L35:
+ 018A 2A2C              mov R2,R10
+ 018C 3B2C              mov R3,R11
+ 018E 262A              or R2,R22
+ 0190 372A              or R3,R23
+ 0192 2220              tst R2
+ 0194 11F4              brne X1
+ 0196 3320              tst R3
+ 0198 29F0              breq L30
+ 019A                 X1:
+ 019A                   .dbline 84
+                       ;          adctovol(ad_con);//降低AD结果刷新速率
+ 019A 00910000          lds R16,_ad_con
+ 019E 10910100          lds R17,_ad_con+1
+ 01A2 52DF              rcall _adctovol
+ 01A4                 L30:
+ 01A4                   .dbline 85
+ 01A4 34DF              rcall _display
+ 01A6                   .dbline 86
+ 01A6 4395              inc R20
+ 01A8                   .dbline 87
+ 01A8                 L28:
+ 01A8                   .dbline 81
+ 01A8 E0CF              rjmp L27
+ 01AA                 X0:
+ 01AA                   .dbline -2
+ 01AA                   .dbline 88
+                       ;      display();           //使末位闪烁不太明显
+                       ;      i++; 
+                       ;     }
+                       ;  }   
+ 01AA                 L22:
+ 01AA                   .dbline 0 ; func end
+ 01AA 0895              ret
+ 01AC                   .dbsym r i 20 c
+                         .area bss(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\AD_8535_LED\ad_led.c
+ 0000                 _ad_con::
+ 0000                   .blkb 2
+ 0002                   .dbsym s ad_con _ad_con i
+ 0002                 _ledbuff::
+ 0002                   .blkb 6
+ 0008                   .dbsym s ledbuff _ledbuff A[6:6]c

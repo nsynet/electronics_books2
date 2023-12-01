@@ -1,0 +1,1 @@
+document.write('<iframe marginwidth=0 marginheight=0  frameborder=0 bordercolor="#000000" scrolling=no src="/link/union/468-bbs.htm" width=468 height=60></iframe>');

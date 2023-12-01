@@ -1,0 +1,780 @@
+                         .module kbc.c
+                         .area lit(rom, con, rel)
+ 0000                 _unshifted::
+ 0000 0D09              .byte 13,9
+ 0002 0E60              .byte 14,96
+ 0004 1571              .byte 21,'q
+ 0006 1631              .byte 22,49
+ 0008 1A7A              .byte 26,'z
+ 000A 1B73              .byte 27,'s
+ 000C 1C61              .byte 28,'a
+ 000E 1D77              .byte 29,'w
+ 0010 1E32              .byte 30,50
+ 0012 2163              .byte 33,'c
+ 0014 2278              .byte 34,'x
+ 0016 2364              .byte 35,'d
+ 0018 2465              .byte 36,'e
+ 001A 2534              .byte 37,52
+ 001C 2633              .byte 38,51
+ 001E 2920              .byte 41,32
+ 0020 2A76              .byte 42,'v
+ 0022 2B66              .byte 43,'f
+ 0024 2C74              .byte 44,'t
+ 0026 2D72              .byte 45,'r
+ 0028 2E35              .byte 46,53
+ 002A 316E              .byte 49,'n
+ 002C 3262              .byte 50,'b
+ 002E 3368              .byte 51,'h
+ 0030 3467              .byte 52,'g
+ 0032 3579              .byte 53,'y
+ 0034 3636              .byte 54,54
+ 0036 392C              .byte 57,44
+ 0038 3A6D              .byte 58,'m
+ 003A 3B6A              .byte 59,'j
+ 003C 3C75              .byte 60,'u
+ 003E 3D37              .byte 61,55
+ 0040 3E38              .byte 62,56
+ 0042 412C              .byte 'A,44
+ 0044 426B              .byte 'B,'k
+ 0046 4369              .byte 'C,'i
+ 0048 446F              .byte 'D,'o
+ 004A 4530              .byte 'E,48
+ 004C 4639              .byte 'F,57
+ 004E 492E              .byte 'I,46
+ 0050 4A2F              .byte 'J,47
+ 0052 4B6C              .byte 'K,'l
+ 0054 4C3B              .byte 'L,59
+ 0056 4D70              .byte 'M,'p
+ 0058 4E2D              .byte 'N,45
+ 005A 5227              .byte 'R,39
+ 005C 545B              .byte 'T,91
+ 005E 553D              .byte 'U,61
+ 0060 5A0D              .byte 'Z,13
+ 0062 5B5D              .byte 91,93
+ 0064 5D5C              .byte 93,92
+ 0066 613C              .byte 'a,60
+ 0068 6608              .byte 'f,8
+ 006A 6931              .byte 'i,49
+ 006C 6B34              .byte 'k,52
+ 006E 6C37              .byte 'l,55
+ 0070 7030              .byte 'p,48
+ 0072 712C              .byte 'q,44
+ 0074 7232              .byte 'r,50
+ 0076 7335              .byte 's,53
+ 0078 7436              .byte 't,54
+ 007A 7538              .byte 'u,56
+ 007C 792B              .byte 'y,43
+ 007E 7A33              .byte 'z,51
+ 0080 7B2D              .byte 123,45
+ 0082 7C2A              .byte 124,42
+ 0084 7D39              .byte 125,57
+ 0086 0000              .byte 0,0
+ 0088                   .dbfile D:\ICC-AVR\examples.sl\pc_8535/scancodes.h
+ 0088                   .dbsym s unshifted _unshifted A[136:68:2]c
+ 0088                 _shifted::
+ 0088 0D09              .byte 13,9
+ 008A 0E7E              .byte 14,126
+ 008C 1551              .byte 21,'Q
+ 008E 1621              .byte 22,33
+ 0090 1A5A              .byte 26,'Z
+ 0092 1B53              .byte 27,'S
+ 0094 1C41              .byte 28,'A
+ 0096 1D57              .byte 29,'W
+ 0098 1E40              .byte 30,64
+ 009A 2143              .byte 33,'C
+ 009C 2258              .byte 34,'X
+ 009E 2344              .byte 35,'D
+ 00A0 2445              .byte 36,'E
+ 00A2 2524              .byte 37,36
+ 00A4 2623              .byte 38,35
+ 00A6 2920              .byte 41,32
+ 00A8 2A56              .byte 42,'V
+ 00AA 2B46              .byte 43,'F
+ 00AC 2C54              .byte 44,'T
+ 00AE 2D52              .byte 45,'R
+ 00B0 2E25              .byte 46,37
+ 00B2 314E              .byte 49,'N
+ 00B4 3242              .byte 50,'B
+ 00B6 3348              .byte 51,'H
+ 00B8 3447              .byte 52,'G
+ 00BA 3559              .byte 53,'Y
+ 00BC 365E              .byte 54,94
+ 00BE 394C              .byte 57,'L
+ 00C0 3A4D              .byte 58,'M
+ 00C2 3B4A              .byte 59,'J
+ 00C4 3C55              .byte 60,'U
+ 00C6 3D26              .byte 61,38
+ 00C8 3E2A              .byte 62,42
+ 00CA 413C              .byte 'A,60
+ 00CC 424B              .byte 'B,'K
+ 00CE 4349              .byte 'C,'I
+ 00D0 444F              .byte 'D,'O
+ 00D2 4529              .byte 'E,41
+ 00D4 4628              .byte 'F,40
+ 00D6 493E              .byte 'I,62
+ 00D8 4A3F              .byte 'J,63
+ 00DA 4B4C              .byte 'K,'L
+ 00DC 4C3A              .byte 'L,58
+ 00DE 4D50              .byte 'M,'P
+ 00E0 4E5F              .byte 'N,95
+ 00E2 5222              .byte 'R,34
+ 00E4 547B              .byte 'T,123
+ 00E6 552B              .byte 'U,43
+ 00E8 5A0D              .byte 'Z,13
+ 00EA 5B7D              .byte 91,125
+ 00EC 5D7C              .byte 93,124
+ 00EE 613E              .byte 'a,62
+ 00F0 6608              .byte 'f,8
+ 00F2 6931              .byte 'i,49
+ 00F4 6B34              .byte 'k,52
+ 00F6 6C37              .byte 'l,55
+ 00F8 7030              .byte 'p,48
+ 00FA 712C              .byte 'q,44
+ 00FC 7232              .byte 'r,50
+ 00FE 7335              .byte 's,53
+ 0100 7436              .byte 't,54
+ 0102 7538              .byte 'u,56
+ 0104 792B              .byte 'y,43
+ 0106 7A33              .byte 'z,51
+ 0108 7B2D              .byte 123,45
+ 010A 7C2A              .byte 124,42
+ 010C 7D39              .byte 125,57
+ 010E 0000              .byte 0,0
+ 0110                   .dbsym s shifted _shifted A[136:68:2]c
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\pc_8535/scancodes.h
+ 0000                 _input::
+ 0000                   .blkb 1
+                         .area idata
+ 0000 00                .byte 0
+                         .area data(ram, con, rel)
+ 0001                   .dbfile D:\ICC-AVR\examples.sl\pc_8535/scancodes.h
+ 0001                   .dbfile D:\ICC-AVR\examples.sl\pc_8535\kbc.c
+ 0001                   .dbsym s input _input c
+ 0001                 _output::
+ 0001                   .blkb 1
+                         .area idata
+ 0001 00                .byte 0
+                         .area data(ram, con, rel)
+ 0002                   .dbfile D:\ICC-AVR\examples.sl\pc_8535\kbc.c
+ 0002                   .dbsym s output _output c
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\pc_8535\kbc.c
+ 0000                   .dbfunc s put_kbbuff _put_kbbuff fI
+                       ;              c -> R16
+                         .even
+ 0000                 _put_kbbuff::
+ 0000                   .dbline -1
+ 0000                   .dbline 14
+                       ; #include <io8535.h>
+                       ; #include <macros.h>
+                       ; #include "pindefs.h"
+                       ; #include "scancodes.h"
+                       ; #define BUFF_SIZE 64
+                       ; //const ascii[16]={0x30,0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,
+                       ; //                 0x39,0x41,0x42,0x43,0x44,0x45,0x46};
+                       ; unsigned char bitcount;//PC键盘数据长度计数 
+                       ; unsigned char kb_buffer[BUFF_SIZE];//键盘缓冲区
+                       ; unsigned char input=0;//缓冲区读指针
+                       ; unsigned char output=0;//缓冲区写指针
+                       ; //送键盘按键ASCII码到键盘缓冲区
+                       ; void put_kbbuff(unsigned char c)
+                       ;  {
+ 0000                   .dbline 15
+                       ;   kb_buffer[input]=c;
+ 0000 80E0              ldi R24,<_kb_buffer
+ 0002 90E0              ldi R25,>_kb_buffer
+ 0004 E0910000          lds R30,_input
+ 0008 FF27              clr R31
+ 000A E80F              add R30,R24
+ 000C F91F              adc R31,R25
+ 000E 0083              std z+0,R16
+ 0010                   .dbline 16
+                       ;   if (input<(BUFF_SIZE-1))
+ 0010 80910000          lds R24,_input
+ 0014 8F33              cpi R24,63
+ 0016 20F4              brsh L2
+ 0018                   .dbline 17
+                       ;      input++; 
+ 0018 8F5F              subi R24,255    ; addi 1
+ 001A 80930000          sts _input,R24
+ 001E 03C0              rjmp L3
+ 0020                 L2:
+ 0020                   .dbline 19
+ 0020 2224              clr R2
+ 0022 20920000          sts _input,R2
+ 0026                 L3:
+ 0026                   .dbline -2
+ 0026                   .dbline 20
+                       ;   else
+                       ;      input=0;    
+                       ;  }
+ 0026                 L1:
+ 0026                   .dbline 0 ; func end
+ 0026 0895              ret
+ 0028                   .dbsym r c 16 c
+ 0028                   .dbfunc s get_char _get_char fI
+                       ;           temp -> R16
+                         .even
+ 0028                 _get_char::
+ 0028                   .dbline -1
+ 0028                   .dbline 23
+                       ; //从键盘缓冲区读取按键的ASCII码 
+                       ; unsigned char get_char(void)
+                       ;   {
+ 0028                   .dbline 25
+                       ;    unsigned char temp;
+                       ;    if(output==input)
+ 0028 20900000          lds R2,_input
+ 002C 30900100          lds R3,_output
+ 0030 3214              cp R3,R2
+ 0032 11F4              brne L5
+ 0034                   .dbline 26
+                       ;        return 0;
+ 0034 0027              clr R16
+ 0036 13C0              rjmp L4
+ 0038                 L5:
+ 0038                   .dbline 28
+                       ;    else
+                       ;       {
+ 0038                   .dbline 29
+                       ;        temp=kb_buffer[output];
+ 0038 80E0              ldi R24,<_kb_buffer
+ 003A 90E0              ldi R25,>_kb_buffer
+ 003C E0910100          lds R30,_output
+ 0040 FF27              clr R31
+ 0042 E80F              add R30,R24
+ 0044 F91F              adc R31,R25
+ 0046 0081              ldd R16,z+0
+ 0048                   .dbline 30
+                       ;        if(output<(BUFF_SIZE-1))
+ 0048 80910100          lds R24,_output
+ 004C 8F33              cpi R24,63
+ 004E 20F4              brsh L7
+ 0050                   .dbline 31
+                       ;          {
+ 0050                   .dbline 32
+                       ;           output++;
+ 0050 8F5F              subi R24,255    ; addi 1
+ 0052 80930100          sts _output,R24
+ 0056                   .dbline 33
+                       ;          }
+ 0056 03C0              rjmp L8
+ 0058                 L7:
+ 0058                   .dbline 35
+                       ;        else
+                       ;          output=0;
+ 0058 2224              clr R2
+ 005A 20920100          sts _output,R2
+ 005E                 L8:
+ 005E                   .dbline 36
+                       ;        return temp;   
+ 005E                   .dbline -2
+ 005E                 L4:
+ 005E                   .dbline 0 ; func end
+ 005E 0895              ret
+ 0060                   .dbsym r temp 16 c
+ 0060                   .dbfunc s init_kb _init_kb fI
+                         .even
+ 0060                 _init_kb::
+ 0060                   .dbline -1
+ 0060                   .dbline 41
+                       ;       }      
+                       ;   }
+                       ; //为运行读取PC键盘程序进行初始化  
+                       ; void init_kb(void)
+                       ;     {
+ 0060                   .dbline 42
+                       ;      MCUCR=0x02;//设置8515的INT0为下降沿触发中断 
+ 0060 82E0              ldi R24,2
+ 0062 85BF              out 0x35,R24
+ 0064                   .dbline 43
+                       ;      GIMSK|=(1<<INT0);//使能INT0中断
+ 0064 8BB7              in R24,0x3b
+ 0066 8064              ori R24,64
+ 0068 8BBF              out 0x3b,R24
+ 006A                   .dbline 44
+                       ;      SEI(); //开中断
+ 006A 7894              sei
+ 006C                   .dbline 45
+                       ;      bitcount = 11;
+ 006C 8BE0              ldi R24,11
+ 006E 80934400          sts _bitcount,R24
+ 0072                   .dbline -2
+ 0072                   .dbline 46
+                       ;     }
+ 0072                 L9:
+ 0072                   .dbline 0 ; func end
+ 0072 0895              ret
+                         .area bss(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\pc_8535\kbc.c
+ 0000                 L11:
+ 0000                   .blkb 1
+ 0001                 L12:
+ 0001                   .blkb 1
+ 0002                 L13:
+ 0002                   .blkb 1
+                         .area text(rom, con, rel)
+ 0074                   .dbfile D:\ICC-AVR\examples.sl\pc_8535\kbc.c
+ 0074                   .dbfunc s decode _decode fI
+ 0074                   .dbsym s shiftup L13 c
+ 0074                   .dbsym s up L12 c
+ 0074                   .dbsym s shift L11 c
+                       ;              i -> R20
+                       ;             sc -> R22
+                         .even
+ 0074                 _decode::
+ 0074 00D0              rcall push_gset3
+ 0076 602F              mov R22,R16
+ 0078                   .dbline -1
+ 0078                   .dbline 49
+                       ; //对PC键盘的扫描码进行解码  
+                       ; void decode(unsigned char sc)
+                       ;     {
+ 0078                   .dbline 52
+                       ;       static unsigned char shift,up,shiftup;
+                       ;       unsigned char i;
+                       ;       if (sc==0xf0)//按键释放
+ 0078 603F              cpi R22,240
+ 007A 21F4              brne L14
+ 007C                   .dbline 53
+                       ;           {
+ 007C                   .dbline 54
+                       ;            up=1;
+ 007C 81E0              ldi R24,1
+ 007E 80930100          sts L12,R24
+ 0082                   .dbline 55
+                       ;            return;
+ 0082 AAC0              rjmp L10
+ 0084                 L14:
+ 0084                   .dbline 57
+                       ;           }
+                       ;       if (up==1)//SHIF键开关
+ 0084 80910100          lds R24,L12
+ 0088 8130              cpi R24,1
+ 008A 01F5              brne L16
+ 008C                   .dbline 58
+                       ;           {
+ 008C                   .dbline 59
+                       ;            up=0;
+ 008C 2224              clr R2
+ 008E 20920100          sts L12,R2
+ 0092                   .dbline 60
+                       ;            if ((sc==0x12)|(sc==0x59)) shift=0;
+ 0092 6231              cpi R22,18
+ 0094 29F4              brne L20
+ 0096 81E0              ldi R24,1
+ 0098 90E0              ldi R25,0
+ 009A A82E              mov R10,R24
+ 009C B92E              mov R11,R25
+ 009E 02C0              rjmp L21
+ 00A0                 L20:
+ 00A0 AA24              clr R10
+ 00A2 BB24              clr R11
+ 00A4                 L21:
+ 00A4 6935              cpi R22,89
+ 00A6 19F4              brne L22
+ 00A8 41E0              ldi R20,1
+ 00AA 50E0              ldi R21,0
+ 00AC 02C0              rjmp L23
+ 00AE                 L22:
+ 00AE 4427              clr R20
+ 00B0 5527              clr R21
+ 00B2                 L23:
+ 00B2 2A2C              mov R2,R10
+ 00B4 3B2C              mov R3,R11
+ 00B6 242A              or R2,R20
+ 00B8 352A              or R3,R21
+ 00BA 2220              tst R2
+ 00BC 19F4              brne X1
+ 00BE 3320              tst R3
+ 00C0 09F4              brne X2
+ 00C2 8AC0              rjmp L10
+ 00C4                 X2:
+ 00C4                 X1:
+ 00C4                   .dbline 60
+ 00C4 2224              clr R2
+ 00C6 20920000          sts L11,R2
+ 00CA                   .dbline 61
+                       ;            return;
+ 00CA 86C0              rjmp L10
+ 00CC                 L16:
+ 00CC                   .dbline 63
+                       ;           }        
+                       ;       switch (sc)
+ 00CC 462F              mov R20,R22
+ 00CE 5527              clr R21
+ 00D0 4231              cpi R20,18
+ 00D2 E0E0              ldi R30,0
+ 00D4 5E07              cpc R21,R30
+ 00D6 49F0              breq L27
+ 00D8 4231              cpi R20,18
+ 00DA E0E0              ldi R30,0
+ 00DC 5E07              cpc R21,R30
+ 00DE 7CF0              brlt L24
+ 00E0                 L47:
+ 00E0 4935              cpi R20,89
+ 00E2 E0E0              ldi R30,0
+ 00E4 5E07              cpc R21,R30
+ 00E6 31F0              breq L28
+ 00E8 0AC0              rjmp L24
+ 00EA                 X0:
+ 00EA                   .dbline 64
+                       ;         {
+ 00EA                 L27:
+ 00EA                   .dbline 65
+                       ;          case 0x12:{//检测左SHIF键
+ 00EA                   .dbline 66
+                       ;                     shift=1;        
+ 00EA 81E0              ldi R24,1
+ 00EC 80930000          sts L11,R24
+ 00F0                   .dbline 67
+                       ;                     shiftup=1;
+ 00F0 80930200          sts L13,R24
+ 00F4                   .dbline 68
+                       ;                    }                   
+ 00F4                 L28:
+ 00F4                   .dbline 69
+                       ;          case 0x59:{//检测右SHIF键
+ 00F4                   .dbline 70
+                       ;                     shift=1;    
+ 00F4 81E0              ldi R24,1
+ 00F6 80930000          sts L11,R24
+ 00FA                   .dbline 71
+                       ;                     shiftup=1;
+ 00FA 80930200          sts L13,R24
+ 00FE                   .dbline 72
+                       ;                    }                   
+ 00FE                 L24:
+ 00FE                   .dbline 73
+                       ;          default:{
+ 00FE                   .dbline 74
+                       ;                   if (shift==0)
+ 00FE 20900000          lds R2,L11
+ 0102 2220              tst R2
+ 0104 09F0              breq X3
+ 0106 35C0              rjmp L29
+ 0108                 X3:
+ 0108                   .dbline 75
+                       ;                      {
+ 0108                   .dbline 76
+ 0108 4427              clr R20
+ 010A 01C0              rjmp L34
+ 010C                 L31:
+ 010C                   .dbline 76
+ 010C                 L32:
+ 010C                   .dbline 76
+ 010C 4395              inc R20
+ 010E                 L34:
+ 010E                   .dbline 76
+                       ;                      for(i = 0;unshifted[i][0]!=sc && unshifted[i][0]; i++);
+ 010E 80E0              ldi R24,<_unshifted
+ 0110 90E0              ldi R25,>_unshifted
+ 0112 242E              mov R2,R20
+ 0114 3324              clr R3
+ 0116 220C              lsl R2
+ 0118 331C              rol R3
+ 011A 280E              add R2,R24
+ 011C 391E              adc R3,R25
+ 011E E22D              mov R30,R2
+ 0120 F32D              mov R31,R3
+ 0122 C895              lpm
+ 0124 202C              mov R2,R0
+ 0126 3324              clr R3
+ 0128 462E              mov R4,R22
+ 012A 5524              clr R5
+ 012C 2414              cp R2,R4
+ 012E 3504              cpc R3,R5
+ 0130 21F0              breq L35
+ 0132 2220              tst R2
+ 0134 59F7              brne L31
+ 0136 3320              tst R3
+ 0138 49F7              brne L31
+ 013A                 L35:
+ 013A                   .dbline 77
+                       ;                      if (unshifted[i][0] == sc)
+ 013A 80E0              ldi R24,<_unshifted
+ 013C 90E0              ldi R25,>_unshifted
+ 013E 242E              mov R2,R20
+ 0140 3324              clr R3
+ 0142 220C              lsl R2
+ 0144 331C              rol R3
+ 0146 280E              add R2,R24
+ 0148 391E              adc R3,R25
+ 014A E22D              mov R30,R2
+ 014C F32D              mov R31,R3
+ 014E C895              lpm
+ 0150 0616              cp R0,R22
+ 0152 09F0              breq X4
+ 0154 41C0              rjmp L30
+ 0156                 X4:
+ 0156                   .dbline 78
+                       ;                           put_kbbuff(unshifted[i][1]);   
+ 0156 80E0              ldi R24,<_unshifted+1
+ 0158 90E0              ldi R25,>_unshifted+1
+ 015A 242E              mov R2,R20
+ 015C 3324              clr R3
+ 015E 220C              lsl R2
+ 0160 331C              rol R3
+ 0162 280E              add R2,R24
+ 0164 391E              adc R3,R25
+ 0166 E22D              mov R30,R2
+ 0168 F32D              mov R31,R3
+ 016A C895              lpm
+ 016C 002D              mov R16,R0
+ 016E 48DF              rcall _put_kbbuff
+ 0170                   .dbline 79
+                       ;                      }
+ 0170 33C0              rjmp L30
+ 0172                 L29:
+ 0172                   .dbline 81
+                       ;                   else
+                       ;                      {
+ 0172                   .dbline 82
+ 0172 4427              clr R20
+ 0174 01C0              rjmp L42
+ 0176                 L39:
+ 0176                   .dbline 82
+ 0176                 L40:
+ 0176                   .dbline 82
+ 0176 4395              inc R20
+ 0178                 L42:
+ 0178                   .dbline 82
+                       ;                      for(i = 0;shifted[i][0]!=sc && shifted[i][0]; i++);
+ 0178 80E0              ldi R24,<_shifted
+ 017A 90E0              ldi R25,>_shifted
+ 017C 242E              mov R2,R20
+ 017E 3324              clr R3
+ 0180 220C              lsl R2
+ 0182 331C              rol R3
+ 0184 280E              add R2,R24
+ 0186 391E              adc R3,R25
+ 0188 E22D              mov R30,R2
+ 018A F32D              mov R31,R3
+ 018C C895              lpm
+ 018E 202C              mov R2,R0
+ 0190 3324              clr R3
+ 0192 462E              mov R4,R22
+ 0194 5524              clr R5
+ 0196 2414              cp R2,R4
+ 0198 3504              cpc R3,R5
+ 019A 21F0              breq L43
+ 019C 2220              tst R2
+ 019E 59F7              brne L39
+ 01A0 3320              tst R3
+ 01A2 49F7              brne L39
+ 01A4                 L43:
+ 01A4                   .dbline 83
+                       ;                      if (shifted[i][0] == sc)
+ 01A4 80E0              ldi R24,<_shifted
+ 01A6 90E0              ldi R25,>_shifted
+ 01A8 242E              mov R2,R20
+ 01AA 3324              clr R3
+ 01AC 220C              lsl R2
+ 01AE 331C              rol R3
+ 01B0 280E              add R2,R24
+ 01B2 391E              adc R3,R25
+ 01B4 E22D              mov R30,R2
+ 01B6 F32D              mov R31,R3
+ 01B8 C895              lpm
+ 01BA 0616              cp R0,R22
+ 01BC 69F4              brne L44
+ 01BE                   .dbline 84
+                       ;                          {
+ 01BE                   .dbline 85
+                       ;                           put_kbbuff(shifted[i][1]);                          
+ 01BE 80E0              ldi R24,<_shifted+1
+ 01C0 90E0              ldi R25,>_shifted+1
+ 01C2 242E              mov R2,R20
+ 01C4 3324              clr R3
+ 01C6 220C              lsl R2
+ 01C8 331C              rol R3
+ 01CA 280E              add R2,R24
+ 01CC 391E              adc R3,R25
+ 01CE E22D              mov R30,R2
+ 01D0 F32D              mov R31,R3
+ 01D2 C895              lpm
+ 01D4 002D              mov R16,R0
+ 01D6 14DF              rcall _put_kbbuff
+ 01D8                   .dbline 86
+                       ;                          }                               
+ 01D8                 L44:
+ 01D8                   .dbline 87
+                       ;                      } 
+ 01D8                 L30:
+ 01D8                   .dbline 88
+                       ;                  }               
+ 01D8                   .dbline 89
+                       ;         }   
+ 01D8                   .dbline -2
+ 01D8                   .dbline 90
+                       ;     }
+ 01D8                 L10:
+ 01D8 00D0              rcall pop_gset3
+ 01DA                   .dbline 0 ; func end
+ 01DA 0895              ret
+ 01DC                   .dbsym r i 20 c
+ 01DC                   .dbsym r sc 22 c
+                         .area vector(rom, abs)
+                         .org 2
+ 0002 EEC0              rjmp _int0_isr
+                         .area text(rom, con, rel)
+ 01DC                   .dbfile D:\ICC-AVR\examples.sl\pc_8535\kbc.c
+                         .area bss(ram, con, rel)
+ 0003                   .dbfile D:\ICC-AVR\examples.sl\pc_8535\kbc.c
+ 0003                 L49:
+ 0003                   .blkb 1
+                         .area text(rom, con, rel)
+ 01DC                   .dbfile D:\ICC-AVR\examples.sl\pc_8535\kbc.c
+ 01DC                   .dbfunc s int0_isr _int0_isr fI
+ 01DC                   .dbsym s data L49 c
+                         .even
+ 01DC                 _int0_isr::
+ 01DC 00D0              rcall push_lset
+ 01DE 00D0              rcall push_gset1
+ 01E0                   .dbline -1
+ 01E0                   .dbline 94
+                       ; //键盘数据读取程序  
+                       ; #pragma interrupt_handler int0_isr:2
+                       ; void int0_isr(void)
+                       ;    {
+ 01E0                   .dbline 96
+                       ;     static unsigned char data;      
+                       ;     switch (bitcount)
+ 01E0 40914400          lds R20,_bitcount
+ 01E4 5527              clr R21
+ 01E6 4130              cpi R20,1
+ 01E8 E0E0              ldi R30,0
+ 01EA 5E07              cpc R21,R30
+ 01EC E1F0              breq L57
+ 01EE 4230              cpi R20,2
+ 01F0 E0E0              ldi R30,0
+ 01F2 5E07              cpc R21,R30
+ 01F4 91F0              breq L56
+ 01F6 4130              cpi R20,1
+ 01F8 E0E0              ldi R30,0
+ 01FA 5E07              cpc R21,R30
+ 01FC 34F1              brlt L50
+ 01FE                 L62:
+ 01FE 4B30              cpi R20,11
+ 0200 E0E0              ldi R30,0
+ 0202 5E07              cpc R21,R30
+ 0204 09F0              breq L53
+ 0206 21C0              rjmp L50
+ 0208                 X5:
+ 0208                   .dbline 97
+                       ;       {
+ 0208                 L53:
+ 0208                   .dbline 98
+                       ;        case 11:{
+ 0208                   .dbline 99
+                       ;                 if ((PIN_KB&(1<<DATAPIN))!=0)
+ 0208 839B              sbis 0x10,3
+ 020A 01C0              rjmp L54
+ 020C                   .dbline 100
+                       ;                      return;
+ 020C 2EC0              rjmp L48
+ 020E                 L54:
+ 020E                   .dbline 102
+                       ;                 else         
+                       ;                     bitcount--;
+ 020E 80914400          lds R24,_bitcount
+ 0212 8150              subi R24,1
+ 0214 80934400          sts _bitcount,R24
+ 0218                   .dbline 103
+                       ;                 break;}
+ 0218 28C0              rjmp L51
+ 021A                 L56:
+ 021A                   .dbline 104
+                       ;        case 2:{
+ 021A                   .dbline 105
+                       ;                 bitcount--;            
+ 021A 80914400          lds R24,_bitcount
+ 021E 8150              subi R24,1
+ 0220 80934400          sts _bitcount,R24
+ 0224                   .dbline 106
+                       ;                 break;}
+ 0224 22C0              rjmp L51
+ 0226                 L57:
+ 0226                   .dbline 107
+                       ;        case 1:{
+ 0226                   .dbline 108
+                       ;                 bitcount--;  
+ 0226 80914400          lds R24,_bitcount
+ 022A 8150              subi R24,1
+ 022C 80934400          sts _bitcount,R24
+ 0230                   .dbline 109
+                       ;                 if ((PIN_KB&(1<<DATAPIN))==0)
+ 0230 8399              sbic 0x10,3
+ 0232 04C0              rjmp L58
+ 0234                   .dbline 110
+                       ;                     {
+ 0234                   .dbline 111
+                       ;                      bitcount=11;
+ 0234 8BE0              ldi R24,11
+ 0236 80934400          sts _bitcount,R24
+ 023A                   .dbline 112
+                       ;                      return;
+ 023A 17C0              rjmp L48
+ 023C                 L58:
+ 023C                   .dbline 115
+                       ;                     }
+                       ;                 else
+                       ;                    {
+ 023C                   .dbline 116
+                       ;                     bitcount=11;
+ 023C 8BE0              ldi R24,11
+ 023E 80934400          sts _bitcount,R24
+ 0242                   .dbline 117
+                       ;                     decode(data);
+ 0242 00910300          lds R16,L49
+ 0246 16DF              rcall _decode
+ 0248                   .dbline 118
+                       ;                    }      
+ 0248                   .dbline 119
+                       ;                 break;}
+ 0248 10C0              rjmp L51
+ 024A                 L50:
+ 024A                   .dbline 120
+                       ;        default:{
+ 024A                   .dbline 121
+                       ;                 data = (data >> 1);
+ 024A 20900300          lds R2,L49
+ 024E 2694              lsr R2
+ 0250 20920300          sts L49,R2
+ 0254                   .dbline 122
+                       ;                 if((PIN_KB&(1<<DATAPIN))!=0)
+ 0254 839B              sbis 0x10,3
+ 0256 04C0              rjmp L60
+ 0258                   .dbline 123
+                       ;                     data|=0x80;
+ 0258 822D              mov R24,R2
+ 025A 8068              ori R24,128
+ 025C 80930300          sts L49,R24
+ 0260                 L60:
+ 0260                   .dbline 124
+ 0260 80914400          lds R24,_bitcount
+ 0264 8150              subi R24,1
+ 0266 80934400          sts _bitcount,R24
+ 026A                   .dbline 125
+ 026A                   .dbline 126
+ 026A                 L51:
+ 026A                   .dbline -2
+ 026A                   .dbline 127
+                       ;                 bitcount--;
+                       ;                 }       
+                       ;       }                     
+                       ;     } 
+ 026A                 L48:
+ 026A 00D0              rcall pop_gset1
+ 026C 00D0              rcall pop_lset
+ 026E                   .dbline 0 ; func end
+ 026E 1895              reti
+                         .area bss(ram, con, rel)
+ 0004                   .dbfile D:\ICC-AVR\examples.sl\pc_8535\kbc.c
+ 0004                 _kb_buffer::
+ 0004                   .blkb 64
+ 0044                   .dbsym s kb_buffer _kb_buffer A[64:64]c
+ 0044                 _bitcount::
+ 0044                   .blkb 1
+ 0045                   .dbsym s bitcount _bitcount c

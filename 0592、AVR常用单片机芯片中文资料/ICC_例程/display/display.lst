@@ -1,0 +1,253 @@
+__start:
+__text_start:
+    0018 E5CF      LDI	R28,0x5F
+    0019 E0D2      LDI	R29,2
+    001A BFCD      OUT	P3D,R28
+    001B BFDE      OUT	P3E,R29
+    001C 51C0      SUBI	R28,0x10
+    001D 40D0      SBCI	R29,0
+    001E EA0A      LDI	R16,0xAA
+    001F 8308      STD	R16,0+Y
+    0020 2400      CLR	R0
+    0021 E6E6      LDI	R30,0x66
+    0022 E0F0      LDI	R31,0
+    0023 E010      LDI	R17,0
+    0024 36E6      CPI	R30,0x66
+    0025 07F1      CPC	R31,R17
+    0026 F011      BEQ	0x0029
+    0027 9201      ST	R0,Z+
+    0028 CFFB      RJMP	0x0024
+    0029 8300      STD	R16,0+Z
+    002A E2EA      LDI	R30,0x2A
+    002B E0F0      LDI	R31,0
+    002C E6A0      LDI	R26,0x60
+    002D E0B0      LDI	R27,0
+    002E E010      LDI	R17,0
+    002F 33E0      CPI	R30,0x30
+    0030 07F1      CPC	R31,R17
+    0031 F021      BEQ	0x0036
+    0032 95C8      LPM
+    0033 9631      ADIW	R30,1
+    0034 920D      ST	R0,X+
+    0035 CFF9      RJMP	0x002F
+    0036 D03D      RCALL	_main
+_exit:
+    0037 CFFF      RJMP	_exit
+FILE: D:\ICC-AVR\examples.sl\display\delay.c
+(0001) /****************************************/
+(0002) /*  ÑÓÊ±º¯Êý(mS),ÔÚ±¾ÎÄ¼þÖÐÓ¦¶¨Òå:xtalº */
+(0003) /*      xtalÎª¶ÔÓ¦¾§ÕñÆµÂÊ,µ¥Î»ÎªMHZ    */
+(0004) /*  ÔÚµ÷ÓÃÑÓÊ±º¯ÊýµÄÎÄ¼þÖÐ,Ó¦×÷ÈçÏÂËµÃ÷ */
+(0005) /* extern void delay_ms(unsigned int n);*/
+(0006) /* extern void delay_1ms(void);         */
+(0007) /****************************************/
+(0008) #define xtal 8   
+(0009) void delay_1ms(void)
+(0010) { unsigned int i;
+(0011)  for(i=1;i<(unsigned int)(xtal*143-2);i++)
+_delay_1ms:
+  i                    --> R16
+    0038 E001      LDI	R16,1
+    0039 E010      LDI	R17,0
+    003A C002      RJMP	0x003D
+(0012)     ;
+    003B 5F0F      SUBI	R16,0xFF
+    003C 4F1F      SBCI	R17,0xFF
+    003D 3706      CPI	R16,0x76
+    003E E0E4      LDI	R30,4
+    003F 071E      CPC	R17,R30
+    0040 F3D0      BCS	0x003B
+(0013) }
+    0041 9508      RET
+_delay_ms:
+  i                    --> R20
+  n                    --> R22
+    0042 D06E      RCALL	push_gset2
+    0043 2F60      MOV	R22,R16
+    0044 2F71      MOV	R23,R17
+(0014) void delay_ms(unsigned int n)
+(0015) {
+(0016)  unsigned int i=0;
+    0045 2744      CLR	R20
+    0046 2755      CLR	R21
+    0047 C003      RJMP	0x004B
+(0017)    while(i<n)
+(0018)    {delay_1ms();
+    0048 DFEF      RCALL	_delay_1ms
+(0019)     i++;
+    0049 5F4F      SUBI	R20,0xFF
+    004A 4F5F      SBCI	R21,0xFF
+(0020)    }
+    004B 1746      CP	R20,R22
+    004C 0757      CPC	R21,R23
+    004D F3D0      BCS	0x0048
+(0021) }    004E D065      RCALL	pop_gset2
+    004F 9508      RET
+FILE: D:\ICC-AVR\examples.sl\display\display.c
+(0001) /*********************************************
+(0002)                HTTP://WWW.SL.COM.CN
+(0003)           	        Ë«Áúµç×Ó
+(0004)                ÁùÂ·¶¯Ì¬É¨ÃèÏÔÊ¾³ÌÐò		 
+(0005) **********************************************/
+(0006) #include <io8515.h>
+(0007) extern void delay_ms(unsigned int n);//ÒýÓÃÍâ²¿º¯Êý
+(0008) extern void delay_1ms(void); 
+(0009)           /*   Æß¶ÎÒëÂë×ÖÐÎ±í     */        
+(0010) const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+(0011)           /*     ÏÔÊ¾»º³åÇø       */
+(0012) unsigned char ledbuff[]={0x3f,0x3f,0x3f,0x3f,0x3f,0x3f};
+(0013) void port_init(void)//¶Ë¿Ú³õÊ¼»¯
+(0014)  {
+(0015)   DDRD=0x3f;
+_port_init:
+    0050 E38F      LDI	R24,0x3F
+    0051 BB81      OUT	P11,R24
+(0016)   DDRB=0xff;
+    0052 EF8F      LDI	R24,0xFF
+    0053 BB87      OUT	P17,R24
+(0017)   PORTD=0xff;
+    0054 BB82      OUT	P12,R24
+(0018)   PORTB=0xff;
+    0055 BB88      OUT	P18,R24
+(0019)  }
+    0056 9508      RET
+_display:
+  i                    --> R20
+    0057 D042      RCALL	push_gset1
+(0020) void display(void)//ÁùÂ·¶¯Ì¬É¨ÃèÏÔÊ¾µçÂ·
+(0021) {
+(0022)  unsigned char i;
+(0023)  for (i=0;i<6;i++)
+    0058 2744      CLR	R20
+    0059 C016      RJMP	0x0070
+(0024)   {
+(0025)    PORTB=ledbuff[i];//½«ÏÔÊ¾»º³åÇøÊý¾ÝËÍPORTB¿Ú
+    005A E680      LDI	R24,0x60
+    005B E090      LDI	R25,0
+    005C 2FE4      MOV	R30,R20
+    005D 27FF      CLR	R31
+    005E 0FE8      ADD	R30,R24
+    005F 1FF9      ADC	R31,R25
+    0060 8020      LDD	R2,0+Z
+    0061 BA28      OUT	P18,R2
+(0026)    PORTD=~(1<<i);   //¿ªÊ¼ÏÔÊ¾
+    0062 E001      LDI	R16,1
+    0063 2F14      MOV	R17,R20
+    0064 D051      RCALL	lsl8
+    0065 2E20      MOV	R2,R16
+    0066 9420      COM	R2
+    0067 BA22      OUT	P12,R2
+(0027)    delay_1ms();     //Ã¿Ò»Î»ÏÔÊ¾±£³ÖÒ»¶¨Ê±¼ä
+    0068 DFCF      RCALL	_delay_1ms
+(0028)    PORTD|=(1<<i);   //¹Ø±ÕÏÔÊ¾
+    0069 E001      LDI	R16,1
+    006A 2F14      MOV	R17,R20
+    006B D04A      RCALL	lsl8
+    006C B222      IN	R2,P12
+    006D 2A20      OR	R2,R16
+    006E BA22      OUT	P12,R2
+(0029)   }
+    006F 9543      INC	R20
+    0070 3046      CPI	R20,6
+    0071 F340      BCS	0x005A
+(0030) }
+    0072 D02A      RCALL	pop_gset1
+    0073 9508      RET
+(0031) /*Ö÷³ÌÐò¹¦ÄÜ£ºÑÝÊ¾ÁËÒ»¸ö¶àÂ·¶¯Ì¬É¨Ãè³ÌÐòµÄ¹¤×÷¹ý³Ì*/
+(0032) void main(void)
+(0033) {
+(0034)  unsigned char i,j;
+(0035)  MCUCR=0;
+_main:
+  i                    --> R20
+  j                    --> R22
+    0074 2422      CLR	R2
+    0075 BE25      OUT	P35,R2
+(0036)  port_init(); //¶Ë¿Ú³õÊ¼»¯
+    0076 DFD9      RCALL	_port_init
+    0077 C020      RJMP	0x0098
+(0037)  while(1)
+(0038)   {
+(0039)    for(i=0;i<0x10;i++)  
+    0078 2744      CLR	R20
+    0079 C01C      RJMP	0x0096
+(0040)      {
+(0041) 	  for(j=0;j<6;j++)
+    007A 2766      CLR	R22
+    007B C011      RJMP	0x008D
+(0042) 	      ledbuff[j]=tabel[i] ;//¸ü»»ÏÔÊ¾×ÖÐÎ
+    007C E18A      LDI	R24,0x1A
+    007D E090      LDI	R25,0
+    007E 2E24      MOV	R2,R20
+    007F 2433      CLR	R3
+    0080 0E28      ADD	R2,R24
+    0081 1E39      ADC	R3,R25
+    0082 2DE2      MOV	R30,R2
+    0083 2DF3      MOV	R31,R3
+    0084 95C8      LPM
+    0085 E680      LDI	R24,0x60
+    0086 E090      LDI	R25,0
+    0087 2FE6      MOV	R30,R22
+    0088 27FF      CLR	R31
+    0089 0FE8      ADD	R30,R24
+    008A 1FF9      ADC	R31,R25
+    008B 8200      STD	R0,0+Z
+    008C 9563      INC	R22
+    008D 3066      CPI	R22,6
+    008E F368      BCS	0x007C
+(0043)       for (j=0;j<200;j++)	 
+    008F 2766      CLR	R22
+    0090 C002      RJMP	0x0093
+(0044)           display();	      //Ñ­»·ÏÔÊ¾200´Î
+    0091 DFC5      RCALL	_display
+    0092 9563      INC	R22
+    0093 3C68      CPI	R22,0xC8
+    0094 F3E0      BCS	0x0091
+(0045) 	 } 
+    0095 9543      INC	R20
+    0096 3140      CPI	R20,0x10
+    0097 F310      BCS	0x007A
+(0046)   }
+    0098 CFDF      RJMP	0x0078
+(0047) }FILE: <library>
+    0099 9508      RET
+push_gset1:
+    009A 935A      ST	R21,-Y
+    009B 934A      ST	R20,-Y
+    009C 9508      RET
+pop_gset1:
+    009D E0E1      LDI	R30,1
+pop:
+    009E 9149      LD	R20,Y+
+    009F 9159      LD	R21,Y+
+    00A0 FDE0      SBRC	R30,0
+    00A1 9508      RET
+    00A2 9169      LD	R22,Y+
+    00A3 9179      LD	R23,Y+
+    00A4 FDE1      SBRC	R30,1
+    00A5 9508      RET
+    00A6 90A9      LD	R10,Y+
+    00A7 90B9      LD	R11,Y+
+    00A8 FDE2      SBRC	R30,2
+    00A9 9508      RET
+    00AA 90C9      LD	R12,Y+
+    00AB 90D9      LD	R13,Y+
+    00AC FDE3      SBRC	R30,3
+    00AD 9508      RET
+    00AE 90E9      LD	R14,Y+
+    00AF 90F9      LD	R15,Y+
+    00B0 9508      RET
+push_gset2:
+    00B1 937A      ST	R23,-Y
+    00B2 936A      ST	R22,-Y
+    00B3 CFE6      RJMP	push_gset1
+pop_gset2:
+    00B4 E0E2      LDI	R30,2
+    00B5 CFE8      RJMP	pop
+lsl8:
+    00B6 2311      TST	R17
+    00B7 F019      BEQ	0x00BB
+    00B8 0F00      LSL	R16
+    00B9 951A      DEC	R17
+    00BA CFFB      RJMP	lsl8
+    00BB 9508      RET

@@ -1,0 +1,1 @@
+ad_led.o: D:/ICC-AVR/include/io8535.h D:/ICC-AVR/include/slavr.h D:/ICC-AVR/include/macros.h

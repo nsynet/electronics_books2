@@ -1,0 +1,1111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0044)http://www.c51.cn/avr/avrjc/200804/7778.html -->
+<HTML 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>AVR教程（8）：ATmega16 简介（三）</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="" name=Keywords>
+<META content="" name=Description><LINK 
+href="AVR教程（8）：ATmega16 简介（三）.files/style.css" type=text/css rel=stylesheet>
+<SCRIPT src="AVR教程（8）：ATmega16 简介（三）.files/chinaz.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="AVR教程（8）：ATmega16 简介（三）.files/prototype.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（8）：ATmega16 简介（三）.files/scriptaculous.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（8）：ATmega16 简介（三）.files/checklogin.js"></SCRIPT>
+
+<SCRIPT language=JavaScript>
+<!--
+//改变图片大小
+function resizepic(thispic)
+{
+  return true;
+}
+//无级缩放图片大小
+function bbimg(o)
+{
+  return true;
+}
+-->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3395" name=GENERATOR></HEAD>
+<BODY>
+<DIV class=container>
+<DIV class="clearfix header">
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width="100%" 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle>
+      <DIV id=UserLogin>载入中…
+      <SCRIPT language=JavaScript 
+      type=text/JavaScript>LoadUserLogin('/',1,2);</SCRIPT>
+       </DIV></TD>
+    <TD align=middle width="14%">
+      <SCRIPT language=javascript 
+      src="AVR教程（8）：ATmega16 简介（三）.files/Date.js"></SCRIPT>
+      　</TD></TR></TBODY></TABLE>
+<DIV class=topnav>
+<P align=center><A href="http://www.c51.cn/">http://www.c51.cn/</A> | <A 
+title="" href="http://www.c51.cn/honews/Index.html">新闻中心</A> | <A 
+href="http://www.c51.cn/mcu/Index.html">51单片机</A> | <A 
+href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+href="http://www.c51.cn/avr/Index.html">AVR单片机</A> | <A 
+href="http://www.c51.cn/holtek/Index.html">合泰单片机</A> | <A title="" 
+href="http://www.c51.cn/Photo/Index.html">电路图站</A> | <A title="" 
+href="http://www.c51.cn/pcb/">EDA技术</A> | <A title="" 
+href="http://www.c51.cn/power/">电源技术</A> | <A title="" 
+href="http://www.c51.cn/cgq/">传感技术</A> | <A title="" 
+href="http://www.c51.cn/GuestBook/Index.asp">雁过留声</A> | <A title="" 
+href="http://www.stcmcu.cn/bbs/">技术论坛</A> | <A 
+href="http://www.c51.cn/avr/avrjc/200804/" name=StranLink>切换到繁體中文</A>
+<SCRIPT language=javascript 
+src="AVR教程（8）：ATmega16 简介（三）.files/gb_big5.js"></SCRIPT>
+ |</P></DIV>
+<DIV class=brand><A class=site-logo title=中国单片机资讯网官方网站 href="http://www.c51.cn/" 
+rel=home><IMG height=60 alt=中国单片机资讯网官方网站 
+src="AVR教程（8）：ATmega16 简介（三）.files/logo.gif" width=165></A> </DIV>
+<DIV class=ad-banner>
+<SCRIPT language=javascript src="AVR教程（8）：ATmega16 简介（三）.files/19.js"></SCRIPT>
+</DIV>
+<DIV class=ad-text>
+<SCRIPT language=JavaScript src="AVR教程（8）：ATmega16 简介（三）.files/text_link.htm" 
+charset=gb2312></SCRIPT>
+
+<TABLE id=table1 cellSpacing=0 cellPadding=2 width=255 border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff0000><IMG 
+      src="AVR教程（8）：ATmega16 简介（三）.files/td_icon.gif" align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/hdfk/index.html"><FONT 
+      color=#ff0000>货到付款网点</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（8）：ATmega16 简介（三）.files/top_ico8.gif" align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wzhelp/200807/8109.html">订购方法</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（8）：ATmega16 简介（三）.files/top_ico2.gif" align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A></TD></TR>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff00ff><IMG 
+      src="AVR教程（8）：ATmega16 简介（三）.files/td_icon.gif" align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/wwwgl/200508/23.html"><FONT 
+      color=#ff00ff>银行汇款帐号</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（8）：ATmega16 简介（三）.files/top_ico8.gif" align=absBottom></SPAN><A 
+      href="http://shop35907817.taobao.com/">淘宝商店</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（8）：ATmega16 简介（三）.files/top_ico2.gif" align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200808/8156.html">VIP申请</A></TD></TR></TBODY></TABLE></DIV></DIV>
+<DIV class=nav>
+<DIV class=navinner>
+<UL class=navlist>
+  <LI><A href="http://www.c51.cn/">首页</A> </LI>
+  <LI><A id=nav_1 onmouseover="showMenu('nav_1','subnav1')" 
+  href="http://www.c51.cn/mcu/">单片机站</A> 
+  <DIV class="subnav disable" id=subnav1>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/mcu/">MCS-51单片机</A> | <A 
+  href="http://www.c51.cn/avr/">AVR单片机</A> | <A 
+  href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+  href="http://www.c51.cn/stc/">STC单片机</A> | <A 
+  href="http://www.c51.cn/mp430/">MSP430单片机</A> | <A 
+  href="http://www.c51.cn/holtek/">合泰单片机</A> | <A 
+  href="http://www.c51.cn/emc/">义隆单片机</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_2 onmouseover="showMenu('nav_2','subnav2')" 
+  href="http://www.c51.cn/shop/">网站商城</A> 
+  <DIV class="subnav disable" id=subnav2>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Shop/mcukf/">开发板/学习板</A> | <A 
+  href="http://www.c51.cn/Shop/gkong/">工业控制板</A> | <A 
+  href="http://www.c51.cn/Shop/bcq/">编程器</A> | <A 
+  href="http://www.c51.cn/Shop/fzq/">仿真器</A> | <A 
+  href="http://www.c51.cn/Shop/ic/">电子元器件</A> | <A 
+  href="http://www.c51.cn/Shop/cygj/">常用小工具</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_3 onmouseover="showMenu('nav_3','subnav3')" 
+  href="http://www.c51.cn/cpsm/Index.html">产品帮助</A> 
+  <DIV class="subnav disable" id=subnav3>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/cpsm/sl2000/">SL2000</A> | <A 
+  href="http://www.c51.cn/cpsm/sl800/">SL1800</A> | <A 
+  href="http://www.c51.cn/cpsm/sl480/">SL480+</A> | <A 
+  href="http://www.c51.cn/cpsm/sl300/">成功三号</A> | <A 
+  href="http://www.c51.cn/cpsm/sl200/">SL200</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc15/">NPLC-15</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc24/">NPLC-24</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc25/">NPLC-25</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc28/">NPLC-28</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_4 onmouseover="showMenu('nav_4','subnav4')" 
+  href="http://www.c51.cn/Article/">技术论文</A> 
+  <DIV class="subnav disable" id=subnav4>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Article/mcuzh/">开发论文</A> | <A 
+  href="http://www.c51.cn/Article/lexu/">嵌入式系统</A> | <A 
+  href="http://www.c51.cn/Article/arm/">ARM专栏</A> | <A 
+  href="http://www.c51.cn/Article/dsp/">DSP专栏</A> | <A 
+  href="http://www.c51.cn/Article/tx/">通信技术 | <A 
+  href="http://www.c51.cn/Article/ycx/">各类源程序</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_5 onmouseover="showMenu('nav_5','subnav5')" 
+  href="http://www.c51.cn/iczldata/">资料查询</A> 
+  <DIV class="subnav disable" id=subnav5>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/iczldata/ttl74/">74XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/cd40/">CD4XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/ram/">存储器系列</A> | <A 
+  href="http://www.c51.cn/iczldata/adda/">A/D&amp;DA</A> | <A 
+  href="http://www.c51.cn/iczldata/yf/">运算放大器</A> | <A 
+  href="http://www.c51.cn/iczldata/power/">电源管理IC</A> | <A 
+  href="http://www.c51.cn/iczldata/scr/">可控硅</A> | <A 
+  href="http://www.c51.cn/iczldata/yp/">音频视频</A> | <A 
+  href="http://www.c51.cn/iczldata/fmic/">通信IC</A> | <A 
+  href="http://www.c51.cn/iczldata/guou/">光电耦合器</A> | <A 
+  href="http://www.c51.cn/iczldata/dv/">二、三极管</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_6 onmouseover="showMenu('nav_6','subnav6')" 
+  href="http://www.c51.cn/soft">资源下载</A> 
+  <DIV class="subnav disable" id=subnav6>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/soft/kfgj/">开发工具</A> | <A 
+  href="http://www.c51.cn/soft/gjrj/">常用工具</A> | <A 
+  href="http://www.c51.cn/soft/spjc/">视频教程</A> | <A 
+  href="http://www.c51.cn/soft/dzbooks/">电子书籍</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_7 onmouseover="showMenu('nav_7','subnav7')" 
+  href="http://www.c51.cn/dzjs/">电子技术</A> 
+  <DIV class="subnav disable" id=subnav7>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/dzjs/yjcs/index.html">电子基础</A> | <A 
+  href="http://www.c51.cn/dzjs/szdl/">数字电路</A> | <A 
+  href="http://www.c51.cn/dzjs/mndl/">模拟电路</A> | <A 
+  href="http://www.c51.cn/dzjs/io/">接口电路</A> | <A 
+  href="http://www.c51.cn/dzjs/xpyy/">芯片应用</A> | <A 
+  href="http://www.c51.cn/dzjs/zhzl/">综合资料</A> | <A 
+  href="http://www.c51.cn/dzjs/wqj/">元件常识</A> 
+</SPAN></P></DIV></LI></UL></DIV></DIV>
+<DIV class=note><SPAN><A href="http://www.c51.cn/User/Index.asp"><IMG 
+src="AVR教程（8）：ATmega16 简介（三）.files/td_icon.gif" align=absBottom> 我要投稿</A> <A 
+href="http://www.c51.cn/glwz/wwwgl/200602/1853.html"><IMG 
+src="AVR教程（8）：ATmega16 简介（三）.files/tg_icon.gif" align=absBottom> 投稿指南</A> <A 
+href="http://www.c51.cn/xml/Rss.xml"><IMG 
+src="AVR教程（8）：ATmega16 简介（三）.files/rss.gif" align=absBottom> RSS订阅</A></SPAN> 
+<B>网站通告:</B> 
+<MARQUEE onmouseover=this.stop() style="WIDTH: 477px; HEIGHT: 15px" 
+onmouseout=this.start() scrollAmount=1 scrollDelay=4 width=477 align="left">
+<P>&nbsp;&nbsp;没有公告</P></MARQUEE></DIV>
+<FORM name=search action=search.asp method=post>
+<DIV class=weizhi><SPAN><B>搜索:</B> <INPUT type=hidden value=0 name=kwtype> 
+<INPUT id=Keyword maxLength=50 value=关键字 name=Keyword> <INPUT class=searchtxt 
+id=Field type=hidden value=Title name=Field> <OPTION selected="selected" 
+value="title">搜索标题</OPTION> </SELECT><INPUT type=image 
+src="AVR教程（8）：ATmega16 简介（三）.files/topsearch_submit.gif"> </SPAN>您现在的位置：&nbsp;<A 
+class=LinkPath href="http://www.c51.cn/">中国单片机资讯网</A>&nbsp;&gt;&gt;&nbsp;<A 
+class=LinkPath 
+href="http://www.c51.cn/avr/Index.html">AVR单片机站</A>&nbsp;&gt;&gt;&nbsp;<A 
+class=LinkPath 
+href="http://www.c51.cn/avr/avrjc/Index.html">教程</A>&nbsp;&gt;&gt;&nbsp;正文 
+</DIV></FORM><!--列表左边:开始--><!--列表左边:开始-->
+<DIV class="clearfix wrap layout-cols2">
+<DIV class=col1>
+<DIV id=news>
+<H1>AVR教程（8）：ATmega16&nbsp;简介（三）</H1>
+<DIV class=times>2008-06-10 13:50:46 来源:<A 
+href="http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net">http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net</A> 
+作者:<A title=微雪电子 
+href="http://www.c51.cn/ShowAuthor.asp?ChannelID=1035&amp;AuthorName=微雪电子">微雪电子</A> 
+【<A href="javascript:doZoom(16)">大</A> <A href="javascript:doZoom(14)">中</A> <A 
+href="javascript:doZoom(12)">小</A>】 <A class=fsource 
+href="http://www.c51.cn/avr/avrjc/200804/7778.html#plshow">点击：<FONT 
+id=feedcounttop color=red>
+<SCRIPT language=javascript 
+src="AVR教程（8）：ATmega16 简介（三）.files/GetHits.htm"></SCRIPT>
+</FONT> 次</A> </DIV>
+<DIV class=content id=textbody>
+<SCRIPT language=javascript src="AVR教程（8）：ATmega16 简介（三）.files/28.js"></SCRIPT>
+</DIV>
+<DIV class=content>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">指令执行时序</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>这一节介绍指令执行过程中的访问时序。<SPAN lang=EN-US>AVR CPU 
+</SPAN>由系统时钟<SPAN lang=EN-US>clkCPU 
+</SPAN>驱动。此时钟直接来自选定的时钟源。芯片内部不对此时钟进行分频。</FONT><SPAN lang=EN-US><BR><BR><FONT 
+face=宋体>Figure 6 </FONT></SPAN><FONT face=宋体>说明了由<SPAN lang=EN-US>Harvard 
+</SPAN>结构决定的并行取指和指令执行，以及可以进行快速访问的寄存器文件的概念。这是一个基本的流水线概念，性能高达<SPAN lang=EN-US>1 
+MIPS/MHz</SPAN>，具有优良的性价比、功能<SPAN lang=EN-US>/ </SPAN>时钟比、功能<SPAN lang=EN-US>/ 
+</SPAN>功耗比。</FONT></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体><SPAN lang=EN-US></SPAN></FONT></SPAN>
+<P>
+<P style="LINE-HEIGHT: 15pt"><FONT face=宋体><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt">Figure 7 </SPAN><SPAN 
+style="FONT-SIZE: 9pt">演示的是寄存器文件内部访问时序。在一个时钟周期里，<SPAN lang=EN-US>ALU 
+</SPAN>可以同时对两个寄存器操作数进行操作，同时将结果保存到目的寄存器中去。</SPAN></FONT></P>
+<P style="LINE-HEIGHT: 15pt"><FONT face=宋体><SPAN style="FONT-SIZE: 9pt"><SPAN 
+lang=EN-US></SPAN></SPAN></FONT>
+<P><FONT face=宋体><SPAN style="FONT-SIZE: 9pt"><SPAN lang=EN-US>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 </SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">复位与中断处理</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt">AVR</SPAN><SPAN 
+style="FONT-SIZE: 9pt">有不同的中断源。每个中断和复位在程序空间都有独立的中断向量。所有的中断事件都有自己的使能位。当使能位置位，且状态寄存器的全局中断使能位<SPAN 
+lang=EN-US>I </SPAN>也置位时，中断可以发生。根据程序计数器<SPAN lang=EN-US>PC 
+</SPAN>的不同，在引导锁定位<SPAN lang=EN-US>BLB02 </SPAN>或<SPAN lang=EN-US>BLB12 
+</SPAN>被编程的情况下，中断可能被自动禁止。这个特性提高了软件的安全性。详见<SPAN lang=EN-US> P247“ 
+</SPAN>存储器编程<SPAN lang=EN-US>” </SPAN>的描述。<SPAN 
+lang=EN-US><BR><BR></SPAN>程序存储区的最低地址缺省为复位向量和中断向量。完整的向量列表请参见 <SPAN 
+lang=EN-US>P43“</SPAN>中断<SPAN 
+lang=EN-US>”</SPAN>。列表也决定了不同中断的优先级。向量所在的地址越低，优先级越高。<SPAN lang=EN-US>RESET 
+</SPAN>具有最高的优先级，第二个为<SPAN lang=EN-US>INT0 – </SPAN>外部中断请求<SPAN 
+lang=EN-US>0</SPAN>。通过置位<SPAN lang=EN-US>MCU </SPAN>控制寄存器<SPAN lang=EN-US> 
+(MCUCR) </SPAN>的<SPAN lang=EN-US>IVSEL</SPAN>，中断向量可以移至引导<SPAN 
+lang=EN-US>Flash</SPAN>的起始处。编程熔丝位<SPAN 
+lang=EN-US>BOOTRST</SPAN>也可以将复位向量移至引导<SPAN lang=EN-US>Flash</SPAN>的起始处。具体参见<SPAN 
+lang=EN-US>P234“</SPAN>支持引导装入程序<SPAN lang=EN-US> – </SPAN>在写的同时可以读<SPAN 
+lang=EN-US>(RWW,Read-While-Write) </SPAN>的自我编程能力<SPAN lang=EN-US>”</SPAN>。<SPAN 
+lang=EN-US><BR><BR></SPAN>任一中断发生时全局中断使能位<SPAN lang=EN-US>I 
+</SPAN>被清零，从而禁止了所有其他的中断。用户软件可以在中断程序里置位<SPAN lang=EN-US>I 
+</SPAN>来实现中断嵌套。此时所有的中断都可以中断当前的中断服务程序。执行<SPAN lang=EN-US>RETI </SPAN>指令后<SPAN 
+lang=EN-US>I </SPAN>自动置位。<SPAN 
+lang=EN-US><BR><BR></SPAN>从根本上说有两种类型的中断。第一种由事件触发并置位中断标志。对于这些中断，程序计数器跳转到实际的中断向量以执行中断处理程序，同时硬件将清除相应的中断标志。中断标志也可以通过对其写<SPAN 
+lang=EN-US>”<CHMETCNV w:st="on" unitname="”" sourcevalue="1" hasspace="False" 
+negative="False" numbertype="1" tcsc="0" />1”</CHMETCNV /> 
+</SPAN>的方式来清除。当中断发生后，如果相应的中断使能位为<SPAN lang=EN-US>“<CHMETCNV w:st="on" 
+unitname="”" sourcevalue="0" hasspace="False" negative="False" numbertype="1" 
+tcsc="0" />0”</CHMETCNV 
+/></SPAN>，则中断标志位置位，并一直保持到中断执行，或者被软件清除。类似的，如果全局中断标志被清零，则所有已发生的中断都不会被执行，直到<SPAN 
+lang=EN-US>I </SPAN>置位。然后挂起的各个中断按中断优先级依次执行。<SPAN 
+lang=EN-US><BR><BR></SPAN>第二种类型的中断则是只要中断条件满足，就会一直触发。这些中断不需要中断标志。若中断条件在中断使能之前就消失了，中断不会被触发。<SPAN 
+lang=EN-US><BR><BR>AVR 
+</SPAN>退出中断后总是回到主程序并至少执行一条指令才可以去执行其他被挂起的中断。要注意的是，进入中断服务程序时状态寄存器不会自动保存，中断返回时也不会自动恢复。这些工作必须由用户通过软件来完成。<SPAN 
+lang=EN-US><BR><BR></SPAN>使用<SPAN lang=EN-US>CLI 
+</SPAN>指令来禁止中断时，中断禁止立即生效。没有中断可以在执行<SPAN lang=EN-US>CLI </SPAN>指令后发生，即使它是在执行<SPAN 
+lang=EN-US>CLI </SPAN>指令的同时发生的。下面的例子说明了如何在写<SPAN lang=EN-US>EEPROM 
+</SPAN>时使用这个指令来防止中断发生以避免对<SPAN lang=EN-US>EEPROM </SPAN>内容的可能破坏。<SPAN 
+lang=EN-US></SPAN></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN style="FONT-SIZE: 9pt">汇编代码例程<SPAN 
+lang=EN-US><BR>in r16, SREG ; </SPAN>保存<SPAN lang=EN-US>SREG<BR>cli ; 
+</SPAN>禁止中断<SPAN lang=EN-US><BR>sbi EECR, EEMWE ; </SPAN>启动<SPAN lang=EN-US> 
+EEPROM </SPAN>写操作<SPAN lang=EN-US><BR>sbi EECR, EEWE<BR>out SREG, r16 ; 
+</SPAN>恢复<SPAN lang=EN-US>SREG (I </SPAN>位<SPAN lang=EN-US>)</SPAN></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN lang=EN-US style="FONT-SIZE: 9pt">C 
+</SPAN><SPAN style="FONT-SIZE: 9pt">代码例程<SPAN lang=EN-US><BR>char 
+cSREG;<BR>cSREG = SREG; /* </SPAN>保存<SPAN lang=EN-US>SREG */<BR>/* 
+</SPAN>禁止中断<SPAN lang=EN-US>*/<BR>_CLI();<BR>EECR |= (1&lt;&lt;EEMWE); /* 
+</SPAN>启动<SPAN lang=EN-US> EEPROM </SPAN>写操作<SPAN lang=EN-US>*/<BR>EECR |= 
+(1&lt;&lt;EEWE);<BR>SREG = cSREG; /* </SPAN>恢复<SPAN lang=EN-US>SREG (I 
+</SPAN>位<SPAN lang=EN-US>) */<BR><BR></SPAN>使用<SPAN lang=EN-US>SEI 
+</SPAN>指令使能中断时，紧跟其后的第一条指令在执行任何中断之前一定会首先得到执行。<SPAN lang=EN-US> 
+<BR><BR></SPAN>汇编代码例程<SPAN lang=EN-US><BR>sei ; </SPAN>置位全局中断使能标志<SPAN 
+lang=EN-US><BR>sleep ; </SPAN>进入休眠模式，等待中断发生<SPAN lang=EN-US><BR>; </SPAN>注意<SPAN 
+lang=EN-US>: </SPAN>在执行任何被挂起的中断之前<SPAN lang=EN-US>MCU </SPAN>将首先进入休眠模式<SPAN 
+lang=EN-US><BR><BR>C </SPAN>代码例程<SPAN lang=EN-US><BR>_SEI(); /* 
+</SPAN>置位全局中断使能标志<SPAN lang=EN-US>*/<BR>_SLEEP(); /* </SPAN>进入休眠模式，等待中断发生<SPAN 
+lang=EN-US>*/<BR>/* </SPAN>注意<SPAN lang=EN-US>: </SPAN>在执行任何被挂起的中断之前<SPAN 
+lang=EN-US>MCU </SPAN>将首先进入休眠模式<SPAN lang=EN-US>*/<BR><BR>AVR 
+</SPAN>中断响应时间最少为<SPAN lang=EN-US>4 </SPAN>个时钟周期。<SPAN lang=EN-US>4 
+</SPAN>个时钟周期后，程序跳转到实际的中断处理例程。在这<SPAN lang=EN-US>4 </SPAN>个时钟期期间<SPAN 
+lang=EN-US>PC </SPAN>自动入栈。在通常情况下，中断向量为一个跳转指令，此跳转需要<SPAN lang=EN-US>3 
+</SPAN>个时钟周期。如果中断在一个多时钟周期指令执行期间发生，则在此多周期指令执行完毕后<SPAN lang=EN-US>MCU 
+</SPAN>才会执行中断程序。若中断发生时<SPAN lang=EN-US>MCU </SPAN>处于休眠模式，中断响应时间还需增加<SPAN 
+lang=EN-US>4 </SPAN>个时钟周期。此外还要考虑到不同的休眠模式所需要的启动时间。这个时间不包括在前面提到的时钟周期里。<SPAN 
+lang=EN-US><BR><BR></SPAN>中断返回需要<SPAN lang=EN-US>4 </SPAN>个时钟。在此期间<SPAN 
+lang=EN-US>PC( </SPAN>两个字节<SPAN lang=EN-US>) </SPAN>将被弹出栈，堆栈指针加二，状态寄存器<SPAN 
+lang=EN-US>SREG </SPAN>的<SPAN lang=EN-US>I </SPAN>置位。 <SPAN 
+lang=EN-US></SPAN></SPAN></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 Flash</SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">程序存储器</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt">系统内可编程的<SPAN lang=EN-US>Flash </SPAN>程序存储器<SPAN 
+lang=EN-US><BR>ATmega16</SPAN>具有<SPAN lang=EN-US>16K</SPAN>字节的在线编程<SPAN 
+lang=EN-US>Flash</SPAN>，用于存放程序指令代码。因为所有的<SPAN lang=EN-US>AVR</SPAN>指令为<SPAN 
+lang=EN-US>16 </SPAN>位或<SPAN lang=EN-US>32 </SPAN>位，故而<SPAN lang=EN-US>Flash 
+</SPAN>组织成<SPAN lang=EN-US>8K x 16 </SPAN>位的形式。用户程序的安全性要根据<SPAN 
+lang=EN-US>Flash</SPAN>程序存储器的两个区：引导<SPAN lang=EN-US>(Boot) 
+</SPAN>程序区和应用程序区，分开来考虑。<SPAN lang=EN-US><BR><BR>Flash</SPAN>存储器至少可以擦写<SPAN 
+lang=EN-US>10,000</SPAN>次。<SPAN lang=EN-US>ATmega16</SPAN>的程序计数器<SPAN 
+lang=EN-US>(PC)</SPAN>为<SPAN lang=EN-US>13</SPAN>位，因此可以寻址<SPAN lang=EN-US>8K 
+</SPAN>字的程序存储器空间。引导程序区以及相关的软件安全锁定位请参见<SPAN lang=EN-US> P234“ 
+</SPAN>支持引导装入程序<SPAN lang=EN-US> – </SPAN>在写的同时可以读<SPAN lang=EN-US>(RWW, 
+Read-While-Write) </SPAN>的自我编程能力<SPAN lang=EN-US>” </SPAN>，而<SPAN lang=EN-US> 
+P247“</SPAN>存储器编程<SPAN lang=EN-US>” </SPAN>详述了用<SPAN lang=EN-US>SPI 
+</SPAN>或<SPAN lang=EN-US>JTAG </SPAN>接口实现对<SPAN lang=EN-US>Flash 
+</SPAN>的串行下载。<SPAN lang=EN-US><BR><BR></SPAN>常数可以保存于整个程序存储器地址空间<SPAN 
+lang=EN-US>( </SPAN>参考<SPAN lang=EN-US>LPM </SPAN>加载程序存储器指令的说明<SPAN 
+lang=EN-US>)</SPAN>。取指与执行时序图请参见<SPAN lang=EN-US> P11“ </SPAN>指令执行时序<SPAN 
+lang=EN-US>”</SPAN>。<SPAN lang=EN-US></SPAN></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><IMG hspace=0 
+src="AVR教程（8）：ATmega16 简介（三）.files/20080401235054681.jpg" align=baseline 
+border=0></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 SRAM</SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">数据存储器</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT 
+face=Arial>SRAM</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">数据存储器</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR>Figure 9 </SPAN><SPAN 
+style="FONT-SIZE: 9pt">给出了<SPAN lang=EN-US>ATmega16 SRAM 
+</SPAN>空间的组织结构。</SPAN></P>
+<P style="LINE-HEIGHT: 15pt"><SPAN style="FONT-SIZE: 9pt"><SPAN lang=EN-US><IMG 
+hspace=0 src="AVR教程（8）：ATmega16 简介（三）.files/20080401235055529.jpg" 
+align=baseline border=0><BR><BR></SPAN>前<SPAN lang=EN-US>1120 
+</SPAN>个数据存储器包括了寄存器文件、<SPAN lang=EN-US>I/O </SPAN>存储器及内部数据<SPAN 
+lang=EN-US>SRAM</SPAN>。起始的<SPAN lang=EN-US>96 </SPAN>个地址为寄存器文件与<SPAN 
+lang=EN-US>64 </SPAN>个<SPAN lang=EN-US>I/O </SPAN>存储器，接着是<SPAN lang=EN-US>1024 
+</SPAN>字节的内部数据<SPAN lang=EN-US>SRAM</SPAN>。<SPAN 
+lang=EN-US><BR><BR></SPAN>数据存储器的寻址方式分为<SPAN lang=EN-US>5 
+</SPAN>种：直接寻址、带偏移量的间接寻址、间接寻址、带预减量的间接寻址和带后增量的间接寻址。寄存器文件中的寄存器<SPAN lang=EN-US>R26 
+</SPAN>到<SPAN lang=EN-US>R31 </SPAN>为间接寻址的指针寄存器。<SPAN 
+lang=EN-US><BR><BR></SPAN>直接寻址范围可达整个数据区。<SPAN 
+lang=EN-US><BR><BR></SPAN>带偏移量的间接寻址模式能够寻址到由寄存器<SPAN lang=EN-US>Y </SPAN>和<SPAN 
+lang=EN-US> Z </SPAN>给定的基址附近的<SPAN lang=EN-US>63 </SPAN>个地址。<SPAN 
+lang=EN-US><BR><BR></SPAN>在自动预减和后加的间接寻址模式中，寄存器<SPAN lang=EN-US>X</SPAN>、<SPAN 
+lang=EN-US>Y </SPAN>和<SPAN lang=EN-US>Z </SPAN>自动增加或减少。<SPAN 
+lang=EN-US><BR><BR>ATmega16</SPAN>的全部<SPAN lang=EN-US>32</SPAN>个通用寄存器、<SPAN 
+lang=EN-US>64</SPAN>个<SPAN lang=EN-US>I/O</SPAN>寄存器及<SPAN 
+lang=EN-US>1024</SPAN>个字节的内部数据<SPAN 
+lang=EN-US>SRAM</SPAN>可以通过所有上述的寻址模式进行访问。寄存器文件的描述见<SPAN lang=EN-US> P9“ 
+</SPAN>通用寄存器文件<SPAN lang=EN-US>” </SPAN>。<SPAN lang=EN-US></SPAN></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT 
+face=Arial>SRAM</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">数据存储器访</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt">本节说明访问内部存储器的时序。如<SPAN lang=EN-US>Figure 10 
+</SPAN>所示，内部数据<SPAN lang=EN-US>SRAM </SPAN>访问时间为两个<SPAN lang=EN-US>clkCPU 
+</SPAN>时钟。 </SPAN></P>
+<P style="LINE-HEIGHT: 15pt"><SPAN style="FONT-SIZE: 9pt"><IMG hspace=0 
+src="AVR教程（8）：ATmega16 简介（三）.files/20080401235057117.jpg" align=baseline 
+border=0></SPAN></P><SPAN style="FONT-SIZE: 9pt">
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 EEPROM</SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">数据存储器</SPAN></B><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"></SPAN></B></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN lang=EN-US style="FONT-SIZE: 9pt">ATmega16 
+</SPAN><SPAN style="FONT-SIZE: 9pt">包含<SPAN lang=EN-US>512 </SPAN>字节的<SPAN 
+lang=EN-US>EEPROM </SPAN>数据存储器。它是作为一个独立的数据空间而存在的，可以按字节读写。<SPAN lang=EN-US>EEPROM 
+</SPAN>的寿命至少为<SPAN lang=EN-US>100,000 </SPAN>次擦除周期。<SPAN lang=EN-US>EEPROM 
+</SPAN>的访问由地址寄存器、数据寄存器和控制寄存器决定。<SPAN lang=EN-US><BR><BR></SPAN>通过<SPAN 
+lang=EN-US>SPI</SPAN>和<SPAN lang=EN-US>JTAG</SPAN>及并行电缆下载<SPAN 
+lang=EN-US>EEPROM</SPAN>数据的操作请分别参见<SPAN lang=EN-US> P260</SPAN>、<SPAN 
+lang=EN-US> P265</SPAN>及<SPAN lang=EN-US>P250</SPAN>。<SPAN 
+lang=EN-US><BR><BR></SPAN></SPAN><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>EEPROM 
+</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">读</SPAN></SPAN><SPAN 
+class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>/ 
+</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">写访问</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR><BR>EEPROM </SPAN><SPAN 
+style="FONT-SIZE: 9pt">读<SPAN lang=EN-US>/ </SPAN>写访问<SPAN lang=EN-US>EEPROM 
+</SPAN>的访问寄存器位于<SPAN lang=EN-US>I/O </SPAN>空间。<SPAN 
+lang=EN-US><BR><BR>EEPROM</SPAN>的写访问时间由<SPAN lang=EN-US>Table 
+1</SPAN>给出。自定时功能可以让用户软件监测何时可以开始写下一字节。用户操作<SPAN lang=EN-US>EEPROM 
+</SPAN>需要注意如下问题：在电源滤波时间常数比较大的电路中，上电<SPAN lang=EN-US>/ </SPAN>下电时<SPAN 
+lang=EN-US>VCC </SPAN>上升<SPAN lang=EN-US>/ </SPAN>下降速度会比较慢。此时<SPAN 
+lang=EN-US>CPU </SPAN>可能工作于低于晶振所要求的电源电压。请参见<SPAN lang=EN-US> P20“ </SPAN>防止<SPAN 
+lang=EN-US>EEPROM </SPAN>数据丢失<SPAN lang=EN-US>” </SPAN>以避免出现<SPAN 
+lang=EN-US>EEPROM </SPAN>数据丢失的问题。<SPAN lang=EN-US><BR><BR></SPAN>为了防止无意识的<SPAN 
+lang=EN-US>EEPROM </SPAN>写操作，需要执行一个特定的写时序。具体参看<SPAN 
+lang=EN-US>EEPROM</SPAN>控制寄存器的内容。<SPAN lang=EN-US><BR><BR></SPAN>执行<SPAN 
+lang=EN-US>EEPROM </SPAN>读操作时，<SPAN lang=EN-US> CPU </SPAN>会停止工作<SPAN 
+lang=EN-US>4 </SPAN>个周期，然后再执行后续指令；执行<SPAN lang=EN-US>EEPROM </SPAN>写操作时，<SPAN 
+lang=EN-US> CPU </SPAN>会停止工作<SPAN lang=EN-US>2 </SPAN>个周期，然后再执行后续指令。<SPAN 
+lang=EN-US><BR><BR></SPAN></SPAN><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>EEPROM 
+</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">地址寄存器－</SPAN></SPAN><SPAN 
+class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial> 
+EEARH</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">和</SPAN></SPAN><FONT 
+face=Arial><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext">EEARL </SPAN></SPAN></FONT></P>
+<P style="LINE-HEIGHT: 15pt"><FONT face=Arial><SPAN class=white12px1><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt; COLOR: windowtext"></SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"></SPAN></FONT>
+<P>
+<P style="LINE-HEIGHT: 15pt; TEXT-ALIGN: center" align=center><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"><SHAPETYPE id=_x0000_t75 stroked="f" filled="f" 
+path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" 
+coordsize="21600,21600" /><STROKE joinstyle="miter" /><FORMULAS /><F 
+eqn="if lineDrawn pixelLineWidth 0" /><F eqn="sum @0 1 0" /><F eqn="sum 0 0 @1" 
+/><F eqn="prod @2 1 2" /><F eqn="prod @3 21600 pixelWidth" /><F 
+eqn="prod @3 21600 pixelHeight" /><F eqn="sum @0 0 1" /><F eqn="prod @6 1 2" 
+/><F eqn="prod @7 21600 pixelWidth" /><F eqn="sum @8 21600 0" /><F 
+eqn="prod @7 21600 pixelHeight" /><F eqn="sum @10 21600 0" /></FORMULAS /><PATH 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f" /><LOCK 
+aspectratio="t" v:ext="edit" /></SHAPETYPE /></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN class=type11><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext">? Bits 15..9 – Res: 
+</SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">保留</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR></SPAN><SPAN 
+class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">保留位，读操作返回值为零。</SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">? Bits 8..0 – EEAR8..0: EEPROM 
+</SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">地址</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">EEPROM</SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">地址寄存器<SPAN 
+lang=EN-US>– EEARH</SPAN>和<SPAN lang=EN-US>EEARL</SPAN>指定了<SPAN 
+lang=EN-US>512</SPAN>字节的<SPAN lang=EN-US>EEPROM</SPAN>空间。<SPAN 
+lang=EN-US>EEPROM</SPAN>地址是线性的，从<SPAN lang=EN-US>0 </SPAN>到<SPAN 
+lang=EN-US>511</SPAN>。<SPAN lang=EN-US>EEAR </SPAN>的初始值没有定义。在访问<SPAN 
+lang=EN-US>EEPROM </SPAN>之前必须为其赋予正确的数据。</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR></SPAN><SPAN 
+class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>EEPROM 
+</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">数据寄存器</SPAN></SPAN><SPAN 
+class=white12px1><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT 
+face=Arial>&nbsp;</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">－</SPAN></SPAN><FONT 
+face=Arial><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"> EEDR</SPAN></SPAN></FONT></P>
+<P style="LINE-HEIGHT: 15pt"><FONT face=Arial><SPAN class=white12px1><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt; COLOR: windowtext"></SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"></SPAN></FONT>
+<P>
+<P style="LINE-HEIGHT: 15pt; TEXT-ALIGN: center" align=center><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN class=type11><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext">? Bits 7..0 – EEDR7.0: EEPROM 
+</SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">数据</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">对于<SPAN 
+lang=EN-US>EEPROM </SPAN>写操作，<SPAN lang=EN-US> EEDR </SPAN>是需要写到<SPAN 
+lang=EN-US>EEAR </SPAN>单元的数据；对于读操作，<SPAN lang=EN-US> EEDR </SPAN>是从地址<SPAN 
+lang=EN-US>EEAR </SPAN>读取的数据。</SPAN></SPAN><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>EEPROM 
+</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">控制寄存器－</SPAN></SPAN><FONT 
+face=Arial><SPAN class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"> EECR</SPAN></SPAN></FONT></P>
+<P style="LINE-HEIGHT: 15pt"><FONT face=Arial><SPAN class=white12px1><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt; COLOR: windowtext"></SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"></SPAN></FONT>
+<P>
+<P style="LINE-HEIGHT: 15pt; TEXT-ALIGN: center" align=center><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN class=type11><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext">? Bits 7..4 – Res: </SPAN></SPAN><SPAN 
+class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">保留</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR></SPAN><SPAN 
+class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">保留位，读操作返回值为零。</SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">? Bit 3 – EERIE: 
+</SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">使能<SPAN lang=EN-US>EEPROM 
+</SPAN>准备好中断</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">若<SPAN 
+lang=EN-US>SREG </SPAN>的<SPAN lang=EN-US>I </SPAN>为<SPAN 
+lang=EN-US>"1"</SPAN>，则置位<SPAN lang=EN-US>EERIE </SPAN>将使能<SPAN 
+lang=EN-US>EEPROM </SPAN>准备好中断。清零<SPAN lang=EN-US>EERIE </SPAN>则禁止此中断。当<SPAN 
+lang=EN-US>EEWE </SPAN>清零时<SPAN lang=EN-US>EEPROM 
+</SPAN>准备好中断即可发生。</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">? Bit 2 – EEMWE: EEPROM 
+</SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">主机写使能</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">EEMWE</SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">决定了<SPAN 
+lang=EN-US>EEWE</SPAN>置位是否可以启动<SPAN lang=EN-US>EEPROM</SPAN>写操作。当<SPAN 
+lang=EN-US>EEMWE</SPAN>为<SPAN lang=EN-US>"1"</SPAN>时，在<SPAN 
+lang=EN-US>4</SPAN>个时钟周期内置位<SPAN lang=EN-US>EEWE </SPAN>将把数据写入<SPAN 
+lang=EN-US>EEPROM </SPAN>的指定地址；若<SPAN lang=EN-US>EEMWE </SPAN>为<SPAN 
+lang=EN-US>"0“</SPAN>，则操作<SPAN lang=EN-US>EEWE </SPAN>不起作用。<SPAN 
+lang=EN-US>EEMWE </SPAN>置位后<SPAN lang=EN-US>4 </SPAN>个周期，硬件对其清零。见<SPAN 
+lang=EN-US>EEPROM </SPAN>写过程中对<SPAN lang=EN-US>EEWE 
+</SPAN>位的描述。</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">? Bit 1 – EEWE: EEPROM 
+</SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">写使能</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">EEWE </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">为<SPAN 
+lang=EN-US>EEPROM </SPAN>写操作的使能信号。当<SPAN lang=EN-US>EEPROM 
+</SPAN>数据和地址设置好之后，需置位<SPAN lang=EN-US>EEWE</SPAN>以便将数据写入<SPAN 
+lang=EN-US>EEPROM</SPAN>。此时<SPAN lang=EN-US>EEMWE</SPAN>必须置位，否则<SPAN 
+lang=EN-US>EEPROM</SPAN>写操作将不会发生。写时序如下<SPAN lang=EN-US>( </SPAN>第<SPAN 
+lang=EN-US>3 </SPAN>步和第<SPAN lang=EN-US>4 </SPAN>步的次序并不重要<SPAN 
+lang=EN-US>)</SPAN>：</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">1. </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">等待<SPAN 
+lang=EN-US>EEWE </SPAN>位变为零</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">2. </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">等待<SPAN 
+lang=EN-US>SPMCSR </SPAN>中的<SPAN lang=EN-US>SPMEN </SPAN>位变为零</SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">3. </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">将新的<SPAN 
+lang=EN-US>EEPROM </SPAN>地址写入<SPAN lang=EN-US>EEAR( </SPAN>可选<SPAN 
+lang=EN-US>)</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">4. </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">将新的<SPAN 
+lang=EN-US>EEPROM </SPAN>数据写入<SPAN lang=EN-US>EEDR( </SPAN>可选<SPAN 
+lang=EN-US>)</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">5. </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">对<SPAN 
+lang=EN-US>EECR </SPAN>寄存器的<SPAN lang=EN-US>EEMWE </SPAN>写<SPAN 
+lang=EN-US>"1"</SPAN>，同时清零<SPAN lang=EN-US>EEWE</SPAN></SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">6. </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">在置位<SPAN 
+lang=EN-US>EEMWE </SPAN>的<SPAN lang=EN-US>4 </SPAN>个周期内，置位<SPAN 
+lang=EN-US>EEWE</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">在<SPAN 
+lang=EN-US>CPU </SPAN>写<SPAN lang=EN-US>Flash </SPAN>存储器的时候不能对<SPAN 
+lang=EN-US>EEPROM </SPAN>进行编程。在启动<SPAN lang=EN-US>EEPROM </SPAN>写操作之前软件必须检查<SPAN 
+lang=EN-US> Flash </SPAN>写操作是否已经完成。步骤<SPAN lang=EN-US>(2) 
+</SPAN>仅在软件包含引导程序并允许<SPAN lang=EN-US>CPU</SPAN>对<SPAN lang=EN-US>Flash 
+</SPAN>进行编程时才有用。如果<SPAN lang=EN-US>CPU </SPAN>永远都不会写<SPAN 
+lang=EN-US>Flash</SPAN>，步骤<SPAN lang=EN-US>(2) </SPAN>可省略。请参见<SPAN 
+lang=EN-US>P234“</SPAN>支持引导装入程序<SPAN lang=EN-US> – </SPAN>在写的同时可以读<SPAN 
+lang=EN-US>(RWW, Read-While-Write)</SPAN>的自我编程能力<SPAN lang=EN-US>” 
+</SPAN>。</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">注意：如果在步骤<SPAN 
+lang=EN-US>5 </SPAN>和<SPAN lang=EN-US>6 </SPAN>之间发生了中断，写操作将失败。因为此时<SPAN 
+lang=EN-US>EEPROM </SPAN>写使能操作将超时。如果一个操作<SPAN 
+lang=EN-US>EEPROM</SPAN>的中断打断了另一个<SPAN lang=EN-US>EEPROM</SPAN>操作，<SPAN 
+lang=EN-US>EEAR </SPAN>或<SPAN lang=EN-US>EEDR</SPAN>寄存器可能被修改，引起<SPAN 
+lang=EN-US>EEPROM </SPAN>操作失败。建议此时关闭全局中断标志<SPAN 
+lang=EN-US>I</SPAN>。经过写访问时间之后，<SPAN lang=EN-US>EEWE 
+</SPAN>硬件清零。用户可以凭借这一位判断写时序是否已经完成。<SPAN lang=EN-US>EEWE </SPAN>置位后，<SPAN 
+lang=EN-US> CPU </SPAN>要停止两个时钟周期才会运行下一条指令。</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">? Bit 0 – EERE: EEPROM 
+</SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">读使能</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">EERE</SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">为<SPAN 
+lang=EN-US>EEPROM</SPAN>读操作的使能信号。当<SPAN lang=EN-US>EEPROM</SPAN>地址设置好之后，需置位<SPAN 
+lang=EN-US>EERE</SPAN>以便将数据读入<SPAN lang=EN-US>EEAR</SPAN>。<SPAN 
+lang=EN-US>EEPROM </SPAN>数据的读取只需要一条指令，且无需等待。读取<SPAN 
+lang=EN-US>EEPROM</SPAN>后<SPAN lang=EN-US>CPU </SPAN>要停止<SPAN lang=EN-US>4 
+</SPAN>个时钟周期才可以执行下一条指令。</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">用户在读取<SPAN 
+lang=EN-US>EEPROM </SPAN>时应该检测<SPAN 
+lang=EN-US>EEWE</SPAN>。如果一个写操作正在进行，就无法读取<SPAN 
+lang=EN-US>EEPROM</SPAN>，也无法改变寄存器<SPAN lang=EN-US>EEAR</SPAN>。 经过校准的片内振荡器用于<SPAN 
+lang=EN-US>EEPROM</SPAN>定时。</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">Table 1 </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">为<SPAN 
+lang=EN-US>CPU</SPAN>访问<SPAN lang=EN-US>EEPROM</SPAN>的典型时间。 </SPAN></SPAN></P>
+<P style="LINE-HEIGHT: 15pt"><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext"></SPAN></SPAN><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"></SPAN>
+<P>
+<P style="LINE-HEIGHT: 15pt; TEXT-ALIGN: center" align=center><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">下面的代码分别用汇编和<SPAN lang=EN-US>C 
+</SPAN>函数说明如何实现<SPAN lang=EN-US>EEPROM 
+</SPAN>的写操作。在此假设中断不会在执行这些函数的过程当中发生。同时还假设软件没有<SPAN lang=EN-US>Boot 
+Loader</SPAN>。若<SPAN lang=EN-US>Boot Loader </SPAN>存在，则<SPAN lang=EN-US>EEPROM 
+</SPAN>写函数还需要等待正在运行的<SPAN lang=EN-US>SPM </SPAN>命令的结束。</SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR></SPAN><SPAN 
+class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">汇编代码例程</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN 
+style="COLOR: windowtext">EEPROM_write:</SPAN></SPAN><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">; </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">等待上一次写操作结束</SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">sbic 
+EECR,EEWE</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">rjmp EEPROM_write</SPAN></SPAN><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">; </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">设置地址寄存器<SPAN 
+lang=EN-US> (r18:r17)</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">out EEARH, 
+r18</SPAN></SPAN><BR><SPAN class=type11><SPAN style="COLOR: windowtext">out 
+EEARL, r17</SPAN></SPAN><BR><SPAN class=type11><SPAN style="COLOR: windowtext">; 
+</SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">将数据写入数据寄存器<SPAN 
+lang=EN-US>(r16)</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">out EEDR,r16</SPAN></SPAN><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">; </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">置位<SPAN 
+lang=EN-US>EEMWE</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">sbi 
+EECR,EEMWE</SPAN></SPAN><BR><SPAN class=type11><SPAN style="COLOR: windowtext">; 
+</SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">置位<SPAN lang=EN-US>EEWE 
+</SPAN>以启动写操作</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">sbi 
+EECR,EEWE</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">ret</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">C </SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">代码例程</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">void EEPROM_write(unsigned int 
+uiAddress, unsigned char ucData)</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">{</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">/* </SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">等待上一次写操作结束<SPAN lang=EN-US> 
+*/</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">while(EECR &amp; 
+(1&lt;&lt;EEWE))</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">;</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">/* </SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">设置地址和数据寄存器<SPAN 
+lang=EN-US>*/</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">EEAR = 
+uiAddress;</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">EEDR = ucData;</SPAN></SPAN><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">/* </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">置位<SPAN 
+lang=EN-US>EEMWE */</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">EECR |= 
+(1&lt;&lt;EEMWE);</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">/* </SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">置位<SPAN lang=EN-US>EEWE 
+</SPAN>以启动写操作<SPAN lang=EN-US>*/</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">EECR |= 
+(1&lt;&lt;EEWE);</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">} </SPAN></SPAN><BR><BR></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">下面的例子说明如何用汇编和<SPAN 
+lang=EN-US>C </SPAN>函数来读取<SPAN 
+lang=EN-US>EEPROM</SPAN>，在此假设中断不会在执行这些函数的过程当中发生。</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR></SPAN><SPAN 
+class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">汇编代码例程</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">EEPROM_read:</SPAN></SPAN><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">; </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">等待上一次写操作结束</SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">sbic 
+EECR,EEWE</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">rjmp EEPROM_read</SPAN></SPAN><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">; </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">设置地址寄存器<SPAN 
+lang=EN-US> (r18:r17)</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">out EEARH, 
+r18</SPAN></SPAN><BR><SPAN class=type11><SPAN style="COLOR: windowtext">out 
+EEARL, r17</SPAN></SPAN><BR><SPAN class=type11><SPAN style="COLOR: windowtext">; 
+</SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">设置<SPAN lang=EN-US>EERE 
+</SPAN>以启动读操作</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">sbi 
+EECR,EERE</SPAN></SPAN><BR><SPAN class=type11><SPAN style="COLOR: windowtext">; 
+</SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">自数据寄存器读取数据</SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">in r16,EEDR</SPAN></SPAN><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">ret</SPAN></SPAN><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">C </SPAN></SPAN></SPAN><SPAN 
+class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">代码例程</SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">unsigned char EEPROM_read(unsigned 
+int uiAddress)</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">{</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">/* </SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">等待上一次写操作结束<SPAN lang=EN-US> 
+*/</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">while(EECR &amp; 
+(1&lt;&lt;EEWE))</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">;</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">/* </SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">设置地址寄存器<SPAN 
+lang=EN-US>*/</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">EEAR = 
+uiAddress;</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">/* </SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">设置<SPAN lang=EN-US>EERE 
+</SPAN>以启动读操作<SPAN lang=EN-US>*/</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">EECR |= 
+(1&lt;&lt;EERE);</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">/* </SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext">自数据寄存器返回数据<SPAN lang=EN-US> 
+*/</SPAN></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">return EEDR;</SPAN></SPAN><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">} 
+</SPAN></SPAN><BR><BR></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">在掉电休眠模式下的</SPAN></SPAN><SPAN 
+class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT 
+face=Arial>EEPROM</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">写操作</SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><BR></SPAN><SPAN 
+class=type11><SPAN style="FONT-SIZE: 9pt; COLOR: windowtext">若程序执行掉电指令时<SPAN 
+lang=EN-US>EEPROM </SPAN>的写操作正在进行，<SPAN lang=EN-US> EEPROM 
+</SPAN>的写操作将继续，并在指定的写访问时间之前完成。但写操作结束后，振荡器还将继续运行，单片机并非处于完全的掉电模式。因此在执行掉电指令之前应结束<SPAN 
+lang=EN-US>EEPROM </SPAN>的写操作。</SPAN></SPAN><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"></SPAN></P>
+<P>
+<P class=white12px style="MARGIN: auto 0cm"><SPAN 
+style="COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">防止</SPAN><SPAN 
+lang=EN-US style="COLOR: windowtext"><FONT face=Arial>EEPROM </FONT></SPAN><SPAN 
+style="COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">数据丢失</SPAN><SPAN 
+lang=EN-US style="COLOR: windowtext"></SPAN></P>
+<P>
+<P class=type1 style="MARGIN: auto 0cm"><SPAN 
+style="COLOR: windowtext">若电源电压过低，<SPAN lang=EN-US>CPU </SPAN>和<SPAN 
+lang=EN-US>EEPROM </SPAN>有可能工作不正常，造成<SPAN lang=EN-US>EEPROM </SPAN>数据的毁坏<SPAN 
+lang=EN-US>( </SPAN>丢失<SPAN lang=EN-US>)</SPAN>。这种情况在使用独立的<SPAN 
+lang=EN-US>EEPROM </SPAN>器件时也会遇到。因而需要使用相同的保护方案。<SPAN 
+lang=EN-US><BR><BR></SPAN>由于电压过低造成<SPAN lang=EN-US>EEPROM 
+</SPAN>数据损坏有两种可能：一是电压低于<SPAN lang=EN-US>EEPROM </SPAN>写操作所需要的最低电压；二是<SPAN 
+lang=EN-US>CPU </SPAN>本身已经无法正常工作。<SPAN lang=EN-US><BR><BR>EEPROM 
+</SPAN>数据损坏的问题可以通过以下方法解决：<SPAN lang=EN-US><BR></SPAN>当电压过低时保持<SPAN 
+lang=EN-US>AVR RESET</SPAN>信号为低。这可以通过使能芯片的掉电检测电路<SPAN 
+lang=EN-US>BOD</SPAN>来实现。如果<SPAN lang=EN-US>BOD 
+</SPAN>电平无法满足要求则可以使用外部复位电路。若写操作过程当中发生了复位，只要电压足够高，写操作仍将正常结束。<SPAN 
+lang=EN-US></SPAN></SPAN></P>
+<P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><B><SPAN lang=EN-US 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial">ATmega16 I/O</SPAN></B><B><SPAN 
+style="FONT-SIZE: 13.5pt; FONT-FAMILY: 宋体; mso-bidi-font-family: Arial; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">存储器</SPAN></B><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><BR>ATmega16</SPAN><SPAN 
+style="FONT-SIZE: 9pt">所有的<SPAN lang=EN-US>I/O</SPAN>及外设都被放置于<SPAN 
+lang=EN-US>I/O</SPAN>空间。所有的<SPAN lang=EN-US>I/O</SPAN>位置都可以通过<SPAN lang=EN-US>IN 
+</SPAN>与<SPAN lang=EN-US>OUT</SPAN>指令来访问，在<SPAN lang=EN-US>32 
+</SPAN>个通用工作寄存器和<SPAN lang=EN-US>I/O </SPAN>之间传输数据。 地址为<SPAN lang=EN-US>0x00 - 
+0x<CHMETCNV w:st="on" unitname="F" sourcevalue="1" hasspace="False" 
+negative="False" numbertype="1" tcsc="0" />1F</CHMETCNV /> </SPAN>的<SPAN 
+lang=EN-US>I/O </SPAN>寄存器还可用<SPAN lang=EN-US>SBI </SPAN>和<SPAN lang=EN-US>CBI 
+</SPAN>指令直接进行位寻址，而<SPAN lang=EN-US>SBIS </SPAN>和<SPAN lang=EN-US>SBIC 
+</SPAN>则用来检查某一位的值。更多内容请参见指令集。使用<SPAN lang=EN-US>IN </SPAN>和<SPAN lang=EN-US>OUT 
+</SPAN>指令时地址必须在<SPAN lang=EN-US> 0x00 - 0x<CHMETCNV w:st="on" unitname="F" 
+sourcevalue="3" hasspace="False" negative="False" numbertype="1" tcsc="0" 
+/>3F</CHMETCNV /> </SPAN>之间。如果要象<SPAN lang=EN-US>SRAM </SPAN>一样通过<SPAN 
+lang=EN-US>LD </SPAN>和<SPAN lang=EN-US>ST </SPAN>指令访问<SPAN lang=EN-US>I/O 
+</SPAN>寄存器，相应的地址要加上<SPAN lang=EN-US>0x20</SPAN>。<SPAN 
+lang=EN-US><BR><BR></SPAN>为了与后续产品兼容，保留未用的未应写<SPAN 
+lang=EN-US>"0"</SPAN>，而保留的<SPAN lang=EN-US>I/O </SPAN>寄存器则不应进行写操作。<SPAN 
+lang=EN-US><BR><BR></SPAN>一些状态标志位的清除是通过写<SPAN lang=EN-US>"1" 
+</SPAN>来实现的。要注意的是，与其他大多数<SPAN lang=EN-US>AVR </SPAN>不同，<SPAN lang=EN-US>CBI 
+</SPAN>和<SPAN lang=EN-US>SBI </SPAN>指令只能对某些特定的位进行操作，因而可以用于包含这些状态标志的寄存器。<SPAN 
+lang=EN-US>CBI </SPAN>与<SPAN lang=EN-US>SBI </SPAN>指令只对<SPAN lang=EN-US>0x00 
+</SPAN>到<SPAN lang=EN-US>0x<CHMETCNV w:st="on" unitname="F" sourcevalue="1" 
+hasspace="False" negative="False" numbertype="1" tcsc="0" />1F</CHMETCNV /> 
+</SPAN>的寄存器有效。<SPAN lang=EN-US><BR><BR>I/O </SPAN>和外设控制寄存器在后续其他章节进行介绍。 <SPAN 
+lang=EN-US></SPAN></SPAN></P>
+<P>
+<P style="LINE-HEIGHT: 15pt"></P>
+<P><IMG hspace=0 src="AVR教程（8）：ATmega16 简介（三）.files/20080401235059453.jpg" 
+align=baseline border=0></P>
+<P></P>
+<P><IMG hspace=0 src="AVR教程（8）：ATmega16 简介（三）.files/20080401235100265.jpg" 
+align=baseline border=0></P>
+<P></P>
+<P><IMG hspace=0 src="AVR教程（8）：ATmega16 简介（三）.files/20080401235101279.jpg" 
+align=baseline border=0></P>
+<P></P>
+<P><IMG hspace=0 src="AVR教程（8）：ATmega16 简介（三）.files/20080401235102356.jpg" 
+align=baseline border=0></P></SPAN></SPAN></SPAN></FONT>
+<P></P>
+<P><IMG hspace=0 src="AVR教程（8）：ATmega16 简介（三）.files/20080401235103255.jpg" 
+align=baseline border=0></P>
+<P></P>
+<P><IMG hspace=0 src="AVR教程（8）：ATmega16 简介（三）.files/20080401235105870.jpg" 
+align=baseline border=0></P></DIV>
+<DIV class=pagebreak></DIV>
+<DIV class=ding_box>
+<DIV align=left>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD align=middle width=700></TD></TR></TBODY></TABLE></DIV>
+<DIV align=left>
+<SCRIPT language=javascript src="AVR教程（8）：ATmega16 简介（三）.files/25.js"></SCRIPT>
+</DIV></DIV>
+<DIV class=text_tag>
+<H5>Tags：<B> AVR单片机学习 </B>&nbsp; </H5><SPAN>责任编辑：尘封往事</SPAN> 
+<LI style="DISPLAY: none">
+<SCRIPT language=javascript 
+src="AVR教程（8）：ATmega16 简介（三）.files/count.htm"></SCRIPT>
+</LI></DIV>
+<DIV align=right>【<A href="http://www.c51.cn/avr/Comment.asp?ArticleID=7778" 
+target=_blank>发表评论</A>】【<A 
+href="http://www.c51.cn/User/User_Favorite.asp?Action=Add&amp;ChannelID=1035&amp;InfoID=7778" 
+target=_blank>加入收藏</A>】【<A 
+href="http://www.c51.cn/avr/SendMail.asp?ArticleID=7778" 
+target=_blank>告诉好友</A>】【<A href="http://www.c51.cn/avr/Print.asp?ArticleID=7778" 
+target=_blank>打印此文</A>】【<A href="javascript:window.close();">关闭窗口</A>】 
+&nbsp;&nbsp; </DIV>
+<DIV class=xg>
+<LI>上一篇文章： <A class=LinkPrevArticle 
+title="文章标题：AVR教程（9）：ATmega16&nbsp;简介（四）&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:49:04" 
+href="http://www.c51.cn/avr/avrjc/200804/7777.html">AVR教程（9）：ATmega16&nbsp;简介（四）…</A> 
+</LI>
+<LI>下一篇文章： <A class=LinkNextArticle 
+title="文章标题：AVR教程（7）：ATmega16&nbsp;简介（二）&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:51:33" 
+href="http://www.c51.cn/avr/avrjc/200804/7779.html">AVR教程（7）：ATmega16&nbsp;简介（二）…</A> 
+</LI></DIV>
+<DIV class=box_xgimg>
+<DIV class=title_xg>最新图文 </DIV>
+<TABLE cellSpacing=5 cellPadding=0 width="100%" align=center border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（8）：ATmega16 简介（三）.files/20080807105131440.jpg" width=125 
+      border=0></A><BR><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+      target=_blank>基于AVR单片机的通用U…</A></TD>
+    <TD align=middle><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（8）：ATmega16 简介（三）.files/20080807104931309.jpg" width=125 
+      border=0></A><BR><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+      target=_blank>IP视频监控系统中云台…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（8）：ATmega16 简介（三）.files/20080402000055425.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+      target=_blank>AVR教程（1）：AVR单片…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（8）：ATmega16 简介（三）.files/20080401235756587.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+      target=_blank>AVR教程（2）：AVR单片…</A></TD></TR>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（8）：ATmega16 简介（三）.files/20080401235700490.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" 
+      target=_blank>AVR教程（3）：ICCAVR…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（8）：ATmega16 简介（三）.files/20080401235536700.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" 
+      target=_blank>AVR教程（4）：AVRStu…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（8）：ATmega16 简介（三）.files/20080401235450679.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" 
+      target=_blank>AVR教程（5）：使用AV…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（8）：ATmega16 简介（三）.files/20080401235250334.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" 
+      target=_blank>AVR教程（6）：ATmega…</A></TD></TR></TBODY></TABLE></DIV>
+<DIV class=box_xg>
+<DIV class=title_xg>相关文章列表 </DIV>
+<UL>
+  <LI><A class=LinkArticleCorrelative 
+  title="文章标题：嵌入式C编程与Atmel&nbsp;AVR[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:48" 
+  href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_self>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A><BR><A 
+  class=LinkArticleCorrelative 
+  title="文章标题：winAVR的安装[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:02" 
+  href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_self>winAVR的安装[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：winAVR背景知识[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:52:27" 
+  href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_self>winAVR背景知识[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR系列单片机C语言编程与应用实例[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:50:44" 
+  href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_self>AVR系列单片机C语言编程与应用实例[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：avr库函数介绍[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:49:07" 
+  href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_self>avr库函数介绍[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR高速嵌入式单片机原理与应用（修订版）[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:48:21" 
+  href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_self>AVR高速嵌入式单片机原理与应用（修订版）[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR单片机应用设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:47:36" 
+  href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_self>AVR单片机应用设计</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：ATmega8原理与应用[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:36:31" 
+  href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_self>ATmega8原理与应用[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（1）：AVR单片机介绍&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:58:21" 
+  href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+  target=_self>AVR教程（1）：AVR单片机介绍</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（2）：AVR单片机基本硬件设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:57:33" 
+  href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+  target=_self>AVR教程（2）：AVR单片机基本硬件设计</A><BR></LI></UL></DIV>
+<FORM name=form1 onsubmit="return Check();" action=Comment.asp method=post>
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width=600 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=right width=110>姓 名：</TD>
+    <TD width=180><INPUT maxLength=16 name=Name> <FONT color=red>*</FONT> </TD>
+    <TD align=right width=60>Oicq：</TD>
+    <TD width=170><INPUT maxLength=15 name=Oicq> </TD></TR>
+  <TR>
+    <TD align=right width=110>评 分：</TD>
+    <TD colSpan=3><INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=1 name=Score> 1分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=2 name=Score> 2分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio CHECKED value=3 name=Score> 3分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=4 name=Score> 4分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=5 name=Score> 5分 </TD></TR>
+  <TR>
+    <TD align=right>评论内容：</TD>
+    <TD colSpan=3><TEXTAREA id=Content name=Content rows=6 cols=80></TEXTAREA> 
+    </TD></TR>
+  <TR>
+    <TD align=middle colSpan=4><INPUT id=Action type=hidden value=Save 
+      name=Action> <INPUT id=ArticleID type=hidden value=7778 name=ArticleID> <INPUT type=submit value=" 发 表 " name=Submit> </TD></TR>
+  <TR>
+    <TD height=5></TD></TR></TBODY></TABLE></FORM></DIV></FORM>
+<DIV class=pl>
+<DIV class=pl_title></DIV>
+<SCRIPT language=javascript 
+src="AVR教程（8）：ATmega16 简介（三）.files/Comment.htm"></SCRIPT>
+</DIV></DIV><!--列表左边:结束--><!--列表右边:开始-->
+<DIV class=col2>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>推荐文章 </DIV>
+<UL>
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+  target=_blank>基于AVR单片机的通用USB接口模块设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+  target=_blank>IP视频监控系统中云台控制模块的设计与…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_blank>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_blank>winAVR的安装[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_blank>winAVR背景知识[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_blank>AVR系列单片机C语言编程与应用实例[电子…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_blank>avr库函数介绍[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_blank>AVR高速嵌入式单片机原理与应用（修订版…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_blank>AVR单片机应用设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_blank>ATmega8原理与应用[电子书]</A> </LI></UL></DIV>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>联系方式及服务项目 </DIV>
+<UL>
+  <LI></A>
+  <SCRIPT language=javascript 
+src="AVR教程（8）：ATmega16 简介（三）.files/17.js"></SCRIPT>
+  </LI></UL></DIV></DIV></DIV><!--列表右边:结束-->
+<DIV class=sitemap><A class=Bottom 
+onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.c51.cn');" 
+href="http://www.c51.cn/avr/avrjc/200804/7778.html#">设为首页</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="javascript:window.external.addFavorite('http://www.c51.cn','中国单片机资讯网');">加入收藏</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="mailto:c51cn@163.com">联系站长</A><FONT color=#0000ff> - </FONT><A 
+class=Bottom href="http://www.c51.cn/FriendSite/Index.asp" 
+target=_blank>友情链接</A><FONT color=#0000ff> - </FONT><A class=Bottom 
+href="http://www.c51.cn/Copyright.asp" target=_blank>版权申明</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/wwwgl/200508/26.html">广告服务</A><FONT color=#0000ff> - 
+</FONT><A href="http://www.c51.cn/glwz/wwwgl/200508/23.html">付款方式</A><FONT 
+color=#0000ff> </FONT></DIV>
+<DIV class=footer>
+<DIV class=copyright>
+<P>&copy;Copyright 2006-2008 <STRONG><A href="http://www.c51.cn/"><FONT 
+face=隶书>W</FONT></A></STRONG><A href="http://www.c51.cn/"><STRONG><FONT 
+face=隶书>ww.<FONT color=#000000>c51.Cn</FONT></FONT></STRONG></A> All Rights 
+Reserved<BR><A href="http://www.c51.cn/"><FONT color=#000000>中</FONT></A><SPAN 
+lang=zh-cn><A href="http://www.c51.cn/"><FONT color=#000000>国单片机资讯</FONT></A><A 
+href="http://www.c51.cn/" target=_blank><FONT 
+color=#000000>网</FONT></A></SPAN>　版权所有<FONT 
+color=#ff0000>（24小时服务热线:0755-27805410）</FONT><BR>本网站所有内容未经许可不得转载或用做其他用途，大部份资源均为网上搜集或网友提供，版权皆属原作者所有，请不要用作商业用途；</P>
+<P>原作者如认为本站侵犯了您的版权,请来信或电话告知,我们会立即删除!</P>
+<P><A style="COLOR: #333333; TEXT-DECORATION: none" 
+href="http://www.miibeian.gov.cn/" target=_blank><FONT 
+color=#ff0000>湘ICP备05018526号</FONT></A> E-mail:<A 
+href="mailto:c51cn@163.com">c51cn@163.com</A>&nbsp;&nbsp; <A 
+href="mailto:c51cn@126.com">c51cn@126.com</A>&nbsp; <A 
+href="msn:c51cn@live.cn">MSN:c51cn@live.cn</A>
+<SCRIPT language=JavaScript src="AVR教程（8）：ATmega16 简介（三）.files/cnt.htm" 
+charset=gb2312></SCRIPT>
+ </P></DIV></DIV></DIV></BODY></HTML>

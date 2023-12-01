@@ -1,0 +1,252 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        03/05/2012  10:48:39  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, chengxu.obj TO chengxu RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  chengxu.obj (CHENGXU)
+
+
+LINK MAP OF MODULE:  chengxu (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         ?DT?CHENGXU
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     004DH     UNIT         ?PR?MAIN?CHENGXU
+            CODE    0050H     0020H     UNIT         ?PR?_DELAYMS?CHENGXU
+            CODE    0070H     001AH     UNIT         ?PR?_IAPERASESECTOR?CHENGXU
+            CODE    008AH     0019H     UNIT         ?PR?_IAPREADBYTE?CHENGXU
+            CODE    00A3H     0018H     UNIT         ?PR?_IAPPROGRAMBYTE?CHENGXU
+            CODE    00BBH     000DH     UNIT         ?PR?IAPIDLE?CHENGXU
+            CODE    00C8H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   chengxu (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?CHENGXU
+
+?PR?MAIN?CHENGXU
+  +--> ?PR?_DELAYMS?CHENGXU
+  +--> ?PR?_IAPREADBYTE?CHENGXU
+  +--> ?PR?_IAPERASESECTOR?CHENGXU
+  +--> ?PR?_IAPPROGRAMBYTE?CHENGXU
+
+?PR?_IAPREADBYTE?CHENGXU
+  +--> ?PR?IAPIDLE?CHENGXU
+
+?PR?_IAPERASESECTOR?CHENGXU
+  +--> ?PR?IAPIDLE?CHENGXU
+
+?PR?_IAPPROGRAMBYTE?CHENGXU
+  +--> ?PR?IAPIDLE?CHENGXU
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/05/2012  10:48:39  PAGE 2
+
+
+
+
+
+SYMBOL TABLE OF MODULE:  chengxu (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:00C8H         SEGMENT       ?C_C51STARTUP
+  I:0009H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:00CBH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:00C8H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:00C8H         LINE#         133
+  C:00CAH         LINE#         134
+  C:00CBH         LINE#         135
+  C:00CCH         LINE#         136
+  C:00CEH         LINE#         185
+  C:00D1H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        CHENGXU
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  C:0074H         PUBLIC        _IapEraseSector
+  D:0008H         PUBLIC        Count
+  D:00A8H         PUBLIC        IE
+  C:00A3H         PUBLIC        _IapProgramByte
+  D:00C5H         PUBLIC        IAP_CMD
+  D:00B8H         PUBLIC        IP
+  C:00BBH         PUBLIC        IapIdle
+  D:00C3H         PUBLIC        IAP_ADDRH
+  D:00C4H         PUBLIC        IAP_ADDRL
+  C:0003H         PUBLIC        main
+  C:008AH         PUBLIC        _IapReadByte
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/05/2012  10:48:39  PAGE 3
+
+
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  B:00B0H.3       PUBLIC        jdq
+  D:00C7H         PUBLIC        IAP_CONTR
+  B:00B0H.5       PUBLIC        key
+  D:00C2H         PUBLIC        IAP_DATA
+  B:0088H.4       PUBLIC        TR0
+  D:00C8H         PUBLIC        T2CON
+  D:00C6H         PUBLIC        IAP_TRIG
+  C:0050H         PUBLIC        _delayms
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        x
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0050H         LINE#         70
+  C:0050H         LINE#         71
+  C:0050H         LINE#         73
+  C:005AH         LINE#         74
+  C:005AH         LINE#         75
+  C:0068H         LINE#         76
+  C:006FH         LINE#         77
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          MAIN
+  C:0003H         LINE#         82
+  C:0003H         LINE#         83
+  C:0003H         LINE#         84
+  C:000AH         LINE#         85
+  C:0013H         LINE#         86
+  C:0015H         LINE#         87
+  C:0018H         LINE#         88
+  C:0021H         LINE#         90
+  C:0028H         LINE#         91
+  C:002AH         LINE#         93
+  C:0031H         LINE#         94
+  C:0031H         LINE#         95
+  C:0033H         LINE#         96
+  C:0035H         LINE#         97
+  C:0038H         LINE#         98
+  C:0041H         LINE#         99
+  C:0041H         LINE#         100
+  C:0041H         LINE#         101
+  C:0044H         LINE#         102
+  C:0046H         LINE#         103
+  C:0049H         LINE#         104
+  C:004BH         LINE#         105
+  C:004EH         LINE#         106
+  C:004EH         LINE#         107
+  -------         ENDPROC       MAIN
+  -------         PROC          IAPIDLE
+  C:00BBH         LINE#         114
+  C:00BBH         LINE#         115
+  C:00BBH         LINE#         116
+  C:00BEH         LINE#         117
+  C:00C0H         LINE#         118
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/05/2012  10:48:39  PAGE 4
+
+
+  C:00C2H         LINE#         119
+  C:00C5H         LINE#         120
+  C:00C7H         LINE#         121
+  -------         ENDPROC       IAPIDLE
+  -------         PROC          _IAPREADBYTE
+  D:0006H         SYMBOL        addr
+  -------         DO            
+  D:0007H         SYMBOL        dat
+  -------         ENDDO         
+  C:008AH         LINE#         125
+  C:008AH         LINE#         126
+  C:008AH         LINE#         128
+  C:008DH         LINE#         129
+  C:0090H         LINE#         130
+  C:0092H         LINE#         131
+  C:0094H         LINE#         132
+  C:0097H         LINE#         133
+  C:009AH         LINE#         134
+  C:009BH         LINE#         135
+  C:009CH         LINE#         136
+  C:009DH         LINE#         137
+  C:009FH         LINE#         138
+  C:00A2H         LINE#         139
+  C:00A2H         LINE#         140
+  -------         ENDPROC       _IAPREADBYTE
+  -------         PROC          _IAPPROGRAMBYTE
+  D:0006H         SYMBOL        addr
+  D:0005H         SYMBOL        dat
+  C:00A3H         LINE#         145
+  C:00A3H         LINE#         146
+  C:00A3H         LINE#         148
+  C:00A6H         LINE#         149
+  C:00A9H         LINE#         150
+  C:00ABH         LINE#         151
+  C:00ADH         LINE#         152
+  C:00AFH         LINE#         153
+  C:00B2H         LINE#         154
+  C:00B5H         LINE#         155
+  C:00B6H         LINE#         156
+  C:00B7H         LINE#         157
+  C:00B8H         LINE#         158
+  -------         ENDPROC       _IAPPROGRAMBYTE
+  C:0070H         SYMBOL        L?0023
+  -------         PROC          L?0022
+  -------         ENDPROC       L?0022
+  C:0070H         SYMBOL        L?0023
+  -------         PROC          _IAPERASESECTOR
+  D:0006H         SYMBOL        addr
+  C:0074H         LINE#         163
+  C:0074H         LINE#         164
+  C:0074H         LINE#         165
+  C:0077H         LINE#         166
+  C:007AH         LINE#         167
+  C:007CH         LINE#         168
+  C:007EH         LINE#         169
+  C:0081H         LINE#         170
+  C:0084H         LINE#         171
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/05/2012  10:48:39  PAGE 5
+
+
+  C:0085H         LINE#         172
+  C:0086H         LINE#         173
+  C:0087H         LINE#         174
+  -------         ENDPROC       _IAPERASESECTOR
+  -------         ENDMOD        CHENGXU
+
+Program Size: data=10.0 xdata=0 code=212
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

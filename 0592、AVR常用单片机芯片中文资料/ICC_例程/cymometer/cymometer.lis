@@ -1,0 +1,478 @@
+                         .module cymometer.c
+                         .area vector(rom, abs)
+                         .org 14
+ 000E 93C0              rjmp _timer0
+                         .org 6
+ 0006 D0C0              rjmp _timer1
+                         .area code(ram, con, rel)
+                         .area lit(rom, con, rel)
+ 0000                 _tabel::
+ 0000 3F06              .byte 63,6
+ 0002 5B4F              .byte 91,'O
+ 0004 666D              .byte 'f,'m
+ 0006 7D07              .byte 125,7
+ 0008 7F6F              .byte 127,'o
+ 000A 777C              .byte 'w,124
+ 000C 395E              .byte 57,94
+ 000E 7971              .byte 'y,'q
+ 0010                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+ 0010                   .dbsym s tabel _tabel Ac[16:16]
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+ 0000                 _ledbuff::
+ 0000                   .blkb 2
+                         .area idata
+ 0000 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0002                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+ 0002                   .blkb 2
+                         .area idata
+ 0002 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0004                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+ 0004                   .blkb 2
+                         .area idata
+ 0004 3F3F              .byte 63,63
+                         .area data(ram, con, rel)
+ 0006                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+ 0006                   .dbsym s ledbuff _ledbuff Ac[6:6]
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+ 0000                   .dbfunc s port_init _port_init fI
+                         .even
+ 0000                 _port_init::
+ 0000                   .dbline 28{
+                       ; /**********************************************
+                       ;              http://www.sl.com.cn
+                       ;       双龙电子公司----频率计演示程序(ICCAVR)
+                       ;                  作者：詹卫前
+                       ;           1、学习定时器T1捕捉(捕获)中断的使用
+                       ;           2、学习频率计的设计方法
+                       ;           3、通过对timecount的修改，可实现多量程
+                       ;              频率计编程。
+                       ; **********************************************/
+                       ; #include <io8515.h>
+                       ; #include <macros.h>
+                       ; #pragma interrupt_handler timer0:8
+                       ; #pragma interrupt_handler timer1:4
+                       ; extern void delay_ms(unsigned int n);//引用外部函数
+                       ; extern void delay_1ms(void); 
+                       ; #pragma data:code
+                       ;           /*   七段译码字形表     */        
+                       ; const unsigned char tabel[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+                       ; #pragma data:data
+                       ;           /*     显示缓冲区       */
+                       ; unsigned char ledbuff[]={0x3f,0x3f,0x3f,0x3f,0x3f,0x3f};
+                       ; unsigned long count;//频率测量计数变量
+                       ; unsigned int timecount;//频率测量闸门控制变量
+                       ; /******************************
+                       ;            初始化
+                       ; ******************************/
+                       ; void port_init(void)
+                       ;  {
+ 0000                   .dbline 29
+                       ;   MCUCR=0x00;
+ 0000 2224              clr R2
+ 0002 25BE              out 0x35,R2
+ 0004                   .dbline 30
+                       ;   DDRD=0x3f;
+ 0004 8FE3              ldi R24,63
+ 0006 81BB              out 0x11,R24
+ 0008                   .dbline 31
+                       ;   DDRB=0xff;
+ 0008 8FEF              ldi R24,255
+ 000A 87BB              out 0x17,R24
+ 000C                   .dbline 32
+                       ;   PORTD=0xff;
+ 000C 82BB              out 0x12,R24
+ 000E                   .dbline 33
+                       ;   PORTB=0xff;
+ 000E 88BB              out 0x18,R24
+ 0010                   .dbline 34
+                       ;   TIMSK=0x0a;//开放T0溢出中断和T1捕捉中断
+ 0010 8AE0              ldi R24,10
+ 0012 89BF              out 0x39,R24
+ 0014                   .dbline 35
+                       ;   TCCR0=0x03;
+ 0014 83E0              ldi R24,3
+ 0016 83BF              out 0x33,R24
+ 0018                   .dbline 36
+                       ;   TCCR1A=0x00;
+ 0018 2FBC              out 0x2f,R2
+ 001A                   .dbline 37
+                       ;   TCCR1B=0xc0;
+ 001A 80EC              ldi R24,192
+ 001C 8EBD              out 0x2e,R24
+ 001E                   .dbline 38
+                       ;   TCNT0=0x83;
+ 001E 83E8              ldi R24,131
+ 0020 82BF              out 0x32,R24
+ 0022                   .dbline 39
+                       ;   timecount=1000;
+ 0022 88EE              ldi R24,1000
+ 0024 93E0              ldi R25,3
+ 0026 90930100          sts _timecount+1,R25
+ 002A 80930000          sts _timecount,R24
+ 002E                   .dbline 40}
+                       ;  }
+ 002E                 L1:
+ 002E 0895              ret
+ 0030                   .dbfunc s display _display fI
+                       ;              i -> R20
+                         .even
+ 0030                 _display::
+ 0030 00D0              rcall push_gset1
+ 0032                   .dbline 45{
+                       ; /******************************
+                       ;      六路动态扫描显示电路
+                       ; ******************************/ 
+                       ; void display(void)
+                       ; {
+ 0032                   .dbline 47
+                       ;  unsigned char i;
+                       ;  for (i=0;i<6;i++)
+ 0032 4427              clr R20
+ 0034 16C0              rjmp L6
+ 0036                 L3:
+ 0036                   .dbline 48
+ 0036                   .dbline 49
+ 0036 80E0              ldi R24,<_ledbuff
+ 0038 90E0              ldi R25,>_ledbuff
+ 003A E42F              mov R30,R20
+ 003C FF27              clr R31
+ 003E E80F              add R30,R24
+ 0040 F91F              adc R31,R25
+ 0042 2080              ldd R2,z+0
+ 0044 28BA              out 0x18,R2
+ 0046                   .dbline 50
+ 0046 01E0              ldi R16,1
+ 0048 142F              mov R17,R20
+ 004A 00D0              rcall lsl8
+ 004C 202E              mov R2,R16
+ 004E 2094              com R2
+ 0050 22BA              out 0x12,R2
+ 0052                   .dbline 51
+ 0052 00D0              rcall _delay_1ms
+ 0054                   .dbline 52
+ 0054 01E0              ldi R16,1
+ 0056 142F              mov R17,R20
+ 0058 00D0              rcall lsl8
+ 005A 22B2              in R2,0x12
+ 005C 202A              or R2,R16
+ 005E 22BA              out 0x12,R2
+ 0060                   .dbline 53
+ 0060                 L4:
+ 0060                   .dbline 47
+ 0060 4395              inc R20
+ 0062                 L6:
+ 0062                   .dbline 47
+ 0062 4630              cpi R20,6
+ 0064 40F3              brlo L3
+ 0066                   .dbline 54}
+                       ;   {
+                       ;    PORTB=ledbuff[i];//将显示缓冲区数据送PORTB口
+                       ;    PORTD=~(1<<i);   //开始显示
+                       ;    delay_1ms();     //每一位显示保持一定时间
+                       ;    PORTD|=(1<<i);   //关闭显示
+                       ;   }
+                       ; }
+ 0066                 L2:
+ 0066 00D0              rcall pop_gset1
+ 0068 0895              ret
+ 006A                   .dbsym r i 20 c
+ 006A                   .dbfunc s hextobcd _hextobcd fI
+                       ;           temp -> R10
+                       ;              i -> R12
+                         .even
+ 006A                 _hextobcd::
+ 006A 00D0              rcall push_gset4
+ 006C                   .dbline 59{
+                       ; /************************************
+                       ;   将count十六进制数据转换为LED七段码
+                       ; ************************************/
+                       ; void hextobcd(void)
+                       ; {
+ 006C                   .dbline 61
+                       ;   unsigned char i,temp;
+                       ;   for (i=0;i<6;i++)
+ 006C CC24              clr R12
+ 006E 42C0              rjmp L11
+ 0070                 L8:
+ 0070                   .dbline 62
+ 0070                   .dbline 62
+ 0070 00E0              ldi R16,<L12
+ 0072 10E0              ldi R17,>L12
+ 0074 00D0              rcall lpm32
+ 0076 50900500          lds R5,_count+2+1
+ 007A 40900400          lds R4,_count+2
+ 007E 30900300          lds R3,_count+1
+ 0082 20900200          lds R2,_count
+ 0086 3A93              st -y,R19
+ 0088 2A93              st -y,R18
+ 008A 1A93              st -y,R17
+ 008C 0A93              st -y,R16
+ 008E 022D              mov R16,R2
+ 0090 132D              mov R17,R3
+ 0092 242D              mov R18,R4
+ 0094 352D              mov R19,R5
+ 0096 00D0              rcall mod32u
+ 0098 A02E              mov R10,R16
+ 009A                   .dbline 63
+ 009A 80E0              ldi R24,<_tabel
+ 009C 90E0              ldi R25,>_tabel
+ 009E 2A2C              mov R2,R10
+ 00A0 3324              clr R3
+ 00A2 280E              add R2,R24
+ 00A4 391E              adc R3,R25
+ 00A6 E22D              mov R30,R2
+ 00A8 F32D              mov R31,R3
+ 00AA C895              lpm
+ 00AC 80E0              ldi R24,<_ledbuff
+ 00AE 90E0              ldi R25,>_ledbuff
+ 00B0 EC2D              mov R30,R12
+ 00B2 FF27              clr R31
+ 00B4 E80F              add R30,R24
+ 00B6 F91F              adc R31,R25
+ 00B8 0082              std z+0,R0
+ 00BA                   .dbline 64
+ 00BA 00E0              ldi R16,<L12
+ 00BC 10E0              ldi R17,>L12
+ 00BE 00D0              rcall lpm32
+ 00C0 50900500          lds R5,_count+2+1
+ 00C4 40900400          lds R4,_count+2
+ 00C8 30900300          lds R3,_count+1
+ 00CC 20900200          lds R2,_count
+ 00D0 3A93              st -y,R19
+ 00D2 2A93              st -y,R18
+ 00D4 1A93              st -y,R17
+ 00D6 0A93              st -y,R16
+ 00D8 022D              mov R16,R2
+ 00DA 132D              mov R17,R3
+ 00DC 242D              mov R18,R4
+ 00DE 352D              mov R19,R5
+ 00E0 00D0              rcall div32u
+ 00E2 10930300          sts _count+1,R17
+ 00E6 00930200          sts _count,R16
+ 00EA 30930500          sts _count+2+1,R19
+ 00EE 20930400          sts _count+2,R18
+ 00F2                   .dbline 65
+ 00F2                 L9:
+ 00F2                   .dbline 61
+ 00F2 C394              inc R12
+ 00F4                 L11:
+ 00F4                   .dbline 61
+ 00F4 8C2D              mov R24,R12
+ 00F6 8630              cpi R24,6
+ 00F8 08F4              brsh X0
+ 00FA BACF              rjmp L8
+ 00FC                 X0:
+ 00FC                   .dbline 66}
+                       ;   {temp=count%10;
+                       ;    ledbuff[i]=tabel[temp];
+                       ;    count=count/10;
+                       ;   }  
+                       ; }
+ 00FC                 L7:
+ 00FC 00D0              rcall pop_gset4
+ 00FE 0895              ret
+ 0100                   .dbsym r temp 10 c
+ 0100                   .dbsym r i 12 c
+ 0100                   .dbfunc s main _main fI
+                       ;              j -> <dead>
+                       ;              i -> <dead>
+                         .even
+ 0100                 _main::
+ 0100                   .dbline 71{
+                       ; /*****************************
+                       ;         主程序
+                       ; ******************************/
+                       ; void main(void)
+                       ; {
+ 0100                   .dbline 73
+                       ;  unsigned char i,j;
+                       ;  MCUCR=0;
+ 0100 2224              clr R2
+ 0102 25BE              out 0x35,R2
+ 0104                   .dbline 74
+                       ;  port_init(); //端口初始化
+ 0104 7DDF              rcall _port_init
+ 0106                   .dbline 75
+                       ;  count=0;
+ 0106 00E0              ldi R16,<L14
+ 0108 10E0              ldi R17,>L14
+ 010A 00D0              rcall lpm32
+ 010C 10930300          sts _count+1,R17
+ 0110 00930200          sts _count,R16
+ 0114 30930500          sts _count+2+1,R19
+ 0118 20930400          sts _count+2,R18
+ 011C                   .dbline 76
+                       ;  SEI();
+ 011C 7894              sei
+ 011E 01C0              rjmp L16
+ 0120                 L15:
+ 0120                   .dbline 78
+ 0120                   .dbline 79
+ 0120 87DF              rcall _display
+ 0122                   .dbline 80
+ 0122                 L16:
+ 0122                   .dbline 77
+                       ;  while(1)
+ 0122 FECF              rjmp L15
+ 0124                 X1:
+ 0124                   .dbline 81}
+                       ;   {
+                       ;    display();
+                       ;   }
+                       ; }
+ 0124                 L13:
+ 0124 0895              ret
+ 0126                   .dbsym l j 1 c
+ 0126                   .dbsym l i 1 c
+ 0126                   .dbfunc s timer0 _timer0 fI
+                         .even
+ 0126                 _timer0::
+ 0126 00D0              rcall push_lset
+ 0128                   .dbline 86{
+                       ; /**************************************
+                       ;  T0溢出中断，完成测量闸门控制和数字转换
+                       ; ***************************************/
+                       ; void timer0(void)
+                       ;    {
+ 0128                   .dbline 87
+                       ;     if (--timecount==0)
+ 0128 90910100          lds R25,_timecount+1
+ 012C 80910000          lds R24,_timecount
+ 0130 0197              sbiw R24,1
+ 0132 282E              mov R2,R24
+ 0134 392E              mov R3,R25
+ 0136 30920100          sts _timecount+1,R3
+ 013A 20920000          sts _timecount,R2
+ 013E 2220              tst R2
+ 0140 59F5              brne L19
+ 0142 3320              tst R3
+ 0144 49F5              brne L19
+ 0146                   .dbline 88
+                       ;      {
+ 0146                   .dbline 89
+                       ;       CLI();
+ 0146 F894              cli
+ 0148                   .dbline 90
+                       ;       hextobcd();
+ 0148 90DF              rcall _hextobcd
+ 014A                   .dbline 91
+                       ;       if (count>999999)
+ 014A 00E0              ldi R16,<L23
+ 014C 10E0              ldi R17,>L23
+ 014E 00D0              rcall lpm32
+ 0150 50900500          lds R5,_count+2+1
+ 0154 40900400          lds R4,_count+2
+ 0158 30900300          lds R3,_count+1
+ 015C 20900200          lds R2,_count
+ 0160 0215              cp R16,R2
+ 0162 1305              cpc R17,R3
+ 0164 2405              cpc R18,R4
+ 0166 3505              cpc R19,R5
+ 0168 28F4              brsh L21
+ 016A                   .dbline 92
+                       ;         ledbuff[0]|=0x80;
+ 016A 80910000          lds R24,_ledbuff
+ 016E 8068              ori R24,128
+ 0170 80930000          sts _ledbuff,R24
+ 0174                 L21:
+ 0174                   .dbline 93
+                       ;       count=0;
+ 0174 00E0              ldi R16,<L14
+ 0176 10E0              ldi R17,>L14
+ 0178 00D0              rcall lpm32
+ 017A 10930300          sts _count+1,R17
+ 017E 00930200          sts _count,R16
+ 0182 30930500          sts _count+2+1,R19
+ 0186 20930400          sts _count+2,R18
+ 018A                   .dbline 94
+                       ;       timecount=1000;
+ 018A 88EE              ldi R24,1000
+ 018C 93E0              ldi R25,3
+ 018E 90930100          sts _timecount+1,R25
+ 0192 80930000          sts _timecount,R24
+ 0196                   .dbline 95
+                       ;       SEI();
+ 0196 7894              sei
+ 0198                   .dbline 96
+                       ;      }
+ 0198                 L19:
+ 0198                   .dbline 97
+                       ;     TCNT0=0x84; 
+ 0198 84E8              ldi R24,132
+ 019A 82BF              out 0x32,R24
+ 019C                   .dbline 98}
+                       ;    }
+ 019C                 L18:
+ 019C 00D0              rcall pop_lset
+ 019E 1895              reti
+ 01A0                   .dbfunc s timer1 _timer1 fI
+                         .even
+ 01A0                 _timer1::
+ 01A0 2A92              st -y,R2
+ 01A2 3A92              st -y,R3
+ 01A4 4A92              st -y,R4
+ 01A6 5A92              st -y,R5
+ 01A8 0A93              st -y,R16
+ 01AA 1A93              st -y,R17
+ 01AC 2A93              st -y,R18
+ 01AE 3A93              st -y,R19
+ 01B0 2FB6              in R2,0x3f
+ 01B2 2A92              st -y,R2
+ 01B4                   .dbline 103{
+                       ; /*****************************
+                       ;   T1捕捉中断，完成脉冲计数
+                       ; ******************************/   
+                       ; void timer1(void)
+                       ;    {
+ 01B4                   .dbline 104
+                       ;     count++;
+ 01B4 00E0              ldi R16,<L25
+ 01B6 10E0              ldi R17,>L25
+ 01B8 00D0              rcall lpm32
+ 01BA 50900500          lds R5,_count+2+1
+ 01BE 40900400          lds R4,_count+2
+ 01C2 30900300          lds R3,_count+1
+ 01C6 20900200          lds R2,_count
+ 01CA 200E              add R2,R16
+ 01CC 311E              adc R3,R17
+ 01CE 421E              adc R4,R18
+ 01D0 531E              adc R5,R19
+ 01D2 30920300          sts _count+1,R3
+ 01D6 20920200          sts _count,R2
+ 01DA 50920500          sts _count+2+1,R5
+ 01DE 40920400          sts _count+2,R4
+ 01E2                   .dbline 105}
+                       ;    }   
+ 01E2                 L24:
+ 01E2 2990              ld R2,y+
+ 01E4 2FBE              out 0x3f,R2
+ 01E6 3991              ld R19,y+
+ 01E8 2991              ld R18,y+
+ 01EA 1991              ld R17,y+
+ 01EC 0991              ld R16,y+
+ 01EE 5990              ld R5,y+
+ 01F0 4990              ld R4,y+
+ 01F2 3990              ld R3,y+
+ 01F4 2990              ld R2,y+
+ 01F6 1895              reti
+                         .area bss(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\cymometer\cymometer.c
+ 0000                 _timecount::
+ 0000                   .blkb 2
+ 0002                   .dbsym s timecount _timecount i
+ 0002                 _count::
+ 0002                   .blkb 4
+ 0006                   .dbsym s count _count l
+                         .area lit(rom, con, rel)
+ 0010                 L25:
+ 0010 01000000          .word 1,0
+ 0014                 L23:
+ 0014 3F420F00          .word 16959,15
+ 0018                 L14:
+ 0018 00000000          .word 0,0
+ 001C                 L12:
+ 001C 0A000000          .word 10,0

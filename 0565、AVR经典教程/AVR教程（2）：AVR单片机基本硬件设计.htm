@@ -1,0 +1,610 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0044)http://www.c51.cn/avr/avrjc/200804/7784.html -->
+<HTML 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>AVR教程（2）：AVR单片机基本硬件设计</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="" name=Keywords>
+<META content="" name=Description><LINK 
+href="AVR教程（2）：AVR单片机基本硬件设计.files/style.css" type=text/css rel=stylesheet>
+<SCRIPT src="AVR教程（2）：AVR单片机基本硬件设计.files/chinaz.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="AVR教程（2）：AVR单片机基本硬件设计.files/prototype.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（2）：AVR单片机基本硬件设计.files/scriptaculous.js"></SCRIPT>
+
+<SCRIPT src="AVR教程（2）：AVR单片机基本硬件设计.files/checklogin.js"></SCRIPT>
+
+<SCRIPT language=JavaScript>
+<!--
+//改变图片大小
+function resizepic(thispic)
+{
+  return true;
+}
+//无级缩放图片大小
+function bbimg(o)
+{
+  return true;
+}
+-->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3395" name=GENERATOR></HEAD>
+<BODY>
+<DIV class=container>
+<DIV class="clearfix header">
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width="100%" 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle>
+      <DIV id=UserLogin>载入中…
+      <SCRIPT language=JavaScript 
+      type=text/JavaScript>LoadUserLogin('/',1,2);</SCRIPT>
+       </DIV></TD>
+    <TD align=middle width="14%">
+      <SCRIPT language=javascript 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/Date.js"></SCRIPT>
+      　</TD></TR></TBODY></TABLE>
+<DIV class=topnav>
+<P align=center><A href="http://www.c51.cn/">http://www.c51.cn/</A> | <A 
+title="" href="http://www.c51.cn/honews/Index.html">新闻中心</A> | <A 
+href="http://www.c51.cn/mcu/Index.html">51单片机</A> | <A 
+href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+href="http://www.c51.cn/avr/Index.html">AVR单片机</A> | <A 
+href="http://www.c51.cn/holtek/Index.html">合泰单片机</A> | <A title="" 
+href="http://www.c51.cn/Photo/Index.html">电路图站</A> | <A title="" 
+href="http://www.c51.cn/pcb/">EDA技术</A> | <A title="" 
+href="http://www.c51.cn/power/">电源技术</A> | <A title="" 
+href="http://www.c51.cn/cgq/">传感技术</A> | <A title="" 
+href="http://www.c51.cn/GuestBook/Index.asp">雁过留声</A> | <A title="" 
+href="http://www.stcmcu.cn/bbs/">技术论坛</A> | <A 
+href="http://www.c51.cn/avr/avrjc/200804/" name=StranLink>切换到繁體中文</A>
+<SCRIPT language=javascript 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/gb_big5.js"></SCRIPT>
+ |</P></DIV>
+<DIV class=brand><A class=site-logo title=中国单片机资讯网官方网站 href="http://www.c51.cn/" 
+rel=home><IMG height=60 alt=中国单片机资讯网官方网站 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/logo.gif" width=165></A> </DIV>
+<DIV class=ad-banner>
+<SCRIPT language=javascript src="AVR教程（2）：AVR单片机基本硬件设计.files/19.js"></SCRIPT>
+</DIV>
+<DIV class=ad-text>
+<SCRIPT language=JavaScript src="AVR教程（2）：AVR单片机基本硬件设计.files/text_link.htm" 
+charset=gb2312></SCRIPT>
+
+<TABLE id=table1 cellSpacing=0 cellPadding=2 width=255 border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff0000><IMG 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/td_icon.gif" align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/hdfk/index.html"><FONT 
+      color=#ff0000>货到付款网点</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/top_ico8.gif" align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wzhelp/200807/8109.html">订购方法</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/top_ico2.gif" align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A></TD></TR>
+  <TR>
+    <TD align=middle width=105 height=30><SPAN><FONT color=#ff00ff><IMG 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/td_icon.gif" align=absBottom></FONT><A 
+      href="http://www.c51.cn/glwz/wwwgl/200508/23.html"><FONT 
+      color=#ff00ff>银行汇款帐号</FONT></A></SPAN></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/top_ico8.gif" align=absBottom></SPAN><A 
+      href="http://shop35907817.taobao.com/">淘宝商店</A></TD>
+    <TD align=middle width=75 height=30><SPAN><IMG 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/top_ico2.gif" align=absBottom></SPAN><A 
+      href="http://www.c51.cn/glwz/wwwgl/200808/8156.html">VIP申请</A></TD></TR></TBODY></TABLE></DIV></DIV>
+<DIV class=nav>
+<DIV class=navinner>
+<UL class=navlist>
+  <LI><A href="http://www.c51.cn/">首页</A> </LI>
+  <LI><A id=nav_1 onmouseover="showMenu('nav_1','subnav1')" 
+  href="http://www.c51.cn/mcu/">单片机站</A> 
+  <DIV class="subnav disable" id=subnav1>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/mcu/">MCS-51单片机</A> | <A 
+  href="http://www.c51.cn/avr/">AVR单片机</A> | <A 
+  href="http://www.c51.cn/pic/">PIC单片机</A> | <A 
+  href="http://www.c51.cn/stc/">STC单片机</A> | <A 
+  href="http://www.c51.cn/mp430/">MSP430单片机</A> | <A 
+  href="http://www.c51.cn/holtek/">合泰单片机</A> | <A 
+  href="http://www.c51.cn/emc/">义隆单片机</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_2 onmouseover="showMenu('nav_2','subnav2')" 
+  href="http://www.c51.cn/shop/">网站商城</A> 
+  <DIV class="subnav disable" id=subnav2>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Shop/mcukf/">开发板/学习板</A> | <A 
+  href="http://www.c51.cn/Shop/gkong/">工业控制板</A> | <A 
+  href="http://www.c51.cn/Shop/bcq/">编程器</A> | <A 
+  href="http://www.c51.cn/Shop/fzq/">仿真器</A> | <A 
+  href="http://www.c51.cn/Shop/ic/">电子元器件</A> | <A 
+  href="http://www.c51.cn/Shop/cygj/">常用小工具</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_3 onmouseover="showMenu('nav_3','subnav3')" 
+  href="http://www.c51.cn/cpsm/Index.html">产品帮助</A> 
+  <DIV class="subnav disable" id=subnav3>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/cpsm/sl2000/">SL2000</A> | <A 
+  href="http://www.c51.cn/cpsm/sl800/">SL1800</A> | <A 
+  href="http://www.c51.cn/cpsm/sl480/">SL480+</A> | <A 
+  href="http://www.c51.cn/cpsm/sl300/">成功三号</A> | <A 
+  href="http://www.c51.cn/cpsm/sl200/">SL200</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc15/">NPLC-15</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc24/">NPLC-24</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc25/">NPLC-25</A> | <A 
+  href="http://www.c51.cn/cpsm/nplc28/">NPLC-28</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_4 onmouseover="showMenu('nav_4','subnav4')" 
+  href="http://www.c51.cn/Article/">技术论文</A> 
+  <DIV class="subnav disable" id=subnav4>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/Article/mcuzh/">开发论文</A> | <A 
+  href="http://www.c51.cn/Article/lexu/">嵌入式系统</A> | <A 
+  href="http://www.c51.cn/Article/arm/">ARM专栏</A> | <A 
+  href="http://www.c51.cn/Article/dsp/">DSP专栏</A> | <A 
+  href="http://www.c51.cn/Article/tx/">通信技术 | <A 
+  href="http://www.c51.cn/Article/ycx/">各类源程序</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_5 onmouseover="showMenu('nav_5','subnav5')" 
+  href="http://www.c51.cn/iczldata/">资料查询</A> 
+  <DIV class="subnav disable" id=subnav5>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/iczldata/ttl74/">74XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/cd40/">CD4XX系列</A> | <A 
+  href="http://www.c51.cn/iczldata/ram/">存储器系列</A> | <A 
+  href="http://www.c51.cn/iczldata/adda/">A/D&amp;DA</A> | <A 
+  href="http://www.c51.cn/iczldata/yf/">运算放大器</A> | <A 
+  href="http://www.c51.cn/iczldata/power/">电源管理IC</A> | <A 
+  href="http://www.c51.cn/iczldata/scr/">可控硅</A> | <A 
+  href="http://www.c51.cn/iczldata/yp/">音频视频</A> | <A 
+  href="http://www.c51.cn/iczldata/fmic/">通信IC</A> | <A 
+  href="http://www.c51.cn/iczldata/guou/">光电耦合器</A> | <A 
+  href="http://www.c51.cn/iczldata/dv/">二、三极管</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_6 onmouseover="showMenu('nav_6','subnav6')" 
+  href="http://www.c51.cn/soft">资源下载</A> 
+  <DIV class="subnav disable" id=subnav6>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/soft/kfgj/">开发工具</A> | <A 
+  href="http://www.c51.cn/soft/gjrj/">常用工具</A> | <A 
+  href="http://www.c51.cn/soft/spjc/">视频教程</A> | <A 
+  href="http://www.c51.cn/soft/dzbooks/">电子书籍</A> </SPAN></P></DIV></LI>
+  <LI><A id=nav_7 onmouseover="showMenu('nav_7','subnav7')" 
+  href="http://www.c51.cn/dzjs/">电子技术</A> 
+  <DIV class="subnav disable" id=subnav7>
+  <P class=pointer>.</P>
+  <P><SPAN><A href="http://www.c51.cn/dzjs/yjcs/index.html">电子基础</A> | <A 
+  href="http://www.c51.cn/dzjs/szdl/">数字电路</A> | <A 
+  href="http://www.c51.cn/dzjs/mndl/">模拟电路</A> | <A 
+  href="http://www.c51.cn/dzjs/io/">接口电路</A> | <A 
+  href="http://www.c51.cn/dzjs/xpyy/">芯片应用</A> | <A 
+  href="http://www.c51.cn/dzjs/zhzl/">综合资料</A> | <A 
+  href="http://www.c51.cn/dzjs/wqj/">元件常识</A> 
+</SPAN></P></DIV></LI></UL></DIV></DIV>
+<DIV class=note><SPAN><A href="http://www.c51.cn/User/Index.asp"><IMG 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/td_icon.gif" align=absBottom> 我要投稿</A> <A 
+href="http://www.c51.cn/glwz/wwwgl/200602/1853.html"><IMG 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/tg_icon.gif" align=absBottom> 投稿指南</A> <A 
+href="http://www.c51.cn/xml/Rss.xml"><IMG 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/rss.gif" align=absBottom> RSS订阅</A></SPAN> 
+<B>网站通告:</B> 
+<MARQUEE onmouseover=this.stop() style="WIDTH: 477px; HEIGHT: 15px" 
+onmouseout=this.start() scrollAmount=1 scrollDelay=4 width=477 align="left">
+<P>&nbsp;&nbsp;没有公告</P></MARQUEE></DIV>
+<FORM name=search action=search.asp method=post>
+<DIV class=weizhi><SPAN><B>搜索:</B> <INPUT type=hidden value=0 name=kwtype> 
+<INPUT id=Keyword maxLength=50 value=关键字 name=Keyword> <INPUT class=searchtxt 
+id=Field type=hidden value=Title name=Field> <OPTION selected="selected" 
+value="title">搜索标题</OPTION> </SELECT><INPUT type=image 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/topsearch_submit.gif"> </SPAN>您现在的位置：&nbsp;<A 
+class=LinkPath href="http://www.c51.cn/">中国单片机资讯网</A>&nbsp;&gt;&gt;&nbsp;<A 
+class=LinkPath 
+href="http://www.c51.cn/avr/Index.html">AVR单片机站</A>&nbsp;&gt;&gt;&nbsp;<A 
+class=LinkPath 
+href="http://www.c51.cn/avr/avrjc/Index.html">教程</A>&nbsp;&gt;&gt;&nbsp;正文 
+</DIV></FORM><!--列表左边:开始--><!--列表左边:开始-->
+<DIV class="clearfix wrap layout-cols2">
+<DIV class=col1>
+<DIV id=news>
+<H1>AVR教程（2）：AVR单片机基本硬件设计</H1>
+<DIV class=times>2008-06-10 13:50:46 来源:<A 
+href="http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net">http://www.c51.cn/ShowCopyFrom.asp?ChannelID=1035&amp;SourceName=www.waveshare.net</A> 
+作者:<A title=微雪电子 
+href="http://www.c51.cn/ShowAuthor.asp?ChannelID=1035&amp;AuthorName=微雪电子">微雪电子</A> 
+【<A href="javascript:doZoom(16)">大</A> <A href="javascript:doZoom(14)">中</A> <A 
+href="javascript:doZoom(12)">小</A>】 <A class=fsource 
+href="http://www.c51.cn/avr/avrjc/200804/7784.html#plshow">点击：<FONT 
+id=feedcounttop color=red>
+<SCRIPT language=javascript 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/GetHits.htm"></SCRIPT>
+</FONT> 次</A> </DIV>
+<DIV class=content id=textbody>
+<SCRIPT language=javascript src="AVR教程（2）：AVR单片机基本硬件设计.files/28.js"></SCRIPT>
+</DIV>
+<DIV class=content>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-INDENT: 21pt"><SPAN 
+lang=EN-US>AVR</SPAN><SPAN style="FONT-FAMILY: 宋体; mso-ascii-font-family: " 
+Roman?? New ?Times mso-hansi-font-family: Roman?; 
+Times>单片机基本硬件电路设计包括：</SPAN><SPAN lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: " Roman?? New ?Times 
+mso-hansi-font-family: Roman?; Times>复位电路和下载电路的设计，另外</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN style="FONT-FAMILY: 宋体; mso-ascii-font-family: " 
+Roman?? New ?Times mso-hansi-font-family: Roman?; Times>晶振电路可以不加。</SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN class=white12px1><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>● 
+AVR</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">复位电路的设计</SPAN></SPAN><SPAN 
+lang=EN-US><BR></SPAN><SPAN style="FONT-FAMILY: 宋体; mso-ascii-font-family: " 
+Roman?? New ?Times mso-hansi-font-family: Roman?; Times>　　与传统的</SPAN><SPAN 
+lang=EN-US>51</SPAN><SPAN style="FONT-FAMILY: 宋体; mso-ascii-font-family: " 
+Roman?? New ?Times mso-hansi-font-family: Roman?; Times>单片机相比，</SPAN><SPAN 
+lang=EN-US>AVR</SPAN><SPAN style="FONT-FAMILY: 宋体; mso-ascii-font-family: " 
+Roman?? New ?Times mso-hansi-font-family: Roman?; 
+Times>单片机内置复位电路，并且在熔丝位里，可以控制复位时间，所以，</SPAN><SPAN lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: " Roman?? New ?Times 
+mso-hansi-font-family: Roman?; Times>单片机可以不设外部上电复位电路，依然可以正常复位，稳定工作。</SPAN><SPAN 
+lang=EN-US> <BR></SPAN><SPAN style="FONT-FAMILY: 宋体; mso-ascii-font-family: " 
+Roman?? New ?Times mso-hansi-font-family: Roman?; 
+Times>　　若是系统需要设置按键复位电路，那么注意，</SPAN><SPAN lang=EN-US>AVR</SPAN><SPAN 
+style="FONT-FAMILY: 宋体; mso-ascii-font-family: " Roman?? New ?Times 
+mso-hansi-font-family: Roman?; Times>单片机是低电平复位，如下图，设计按键复位电路：</SPAN><B><SPAN 
+lang=EN-US style="FONT-SIZE: 13.5pt; FONT-FAMILY: Arial"> 
+<P></SPAN></B></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><SHAPETYPE id=_x0000_t75 stroked="f" 
+filled="f" path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" 
+coordsize="21600,21600"><STROKE joinstyle="miter" /><FORMULAS><F 
+eqn="if lineDrawn pixelLineWidth 0" /><F eqn="sum @0 1 0" /><F eqn="sum 0 0 @1" 
+/><F eqn="prod @2 1 2" /><F eqn="prod @3 21600 pixelWidth" /><F 
+eqn="prod @3 21600 pixelHeight" /><F eqn="sum @0 0 1" /><F eqn="prod @6 1 2" 
+/><F eqn="prod @7 21600 pixelWidth" /><F eqn="sum @8 21600 0" /><F 
+eqn="prod @7 21600 pixelHeight" /><F eqn="sum @10 21600 0" /></FORMULAS><PATH 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f" /><LOCK 
+aspectratio="t" v:ext="edit" /></SHAPETYPE>
+<P></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt"><IMG hspace=0 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/20080401235756587.jpg" align=baseline 
+border=0><BR></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">　　　</SPAN></SPAN><SPAN 
+class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>● 
+AVR</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">下载电路的设计</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt; FONT-FAMILY: Arial"><BR></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>　　一般来说，<SPAN 
+lang=EN-US>AVR</SPAN>的编程方式有：</FONT><SPAN lang=EN-US><BR></SPAN><FONT 
+face=宋体>　　（<SPAN lang=EN-US>1</SPAN>）串行编程，<SPAN 
+lang=EN-US>ISP</SPAN>编程</FONT><SPAN lang=EN-US><BR></SPAN><FONT face=宋体>　　（<SPAN 
+lang=EN-US>2</SPAN>）高压<SPAN lang=EN-US>/</SPAN>并行编程</FONT><SPAN 
+lang=EN-US><BR></SPAN><FONT face=宋体>　　（<SPAN lang=EN-US>3</SPAN>）<SPAN 
+lang=EN-US>JTAG</SPAN>编程</FONT><SPAN lang=EN-US><BR></SPAN><FONT 
+face=宋体>　　（<SPAN lang=EN-US>4</SPAN>）<SPAN lang=EN-US>IAP</SPAN>编程</FONT><SPAN 
+lang=EN-US><BR></SPAN><SPAN class=type11><SPAN style="COLOR: windowtext"><FONT 
+face=宋体>　　一般情况，系统板都需要设计下载线路，对<SPAN lang=EN-US>AVR</SPAN>进行编程。目前的<SPAN 
+lang=EN-US>AVR</SPAN>芯片基本上都具备<SPAN lang=EN-US>ISP</SPAN>接口，可通过<SPAN 
+lang=EN-US>ISP</SPAN>接口进行编程。所以，最常见的是，在系统板上留<SPAN 
+lang=EN-US>ISP</SPAN>接口。</FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR></SPAN><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT face=宋体>　　那么什么是<SPAN 
+lang=EN-US>ISP</SPAN>呢？</FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR></SPAN><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT face=宋体>　　<SPAN 
+lang=EN-US>ISP</SPAN>是<SPAN lang=EN-US>In System 
+Program</SPAN>的缩写，意思是在系统编程，亦即是在线编程。它一共使用了两条电源线：<SPAN lang=EN-US>VCC</SPAN>、<SPAN 
+lang=EN-US>GND</SPAN>，三条信号线：<SPAN lang=EN-US>SCK</SPAN>、<SPAN 
+lang=EN-US>MOSI</SPAN>、<SPAN lang=EN-US>MISO</SPAN>，以及复位线：<SPAN 
+lang=EN-US>RESET</SPAN>。由于仅仅使用了几条数据线，所以我们亦常将其称为串行编程。</FONT></SPAN></SPAN><SPAN 
+lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR></SPAN><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT face=宋体>　　值得注意的是：大部分<SPAN 
+lang=EN-US>AVR</SPAN>的<SPAN lang=EN-US>ISP</SPAN>数据端口亦为<SPAN lang=EN-US> 
+SCK</SPAN>、<SPAN lang=EN-US>MOSI</SPAN>、<SPAN lang=EN-US>MISO</SPAN>引脚（如<SPAN 
+lang=EN-US>tiny13/24/2313</SPAN>，<SPAN lang=EN-US>mega48/88/168/8</SPAN>，<SPAN 
+lang=EN-US>mega16/32/162</SPAN>等），如下：</FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext"><FONT 
+face=宋体>[</FONT></SPAN></SPAN></SPAN><SPAN class=type11><SPAN 
+style="COLOR: windowtext"><FONT face=宋体>调试器<SPAN lang=EN-US>] [</SPAN>目标<SPAN 
+lang=EN-US>MCU]</SPAN></FONT></SPAN></SPAN><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><BR><FONT 
+face=宋体><SPAN class=type11><SPAN style="COLOR: windowtext">VCC -------- 
+VCC</SPAN></SPAN><BR><SPAN class=type11><SPAN style="COLOR: windowtext">GND 
+-------- GND</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">RESET -------- RESET</SPAN></SPAN><BR><SPAN 
+class=type11><SPAN style="COLOR: windowtext">SCK -------- 
+SCK</SPAN></SPAN><BR><SPAN class=type11><SPAN style="COLOR: windowtext">MOSI 
+-------- MOSI</SPAN></SPAN><BR><SPAN class=type11><SPAN 
+style="COLOR: windowtext">MISO -------- 
+MISO</SPAN></SPAN></FONT></SPAN></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+style="FONT-SIZE: 9pt"><SPAN lang=EN-US 
+style="BORDER-TOP-WIDTH: 1pt; PADDING-RIGHT: 0cm; PADDING-LEFT: 0cm; BORDER-LEFT-WIDTH: 1pt; BORDER-LEFT-COLOR: windowtext; BORDER-BOTTOM-WIDTH: 1pt; BORDER-BOTTOM-COLOR: windowtext; PADDING-BOTTOM: 0cm; BORDER-TOP-COLOR: windowtext; PADDING-TOP: 0cm; BORDER-RIGHT-WIDTH: 1pt; BORDER-RIGHT-COLOR: windowtext; mso-border-alt: none windowtext 0cm"><FONT 
+face=宋体><SPAN class=type11><SPAN style="COLOR: windowtext"><IMG 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/20080401235757547.jpg"></SPAN></SPAN></FONT></SPAN><SPAN 
+lang=EN-US> 
+<P></SPAN></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US></SPAN><SPAN lang=EN-US style="FONT-SIZE: 9pt">
+<P></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">　</SPAN></SPAN><SPAN 
+class=white12px1><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt; COLOR: windowtext"><FONT face=Arial>● 
+AVR</FONT></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">晶振电路的设计</SPAN></SPAN><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt; FONT-FAMILY: Arial"><BR></SPAN><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">　　</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>与传统的<SPAN lang=EN-US>51</SPAN>单片机相比，<SPAN 
+lang=EN-US>AVR</SPAN>单片机内置<SPAN lang=EN-US>RC</SPAN>振荡电路。出厂时，未进行时钟源设置的<SPAN 
+lang=EN-US>AVR</SPAN>，其时钟源使用的是内部<SPAN lang=EN-US>RC</SPAN>振荡，一般情况使用的是<CHMETCNV 
+w:st="on" unitname="m" sourcevalue="1" hasspace="False" negative="False" 
+numbertype="1" tcsc="0"><SPAN lang=EN-US>1M</SPAN></CHMETCNV>频率。</FONT><SPAN 
+lang=EN-US><BR></SPAN></SPAN><SPAN class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">　　</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>通过对熔丝位的设置，可以设置<SPAN 
+lang=EN-US>MCU</SPAN>的内部<SPAN lang=EN-US>RC</SPAN>振荡频率。例如：<CHMETCNV w:st="on" 
+unitname="m" sourcevalue="4" hasspace="False" negative="False" numbertype="1" 
+tcsc="0"><SPAN lang=EN-US>4M</SPAN></CHMETCNV>、<CHMETCNV w:st="on" unitname="m" 
+sourcevalue="8" hasspace="False" negative="False" numbertype="1" tcsc="0"><SPAN 
+lang=EN-US>8M</SPAN></CHMETCNV>等。</FONT><SPAN lang=EN-US><BR></SPAN></SPAN><SPAN 
+class=white12px1><SPAN 
+style="FONT-SIZE: 9pt; COLOR: windowtext; FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">　　</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 9pt"><FONT face=宋体>不过，内置<SPAN 
+lang=EN-US>RC</SPAN>振荡，在一致性方面存在差异，它因生产的批次有所差异，亦与温度等因素有较大的相关性。所以，在一些对时钟要求较高的场合，如：精确定时，<SPAN 
+lang=EN-US>RS232</SPAN>通信等，这些场合，建议使用外部的晶振线路。<SPAN lang=EN-US> 
+<P></SPAN></FONT></SPAN></P>
+<P 
+style="TEXT-JUSTIFY: inter-ideograph; LINE-HEIGHT: 15pt; TEXT-ALIGN: justify"><SPAN 
+lang=EN-US style="FONT-SIZE: 9pt">
+<P></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US 
+style="FONT-SIZE: 9pt"><IMG hspace=0 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/20080401235758830.jpg" align=baseline 
+border=0><BR style="mso-special-character: line-break"><BR 
+style="mso-special-character: line-break"><SPAN style="COLOR: #ff9900">
+<P><FONT face=宋体></FONT></P></SPAN></SPAN>
+<P></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US>
+<P>&nbsp;</P></SPAN></DIV>
+<DIV class=pagebreak></DIV>
+<DIV class=ding_box>
+<DIV align=left>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD align=middle width=700></TD></TR></TBODY></TABLE></DIV>
+<DIV align=left>
+<SCRIPT language=javascript src="AVR教程（2）：AVR单片机基本硬件设计.files/25.js"></SCRIPT>
+</DIV></DIV>
+<DIV class=text_tag>
+<H5>Tags：<B> AVR单片机学习 </B>&nbsp; </H5><SPAN>责任编辑：尘封往事</SPAN> 
+<LI style="DISPLAY: none">
+<SCRIPT language=javascript 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/count.htm"></SCRIPT>
+</LI></DIV>
+<DIV align=right>【<A href="http://www.c51.cn/avr/Comment.asp?ArticleID=7784" 
+target=_blank>发表评论</A>】【<A 
+href="http://www.c51.cn/User/User_Favorite.asp?Action=Add&amp;ChannelID=1035&amp;InfoID=7784" 
+target=_blank>加入收藏</A>】【<A 
+href="http://www.c51.cn/avr/SendMail.asp?ArticleID=7784" 
+target=_blank>告诉好友</A>】【<A href="http://www.c51.cn/avr/Print.asp?ArticleID=7784" 
+target=_blank>打印此文</A>】【<A href="javascript:window.close();">关闭窗口</A>】 
+&nbsp;&nbsp; </DIV>
+<DIV class=xg>
+<LI>上一篇文章： <A class=LinkPrevArticle 
+title="文章标题：AVR教程（3）：ICCAVR快速使用&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:56:44" 
+href="http://www.c51.cn/avr/avrjc/200804/7783.html">AVR教程（3）：ICCAVR快速使用</A> 
+</LI>
+<LI>下一篇文章： <A class=LinkNextArticle 
+title="文章标题：AVR教程（1）：AVR单片机介绍&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:58:21" 
+href="http://www.c51.cn/avr/avrjc/200804/7785.html">AVR教程（1）：AVR单片机介绍</A> 
+</LI></DIV>
+<DIV class=box_xgimg>
+<DIV class=title_xg>最新图文 </DIV>
+<TABLE cellSpacing=5 cellPadding=0 width="100%" align=center border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/20080807105131440.jpg" width=125 
+      border=0></A><BR><A class="" title=基于AVR单片机的通用USB接口模块设计 
+      href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+      target=_blank>基于AVR单片机的通用U…</A></TD>
+    <TD align=middle><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/20080807104931309.jpg" width=125 
+      border=0></A><BR><A class="" title=IP视频监控系统中云台控制模块的设计与实现 
+      href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+      target=_blank>IP视频监控系统中云台…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/20080402000055425.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（1）：AVR单片机介绍 
+      href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+      target=_blank>AVR教程（1）：AVR单片…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/20080401235756587.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（2）：AVR单片机基本硬件设计 
+      href="http://www.c51.cn/avr/avrjc/200804/7784.html" 
+      target=_blank>AVR教程（2）：AVR单片…</A></TD></TR>
+  <TR vAlign=top>
+    <TD align=middle><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/20080401235700490.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（3）：ICCAVR快速使用 
+      href="http://www.c51.cn/avr/avrjc/200804/7783.html" 
+      target=_blank>AVR教程（3）：ICCAVR…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/20080401235536700.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（4）：AVRStudio仿真调试快速入门 
+      href="http://www.c51.cn/avr/avrjc/200804/7782.html" 
+      target=_blank>AVR教程（4）：AVRStu…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/20080401235450679.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（5）：使用AVRStudio设置AVR熔丝位及烧写程序 
+      href="http://www.c51.cn/avr/avrjc/200804/7781.html" 
+      target=_blank>AVR教程（5）：使用AV…</A></TD>
+    <TD align=middle><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" target=_blank><IMG 
+      class=pic1 height=95 
+      src="AVR教程（2）：AVR单片机基本硬件设计.files/20080401235250334.jpg" width=125 
+      border=0></A><BR><A class="" title=AVR教程（6）：ATmega16&nbsp;简介（一） 
+      href="http://www.c51.cn/avr/avrjc/200804/7780.html" 
+      target=_blank>AVR教程（6）：ATmega…</A></TD></TR></TBODY></TABLE></DIV>
+<DIV class=box_xg>
+<DIV class=title_xg>相关文章列表 </DIV>
+<UL>
+  <LI><A class=LinkArticleCorrelative 
+  title="文章标题：嵌入式C编程与Atmel&nbsp;AVR[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:48" 
+  href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_self>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A><BR><A 
+  class=LinkArticleCorrelative 
+  title="文章标题：winAVR的安装[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:54:02" 
+  href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_self>winAVR的安装[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：winAVR背景知识[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:52:27" 
+  href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_self>winAVR背景知识[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR系列单片机C语言编程与应用实例[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:50:44" 
+  href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_self>AVR系列单片机C语言编程与应用实例[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：avr库函数介绍[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:49:07" 
+  href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_self>avr库函数介绍[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR高速嵌入式单片机原理与应用（修订版）[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:48:21" 
+  href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_self>AVR高速嵌入式单片机原理与应用（修订版）[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR单片机应用设计&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:47:36" 
+  href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_self>AVR单片机应用设计</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：ATmega8原理与应用[电子书]&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：佚名&#13;&#10;更新时间：2008-5-23 18:36:31" 
+  href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_self>ATmega8原理与应用[电子书]</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（1）：AVR单片机介绍&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:58:21" 
+  href="http://www.c51.cn/avr/avrjc/200804/7785.html" 
+  target=_self>AVR教程（1）：AVR单片机介绍</A><BR><A class=LinkArticleCorrelative 
+  title="文章标题：AVR教程（3）：ICCAVR快速使用&#13;&#10;作&nbsp;&nbsp;&nbsp;&nbsp;者：微雪电子&#13;&#10;更新时间：2008-4-1 23:56:44" 
+  href="http://www.c51.cn/avr/avrjc/200804/7783.html" 
+  target=_self>AVR教程（3）：ICCAVR快速使用</A><BR></LI></UL></DIV>
+<FORM name=form1 onsubmit="return Check();" action=Comment.asp method=post>
+<TABLE style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=0 width=600 
+align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=right width=110>姓 名：</TD>
+    <TD width=180><INPUT maxLength=16 name=Name> <FONT color=red>*</FONT> </TD>
+    <TD align=right width=60>Oicq：</TD>
+    <TD width=170><INPUT maxLength=15 name=Oicq> </TD></TR>
+  <TR>
+    <TD align=right width=110>评 分：</TD>
+    <TD colSpan=3><INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=1 name=Score> 1分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=2 name=Score> 2分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio CHECKED value=3 name=Score> 3分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=4 name=Score> 4分 <INPUT 
+      style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
+      type=radio value=5 name=Score> 5分 </TD></TR>
+  <TR>
+    <TD align=right>评论内容：</TD>
+    <TD colSpan=3><TEXTAREA id=Content name=Content rows=6 cols=80></TEXTAREA> 
+    </TD></TR>
+  <TR>
+    <TD align=middle colSpan=4><INPUT id=Action type=hidden value=Save 
+      name=Action> <INPUT id=ArticleID type=hidden value=7784 name=ArticleID> <INPUT type=submit value=" 发 表 " name=Submit> </TD></TR>
+  <TR>
+    <TD height=5></TD></TR></TBODY></TABLE></FORM></DIV></FORM>
+<DIV class=pl>
+<DIV class=pl_title></DIV>
+<SCRIPT language=javascript 
+src="AVR教程（2）：AVR单片机基本硬件设计.files/Comment.htm"></SCRIPT>
+</DIV></DIV><!--列表左边:结束--><!--列表右边:开始-->
+<DIV class=col2>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>推荐文章 </DIV>
+<UL>
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8133.html" 
+  target=_blank>基于AVR单片机的通用USB接口模块设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avryy/200808/8132.html" 
+  target=_blank>IP视频监控系统中云台控制模块的设计与…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7900.html" 
+  target=_blank>嵌入式C编程与Atmel&nbsp;AVR[电子书]…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7899.html" 
+  target=_blank>winAVR的安装[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7898.html" 
+  target=_blank>winAVR背景知识[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7897.html" 
+  target=_blank>AVR系列单片机C语言编程与应用实例[电子…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7896.html" 
+  target=_blank>avr库函数介绍[电子书]</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7895.html" 
+  target=_blank>AVR高速嵌入式单片机原理与应用（修订版…</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7894.html" 
+  target=_blank>AVR单片机应用设计</A> 
+  <LI>· <A href="http://www.c51.cn/avr/avrjc/200805/7893.html" 
+  target=_blank>ATmega8原理与应用[电子书]</A> </LI></UL></DIV>
+<DIV class=right_bot></DIV>
+<DIV class="right_box right_bot">
+<DIV class=right_title>联系方式及服务项目 </DIV>
+<UL>
+  <LI></A>
+  <SCRIPT language=javascript src="AVR教程（2）：AVR单片机基本硬件设计.files/17.js"></SCRIPT>
+  </LI></UL></DIV></DIV></DIV><!--列表右边:结束-->
+<DIV class=sitemap><A class=Bottom 
+onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.c51.cn');" 
+href="http://www.c51.cn/avr/avrjc/200804/7784.html#">设为首页</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="javascript:window.external.addFavorite('http://www.c51.cn','中国单片机资讯网');">加入收藏</A><FONT 
+color=#0000ff> - </FONT><A class=Bottom 
+href="mailto:c51cn@163.com">联系站长</A><FONT color=#0000ff> - </FONT><A 
+class=Bottom href="http://www.c51.cn/FriendSite/Index.asp" 
+target=_blank>友情链接</A><FONT color=#0000ff> - </FONT><A class=Bottom 
+href="http://www.c51.cn/Copyright.asp" target=_blank>版权申明</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/glwz/wwwgl/200601/1852.html">网站地图</A><FONT 
+color=#0000ff> - </FONT><A 
+href="http://www.c51.cn/wwwgl/200508/26.html">广告服务</A><FONT color=#0000ff> - 
+</FONT><A href="http://www.c51.cn/glwz/wwwgl/200508/23.html">付款方式</A><FONT 
+color=#0000ff> </FONT></DIV>
+<DIV class=footer>
+<DIV class=copyright>
+<P>&copy;Copyright 2006-2008 <STRONG><A href="http://www.c51.cn/"><FONT 
+face=隶书>W</FONT></A></STRONG><A href="http://www.c51.cn/"><STRONG><FONT 
+face=隶书>ww.<FONT color=#000000>c51.Cn</FONT></FONT></STRONG></A> All Rights 
+Reserved<BR><A href="http://www.c51.cn/"><FONT color=#000000>中</FONT></A><SPAN 
+lang=zh-cn><A href="http://www.c51.cn/"><FONT color=#000000>国单片机资讯</FONT></A><A 
+href="http://www.c51.cn/" target=_blank><FONT 
+color=#000000>网</FONT></A></SPAN>　版权所有<FONT 
+color=#ff0000>（24小时服务热线:0755-27805410）</FONT><BR>本网站所有内容未经许可不得转载或用做其他用途，大部份资源均为网上搜集或网友提供，版权皆属原作者所有，请不要用作商业用途；</P>
+<P>原作者如认为本站侵犯了您的版权,请来信或电话告知,我们会立即删除!</P>
+<P><A style="COLOR: #333333; TEXT-DECORATION: none" 
+href="http://www.miibeian.gov.cn/" target=_blank><FONT 
+color=#ff0000>湘ICP备05018526号</FONT></A> E-mail:<A 
+href="mailto:c51cn@163.com">c51cn@163.com</A>&nbsp;&nbsp; <A 
+href="mailto:c51cn@126.com">c51cn@126.com</A>&nbsp; <A 
+href="msn:c51cn@live.cn">MSN:c51cn@live.cn</A>
+<SCRIPT language=JavaScript src="AVR教程（2）：AVR单片机基本硬件设计.files/cnt.htm" 
+charset=gb2312></SCRIPT>
+ </P></DIV></DIV></DIV></BODY></HTML>

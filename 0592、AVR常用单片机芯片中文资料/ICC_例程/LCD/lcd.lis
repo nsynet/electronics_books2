@@ -1,0 +1,107 @@
+                         .module lcd.c
+                         .area text(rom, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\LCD\lcd.c
+ 0000                   .dbfunc s main _main fI
+                         .even
+ 0000                 _main::
+ 0000                   .dbline 12{
+                       ; /******************************************************
+                       ;              http://www.sl.com.cn
+                       ;       双龙电子公司----2*16 LCD控制演示程序(ICCAVR)
+                       ;                  作者：詹卫前       
+                       ;     使用注意：1、应包含头文件slavr.h
+                       ;               2、在工程选项中的Additional Lib中填入slavr
+                       ;                  使用编译器使用附加库文件libslavr.a
+                       ; *******************************************************/
+                       ; #include <io8515.h>
+                       ; #include <slavr.h>
+                       ; void main(void)
+                       ; {
+ 0000                   .dbline 13
+                       ;  MCUCR=0;
+ 0000 2224              clr R2
+ 0002 25BE              out 0x35,R2
+ 0004                   .dbline 14
+                       ;  lcd_init();
+ 0004 00D0              rcall _lcd_init
+ 0006 1AC0              rjmp L3
+ 0008                 L2:
+ 0008                   .dbline 16
+ 0008                   .dbline 17
+ 0008 2227              clr R18
+ 000A 02E0              ldi R16,2
+ 000C 00D0              rcall _lcd_gotoxy
+ 000E                   .dbline 18
+ 000E 00E0              ldi R16,<L5
+ 0010 10E0              ldi R17,>L5
+ 0012 00D0              rcall _lcd_puts
+ 0014                   .dbline 19
+ 0014 00ED              ldi R16,2000
+ 0016 17E0              ldi R17,7
+ 0018 00D0              rcall _delay_ms
+ 001A                   .dbline 20
+ 001A 00D0              rcall _lcd_clear
+ 001C                   .dbline 21
+ 001C 2227              clr R18
+ 001E 04E0              ldi R16,4
+ 0020 00D0              rcall _lcd_gotoxy
+ 0022                   .dbline 22
+ 0022 00E0              ldi R16,<L6
+ 0024 10E0              ldi R17,>L6
+ 0026 00D0              rcall _lcd_puts
+ 0028                   .dbline 23
+ 0028 21E0              ldi R18,1
+ 002A 01E0              ldi R16,1
+ 002C 00D0              rcall _lcd_gotoxy
+ 002E                   .dbline 24
+ 002E 00E0              ldi R16,<L7
+ 0030 10E0              ldi R17,>L7
+ 0032 00D0              rcall _lcd_puts
+ 0034                   .dbline 25
+ 0034 00ED              ldi R16,2000
+ 0036 17E0              ldi R17,7
+ 0038 00D0              rcall _delay_ms
+ 003A                   .dbline 26
+ 003A 00D0              rcall _lcd_clear
+ 003C                   .dbline 27
+ 003C                 L3:
+ 003C                   .dbline 15
+                       ;  while(1)
+ 003C E5CF              rjmp L2
+ 003E                 X0:
+ 003E                   .dbline 28}
+                       ;     {
+                       ;      lcd_gotoxy(2,0);
+                       ;      lcd_puts("Hello World!");
+                       ;      delay_ms(2000);
+                       ;      lcd_clear();
+                       ;      lcd_gotoxy(4,0);
+                       ;      lcd_puts("HTTP://");
+                       ;      lcd_gotoxy(1,1);
+                       ;      lcd_puts("www.sl.com.cn");
+                       ;      delay_ms(2000);
+                       ;      lcd_clear();
+                       ;      }
+                       ;  }
+ 003E                 L1:
+ 003E 0895              ret
+                         .area data(ram, con, rel)
+ 0000                   .dbfile D:\ICC-AVR\examples.sl\LCD\lcd.c
+ 0000                 L7:
+ 0000                   .blkb 14
+                         .area idata
+ 0000 7777772E736C2E636F6D2E636E00   .byte 'w,'w,'w,46,'s,'l,46,'c,'o,'m,46,'c,'n,0
+                         .area data(ram, con, rel)
+ 000E                   .dbfile D:\ICC-AVR\examples.sl\LCD\lcd.c
+ 000E                 L6:
+ 000E                   .blkb 8
+                         .area idata
+ 000E 485454503A2F2F00   .byte 'H,'T,'T,'P,58,47,47,0
+                         .area data(ram, con, rel)
+ 0016                   .dbfile D:\ICC-AVR\examples.sl\LCD\lcd.c
+ 0016                 L5:
+ 0016                   .blkb 13
+                         .area idata
+ 0016 48656C6C6F20576F726C642100     .byte 'H,'e,'l,'l,'o,32,'W,'o,'r,'l,'d,33,0
+                         .area data(ram, con, rel)
+ 0023                   .dbfile D:\ICC-AVR\examples.sl\LCD\lcd.c

@@ -1,0 +1,443 @@
+[009E]         LDI     R28,0x5F
+               LDI     R29,0x02
+               OUT     0x3D,R28
+               OUT     0x3E,R29
+               SUBI    R28,0x10
+               SBCI    R29,0x00
+               LDI     R16,0xAA
+               STD     Y+0,R16
+               EOR     R0,R0
+               LDI     R30,0x71
+               LDI     R31,0x00
+               LDI     R17,0x00
+[00AA]         CPI     R30,0xB8
+               CPC     R31,R17
+      C        BREQ    +0x02             ; Destination: 0x0000AF
+               ST      Z+,R0
+      C        RJMP    -0x0005           ; Destination: 0x0000AA
+[00AF]         STD     Z+0,R16
+               LDI     R30,0x2A
+               LDI     R31,0x01
+               LDI     R26,0x60
+               LDI     R27,0x00
+               LDI     R17,0x01
+[00B5]         CPI     R30,0x3B
+               CPC     R31,R17
+      C        BREQ    +0x04             ; Destination: 0x0000BC
+               LPM
+               ADIW    R30,0x01
+               ST      X+,R0
+      C        RJMP    -0x0007           ; Destination: 0x0000B5
+[00BC]C X      RCALL   +0x000C           ; Destination: 0x0000C9
+[00BD]C        RJMP    -0x0001           ; Destination: 0x0000BD
+[00BE]         EOR     R2,R2
+               OUT     0x0A,R2
+               LDI     R24,0x19
+               OUT     0x09,R24
+               SBI     0x0A,3
+        X      RET
+[00C4]         LDI     R24,0x02
+               OUT     0x11,R24
+               LDI     R24,0xFF
+               OUT     0x12,R24
+        X      RET
+[00C9]C X      RCALL   -0x0006           ; Destination: 0x0000C4
+      C X      RCALL   -0x000D           ; Destination: 0x0000BE
+      C X      RCALL   +0x0045           ; Destination: 0x000111
+               LDI     R16,0x60
+               LDI     R17,0x00
+      C X      RCALL   +0x015E           ; Destination: 0x00022D
+               LDI     R16,0x0D
+      C X      RCALL   +0x0147           ; Destination: 0x000218
+      C        RJMP    +0x000D           ; Destination: 0x0000DF
+[00D2]C X      RCALL   +0x0022           ; Destination: 0x0000F5
+               MOV     R20,R16
+               AND     R16,R16
+      C        BREQ    +0x09             ; Destination: 0x0000DF
+               CPI     R16,0x0D
+      C        BRNE    +0x05             ; Destination: 0x0000DD
+               LDI     R16,0x0A
+      C X      RCALL   +0x013E           ; Destination: 0x000218
+               MOV     R16,R20
+      C X      RCALL   +0x013C           ; Destination: 0x000218
+      C        RJMP    +0x0002           ; Destination: 0x0000DF
+[00DD]         MOV     R16,R20
+      C X      RCALL   +0x0139           ; Destination: 0x000218
+[00DF]C        RJMP    -0x000E           ; Destination: 0x0000D2
+        X      RET
+[00E1]         LDI     R24,0x75
+               LDI     R25,0x00
+       L       LDS     R30,0x006F
+                  <ext>
+               EOR     R31,R31
+               ADD     R30,R24
+               ADC     R31,R25
+               STD     Z+0,R16
+       L       LDS     R24,0x006F
+                  <ext>
+               CPI     R24,0x3F
+      C        BRCC    +0x04             ; Destination: 0x0000F1
+               SUBI    R24,0xFF
+       L       STS     0x006F,R24
+                  <ext>
+      C        RJMP    +0x0003           ; Destination: 0x0000F4
+[00F1]         EOR     R2,R2
+       L       STS     0x006F,R2
+                  <ext>
+[00F4]  X      RET
+[00F5] L       LDS     R2,0x006F
+                  <ext>
+       L       LDS     R3,0x0070
+                  <ext>
+               CP      R3,R2
+      C        BRNE    +0x02             ; Destination: 0x0000FD
+               EOR     R16,R16
+      C        RJMP    +0x0013           ; Destination: 0x000110
+[00FD]         LDI     R24,0x75
+               LDI     R25,0x00
+       L       LDS     R30,0x0070
+                  <ext>
+               EOR     R31,R31
+               ADD     R30,R24
+               ADC     R31,R25
+               LDD     R16,Z+0
+       L       LDS     R24,0x0070
+                  <ext>
+               CPI     R24,0x3F
+      C        BRCC    +0x04             ; Destination: 0x00010D
+               SUBI    R24,0xFF
+       L       STS     0x0070,R24
+                  <ext>
+      C        RJMP    +0x0003           ; Destination: 0x000110
+[010D]         EOR     R2,R2
+       L       STS     0x0070,R2
+                  <ext>
+[0110]  X      RET
+[0111]         LDI     R24,0x02
+               OUT     0x35,R24
+               IN      R24,0x3B
+               ORI     R24,0x40
+               OUT     0x3B,R24
+               SEI
+               LDI     R24,0x0B
+       L       STS     0x00B5,R24
+                  <ext>
+        X      RET
+[011B]C X      RCALL   +0x00F7           ; Destination: 0x000213
+               MOV     R22,R16
+               CPI     R22,0xF0
+      C        BRNE    +0x04             ; Destination: 0x000123
+               LDI     R24,0x01
+       L       STS     0x0072,R24
+                  <ext>
+      C        RJMP    +0x006C           ; Destination: 0x00018F
+[0123] L       LDS     R24,0x0072
+                  <ext>
+               CPI     R24,0x01
+      C        BRNE    +0x20             ; Destination: 0x000147
+               EOR     R2,R2
+       L       STS     0x0072,R2
+                  <ext>
+               CPI     R22,0x12
+      C        BRNE    +0x05             ; Destination: 0x000131
+               LDI     R24,0x01
+               LDI     R25,0x00
+               MOV     R10,R24
+               MOV     R11,R25
+      C        RJMP    +0x0002           ; Destination: 0x000133
+[0131]         EOR     R10,R10
+               EOR     R11,R11
+[0133]         CPI     R22,0x59
+      C        BRNE    +0x03             ; Destination: 0x000138
+               LDI     R20,0x01
+               LDI     R21,0x00
+      C        RJMP    +0x0002           ; Destination: 0x00013A
+[0138]         EOR     R20,R20
+               EOR     R21,R21
+[013A]         MOV     R2,R10
+               MOV     R3,R11
+               OR      R2,R20
+               OR      R3,R21
+               AND     R2,R2
+      C        BRNE    +0x03             ; Destination: 0x000143
+               AND     R3,R3
+      C        BRNE    +0x01             ; Destination: 0x000143
+      C        RJMP    +0x004C           ; Destination: 0x00018F
+[0143]         EOR     R2,R2
+       L       STS     0x0071,R2
+                  <ext>
+      C        RJMP    +0x0048           ; Destination: 0x00018F
+[0147]         MOV     R20,R22
+               EOR     R21,R21
+               CPI     R20,0x12
+               LDI     R30,0x00
+               CPC     R21,R30
+      C        BREQ    +0x09             ; Destination: 0x000156
+               CPI     R20,0x12
+               LDI     R30,0x00
+               CPC     R21,R30
+      C        BRLT    +0x07             ; Destination: 0x000158
+               CPI     R20,0x59
+               LDI     R30,0x00
+               CPC     R21,R30
+      C        BREQ    +0x02             ; Destination: 0x000157
+      C        RJMP    +0x0002           ; Destination: 0x000158
+[0156]C X      RCALL   +0x00FC           ; Destination: 0x000253
+[0157]C X      RCALL   +0x00FB           ; Destination: 0x000253
+[0158] L       LDS     R2,0x0071
+                  <ext>
+               AND     R2,R2
+      C        BREQ    +0x01             ; Destination: 0x00015D
+      C        RJMP    +0x001A           ; Destination: 0x000177
+[015D]         EOR     R20,R20
+      C        RJMP    +0x0001           ; Destination: 0x000160
+[015F]         INC     R20
+[0160]         LDI     R24,0x1A
+      C X      RCALL   +0x00E0           ; Destination: 0x000242
+               MOV     R2,R0
+               EOR     R3,R3
+               MOV     R4,R22
+               EOR     R5,R5
+               CP      R2,R4
+               CPC     R3,R5
+      C        BREQ    +0x04             ; Destination: 0x00016D
+               AND     R2,R2
+      C        BRNE    -0x0C             ; Destination: 0x00015F
+               AND     R3,R3
+      C        BRNE    -0x0E             ; Destination: 0x00015F
+[016D]         LDI     R24,0x1A
+      C X      RCALL   +0x00D3           ; Destination: 0x000242
+               CP      R0,R22
+      C        BREQ    +0x01             ; Destination: 0x000172
+      C        RJMP    +0x001D           ; Destination: 0x00018F
+[0172]         LDI     R24,0x1B
+      C X      RCALL   +0x00CE           ; Destination: 0x000242
+               MOV     R16,R0
+      C X      RCALL   -0x0095           ; Destination: 0x0000E1
+      C        RJMP    +0x0018           ; Destination: 0x00018F
+[0177]         EOR     R20,R20
+      C        RJMP    +0x0001           ; Destination: 0x00017A
+[0179]         INC     R20
+[017A]         LDI     R24,0xA2
+      C X      RCALL   +0x00C6           ; Destination: 0x000242
+               MOV     R2,R0
+               EOR     R3,R3
+               MOV     R4,R22
+               EOR     R5,R5
+               CP      R2,R4
+               CPC     R3,R5
+      C        BREQ    +0x04             ; Destination: 0x000187
+               AND     R2,R2
+      C        BRNE    -0x0C             ; Destination: 0x000179
+               AND     R3,R3
+      C        BRNE    -0x0E             ; Destination: 0x000179
+[0187]         LDI     R24,0xA2
+      C X      RCALL   +0x00B9           ; Destination: 0x000242
+               CP      R0,R22
+      C        BRNE    +0x04             ; Destination: 0x00018F
+               LDI     R24,0xA3
+      C X      RCALL   +0x00B5           ; Destination: 0x000242
+               MOV     R16,R0
+      C X      RCALL   -0x00AE           ; Destination: 0x0000E1
+[018F]C X      RCALL   +0x0086           ; Destination: 0x000216
+        X      RET
+[0191]C X      RCALL   +0x0039           ; Destination: 0x0001CB
+      C X      RCALL   +0x0066           ; Destination: 0x0001F9
+       L       LDS     R20,0x00B5
+                  <ext>
+               EOR     R21,R21
+               CPI     R20,0x01
+               LDI     R30,0x00
+               CPC     R21,R30
+      C        BREQ    +0x14             ; Destination: 0x0001AE
+               CPI     R20,0x02
+               LDI     R30,0x00
+               CPC     R21,R30
+      C        BREQ    +0x0E             ; Destination: 0x0001AC
+               CPI     R20,0x01
+               LDI     R30,0x00
+               CPC     R21,R30
+      C        BRLT    +0x1A             ; Destination: 0x0001BC
+               CPI     R20,0x0B
+               LDI     R30,0x00
+               CPC     R21,R30
+      C        BREQ    +0x01             ; Destination: 0x0001A7
+      C        RJMP    +0x0015           ; Destination: 0x0001BC
+[01A7]         SBIS    0x10,3
+      C        RJMP    +0x0001           ; Destination: 0x0001AA
+      C        RJMP    +0x001E           ; Destination: 0x0001C8
+[01AA]C X      RCALL   +0x00A2           ; Destination: 0x00024D
+      C        RJMP    +0x001C           ; Destination: 0x0001C8
+[01AC]C X      RCALL   +0x00A0           ; Destination: 0x00024D
+      C        RJMP    +0x001A           ; Destination: 0x0001C8
+[01AE]C X      RCALL   +0x009E           ; Destination: 0x00024D
+               SBIC    0x10,3
+      C        RJMP    +0x0004           ; Destination: 0x0001B5
+               LDI     R24,0x0B
+       L       STS     0x00B5,R24
+                  <ext>
+      C        RJMP    +0x0013           ; Destination: 0x0001C8
+[01B5]         LDI     R24,0x0B
+       L       STS     0x00B5,R24
+                  <ext>
+       L       LDS     R16,0x0074
+                  <ext>
+      C X      RCALL   -0x00A0           ; Destination: 0x00011B
+      C        RJMP    +0x000C           ; Destination: 0x0001C8
+[01BC] L       LDS     R2,0x0074
+                  <ext>
+               LSR     R2
+       L       STS     0x0074,R2
+                  <ext>
+               SBIS    0x10,3
+      C        RJMP    +0x0004           ; Destination: 0x0001C7
+               MOV     R24,R2
+               ORI     R24,0x80
+       L       STS     0x0074,R24
+                  <ext>
+[01C7]C X      RCALL   +0x0085           ; Destination: 0x00024D
+[01C8]C X      RCALL   +0x0033           ; Destination: 0x0001FC
+      C X      RCALL   +0x0018           ; Destination: 0x0001E2
+        X      RETI
+[01CB]         ST      -Y,R31
+               ST      -Y,R30
+               ST      -Y,R27
+               ST      -Y,R26
+               ST      -Y,R25
+               ST      -Y,R24
+               ST      -Y,R19
+               ST      -Y,R18
+               ST      -Y,R17
+               ST      -Y,R16
+               ST      -Y,R9
+               ST      -Y,R8
+               ST      -Y,R7
+               ST      -Y,R6
+               ST      -Y,R5
+               ST      -Y,R4
+               ST      -Y,R3
+               ST      -Y,R2
+               ST      -Y,R1
+               ST      -Y,R0
+               IN      R0,0x3F
+               ST      -Y,R0
+        X      RET
+[01E2]         LD      R0,Y+
+               OUT     0x3F,R0
+               LD      R0,Y+
+               LD      R1,Y+
+               LD      R2,Y+
+               LD      R3,Y+
+               LD      R4,Y+
+               LD      R5,Y+
+               LD      R6,Y+
+               LD      R7,Y+
+               LD      R8,Y+
+               LD      R9,Y+
+               LD      R16,Y+
+               LD      R17,Y+
+               LD      R18,Y+
+               LD      R19,Y+
+               LD      R24,Y+
+               LD      R25,Y+
+               LD      R26,Y+
+               LD      R27,Y+
+               LD      R30,Y+
+               LD      R31,Y+
+        X      RET
+[01F9]         ST      -Y,R21
+               ST      -Y,R20
+        X      RET
+[01FC]         LDI     R30,0x01
+[01FD]         LD      R20,Y+
+               LD      R21,Y+
+               SBRC    R30,0
+        X      RET
+               LD      R22,Y+
+               LD      R23,Y+
+               SBRC    R30,1
+        X      RET
+               LD      R10,Y+
+               LD      R11,Y+
+               SBRC    R30,2
+        X      RET
+               LD      R12,Y+
+               LD      R13,Y+
+               SBRC    R30,3
+        X      RET
+               LD      R14,Y+
+               LD      R15,Y+
+        X      RET
+[0210]         ST      -Y,R23
+               ST      -Y,R22
+      C        RJMP    -0x001A           ; Destination: 0x0001F9
+[0213]         ST      -Y,R11
+               ST      -Y,R10
+      C        RJMP    -0x0006           ; Destination: 0x000210
+[0216]         LDI     R30,0x04
+      C        RJMP    -0x001B           ; Destination: 0x0001FD
+[0218]C X      RCALL   -0x0020           ; Destination: 0x0001F9
+               MOV     R20,R16
+       L       LDS     R3,0x00B7
+                  <ext>
+       L       LDS     R2,0x00B6
+                  <ext>
+               AND     R2,R2
+      C        BRNE    +0x02             ; Destination: 0x000222
+               AND     R3,R3
+      C        BREQ    +0x04             ; Destination: 0x000226
+[0222]         CPI     R20,0x0A
+      C        BRNE    +0x02             ; Destination: 0x000226
+               LDI     R16,0x0D
+      C X      RCALL   -0x000E           ; Destination: 0x000218
+[0226]         SBIS    0x0B,5
+      C        RJMP    -0x0002           ; Destination: 0x000226
+               OUT     0x0C,R20
+               MOV     R16,R20
+               EOR     R17,R17
+      C X      RCALL   -0x0030           ; Destination: 0x0001FC
+        X      RET
+[022D]C X      RCALL   -0x0035           ; Destination: 0x0001F9
+               MOV     R20,R16
+               MOV     R21,R17
+      C        RJMP    +0x0006           ; Destination: 0x000237
+[0231]         MOV     R30,R20
+               MOV     R31,R21
+               LDD     R16,Z+0
+      C X      RCALL   -0x001D           ; Destination: 0x000218
+               SUBI    R20,0xFF
+               SBCI    R21,0xFF
+[0237]         MOV     R30,R20
+               MOV     R31,R21
+               LDD     R2,Z+0
+               AND     R2,R2
+      C        BRNE    -0x0B             ; Destination: 0x000231
+               LDI     R16,0x0A
+      C X      RCALL   -0x0026           ; Destination: 0x000218
+               LDI     R16,0x01
+               LDI     R17,0x00
+      C X      RCALL   -0x0045           ; Destination: 0x0001FC
+        X      RET
+[0242]         LDI     R25,0x00
+               MOV     R2,R20
+               EOR     R3,R3
+               ADD     R2,R2
+               ADC     R3,R3
+               ADD     R2,R24
+               ADC     R3,R25
+               MOV     R30,R2
+               MOV     R31,R3
+               LPM
+        X      RET
+[024D] L       LDS     R24,0x00B5
+                  <ext>
+               SUBI    R24,0x01
+       L       STS     0x00B5,R24
+                  <ext>
+        X      RET
+[0253]         LDI     R24,0x01
+       L       STS     0x0071,R24
+                  <ext>
+       L       STS     0x0073,R24
+                  <ext>
+        X      RET
