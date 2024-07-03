@@ -1,0 +1,458 @@
+//============================================================================//
+// 文件名:    usbmain.c
+// 描  述：   usb1.1协议的标准请求处理
+// 日  期：   2003/04/03
+//=============================================================================//
+
+#include "usbmain.h"
+#include "usb11.h"
+#include "D12CI.H"
+#include "chap9.h"
+
+void single_transmit(unsigned int * buf, unsigned int len);
+void code_transmit(unsigned int * pRomData, unsigned long int len);
+void stall_ep0(void);
+void control_handler(void);
+void init_unconfig(void);
+void init_config(void);
+
+unsigned int ReadCtrNum;
+void ep0_rxdone_detail(void);
+void ep0_txdone_detail(void);
+extern unsigned int ep_last;
+
+extern CONTROL_XFER ControlData;
+extern EPPFLAGS bEPPflags;
+extern SP_TurnOnSecondLed(void);
+#define NUM_ENDPOINTS	4
+#define CONFIG_DESCRIPTOR_LENGTH    (unsigned long int)(sizeof(USB_CONFIGURATION_DESCRIPTOR)+ sizeof(USB_INTERFACE_DESCRIPTOR)+(NUM_ENDPOINTS * sizeof(USB_ENDPOINT_DESCRIPTOR)))
+//设备描述符号
+USB_DEVICE_DESCRIPTOR DeviceDescr =
+{
+	sizeof(USB_DEVICE_DESCRIPTOR),
+    USB_DEVICE_DESCRIPTOR_TYPE,
+    0x00010000,
+    USB_CLASS_CODE_TEST_CLASS_DEVICE,
+    0, 
+    0,
+	EP0_PACKET_SIZE,
+    0x00040071,
+    0x00060066,
+    0x00010000,
+    0, 			//Manufactory
+    0,			//Product
+    0,			//Serial Number
+    25			//Number of possible configurations
+};
+//配置描述符
+USB_CONFIGURATION_DESCRIPTOR ConfigDescr =
+{
+    sizeof(USB_CONFIGURATION_DESCRIPTOR),
+    USB_CONFIGURATION_DESCRIPTOR_TYPE,
+    CONFIG_DESCRIPTOR_LENGTH,
+	1,
+	1,
+    0,
+	0x60,
+	0xf0
+};
+//接口描述符
+USB_INTERFACE_DESCRIPTOR InterfaceDescr =
+{
+    sizeof(USB_INTERFACE_DESCRIPTOR),
+    USB_INTERFACE_DESCRIPTOR_TYPE,
+    0,
+    0,
+	NUM_ENDPOINTS,
+	USB_CLASS_CODE_TEST_CLASS_DEVICE,
+	USB_SUBCLASS_CODE_TEST_CLASS_D12,
+	USB_PROTOCOL_CODE_TEST_CLASS_D12,
+	0
+};
+//端点1输入描述符
+USB_ENDPOINT_DESCRIPTOR EP1_TXDescr =
+{
+	sizeof(USB_ENDPOINT_DESCRIPTOR),
+	USB_ENDPOINT_DESCRIPTOR_TYPE,
+	0x81,
+	USB_ENDPOINT_TYPE_INTERRUPT,
+	EP1_PACKET_SIZE,
+	10
+};
+//端点1输出描述符
+USB_ENDPOINT_DESCRIPTOR EP1_RXDescr =
+{
+	sizeof(USB_ENDPOINT_DESCRIPTOR),
+	USB_ENDPOINT_DESCRIPTOR_TYPE,
+	0x1,
+	USB_ENDPOINT_TYPE_INTERRUPT,
+	EP1_PACKET_SIZE,
+	10
+};
+//端点2输入描述符
+USB_ENDPOINT_DESCRIPTOR EP2_TXDescr =
+{
+	sizeof(USB_ENDPOINT_DESCRIPTOR),
+	USB_ENDPOINT_DESCRIPTOR_TYPE,
+	0x82,
+	USB_ENDPOINT_TYPE_BULK,
+	EP2_PACKET_SIZE,
+	10
+};
+//端点2输出描述符
+USB_ENDPOINT_DESCRIPTOR EP2_RXDescr =
+{
+	sizeof(USB_ENDPOINT_DESCRIPTOR),
+	USB_ENDPOINT_DESCRIPTOR_TYPE,
+	0x2,
+	USB_ENDPOINT_TYPE_BULK,
+	EP2_PACKET_SIZE,
+	10
+};
+
+//*************************************************************************
+// USB protocol function pointer arrays
+//*************************************************************************
+void (*StandardDeviceRequest[])(void) =
+{
+	get_status,
+	clear_feature,
+	reserved,
+	set_feature,
+	reserved,
+	set_address,
+	get_descriptor,
+	reserved,
+	get_configuration,
+	set_configuration,
+	get_interface,
+	set_interface,
+	reserved,
+	reserved,
+	reserved,
+	reserved
+};
+//*************************************************************************
+// USB Protocol Layer
+//*************************************************************************
+void reserved(void)
+{
+	stall_ep0();
+}
+//*************************************************************************
+// USB standard device requests
+//*************************************************************************
+void get_status(void)
+{
+	unsigned int endp, txdat[2];
+	unsigned int bRecipient = ControlData.DeviceRequest.bmRequestType & USB_RECIPIENT;
+	unsigned int c;
+	if(bRecipient == USB_RECIPIENT_DEVICE) 
+	{
+		if(bEPPflags.bits.remote_wakeup == 1)
+			txdat[0] = 3;
+		else
+			txdat[0] = 1;
+		txdat[1]=0;
+		single_transmit(txdat, 2);
+	} 
+	else if(bRecipient == USB_RECIPIENT_INTERFACE)
+	{
+		txdat[0]=0;
+		txdat[1]=0;
+		single_transmit(txdat, 2);
+	} 
+	else if(bRecipient == USB_RECIPIENT_ENDPOINT) 
+	{
+		endp = (unsigned int)(ControlData.DeviceRequest.wIndex & MAX_ENDPOINTS);
+		if(ControlData.DeviceRequest.wIndex & (unsigned int)USB_ENDPOINT_DIRECTION_MASK)
+			c = D12_SelectEndpoint(endp*2 + 1);	/* Control-in */
+		else
+			c = D12_SelectEndpoint(endp*2);	/* Control-out */
+		if(c & D12_STALL)
+			txdat[0] = 1;
+		else
+			txdat[0] = 0;
+		txdat[1] = 0;
+		single_transmit(txdat, 2);
+	} 
+	else
+		stall_ep0();
+}
+
+void clear_feature(void)
+{
+	unsigned int endp;
+	unsigned int bRecipient = ControlData.DeviceRequest.bmRequestType & USB_RECIPIENT;
+	if(bRecipient == USB_RECIPIENT_DEVICE&& ControlData.DeviceRequest.wValue == USB_FEATURE_REMOTE_WAKEUP) 
+	{
+		Interrupt_Off();
+		bEPPflags.bits.remote_wakeup = 0;
+		Interrupt_On();
+		single_transmit(0, 0);
+	}
+	else if(bRecipient == USB_RECIPIENT_ENDPOINT && ControlData.DeviceRequest.wValue == USB_FEATURE_ENDPOINT_STALL)
+	{
+		endp = (unsigned int)(ControlData.DeviceRequest.wIndex & MAX_ENDPOINTS);
+		if(ControlData.DeviceRequest.wIndex & (unsigned int)USB_ENDPOINT_DIRECTION_MASK)
+			// clear TX stall for IN on EPn. 
+			D12_SetEndpointStatus(endp*2 + 1, 0);
+		else
+			// clear RX stall for OUT on EPn. 
+			D12_SetEndpointStatus(endp*2, 0);
+		single_transmit(0, 0);
+	} 
+	else
+		stall_ep0();
+}
+
+
+void set_feature(void)
+{
+	unsigned int endp;
+	unsigned int bRecipient = ControlData.DeviceRequest.bmRequestType & USB_RECIPIENT;
+	if (bRecipient == USB_RECIPIENT_DEVICE && ControlData.DeviceRequest.wValue == USB_FEATURE_REMOTE_WAKEUP)
+	 {
+		Interrupt_Off();
+		bEPPflags.bits.remote_wakeup = 1;
+		Interrupt_On();
+		single_transmit(0, 0);
+	}
+	else if (bRecipient == USB_RECIPIENT_ENDPOINT && ControlData.DeviceRequest.wValue == USB_FEATURE_ENDPOINT_STALL) 
+	{
+		endp = (unsigned int)(ControlData.DeviceRequest.wIndex & MAX_ENDPOINTS);
+		if (ControlData.DeviceRequest.wIndex & (unsigned int)USB_ENDPOINT_DIRECTION_MASK)
+			// clear TX stall for IN on EPn. 
+			D12_SetEndpointStatus(endp*2 + 1, 1);
+		else
+			// clear RX stall for OUT on EPn. 
+			D12_SetEndpointStatus(endp*2, 1);
+		single_transmit(0, 0);
+	}
+	else
+		stall_ep0();
+}
+
+void set_address(void)
+{
+	D12_SetAddressEnable((unsigned int)(ControlData.DeviceRequest.wValue & DEVICE_ADDRESS_MASK), 1);
+	single_transmit(0, 0);
+}
+
+void get_descriptor(void)
+{   
+	unsigned int bDescriptor = MSB(ControlData.DeviceRequest.wValue);
+    if (bDescriptor == USB_DEVICE_DESCRIPTOR_TYPE)  //0x01
+	{
+		code_transmit((unsigned int *)&DeviceDescr, sizeof(USB_DEVICE_DESCRIPTOR));
+	} 
+	else if (bDescriptor == USB_CONFIGURATION_DESCRIPTOR_TYPE)
+	{
+		code_transmit((unsigned int *)&ConfigDescr, CONFIG_DESCRIPTOR_LENGTH);
+	} 
+	else
+		stall_ep0();
+}
+void get_configuration(void)
+{
+	unsigned int c = bEPPflags.bits.configuration;
+	single_transmit(&c, 1);
+}
+void set_configuration(void)
+{
+	if (ControlData.DeviceRequest.wValue == 0)
+	{
+		//* put device in unconfigured state 
+		single_transmit(0, 0);
+		Interrupt_Off();
+		bEPPflags.bits.configuration = 0;
+		Interrupt_On();
+		init_unconfig();
+	} 
+	else if (ControlData.DeviceRequest.wValue == 1) 
+	{
+		// Configure device 
+		single_transmit(0, 0);
+		init_unconfig();
+		init_config();
+		Interrupt_Off();
+		bEPPflags.bits.configuration = 1;
+		Interrupt_On();
+	}
+	else
+		stall_ep0();
+}
+
+void get_interface(void)
+{
+	unsigned int txdat = 0;        // Only/Current interface = 0 
+	single_transmit(&txdat, 1);
+}
+void set_interface(void)
+{
+	if (ControlData.DeviceRequest.wValue == 0 && ControlData.DeviceRequest.wIndex == 0)
+		single_transmit(0, 0);
+	else
+		stall_ep0();
+}
+
+
+
+//--------------------------------------------------------------------//
+//--------------------------------------------------------------------//
+//--------------------------for standard request handle --------------//
+//--------------------------------------------------------------------//
+void stall_ep0(void)
+{
+	D12_SetEndpointStatus(0, 1);//
+	D12_SetEndpointStatus(1, 1);//
+}
+void single_transmit(unsigned int * buf, unsigned int len)
+{
+	if( len <= EP0_PACKET_SIZE) 
+	{
+		D12_WriteEndpoint(1, len, buf);
+	}
+}
+void code_transmit(unsigned int * pRomData, unsigned long int len)
+{
+	ControlData.wCount = 0;
+	if(ControlData.wLength > len)
+		ControlData.wLength = len;
+	ControlData.pData = pRomData;
+	if( ControlData.wLength >= EP0_PACKET_SIZE) 
+	{	
+		D12_WriteEndpoint(1, EP0_PACKET_SIZE, ControlData.pData);
+		ControlData.wCount += EP0_PACKET_SIZE;
+		Interrupt_Off();
+		bEPPflags.bits.control_state = USB_TRANSMIT;
+		Interrupt_On();
+	}
+	else
+    {					
+		D12_WriteEndpoint(1, ControlData.wLength, pRomData);
+		ControlData.wCount += ControlData.wLength;
+		Interrupt_Off();
+		bEPPflags.bits.control_state = USB_IDLE;
+		Interrupt_On();
+	}
+}
+
+//------------------------------
+void control_handler()
+{
+	unsigned int type, req;
+	type = ControlData.DeviceRequest.bmRequestType & USB_REQUEST_TYPE_MASK;	
+	req = ControlData.DeviceRequest.bRequest & USB_REQUEST_MASK;
+	if (type == USB_STANDARD_REQUEST)
+	{
+		(*StandardDeviceRequest[req])();
+	}
+	else
+		stall_ep0();
+}
+//-----------------------------------
+void init_unconfig(void)
+{
+	D12_SetEndpointEnable(0);	/* Disable all endpoints but EPP0. */
+}
+void init_config(void)
+{
+	D12_SetEndpointEnable(1);	/* Enable  generic/iso endpoints. */
+}
+
+
+
+//main Ep rxdone
+//
+void ep0_rxdone_detail(void)
+{
+	unsigned int i;
+	if (ep_last & D12_SETUPPACKET)
+	{
+		ControlData.wLength = 0;
+		ControlData.wCount = 0;
+		//判断端点是否满,如是,则取出
+		ReadCtrNum=D12_ReadEndpoint(0, sizeof(ControlData.DeviceRequest),(unsigned int *)(&(ControlData.DeviceRequest)));
+		if(ReadCtrNum!= sizeof(DEVICE_REQUEST))
+		{
+			D12_SetEndpointStatus(0, 1);
+			D12_SetEndpointStatus(1, 1);
+			bEPPflags.bits.control_state = USB_IDLE;
+			return;
+		}
+		// Acknowledge setup here to unlock in/out endp
+	    // 向控制输出端点发送应答建立命令以重新使能下一个建立阶段
+		D12_AcknowledgeEndpoint(0);
+		D12_AcknowledgeEndpoint(1);
+		ControlData.wLength = ControlData.DeviceRequest.wLength;
+		ControlData.wCount = 0;
+		if (ControlData.DeviceRequest.bmRequestType & (unsigned int)USB_ENDPOINT_DIRECTION_MASK) 
+		{
+			bEPPflags.bits.setup_packet = 1;
+			bEPPflags.bits.control_state = USB_IDLE;		/* get command */
+		}
+		else
+		{
+			if (ControlData.DeviceRequest.wLength == 0)
+			{
+				bEPPflags.bits.setup_packet = 1;
+				bEPPflags.bits.control_state = USB_IDLE;		/* set command */
+			}
+			else 
+			{
+				if(ControlData.DeviceRequest.wLength > MAX_CONTROLDATA_SIZE)
+				{
+					bEPPflags.bits.control_state = USB_IDLE;
+					D12_SetEndpointStatus(0, 1);
+					D12_SetEndpointStatus(1, 1);
+				}
+				else
+				{
+					bEPPflags.bits.control_state = USB_RECEIVE;	/* set command with OUT token */
+				}
+			} // set command with data
+		} // else set command
+	} // if setup packet
+
+	else if (bEPPflags.bits.control_state == USB_RECEIVE) 
+	{
+		i =	D12_ReadEndpoint(0, EP0_PACKET_SIZE,
+			ControlData.dataBuffer + ControlData.wCount);
+
+		ControlData.wCount += i;
+		if( i != EP0_PACKET_SIZE || ControlData.wCount >= ControlData.wLength)
+		{
+			bEPPflags.bits.setup_packet = 1;
+			bEPPflags.bits.control_state = USB_IDLE;
+		}
+	}
+
+	else
+	{
+		bEPPflags.bits.control_state = USB_IDLE;
+	}
+}
+void ep0_txdone_detail(void)
+{
+	unsigned long int i = ControlData.wLength - ControlData.wCount;
+	if (bEPPflags.bits.control_state != USB_TRANSMIT) 
+		return;
+	if( i >= EP0_PACKET_SIZE)
+	{
+		D12_WriteEndpoint(1, EP0_PACKET_SIZE, ControlData.pData + ControlData.wCount);
+		ControlData.wCount += EP0_PACKET_SIZE;
+		bEPPflags.bits.control_state = USB_TRANSMIT;
+	}
+	else if( i != 0)
+	{
+		D12_WriteEndpoint(1, i, ControlData.pData + ControlData.wCount);
+		ControlData.wCount += i;
+		bEPPflags.bits.control_state = USB_IDLE;
+	}
+	else if (i == 0)
+	{
+		D12_WriteEndpoint(1, 0, 0); // Send zero packet at the end 
+		bEPPflags.bits.control_state = USB_IDLE;
+	}
+}

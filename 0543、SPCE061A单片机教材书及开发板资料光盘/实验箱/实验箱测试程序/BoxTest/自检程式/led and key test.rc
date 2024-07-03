@@ -1,0 +1,130 @@
+# Begin Project
+# Begin SubItem "led and key test  Resources"
+# Begin Source File
+SOURCE=voice0\1.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_1_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\2.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_2_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\3.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_3_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\4.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_4_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\5.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_5_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\6.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_6_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\7.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_7_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\8.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_8_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\9.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_9_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\10.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_10_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\11.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_11_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\12.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_12_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\13.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_13_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\14.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_14_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\15.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_15_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\01.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_01_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice0\16.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_16_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=VOICE\08.48K
+USEPARAM=FALSE
+PARAM=
+ID=RES_08_48K
+EXPORT=3
+# End Source File
+# End SubItem
+# End Project

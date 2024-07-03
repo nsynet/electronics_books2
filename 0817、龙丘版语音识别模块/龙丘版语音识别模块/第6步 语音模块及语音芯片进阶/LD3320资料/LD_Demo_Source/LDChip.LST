@@ -1,0 +1,467 @@
+C51 COMPILER V7.06   LDCHIP                       09/13/2010 23:59:54 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE LDCHIP
+OBJECT MODULE PLACED IN LDChip.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE LDChip.c OPTIMIZE(SIZE) BROWSE DEB
+                    -UG OBJECTEXTEND PAGEWIDTH(79) PAGELENGTH(66)
+
+stmt level    source
+
+   1          /****************************************************************
+             -********************/
+   2          //      °æÈ¨ËùÓÐ£ºCopyright (c) 2005 - 2010 ICRoute INC.
+   3          /****************************************************************
+             -********************/
+   4          
+   5          
+   6          
+   7          #include "STC10F08XE.H"
+   8          #include "LDChip.h"
+   9          #include "Reg_RW.h"
+  10          #include "FlashDef.h"
+  11          
+  12          sbit RSTB=P3^3;
+  13          sbit CSB=P2^6;
+  14          
+  15          uint32 nMp3StartPos=0;
+  16          uint32 nMp3Size=0;
+  17          uint32 nMp3Pos=0;
+  18          uint32 nCurMp3Pos=0;
+  19          uint8  idata nLD_Mode = LD_MODE_IDLE;           //      ÓÃÀ´¼ÇÂ¼µ±Ç°ÊÇÔÚ½øÐÐASR
+             -Ê¶±ð»¹ÊÇÔÚ²¥·ÅMP3
+  20          uint8 bMp3Play=0;                                                       //      ÓÃÀ´¼ÇÂ¼²¥·ÅMP3µÄ×´Ì¬
+  21          uint8 idata ucRegVal;
+  22          uint8 idata ucHighInt;
+  23          uint8 idata ucLowInt;
+  24          uint8 idata ucStatus;
+  25          uint8 idata ucSPVol=15; // MAX=15 MIN=0         //      SpeakerÀ®°ÈÊä³öµÄÒôÁ¿
+  26          
+  27          extern uint8 idata nAsrStatus;
+  28          void ProcessInt0();
+  29          
+  30          /****************************************************************
+             -********************/
+  31          //      Õâ¸öCÎÄ¼þÀïÃæ°üº¬µÄº¯Êý£¬Ïàµ±ÓÚLD3320µÄÇý¶¯£¬ÒÔCÓïÑÔÔ´´úÂëµÄÐÎ
+             -Ê½Ìá¹©
+  32          //      ¿ª·¢ÕßÔÚÃ»ÓÐµ÷ÊÔÍ¨¹ýÖ®Ç°£¬Ò»¶¨²»ÒªÐÞ¸ÄÕâÀïÃæµÄº¯Êý
+  33          //      
+  34          //      LD_ReloadMp3Data()º¯ÊýÓÉÓÚÇ£Éæµ½Ö÷¿ØMCUÏòÍâ²¿´æ´¢Ð¾Æ¬¶ÁÈ¡MP3Êý
+             -¾ÝµÄ²Ù×÷
+  35          //      ËùÒÔ¿ª·¢ÕßÓ¦¸Ã¸ù¾Ý×Ô¼ºµÄÊµ¼ÊÊ¹ÓÃµÄ´æ´¢Ð¾Æ¬£¬È¥ÐÞ¸ÄÕâ¸öº¯Êý
+  36          //      µ«ÊÇÒª±£Ö¤¶ÔÓÚLD3320Ð¾Æ¬µÄ²Ù×÷²»¸Ä±ä
+  37          //
+  38          //      LD_GetResult()º¯ÊýÄ¿Ç°Ö»¼òµ¥È¡ÁËµÚÒ»ºòÑ¡½á¹û×÷ÎªÊ¶±ð½á¹û
+  39          //      ¿ª·¢ÕßÓ¦¸Ã¸ù¾Ý×Ô¼º²úÆ·Éè¼Æ£¬¾ö¶¨ÊÇ·ñÒª¶ÁÈ¡ÆäËûµÄÊ¶±ðºòÑ¡½á¹û
+  40          /****************************************************************
+             -********************/
+  41          
+  42          
+  43          
+  44          void LD_reset()
+  45          {
+  46   1              RSTB=1;
+  47   1              delay(1);
+  48   1              RSTB=0;
+  49   1              delay(1);
+C51 COMPILER V7.06   LDCHIP                       09/13/2010 23:59:54 PAGE 2   
+
+  50   1              RSTB=1;
+  51   1      
+  52   1              delay(1);
+  53   1              CSB=0;
+  54   1              delay(1);
+  55   1              CSB=1;
+  56   1              delay(1);
+  57   1      }
+  58          
+  59          void LD_Init_Common()
+  60          {
+  61   1              bMp3Play = 0;
+  62   1      
+  63   1              LD_ReadReg(0x06);  
+  64   1              LD_WriteReg(0x17, 0x35); 
+  65   1              delay(10);
+  66   1              LD_ReadReg(0x06);  
+  67   1      
+  68   1              LD_WriteReg(0x89, 0x03);  
+  69   1              delay(5);
+  70   1              LD_WriteReg(0xCF, 0x43);   
+  71   1              delay(5);
+  72   1              LD_WriteReg(0xCB, 0x02);
+  73   1              
+  74   1              /*PLL setting*/
+  75   1              LD_WriteReg(0x11, LD_PLL_11);       
+  76   1              if (nLD_Mode == LD_MODE_MP3)
+  77   1              {
+  78   2                      LD_WriteReg(0x1E, 0x00); 
+  79   2                      LD_WriteReg(0x19, LD_PLL_MP3_19);   
+  80   2                      LD_WriteReg(0x1B, LD_PLL_MP3_1B);   
+  81   2                      LD_WriteReg(0x1D, LD_PLL_MP3_1D);
+  82   2              }
+  83   1              else
+  84   1              {
+  85   2                      LD_WriteReg(0x1E,0x00);
+  86   2                      LD_WriteReg(0x19, LD_PLL_ASR_19); 
+  87   2                      LD_WriteReg(0x1B, LD_PLL_ASR_1B);               
+  88   2                  LD_WriteReg(0x1D, LD_PLL_ASR_1D);
+  89   2              }
+  90   1              delay(10);
+  91   1              
+  92   1              LD_WriteReg(0xCD, 0x04);
+  93   1              LD_WriteReg(0x17, 0x4c); 
+  94   1              delay(5);
+  95   1              LD_WriteReg(0xB9, 0x00);
+  96   1              LD_WriteReg(0xCF, 0x4f); 
+  97   1      }
+  98          
+  99          void LD_Init_MP3()
+ 100          {
+ 101   1              nLD_Mode = LD_MODE_MP3;
+ 102   1              LD_Init_Common();
+ 103   1      
+ 104   1              LD_WriteReg(0xBD,0x02);
+ 105   1              LD_WriteReg(0x17, 0x48);
+ 106   1              delay(10);
+ 107   1      
+ 108   1              LD_WriteReg(0x85, 0x52); 
+ 109   1              LD_WriteReg(0x8F, 0x00);  
+ 110   1              LD_WriteReg(0x81, 0x00);
+ 111   1              LD_WriteReg(0x83, 0x00);
+ 112   1              LD_WriteReg(0x8E, 0xff);
+ 113   1              LD_WriteReg(0x8D, 0xff);
+C51 COMPILER V7.06   LDCHIP                       09/13/2010 23:59:54 PAGE 3   
+
+ 114   1          delay(1);
+ 115   1              LD_WriteReg(0x87, 0xff);
+ 116   1              LD_WriteReg(0x89, 0xff);
+ 117   1              delay(1);
+ 118   1              LD_WriteReg(0x22, 0x00);    
+ 119   1              LD_WriteReg(0x23, 0x00);
+ 120   1              LD_WriteReg(0x20, 0xff);    
+ 121   1              LD_WriteReg(0x21, 0x07);
+ 122   1              LD_WriteReg(0x24, 0x77);          
+ 123   1          LD_WriteReg(0x25, 0x03);
+ 124   1          LD_WriteReg(0x26, 0xbb);    
+ 125   1          LD_WriteReg(0x27, 0x01); 
+ 126   1      }
+ 127                  
+ 128          void LD_Init_ASR()
+ 129          {
+ 130   1              nLD_Mode=LD_MODE_ASR_RUN;
+ 131   1              LD_Init_Common();
+ 132   1      
+ 133   1              LD_WriteReg(0xBD, 0x00);
+ 134   1              LD_WriteReg(0x17, 0x48);
+ 135   1              delay( 10 );
+ 136   1      
+ 137   1              LD_WriteReg(0x3C, 0x80);    
+ 138   1              LD_WriteReg(0x3E, 0x07);
+ 139   1              LD_WriteReg(0x38, 0xff);    
+ 140   1              LD_WriteReg(0x3A, 0x07);
+ 141   1              
+ 142   1              LD_WriteReg(0x40, 0);          
+ 143   1              LD_WriteReg(0x42, 8);
+ 144   1              LD_WriteReg(0x44, 0);    
+ 145   1              LD_WriteReg(0x46, 8); 
+ 146   1              delay( 1 );
+ 147   1      }
+ 148          
+ 149          
+ 150          void ProcessInt0()
+ 151          {
+ 152   1              uint8 nAsrResCount=0;
+ 153   1      
+ 154   1              EX0=0;
+ 155   1              
+ 156   1              ucRegVal = LD_ReadReg(0x2B);
+ 157   1              if(nLD_Mode == LD_MODE_ASR_RUN)
+ 158   1              {
+ 159   2                      // ÓïÒôÊ¶±ð²úÉúµÄÖÐ¶Ï
+ 160   2                      // £¨ÓÐÉùÒôÊäÈë£¬²»ÂÛÊ¶±ð³É¹¦»òÊ§°Ü¶¼ÓÐÖÐ¶Ï£©
+ 161   2                      LD_WriteReg(0x29,0) ;
+ 162   2                      LD_WriteReg(0x02,0) ;
+ 163   2                      if((ucRegVal & 0x10) &&
+ 164   2                              LD_ReadReg(0xb2)==0x21 && 
+ 165   2                              LD_ReadReg(0xbf)==0x35)
+ 166   2                      {
+ 167   3                              nAsrResCount = LD_ReadReg(0xba);
+ 168   3                              if(nAsrResCount>0 && nAsrResCount<4) 
+ 169   3                              {
+ 170   4                                      nAsrStatus=LD_ASR_FOUNDOK;
+ 171   4                              }
+ 172   3                              else
+ 173   3                          {
+ 174   4                                      nAsrStatus=LD_ASR_FOUNDZERO;
+ 175   4                              }       
+ 176   3                      }
+ 177   2                      else
+C51 COMPILER V7.06   LDCHIP                       09/13/2010 23:59:54 PAGE 4   
+
+ 178   2                      {
+ 179   3                              nAsrStatus=LD_ASR_FOUNDZERO;
+ 180   3                      }
+ 181   2                              
+ 182   2                      LD_WriteReg(0x2b, 0);
+ 183   2              LD_WriteReg(0x1C,0);
+ 184   2                      return;
+ 185   2              }
+ 186   1              
+ 187   1              // ÉùÒô²¥·Å²úÉúµÄÖÐ¶Ï£¬ÓÐÈýÖÖ£º
+ 188   1              // A. ÉùÒôÊý¾ÝÒÑÈ«²¿²¥·ÅÍê¡£
+ 189   1              // B. ÉùÒôÊý¾ÝÒÑ·¢ËÍÍê±Ï¡£
+ 190   1              // C. ÉùÒôÊý¾ÝÔÝÊ±½«ÒªÓÃÍê£¬ÐèÒª·ÅÈëÐÂµÄÊý¾Ý¡£  
+ 191   1              ucHighInt = LD_ReadReg(0x29); 
+ 192   1              ucLowInt=LD_ReadReg(0x02); 
+ 193   1              LD_WriteReg(0x29,0) ;
+ 194   1              LD_WriteReg(0x02,0) ;
+ 195   1          if(LD_ReadReg(0xBA)&CAUSE_MP3_SONG_END)
+ 196   1          {
+ 197   2              // A. ÉùÒôÊý¾ÝÒÑÈ«²¿²¥·ÅÍê¡£
+ 198   2      
+ 199   2                      LD_WriteReg(0x2B,LD_ReadReg(0x2B)&(~MASK_INT_SYNC));    
+ 200   2              LD_WriteReg(0xBA, 0);   
+ 201   2                      LD_WriteReg(0xBC,0x0);  
+ 202   2                      bMp3Play=0;                                     // ÉùÒôÊý¾ÝÈ«²¿²¥·ÅÍêºó£¬ÐÞ¸ÄbMp3PlayµÄ±äÁ¿
+ 203   2                      LD_WriteReg(0x08,1);
+ 204   2                      delay(5);
+ 205   2              LD_WriteReg(0x08,0);
+ 206   2                      LD_WriteReg(0x33, 0);
+ 207   2      
+ 208   2                      return ;
+ 209   2           }
+ 210   1      
+ 211   1               if(nMp3Pos>=nMp3Size)
+ 212   1              {
+ 213   2              // B. ÉùÒôÊý¾ÝÒÑ·¢ËÍÍê±Ï¡£
+ 214   2      
+ 215   2                      LD_WriteReg(0xBC,0x01);
+ 216   2                      ucStatus = LD_ReadReg(0x02);
+ 217   2                      ucStatus&=(~MASK_AFIFO_INT);
+ 218   2                      LD_WriteReg(0x02, ucStatus);
+ 219   2                      ucStatus=LD_ReadReg(0x29);
+ 220   2                      ucStatus&=(~MASK_INT_FIFO);  
+ 221   2                      LD_WriteReg(0x29,ucStatus|MASK_INT_SYNC) ;
+ 222   2      //              bMp3Play=0;                             //      ´ËÊ±£¬Ö»ÊÇÖ÷¿ØMCU°ÑËùÓÐMP3Êý¾Ý·¢ËÍµ½LD3320Ð
+             -¾Æ¬ÄÚ£¬µ«ÊÇ»¹Ã»ÓÐ°ÑËÍÈëµÄÊý¾ÝÈ«²¿²¥·ÅÍê±Ï
+ 223   2                      EX0=1;
+ 224   2      
+ 225   2                      return; 
+ 226   2              }
+ 227   1      
+ 228   1              // C. ÉùÒôÊý¾ÝÔÝÊ±½«ÒªÓÃÍê£¬ÐèÒª·ÅÈëÐÂµÄÊý¾Ý¡£  
+ 229   1      
+ 230   1              LD_ReloadMp3Data();
+ 231   1                      
+ 232   1              LD_WriteReg(0x29,ucHighInt); 
+ 233   1              LD_WriteReg(0x02,ucLowInt) ;
+ 234   1      
+ 235   1              delay(10);
+ 236   1              EX0=1;
+ 237   1      
+ 238   1      }
+ 239          
+ 240          
+C51 COMPILER V7.06   LDCHIP                       09/13/2010 23:59:54 PAGE 5   
+
+ 241          
+ 242          
+ 243          void LD_play()
+ 244          {
+ 245   1              nMp3Pos=0;
+ 246   1              bMp3Play=1;
+ 247   1      
+ 248   1              LD_WriteReg(0x1B, LD_ReadReg(0x1B)|0x08);       
+ 249   1              if (nMp3Pos >=  nMp3Size)
+ 250   1                      return ; 
+ 251   1      
+ 252   1              LD_ReloadMp3Data();
+ 253   1      
+ 254   1          LD_WriteReg(0xBA, 0);
+ 255   1              LD_WriteReg(0x17,0x48);
+ 256   1              LD_WriteReg(0x33, 1);
+ 257   1              ucRegVal  =  LD_ReadReg(0x29);
+ 258   1              LD_WriteReg(0x29, ucRegVal|MASK_INT_FIFO);
+ 259   1              
+ 260   1              ucRegVal  =  LD_ReadReg(0x02);
+ 261   1              LD_WriteReg(0x02, ucRegVal|MASK_AFIFO_INT); 
+ 262   1              ucRegVal=LD_ReadReg(0x89);
+ 263   1              LD_WriteReg(0x89, ucRegVal | 0x0c);
+ 264   1              ucRegVal = (2& 0x03)<<2;//
+ 265   1              ucStatus=LD_ReadReg(0x85)&(~0x0c);
+ 266   1              LD_WriteReg(0x85, ucStatus | ucRegVal);
+ 267   1      
+ 268   1              EX0=1;
+ 269   1      
+ 270   1      }
+ 271          
+ 272          void LD_AdjustMIX2SPVolume(uint8 val)
+ 273          {
+ 274   1              ucSPVol = val;
+ 275   1              val = ((15-val)&0x0f) << 2;
+ 276   1              ucRegVal = LD_ReadReg(0x8E)&0xc3;  
+ 277   1              LD_WriteReg(0x8E, val | ucRegVal); 
+ 278   1              LD_WriteReg(0x87, 0x78); 
+ 279   1      }
+ 280          
+ 281          void LD_ReloadMp3Data()
+ 282          {
+ 283   1              uint32 nCurMp3Pos;
+ 284   1              uint8 val;
+ 285   1              uint8 k;
+ 286   1      
+ 287   1              nCurMp3Pos = nMp3StartPos + nMp3Pos;
+ 288   1              FLASH_CS=1;
+ 289   1              FLASH_CLK=0;
+ 290   1              FLASH_CS=0;
+ 291   1      
+ 292   1               IO_Send_Byte(W25P_FastReadData);   
+ 293   1               IO_Send_Byte(((nCurMp3Pos & 0xFFFFFF) >> 16));  
+ 294   1               IO_Send_Byte(((nCurMp3Pos & 0xFFFF) >> 8));
+ 295   1               IO_Send_Byte(nCurMp3Pos & 0xFF);
+ 296   1               IO_Send_Byte(0xFF);
+ 297   1      
+ 298   1              ucStatus = LD_ReadReg(0x06);
+ 299   1              while ( !(ucStatus&MASK_FIFO_STATUS_AFULL) && (nMp3Pos<nMp3Size)
+             - )
+ 300   1              {
+ 301   2                      val=0;
+ 302   2                      for(k=0;k<8;k++)
+ 303   2                      {
+C51 COMPILER V7.06   LDCHIP                       09/13/2010 23:59:54 PAGE 6   
+
+ 304   3                              FLASH_CLK=0;
+ 305   3                              val<<=1;
+ 306   3                              FLASH_CLK=1;
+ 307   3                              val|=FLASH_DO;
+ 308   3                      }
+ 309   2                      LD_WriteReg(0x01,val);
+ 310   2      
+ 311   2                      nMp3Pos++;
+ 312   2      
+ 313   2                      ucStatus = LD_ReadReg(0x06);
+ 314   2              }
+ 315   1              
+ 316   1              FLASH_CS=1;
+ 317   1              FLASH_CLK=0;
+ 318   1      
+ 319   1      }
+ 320          
+ 321          // Return 1: success.
+ 322          uint8 LD_Check_ASRBusyFlag_b2()
+ 323          {
+ 324   1              uint8 j;
+ 325   1              uint8 flag = 0;
+ 326   1              for (j=0; j<10; j++)
+ 327   1              {
+ 328   2                      if (LD_ReadReg(0xb2) == 0x21)
+ 329   2                      {
+ 330   3                              flag = 1;
+ 331   3                              break;
+ 332   3                      }
+ 333   2                      delay(10);              
+ 334   2              }
+ 335   1              return flag;
+ 336   1      }
+ 337          
+ 338          void LD_AsrStart()
+ 339          {
+ 340   1              LD_Init_ASR();
+ 341   1      }
+ 342          
+ 343          // Return 1: success.
+ 344          uint8 LD_AsrRun()
+ 345          {
+ 346   1              LD_WriteReg(0x35, MIC_VOL);
+ 347   1              LD_WriteReg(0x1C, 0x09);
+ 348   1              LD_WriteReg(0xBD, 0x20);
+ 349   1              LD_WriteReg(0x08, 0x01);
+ 350   1              delay( 1 );
+ 351   1              LD_WriteReg(0x08, 0x00);
+ 352   1              delay( 1 );
+ 353   1      
+ 354   1              if(LD_Check_ASRBusyFlag_b2() == 0)
+ 355   1              {
+ 356   2                      return 0;
+ 357   2              }
+ 358   1      
+ 359   1              LD_WriteReg(0xB2, 0xff);        
+ 360   1              LD_WriteReg(0x37, 0x06);
+ 361   1              delay( 5 );
+ 362   1              LD_WriteReg(0x1C, 0x0b);
+ 363   1              LD_WriteReg(0x29, 0x10);
+ 364   1              
+ 365   1              LD_WriteReg(0xBD, 0x00);
+ 366   1              EX0=1;
+ 367   1              return 1;
+C51 COMPILER V7.06   LDCHIP                       09/13/2010 23:59:54 PAGE 7   
+
+ 368   1      }
+ 369          
+ 370          // Return 1: success.
+ 371          //      Ìí¼ÓÊ¶±ð¹Ø¼ü´ÊÓï£¬¿ª·¢Õß¿ÉÒÔÑ§Ï°"ÓïÒôÊ¶±ðÐ¾Æ¬LD3320¸ß½×ÃØ¼®.pd
+             -f"ÖÐ¹ØÓÚÀ¬»ø´ÊÓïÎüÊÕ´íÎóµÄÓÃ·¨
+ 372          uint8 LD_AsrAddFixed()
+ 373          {
+ 374   1              uint8 k, flag;
+ 375   1              uint8 nAsrAddLength;
+ 376   1              const char sRecog[5][13] = {"bei jing", "shou du", 
+ 377   1                      "shang hai", "tian jin", "chong qing"};
+ 378   1                      const uint8 pCode[5] = {CODE_BEIJING, CODE_BEIJING, CODE_SHANGH
+             -AI, CODE_TIANJIN, CODE_CHONGQING};
+ 379   1                      
+ 380   1              flag = 1;
+ 381   1              for (k=0; k<5; k++)
+ 382   1              {
+ 383   2                              
+ 384   2                      if(LD_Check_ASRBusyFlag_b2() == 0)
+ 385   2                      {
+ 386   3                              flag = 0;
+ 387   3                              break;
+ 388   3                      }
+ 389   2                      
+ 390   2                      LD_WriteReg(0xc1, pCode[k] );
+ 391   2                      LD_WriteReg(0xc3, 0 );
+ 392   2                      LD_WriteReg(0x08, 0x04);
+ 393   2                      delay(1);
+ 394   2                      LD_WriteReg(0x08, 0x00);
+ 395   2                      delay(1);
+ 396   2      
+ 397   2                      for (nAsrAddLength=0; nAsrAddLength<20; nAsrAddLength++)
+ 398   2                      {
+ 399   3                              if (sRecog[k][nAsrAddLength] == 0)
+ 400   3                                      break;
+ 401   3                              LD_WriteReg(0x5, sRecog[k][nAsrAddLength]);
+ 402   3                      }
+ 403   2                      LD_WriteReg(0xb9, nAsrAddLength);
+ 404   2                      LD_WriteReg(0xb2, 0xff);
+ 405   2                      LD_WriteReg(0x37, 0x04);
+ 406   2              }
+ 407   1          return flag;
+ 408   1      }
+ 409          
+ 410          
+ 411          
+ 412          uint8 LD_GetResult()
+ 413          {
+ 414   1              return LD_ReadReg(0xc5 );
+ 415   1      }
+ 416          
+ 417          
+ 418          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1548    ----
+   CONSTANT SIZE    =     70    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     17      82
+   IDATA SIZE       =      6    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V7.06   LDCHIP                       09/13/2010 23:59:54 PAGE 8   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

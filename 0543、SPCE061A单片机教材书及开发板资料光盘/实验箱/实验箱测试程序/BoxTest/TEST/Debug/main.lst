@@ -1,0 +1,134 @@
+Sunplus u'nSP Assembler - Ver. 1.8.0
+              Listing File Has Been Relocated
+                            	
+                            	.define		P_IOA_DATA  	0x7000;
+                            	.define		P_IOA_DIR   	0x7002;
+                            	.define		P_IOA_ATTRI 	0x7003;
+                            	.define		P_IOB_DATA  	0x7005;
+                            	.define		P_IOB_DIR   	0x7007;
+                            	.define		P_IOB_ATTRI		0x7008;
+                            	
+                            	
+                            	.define		P_TimerB_Data	0x700C;
+                            	.define		P_TimerB_Ctrl	0x700D;
+                            	.define		timea_clk		0x020d; 
+                            	.define		timeb_clk		0x0004;
+                            	.define     TIMER_DATA_FOR_8KHZ (0xffff -2457)	 // 时钟频率为Fosc/2,采样率为5kHz
+                            	
+                            	.define		P_TimerA_Ctrl	0x700b 
+                            	.define		P_TimerA_Data	0x700a 
+                            	.define		P_ADC			0x7014 
+                            	.define		P_ADC_CTRL		0x7015 
+                            	.define		P_DAC1			0x7017
+                            	.define		P_DAC2			0x7016
+                            	.define		P_DAC_Ctrl		0x702A 
+                            	.define		P_INT_CTRL		0x7010 
+                            	.define		P_INT_CLEAR		0x7011 
+                            	
+                            	
+00000000                    	.iram
+                            	//.public  One_Flag 
+00000000 55 1F              	.var     Originally_Data =0001111101010101b 
+00000001 00 00              	.var     One_Flag = 0 
+00000002 10 00              	.var     Zero_Flag = 16
+00000003 00 00 00 00        	.var     Step = 0,first=0  
+                            	
+00008056                    	.code
+                            	.public _main
+                            	_main:
+00008056 40 F1              		int off; 
+                            	//	r1=0xffff; 				//A口设置为同相高电平输出
+                            	//	[P_IOA_ATTRI]=r1; 
+                            	//	[P_IOA_DIR]=r1; 
+                            	//	//r1=0x0000 ;
+                            	//	[P_IOA_DATA]=r1; 
+                            		
+                            	//	r1=0xffff; 				//B口设置为同相高电平输出  
+                            	//   [P_IOB_DIR]=r1; 
+                            	//	[P_IOB_ATTRI]=r1; 
+                            		//r1=0x0000;
+                            	//	[P_IOB_DATA]=r1;
+00008057 09 93 70 00        	    r1=0000000001110000b
+00008059 19 D3 07 70        	    [P_IOB_DIR]=r1; 
+0000805B 09 93 50 00        	    r1=0000000001010000b
+0000805D 19 D3 08 70        	    [P_IOB_ATTRI]=r1;
+0000805F 09 93 40 00        	    r1=0000000001000000b
+00008061 19 D3 05 70        	    [P_IOB_DATA]=r1;
+                            		
+                            	
+00008063 09 93 40 00        		 R1 = 0x0040;				//开中断IRQ4_4KHz、IRQ4_2KHz和IRQ4_1KHz;
+00008065 19 D3 10 70        		[P_INT_CTRL] = R1;
+                            		
+00008067 41 F1              			INT IRQ;
+                            			
+                            		
+                            	loop:
+                            	 
+00008068 00 EE              		nop;
+00008069 00 EE              		nop;
+0000806A 00 EE              		nop;
+0000806B 44 EE              		jmp loop;
+                            	
+                            	
+                            	
+00008009                    	.text
+                            	.PUBLIC _IRQ4
+                            	_IRQ4:       
+00008009 A8 DA              		PUSH R1,R5 TO [sp]		//压栈保护；
+0000800A 50 92              		R1 = 0x0010;
+0000800B 11 C3 10 70        		test R1,[P_INT_CTRL];	//比较是否为1KHz的中断源；
+0000800D 1C 4E              		JNZ L_irq4_1k;			//是，则转至对应程序段；
+0000800E 60 92              		R1 = 0x0020;				
+0000800F 11 C3 10 70        		TEST R1,[P_INT_CTRL]    //否，则比较是否为2KHz的中断源；	 
+00008011 13 4E              		JNZ L_irq4_2k;			//是，则转至对应程序段；
+                            	L_irq4_4k:                  //否，则进入4KHz程序段；
+00008012 11 93 00 00        		    r1=[Originally_Data]
+00008014 A1 93              	       r1=r1 ror 1
+00008015 19 D3 00 00        	       [Originally_Data]=r1
+                            	    
+00008017 41 94              	       r2=0000000000000001b
+00008018 02 B3              	       r1=r1&R2
+                            	   
+00008019 41 C2              	       test r1,0x0001
+                            	//       test r1,0000000000010000b
+0000801A 14 5E              	       jz _step0
+0000801B 09 93 50 00        	       r1=0000000001010000b
+0000801D 19 D3 05 70        	       [P_IOB_DATA]=r1;
+                            	       
+                            	       
+                            		
+0000801F 09 93 40 00        	    R1 = 0x0040;	     
+00008021 19 D3 11 70        		[P_INT_CLEAR] = R1;
+00008023 A8 90              	    POP R1,R5 FROM [sp]
+00008024 98 9A              	    RETI;    	
+                            	L_irq4_2k:
+                            	   
+00008025 60 92              	    R1 = 0x0020;	     
+00008026 19 D3 11 70        		[P_INT_CLEAR] = R1;
+00008028 A8 90              	    POP R1,R5 FROM [sp]
+00008029 98 9A              	    RETI	
+                            	L_irq4_1k:
+                            	
+0000802A 50 92              	    R1 = 0x0010;	     
+0000802B 19 D3 11 70        		[P_INT_CLEAR] = R1;
+0000802D A8 90              	    POP R1,R5 FROM [sp]
+0000802E 98 9A              	    RETI
+                            			
+                            	   
+                            	 
+                            	 
+                            	 _step0:
+0000802F 09 93 40 00        			r1=0000000001000000b
+                            	//	   r1=0x0000
+00008031 19 D3 05 70        		    [P_IOB_DATA]=r1;
+00008033 09 93 40 00        	    R1 = 0x0040;	     
+00008035 19 D3 11 70        		[P_INT_CLEAR] = R1;
+00008037 A8 90              	    POP R1,R5 FROM [sp]
+00008038 98 9A              	    RETI;    	
+                            			
+                            	
+                            	        
+                            		    
+                            	        
+0 error(s), 0 warning(s).
+

@@ -1,0 +1,56 @@
+Sunplus u'nSP Assembler - Ver. 1.8.0
+              Listing File Has Been Relocated
+                            	
+                            	.define		P_IOA_DATA  	    0x7000
+                            	.define		P_IOA_DIR   	    0x7002 
+                            	.define		P_IOA_ATTRI			0x7003
+                            	.define		P_IOB_DATA  	    0x7005
+                            	.define		P_IOB_DIR   	    0x7007
+                            	.define		P_IOB_ATTRI			0x7008
+                            	
+                            	.external ClearWatchDog
+00000255                    	.ram
+00000255 00 00 00 00        	.var first,last,keyword;
+         00 00      
+                            	
+0000CBD7                    	.code
+                            	.public _key_asm1
+                            	
+                            	_key_asm1:
+0000CBD7 09 93 0F FF        	  r1=0xff0f;
+0000CBD9 19 D3 02 70        			[P_IOA_DIR]=r1 ;
+                            	   
+0000CBDB 09 93 00 FF        	    r1=0xff00;
+0000CBDD 19 D3 03 70        			[P_IOA_ATTRI]=r1   ;        
+                            		
+0000CBDF 40 92              		r1=0x0000;
+0000CBE0 19 D3 00 70        			[P_IOA_DATA]=r1;
+                            	
+                            	//debug luo zhihong 2003.8.11
+0000CBE2 53 94              	 	r2 = 19;
+                            	?L_Debug:
+0000CBE3 41 24              		r2 -= 1;
+0000CBE4 42 4E              		jnz		?L_Debug;
+                            	//debug end
+                            	
+0000CBE5 11 93 00 70        	   r1=[P_IOA_DATA];
+0000CBE7 19 D3 56 02        	   [last]=r1;
+                            	   ////////////////////////////////
+0000CBE9 11 93 56 02        	  r1=[last];
+0000CBEB 00 EE              		nop
+0000CBEC 00 EE              		nop
+0000CBED 40 F0 33 CB        	call ClearWatchDog
+0000CBEF 90 9A              	   retf;
+                            	   
+                            	reset: 
+0000CBF0 00 EE              	       nop;
+0000CBF1 00 EE              	       nop;
+                            	     
+0000CBF2 90 9A              	  	   retf;
+                            	   ///////////////////////////////
+                            	 
+                            	// aa_wait:
+                            	 //  jmp aa_wait; 
+0 error(s), 0 warning(s).
+
+

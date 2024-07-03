@@ -1,0 +1,569 @@
+Sunplus u'nSP Assembler - Ver. 1.8.1
+              Listing File Has Been Relocated
+                            	.define  Write_Port_Data     0xffff;
+                            	.define  Write_Port_Data0    0xaaaa;
+                            	.define  TIMER_DATA_FOR_8KHZ 0xfa23
+                            	.include hardware.inc
+                     <      	//========================================================================================
+                     <      	// Progarm: The file be included by modules
+                     <      	// Arranged by: Andy Hsu
+                     <      	// Date: 	2000/06/23: first version
+                     <      	//		2000/07/24: modified
+                     <      	//		2000/10/20: modified for version 52A
+                     <      	//========================================================================================
+                     <      	//////////////////////////////////////////////////////////////////
+                     <      	// Definitions for I/O Port
+                     <      	//////////////////////////////////////////////////////////////////
+                     <      	.DEFINE	P_IOA_Data   		0x7000;        // Write Data into data register and read from IOA pad
+                     <      	.DEFINE P_IOA_Buffer        0x7001;        // Write Data into buffer register and read from buffer register
+                     <      	.DEFINE P_IOA_Dir           0x7002;        // Direction vector for IOA
+                     <      	.DEFINE P_IOA_Attrib        0x7003;        // Attribute vector for IOA
+                     <      	.DEFINE P_IOA_Latch         0x7004;        // Latch PortA data for key change wake-up
+                     <      	
+                     <      	.DEFINE P_IOB_Data         	0x7005;        // Write Data into the data register and read from IOB pad
+                     <      	.DEFINE P_IOB_Buffer        0x7006;        // Write Data into buffer register and read from buffer register
+                     <      	.DEFINE P_IOB_Dir           0x7007;        // Direction vector for IOB
+                     <      	.DEFINE P_IOB_Attrib        0x7008;        // Attribute vector for IOB
+                     <      	
+                     <      	.DEFINE P_FeedBack          0x7009;        // Clock form external R,C
+                     <      	.DEFINE P_TimerA_Data       0x700A;        // Data port for TimerA 
+                     <      	.DEFINE P_TimerA_Ctrl       0x700B;        // Control Port for TimerA
+                     <      	.DEFINE P_TimerB_Data       0x700C;        // Data port for TimerB
+                     <      	.DEFINE P_TimerB_Ctrl       0x700D;        // Control Port for TimerB
+                     <      	.DEFINE P_TimeBase_Setup    0x700E;        // TimerBase Freq. Set
+                     <      	.DEFINE P_TimeBase_Clear	0x700F;		   // Reset Timerbase counter
+                     <      	.DEFINE P_INT_Ctrl          0x7010;        // Control port for interrupt source
+                     <      	.DEFINE P_INT_Clear         0x7011;        // Clear interrupt source
+                     <      	.DEFINE P_Watchdog_Clear    0x7012;        // Watchdog Reset
+                     <      	.DEFINE P_SystemClock       0x7013;        // Change system clock frequency(include go to standby mode)
+                     <      	
+                     <      	//... PA6442 Old version (for EC-02) ...........
+                     <      	//.DEFINE P_ADDA               0x7014;        //10-bit DA(W) AD(R)
+                     <      	//.DEFINE P_DAC1               0x7014;        //
+                     <      	//.DEFINE P_AD_Ctrl            0x7015;        //AD/DA control
+                     <      	//.DEFINE P_AD_Status          0x7015;        //AD status
+                     <      	//.DEFINE P_DAC2               0x7016;        //DAC channel 2
+                     <      	//.DEFINE P_PWM                0x7016;        //PWM output
+                     <      	//.DEFINE P_DA_Ctrl            0x7017;        //DAC latch control
+                     <      	
+                     <      	//... PA6442 New version MC52A (For EC-03)....
+                     <      	.DEFINE P_ADC 	        	0x7014;        	// Data Port for AD
+                     <      	.DEFINE P_ADC_Ctrl          0x7015;        	// Control Port for AD control
+                     <      	//.DEFINE P_ADC_Status        0x7015;        	// AD Port Status
+                     <      	.DEFINE P_DAC2              0x7016;        	// Data Port for DAC2
+                     <      	//.DEFINE P_PWM               0x7016;        	// Data Port for PWM
+                     <      	.DEFINE P_DAC1	        	0x7017;        	// Data Port for DAC1
+                     <      	.DEFINE P_DAC_Ctrl			0x702A;			// Control Port for two DAC and audio output mode
+                     <      	//............................................
+                     <      	
+                     <      	//.DEFINE P_IR_Ctrl			0x7018;			// Control Port for IR
+                     <      	.DEFINE P_LVD_Ctrl          0x7019;        	// Control Port for LVD
+                     <      	
+                     <      	.DEFINE P_SIO_Addr_Low		0x701B;			// Address Port low
+                     <      	.DEFINE P_SIO_Addr_Mid		0x701C;			// Address Port middle
+                     <      	.DEFINE P_SIO_Addr_High	 	0x701D;			// Address Port high
+                     <      	.DEFINE P_SIO_Ctrl			0x701E;			// Control Port
+                     <      	.DEFINE P_SIO_Start			0x701F;			// Start port for serial interface
+                     <      	.DEFINE P_SIO_Stop			0x7020;			// Stop port for serial interface
+                     <      	
+                     <      	.DEFINE P_UART_Command1		 0x7021;		// Command1 Port for UART
+                     <      	.DEFINE P_UART_Command2		 0x7022;		// Command2 Port for UART
+                     <      	.DEFINE P_UART_Data			 0x7023; 		// Data Port for UART
+                     <      	.DEFINE	P_UART_BaudScalarLow 0x7024;		// Set Baud Rate scalar low
+                     <      	.DEFINE	P_UART_BaudScalarHigh 0x7025;		// Set Baud Rate scalar high
+                     <      	
+                     <      	
+                     <      	//... Definitions for P_INT_Ctrl ..............
+                     <      	.DEFINE C_IRQ6_TMB2             0x0001;        	// Timer B IRQ6
+                     <      	.DEFINE C_IRQ6_TMB1             0x0002;        	// Timer A IRQ6
+                     <      	.DEFINE C_IRQ5_2Hz              0x0004;        	// 2Hz IRQ5
+                     <      	.DEFINE C_IRQ5_4Hz              0x0008;        	// 4Hz IRQ5
+                     <      	.DEFINE C_IRQ4_1KHz             0x0010;        	// 1024Hz IRQ4
+                     <      	.DEFINE C_IRQ4_2KHz             0x0020;        	// 2048Hz IRQ4
+                     <      	.DEFINE C_IRQ4_4KHz             0x0040;        	// 4096Hz IRQ4
+                     <      	.DEFINE C_IRQ3_KEY              0x0080;        	// Key Change IRQ3
+                     <      	.DEFINE C_IRQ3_EXT1             0x0100;        	// Ext1 IRQ3
+                     <      	.DEFINE C_IRQ3_EXT2             0x0200;        	// Ext2 IRQ3
+                     <      	.DEFINE C_IRQ2_TMB              0x0400;        	// Timer B IRQ2
+                     <      	.DEFINE C_FIQ_TMB               0x0800;        	// Timer B FIQ
+                     <      	.DEFINE C_IRQ1_TMA              0x1000;        	// Timer A IRQ1
+                     <      	.DEFINE C_FIQ_TMA               0x2000;        	// Timer A FIQ
+                     <      	.DEFINE C_IRQ0_PWM              0x4000;        	// PWM IRQ0
+                     <      	.DEFINE C_FIQ_PWM               0x8000;        	// PWM FIQ
+                     <      	
+                     <      	// Definitions for P_TimerA/B_Ctrl ............                               
+                     <      	.DEFINE	C_Fosc_2				0x0000;			// 
+                     <      	.DEFINE	C_Fosc_256		    	0x0001;			//
+                     <      	.DEFINE	C_32768Hz				0x0002;			//
+                     <      	.DEFINE	C_8192Hz				0x0003;			//
+                     <      	.DEFINE	C_4096Hz				0x0004;			//
+                     <      	.DEFINE	C_A1					0x0005;			//
+                     <      	.DEFINE C_A0					0x0006;			//
+                     <      	.DEFINE C_Ext1					0x0007;			//
+                     <      	
+                     <      	.DEFINE	C_2048Hz				0x0000;			//
+                     <      	.DEFINE	C_1024Hz				0x0008;			//
+                     <      	.DEFINE	C_256Hz					0x0010;			//
+                     <      	.DEFINE	C_TMB1Hz				0x0018;			//
+                     <      	.DEFINE	C_4Hz					0x0020;			//
+                     <      	.DEFINE	C_2Hz					0x0028;			//
+                     <      	.DEFINE	C_B1					0x0030;			//
+                     <      	.DEFINE	C_Ext2					0x0038;			//
+                     <      	
+                     <      	.DEFINE	C_Off					0x0000;			//
+                     <      	.DEFINE C_D1					0x0040;			//
+                     <      	.DEFINE C_D2					0x0080;			//
+                     <      	.DEFINE C_D3					0x00C0;			//
+                     <      	.DEFINE C_D4					0x0100;			//
+                     <      	.DEFINE C_D5					0x0140;			//
+                     <      	.DEFINE C_D6					0x0180;			//
+                     <      	.DEFINE C_D7					0x01C0;			//
+                     <      	.DEFINE C_D8					0x0200;			//
+                     <      	.DEFINE C_D9					0x0240;			//
+                     <      	.DEFINE C_D10					0x0280;			//
+                     <      	.DEFINE C_D11					0x02C0;			//
+                     <      	.DEFINE C_D12					0x0300;			//
+                     <      	.DEFINE C_D13					0x0340;			//
+                     <      	.DEFINE C_D14					0x0380;			//
+                     <      	.DEFINE C_TA_Div_2				0x03C0;			// Timer A
+                     <      	.DEFINE C_TB_Div_2				0x03C0;			// Timer B
+                     <      	
+                     <      	//... Definition for P_SystemClock ............
+                     <      	.DEFINE C_Fosc					0x0000;			// b3..b0
+                     <      	.DEFINE C_Fosc_Div_2			0x0001;			//
+                     <      	.DEFINE C_Fosc_Div_4			0x0002;			//
+                     <      	.DEFINE C_Fosc_Div_8			0x0003;			// (default)
+                     <      	.DEFINE C_Fosc_Div_16			0x0004;			//
+                     <      	.DEFINE C_Fosc_Div_32			0x0005;			//
+                     <      	.DEFINE C_Fosc_Div_64			0x0006;			//
+                     <      	.DEFINE C_Sleep					0x0007;		 	//
+                     <      	
+                     <      	.DEFINE	C_32K_Work				0x0000;			// b4
+                     <      	.DEFINE C_32K_Off				0x0000;			// 
+                     <      	.DEFINE C_StrongMode			0x0000;			// b5
+                     <      	.DEFINE C_AutoMode				0x0000;			//
+                     <      	
+                     <      	//... Define for P_AD_Ctrl ....................
+                     <      	.DEFINE	C_AD					0x0001;			//
+                     <      	.DEFINE C_DA					0x0000;			//
+                     <      	.DEFINE C_MIC					0x0000;			//
+                     <      	.DEFINE C_LINE					0x0002;			//
+                     <      	
+                     <      	//... Define for P_DA_Ctrl ....................
+                     <      	.DEFINE C_PushPull				0x0000;			// b0, (default) 
+                     <      	.DEFINE C_DoubleEnd				0x0001;			// b0
+                     <      	.DEFINE	C_DAC_Mode				0x0000;			// b1, (default)
+                     <      	.DEFINE C_PWM_Mode				0x0002;			// b1
+                     <      	
+                     <      	.DEFINE	C_D1_Direct				0x0000;			// DAC1 latch
+                     <      	.DEFINE C_D1_LatchA				0x0008;			// 
+                     <      	.DEFINE C_D1_LatchB				0x0010;			//
+                     <      	.DEFINE C_D1_LatchAB			0x0018;			//
+                     <      	
+                     <      	.DEFINE	C_D2_Direct				0x0000;			// DAC2 latch
+                     <      	.DEFINE C_D2_LatchA				0x0020;			// 
+                     <      	.DEFINE C_D2_LatchB				0x0040;			//
+                     <      	.DEFINE C_D2_LatchAB			0x00C0;			//
+                     <      	
+                     <      	//... Define for P_LVD_Ctrl ...................
+                     <      	.DEFINE C_LVD24V				0x0000;			// LVD = 2.4V 
+                     <      	.DEFINE C_LVD28V				0x0001;			// LVD = 2.8V
+                     <      	.DEFINE C_LVD32V				0x0002;			// LVD = 3.2V
+                     <      	.DEFINE C_LVD36V				0x0003;			// LVD = 3.6V
+                     <      	
+                     <      	
+                     <      	.EXTERNAL	F_SP_Read_INT_Status;			// for further use
+                     <      	.EXTERNAL 	F_SP_Write_INT_Status;			// for further use
+                     <      	.EXTERNAL  	F_SP_Set_INT_Vector;			// for further use
+                     <      	.EXTERNAL	F_SP_Clear_INT_Vector;			// for further use
+                     <      	
+                     <      	.EXTERNAL	F_SP_Send_Out;					//
+                     <      	.EXTERNAL	F_SP_Send_DAC1;					//
+                     <      	.EXTERNAL	F_SP_Send_DAC2;					//
+                     <      	.EXTERNAL	F_SP_Send_Two_DAC;				//
+                     <      	.EXTERNAL	F_SP_Init_HW;					//
+                     <      	
+                     <      	.EXTERNAL	R_InterruptStatus;
+                     <      	
+                     <      	
+                     <      	.EXTERNAL 	F_SP_RampUpDAC1;
+                     <      	.EXTERNAL 	F_SP_RampDnDAC1;
+                     <      	.EXTERNAL 	F_SP_RampUpDAC2;
+                     <      	.EXTERNAL  	F_SP_RampDnDAC2;
+                     <      	
+                     <      	.EXTERNAL 	F_SP_InitQueue;
+                     <      	.EXTERNAL 	F_SP_ReadQueue;
+                     <      	.EXTERNAL 	F_SP_WriteQueue;
+                     <      	.EXTERNAL 	F_SP_TestQueue;
+                     <      	
+                     <      	
+                     <      	
+                     <      	.EXTERNAL	F_SP_Get_ADC
+                     <      	
+                     <      	.EXTERNAL 	F_SP_Set_P_TimerA_Ctrl
+                     <      	.EXTERNAL 	F_SP_Set_P_TimerA_Data
+                     <      	.EXTERNAL 	F_SP_Set_P_TimerB_Ctrl
+                     <      	.EXTERNAL 	F_SP_Set_P_TimerB_Data
+                     <      	.EXTERNAL 	F_SP_Set_P_INT_Ctrl
+                     <      	.EXTERNAL 	F_SP_Set_P_INT_Clear
+                     <      	.EXTERNAL 	F_SP_Set_P_SystemClock
+                     <      	.EXTERNAL 	F_SP_Set_P_DAC_Ctrl
+                     <      	.EXTERNAL 	F_SP_Set_P_ADC_Ctrl
+                     <      	
+                     <      		
+                     <      	
+                     <      	//--------------------------------------------
+                     <      	SACM_MACRO1: 	.MACRO
+                     <      		
+                     <      		.ENDM
+                     <      	
+                     <      	SACM_MACRO2:	.MACRO
+                     <      		
+                     <      		.ENDM
+                     <      	
+                     <      	
+                     <      	
+                     <      	
+                     <      	//.define PC_Play_Enable_A2000		1    	// Enable the PC-Play function for SACM-A2000 module
+                     <      	//.define PC_Play_Enable_S480		1    	// Enable the PC-Play function for SACM-S480 module
+                     <      	//.define PC_Play_Enable_S240		1    	// Enable the PC-Play function for SACM-S240 module    
+                     <      	//.define PC_Play_Enable_MS01		1    	// Enable the PC-Play function for SACM-MS01 module
+                     <      	
+                     <      	
+                     <      	
+                     <      	//========================================================================================        
+                     <      	// End of hardware.inc
+                     <      	//========================================================================================
+00008BB6                    	.code
+                            	//=====================================//
+                            	//函数名称：unsigned IOTest（）
+                            	//出口参数：1.测试成功0、测试失败
+                            	//无入口参数
+                            	//硬件连接：A口B口短接
+                            	//=====================================//
+                            	
+                            	.public _IOTest;
+                            	_IOTest:    .proc
+                            	
+                            	InitPortAinput_Boutput:
+00008BB6 40 92              	    r1=0x0000                 //初始化A口为输入端
+00008BB7 19 D3 02 70        		[P_IOA_Dir]=r1
+00008BB9 19 D3 03 70        		[P_IOA_Attrib]=r1
+00008BBB 19 D3 00 70        		[P_IOA_Data]=r1
+                            		                          //初始化B口为输出端
+00008BBD 09 93 FF FF        		r1=0xffff                 
+00008BBF 19 D3 07 70        		[P_IOB_Dir]=r1
+00008BC1 19 D3 08 70        		[P_IOB_Attrib]=r1
+00008BC3 40 92              		r1=0x0000
+00008BC4 19 D3 05 70        		[P_IOB_Data]=r1
+                            	
+                            	WritePortB:
+00008BC6 09 93 FF FF        	    r1 = Write_Port_Data;    //向B口写数据0xaaaa   
+                            	LoopWrite:   // 
+00008BC8 41 22              	    r1 = r1-1;
+00008BC9 12 5E              	    jz  InitPortBinput_Aoutput;//
+00008BCA 19 D3 05 70        	    [P_IOB_Data]=r1
+                            	ReadPortA: 
+                            	                             //使数据稳定
+00008BCC 00 EE              	    nop;
+00008BCD 00 EE              	    nop;
+00008BCE 00 EE              	    nop;
+00008BCF 00 EE              	    nop;
+00008BD0 00 EE              	    nop;      
+00008BD1 12 95 00 70        	    r2 = [P_IOA_Data];       //读A口数据    
+00008BD3 02 43              	    cmp r1,r2;               //比较读写数据是否相同
+00008BD4 4D 5E              	    je  LoopWrite;
+                            	    //je  InitPortBinput_Aoutput;
+00008BD5 00 EE              	    nop;
+00008BD6 00 EE              	    nop;
+00008BD7 00 EE              	    nop;
+00008BD8 40 92              	    r1 = 0x0000;             //测试失败
+00008BD9 00 EE              	    nop;
+00008BDA 00 EE              	    nop;
+00008BDB 90 9A              	    retf;
+                            	    
+                            	InitPortBinput_Aoutput:
+                            	   
+00008BDC 40 92              	     r1=0x0000                 //初始化B口为输入
+00008BDD 19 D3 07 70        		[P_IOB_Dir]=r1
+00008BDF 19 D3 08 70        		[P_IOB_Attrib]=r1
+00008BE1 19 D3 05 70        		[P_IOB_Data]=r1
+                            		                          //初始化A口为输出
+00008BE3 09 93 FF FF        		r1=0xffff                 
+00008BE5 19 D3 02 70        		[P_IOA_Dir]=r1
+00008BE7 19 D3 03 70        		[P_IOA_Attrib]=r1
+00008BE9 40 92              		r1=0x0000
+00008BEA 19 D3 00 70        		[P_IOA_Data]=r1
+                            		
+                            	WritePortA:                  //向A口写数据
+00008BEC 09 93 FF FF        	    r1 = Write_Port_Data
+                            	LoopWrite0:
+00008BEE 41 22              	    r1 = r1 - 1;
+00008BEF 0D 5E              	    jz  TestSuc;    
+00008BF0 19 D3 00 70        	    [P_IOA_Data]=r1    
+                            	ReadPortB:
+                            	                             //使数据稳定
+00008BF2 00 EE              	    nop;
+00008BF3 00 EE              	    nop;
+00008BF4 00 EE              	    nop;
+00008BF5 00 EE              	    nop;
+00008BF6 00 EE              	    nop;    
+00008BF7 12 95 05 70        	    r2 = [P_IOB_Data];       //读B口数据    
+00008BF9 02 43              	    cmp r1,r2;               //比较读写数据是否相同
+00008BFA 4D 5E              	    je  LoopWrite0;
+                            	
+00008BFB 40 92              	    r1 = 0x0000;             //测试失败
+00008BFC 90 9A              	    retf;
+                            	 TestSuc:
+00008BFD 41 92              	    r1 = 0x0001;
+00008BFE 90 9A              	    retf;
+                            	    .endp
+                            	//===========================================//
+                            	//函数名称：unsigned KeyWakeUp()
+                            	//出口参数：1.测试成功0、测试失败
+                            	//无入口参数
+                            	//硬件连接：A口B口短接
+                            	//=====================================//
+                            	.public _KeyWakeUp;
+                            	_KeyWakeUp:    .proc
+                            	.define P_IOA_RL   0x7004
+                            	//InitPortA_input_B_output0:
+00008BFF 40 92              	    r1=0x0000                 //初始化A口为输入端
+00008C00 19 D3 02 70        		[P_IOA_Dir]=r1
+00008C02 19 D3 03 70        		[P_IOA_Attrib]=r1
+00008C04 19 D3 00 70        		[P_IOA_Data]=r1
+                            	
+                            	
+                            		                          //初始化B口为输出端
+00008C06 09 93 FF FF        		r1=0xffff                 
+00008C08 19 D3 07 70        		[P_IOB_Dir]=r1
+00008C0A 19 D3 08 70        		[P_IOB_Attrib]=r1
+00008C0C 40 92              		r1=0x0000
+00008C0D 19 D3 05 70        		[P_IOB_Data]=r1
+00008C0F 11 93 10 70        	    r1 = [P_INT_Ctrl]
+00008C11 44 A2              	    r1 |= 0x0004                //中断初始化
+00008C12 19 D3 10 70        	    [P_INT_Ctrl] = r1;  
+00008C14 11 93 04 70        	    r1=[P_IOA_RL] 
+00008C16 41 F1              	    INT IRQ                  //开中断   
+00008C17 57 92              	    r1=0x0017;               //on 32768   
+00008C18 19 D3 13 70        	    [P_SystemClock]=r1       //进入睡眠状态
+                            	    
+                            	    
+                            	    
+00008C1A 40 92              	    r1 = 0x0000
+00008C1B 19 D3 13 70        	    [P_SystemClock]=r1 
+00008C1D 41 92              	    r1 = 0x0001;             //测试成功
+00008C1E 90 9A              	    retf;
+                            	.endp    
+                            	//********************************//
+                            	//键唤醒中断    
+                            	//*******************************//
+0000808C                    	.text  
+                            	.public _IRQ3
+                            	_IRQ3:
+0000808C A0 D8              	    push r1,r4 to [sp]
+                            	  
+0000808D 09 93 80 00        	    r1=0x0080
+0000808F 11 C3 10 70        	    test r1,[P_INT_Ctrl]   //是否为键唤醒中断
+00008091 04 5E              	    jz L_notKeyArouse      //否，退出中断程序
+00008092 09 93 80 00        	    r1=0x0080
+00008094 19 D3 11 70        	    [P_INT_Clear]=r1       //是，清中断 
+                            	L_notKeyArouse: 
+00008096 A0 90              	    pop r1,r4 from [sp] 
+00008097 98 9A              	    reti
+                            	//=======================================//
+                            	//函数名称：unsigned UART(char *Psend)
+                            	//出口参数：1.测试成功0、测试失败
+                            	//无入口参数
+                            	//硬件连接：A口B口短接
+                            	//=====================================// 
+                            	
+                            	
+0000C6BE                    	.data   //发送的数据
+0000C6BE AA 00 55 00        	    SendData:.dw 0x00aa,0x0055,0x00a5,0x005a,0x00aa
+         A5 00 5A 00
+         AA 00      
+00000000                    	.isram
+                            	.public  RecData    //接收数据缓冲区
+00000000 00 00 00 00        	 RecData: .dw  5 dup(0);
+         00 00 00 00
+         00 00      
+                            	 
+00000005 00 00              	 .var recNum        //接收数据个数
+                            	
+00000006 00 00              	 .var sendNum       //发送数据个数
+                            	 
+00008C1F                    	.code
+                            	.public _UART;
+                            	_UART:
+                            	
+00008C1F 09 93 FF FF        	    r1 = 0xffff;      //设置A口为输出
+00008C21 19 D3 03 70        	    [P_IOA_Attrib] = r1;    
+00008C23 19 D3 02 70        	    [P_IOA_Dir] = r1;
+00008C25 09 93 FF FF        	    r1 = 0xffff;    
+00008C27 19 D3 00 70        	    [P_IOA_Data] = r1; 
+                            	       
+00008C29 40 94              	    r2 = RecData;   
+                            	    
+                            	_UART_INIT:		
+                            	F_UART_INIT:
+00008C2A 40 F1              		INT OFF;
+00008C2B 40 92              		R1 = 0x0000;		    //关闭中断	
+00008C2C 19 D3 10 70        		[P_INT_Ctrl] = R1;   
+                            	
+00008C2E 09 93 80 04        		R1 = 0x0480;		    //设置IOB7为输入IOB10为输出
+00008C30 19 D3 08 70        		[P_IOB_Attrib] = R1;
+00008C32 09 93 00 04        		R1 = 0x0400;
+00008C34 19 D3 07 70        		[P_IOB_Dir] = R1;
+00008C36 40 92              		R1 = 0x0000;	
+00008C37 19 D3 05 70        		[P_IOB_Data] = R1;
+                            	
+00008C39 09 93 6B 00        		R1 = 0x006b;		    //设置波特率 114.84KHz(~=115.2KHz)
+00008C3B 19 D3 24 70        		[P_UART_BaudScalarLow] = R1;
+00008C3D 40 92              		R1 = 0x0000;
+00008C3E 19 D3 25 70        		[P_UART_BaudScalarHigh] = R1;
+                            		
+                            		
+00008C40 40 92              		R1 = 0x0000;
+00008C41 0C 99 C0 00        		R4 = 0x00C0;	      //使能RX和TX
+00008C43 19 D3 21 70        		[P_UART_Command1] = R1;
+00008C45 1C D9 22 70        		[P_UART_Command2] = R4;
+                            		
+                            	
+                            	
+                            		
+00008C47 40 96              		R3 = 0x00;
+00008C48 40 9A              		bp = 0x0000
+00008C49 C6 DB              		[sendNum] = bp
+00008C4A C5 DB              	    [recNum] = bp
+                            		
+                            	L_sendData:
+                            		
+                            	L_Check_TxRDY:
+00008C4B 0C 99 BE C6        	    R4 = SendData;				//准备发送数据
+00008C4D C6 9B              	    bp = [sendNum] 
+                            		
+00008C4E 41 26              		R3 -= 1;
+00008C4F 24 5E              		jz	L_TxRDY_TimeOut;
+                            	
+00008C50 45 4A              	    cmp bp,5                    //发送是否结束
+00008C51 0C 5E              	    je L_Check_RxRDY;           
+                            	    
+00008C52 11 93 22 70        		R1 = [P_UART_Command2];    
+00008C54 09 B3 40 00        		R1 &= 0x0040;			      //检测 TxRDY = 1;
+00008C56 07 5E              		JZ L_Check_RxRDY;
+00008C57 05 09              	    r4 = r4 + bp
+00008C58 C4 98              		r4 = [r4]
+00008C59 1C D9 23 70        		[P_UART_Data] = R4;	          //发送数据
+                            	    
+00008C5B 41 0A              	    bp += 1     
+00008C5C C6 DB              	    [sendNum] = bp                //发送数据的个数      
+                            	    
+                            	L_recData:      
+00008C5D 40 96              		R3 = 0x00;
+                            	L_Check_RxRDY:
+                            		
+00008C5E 41 26              		R3 -= 1;
+00008C5F 14 5E              		jz	L_RxRDY_TimeOut;
+                            	    
+00008C60 C5 9B              	    bp = [recNum]
+00008C61 0D 05 00 00        	    r2 =  bp + RecData            
+                            	    
+00008C63 11 93 22 70        		R1 = [P_UART_Command2];			//检测是否有数据接收
+00008C65 09 B3 80 00        		R1 &= 0x0080;
+00008C67 5D 5E              		JZ L_Check_TxRDY;
+                            		                                //接收自己发送的8位十六进制数
+00008C68 40 92              		r1 = 0x0000;
+                            		//... Get data .................
+00008C69 11 93 23 70        		R1 = [P_UART_Data];				//取接收的数据
+                            	    
+00008C6B C2 D2              	    [r2] = r1;    
+00008C6C 41 0A              	    bp += 1
+00008C6D C5 DB              	    [recNum] = bp                   //数据是否全部接收
+00008C6E 45 4A              	    cmp bp ,5
+00008C6F 52 4E              	    jne L_Check_RxRDY
+                            	    
+00008C70 40 92              	    R1 = 0x0000;
+00008C71 19 D3 22 70        	    [P_UART_Command2] = R1;        //禁止接收
+00008C73 00 EE              	    jmp L_TxRDY_TimeOut
+                            	
+                            		
+                            	L_TxRDY_TimeOut:
+                            	L_RxRDY_TimeOut:		
+00008C74 40 F0 77 8C        	    call CmpRecSend;
+00008C76 90 9A              		retf;
+                            	
+                            	//==============================//
+                            	//函数名称：CmpRecSend:
+                            	
+                            	//比较发送数据与接收数据是否相等
+                            	//==============================//
+                            	CmpRecSend:
+00008C77 C5 9B              	   bp = [recNum] 
+00008C78 41 2A              	   bp -= 1
+                            	loopCmp:   
+00008C79 0D 07 00 00        	   r3 = bp + RecData
+00008C7B 0D 09 BE C6        	   r4 = bp + SendData
+                            	  // r3 -= 1 
+00008C7D C3 96              	   r3 = [r3] 
+00008C7E C4 98              	   r4 = [r4]
+00008C7F 04 47              	   cmp r3,r4;
+00008C80 06 4E              	   jne UartFail;
+00008C81 41 2A              	   bp -= 1 
+00008C82 0D 4B FF FF        	   cmp bp,0xffff
+00008C84 4C 4E              	   jne loopCmp;      
+00008C85 41 92              	   r1 = 0x0001  //成功
+00008C86 90 9A              	   retf
+                            	 UartFail:
+00008C87 40 92              	   r1 = 0x0000;   //失败
+00008C88 90 9A              	 retf;
+                            	//==============================//
+                            	// MIC测试部分
+                            	//==============================//
+00008C89                    	.CODE
+                            	_InitAD_DA: 
+00008C89 40 F1              			INT OFF;	
+                            		
+00008C8A 70 92              			R1 = 0x0030; 				// 时钟频率为CLKA的Fosc/2
+00008C8B 19 D3 0B 70        			[P_TimerA_Ctrl] = R1;		//
+00008C8D 09 93 23 FA        			R1 = TIMER_DATA_FOR_8KHZ; 	// 采样率为 8kHz
+00008C8F 19 D3 0A 70        			[P_TimerA_Data] = R1;		//
+                            			
+00008C91 55 92              			R1 = 0x0015;				// 设置AGC 
+                            			//R1 = 0x0011				// 取消AGC 
+00008C92 19 D3 15 70        			[P_ADC_Ctrl] = R1;			// 采用自动方式、且通过MIC_IN通道输入,
+                            			
+                            			
+00008C94 09 93 A8 00        			R1 = 0x00A8;				//通过定时器A的溢出锁存数据，ADC为自动方式
+00008C96 19 D3 2A 70        			[P_DAC_Ctrl] = R1;			
+00008C98 09 93 00 10        			R1 = 0x1000;				//
+00008C9A 19 D3 10 70        			[P_INT_Ctrl] = R1;			// 开中断IRQ1_TM
+                            			
+00008C9C 41 F1              			INT IRQ;
+00008C9D 90 9A              			retf; 
+                            	
+                            	//主程序
+                            	.PUBLIC _MICTEST	
+                            	_MICTEST: .PROC 
+00008C9E 40 F0 89 8C        			call _InitAD_DA				// 调用AD 初始化子程序 
+                            		.ENDP
+                            	loop:
+00008CA0 00 EE              		nop 
+00008CA1 00 EE              		nop 
+00008CA2 00 EE              		nop 
+00008CA3 00 EE              		nop 
+00008CA4 45 EE              		jmp loop 
+00008098                    	.text
+                            	.PUBLIC _IRQ1 
+                            	_IRQ1:       
+00008098 88 D2              			push R1 to [SP]
+                            		
+00008099 11 93 14 70        			R1 = [P_ADC] 
+0000809B 19 D3 17 70        			[P_DAC1] = R1 
+0000809D 19 D3 16 70        			[P_DAC2] = R1 
+0000809F 09 93 00 10        			R1 = 0x1000 
+000080A1 19 D3 11 70        			[P_INT_Clear] = R1 
+000080A3 88 90              			pop R1 from [SP] 
+000080A4 98 9A              			reti 
+0 error(s), 0 warning(s).
+

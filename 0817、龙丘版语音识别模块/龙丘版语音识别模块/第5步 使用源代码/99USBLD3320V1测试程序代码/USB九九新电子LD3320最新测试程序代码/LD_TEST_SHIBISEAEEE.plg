@@ -1,0 +1,28 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+D:\弋戈电子项目\语音识别\C51编译成功程序10-16\C51编译成功程序\送残联LD3320-CODEV3_he\LD3320-CODEV3_he\LD3320-CODEV3_he\LD_TEST.uv2
+Project File Date:  11/07/2010
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+compiling LDChip.c...
+compiling LDChip_HardW.c...
+compiling uart.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LD_INIT_MP3?LDCHIP
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LD_PLAY?LDCHIP
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LD_ADJUSTMIX2SPVOLUME?LDCHIP
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_DELAY?LDCHIP
+    CALLER1: ?PR?EXTINT0HANDLER?LDCHIP
+    CALLER2: ?C_C51STARTUP
+Program Size: data=57.0 xdata=0 code=3633
+creating hex file from "LD_TEST_SHIBISEAEEE"...
+"LD_TEST_SHIBISEAEEE" - 0 Error(s), 4 Warning(s).

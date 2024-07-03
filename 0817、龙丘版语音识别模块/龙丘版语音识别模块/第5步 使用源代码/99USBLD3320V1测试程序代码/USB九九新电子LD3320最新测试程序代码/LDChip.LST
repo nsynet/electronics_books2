@@ -1,0 +1,545 @@
+C51 COMPILER V8.18   LDCHIP                                                                08/13/2011 17:58:06 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE LDCHIP
+OBJECT MODULE PLACED IN LDChip.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE LDChip.c OPTIMIZE(SIZE) BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          
+   2          #include "STC10F08XE.H"
+   3          #include "config.h"
+   4          #include "LDChip.h"
+   5          #include "LD3320_HardW.H"
+   6          
+   7          
+   8          extern void          _nop_     (void);
+   9          
+  10          
+  11          uint32 nMp3StartPos=0;
+  12          uint32 nMp3Size=0;
+  13          uint32 nMp3Pos=0;
+  14          uint32 nCurMp3Pos=0;
+  15          uint8  idata nLD_Mode = LD_MODE_IDLE;
+  16          uint8 bMp3Play=0;
+  17          uint8 idata ucRegVal;
+  18          uint8 idata ucHighInt;
+  19          uint8 idata ucLowInt;
+  20          uint8 idata ucStatus;
+  21          uint8 idata ucSPVol=15; // MAX=15 MIN=0
+  22          
+  23          extern uint8 idata nAsrStatus;
+  24          
+  25          /**************************************************************** 
+  26          函数名称： delay 
+  27          功    能： 延时处理函数
+  28          入口参数： uldata 
+  29          返回值  ： 无
+  30          修    改： 2010-2-1              
+  31          ****************************************************************/ 
+  32          void  delay(uint32 uldata)
+  33          {
+  34   1              unsigned int j  =  0;
+  35   1              unsigned int g  =  0;
+  36   1              for (j=0;j<5;j++)
+  37   1              {
+  38   2                      for (g=0;g<uldata;g++)
+  39   2                      {
+  40   3                              _nop_();
+  41   3                              _nop_();
+  42   3                              _nop_();
+  43   3                      }
+  44   2              }
+  45   1      }
+  46          
+  47          /**************************************************************** 
+  48          函数名称： LD_Init_Common 
+  49          功    能： LD3320 通用初始化程序
+  50          入口参数： 无 
+  51          返回值  ： 无
+  52          修    改： 2010-2-1
+  53          ****************************************************************/ 
+  54          void LD_Init_Common()
+  55          {
+C51 COMPILER V8.18   LDCHIP                                                                08/13/2011 17:58:06 PAGE 2   
+
+  56   1              bMp3Play = 0;
+  57   1      
+  58   1              LD_ReadReg(0x06);  
+  59   1          /* soft reset. */
+  60   1              LD_WriteReg(0x1F, 0x1);
+  61   1              delay( 10 );                
+  62   1              LD_WriteReg(0x1F, 0x0);  
+  63   1              delay( 10 );                
+  64   1              
+  65   1              LD_WriteReg(0x89, 0x03);  
+  66   1              LD_WriteReg(0xCF, 0x43);   
+  67   1              LD_WriteReg(0xCB, 0x02);
+  68   1              
+  69   1              /*PLL setting*/
+  70   1              LD_WriteReg(0x11, LD_PLL_11);       
+  71   1              LD_WriteReg(0x19, LD_PLL_19);   
+  72   1              LD_WriteReg(0x1B, LD_PLL_1B);   
+  73   1              LD_WriteReg(0x1D, LD_PLL_1D);
+  74   1              LD_WriteReg(0x79, LD_LEDMTR_FREQ);
+  75   1              LD_WriteReg(0xCD, 0x04);
+  76   1              LD_WriteReg(0x17, 0x4c); 
+  77   1              LD_WriteReg(0xB9, 0x00);
+  78   1              LD_WriteReg(0xCF, 0x4f); 
+  79   1      }
+  80          
+  81          /**************************************************************** 
+  82          函数名称： LD_Init_MP3 
+  83          功    能： LD3320 MP3功能初始化
+  84          入口参数： 无 
+  85          返回值  ： 无
+  86          修    改： 2010-2-1
+  87          ****************************************************************/ 
+  88          void LD_Init_MP3()
+  89          {
+  90   1              nLD_Mode = LD_MODE_MP3;
+  91   1              LD_WriteReg(0xBD,0x02);
+  92   1              LD_WriteReg(0x17, 0x48);
+  93   1      
+  94   1              LD_WriteReg(0x85, 0x52); 
+  95   1              LD_WriteReg(0x8F ,0x00);  
+  96   1              LD_WriteReg(0x81,0x00);
+  97   1              LD_WriteReg(0x83,0x00);
+  98   1              LD_WriteReg(0x8E,0xff);
+  99   1              LD_WriteReg(0x8D,0xff);
+ 100   1          delay(1);
+ 101   1              LD_WriteReg(0x87,0xff);
+ 102   1              LD_WriteReg(0x89,0xff); 
+ 103   1              LD_WriteReg(0x22,0);    
+ 104   1              LD_WriteReg(0x23,0);
+ 105   1              LD_WriteReg(0x20,(uint8)2031);    
+ 106   1              LD_WriteReg(0x21,(uint8)((2031>>8)&0x07));
+ 107   1              LD_WriteReg(0x24, (uint8)1524);          
+ 108   1          LD_WriteReg(0x25, (uint8)((1524>>8)&0x07));
+ 109   1          LD_WriteReg(0x26,(uint8)1524);    
+ 110   1          LD_WriteReg(0x27,(uint8)((1524>>8)&0x07)); 
+ 111   1      }
+ 112          
+ 113          /**************************************************************** 
+ 114          函数名称： LD_Init_ASR 
+ 115          功    能： LD3320 语音识别初始化程序
+ 116          入口参数： 无 
+ 117          返回值  ： 无
+C51 COMPILER V8.18   LDCHIP                                                                08/13/2011 17:58:06 PAGE 3   
+
+ 118          修    改： 2010-2-1
+ 119          ****************************************************************/ 
+ 120          void LD_Init_ASR()
+ 121          {
+ 122   1              nLD_Mode=LD_MODE_ASR_RUN;
+ 123   1              LD_WriteReg(0xBD,0x00);
+ 124   1              LD_WriteReg(0x17,0x48);
+ 125   1      
+ 126   1              delay( 10 );
+ 127   1              LD_WriteReg(0x1E,0x00);
+ 128   1          LD_WriteReg(0x19,0x3f); 
+ 129   1          LD_WriteReg(0x1D,0x1f);
+ 130   1              LD_WriteReg(0x1B,0x08);         
+ 131   1      
+ 132   1              LD_WriteReg(0x3C,0xf0);    
+ 133   1              LD_WriteReg(0x3E,7);
+ 134   1      
+ 135   1              LD_WriteReg(0x38,0xff);    
+ 136   1              LD_WriteReg(0x3A  ,7);
+ 137   1              
+ 138   1              LD_WriteReg(0x40, 8);          
+ 139   1              LD_WriteReg(0x42, 0);
+ 140   1              LD_WriteReg(0x44,8);    
+ 141   1              LD_WriteReg(0x46,0); 
+ 142   1              LD_WriteReg(0x1b,0x48);
+ 143   1              delay( 1 );
+ 144   1      }
+ 145          
+ 146          
+ 147          /**************************************************************** 
+ 148          函数名称： ExtInt0Handler 
+ 149          功    能： ①如果麦克风采集到声音，不管是否识别出正常结果，都会产
+ 150                     生一个中断信号。而中断程序要根据寄存器的值分析结果。读
+ 151                             取BA 寄存器的值，可以知道有几个候选答案，而C5 寄存器里
+ 152                     的答案是得分最高、最可能正确的答案。例如发音为“上海”
+ 153                             并被成功识别（无其他候选），那么BA 寄存器里的数值是1，
+ 154                             而C5 寄存器里的值是对应的编码3。
+ 155                             ②开始播放可以把声音数据的最初部分送入芯片，等到芯片播
+ 156                             放这一段后会发出中断请求。而中断函数里会不断的送入数据，
+ 157                             直到FIFO_DATA 装满或声音数据结束。这一段程序和开始播放
+ 158                             比较类似，都是通过LD_ReloadMp3Data()函数送入数据。由于
+ 159                             LD3320芯片只有一只管脚负责中断请求输出，所以一般情况下
+ 160                             用一个中断响应函数处理2 种中断。
+ 161          入口参数： 无
+ 162          返回值  ： 无
+ 163          修    改： 2010-2-1
+ 164          ****************************************************************/ 
+ 165          void ExtInt0Handler(void) interrupt 0  
+ 166          {
+ 167   1              uint8 nAsrResCount=0;
+ 168   1      
+ 169   1              EX0=0;
+ 170   1              ET0=0;
+ 171   1              
+ 172   1              ucRegVal = LD_ReadReg(0x2B);
+ 173   1              ucHighInt = LD_ReadReg(0x29); 
+ 174   1              LD_WriteReg(0x29,0);
+ 175   1      
+ 176   1              ucLowInt=LD_ReadReg(0x02); 
+ 177   1              LD_WriteReg(0x02,0) ;
+ 178   1              if(nLD_Mode == LD_MODE_ASR_RUN)
+ 179   1              {
+C51 COMPILER V8.18   LDCHIP                                                                08/13/2011 17:58:06 PAGE 4   
+
+ 180   2                      if((ucRegVal & 0x10) &&LD_ReadReg(0xb2)==0x21 && LD_ReadReg(0xbf)==0x35)
+ 181   2                      {
+ 182   3                              nAsrResCount = LD_ReadReg(0xba);
+ 183   3                              if(nAsrResCount>0 && nAsrResCount<4) 
+ 184   3                              {
+ 185   4                                      nAsrStatus=LD_ASR_FOUNDOK;
+ 186   4                              }
+ 187   3                              else
+ 188   3                          {
+ 189   4                                      nAsrStatus=LD_ASR_FOUNDZERO;
+ 190   4                              }       
+ 191   3                      }
+ 192   2                      else
+ 193   2                      {
+ 194   3                              nAsrStatus=LD_ASR_FOUNDZERO;
+ 195   3                      }
+ 196   2                              
+ 197   2                      LD_WriteReg(0x2b, 0);
+ 198   2              LD_WriteReg(0x1C,0);
+ 199   2                      ET0=1;
+ 200   2                      return;
+ 201   2              }
+ 202   1                      
+ 203   1          if(LD_ReadReg(0xBA)&CAUSE_MP3_SONG_END)
+ 204   1          {
+ 205   2                      LD_WriteReg(0x2B,LD_ReadReg(0x2B)&(~MASK_INT_SYNC));    
+ 206   2              LD_WriteReg(0xBA, 0);   
+ 207   2                      LD_WriteReg(0xBC,0x0);  
+ 208   2                      bMp3Play=0;
+ 209   2                      LD_WriteReg(0x08,1);
+ 210   2                      delay(5);
+ 211   2              LD_WriteReg(0x08,0);
+ 212   2                      LD_WriteReg(0x33, 0);
+ 213   2      
+ 214   2                      ET0=1;
+ 215   2                      return ;
+ 216   2           }
+ 217   1      
+ 218   1               if(nMp3Pos>=nMp3Size)
+ 219   1              {
+ 220   2                      LD_WriteReg(0xBC,0x01);
+ 221   2                      ucStatus = LD_ReadReg(0x02);
+ 222   2                      ucStatus&=(~MASK_AFIFO_INT);
+ 223   2                      LD_WriteReg(0x02, ucStatus);
+ 224   2                      ucStatus=LD_ReadReg(0x29);
+ 225   2                      ucStatus&=(~MASK_INT_FIFO);  
+ 226   2                      LD_WriteReg(0x29,ucStatus|MASK_INT_SYNC) ;
+ 227   2                      EX0=1;
+ 228   2                      ET0=1;
+ 229   2      
+ 230   2                      return; 
+ 231   2              }
+ 232   1      
+ 233   1              LD_ReloadMp3Data();
+ 234   1                      
+ 235   1              LD_WriteReg(0x29,ucHighInt); 
+ 236   1              LD_WriteReg(0x02,ucLowInt) ;
+ 237   1      
+ 238   1              delay(10);
+ 239   1              EX0=1;
+ 240   1              ET0=1;
+ 241   1      
+C51 COMPILER V8.18   LDCHIP                                                                08/13/2011 17:58:06 PAGE 5   
+
+ 242   1      }
+ 243          
+ 244          /**************************************************************** 
+ 245          函数名称： LD_Play 
+ 246          功    能： LD-MP3播放
+ 247          入口参数： 无 
+ 248          返回值  ： 无
+ 249          修    改： 2010-2-1
+ 250          ****************************************************************/ 
+ 251          void LD_Play()
+ 252          {
+ 253   1              nMp3Pos=0;
+ 254   1              bMp3Play=1;
+ 255   1      
+ 256   1              LD_WriteReg(0x1B, LD_ReadReg(0x1B)|0x08);       
+ 257   1              if (nMp3Pos >=  nMp3Size)
+ 258   1                      return ; 
+ 259   1      
+ 260   1              LD_ReloadMp3Data();
+ 261   1      
+ 262   1          LD_WriteReg(0xBA, 0);
+ 263   1              LD_WriteReg(0x17,0x48);
+ 264   1              LD_WriteReg(0x33, 1);
+ 265   1              ucRegVal  =  LD_ReadReg(0x29);
+ 266   1              LD_WriteReg(0x29, ucRegVal|MASK_INT_FIFO);
+ 267   1              
+ 268   1              ucRegVal  =  LD_ReadReg(0x02);
+ 269   1              LD_WriteReg(0x02, ucRegVal|MASK_AFIFO_INT); 
+ 270   1              ucRegVal=LD_ReadReg(0x89);
+ 271   1              LD_WriteReg(0x89, ucRegVal | 0x0c);
+ 272   1              ucRegVal = (2& 0x03)<<2;//
+ 273   1              ucStatus=LD_ReadReg(0x85)&(~0x0c);
+ 274   1              LD_WriteReg(0x85, ucStatus | ucRegVal);
+ 275   1      
+ 276   1              EX0=1;
+ 277   1      
+ 278   1      }
+ 279          
+ 280          /**************************************************************** 
+ 281          函数名称： LD_AdjustMIX2SPVolume 
+ 282          功    能： 调节播放音量 。这里需要修改寄存器8E。 音量分为16 级，用
+ 283                     4 位二进制表示，范围是0-15。 设置音量时，将(15-音量值) 
+ 284                             设给寄存器8E 的第2-5 位。这个函数只调节喇叭（Speaker）的
+ 285                             音量，和耳机等其他输出无关。而且实验板上只有喇叭连接了输出。
+ 286          入口参数： val，音量等级 
+ 287          返回值  ： 无
+ 288          修    改： 2010-2-1
+ 289          ****************************************************************/ 
+ 290          void LD_AdjustMIX2SPVolume(uint8 val)
+ 291          {
+ 292   1              ucSPVol = val;
+ 293   1              val = ((15-val)&0x0f) << 2;
+ 294   1              ucRegVal = LD_ReadReg(0x8E)&0xc3;  
+ 295   1              LD_WriteReg(0x8E, val | ucRegVal); 
+ 296   1              LD_WriteReg(0x87, 0x78); 
+ 297   1      }
+ 298          
+ 299          /**************************************************************** 
+ 300          函数名称： LD_ReloadMp3Data 
+ 301          功    能： LD采用Spi协议下载FLASH中数据 ，需要根据不同硬件结果加以修改
+ 302          入口参数： 无 
+ 303          返回值  ： 无
+C51 COMPILER V8.18   LDCHIP                                                                08/13/2011 17:58:06 PAGE 6   
+
+ 304          修    改： 2010-2-1
+ 305          ****************************************************************/ 
+ 306          void LD_ReloadMp3Data()
+ 307          {
+ 308   1              uint32 nCurMp3Pos;
+ 309   1              uint8 val;
+ 310   1              uint8 k;
+ 311   1      
+ 312   1              nCurMp3Pos = nMp3StartPos + nMp3Pos;
+ 313   1              FLASH_CS=1;
+ 314   1              FLASH_CLK=0;
+ 315   1              FLASH_CS=0;
+ 316   1      
+ 317   1               IO_Send_Byte(W25P_FastReadData);   
+ 318   1               IO_Send_Byte(((nCurMp3Pos & 0xFFFFFF) >> 16));  
+ 319   1               IO_Send_Byte(((nCurMp3Pos & 0xFFFF) >> 8));
+ 320   1               IO_Send_Byte(nCurMp3Pos & 0xFF);
+ 321   1               IO_Send_Byte(0xFF);
+ 322   1      
+ 323   1              ucStatus = LD_ReadReg(0x06);
+ 324   1              while ( !(ucStatus&MASK_FIFO_STATUS_AFULL) && (nMp3Pos<nMp3Size) )
+ 325   1              {
+ 326   2                      val=0;
+ 327   2                      for(k=0;k<8;k++)
+ 328   2                      {
+ 329   3                              FLASH_CLK=0;
+ 330   3                              val<<=1;
+ 331   3                              FLASH_CLK=1;
+ 332   3                              val|=FLASH_DO;
+ 333   3                      }
+ 334   2                      LD_WriteReg(0x01,val);
+ 335   2      
+ 336   2                      nMp3Pos++;
+ 337   2      
+ 338   2                      ucStatus = LD_ReadReg(0x06);
+ 339   2              }
+ 340   1              
+ 341   1              FLASH_CS=1;
+ 342   1              FLASH_CLK=0;
+ 343   1      
+ 344   1      }
+ 345          
+ 346          /**************************************************************** 
+ 347          函数名称： LD_Check_AsrBusyFlag_b2 
+ 348          功    能： 读取0xB2 寄存器的函数，如果在以后的ASR 命令函数前不能够
+ 349                     读取到正确Idle 状态，说明芯片内部可能出错了。经拷机测试，
+ 350                             当使用的电源电压/电流出现不稳定有较大波动时，有小概率会
+ 351                             出现这种情况。出现这种情况时，建议Reset LD3320 芯片，重
+ 352                             新启动设置芯片。
+ 353          入口参数： 无 
+ 354          返回值  ： flag，成功标志 1: success. 
+ 355          修    改： 2010-2-1
+ 356          ****************************************************************/ 
+ 357          uint8 LD_Check_ASRBusyFlag_b2()
+ 358          {
+ 359   1              uint8 j;
+ 360   1              uint8 flag = 0;
+ 361   1              for (j=0; j<10; j++)
+ 362   1              {
+ 363   2                      if (LD_ReadReg(0xb2) == 0x21)
+ 364   2                      {
+ 365   3                              flag = 1;
+C51 COMPILER V8.18   LDCHIP                                                                08/13/2011 17:58:06 PAGE 7   
+
+ 366   3                              break;
+ 367   3                      }
+ 368   2                      delay(10);              
+ 369   2              }
+ 370   1              return flag;
+ 371   1      }
+ 372          
+ 373          /**************************************************************** 
+ 374          函数名称： LD_AsrStart 
+ 375          功    能： LD启动ASR语音识别
+ 376          入口参数： 无 
+ 377          返回值  ： 无
+ 378          修    改： 2010-2-1
+ 379          ****************************************************************/ 
+ 380          void LD_AsrStart()
+ 381          {
+ 382   1              LD_Init_Common();
+ 383   1              LD_Init_ASR();
+ 384   1      }
+ 385          
+ 386          /**************************************************************** 
+ 387          函数名称： RunASR 
+ 388          功    能：  运行LD3320语音识别
+ 389          入口参数： 无 
+ 390          返回值  ： 1为成功
+ 391          修    改： 2010-2-1
+ 392          ****************************************************************/ 
+ 393          uint8 LD_AsrRun()
+ 394          {
+ 395   1              LD_WriteReg(0x35, MIC_VOL);
+ 396   1              LD_WriteReg(0x1C, 0x09);
+ 397   1              LD_WriteReg(0xBD, 0x20);
+ 398   1              LD_WriteReg(0x08, 0x01);
+ 399   1              delay( 1 );
+ 400   1              LD_WriteReg(0x08, 0x00);
+ 401   1              delay( 1 );
+ 402   1      
+ 403   1              if(LD_Check_ASRBusyFlag_b2() == 0)
+ 404   1              {
+ 405   2                      return 0;
+ 406   2              }
+ 407   1      
+ 408   1              LD_WriteReg(0xB2, 0xff);        
+ 409   1              LD_WriteReg(0x37, 0x06);
+ 410   1              delay( 5 );
+ 411   1              LD_WriteReg(0x1C, 0x0b);
+ 412   1              LD_WriteReg(0x29, 0x10);
+ 413   1              
+ 414   1              EX0=1;
+ 415   1              return 1;
+ 416   1      }
+ 417          
+ 418          /**************************************************************** 
+ 419          函数名称： LD_AsrAddFixed 
+ 420          功    能： LD3320 添加语音序列
+ 421          入口参数： 无 
+ 422          返回值  ： 1为成功
+ 423          修    改： 2010-2-1
+ 424          备    注： 添加误识别语音序列,添加一些近似语音来吸收错误识别
+ 425          ****************************************************************/ 
+ 426          uint8 LD_AsrAddFixed()
+ 427          {
+C51 COMPILER V8.18   LDCHIP                                                                08/13/2011 17:58:06 PAGE 8   
+
+ 428   1              uint8 k, flag;
+ 429   1              uint8 nAsrAddLength;
+ 430   1              /*code char sRecog[26][26] = {"liu hao kai","liu hao guan","wu hao jian kai","wu hao jian guan","feng sha
+             -n kai","feng shan guan","tai deng kai","tai deng guan","dian dong chuang kai", 
+ 431   1                                      "dian dong chuang guan","zhao ming deng kai","zhao ming deng guan","dian dong
+             - chuang lian kai",
+ 432   1                                                                      "dian dong chuang lian guan","dian re qi kai","feng shan","tai deng","dian dong chuang",
+ 433   1                                                                      "dian dong chuang lian","zhao ming deng","gao ya guo guan","dian fan bao","en en","qing suo","la l
+             -a la","dian deng"};
+ 434   1              code uint8 pCode[26] = {CODE_SIXK,CODE_SIXG,CODE_FIVK,CODE_FIVG,CODE_FSK, CODE_FSG, CODE_TDK, CODE_TDG, C
+             -ODE_DDCK,CODE_DDCG,CODE_ZMDK,CODE_ZMDG,CODE_DDCLK,CODE_DDCLG,
+ 435   1                                                              CODE_ERROR,CODE_ERROR,CODE_ERROR,CODE_ERROR,CODE_ERROR,CODE_ERROR,CODE_ERROR,CODE_ERROR,CODE_ERROR,
+             -CODE_ERROR,
+ 436   1                                                              CODE_ERROR,CODE_ERROR};   */
+ 437   1              code char sRecog[26][26] = {"feng shan kai","feng shan guan","tai deng kai","tai deng guan",
+ 438   1                                          "cha ji sheng","cha ji jiang","ting deng kai","ting deng guan",
+ 439   1                                                                      "fang deng kai","fang deng guan",
+ 440   1                                                                      "liu hao kai","liu hao guan","qi hao kai","qi hao guan",
+ 441   1                                                                      "ba hao kai","ba hao guan","jiu hao kai","jiu hao guan",
+ 442   1                                                                      "dian dong chuang lian kai","dian dong chuang lian guan",
+ 443   1                                                                      "shi yi hao kai","shi yi hao guan",
+ 444   1                                                                      "dian dong chuang kai","dian dong chuang guan",
+ 445   1                                                                      "wo xi huan","wo hen xi huan"
+ 446   1                                           };
+ 447   1              code uint8 pCode[26] = {CODE_FSK,CODE_FSG,CODE_TDK,CODE_TDG,CODE_CJS, CODE_CJJ, CODE_TINGDENGK, CODE_TING
+             -DENGG, 
+ 448   1                                      CODE_FANGDENGK,CODE_FANGDENGG,CODE_LIUHAOK,CODE_LIUHAOG,CODE_QIHAOK,CODE_QIHAOG,
+ 449   1                                                              CODE_BAHAOK,CODE_BAHAOG,CODE_JIUHAOK,CODE_JIUHAOG,CODE_DDCLK,CODE_DDCLG,
+ 450   1                                                              CODE_SHIYIHAOK,CODE_SHIYIHAOG,CODE_DDCK,CODE_DDCG,
+ 451   1                                                              CODE_ERROR,CODE_ERROR}; 
+ 452   1              flag = 1;
+ 453   1              for (k=0; k<26; k++)//k最大值要随之变化
+ 454   1              {
+ 455   2                              
+ 456   2                      if(LD_Check_ASRBusyFlag_b2() == 0)
+ 457   2                      {
+ 458   3                              flag = 0;
+ 459   3                              break;
+ 460   3                      }
+ 461   2                      
+ 462   2                      LD_WriteReg(0xc1, pCode[k]);
+ 463   2                      LD_WriteReg(0xc3, 0 );
+ 464   2                      LD_WriteReg(0x08, 0x04);
+ 465   2                      delay(1);
+ 466   2                      LD_WriteReg(0x08, 0x00);
+ 467   2                      delay(1);
+ 468   2      
+ 469   2                      for (nAsrAddLength=0; nAsrAddLength<26; nAsrAddLength++)//nAsrAddLength最大值要随之变化
+ 470   2                      {
+ 471   3                              if (sRecog[k][nAsrAddLength] == 0)
+ 472   3                                      break;
+ 473   3                              LD_WriteReg(0x5, sRecog[k][nAsrAddLength]);
+ 474   3                      }
+ 475   2                      LD_WriteReg(0xb9, nAsrAddLength);
+ 476   2                      LD_WriteReg(0xb2, 0xff);
+ 477   2                      LD_WriteReg(0x37, 0x04);
+ 478   2              }
+ 479   1          return flag;
+ 480   1      }
+ 481          
+ 482          
+ 483          /**************************************************************** 
+C51 COMPILER V8.18   LDCHIP                                                                08/13/2011 17:58:06 PAGE 9   
+
+ 484          函数名称： LD_GetResult 
+ 485          功    能： 获取识别的语音
+ 486          入口参数： 无 
+ 487          返回值  ： 获取最佳识别结果
+ 488          修    改： 2010-2-1
+ 489          ****************************************************************/ 
+ 490          uint8 LD_GetResult()
+ 491          {
+ 492   1              uint8 temp;
+ 493   1              temp = LD_ReadReg(0xc5 );
+ 494   1              if(temp<50)
+ 495   1                      return temp;
+ 496   1              else  return CODE_ERROR;
+ 497   1      }
+ 498          
+ 499          
+ 500          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1457    ----
+   CONSTANT SIZE    =    702    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     17      18
+   IDATA SIZE       =      6    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

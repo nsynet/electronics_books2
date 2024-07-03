@@ -1,0 +1,822 @@
+Thursday, August 14, 15:31:22, 2003
+
+                    Sunplus u'nSP Linker version 1.8.0 (enc)
+                    -------------------------------------------
+
+Global Symbol Name                             Global Value     Global Filename
+*********************************************************************************************
+_RESET                                             83B1         "E:\IDE180\startupD.obj"
+__sn_loop                                          83CD         "E:\IDE180\startupD.obj"
+__sn_loop2                                         83CC         "E:\IDE180\startupD.obj"
+_RES_Table                                         834E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_1_48K_SA                                      834E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_1_48K_EA                                      8350         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_2_48K_SA                                      8352         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_2_48K_EA                                      8354         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_3_48K_SA                                      8356         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_3_48K_EA                                      8358         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_4_48K_SA                                      835A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_4_48K_EA                                      835C         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_5_48K_SA                                      835E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_5_48K_EA                                      8360         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_6_48K_SA                                      8362         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_6_48K_EA                                      8364         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_7_48K_SA                                      8366         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_7_48K_EA                                      8368         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_8_48K_SA                                      836A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_8_48K_EA                                      836C         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_9_48K_SA                                      836E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_9_48K_EA                                      8370         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_10_48K_SA                                     8372         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_10_48K_EA                                     8374         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_11_48K_SA                                     8376         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_11_48K_EA                                     8378         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_12_48K_SA                                     837A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_12_48K_EA                                     837C         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_13_48K_SA                                     837E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_13_48K_EA                                     8380         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_14_48K_SA                                     8382         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_14_48K_EA                                     8384         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_15_48K_SA                                     8386         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_15_48K_EA                                     8388         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_01_48K_SA                                     838A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_01_48K_EA                                     838C         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_16_48K_SA                                     838E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_16_48K_EA                                     8390         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_08_48K_SA                                     8392         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_RES_08_48K_EA                                     8394         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+_key_asm                                           CBBB         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\key.obj"
+_key_asm1                                          CBD7         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\key1.obj"
+_uiDelay                                           2F8          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_playS480                                          AEE0         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_WakeUpTest                                        AF1C         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_UartTest                                          AF46         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_Addr                                              2F9          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_main                                              AF80         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_value                                             24D          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_ko                                                24E          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_Record_Stard                                      24F          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_Record_Stop                                       250          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_Record_Play                                       251          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_FailTimes                                         252          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_Key                                               253          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_Status                                            254          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+_Initirq5                                          CB39         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_SP_INT_64Hz                                       CB46         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+F_SP_INT_64Hz                                      CB46         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_Turnoff_INT_64Hz                                  CB54         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+T_SACM_S480_SpeechTable                            CB5F         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_BREAK                                             8267         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_FIQ                                               824C         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_IRQ0                                              826A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_IRQ1                                              826D         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_IRQ2                                              8270         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_IRQ4                                              8273         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_IRQ5                                              832E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_IRQ6                                              833D         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_IRQ7                                              834B         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+_singleled                                         C9A5         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\single.obj"
+_F_18LedTest                                       C9C6         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\single.obj"
+_F_18LedTest_Return                                C9D5         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\single.obj"
+_F_Uart_Init_Restore_IO                            C9E4         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\single.obj"
+_F_SingleLed                                       C9F3         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\single.obj"
+_delay                                             CAFD         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\delay.obj"
+_SerialInit                                        CB07         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\delay.obj"
+_Output                                            CB20         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\delay.obj"
+_ClearWatchDog                                     CB33         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\delay.obj"
+ClearWatchDog                                      CB33         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\delay.obj"
+tiny3                                              83CE         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501DisplayTAB.obj"
+large1                                             8606         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501DisplayTAB.obj"
+smallb1                                            8BC7         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501DisplayTAB.obj"
+small1                                             9114         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501DisplayTAB.obj"
+narrow1                                            9602         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501DisplayTAB.obj"
+_Init_LCD_501                                      C306         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+_Set_LCD_Page_No                                   C3FA         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+F_Set_LCD_Page_No                                  C3FA         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+_Set_LCD_Column_Addr                               C423         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+F_Set_LCD_Column_Addr                              C423         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+_Fill_All_LCD_Value                                C459         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+F_Fill_All_LCD_Value                               C459         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+_Send_data                                         C488         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+F_Send_data                                        C488         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+_Read_Lcd_data                                     C4A5         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+F_Read_Lcd_data                                    C4A5         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+F_Display_point                                    C4D3         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+F_Init_IO                                          C4EE         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+_Init_IO                                           C4EE         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+_Init_sys                                          9A72         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+F_zk_bank                                          9A79         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_pixel                                             9A8C         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+image                                              9AE8         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_InitGraphic                                    9BCD         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_ClearScreen                                    9BDB         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetBMPMode                                     9BEF         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetLineStyle                                   9C00         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetRectStyle                                   9C10         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetCircleStyle                                 9C13         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetEllipseStyle                                9C16         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetCharMode                                    9C19         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_SetBMPMode                                     9C1C         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_SetCharMode                                    9C47         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_SetLineStyle                                   9C49         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_SetRectStyle                                   9CA3         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_SetCircleStyle                                 9CA5         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_SetEllipseStyle                                9CA7         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_PutBitmap                                      9D14         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_F_image_bank                                      9D50         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_LineTo                                         9E28         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+DISPLAY_A_POINT                                    9FF2         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+get_a_point_address                                A0D9         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_Rectangle                                      A11A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_Circle                                         A30A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_Ellipse                                        A329         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_ellipse_process1                                  A46D         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_ellipse_process2                                  A49A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_ellipse_process3                                  A4B6         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_ellipse_process4                                  A4E9         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_offset                                            A525         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_sub                                               A5CE         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_a_square_b_square                                 A608         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_PutChar                                        A620         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_PutStr                                         A781         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetPixel                                       A7FF         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_PutPixel                                       A818         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetY                                           A843         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetX                                           A846         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetCharHeight                                  A849         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetCharWidth                                   A864         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_GetStrWidth                                    A8C3         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_MoveDelta                                      A92D         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_MoveTo                                         A945         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_Bar                                            A959         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_ClearRect                                      AA3D         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_ClearEllipse                                   AB1F         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_FG_ClearCircle                                    AB80         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_mode2                                             ABDF         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+_SP_InitWriteSRAM                                  C926         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sram.obj"
+F_SP_InitWriteSRAM                                 C926         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sram.obj"
+F_SP_InitReadSRAM                                  C93B         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sram.obj"
+_SP_InitReadSRAM                                   C93B         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sram.obj"
+F_SP_WriteSRAM                                     C950         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sram.obj"
+F_SP_ReadSRAM                                      C96C         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sram.obj"
+_SP_ReadSRAM                                       C992         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sram.obj"
+_SP_WriteSRAM                                      C99A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sram.obj"
+R_SpeechType                                       25B          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\system.obj"
+_System_Initial                                    CB71         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\system.obj"
+F_System_Initial                                   CB71         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\system.obj"
+_F_User_Init_Restore_IO                            CB8B         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\system.obj"
+F_SP_RampUpDAC1                                    C63E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_RampDnDAC1                                    C662         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_RampUpDAC2                                    C674         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_RampDnDAC2                                    C698         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_RampUpDAC1                                     C63E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_RampDnDAC1                                     C662         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_RampUpDAC2                                     C674         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_RampDnDAC2                                     C698         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_InitQueue                                      C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_InitQueue_A2000                                C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_InitQueue_S480                                 C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_InitQueue_S240                                 C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_InitQueue_MS01                                 C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_InitQueue_DVR                                  C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_InitQueue                                     C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_InitQueue_A2000                               C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_InitQueue_S480                                C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_InitQueue_S240                                C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_InitQueue_MS01                                C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_InitQueue_DVR                                 C518         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue                                     C525         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_A2000                               C525         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_S480                                C525         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_S240                                C525         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_MS01                                C525         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_DVR                                 C525         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_NIC                                 C538         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_NIC_A2000                           C538         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_NIC_S480                            C538         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_NIC_S240                            C538         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_NIC_MS01                            C538         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_ReadQueue_NIC_DVR                             C538         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_WriteQueue                                    C541         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_WriteQueue_A2000                              C541         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_WriteQueue_S480                               C541         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_WriteQueue_S240                               C541         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_WriteQueue_MS01                               C541         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_WriteQueue_DVR                                C541         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_TestQueue                                     C550         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_TestQueue_A2000                               C550         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_TestQueue_S480                                C550         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_TestQueue_S240                                C550         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_TestQueue_MS01                                C550         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_TestQueue_DVR                                 C550         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_Export                                         C6D7         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_Import                                         C6D0         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_Init_IOB                                       C6C0         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_Init_IOA                                       C6B0         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_SP_GetResource                                    C6E1         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_GetResource                                   C6EF         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_SACM_A2000_Init_                              C569         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_SACM_S480_Init_                               C585         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_SACM_S240_Init_                               C5A0         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_SACM_MS01_Init_                               C5BB         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_PlayMode0_                                    C5CD         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_PlayMode1_                                    C5DD         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_PlayMode2_                                    C5EE         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_PlayMode3_                                    C5FF         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_SACM_DVR_Init_                                C610         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_SACM_DVR_Rec_Init_                            C62E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_SP_SACM_DVR_Play_Init_                           C636         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+R_InterruptStatus                                  25C          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_RampUpDAC1                                       C63E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_RampDnDAC1                                       C662         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_RampUpDAC2                                       C674         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+F_RampDnDAC2                                       C698         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_STD_RampUpDAC1                                    C63E         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_STD_RampDnDAC1                                    C662         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_STD_RampUpDAC2                                    C674         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_STD_RampDnDAC2                                    C698         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+_MicAD_DA                                          CB9B         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\MICTest.obj"
+_WakeUp                                            CC05         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sleep.obj"
+RecData                                            0            "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\uart.obj"
+_UART                                              CA1F         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\uart.obj"
+_delay1                                            C871         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\88ledtest.obj"
+_TestLed                                           C8B5         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\88ledtest.obj"
+_a                                                 2FD          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\4096.obj"
+_Test_4096                                         CA91         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\4096.obj"
+_SP_SIOSendAByte                                   C6F7         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+_SP_SIOReadAByte                                   C717         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+_SP_SIOSendAWord                                   C73D         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+_SP_SIOReadAWord                                   C77F         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+_SP_SIOPageErase                                   C7B1         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+_SP_SIOMassErase                                   C7D4         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+_Delay100uS                                        C803         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+_DelayPT                                           C80A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+_SP_WriteHeader                                    C811         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+_SP_CheckHeader                                    C83C         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+Originally_Data                                    2EF          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"
+Originally_Data1                                   2F0          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"
+Originally_Data2                                   2F1          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"
+Originally_Data3                                   2F2          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"
+One_Flag                                           2F3          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"
+Step                                               2F5          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"
+first                                              2F6          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"
+_Last                                              2F7          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"
+_Rf_Received                                       CBF3         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"
+bank                                               1AA          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+bank1                                              1AB          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+label1                                             1AC          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+pixel_page                                         1AC          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+pixel_column                                       1AD          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+pixel_bit                                          1AE          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_width_byte                                   1AC          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_high_bit                                     1AD          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_jumpoff_point_x                              1AE          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_jumpoff_point_y                              1AF          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_tab                                          1B0          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_page                                         1B1          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_bit                                          1B2          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_lcd_data                                     1B3          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_temp_data                                    1B4          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_temp_data1                                   1B7          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+image_tab_pointer                                  1B6          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_line_x0                                           1B8          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_line_x1                                           1B9          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_line_y0                                           1BA          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_line_y1                                           1BB          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_line_x                                            1BC          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_line_y                                            1BD          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_lineparameter_a                                   1BE          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_lineparameter_b                                   1BF          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_lineparameter_a_temp                              1C0          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_lineparameter_b_temp                              1C1          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_jumping_off_x                           1C2          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_jumping_off_y                           1C3          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_high                                    1C4          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_wide                                    1C5          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectagle_shape                                    1C6          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectagle_mode                                     1C7          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_jumping_off_page                        1C8          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_jumping_off_place                       1C9          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_jumping_off_bit                         1CA          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_end_place                               1CB          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_end_page                                1CC          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_end_bit                                 1CD          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+rectangle_temp_bit                                 1CE          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+rectangle_temp_page                                1CF          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_jumping_off_bit_temp                    1D0          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectagle_high_temp                                1D2          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectagle_wide_temp                                1D3          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_temp_x                                  1D4          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_wide_temp                               1D5          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_rectangle_end_place_temp                          1D1          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_long_axes                                 1D6          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_short_axes                                1D7          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_x                                         1D8          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_y                                         1D9          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_origin_x                                  1DA          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_origin_y                                  1DB          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_a_square_mul_y_square_l                           1DC          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_a_square_mul_y_square_h                           1DD          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_b_square_mul_x_square_l                           1DE          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_b_square_mul_x_square_h                           1DF          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_a_square_mul_b_square_l                           1E0          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_a_square_mul_b_square_h                           1E1          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_a                                          1E2          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_b                                          1E3          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_a_squ_mul_b_squ_l                          1E4          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_a_squ_mul_b_squ_h                          1E5          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_sbc_l                                      1E6          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_sbc_h                                      1E7          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_c_l                                        1E8          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_c_h                                        1E9          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_d_l                                        1EA          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_d_h                                        1EB          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_x_temp                                    1EC          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_y_temp                                    1ED          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_offset_in_a_l                              1EE          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_offset_in_a_h                              1EF          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_offset_in_b_l                              1F0          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_offset_in_b_h                              1F1          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_offset_in_c_l                              1F2          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_offset_in_c_h                              1F3          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_offset_out_l                               1F4          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_offset_out_h                               1F5          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_sign                                              1F6          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_reckon_offset_first_l                     1F7          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_reckon_offset_first_h                     1F8          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_reckon_offset_second_l                    1F9          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_reckon_offset_second_h                    1FA          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_ellipse_reckon_offset_sign                        1FB          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_process_sign                                      1FC          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+charnum                                            1FD          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+charwide                                           1FE          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+charhigh                                           1FF          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+chartemp                                           201          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+str_tab                                            203          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+str_x                                              204          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+str_y                                              205          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+label2                                             206          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+bp_temp                                            206          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+R_GraphicMode_temp                                 207          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+sign                                               208          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+constant                                           202          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+label3                                             210          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_page_place_bit                                    21F          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_page                                              220          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_page_place                                        221          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_point_shape                                       229          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_x                                                 222          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_y                                                 223          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_offset_x                                   224          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_offset_y                                   225          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_public_area_sign                                  226          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_point_value                                       227          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_point_value_temp                                  228          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+label4                                             22A          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+R_GraphicMode                                      24A          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_x0                                                24B          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+_y0                                                24C          "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+tab_rectangle1                                     8396         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+tab_rectangle2                                     839F         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+TAB_pixel                                          83A8         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+__RES_1_48K_sa                                     EE96         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\1_48k.res"
+__RES_1_48K_ea                                     EF95         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\1_48k.res"
+__RES_2_48K_sa                                     F094         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\2_48k.res"
+__RES_2_48K_ea                                     F18A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\2_48k.res"
+__RES_3_48K_sa                                     EF95         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\3_48k.res"
+__RES_3_48K_ea                                     F094         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\3_48k.res"
+__RES_4_48K_sa                                     EACA         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\4_48k.res"
+__RES_4_48K_ea                                     EC11         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\4_48k.res"
+__RES_5_48K_sa                                     F18A         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\5_48k.res"
+__RES_5_48K_ea                                     F277         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\5_48k.res"
+__RES_6_48K_sa                                     E971         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\6_48k.res"
+__RES_6_48K_ea                                     EACA         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\6_48k.res"
+__RES_7_48K_sa                                     F277         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\7_48k.res"
+__RES_7_48K_ea                                     F364         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\7_48k.res"
+__RES_8_48K_sa                                     E3EC         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\8_48k.res"
+__RES_8_48K_ea                                     E5D5         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\8_48k.res"
+__RES_9_48K_sa                                     EC11         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\9_48k.res"
+__RES_9_48K_ea                                     ED58         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\9_48k.res"
+__RES_10_48K_sa                                    DFDB         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\10_48k.res"
+__RES_10_48K_ea                                    E1FA         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\10_48k.res"
+__RES_11_48K_sa                                    E7A3         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\11_48k.res"
+__RES_11_48K_ea                                    E971         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\11_48k.res"
+__RES_12_48K_sa                                    E1FA         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\12_48k.res"
+__RES_12_48K_ea                                    E3EC         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\12_48k.res"
+__RES_13_48K_sa                                    E5D5         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\13_48k.res"
+__RES_13_48K_ea                                    E7A3         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\13_48k.res"
+__RES_14_48K_sa                                    ED58         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\14_48k.res"
+__RES_14_48K_ea                                    EE96         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\14_48k.res"
+__RES_15_48K_sa                                    F364         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\15_48k.res"
+__RES_15_48K_ea                                    F43F         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\15_48k.res"
+__RES_01_48K_sa                                    D8BF         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\01_48k.res"
+__RES_01_48K_ea                                    DFDB         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\01_48k.res"
+__RES_16_48K_sa                                    F43F         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\16_48k.res"
+__RES_16_48K_ea                                    F508         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\16_48k.res"
+__RES_08_48K_sa                                    CCC0         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\08_48K.res"
+__RES_08_48K_ea                                    D8BF         "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\08_48K.res"
+*********************************************************************************************
+
+*********************************************************************************************
+*                             S E C T I O N     S U M M A R Y                               *
+*********************************************************************************************
+*     Section Name                             Startting Address   Ending Address    Size   *
+*********************************************************************************************
+* "E:\IDE180\startupD.obj"                                                                  *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    unSP_StartUp(TEXT)                            83B1                 83CD         1D     *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"                           *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          834E                 8395         48     *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\key.obj"                                *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          CBBB                 CBD6         1C     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           258                  25A          3      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\key1.obj"                               *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          CBD7                 CBF2         1C     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           255                  257          3      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"                               *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          AEE0                 B90B         A2C    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          8009                 824B         243    *
+*    IRAM                                          CCB3 (2F8)           CCB5 (2FA)   3      *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           24D                  254          8      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"                               *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          CB39                 CB70         38     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          824C                 834D         102    *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\single.obj"                             *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          C9A5                 CA1E         7A     *
+*    DATA                                          F508                 F536         2F     *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\delay.obj"                              *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          CAFD                 CB38         3C     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501DisplayTAB.obj"                  *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          83CE                 9A71         16A4   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"                    *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          C306                 C517         212    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"                         *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          9A72                 AEDF         146E   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sram.obj"                               *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          C926                 C9A4         7F     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\system.obj"                             *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          CB71                 CB9A         2A     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           25B                  25B          1      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"                           *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          C518                 C6F6         1DF    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          CC17 (25C)           CCA9 (2EE)   93     *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\MICTest.obj"                            *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          CB9B                 CBBA         20     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sleep.obj"                              *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          CC05                 CC16         12     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\uart.obj"                               *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          CA1F                 CA90         72     *
+*    DATA                                          F537                 F53B         5      *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         CCB9 (0)             CCBF (6)     7      *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\88ledtest.obj"                          *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          C871                 C925         B5     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\4096.obj"                               *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          CA91                 CAFC         6C     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          CCB8 (2FD)           CCB8 (2FD)   1      *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"                          *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          C6F7                 C870         17A    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"                        *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          CBF3                 CC04         12     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          CCAA (2EF)           CCB2 (2F7)   9      *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"                         *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          8396                 83B0         1B     *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           1AA                  24C          A3     *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\1_48k.res"                              *
+*    __sn_section_RES_1_48K(DATA)                  EE96                 EF94         FF     *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\2_48k.res"                              *
+*    __sn_section_RES_2_48K(DATA)                  F094                 F189         F6     *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\3_48k.res"                              *
+*    __sn_section_RES_3_48K(DATA)                  EF95                 F093         FF     *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\4_48k.res"                              *
+*    __sn_section_RES_4_48K(DATA)                  EACA                 EC10         147    *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\5_48k.res"                              *
+*    __sn_section_RES_5_48K(DATA)                  F18A                 F276         ED     *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\6_48k.res"                              *
+*    __sn_section_RES_6_48K(DATA)                  E971                 EAC9         159    *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\7_48k.res"                              *
+*    __sn_section_RES_7_48K(DATA)                  F277                 F363         ED     *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\8_48k.res"                              *
+*    __sn_section_RES_8_48K(DATA)                  E3EC                 E5D4         1E9    *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\9_48k.res"                              *
+*    __sn_section_RES_9_48K(DATA)                  EC11                 ED57         147    *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\10_48k.res"                             *
+*    __sn_section_RES_10_48K(DATA)                 DFDB                 E1F9         21F    *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\11_48k.res"                             *
+*    __sn_section_RES_11_48K(DATA)                 E7A3                 E970         1CE    *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\12_48k.res"                             *
+*    __sn_section_RES_12_48K(DATA)                 E1FA                 E3EB         1F2    *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\13_48k.res"                             *
+*    __sn_section_RES_13_48K(DATA)                 E5D5                 E7A2         1CE    *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\14_48k.res"                             *
+*    __sn_section_RES_14_48K(DATA)                 ED58                 EE95         13E    *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\15_48k.res"                             *
+*    __sn_section_RES_15_48K(DATA)                 F364                 F43E         DB     *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\01_48k.res"                             *
+*    __sn_section_RES_01_48K(DATA)                 D8BF                 DFDA         71C    *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\16_48k.res"                             *
+*    __sn_section_RES_16_48K(DATA)                 F43F                 F507         C9     *
+* "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\08_48K.res"                             *
+*    __sn_section_RES_08_48K(DATA)                 CCC0                 D8BE         BFF    *
+* "D:\WORKING\UNSP\LIBMAK~1\RELEASE\S480"                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          B90C                 C305         9FA    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          CCB6 (2FB)           CCB7 (2FC)   2      *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    OVERLAP_RAM_BLOCK(ORAM)                       7                    1A9          1A3    *
+* "Init Table"                                     8000                 8008         9      *
+*********************************************************************************************
+
+*********************************************************************************************
+*                             M E M O R Y     S U M M A R Y                                 *
+*********************************************************************************************
+*     Type                          Total               Using        Remain                 *
+*********************************************************************************************
+* "SRam/OSRam/ISRam"                40                   7            39                    *
+* "Ram"                             800                  2FE          502                   *
+* "First Bank Rom"                  7C00                 753C         6C4                   *
+* "Other Banks Rom"                 0                    0            0                     *
+*********************************************************************************************
+
+Linker Output Filename : .\Debug\led and key test.S37
+Disk  Mapping Filename : .\Debug\led and key test.map
+Symbol  Table FileName : .\Debug\led and key test.sym
+Format :                 Microtek
+
+Linker Errors :          0
+Output Format :          S37

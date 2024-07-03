@@ -1,0 +1,165 @@
+Sunplus u'nSP Assembler - Ver. 1.8.1
+              Listing File Has Been Relocated
+                            	//***********************************************************
+                            	// Note:通过模拟量输入口LINE_IN输入电压值，以8K的采样率经A/D
+                            	//转换后送给IOB口控制LED点亮,同时可以根据LED的点亮来了解转换
+                            	//的数据
+                            	//*************************************************************									
+                            	
+                            	// 时钟源为Fosc/2，采样率为8KHz
+                            	.define     TIMER_DATA_FOR_8KHZ   0xFA23  
+                            	
+                            	.define		P_IOB_DATA  	0x7005 
+                            	.define		P_IOB_DIR   	0x7007 
+                            	.define		P_IOB_ATTRI		0x7008 
+                            	.define		P_INT_Ctrl		0x7010 
+                            	.define		P_INT_CLEAR		0x7011 
+                            	
+                            	.define		P_TimerA_Ctrl	0x700b 
+                            	.define		P_TimerA_Data	0x700a 
+                            	.define		P_ADC_Ctrl		0x7015 
+                            	.define		P_ADC			0x7014 
+                            	.define		P_ADC_MUX_Ctrl	0x702b 
+                            	.define		P_ADC_MUX_DATA	0x702C
+                            	.define		P_DAC_Ctrl		0x702A 
+                            	
+                            	
+                            	.define		P_DAC1			0x7017
+                            	.define		P_DAC2			0x7016
+00000007                    	.ISRAM
+00000007 00 00              	.VAR RESULT
+00000008 00 00              	.VAR TIME            //Line in select
+00000009 00 00              	.var value           //vol 0 or ffc
+00008D90                    	.CODE
+                            	.public _AD_Line;
+                            	_AD_Line:  .proc
+                            	       
+00008D90 41 92              	        R1=0x0001
+00008D91 C8 D3              	        [TIME]=R1//选择LINE0
+00008D92 09 93 F0 00        			r1=0x00f0
+00008D94 C9 D3              			[value]=r1	//端口送入的值
+00008D95 09 93 FF FF        			r1=0xffff 
+00008D97 19 D3 08 70        			[P_IOB_ATTRI]=r1 
+00008D99 19 D3 07 70        			[P_IOB_DIR]=r1 
+00008D9B 40 92              			r1=0x0000
+00008D9C 19 D3 05 70        			[P_IOB_DATA]=r1;
+                            			
+                            		    
+                            			   		
+00008D9E 41 92              			R1 = 0x0001	            //允许A/D
+00008D9F 19 D3 15 70        			[P_ADC_Ctrl] = R1 		 
+00008DA1 09 93 A0 00        		    r1 = 0x00A0;
+00008DA3 19 D3 2A 70        		    [P_DAC_Ctrl] = r1;
+00008DA5 40 F0 BA 8D        			call _InitAD1
+00008DA7 41 C2              			test r1,0x0001;
+00008DA8 0F 5E              			jz fail;	
+                            			
+00008DA9 09 93 FF FF        			r1=0xffff
+00008DAB 19 D3 05 70        			[P_IOB_DATA]=r1;
+00008DAD 41 92              	   		R1=0x0001
+00008DAE C8 D3              	        [TIME]=R1
+00008DAF 09 93 00 FF        			r1=0xff00
+00008DB1 C9 D3              			[value]=r1	
+                            			
+00008DB2 40 F0 D3 8D        			call _InitAD2
+00008DB4 41 C2              			test r1,0x0001;
+00008DB5 02 5E              			jz fail;		
+00008DB6 41 92              			r1 = 0x0001  //success
+                            			
+00008DB7 90 9A              		    retf;
+                            			
+00008DB8 40 92              	fail:	r1 = 0x0000   //fail
+                            	        // fiq on
+                            	        // irq on
+00008DB9 90 9A              		    retf;
+                            		
+                            	.endp
+                            			
+                            			
+                            	.public _InitAD1
+                            	_InitAD1:
+                            	       
+00008DBA C8 95              	       R2=[TIME]							
+00008DBB 0A C5 80 00        		   test r2,0x0080
+00008DBD 13 4E              		   jNZ NEXT1
+00008DBE 1A D5 2B 70        		   [P_ADC_MUX_Ctrl]=R2
+00008DC0 42 95              		   R2=R2 LSL 1
+00008DC1 C8 D5              		   [TIME]=R2
+00008DC2 00 EE              		   NOP
+00008DC3 00 EE              		   NOP
+00008DC4 11 93 2C 70        	      r1=[P_ADC_MUX_DATA]
+                            	       
+                            	 _AD1:
+                            	 	 
+00008DC6 11 93 2B 70        	       r1=[P_ADC_MUX_Ctrl] 
+00008DC8 09 C3 00 80        	       test r1,0x8000
+00008DCA 45 5E              	       jz _AD1
+                            	     
+                            	       
+                            	   
+00008DCB 11 93 2C 70        	       r1=[P_ADC_MUX_DATA]
+                            	       
+00008DCD C9 43              	       CMP R1,[value] 
+00008DCE 55 8E              	       jbe  _InitAD1
+                            	      
+00008DCF 40 92              	       r1 = 0;
+00008DD0 90 9A              	       retf;
+                            	        			      // 调用ADC初始化程序
+                            	NEXT1:
+                            			//成功
+00008DD1 41 92              			r1 = 0x0001;
+00008DD2 90 9A              	       RETF
+                            	       
+                            	       
+                            	.public _InitAD2
+                            	_InitAD2:
+                            	       
+00008DD3 C8 95              	       R2 = [TIME]							
+00008DD4 0A C5 80 00        		   test r2,0x0080
+00008DD6 13 4E              		   jNZ NEXT2
+00008DD7 1A D5 2B 70        		   [P_ADC_MUX_Ctrl] = R2
+00008DD9 42 95              		   R2=R2 LSL 1
+00008DDA C8 D5              		   [TIME]=R2
+00008DDB 00 EE              		   NOP
+00008DDC 00 EE              		   NOP
+00008DDD 11 93 2C 70        	       r1=[P_ADC_MUX_DATA]
+                            	
+                            	 _AD2:  
+00008DDF 11 93 2B 70        	       r1=[P_ADC_MUX_Ctrl] 
+00008DE1 09 C3 00 80        	       test r1,0x8000
+00008DE3 45 5E              	       jz _AD2   
+                            	       
+                            	   
+00008DE4 11 93 2C 70        	       r1 = [P_ADC_MUX_DATA]
+                            	       
+00008DE6 C9 43              	       CMP R1,[value] 
+00008DE7 55 1E              	       jae  _InitAD2
+                            	       //shibai
+00008DE8 40 92              	       r1 = 0;
+00008DE9 90 9A              	       retf;
+                            	        			      // 调用ADC初始化程序
+                            	NEXT2:
+                            			//成功
+00008DEA 41 92              			r1 = 0x0001;
+00008DEB 90 9A              	       RETF
+                            	       
+                            	delay://1ms
+00008DEC 90 D4              		push r1,r2 to [sp]
+00008DED 41 92              	    r1 = 1
+                            	loop_out:
+00008DEE 0A 95 FF 00        	    r2 = 0x00ff
+                            	loop_in:
+00008DF0 41 24              	    r2 -=1
+00008DF1 40 44              	    cmp r2,0x0000
+00008DF2 43 4E              	    jnz loop_in;
+00008DF3 41 22              	    r1 -= 1;
+00008DF4 40 42              	    cmp r1,0x0000
+00008DF5 48 4E              	    jnz loop_out;
+00008DF6 90 90              	    pop r1,r2 from [sp]
+00008DF7 90 9A              	   retf  
+                            	   
+                            	   
+                            	   
+                            	 
+0 error(s), 0 warning(s).
+

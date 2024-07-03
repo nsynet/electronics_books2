@@ -1,0 +1,259 @@
+Thursday, August 21, 18:40:02, 2003
+
+                    Sunplus u'nSP Linker version 1.8.0 (enc)
+                    -------------------------------------------
+
+Global Symbol Name                             Global Value     Global Filename
+*********************************************************************************************
+_RESET                                             805A         "E:\PROGRA~1\Sunplus\UNSPID~3\IDE180\startupD.obj"
+__sn_loop                                          8076         "E:\PROGRA~1\Sunplus\UNSPID~3\IDE180\startupD.obj"
+__sn_loop2                                         8075         "E:\PROGRA~1\Sunplus\UNSPID~3\IDE180\startupD.obj"
+_RES_Table                                         0            "E:\usb\example1\061_lib\061_LIB\Debug\Resource.obj"
+_BREAK                                             800C         "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+_FIQ                                               8009         "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+_IRQ0                                              800F         "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+_IRQ1                                              8012         "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+_IRQ2                                              8015         "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+_IRQ3                                              8018         "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+_IRQ4                                              803A         "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+_IRQ5                                              803D         "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+_IRQ6                                              8040         "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+_IRQ7                                              8043         "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+_F_TurnOnFirstLed                                  8BDA         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_TurnOffFirstLed                                 8BD1         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_TurnOnSecondLed                                 8BEB         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_TurnOffSecondLed                                8BE2         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_InitWriteD12                                    8BF3         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_InitReadD12                                     8C0F         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_ReadD12                                         8C2B         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_WriteCmdOrDataToD12                             8C61         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_System_Initial                                  8B6C         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_Interrupt_On                                    8BC2         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_Delay                                           8BC6         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_Interrupt_Off                                   8BC4         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_F_Clear_WatchDog                                  8C9E         "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+_main                                              8A20         "E:\usb\example1\061_lib\061_LIB\Debug\main.obj"
+_EpBuf                                             0            "E:\usb\example1\061_lib\061_LIB\Debug\main.obj"
+_MainEpBuf                                         40           "E:\usb\example1\061_lib\061_LIB\Debug\main.obj"
+_F_D12_SetAddressEnable                            8608         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_SetEndpointEnable                           8636         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_SetMode                                     8663         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_SetDMA                                      868E         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_SetEndpointStatus                           86AC         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_WriteEndpoint                               86D0         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_AcknowledgeEndpoint                         8744         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_ReadInterruptRegister                       8771         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_ReadLastTransactionStatus                   87BA         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_ReadEndpoint                                87DD         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_SelectEndpoint                              8875         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_Disconnect_USB                                  8897         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_Connect_USB                                     88A9         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_Reconnect_USB                                   88C1         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_ReadEndpointAndClrD12Int                    8900         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_F_D12_WriteEndpointAndClrD12Int                   89A6         "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+_DeviceDescr                                       98           "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_ConfigDescr                                       AA           "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_InterfaceDescr                                    B3           "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_EP1_TXDescr                                       BC           "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_EP1_RXDescr                                       C3           "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_EP2_TXDescr                                       CA           "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_EP2_RXDescr                                       D1           "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_StandardDeviceRequest                             D8           "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Reserved                                        8077         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Get_Status                                      8083         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Clear_Feature                                   8153         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Set_Feature                                     81CE         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Set_Address                                     8249         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Get_Descriptor                                  8264         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Get_Configuration                               829C         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Set_Configuration                               82B7         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Get_Interface                                   82FB         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Set_Interface                                   830D         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Stall_Ep0                                       8336         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Single_Transmit                                 834E         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Code_Transmit                                   8371         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Control_Handler                                 83F1         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Init_Unconfig                                   8424         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Init_Config                                     8433         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Ep0_RxDone_Detail                               8442         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_Ep0_TxDone_Detail                               8575         "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_ControlData                                       80           "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_bEPPflags                                         95           "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+_F_USB_Isr                                         8CA4         "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+_F_DMA_Eot                                         8D22         "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+_F_Ep0_RxDone                                      8D29         "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+_F_Ep0_TxDone                                      8D3C         "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+_F_Ep1_TxDone                                      8D4D         "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+_F_Ep1_RxDone                                      8D62         "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+_F_Main_TxDone                                     8D6F         "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+_F_Main_RxDone                                     8D84         "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+_i_st                                              96           "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+_ep_last                                           97           "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+*********************************************************************************************
+
+*********************************************************************************************
+*                             S E C T I O N     S U M M A R Y                               *
+*********************************************************************************************
+*     Section Name                             Startting Address   Ending Address    Size   *
+*********************************************************************************************
+* "E:\PROGRA~1\Sunplus\UNSPID~3\IDE180\startupD.obj"                                        *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    unSP_StartUp(TEXT)                            805A                 8076         1D     *
+* "E:\usb\example1\061_lib\061_LIB\Debug\Resource.obj"                                      *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"                                           *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          8009                 8045         3D     *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"                                        *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8B6C                 8CA3         138    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "E:\usb\example1\061_lib\061_LIB\Debug\main.obj"                                          *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8A20                 8B6B         14C    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           0                    7F           80     *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"                                         *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8608                 8A1F         418    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"                                         *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8077                 8607         591    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          8046                 8059         14     *
+*    IRAM                                          8DCC (98)            8E1B (E7)    50     *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           80                   95           16     *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"                                     *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8CA4                 8D90         ED     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           96                   97           2      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    CTOR                                          ----                 ----         ----   *
+*    DTOR                                          ----                 ----         ----   *
+*    IM                                            ----                 ----         ----   *
+* "rshu1"                                                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8DB7                 8DCB         15     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "rshu2"                                                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8D91                 8DB6         26     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "Init Table"                                     8000                 8008         9      *
+*********************************************************************************************
+
+*********************************************************************************************
+*                             M E M O R Y     S U M M A R Y                                 *
+*********************************************************************************************
+*     Type                          Total               Using        Remain                 *
+*********************************************************************************************
+* "SRam/OSRam/ISRam"                40                   0            40                    *
+* "Ram"                             800                  E8           718                   *
+* "First Bank Rom"                  7C00                 E1C          6DE4                  *
+* "Other Banks Rom"                 0                    0            0                     *
+*********************************************************************************************
+
+Linker Output Filename : .\Debug\usb061.S37
+Disk  Mapping Filename : .\Debug\usb061.map
+Symbol  Table FileName : .\Debug\usb061.sym
+Format :                 Microtek
+
+Linker Errors :          0
+Output Format :          S37

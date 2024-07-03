@@ -1,0 +1,73 @@
+Version: 3.0
+Options: m37
+Obj: "D:\PROGRA~1\Sunplus\UNSPID~3\unSPIDE\startupD.obj"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\Resource.obj"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\EVB061Test.obj"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\system.obj"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\isr.obj"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\ad_line.obj"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\key.obj"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\hardware.obj"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\main.obj"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\09_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\02_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\03_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\04_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\05_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\06_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\07_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\08_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\01_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\12_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\11_48k.res"
+Obj: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\10_48k.res"
+Lib: "F:\©лб╪╧Бел\EVB061Test-KEY\sacmv25.lib"
+Output: "F:\©лб╪╧Бел\EVB061Test-KEY\Debug\EVB061Test.S37"
+;Locate: TEXT in "isr.obj" at 8009 
+;Align: TEXT in "isr.obj" with 0 
+;Locate: IRAM in "hardware.obj" at 8E69  linkat 1B1 
+;Align: IRAM in "hardware.obj" with 0 
+;Locate: ISRAM in "ad_line.obj" at 8E9F  linkat 0 
+;Align: ISRAM in "ad_line.obj" with 0 
+;Locate: RAM in "main.obj" at 1A7 
+;Align: RAM in "main.obj" with 0 
+;Locate: S480_Section in "s480" of "sacmv25.lib"  at 3 
+;Align: S480_Section in "s480" of "sacmv25.lib"  with 0 
+;Locate: __sn_section_RES_01_48K in "01_48k.res" at 9AA1 
+;Align: __sn_section_RES_01_48K in "01_48k.res" with 0 
+;Locate: __sn_section_RES_02_48K in "02_48k.res" at C343 
+;Align: __sn_section_RES_02_48K in "02_48k.res" with 0 
+;Locate: __sn_section_RES_03_48K in "03_48k.res" at BEEE 
+;Align: __sn_section_RES_03_48K in "03_48k.res" with 0 
+;Locate: __sn_section_RES_04_48K in "04_48k.res" at A1BD 
+;Align: __sn_section_RES_04_48K in "04_48k.res" with 0 
+;Locate: __sn_section_RES_05_48K in "05_48k.res" at A74D 
+;Align: __sn_section_RES_05_48K in "05_48k.res" with 0 
+;Locate: __sn_section_RES_06_48K in "06_48k.res" at BA75 
+;Align: __sn_section_RES_06_48K in "06_48k.res" with 0 
+;Locate: __sn_section_RES_07_48K in "07_48k.res" at CB6F 
+;Align: __sn_section_RES_07_48K in "07_48k.res" with 0 
+;Locate: __sn_section_RES_08_48K in "08_48k.res" at 8EA2 
+;Align: __sn_section_RES_08_48K in "08_48k.res" with 0 
+;Locate: __sn_section_RES_09_48K in "09_48k.res" at AC32 
+;Align: __sn_section_RES_09_48K in "09_48k.res" with 0 
+;Locate: __sn_section_RES_10_48K in "10_48k.res" at B117 
+;Align: __sn_section_RES_10_48K in "10_48k.res" with 0 
+;Locate: __sn_section_RES_11_48K in "11_48k.res" at C762 
+;Align: __sn_section_RES_11_48K in "11_48k.res" with 0 
+;Locate: __sn_section_RES_12_48K in "12_48k.res" at B5C6 
+;Align: __sn_section_RES_12_48K in "12_48k.res" with 0 
+;Locate: CODE in "s480" of "sacmv25.lib"  at 80CA 
+;Align: CODE in "s480" of "sacmv25.lib"  with 0 
+;Locate: CODE in "hardware.obj" at 8A91 
+;Align: CODE in "hardware.obj" with 0 
+;Locate: CODE in "main.obj" at 8BBE 
+;Align: CODE in "main.obj" with 0 
+;Locate: CODE in "key.obj" at 8CC5 
+;Align: CODE in "key.obj" with 0 
+;Locate: CODE in "EVB061Test.obj" at 8D43 
+;Align: CODE in "EVB061Test.obj" with 0 
+;Locate: CODE in "ad_line.obj" at 8DBF 
+;Align: CODE in "ad_line.obj" with 0 
+;Locate: CODE in "system.obj" at 8E23 
+;Align: CODE in "system.obj" with 0 

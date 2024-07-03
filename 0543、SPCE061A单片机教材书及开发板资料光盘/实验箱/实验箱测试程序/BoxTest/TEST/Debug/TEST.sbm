@@ -1,0 +1,81 @@
+.stabs "startup_code.",0x3c,0,0,0
+.stabs "__sn_main:F15",36,0,0,     32854
+.stabs "__sn_end:F15",36,0,0,     32852
+.stabs "__sn_exception:F15",36,0,0,     32853
+.stabs "D:\Documents and Settings\ÁõĞÂÑÕ\My Documents\rf\TEST/", 0x64,0,0,0
+.stabs "D:\Documents and Settings\ÁõĞÂÑÕ\My Documents\rf\TEST\Resource.asm", 0x64,0,0,0
+.stabs "unsigned int:t1=r1;0;65535;",128,0,0,0
+.stabs "long long int:t2=r1;-2147483648;2147483647;",128,0,0,0
+.stabs "float:t3=r1;2;0;",128,0,0,0
+.stabs "double:t4=r1;4;0;",128,0,0,0
+.stabn 0xc0,0,0,         0
+.stabn 0xe0,0,0,         0
+.stabn 0xc0,0,0,         0
+.stabn 0xe0,0,0,         0
+.stabs "D:\Documents and Settings\ÁõĞÂÑÕ\My Documents\rf\TEST/", 0x64,0,0,0
+.stabs "D:\Documents and Settings\ÁõĞÂÑÕ\My Documents\rf\TEST\main.asm", 0x64,0,0,0
+.stabs "unsigned int:t1=r1;0;65535;",128,0,0,0
+.stabs "long long int:t2=r1;-2147483648;2147483647;",128,0,0,0
+.stabs "float:t3=r1;2;0;",128,0,0,0
+.stabs "double:t4=r1;4;0;",128,0,0,0
+.stabn 0xc0,0,0,     32854
+.stabn 0xe0,0,0,     32854
+.stabn 0xc0,0,0,         0
+.stabs "Originally_Data:S1",38,0,0,         0
+.stabs "One_Flag:S1",38,0,0,         1
+.stabs "Zero_Flag:S1",38,0,0,         2
+.stabs "Step:S1",38,0,0,         3
+.stabs "first:S1",38,0,0,         4
+.stabn 0xe0,0,0,         5
+.stabn 0xc0,0,0,     32854
+.stabn 0x44,0,37,     32854
+.stabn 0x44,0,49,     32855
+.stabn 0x44,0,50,     32857
+.stabn 0x44,0,51,     32859
+.stabn 0x44,0,52,     32861
+.stabn 0x44,0,53,     32863
+.stabn 0x44,0,54,     32865
+.stabn 0x44,0,57,     32867
+.stabn 0x44,0,58,     32869
+.stabn 0x44,0,60,     32871
+.stabn 0x44,0,65,     32872
+.stabn 0x44,0,66,     32873
+.stabn 0x44,0,67,     32874
+.stabn 0x44,0,68,     32875
+.stabn 0xe0,0,0,     32876
+.stabn 0xc0,0,0,     32777
+.stabn 0x44,0,75,     32777
+.stabn 0x44,0,76,     32778
+.stabn 0x44,0,77,     32779
+.stabn 0x44,0,78,     32781
+.stabn 0x44,0,79,     32782
+.stabn 0x44,0,80,     32783
+.stabn 0x44,0,81,     32785
+.stabn 0x44,0,83,     32786
+.stabn 0x44,0,84,     32788
+.stabn 0x44,0,85,     32789
+.stabn 0x44,0,87,     32791
+.stabn 0x44,0,88,     32792
+.stabn 0x44,0,90,     32793
+.stabn 0x44,0,92,     32794
+.stabn 0x44,0,93,     32795
+.stabn 0x44,0,94,     32797
+.stabn 0x44,0,98,     32799
+.stabn 0x44,0,99,     32801
+.stabn 0x44,0,100,     32803
+.stabn 0x44,0,101,     32804
+.stabn 0x44,0,104,     32805
+.stabn 0x44,0,105,     32806
+.stabn 0x44,0,106,     32808
+.stabn 0x44,0,107,     32809
+.stabn 0x44,0,110,     32810
+.stabn 0x44,0,111,     32811
+.stabn 0x44,0,112,     32813
+.stabn 0x44,0,113,     32814
+.stabn 0x44,0,119,     32815
+.stabn 0x44,0,121,     32817
+.stabn 0x44,0,122,     32819
+.stabn 0x44,0,123,     32821
+.stabn 0x44,0,124,     32823
+.stabn 0x44,0,125,     32824
+.stabn 0xe0,0,0,     32825

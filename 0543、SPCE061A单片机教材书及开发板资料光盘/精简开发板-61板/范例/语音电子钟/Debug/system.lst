@@ -1,0 +1,794 @@
+Sunplus u'nSP Assembler - Ver. 1.4.1 (Build:0)
+              Listing File Has Been Relocated
+                            	
+                            	.include hardware.inc  
+                     <      	//========================================================================================
+                     <      	// Progarm: The file be included by modules
+                     <      	// Arranged by: Andy Hsu
+                     <      	// Date: 	2000/06/23: first version
+                     <      	//		2000/07/24: modified
+                     <      	//		2000/10/20: modified for version 52A
+                     <      	//========================================================================================
+                     <      	//////////////////////////////////////////////////////////////////
+                     <      	// Definitions for I/O Port
+                     <      	//////////////////////////////////////////////////////////////////
+                     <      	.DEFINE	P_IOA_Data   		0x7000;        // Write Data into data register and read from IOA pad
+                     <      	.DEFINE P_IOA_Buffer        0x7001;        // Write Data into buffer register and read from buffer register
+                     <      	.DEFINE P_IOA_Dir           0x7002;        // Direction vector for IOA
+                     <      	.DEFINE P_IOA_Attrib        0x7003;        // Attribute vector for IOA
+                     <      	.DEFINE P_IOA_Latch         0x7004;        // Latch PortA data for key change wake-up
+                     <      	
+                     <      	.DEFINE P_IOB_Data         	0x7005;        // Write Data into the data register and read from IOB pad
+                     <      	.DEFINE P_IOB_Buffer        0x7006;        // Write Data into buffer register and read from buffer register
+                     <      	.DEFINE P_IOB_Dir           0x7007;        // Direction vector for IOB
+                     <      	.DEFINE P_IOB_Attrib        0x7008;        // Attribute vector for IOB
+                     <      	
+                     <      	.DEFINE P_FeedBack          0x7009;        // Clock form external R,C
+                     <      	.DEFINE P_TimerA_Data       0x700A;        // Data port for TimerA 
+                     <      	.DEFINE P_TimerA_Ctrl       0x700B;        // Control Port for TimerA
+                     <      	.DEFINE P_TimerB_Data       0x700C;        // Data port for TimerB
+                     <      	.DEFINE P_TimerB_Ctrl       0x700D;        // Control Port for TimerB
+                     <      	.DEFINE P_TimeBase_Setup    0x700E;        // TimerBase Freq. Set
+                     <      	.DEFINE P_TimeBase_Clear	0x700F;		   // Reset Timerbase counter
+                     <      	.DEFINE P_INT_Ctrl          0x7010;        // Control port for interrupt source
+                     <      	.DEFINE P_INT_Clear         0x7011;        // Clear interrupt source
+                     <      	.DEFINE P_Watchdog_Clear    0x7012;        // Watchdog Reset
+                     <      	.DEFINE P_SystemClock       0x7013;        // Change system clock frequency(include go to standby mode)
+                     <      	
+                     <      	//... PA6442 Old version (for EC-02) ...........
+                     <      	//.DEFINE P_ADDA               0x7014;        //10-bit DA(W) AD(R)
+                     <      	//.DEFINE P_DAC1               0x7014;        //
+                     <      	//.DEFINE P_AD_Ctrl            0x7015;        //AD/DA control
+                     <      	//.DEFINE P_AD_Status          0x7015;        //AD status
+                     <      	//.DEFINE P_DAC2               0x7016;        //DAC channel 2
+                     <      	//.DEFINE P_PWM                0x7016;        //PWM output
+                     <      	//.DEFINE P_DA_Ctrl            0x7017;        //DAC latch control
+                     <      	
+                     <      	//... PA6442 New version MC52A (For EC-03)....
+                     <      	.DEFINE P_ADC 	        	0x7014;        	// Data Port for AD
+                     <      	.DEFINE P_ADC_Ctrl          0x7015;        	// Control Port for AD control
+                     <      	.DEFINE P_ADC_Status        0x7015;        	// AD Port Status
+                     <      	.DEFINE P_DAC2              0x7016;        	// Data Port for DAC2
+                     <      	.DEFINE P_PWM               0x7016;        	// Data Port for PWM
+                     <      	.DEFINE P_DAC1	        	0x7017;        	// Data Port for DAC1
+                     <      	.DEFINE P_DAC_Ctrl			0x702A;			// Control Port for two DAC and audio output mode
+                     <      	//............................................
+                     <      	
+                     <      	.DEFINE P_IR_Ctrl			0x7018;			// Control Port for IR
+                     <      	.DEFINE P_LVD_Ctrl          0x7019;        	// Control Port for LVD
+                     <      	
+                     <      	.DEFINE P_SIO_Addr_Low		0x701B;			// Address Port low
+                     <      	.DEFINE P_SIO_Addr_Mid		0x701C;			// Address Port middle
+                     <      	.DEFINE P_SIO_Addr_High	 	0x701D;			// Address Port high
+                     <      	.DEFINE P_SIO_Ctrl			0x701E;			// Control Port
+                     <      	.DEFINE P_SIO_Start			0x701F;			// Start port for serial interface
+                     <      	.DEFINE P_SIO_Stop			0x7020;			// Stop port for serial interface
+                     <      	
+                     <      	.DEFINE P_UART_Command1		 0x7021;		// Command1 Port for UART
+                     <      	.DEFINE P_UART_Command2		 0x7022;		// Command2 Port for UART
+                     <      	.DEFINE P_UART_Data			 0x7023; 		// Data Port for UART
+                     <      	.DEFINE	P_UART_BaudScalarLow 0x7024;		// Set Baud Rate scalar low
+                     <      	.DEFINE	P_UART_BaudScalarHigh 0x7025;		// Set Baud Rate scalar high
+                     <      	
+                     <      	
+                     <      	//... Definitions for P_INT_Ctrl ..............
+                     <      	.DEFINE C_IRQ6_TMB2             0x0001;        	// Timer B IRQ6
+                     <      	.DEFINE C_IRQ6_TMB1             0x0002;        	// Timer A IRQ6
+                     <      	.DEFINE C_IRQ5_2Hz              0x0004;        	// 2Hz IRQ5
+                     <      	.DEFINE C_IRQ5_4Hz              0x0008;        	// 4Hz IRQ5
+                     <      	.DEFINE C_IRQ4_1KHz             0x0010;        	// 1024Hz IRQ4
+                     <      	.DEFINE C_IRQ4_2KHz             0x0020;        	// 2048Hz IRQ4
+                     <      	.DEFINE C_IRQ4_4KHz             0x0040;        	// 4096Hz IRQ4
+                     <      	.DEFINE C_IRQ3_KEY              0x0080;        	// Key Change IRQ3
+                     <      	.DEFINE C_IRQ3_EXT1             0x0100;        	// Ext1 IRQ3
+                     <      	.DEFINE C_IRQ3_EXT2             0x0200;        	// Ext2 IRQ3
+                     <      	.DEFINE C_IRQ2_TMB              0x0400;        	// Timer B IRQ2
+                     <      	.DEFINE C_FIQ_TMB               0x0800;        	// Timer B FIQ
+                     <      	.DEFINE C_IRQ1_TMA              0x1000;        	// Timer A IRQ1
+                     <      	.DEFINE C_FIQ_TMA               0x2000;        	// Timer A FIQ
+                     <      	.DEFINE C_IRQ0_PWM              0x4000;        	// PWM IRQ0
+                     <      	.DEFINE C_FIQ_PWM               0x8000;        	// PWM FIQ
+                     <      	
+                     <      	// Definitions for P_TimerA/B_Ctrl ............                               
+                     <      	.DEFINE	C_Fosc_2				0x0000;			// 
+                     <      	.DEFINE	C_Fosc_256		    	0x0001;			//
+                     <      	.DEFINE	C_32768Hz				0x0002;			//
+                     <      	.DEFINE	C_8192Hz				0x0003;			//
+                     <      	.DEFINE	C_4096Hz				0x0004;			//
+                     <      	.DEFINE	C_A1					0x0005;			//
+                     <      	.DEFINE C_A0					0x0006;			//
+                     <      	.DEFINE C_Ext1					0x0007;			//
+                     <      	
+                     <      	.DEFINE	C_2048Hz				0x0000;			//
+                     <      	.DEFINE	C_1024Hz				0x0008;			//
+                     <      	.DEFINE	C_256Hz					0x0010;			//
+                     <      	.DEFINE	C_TMB1Hz				0x0018;			//
+                     <      	.DEFINE	C_4Hz					0x0020;			//
+                     <      	.DEFINE	C_2Hz					0x0028;			//
+                     <      	.DEFINE	C_B1					0x0030;			//
+                     <      	.DEFINE	C_Ext2					0x0038;			//
+                     <      	
+                     <      	.DEFINE	C_Off					0x0000;			//
+                     <      	.DEFINE C_D1					0x0040;			//
+                     <      	.DEFINE C_D2					0x0080;			//
+                     <      	.DEFINE C_D3					0x00C0;			//
+                     <      	.DEFINE C_D4					0x0100;			//
+                     <      	.DEFINE C_D5					0x0140;			//
+                     <      	.DEFINE C_D6					0x0180;			//
+                     <      	.DEFINE C_D7					0x01C0;			//
+                     <      	.DEFINE C_D8					0x0200;			//
+                     <      	.DEFINE C_D9					0x0240;			//
+                     <      	.DEFINE C_D10					0x0280;			//
+                     <      	.DEFINE C_D11					0x02C0;			//
+                     <      	.DEFINE C_D12					0x0300;			//
+                     <      	.DEFINE C_D13					0x0340;			//
+                     <      	.DEFINE C_D14					0x0380;			//
+                     <      	.DEFINE C_TA_Div_2				0x03C0;			// Timer A
+                     <      	.DEFINE C_TB_Div_2				0x03C0;			// Timer B
+                     <      	
+                     <      	//... Definition for P_SystemClock ............
+                     <      	.DEFINE C_Fosc					0x0000;			// b3..b0
+                     <      	.DEFINE C_Fosc_Div_2			0x0001;			//
+                     <      	.DEFINE C_Fosc_Div_4			0x0002;			//
+                     <      	.DEFINE C_Fosc_Div_8			0x0003;			// (default)
+                     <      	.DEFINE C_Fosc_Div_16			0x0004;			//
+                     <      	.DEFINE C_Fosc_Div_32			0x0005;			//
+                     <      	.DEFINE C_Fosc_Div_64			0x0006;			//
+                     <      	.DEFINE C_Sleep					0x0007;		 	//
+                     <      	
+                     <      	.DEFINE	C_32K_Work				0x0000;			// b4
+                     <      	.DEFINE C_32K_Off				0x0000;			// 
+                     <      	.DEFINE C_StrongMode			0x0000;			// b5
+                     <      	.DEFINE C_AutoMode				0x0000;			//
+                     <      	
+                     <      	//... Define for P_AD_Ctrl ....................
+                     <      	.DEFINE	C_AD					0x0001;			//
+                     <      	.DEFINE C_DA					0x0000;			//
+                     <      	.DEFINE C_MIC					0x0000;			//
+                     <      	.DEFINE C_LINE					0x0002;			//
+                     <      	
+                     <      	//... Define for P_DA_Ctrl ....................
+                     <      	.DEFINE C_PushPull				0x0000;			// b0, (default) 
+                     <      	.DEFINE C_DoubleEnd				0x0001;			// b0
+                     <      	.DEFINE	C_DAC_Mode				0x0000;			// b1, (default)
+                     <      	.DEFINE C_PWM_Mode				0x0002;			// b1
+                     <      	
+                     <      	.DEFINE	C_D1_Direct				0x0000;			// DAC1 latch
+                     <      	.DEFINE C_D1_LatchA				0x0008;			// 
+                     <      	.DEFINE C_D1_LatchB				0x0010;			//
+                     <      	.DEFINE C_D1_LatchAB			0x0018;			//
+                     <      	
+                     <      	.DEFINE	C_D2_Direct				0x0000;			// DAC2 latch
+                     <      	.DEFINE C_D2_LatchA				0x0020;			// 
+                     <      	.DEFINE C_D2_LatchB				0x0040;			//
+                     <      	.DEFINE C_D2_LatchAB			0x00C0;			//
+                     <      	
+                     <      	//... Define for P_LVD_Ctrl ...................
+                     <      	.DEFINE C_LVD24V				0x0000;			// LVD = 2.4V 
+                     <      	.DEFINE C_LVD28V				0x0001;			// LVD = 2.8V
+                     <      	.DEFINE C_LVD32V				0x0002;			// LVD = 3.2V
+                     <      	.DEFINE C_LVD36V				0x0003;			// LVD = 3.6V
+                     <      	
+                     <      	
+                     <      	.EXTERNAL	F_SP_Read_INT_Status;			// for further use
+                     <      	.EXTERNAL 	F_SP_Write_INT_Status;			// for further use
+                     <      	.EXTERNAL  	F_SP_Set_INT_Vector;			// for further use
+                     <      	.EXTERNAL	F_SP_Clear_INT_Vector;			// for further use
+                     <      	
+                     <      	.EXTERNAL	F_SP_Send_Out;					//
+                     <      	.EXTERNAL	F_SP_Send_DAC1;					//
+                     <      	.EXTERNAL	F_SP_Send_DAC2;					//
+                     <      	.EXTERNAL	F_SP_Send_Two_DAC;				//
+                     <      	.EXTERNAL	F_SP_Init_HW;					//
+                     <      	
+                     <      	.EXTERNAL	R_InterruptStatus;
+                     <      	
+                     <      	
+                     <      	.EXTERNAL 	F_SP_RampUpDAC1;
+                     <      	.EXTERNAL 	F_SP_RampDnDAC1;
+                     <      	.EXTERNAL 	F_SP_RampUpDAC2;
+                     <      	.EXTERNAL  	F_SP_RampDnDAC2;
+                     <      	
+                     <      	.EXTERNAL 	F_SP_InitQueue;
+                     <      	.EXTERNAL 	F_SP_ReadQueue;
+                     <      	.EXTERNAL 	F_SP_WriteQueue;
+                     <      	.EXTERNAL 	F_SP_TestQueue;
+                     <      	
+                     <      	
+                     <      	
+                     <      	.EXTERNAL	F_SP_Get_ADC
+                     <      	
+                     <      	.EXTERNAL 	F_SP_Set_P_TimerA_Ctrl
+                     <      	.EXTERNAL 	F_SP_Set_P_TimerA_Data
+                     <      	.EXTERNAL 	F_SP_Set_P_TimerB_Ctrl
+                     <      	.EXTERNAL 	F_SP_Set_P_TimerB_Data
+                     <      	.EXTERNAL 	F_SP_Set_P_INT_Ctrl
+                     <      	.EXTERNAL 	F_SP_Set_P_INT_Clear
+                     <      	.EXTERNAL 	F_SP_Set_P_SystemClock
+                     <      	.EXTERNAL 	F_SP_Set_P_DAC_Ctrl
+                     <      	.EXTERNAL 	F_SP_Set_P_ADC_Ctrl
+                     <      	
+                     <      		
+                     <      	
+                     <      	//--------------------------------------------
+                     <      	SACM_MACRO1: 	.MACRO
+                     <      		
+                     <      		.ENDM
+                     <      	
+                     <      	SACM_MACRO2:	.MACRO
+                     <      		
+                     <      		.ENDM
+                     <      	
+                     <      	
+                     <      	
+                     <      	
+                     <      	//.define PC_Play_Enable_A2000		1    	// Enable the PC-Play function for SACM-A2000 module
+                     <      	//.define PC_Play_Enable_S480		1    	// Enable the PC-Play function for SACM-S480 module
+                     <      	//.define PC_Play_Enable_S240		1    	// Enable the PC-Play function for SACM-S240 module    
+                     <      	//.define PC_Play_Enable_MS01		1    	// Enable the PC-Play function for SACM-MS01 module
+                     <      	
+                     <      	
+                     <      	
+                     <      	//========================================================================================        
+                     <      	// End of hardware.inc
+                     <      	//========================================================================================
+                            	.external  _SecondAddOne
+                            	 
+0000032D                    	.RAM
+                            	.public     Year; 
+                            	.public     MonDayHr; 
+                            	.public     MinSec; 
+                            	.public     Per500msSet; 
+                            	
+0000032D 00 00              	.var   Year          //Äê b15--if leap year
+0000032E 00 00              	.var   MonDayHr      //ÔÂÈÕÊ±  b13--b10(month) b9--b5(day)  b4--b0(hour) 
+0000032F 00 00              	.var   MinSec        //·ÖÃë    b12--b7(minute) b6--b1(second) b0--500ms
+00000330 00 00              	.var   Per500msSet   //500ms ±êÖ¾
+                            	
+00009272                    	.CODE
+                            	
+                            	//////////////////////////////////////////////////////////////////
+                            	// ¹¦ÄÜ£ºÏµÍ³³õÊ¼»¯              
+                            	// Èë¿Ú£ºÎÞ
+                            	// ³ö¿Ú£ºÎÞ
+                            	//////////////////////////////////////////////////////////////////
+                            	
+                            	.public _System_Initial;
+                            	_System_Initial: .PROC
+                            	
+                            	 //---------------- ÏµÍ³Ê±ÖÓ¡¢ÖÐ¶Ï --------------------// 
+00009272 40 92              	     r1=0
+00009273 19 D3 13 70        	     [P_SystemClock]=r1
+                            	
+00009275 40 92              	     r1=0
+00009276 19 D3 F7 02        	     [R_InterruptStatus] = R1
+00009278 19 D3 10 70        	     [P_INT_Ctrl]=r1
+0000927A 48 F1              	     IRQ OFF
+0000927B 4C F1              	     FIQ OFF
+                            	
+                            	//----------------IO¿Ú--------------//
+0000927C 09 93 00 FF        		R1=0xff00
+0000927E 19 D3 03 70        		[P_IOA_Attrib] = R1		//A7--A0  ÊäÈë
+00009280 19 D3 02 70        		[P_IOA_Dir] = R1		//A15--A8 Êä³ö
+00009282 40 92              		R1 = 0x0000				
+00009283 19 D3 00 70        		[P_IOA_Data] = R1
+                            	     
+                            	  //--------ÍòÄêÀú---------//
+00009285 09 93 D1 07        	     R1=2001
+00009287 19 D3 2D 03        	     [Year]=R1     //2001Äê  b15--not leap year
+00009289 09 93 20 04        	     R1=0x0420
+0000928B 19 D3 2E 03        	     [MonDayHr]=R1  //1ÔÂ1ÈÕ1Ê± 
+                            	                    // b13--b10(month) b9--b5(day)  b4--b0(hour)
+0000928D 40 92              	     R1=0x0000      
+0000928E 19 D3 2F 03        	     [MinSec]=R1      //0·Ö0Ãë    
+                            	                   //b12--b7(minute) b6--b1(second) b0--500ms
+00009290 19 D3 30 03        	     [Per500msSet]=R1 
+                            	  
+                            	  
+                            	  //------------------- ÖÐ¶Ï --------------------//   
+00009292 09 93 84 00        	     r1 = C_IRQ5_2Hz+ C_IRQ3_KEY     //2Hz+KeyUp
+00009294 11 A3 F7 02        	     r1|=[R_InterruptStatus] 
+00009296 19 D3 F7 02        		 [R_InterruptStatus] = R1
+00009298 19 D3 10 70        	     [P_INT_Ctrl]=r1
+0000929A 49 F1              	     IRQ ON 
+                            	     
+0000929B 90 9A              	     retf;
+                            		.ENDP;
+                            	//==========================================================================//
+                            	////////////////////////////////
+                            	.public _Clear_WatchDog;
+                            	_Clear_WatchDog: 	.PROC
+0000929C 41 92              			R1=0x0001;                      // Clear watch dog
+0000929D 19 D3 12 70        			[P_Watchdog_Clear]=R1;       	//
+0000929F 90 9A              			retf;
+                            			.ENDP
+                            	////////////////////////////////
+                            	.public	_LightOn;
+                            	_LightOn:	.proc         //µãÁÁIOA15 LED 	
+000092A0 09 93 00 80        				r1= 0x8000;
+000092A2 11 A3 01 70        				r1 |= [P_IOA_Buffer];
+000092A4 19 D3 01 70        				[P_IOA_Buffer] = r1;
+000092A6 90 9A              				retf;
+                            				.endp
+                            	
+                            	.public	_LightOff;      //Ï¨Ãð IOA15 LED
+                            	_LightOff:	.proc
+000092A7 09 93 FF 7F        				r1= 0x7FFF;
+000092A9 11 B3 01 70        				r1&= [P_IOA_Buffer];
+000092AB 19 D3 01 70        				[P_IOA_Buffer] = r1;
+000092AD 90 9A              				retf;
+                            				.endp
+                            	
+                            	//----------------------------------------------//
+                            	//¹¦ÄÜ£ºÍòÄêÀúµ÷Õû
+                            	//Èë¿Ú£º500ms±êÖ¾  [Per500msSet]----0xFFFF£¬500msµ½
+                            	//³ö¿Ú£ºÎÞ
+                            	//----------------------------------------------//
+                            	
+                            	.public _Calendar_Counter
+                            	 _Calendar_Counter: .proc
+000092AE 11 93 30 03        	        R1 = [Per500msSet];   //500ms±êÖ¾/////////////////////////////
+000092B0 01 4E              	        JNZ  Update_Time;
+000092B1 90 9A              	        RETF;
+                            	 Update_Time:
+000092B2 40 92              	        R1 = 0;
+000092B3 19 D3 30 03        	        [Per500msSet] = R1;
+                            	               
+                            	//minute & second
+000092B5 11 93 2F 03        	        R1 = [MinSec];
+000092B7 41 02              	        R1 += 1;            //Ãë+1
+000092B8 09 B5 7E 00        	        R2 = R1 AND 0x007E;  //ÊÇ·ñµ½60Ãë£¿  ///////////////////////
+000092BA 0A 45 78 00        	        CMP     R2,60*2;
+000092BC 37 0E              	        JB      _2HzRtc_90;
+000092BD 09 B3 80 1F        	        R1 &= 0x1F80;               
+000092BF 09 03 80 00        	        R1 += 0x0080;               
+                            	        
+000092C1 0C 99 FF FF        	        r4=0xFFFF            //·Ö+1£¬ÖÃµ÷Õû±êÖ¾
+000092C3 1C D9 44 03        	        [_SecondAddOne]=r4
+                            	        
+000092C5 09 43 00 1E        	        CMP     R1,60*128;  //ÊÇ·ñµ½60·Ö
+000092C7 2C 0E              	        JB      _2HzRtc_90; 
+                            	        
+000092C8 43 02              	        r1+=0x0003;      //ÊÖ¹¤Ð£Õý 
+                            	        
+                            	//month, day, hour
+000092C9 12 95 2E 03        	        R2 = [MonDayHr];
+000092CB 41 04              	        R2 += 1;                    //Ê±+1
+000092CC 0A B7 1F 00        	        R3 = R2 AND 0x001F;         
+000092CE 58 46              	        CMP     R3,24;         //ÊÇ·ñµ½24Ð¡Ê±
+000092CF 21 0E              	        JB      _2HzRtc_80;
+000092D0 0A B5 E0 3F        	        R2& = 0x3FE0;         //Ð¡Ê±Çå0
+000092D2 7A 97              	        R3 = R2 LSR 4;
+000092D3 63 97              	        R3 = R3 LSR 1;
+000092D4 5F B6              	        R3 &= 0x001F;
+                            	        
+000092D5 40 F0 04 93        	        CALL    F_GetDaysOfTheMonth;  //¶Á±¾ÔÂÌìÊý
+                            	       
+000092D7 01 47              	        CMP     R3,R1;         
+000092D8 17 0E              	        JB      _2HzRtc_75;
+000092D9 0A B5 00 3C        	        R2 &= 0x3C00;
+000092DB 0A 05 00 04        	        R2 += 0x0400;             //ÔÂ+1
+000092DD 0A 45 00 34        	        CMP     R2,13*1024;       //ÔÂ³¬¹ý12£¿
+000092DF 10 0E              	        JB      _2HzRtc_75;
+000092E0 0A 95 00 04        	        R2 = 0x0400;                //ÔÂÖÃ1
+                            	//year
+000092E2 13 97 2D 03        	        R3 = [Year];
+000092E4 41 06              	        R3 += 1;                 //Äê+1
+000092E5 0B B7 FF 7F        	        R3&=0x7FFF
+000092E7 0B 47 1B 0C        	        CMP     R3,3099;       //3099Äê
+000092E9 02 8E              	        JBE     _2HzRtc_70;
+000092EA 0B 97 D1 07        	        R3 = 2001;             //2001Äê
+                            	_2HzRtc_70:
+000092EC 40 F0 18 93        	        CALL F_CalcLeapYear_or_NonLeapYear  //¼ÆËãÆ½ÈòÄê£¬R3---·µ»ØÖµ
+                            	                                            //ÈòÄê(b15=1) Æ½Äê(b15=0)
+000092EE 1B D7 2D 03        	        [Year] = R3;
+                            	
+                            	_2HzRtc_75:
+000092F0 60 04              	        R2 += 0x0020;               //Ìì+1
+                            	_2HzRtc_80:
+000092F1 1A D5 2E 03        	        [MonDayHr] = R2;
+                            	_2HzRtc_85:
+000092F3 40 92              	        R1 = 0x0000;          //R1 = 0x0000;
+                            	_2HzRtc_90:
+000092F4 19 D3 2F 03        	        [MinSec] = R1;
+                            	        
+000092F6 90 9A              	        RETF;
+                            	//----------------------------------------------------------------------------//
+                            	TB_DaysOfMonth:     //¸ß×Ö½Ú---ÈòÄêÌìÊý, µÍ×Ö½Ú---- Æ½ÄêÌìÊý
+000092F7 1F 1F              	        .DW     31*256+31;
+000092F8 1F 1F              	        .DW     31*256+31;          //1 month
+000092F9 1C 1D              	        .DW     29*256+28;          //2 month
+000092FA 1F 1F              	        .DW     31*256+31;          //3 month
+000092FB 1E 1E              	        .DW     30*256+30;          //4 month
+000092FC 1F 1F              	        .DW     31*256+31;          //5 month
+000092FD 1E 1E              	        .DW     30*256+30;          //6 month
+000092FE 1F 1F              	        .DW     31*256+31;          //7 month
+000092FF 1F 1F              	        .DW     31*256+31;          //8 month
+00009300 1E 1E              	        .DW     30*256+30;          //9 month
+00009301 1F 1F              	        .DW     31*256+31;          //10 month
+00009302 1E 1E              	        .DW     30*256+30;          //11 month
+00009303 1F 1F              	        .DW     31*256+31;          //12 month
+                            	        
+                            	        
+                            	//----------------------------------------------------------------------------//
+                            	//¹¦ÄÜ£º¼ÆËã±¾ÔÂÌìÊý
+                            	//³ö¿Ú£ºR1---ÌìÊý
+                            	//----------------------------------------------------------------------------//
+                            	F_GetDaysOfTheMonth:
+00009304 11 93 2E 03        	        R1 = [MonDayHr];
+00009306 79 93              	        R1 = R1 LSR 4;
+00009307 79 93              	        R1 = R1 LSR 4;
+00009308 69 93              	        R1 = R1 LSR 2;
+                            	
+00009309 4F B2              	        R1 &= 0x000F;
+0000930A 09 0B F7 92        	        BP = R1 + TB_DaysOfMonth;
+0000930C C5 92              	        R1 = [BP];
+                            	
+0000930D 0C 99 00 80        	        R4 = 0x8000 
+0000930F 14 C9 2D 03        	        TEST R4,[Year];        //Æ½ÈòÄê£¿
+00009311 03 4E              	        JNZ   GetDaysOfTheMonth_LeapYear;
+                            	        
+                            	GetDaysOfTheMonth_NonLeapYear:  //Æ½Äê
+00009312 09 B3 FF 00        	        R1 &= 0x00FF;
+00009314 90 9A              	        RETF;
+                            	        
+                            	GetDaysOfTheMonth_LeapYear:     //ÈòÄê           
+00009315 79 93              	        R1 = R1 LSR 4;
+00009316 79 93              	        R1 = R1 LSR 4;
+00009317 90 9A              	        RETF;        
+                            	        
+                            	//---------------------------------------------------------------
+                            	//¹¦ÄÜ£ºÆ½ÈòÄê¼ÆËã        
+                            	//ÈòÄêÌõ¼þ£º1¡¢ÄÜ±»400Õû³ý 2¡¢ÄÜ±»4Õû³ý£¬µ«²»ÄÜ±»100Õû³ý
+                            	//---------------------------------------------------------------
+                            	 F_CalcLeapYear_or_NonLeapYear:
+00009318 03 99              	        R4=R3;
+00009319 40 48              	        CMP     R4,0;
+0000931A 06 5E              	        JZ      GetDaysOfTheMonth_20;
+                            	GetDaysOfTheMonth_10:
+0000931B 0C 49 90 01        	        CMP     R4,400;            //ÅÐ¶ÏÊÇ·ñÄÜ±»400Õû³ý
+0000931D 06 0E              	        JB      GetDaysOfTheMonth_30;     //²»ÄÜ±»400Õû³ý
+0000931E 0C 29 90 01        	        R4 -= 400;
+00009320 46 4E              	        JNZ     GetDaysOfTheMonth_10;
+                            	GetDaysOfTheMonth_20:       //ÈòÄê   //ÄÜ±»400Õû³ý »ò ÄÜ±»4Õû³ýµ«²»ÄÜ±»100Õû³ýµ         
+00009321 0B A7 00 80        	        R3| = 0x8000;       //ÈòÄê [YEAR].15=1
+00009323 90 9A              	        RETF;
+                            	
+                            	GetDaysOfTheMonth_30:
+00009324 0C 49 64 00        	        CMP     R4,100;       //ÅÐ¶ÏÊÇ·ñÄÜ±»100Õû³ý
+00009326 04 0E              	        JB      GetDaysOfTheMonth_40;  //²»ÄÜ±»100Õû³ý£¬ÅÐ¶ÏÊÇ·ñÄÜ±»4Õû³ý 
+00009327 0C 29 64 00        	        R4 -= 100;
+00009329 46 4E              	        JNZ     GetDaysOfTheMonth_30;
+0000932A 02 EE              	        JMP     GetDaysOfTheMonth_50;     //ÄÜ±»100Õû³ý£¬²»ÊÇÈòÄê  
+                            	GetDaysOfTheMonth_40:
+0000932B 43 C8              	        TEST    R4,0x0003;            
+0000932C 4C 5E              	        JZ      GetDaysOfTheMonth_20;   //ÄÜ±»4Õû³ý     
+                            	
+                            	GetDaysOfTheMonth_50:                   //Æ½Äê [YEAR].15=0
+0000932D 0B B7 FF 7F        	        R3 &= 0x7FFF;
+0000932F 90 9A              	        RETF;     
+                            	      .endp          
+                            	    
+                            	//--------- µ÷ÕûÊ±¼ä  ---------------------//
+                            	//------------ Ôö¼Ó ----------------------//
+                            	.PUBLIC  _Adjust_Time_Up
+                            	_Adjust_Time_Up: .PROC
+00009330 88 DA              	      	PUSH  BP,BP TO [SP];
+00009331 08 0B 01 00        		    BP=SP+1;
+00009333 03 92              	        R1=[BP+3];    
+                            	        
+00009334 40 42              	        CMP R1,0;
+00009335 0C 5E              	        JE  Adjust_Up_00
+00009336 41 42              	        CMP R1,1;
+00009337 0C 5E              	        JE  Adjust_Up_01
+00009338 42 42              	        CMP R1,2;
+00009339 0C 5E              	        JE  Adjust_Up_02
+0000933A 43 42              	        CMP R1,3;
+0000933B 0C 5E              	        JE  Adjust_Up_03
+0000933C 44 42              	        CMP R1,4;
+0000933D 0C 5E              	        JE  Adjust_Up_04
+0000933E 45 42              	        CMP R1,5;
+0000933F 0C 5E              	        JE  Adjust_Up_05
+00009340 88 98              	        POP BP,BP  FROM [SP];
+00009341 90 9A              	        RETF
+                            	        
+00009342 0F 9F 4E 93        	  Adjust_Up_00:  GOTO   Adjust_Up_Time_00;           
+00009344 0F 9F 5E 93        	  Adjust_Up_01:  GOTO   Adjust_Up_Time_01;       
+00009346 0F 9F 6E 93        	  Adjust_Up_02:  GOTO   Adjust_Up_Time_02;        
+00009348 0F 9F 7D 93        	  Adjust_Up_03:  GOTO   Adjust_Up_Time_03;                 
+0000934A 0F 9F 8B 93        	  Adjust_Up_04:  GOTO   Adjust_Up_Time_04;       
+0000934C 0F 9F 9C 93        	  Adjust_Up_05:  GOTO   Adjust_Up_Time_05;             
+                            	              
+                            	  Adjust_Up_Time_00:    //µ÷ÕûÄê
+0000934E 13 97 2D 03        	        R3=[Year];
+00009350 0B B7 FF 7F        	        R3&=0x7FFF
+00009352 41 06              	        R3+=1;
+00009353 0B 47 1B 0C        	        CMP     R3,3099;  //2099Äê
+00009355 02 8E              	        JBE  YearUp_NoOver
+00009356 0B 97 D1 07        	        R3=2001
+                            	  YearUp_NoOver:      
+00009358 40 F0 18 93        	        CALL F_CalcLeapYear_or_NonLeapYear;
+0000935A 1B D7 2D 03        	        [Year] = R3;
+0000935C 88 98              	        POP BP,BP  FROM [SP];
+0000935D 90 9A              	        RETF       
+                            	        
+                            	  Adjust_Up_Time_01:   //µ÷ÕûÔÂ
+0000935E 13 97 2E 03        	        R3=[MonDayHr];
+00009360 0A 95 00 3C        	        R2=0x3C00;
+00009362 03 B5              	        R2&=R3;
+00009363 0A 45 00 30        	        CMP R2,12*1024;
+00009365 02 0E              	        JB  MonUp_NoOver;
+00009366 0B B7 FF 03        	        R3&=0x03FF;
+                            	   MonUp_NoOver:
+00009368 0B 07 00 04        	        R3+=0x0400;
+0000936A 1B D7 2E 03        	        [MonDayHr]=R3;     
+0000936C 88 98              	        POP BP,BP FROM [SP];
+0000936D 90 9A              	        RETF       
+                            	         
+                            	  Adjust_Up_Time_02:   //µ÷ÕûÈÕ
+0000936E 13 97 2E 03        	        R3=[MonDayHr];
+00009370 0A 95 E0 03        	        R2=0x03E0;
+00009372 03 B5              	        R2&=R3;
+00009373 0A 45 E0 03        	        CMP R2,31*32;
+00009375 02 0E              	        JB  DayUp_NoOver;
+00009376 0B B7 1F 3C        	        R3&=0x3C1F;  
+                            	   DayUp_NoOver:
+00009378 60 06              	        R3+=0x0020;
+00009379 1B D7 2E 03        	        [MonDayHr]=R3;      
+0000937B 88 98              	        POP BP,BP  FROM [SP];
+0000937C 90 9A              	        RETF       
+                            	  
+                            	  Adjust_Up_Time_03:    //µ÷ÕûÊ±
+0000937D 41 96              	        r3=0x0001
+0000937E 13 07 2E 03        	        R3+=[MonDayHr];
+00009380 5F 94              	        R2=0x001F;
+00009381 03 B5              	        R2&=R3;
+00009382 57 44              	        CMP R2,23;
+00009383 03 8E              	        JBE  HourUp_NoOver;
+00009384 0B B7 E0 3F        	        R3&=0x3FE0;  
+00009386 40 06              	        R3+=0x0000;  
+                            	   HourUp_NoOver:
+00009387 1B D7 2E 03        	        [MonDayHr]=R3;      
+00009389 88 98              	        POP BP,BP  FROM [SP];
+0000938A 90 9A              	        RETF       
+                            	        
+                            	  Adjust_Up_Time_04:    //µ÷Õû·Ö
+0000938B 0B 97 80 00        	        R3=0x0080;
+0000938D 13 07 2F 03        	        R3+=[MinSec];
+0000938F 0A 95 80 1F        	        R2=0x1F80;
+00009391 03 B5              	        R2&=R3;
+00009392 0A 45 80 1D        	        CMP R2,59*128;
+00009394 03 8E              	        JBE  MinUp_NoOver;
+00009395 0B B7 7F 00        	        R3&=0x007F;
+00009397 40 06              	        R3+=0x0000;
+                            	   MinUp_NoOver:
+00009398 1B D7 2F 03        	        [MinSec]=R3;      
+0000939A 88 98              	        POP BP,BP  FROM [SP];
+0000939B 90 9A              	        RETF       
+                            	  
+                            	  Adjust_Up_Time_05:    //µ÷ÕûÃë
+0000939C 42 96              	        R3=0x0002;
+0000939D 13 07 2F 03        	        R3+=[MinSec];
+0000939F 0A 95 7E 00        	        R2=0x007E;
+000093A1 03 B5              	        R2&=R3;
+000093A2 0A 45 76 00        	        CMP R2,59*2;
+000093A4 03 8E              	        JBE  SecUp_NoOver;
+000093A5 0B B7 80 1F        	        R3&=0x1F80;
+000093A7 40 06              	        R3+=0x0000;
+                            	   SecUp_NoOver:
+000093A8 1B D7 2F 03        	        [MinSec]=R3;      
+000093AA 88 98              	        POP BP,BP  FROM [SP];
+000093AB 90 9A              	        RETF       
+                            	
+                            	      .ENDP   
+                            	        
+                            	
+                            	//--------- µ÷ÕûÊ±¼ä  ---------------------//
+                            	//------------ ¼õÉÙ   ----------------------//
+                            	
+                            	.PUBLIC  _Adjust_Time_Down
+                            	_Adjust_Time_Down: .PROC
+000093AC 88 DA              	      	PUSH  BP,BP  TO [SP];
+000093AD 08 0B 01 00        		    BP=SP+1;
+000093AF 03 92              	        R1=[BP+3];    
+                            	        
+000093B0 40 42              	        CMP R1,0;
+000093B1 0B 5E              	        JE  Adjust_Down_00
+000093B2 41 42              	        CMP R1,1;
+000093B3 0B 5E              	        JE  Adjust_Down_01
+000093B4 42 42              	        CMP R1,2;
+000093B5 0B 5E              	        JE  Adjust_Down_02
+000093B6 43 42              	        CMP R1,3;
+000093B7 0B 5E              	        JE  Adjust_Down_03
+000093B8 44 42              	        CMP R1,4;
+000093B9 0B 5E              	        JE  Adjust_Down_04
+000093BA 45 42              	        CMP R1,5;
+000093BB 0B 5E              	        JE  Adjust_Down_05
+000093BC 3B EE              	        JMP Adjust_Down_Time_Ret
+                            	
+000093BD 0F 9F C9 93        	Adjust_Down_00: GOTO   Adjust_Down_Time_00; 
+000093BF 0F 9F D8 93        	Adjust_Down_01: GOTO   Adjust_Down_Time_01; 
+000093C1 0F 9F E9 93        	Adjust_Down_02: GOTO   Adjust_Down_Time_02; 
+000093C3 0F 9F FA 93        	Adjust_Down_03: GOTO   Adjust_Down_Time_03; 
+000093C5 0F 9F 07 94        	Adjust_Down_04: GOTO   Adjust_Down_Time_04; 
+000093C7 0F 9F 17 94        	Adjust_Down_05: GOTO   Adjust_Down_Time_05; 
+                            	        
+                            	  Adjust_Down_Time_00:    //µ÷ÕûÄê
+000093C9 13 97 2D 03        	        R3=[Year];
+000093CB 0B B7 FF 7F        	        R3&=0x7FFF
+000093CD 41 26              	        R3-=1;
+000093CE 0B 47 D1 07        	        CMP     R3,2001;  //2099Äê
+000093D0 02 1E              	        JAE  YearDown_NoOver
+000093D1 0B 97 1B 0C        	        R3=3099
+                            	 YearDown_NoOver:    
+000093D3 40 F0 18 93        	        CALL F_CalcLeapYear_or_NonLeapYear;
+000093D5 1B D7 2D 03        	        [Year] = R3;
+000093D7 20 EE              	        JMP Adjust_Down_Time_Ret;
+                            	        
+                            	  Adjust_Down_Time_01:   //µ÷ÕûÔÂ
+000093D8 13 97 2E 03        	        R3=[MonDayHr];
+000093DA 0A 95 00 3C        	        R2=0x3C00;
+000093DC 03 B5              	        R2&=R3;
+000093DD 0A 45 00 04        	        CMP R2,0x0400;
+000093DF 04 9E              	        JA  MonDown_NoOver;
+000093E0 0B B7 FF 03        	        R3&=0x03FF;
+000093E2 0B 07 00 34        	        R3+=0x3400;     //13    //13-1=12£¨ÏÂÃæ-1£©
+                            	   MonDown_NoOver:
+000093E4 0B 27 00 04        	        R3-=0x0400;     //-1 
+000093E6 1B D7 2E 03        	        [MonDayHr]=R3;     
+000093E8 0F EE              	        JMP Adjust_Down_Time_Ret;
+                            	           
+                            	  
+                            	  Adjust_Down_Time_02:   //µ÷ÕûÈÕ
+000093E9 13 97 2E 03        	        R3=[MonDayHr];
+000093EB 0A 95 E0 03        	        R2=0x03E0;
+000093ED 03 B5              	        R2&=R3;
+000093EE 60 44              	        CMP R2,0x0020;
+000093EF 04 9E              	        JA  DayDown_NoOver;
+000093F0 0B B7 1F 3C        	        R3&=0x3C1F;
+000093F2 0B 07 00 04        	        R3+=0x0400;    //32  32-1=31
+                            	   DayDown_NoOver:
+000093F4 60 26              	        R3-=0x0020;   
+000093F5 1B D7 2E 03        	        [MonDayHr]=R3;     
+000093F7 00 EE              	        JMP Adjust_Down_Time_Ret; 
+                            	 
+                            	  Adjust_Down_Time_Ret:
+000093F8 88 98              	        POP BP,BP FROM [SP];
+000093F9 90 9A              	        RETF  
+                            	 
+                            	  Adjust_Down_Time_03:    //µ÷ÕûÊ±
+000093FA 13 97 2E 03        	        R3=[MonDayHr];
+000093FC 5F 94              	        R2=0x001F;
+000093FD 03 B5              	        R2&=R3;
+000093FE 40 44              	        CMP R2,0;
+000093FF 03 9E              	        JA  HourDown_NoOver;
+00009400 0B B7 E0 3F        	        R3&=0x3FE0;
+00009402 58 06              	        R3+=0x0018;
+                            	   HourDown_NoOver:
+00009403 41 26              	        R3-=0x001;
+00009404 1B D7 2E 03        	        [MonDayHr]=R3;     
+00009406 4F EE              	        JMP Adjust_Down_Time_Ret;  
+                            	  
+                            	  Adjust_Down_Time_04:    //µ÷Õû·Ö
+00009407 13 97 2F 03        	        R3=[MinSec];
+00009409 0A 95 80 1F        	        R2=0x1F80;
+0000940B 03 B5              	        R2&=R3;
+0000940C 40 44              	        CMP R2,0;
+0000940D 04 9E              	        JA  MinDown_NoOver;
+0000940E 0B B7 7F 00        	        R3&=0x007F;
+00009410 0B 07 00 1E        	        R3+=0x1E00;    //60   60-1=59
+                            	   MinDown_NoOver:
+00009412 0B 27 80 00        	        R3-=0x0080;
+00009414 1B D7 2F 03        	        [MinSec]=R3;     
+00009416 5F EE              	        JMP Adjust_Down_Time_Ret; 
+                            	  
+                            	  Adjust_Down_Time_05:    //µ÷ÕûÃë
+00009417 13 97 2F 03        	        R3=[MinSec];
+00009419 0A 95 7E 00        	        R2=0x007E;
+0000941B 03 B5              	        R2&=R3;
+0000941C 40 44              	        CMP R2,0;
+0000941D 04 9E              	        JA  SecDown_NoOver;
+0000941E 0B B7 80 1F        	        R3&=0x1F80;
+00009420 0B 07 78 00        	        R3+=0x0078;     //60    60-1=59
+                            	   SecDown_NoOver:
+00009422 42 26              	        R3-=0x0002;
+00009423 1B D7 2F 03        	        [MinSec]=R3;     
+00009425 6E EE              	        JMP Adjust_Down_Time_Ret; 
+                            	  
+                            	      .ENDP   
+                            	 
+                            	 //=============================================== 
+                            	 //        ¶ÁÊ±¼ä
+                            	 //===============================================      
+                            	.public _ReadRealYear   //Äê£º16½øÖÆ
+                            	_ReadRealYear: .proc
+00009426 09 93 FF 7F        	      R1=0x7FFF;/////////////////////////////////
+00009428 11 B3 2D 03        	      R1&=[Year];
+0000942A 90 9A              	      RETF
+                            	      .ENDP
+                            	          
+                            	.public _ReadRealMonthDay   //ÔÂ¡¢ÈÕ
+                            	_ReadRealMonthDay: .proc
+0000942B 14 99 2E 03        	      r4=[MonDayHr];
+0000942D 6C 93              	      R1=R4 LSR 2;    // ÔÂ --¸ß°ËÎ»,16½øÖÆ///////////////////////
+0000942E 09 B3 00 FF        	      R1&=0xFF00 
+00009430 7C 97              	      R3=R4 LSR 4     //ÈÕ----µÍ°ËÎ»,16½øÖÆ 
+00009431 63 97              	      R3=R3 LSR 1
+00009432 5F B6              	      R3&=0x001F
+00009433 03 A3              	      R1|=R3
+00009434 90 9A              	      RETF
+                            	    .ENDP
+                            	
+                            	.public _ReadRealHourMin    //Ê±¡¢·Ö
+                            	 _ReadRealHourMin: .proc
+00009435 14 99 2E 03        	        r4=[MonDayHr]  ///////////////////////////////////////
+00009437 5F B8              	        r4&=0x001F     //Ê±´æÓÚ¸ß8Î»,16½øÖÆ
+00009438 41 08              	        R4+=1
+00009439 5C 99              	        R4=R4 LSL 4
+0000943A 5C 99              	        R4=R4 LSL 4
+0000943B 12 95 2F 03        	        r2=[MinSec]   //·Ö´æÓÚµÍ8Î»£¬16½øÖÆ
+0000943D 0A B5 80 1F        	        r2&=0x1F80
+0000943F 7A 93              	        r1=r2 lsr 4
+00009440 71 93              	        r1=r1 lsr 3
+00009441 04 A3              	        r1|=r4
+00009442 90 9A              	        retf
+                            	        .endp
+                            	 
+                            	 .public _ReadRealSecond    //Ãë  16½øÖÆ 
+                            	 _ReadRealSecond: .proc
+00009443 0C 99 7E 00        	     r4=0x007E;
+00009445 14 B9 2F 03        	     r4&=[MinSec];
+00009447 64 93              	     r1=r4 lsr 1;
+00009448 90 9A              	     retf
+                            	     .ENDP
+                            	 
+                            	//=======================================================
+                            	 
+                            	      
+                            	.public _Start256HzRTC        //´ò¿ª256HzÖÐ¶Ï
+                            	_Start256HzRTC: .proc
+00009449 40 92              	      r1=0
+0000944A 19 D3 0F 70        	      [P_TimeBase_Clear]=r1
+0000944C 09 93 40 00        	      r1=0x0040
+0000944E 19 D3 0E 70        	      [P_TimeBase_Setup]=r1      //TMB2 CLKsour=256Hz
+                            	    
+00009450 41 92              	      r1 = C_IRQ6_TMB2 ;  //256Hz
+00009451 11 A3 F7 02        	      r1|=[R_InterruptStatus] 
+00009453 19 D3 F7 02        		  [R_InterruptStatus] = R1
+00009455 19 D3 10 70        	      [P_INT_Ctrl]=r1
+00009457 90 9A              	      retf
+                            	    .endp
+                            	     
+                            	 .public _Stop256HzRTC           //¹Ø±Õ256HzÖÐ¶Ï
+                            	_Stop256HzRTC: .proc
+00009458 41 92              	     r1 = C_IRQ6_TMB2 ;  //256Hz
+00009459 09 83 FF FF        	     r1^=0xFFFF        //È¡·´ 
+0000945B 11 B3 F7 02        	     r1&=[R_InterruptStatus] 
+0000945D 19 D3 F7 02        		 [R_InterruptStatus] = R1
+0000945F 19 D3 10 70        	     [P_INT_Ctrl]=r1  
+00009461 90 9A              	     retf
+                            	     .endp    
+                            	 
+                            	.external  Key_Scan_Init
+                            	.public _SP_GoSleep
+                            	_SP_GoSleep: .PROC
+00009462 09 93 FF 00        		    R1=0x00ff;	           //µÈ´ý¼üÊÍ·Å
+00009464 11 B3 00 70        	        R1 &= [P_IOA_Data];	
+00009466 0F 4E              	        jnz    WaitKeyUp;
+00009467 40 F0 A4 95        	        call Key_Scan_Init
+                            	       
+00009469 11 93 04 70        	        r1 = [P_IOA_Latch];     //Ëø´æÊý¾Ý
+0000946B 11 93 04 70        			r1 = [P_IOA_Latch];	 
+0000946D 57 92              			r1 = 0x0017;            //ÈõÕñ¡¢Í£Ö¹Ë¯Ãß
+0000946E 19 D3 13 70        			[P_SystemClock] = r1;
+00009470 60 92              		      R1=32           //ÑÓÊ±
+                            	  WakeUpWaitDelay:      
+00009471 41 22              	          r1-=1
+00009472 42 4E              	          jnz WakeUpWaitDelay 	
+00009473 40 92              	          r1=0
+00009474 19 D3 13 70        	          [P_SystemClock]=r1    //¹Ø±Õ32768HÊ±ÖÓ¡¢CPUCLKÎªFosc
+                            	WaitKeyUp:   
+00009476 90 9A              			retf;  	              
+                            			.ENDP
+0 error(s), 0 warning(s).
+

@@ -1,0 +1,115 @@
+Sunplus u'nSP Assembler - Ver. 1.8.0
+              Listing File Has Been Relocated
+                            	//======================================================
+                            	// 文件名称:	PWM.asm
+                            	// 功能描述：   PWM设置服务 
+                            	// 完成日期：   2003-8-13
+                            	//======================================================
+                            	.DEFINE	timefosc_2		0x0230;	//clkA选择fosc/2Hz
+                            	.DEFINE		timefosc_256	0x0231;	//clkA选择fosc/256Hz
+                            	.DEFINE		timeclk_32768	0x0232;	//clkA选择32768Hz
+                            	.DEFINE		timeclk_8192	0x0233;	//clkA选择8192Hz
+                            	.DEFINE		timeclk_4096	0x0234;	//clkA选择4096Hz
+                            	.DEFINE		timeclk_2048	0x0205;	//clkB选择2048Hz
+                            	.DEFINE		timeclk_1024	0x020d;	//clkB选择1024Hz
+                            	.DEFINE		timeclk_256		0x0215; //clkB选择256Hz
+                            	.DEFINE		timeclk_4		0x0225; //clkB选择4Hz
+                            	.DEFINE		timeclk_2		0x0065;	//clkB选择2HzHz
+                            	 
+                            	//频率选择fosc/2Hz;
+                            	//使用者也可以自己设置不同频率下的占空比；
+                            	 
+                            	.DEFINE		timepwm_1		0x0070; 	//脉宽选择1/6
+                            	.DEFINE		timepwm_2		0x00b0;	    //脉宽选择2/6
+                            	.DEFINE		timepwm_3		0x00f0;		//脉宽选择3/6
+                            	.DEFINE		timepwm_4		0x0130;		//脉宽选择4/6 		
+                            	.DEFINE		timepwm_5		0x0170;		//脉宽选择5/6 		 
+                            	.DEFINE		timepwm_6		0x01b0;		//脉宽选择6/6 		
+                            	.DEFINE		timepwm_7		0x01f0;		//脉宽选择7/6 	
+                            	.DEFINE		timepwm_8		0x0230;		//脉宽选择8/6 		
+                            	.DEFINE		timepwm_9		0x0270;		//脉宽选择9/6        
+                            	.DEFINE		timepwm_10		0x02b0;		//脉宽选择10/6 		
+                            	.DEFINE		timepwm_11		0x02f0;		//脉宽选择11/6 		
+                            	.DEFINE		timepwm_12		0x0330;		//脉宽选择12/6 		
+                            	.DEFINE		timepwm_13		0x0370;		//脉宽选择13/6 		
+                            	.DEFINE		timepwm_14		0x03b0;		//脉宽选择14/6
+                            	 
+                            	.DEFINE		time_clk	timefosc_256;	//频率选择
+                            	.DEFINE		time_pwm	timepwm_4;	 	//脉宽选择
+                            	 
+                            	.DEFINE	    P_TimerA_Data	  0x700A;
+                            	.DEFINE	    P_TimerA_Ctrl	  0x700B;
+                            	.DEFINE     P_IOB_DATA  	  0x7005;
+                            	.DEFINE    	P_IOB_DIR   	  0x7007;
+                            	.DEFINE	    P_IOB_ATTRI		  0x7008;
+                            	.DEFINE    	P_Feedback		  0x7009;
+                            	.define     p_watchdog_clear  0x7012;
+                            	.DEFINE		P_INT_CTRL		  0x7010;
+                            	.DEFINE		P_INT_CLEAR		  0x7011;
+                            	
+000081E4                    	.code
+                            	//======================================================
+                            	// 函数名称:	F_Pwm
+                            	// 实现功能:    PWM设置
+                            	// 入口参数：   频率设置值，占空比设置值
+                            	// 出口参数：   无
+                            	// 破坏寄存器:  r1，r2
+                            	//======================================================
+                            	.public _F_Pwm;	
+                            	_F_Pwm:
+000081E4 88 DA              	    push bp to  [sp];
+000081E5 08 0B 03 00        	    bp=sp+3  
+000081E7 01 92              	    r1=[bp+1]; 		        
+000081E8 19 D3 0A 70        		[P_TimerA_Data]=r1; 
+000081EA 02 94              		r2=[bp+2];
+000081EB 1A D5 0B 70        		[P_TimerA_Ctrl]=r2; 
+000081ED 09 93 00 01        		r1=0x0100; 				//IOB8设置为同相低电平输出口 
+000081EF 19 D3 07 70        	    [P_IOB_DIR]=r1; 
+000081F1 19 D3 08 70        		[P_IOB_ATTRI]=r1; 
+000081F3 40 92              		r1=0x0000; 
+000081F4 19 D3 05 70        		[P_IOB_DATA ]=r1;
+000081F6 40 92              		r1=0x0000;
+000081F7 19 D3 09 70        		[P_Feedback]=r1;        //设置IOB8口为APWMO端口
+000081F9 88 98              		pop bp from  [sp];
+000081FA 90 9A              		retf
+                            	//======================================================
+                            	// 函数名称:	F_IRQ3_Init
+                            	// 实现功能:    外部中断初始化
+                            	// 入口参数：   无
+                            	// 出口参数：   无
+                            	// 破坏寄存器:  r1
+                            	//======================================================
+                            	.public _F_IRQ3_Init
+                            	_F_IRQ3_Init:
+000081FB 40 F1              		int off 
+                            	                             //设置IOB2、IOB3设成带上拉电阻的输入端口
+000081FC 09 93 00 01        	    r1=0x0100;  
+000081FE 19 D3 07 70        	    [P_IOB_DIR]=r1; 
+00008200 19 D3 08 70        		[P_IOB_ATTRI]=r1; 
+00008202 40 92              		r1=0x0000 ;
+00008203 19 D3 05 70        	    [P_IOB_DATA]=r1;
+00008205 09 93 00 03        	   	r1=0x0300; 				 //开中断IRQ3_EXT1、IRQ3_EXT2
+00008207 19 D3 10 70        		[P_INT_CTRL]=r1; 
+00008209 41 F1              		int irq; 
+0000820A 90 9A              		retf
+                            	//======================================================
+                            	// 函数名称:	F_PwmIRQ3
+                            	// 实现功能:    PWM设置
+                            	// 入口参数：   r1频率设置值，r2占空比设置值
+                            	// 出口参数：   无
+                            	// 破坏寄存器:  r1，r2
+                            	//======================================================
+                            	.public _F_PwmIRQ3;	
+                            	_F_PwmIRQ3:
+0000820B 19 D3 0A 70        		[P_TimerA_Data]=r1; 
+0000820D 1A D5 0B 70        		[P_TimerA_Ctrl]=r2; 
+0000820F 09 93 00 01        		r1=0x0100; 				 //IOB8设置为同相低电平输出口 
+00008211 19 D3 07 70        	    [P_IOB_DIR]=r1; 
+00008213 19 D3 08 70        		[P_IOB_ATTRI]=r1; 
+00008215 40 92              		r1=0x0000; 
+00008216 19 D3 05 70        		[P_IOB_DATA ]=r1;
+00008218 40 92              		r1=0x0000;
+00008219 19 D3 09 70        		[P_Feedback]=r1;         //设置IOB8口为APWMO端口
+0000821B 90 9A              		retf
+0 error(s), 0 warning(s).
+

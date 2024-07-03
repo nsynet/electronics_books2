@@ -1,0 +1,442 @@
+Friday, May 16, 15:17:35, 2003
+
+                    Sunplus u'nSP Linker - Ver. 1.4.0 (Build:0)
+                    -------------------------------------------
+
+Global Symbol Name                             Global Value     Global Filename
+*********************************************************************************************
+_RESET                                             80EA         "E:\Program Files\Sunplus\unSPIDE162\IDE162\startupD.obj"
+__sn_loop                                          8106         "E:\Program Files\Sunplus\unSPIDE162\IDE162\startupD.obj"
+__sn_loop2                                         8105         "E:\Program Files\Sunplus\unSPIDE162\IDE162\startupD.obj"
+_RES_Table                                         8009         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T040_16K_SA                                   8009         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T040_16K_EA                                   800B         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T041_16K_SA                                   800D         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T041_16K_EA                                   800F         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T042_16K_SA                                   8011         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T042_16K_EA                                   8013         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T043_16K_SA                                   8015         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T043_16K_EA                                   8017         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T044_16K_SA                                   8019         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T044_16K_EA                                   801B         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T045_16K_SA                                   801D         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T045_16K_EA                                   801F         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T046_16K_SA                                   8021         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T046_16K_EA                                   8023         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T047_16K_SA                                   8025         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T047_16K_EA                                   8027         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T048_16K_SA                                   8029         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T048_16K_EA                                   802B         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T049_16K_SA                                   802D         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T049_16K_EA                                   802F         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T050_16K_SA                                   8031         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T050_16K_EA                                   8033         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T051_16K_SA                                   8035         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T051_16K_EA                                   8037         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T052_16K_SA                                   8039         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T052_16K_EA                                   803B         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T053_16K_SA                                   803D         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T053_16K_EA                                   803F         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T054_16K_SA                                   8041         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T054_16K_EA                                   8043         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T055_16K_SA                                   8045         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T055_16K_EA                                   8047         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T056_16K_SA                                   8049         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T056_16K_EA                                   804B         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T057_16K_SA                                   804D         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T057_16K_EA                                   804F         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T058_16K_SA                                   8051         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T058_16K_EA                                   8053         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T059_16K_SA                                   8055         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T059_16K_EA                                   8057         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T060_16K_SA                                   8059         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T060_16K_EA                                   805B         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T061_16K_SA                                   805D         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T061_16K_EA                                   805F         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T062_16K_SA                                   8061         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T062_16K_EA                                   8063         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T063_16K_SA                                   8065         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T063_16K_EA                                   8067         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T064_16K_SA                                   8069         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T064_16K_EA                                   806B         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T065_16K_SA                                   806D         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T065_16K_EA                                   806F         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T066_16K_SA                                   8071         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_RES_T066_16K_EA                                   8073         "F:\SN03-TG028\Time\Debug\Resource.obj"
+T_SACM_A2000_SpeechTable                           8075         "F:\SN03-TG028\Time\Debug\Resource.obj"
+_SpeechAdjustTemp                                  339          "F:\SN03-TG028\Time\Debug\main.obj"
+_Key                                               33A          "F:\SN03-TG028\Time\Debug\main.obj"
+_KeyPressFlag                                      33B          "F:\SN03-TG028\Time\Debug\main.obj"
+_TimeCount                                         33C          "F:\SN03-TG028\Time\Debug\main.obj"
+_SleepFlag                                         33D          "F:\SN03-TG028\Time\Debug\main.obj"
+_TimeChangeCount                                   33E          "F:\SN03-TG028\Time\Debug\main.obj"
+_KeyStatus                                         33F          "F:\SN03-TG028\Time\Debug\main.obj"
+_KeyAdjust                                         340          "F:\SN03-TG028\Time\Debug\main.obj"
+_YearOrTime                                        341          "F:\SN03-TG028\Time\Debug\main.obj"
+_TimeChangeKey                                     342          "F:\SN03-TG028\Time\Debug\main.obj"
+_KeyCount                                          343          "F:\SN03-TG028\Time\Debug\main.obj"
+_SecondAddOne                                      344          "F:\SN03-TG028\Time\Debug\main.obj"
+_HourMinTemp                                       345          "F:\SN03-TG028\Time\Debug\main.obj"
+_i                                                 346          "F:\SN03-TG028\Time\Debug\main.obj"
+_j                                                 347          "F:\SN03-TG028\Time\Debug\main.obj"
+_gTimeVSShem                                       348          "F:\SN03-TG028\Time\Debug\main.obj"
+_PlayRespond                                       8D7B         "F:\SN03-TG028\Time\Debug\main.obj"
+_Delay3ms                                          8DA6         "F:\SN03-TG028\Time\Debug\main.obj"
+_PlayAdjustTime                                    8DC1         "F:\SN03-TG028\Time\Debug\main.obj"
+_PlaySpeakYear                                     8E2A         "F:\SN03-TG028\Time\Debug\main.obj"
+_PlaySpeakMonth                                    8E81         "F:\SN03-TG028\Time\Debug\main.obj"
+_PlaySpeakDay                                      8EC5         "F:\SN03-TG028\Time\Debug\main.obj"
+_PlaySpeakHour                                     8F19         "F:\SN03-TG028\Time\Debug\main.obj"
+_PlaySpeakMinute                                   9004         "F:\SN03-TG028\Time\Debug\main.obj"
+_PlaySpeakSecond                                   9065         "F:\SN03-TG028\Time\Debug\main.obj"
+_SpeakTime                                         90C7         "F:\SN03-TG028\Time\Debug\main.obj"
+_main                                              90FC         "F:\SN03-TG028\Time\Debug\main.obj"
+Year                                               32D          "F:\SN03-TG028\Time\Debug\system.obj"
+MonDayHr                                           32E          "F:\SN03-TG028\Time\Debug\system.obj"
+MinSec                                             32F          "F:\SN03-TG028\Time\Debug\system.obj"
+Per500msSet                                        330          "F:\SN03-TG028\Time\Debug\system.obj"
+_System_Initial                                    9272         "F:\SN03-TG028\Time\Debug\system.obj"
+_Clear_WatchDog                                    929C         "F:\SN03-TG028\Time\Debug\system.obj"
+_LightOn                                           92A0         "F:\SN03-TG028\Time\Debug\system.obj"
+_LightOff                                          92A7         "F:\SN03-TG028\Time\Debug\system.obj"
+_Calendar_Counter                                  92AE         "F:\SN03-TG028\Time\Debug\system.obj"
+_Adjust_Time_Up                                    9330         "F:\SN03-TG028\Time\Debug\system.obj"
+_Adjust_Time_Down                                  93AC         "F:\SN03-TG028\Time\Debug\system.obj"
+_ReadRealYear                                      9426         "F:\SN03-TG028\Time\Debug\system.obj"
+_ReadRealMonthDay                                  942B         "F:\SN03-TG028\Time\Debug\system.obj"
+_ReadRealHourMin                                   9435         "F:\SN03-TG028\Time\Debug\system.obj"
+_ReadRealSecond                                    9443         "F:\SN03-TG028\Time\Debug\system.obj"
+_Start256HzRTC                                     9449         "F:\SN03-TG028\Time\Debug\system.obj"
+_Stop256HzRTC                                      9458         "F:\SN03-TG028\Time\Debug\system.obj"
+_SP_GoSleep                                        9462         "F:\SN03-TG028\Time\Debug\system.obj"
+F_SP_Send_PWM                                      9477         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Send_DAC1                                     947A         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Send_DAC2                                     947D         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Send_Two_DAC                                  9480         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Send_Out                                      9480         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Get_ADC                                       9485         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Set_P_TimerA_Ctrl                             9488         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Set_P_TimerA_Data                             948B         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Set_P_TimerB_Ctrl                             948E         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Set_P_TimerB_Data                             9491         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Set_P_INT_Ctrl                                9494         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Set_P_INT_Clear                               9497         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Set_P_SystemClock                             949A         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Set_P_DAC_Ctrl                                949D         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Set_P_ADC_Ctrl                                94A0         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Write_INT_Status                              94A3         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Read_INT_Status                               94A6         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_RampUpDAC1                                    94DE         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_RampDnDAC1                                    9502         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_RampUpDAC2                                    9514         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_RampDnDAC2                                    9538         "F:\SN03-TG028\Time\Debug\hardware.obj"
+_SP_RampUpDAC1                                     94DE         "F:\SN03-TG028\Time\Debug\hardware.obj"
+_SP_RampDnDAC1                                     9502         "F:\SN03-TG028\Time\Debug\hardware.obj"
+_SP_RampUpDAC2                                     9514         "F:\SN03-TG028\Time\Debug\hardware.obj"
+_SP_RampDnDAC2                                     9538         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_Delay                                         95A3         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_InitQueue                                     9550         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_ReadQueue                                     955D         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_WriteQueue                                    956F         "F:\SN03-TG028\Time\Debug\hardware.obj"
+F_SP_TestQueue                                     957D         "F:\SN03-TG028\Time\Debug\hardware.obj"
+_SP_Export                                         94D4         "F:\SN03-TG028\Time\Debug\hardware.obj"
+_SP_Import                                         94C9         "F:\SN03-TG028\Time\Debug\hardware.obj"
+_SP_Init_IOB                                       94B9         "F:\SN03-TG028\Time\Debug\hardware.obj"
+_SP_Init_IOA                                       94A9         "F:\SN03-TG028\Time\Debug\hardware.obj"
+_SP_GetResource                                    9595         "F:\SN03-TG028\Time\Debug\hardware.obj"
+R_InterruptStatus                                  2F7          "F:\SN03-TG028\Time\Debug\hardware.obj"
+R_FIQTemp                                          2F8          "F:\SN03-TG028\Time\Debug\hardware.obj"
+_Key_Scan_ServiceLoop                              95AC         "F:\SN03-TG028\Time\Debug\Key.obj"
+Key_Scan_Init                                      95A4         "F:\SN03-TG028\Time\Debug\Key.obj"
+_FIQ                                               8090         "F:\SN03-TG028\Time\Debug\FIQ.obj"
+_IRQ3                                              80B2         "F:\SN03-TG028\Time\Debug\FIQ.obj"
+_IRQ5                                              80B9         "F:\SN03-TG028\Time\Debug\FIQ.obj"
+_IRQ6                                              80D0         "F:\SN03-TG028\Time\Debug\FIQ.obj"
+__RES_T040_16K_sa                                  B0C0         "F:\SN03-TG028\Time\Debug\T040_16k.res"
+__RES_T040_16K_ea                                  B2A3         "F:\SN03-TG028\Time\Debug\T040_16k.res"
+__RES_T041_16K_sa                                  96C2         "F:\SN03-TG028\Time\Debug\T041_16k.res"
+__RES_T041_16K_ea                                  9B45         "F:\SN03-TG028\Time\Debug\T041_16k.res"
+__RES_T042_16K_sa                                  9B45         "F:\SN03-TG028\Time\Debug\T042_16k.res"
+__RES_T042_16K_ea                                  9E48         "F:\SN03-TG028\Time\Debug\T042_16k.res"
+__RES_T043_16K_sa                                  A0EB         "F:\SN03-TG028\Time\Debug\T043_16k.res"
+__RES_T043_16K_ea                                  A35E         "F:\SN03-TG028\Time\Debug\T043_16k.res"
+__RES_T044_16K_sa                                  9E48         "F:\SN03-TG028\Time\Debug\T044_16k.res"
+__RES_T044_16K_ea                                  A0EB         "F:\SN03-TG028\Time\Debug\T044_16k.res"
+__RES_T045_16K_sa                                  A35E         "F:\SN03-TG028\Time\Debug\T045_16k.res"
+__RES_T045_16K_ea                                  A5D1         "F:\SN03-TG028\Time\Debug\T045_16k.res"
+__RES_T046_16K_sa                                  AC9A         "F:\SN03-TG028\Time\Debug\T046_16k.res"
+__RES_T046_16K_ea                                  AEAD         "F:\SN03-TG028\Time\Debug\T046_16k.res"
+__RES_T047_16K_sa                                  B2A3         "F:\SN03-TG028\Time\Debug\T047_16k.res"
+__RES_T047_16K_ea                                  B456         "F:\SN03-TG028\Time\Debug\T047_16k.res"
+__RES_T048_16K_sa                                  C494         "F:\SN03-TG028\Time\Debug\T048_16k.res"
+__RES_T048_16K_ea                                  C5E7         "F:\SN03-TG028\Time\Debug\T048_16k.res"
+__RES_T049_16K_sa                                  B456         "F:\SN03-TG028\Time\Debug\T049_16k.res"
+__RES_T049_16K_ea                                  B609         "F:\SN03-TG028\Time\Debug\T049_16k.res"
+__RES_T050_16K_sa                                  C18E         "F:\SN03-TG028\Time\Debug\T050_16k.res"
+__RES_T050_16K_ea                                  C311         "F:\SN03-TG028\Time\Debug\T050_16k.res"
+__RES_T051_16K_sa                                  B7BC         "F:\SN03-TG028\Time\Debug\T051_16k.res"
+__RES_T051_16K_ea                                  B96F         "F:\SN03-TG028\Time\Debug\T051_16k.res"
+__RES_T052_16K_sa                                  C73A         "F:\SN03-TG028\Time\Debug\T052_16k.res"
+__RES_T052_16K_ea                                  C88D         "F:\SN03-TG028\Time\Debug\T052_16k.res"
+__RES_T053_16K_sa                                  C88D         "F:\SN03-TG028\Time\Debug\T053_16k.res"
+__RES_T053_16K_ea                                  C9E0         "F:\SN03-TG028\Time\Debug\T053_16k.res"
+__RES_T054_16K_sa                                  C9E0         "F:\SN03-TG028\Time\Debug\T054_16k.res"
+__RES_T054_16K_ea                                  CAD3         "F:\SN03-TG028\Time\Debug\T054_16k.res"
+__RES_T055_16K_sa                                  BB22         "F:\SN03-TG028\Time\Debug\T055_16k.res"
+__RES_T055_16K_ea                                  BCD5         "F:\SN03-TG028\Time\Debug\T055_16k.res"
+__RES_T056_16K_sa                                  C5E7         "F:\SN03-TG028\Time\Debug\T056_16k.res"
+__RES_T056_16K_ea                                  C73A         "F:\SN03-TG028\Time\Debug\T056_16k.res"
+__RES_T057_16K_sa                                  AEAD         "F:\SN03-TG028\Time\Debug\T057_16k.res"
+__RES_T057_16K_ea                                  B0C0         "F:\SN03-TG028\Time\Debug\T057_16k.res"
+__RES_T058_16K_sa                                  AA87         "F:\SN03-TG028\Time\Debug\T058_16k.res"
+__RES_T058_16K_ea                                  AC9A         "F:\SN03-TG028\Time\Debug\T058_16k.res"
+__RES_T059_16K_sa                                  B609         "F:\SN03-TG028\Time\Debug\T059_16k.res"
+__RES_T059_16K_ea                                  B7BC         "F:\SN03-TG028\Time\Debug\T059_16k.res"
+__RES_T060_16K_sa                                  C311         "F:\SN03-TG028\Time\Debug\T060_16k.res"
+__RES_T060_16K_ea                                  C494         "F:\SN03-TG028\Time\Debug\T060_16k.res"
+__RES_T061_16K_sa                                  A5D1         "F:\SN03-TG028\Time\Debug\T061_16k.res"
+__RES_T061_16K_ea                                  A844         "F:\SN03-TG028\Time\Debug\T061_16k.res"
+__RES_T062_16K_sa                                  B96F         "F:\SN03-TG028\Time\Debug\T062_16k.res"
+__RES_T062_16K_ea                                  BB22         "F:\SN03-TG028\Time\Debug\T062_16k.res"
+__RES_T063_16K_sa                                  BE88         "F:\SN03-TG028\Time\Debug\T063_16k.res"
+__RES_T063_16K_ea                                  C00B         "F:\SN03-TG028\Time\Debug\T063_16k.res"
+__RES_T064_16K_sa                                  C00B         "F:\SN03-TG028\Time\Debug\T064_16k.res"
+__RES_T064_16K_ea                                  C18E         "F:\SN03-TG028\Time\Debug\T064_16k.res"
+__RES_T065_16K_sa                                  A844         "F:\SN03-TG028\Time\Debug\T065_16k.res"
+__RES_T065_16K_ea                                  AA87         "F:\SN03-TG028\Time\Debug\T065_16k.res"
+__RES_T066_16K_sa                                  BCD5         "F:\SN03-TG028\Time\Debug\T066_16k.res"
+__RES_T066_16K_ea                                  BE88         "F:\SN03-TG028\Time\Debug\T066_16k.res"
+*********************************************************************************************
+
+*********************************************************************************************
+*                             S E C T I O N     S U M M A R Y                               *
+*********************************************************************************************
+*     Section Name                             Startting Address   Ending Address    Size   *
+*********************************************************************************************
+* "E:\Program Files\Sunplus\unSPIDE162\IDE162\startupD.obj"                                 *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    unSP_StartUp(TEXT)                            80EA                 8106         1D     *
+* "F:\SN03-TG028\Time\Debug\Resource.obj"                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          8009                 808F         87     *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\Time\Debug\main.obj"                                                       *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8D7B                 9271         4F7    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          80E4                 80E9         6      *
+*    IRAM                                          96A3 (339)           96C1 (357)   1F     *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\Time\Debug\system.obj"                                                     *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          9272                 9476         205    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           32D                  330          4      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\Time\Debug\hardware.obj"                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          9477                 95A3         12D    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           2F7                  32C          36     *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\Time\Debug\Key.obj"                                                        *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          95A4                 95F0         4D     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           335                  337          3      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\Time\Debug\FIQ.obj"                                                        *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          8090                 80E3         54     *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\Time\Debug\T040_16k.res"                                                   *
+*    __sn_section_RES_T040_16K(DATA)               B0C0                 B2A2         1E3    *
+* "F:\SN03-TG028\Time\Debug\T041_16k.res"                                                   *
+*    __sn_section_RES_T041_16K(DATA)               96C2                 9B44         483    *
+* "F:\SN03-TG028\Time\Debug\T042_16k.res"                                                   *
+*    __sn_section_RES_T042_16K(DATA)               9B45                 9E47         303    *
+* "F:\SN03-TG028\Time\Debug\T043_16k.res"                                                   *
+*    __sn_section_RES_T043_16K(DATA)               A0EB                 A35D         273    *
+* "F:\SN03-TG028\Time\Debug\T044_16k.res"                                                   *
+*    __sn_section_RES_T044_16K(DATA)               9E48                 A0EA         2A3    *
+* "F:\SN03-TG028\Time\Debug\T045_16k.res"                                                   *
+*    __sn_section_RES_T045_16K(DATA)               A35E                 A5D0         273    *
+* "F:\SN03-TG028\Time\Debug\T046_16k.res"                                                   *
+*    __sn_section_RES_T046_16K(DATA)               AC9A                 AEAC         213    *
+* "F:\SN03-TG028\Time\Debug\T047_16k.res"                                                   *
+*    __sn_section_RES_T047_16K(DATA)               B2A3                 B455         1B3    *
+* "F:\SN03-TG028\Time\Debug\T048_16k.res"                                                   *
+*    __sn_section_RES_T048_16K(DATA)               C494                 C5E6         153    *
+* "F:\SN03-TG028\Time\Debug\T049_16k.res"                                                   *
+*    __sn_section_RES_T049_16K(DATA)               B456                 B608         1B3    *
+* "F:\SN03-TG028\Time\Debug\T050_16k.res"                                                   *
+*    __sn_section_RES_T050_16K(DATA)               C18E                 C310         183    *
+* "F:\SN03-TG028\Time\Debug\T051_16k.res"                                                   *
+*    __sn_section_RES_T051_16K(DATA)               B7BC                 B96E         1B3    *
+* "F:\SN03-TG028\Time\Debug\T052_16k.res"                                                   *
+*    __sn_section_RES_T052_16K(DATA)               C73A                 C88C         153    *
+* "F:\SN03-TG028\Time\Debug\T053_16k.res"                                                   *
+*    __sn_section_RES_T053_16K(DATA)               C88D                 C9DF         153    *
+* "F:\SN03-TG028\Time\Debug\T054_16k.res"                                                   *
+*    __sn_section_RES_T054_16K(DATA)               C9E0                 CAD2         F3     *
+* "F:\SN03-TG028\Time\Debug\T055_16k.res"                                                   *
+*    __sn_section_RES_T055_16K(DATA)               BB22                 BCD4         1B3    *
+* "F:\SN03-TG028\Time\Debug\T056_16k.res"                                                   *
+*    __sn_section_RES_T056_16K(DATA)               C5E7                 C739         153    *
+* "F:\SN03-TG028\Time\Debug\T057_16k.res"                                                   *
+*    __sn_section_RES_T057_16K(DATA)               AEAD                 B0BF         213    *
+* "F:\SN03-TG028\Time\Debug\T058_16k.res"                                                   *
+*    __sn_section_RES_T058_16K(DATA)               AA87                 AC99         213    *
+* "F:\SN03-TG028\Time\Debug\T059_16k.res"                                                   *
+*    __sn_section_RES_T059_16K(DATA)               B609                 B7BB         1B3    *
+* "F:\SN03-TG028\Time\Debug\T060_16k.res"                                                   *
+*    __sn_section_RES_T060_16K(DATA)               C311                 C493         183    *
+* "F:\SN03-TG028\Time\Debug\T061_16k.res"                                                   *
+*    __sn_section_RES_T061_16K(DATA)               A5D1                 A843         273    *
+* "F:\SN03-TG028\Time\Debug\T062_16k.res"                                                   *
+*    __sn_section_RES_T062_16K(DATA)               B96F                 BB21         1B3    *
+* "F:\SN03-TG028\Time\Debug\T063_16k.res"                                                   *
+*    __sn_section_RES_T063_16K(DATA)               BE88                 C00A         183    *
+* "F:\SN03-TG028\Time\Debug\T064_16k.res"                                                   *
+*    __sn_section_RES_T064_16K(DATA)               C00B                 C18D         183    *
+* "F:\SN03-TG028\Time\Debug\T065_16k.res"                                                   *
+*    __sn_section_RES_T065_16K(DATA)               A844                 AA86         243    *
+* "F:\SN03-TG028\Time\Debug\T066_16k.res"                                                   *
+*    __sn_section_RES_T066_16K(DATA)               BCD5                 BE87         1B3    *
+* "d:\working\unsp\mix\release\a2000"                                                       *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8107                 8D7A         C74    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           338                  338          1      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    A2000_Section(ORAM)                           0                    2F6          2F7    *
+* "modi1"                                                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          9666                 968D         28     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "divi1"                                                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          962F                 9665         37     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "rshu1"                                                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          968E                 96A2         15     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "divu1"                                                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          95F1                 962E         3E     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "common"                                                                                  *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           331                  334          4      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "Init Table"                                     8000                 8008         9      *
+*********************************************************************************************
+
+*********************************************************************************************
+*                             M E M O R Y     S U M M A R Y                                 *
+*********************************************************************************************
+*     Type                          Total               Using        Remain                 *
+*********************************************************************************************
+* "SRam/OSRam/ISRam"                40                   0            40                    *
+* "Ram"                             800                  358          4A8                   *
+* "First Bank Rom"                  7C00                 4AD3         312D                  *
+* "Other Banks Rom"                 0                    0            0                     *
+*********************************************************************************************
+
+Linker Output Filename : .\Debug\Time.S37
+Disk  Mapping Filename : .\Debug\Time.map
+Symbol  Table FileName : .\Debug\Time.sym
+Format :                 Microtek
+
+Linker Errors :          0
+Output Format :          S37

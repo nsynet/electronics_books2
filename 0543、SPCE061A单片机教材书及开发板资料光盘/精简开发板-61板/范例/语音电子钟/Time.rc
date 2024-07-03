@@ -1,0 +1,193 @@
+# Begin Project
+# Begin SubItem "Time  Resources"
+# Begin Source File
+SOURCE=16k\T040.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T040_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T041.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T041_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T042.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T042_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T043.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T043_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T044.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T044_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T045.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T045_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T046.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T046_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T047.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T047_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T048.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T048_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T049.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T049_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T050.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T050_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T051.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T051_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T052.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T052_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T053.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T053_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T054.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T054_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T055.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T055_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T056.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T056_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T057.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T057_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T058.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T058_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T059.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T059_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T060.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T060_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T061.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T061_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T062.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T062_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T063.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T063_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T064.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T064_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T065.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T065_16K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=16k\T066.16k
+USEPARAM=FALSE
+PARAM=
+ID=RES_T066_16K
+EXPORT=3
+# End Source File
+# End SubItem
+# End Project

@@ -1,0 +1,255 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+F:\软件编程\语音识别\hewenhui\LD3320-CODEV3_he\LD3320-CODEV3_he\LD_TEST.uv2
+Project File Date:  09/15/2010
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+compiling LDChip.c...
+compiling LDChip_HardW.c...
+compiling uart.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LD_INIT_MP3?LDCHIP
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LD_PLAY?LDCHIP
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LD_ADJUSTMIX2SPVOLUME?LDCHIP
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_DELAY?LDCHIP
+    CALLER1: ?PR?EXTINT0HANDLER?LDCHIP
+    CALLER2: ?C_C51STARTUP
+Program Size: data=57.0 xdata=0 code=3689
+creating hex file from "LD_TEST_he_wen_hui"...
+"LD_TEST_he_wen_hui" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling LDChip.c...
+LDCHIP.C(443): error C243: 'array[]': string out of bounds
+LDCHIP.C(445): error C202: 'CODE_CJS': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_CJJ': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_TINGDENGK': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_TINGDENGG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_FANGDENGK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_FANGDENGG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_LIUHAOK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_LIUHAOG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_QIHAOK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_QIHAOG': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_BAHAOK': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_BAHAOG': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_JIUHAOK': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_JIUHAOG': undefined identifier
+LDCHIP.C(448): error C202: 'CODE_SHIYIHAOK': undefined identifier
+LDCHIP.C(448): error C202: 'CODE_SHIYIHAOG': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(196): error C202: 'CODE_CJS': undefined identifier
+MAIN.C(203): error C202: 'CODE_CJJ': undefined identifier
+MAIN.C(210): error C202: 'CODE_TINGDENGK': undefined identifier
+MAIN.C(217): error C202: 'CODE_TINGDENGG': undefined identifier
+MAIN.C(224): error C202: 'CODE_FANGDENGK': undefined identifier
+MAIN.C(231): error C202: 'CODE_FANGDENGG': undefined identifier
+MAIN.C(238): error C202: 'CODE_LIUHAOK': undefined identifier
+MAIN.C(245): error C202: 'CODE_LIUHAOG': undefined identifier
+MAIN.C(252): error C202: 'CODE_QIHAOK': undefined identifier
+MAIN.C(259): error C202: 'CODE_QIHAOG': undefined identifier
+MAIN.C(267): error C202: 'CODE_BAHAOK': undefined identifier
+MAIN.C(274): error C202: 'CODE_BAHAOG': undefined identifier
+MAIN.C(281): error C202: 'CODE_JIUHAOK': undefined identifier
+MAIN.C(288): error C202: 'CODE_JIUHAOG': undefined identifier
+MAIN.C(309): error C202: 'CODE_SHIYIHAOK': undefined identifier
+MAIN.C(316): error C202: 'CODE_SHIYIHAOG': undefined identifier
+compiling LDChip.c...
+LDCHIP.C(443): error C243: 'array[]': string out of bounds
+LDCHIP.C(445): error C202: 'CODE_CJS': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_CJJ': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_TINGDENGK': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_TINGDENGG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_FANGDENGK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_FANGDENGG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_LIUHAOK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_LIUHAOG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_QIHAOK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_QIHAOG': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_BAHAOK': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_BAHAOG': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_JIUHAOK': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_JIUHAOG': undefined identifier
+LDCHIP.C(448): error C202: 'CODE_SHIYIHAOK': undefined identifier
+LDCHIP.C(448): error C202: 'CODE_SHIYIHAOG': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(196): error C202: 'CODE_CJS': undefined identifier
+MAIN.C(203): error C202: 'CODE_CJJ': undefined identifier
+MAIN.C(210): error C202: 'CODE_TINGDENGK': undefined identifier
+MAIN.C(217): error C202: 'CODE_TINGDENGG': undefined identifier
+MAIN.C(224): error C202: 'CODE_FANGDENGK': undefined identifier
+MAIN.C(231): error C202: 'CODE_FANGDENGG': undefined identifier
+MAIN.C(238): error C202: 'CODE_LIUHAOK': undefined identifier
+MAIN.C(245): error C202: 'CODE_LIUHAOG': undefined identifier
+MAIN.C(252): error C202: 'CODE_QIHAOK': undefined identifier
+MAIN.C(259): error C202: 'CODE_QIHAOG': undefined identifier
+MAIN.C(267): error C202: 'CODE_BAHAOK': undefined identifier
+MAIN.C(274): error C202: 'CODE_BAHAOG': undefined identifier
+MAIN.C(281): error C202: 'CODE_JIUHAOK': undefined identifier
+MAIN.C(288): error C202: 'CODE_JIUHAOG': undefined identifier
+MAIN.C(309): error C202: 'CODE_SHIYIHAOK': undefined identifier
+MAIN.C(316): error C202: 'CODE_SHIYIHAOG': undefined identifier
+compiling LDChip.c...
+LDCHIP.C(443): error C243: 'array[]': string out of bounds
+LDCHIP.C(445): error C202: 'CODE_CJS': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_CJJ': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_TINGDENGK': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_TINGDENGG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_FANGDENGK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_FANGDENGG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_LIUHAOK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_LIUHAOG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_QIHAOK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_QIHAOG': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_BAHAOK': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_BAHAOG': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_JIUHAOK': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_JIUHAOG': undefined identifier
+LDCHIP.C(448): error C202: 'CODE_SHIYIHAOK': undefined identifier
+LDCHIP.C(448): error C202: 'CODE_SHIYIHAOG': undefined identifier
+compiling LDChip_HardW.c...
+compiling uart.c...
+Target not created
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(196): error C202: 'CODE_CJS': undefined identifier
+MAIN.C(203): error C202: 'CODE_CJJ': undefined identifier
+MAIN.C(210): error C202: 'CODE_TINGDENGK': undefined identifier
+MAIN.C(217): error C202: 'CODE_TINGDENGG': undefined identifier
+MAIN.C(224): error C202: 'CODE_FANGDENGK': undefined identifier
+MAIN.C(231): error C202: 'CODE_FANGDENGG': undefined identifier
+MAIN.C(238): error C202: 'CODE_LIUHAOK': undefined identifier
+MAIN.C(245): error C202: 'CODE_LIUHAOG': undefined identifier
+MAIN.C(252): error C202: 'CODE_QIHAOK': undefined identifier
+MAIN.C(259): error C202: 'CODE_QIHAOG': undefined identifier
+MAIN.C(267): error C202: 'CODE_BAHAOK': undefined identifier
+MAIN.C(274): error C202: 'CODE_BAHAOG': undefined identifier
+MAIN.C(281): error C202: 'CODE_JIUHAOK': undefined identifier
+MAIN.C(288): error C202: 'CODE_JIUHAOG': undefined identifier
+MAIN.C(309): error C202: 'CODE_SHIYIHAOK': undefined identifier
+MAIN.C(316): error C202: 'CODE_SHIYIHAOG': undefined identifier
+compiling LDChip.c...
+LDCHIP.C(445): error C202: 'CODE_CJS': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_CJJ': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_TINGDENGK': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_TINGDENGG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_FANGDENGK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_FANGDENGG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_LIUHAOK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_LIUHAOG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_QIHAOK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_QIHAOG': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_BAHAOK': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_BAHAOG': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_JIUHAOK': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_JIUHAOG': undefined identifier
+LDCHIP.C(448): error C202: 'CODE_SHIYIHAOK': undefined identifier
+LDCHIP.C(448): error C202: 'CODE_SHIYIHAOG': undefined identifier
+compiling LDChip_HardW.c...
+compiling uart.c...
+Target not created
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(196): error C202: 'CODE_CJS': undefined identifier
+MAIN.C(203): error C202: 'CODE_CJJ': undefined identifier
+MAIN.C(210): error C202: 'CODE_TINGDENGK': undefined identifier
+MAIN.C(217): error C202: 'CODE_TINGDENGG': undefined identifier
+MAIN.C(224): error C202: 'CODE_FANGDENGK': undefined identifier
+MAIN.C(231): error C202: 'CODE_FANGDENGG': undefined identifier
+MAIN.C(238): error C202: 'CODE_LIUHAOK': undefined identifier
+MAIN.C(245): error C202: 'CODE_LIUHAOG': undefined identifier
+MAIN.C(252): error C202: 'CODE_QIHAOK': undefined identifier
+MAIN.C(259): error C202: 'CODE_QIHAOG': undefined identifier
+MAIN.C(267): error C202: 'CODE_BAHAOK': undefined identifier
+MAIN.C(274): error C202: 'CODE_BAHAOG': undefined identifier
+MAIN.C(281): error C202: 'CODE_JIUHAOK': undefined identifier
+MAIN.C(288): error C202: 'CODE_JIUHAOG': undefined identifier
+MAIN.C(309): error C202: 'CODE_SHIYIHAOK': undefined identifier
+MAIN.C(316): error C202: 'CODE_SHIYIHAOG': undefined identifier
+compiling LDChip.c...
+LDCHIP.C(445): error C202: 'CODE_CJS': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_CJJ': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_TINGDENGK': undefined identifier
+LDCHIP.C(445): error C202: 'CODE_TINGDENGG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_FANGDENGK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_FANGDENGG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_LIUHAOK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_LIUHAOG': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_QIHAOK': undefined identifier
+LDCHIP.C(446): error C202: 'CODE_QIHAOG': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_BAHAOK': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_BAHAOG': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_JIUHAOK': undefined identifier
+LDCHIP.C(447): error C202: 'CODE_JIUHAOG': undefined identifier
+LDCHIP.C(448): error C202: 'CODE_SHIYIHAOK': undefined identifier
+LDCHIP.C(448): error C202: 'CODE_SHIYIHAOG': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling main.c...
+compiling LDChip.c...
+compiling LDChip_HardW.c...
+compiling uart.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LD_INIT_MP3?LDCHIP
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LD_PLAY?LDCHIP
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LD_ADJUSTMIX2SPVOLUME?LDCHIP
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_DELAY?LDCHIP
+    CALLER1: ?PR?EXTINT0HANDLER?LDCHIP
+    CALLER2: ?C_C51STARTUP
+Program Size: data=57.0 xdata=0 code=3977
+creating hex file from "LD_TEST_he_wen_hui"...
+"LD_TEST_he_wen_hui" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+compiling LDChip.c...
+compiling LDChip_HardW.c...
+compiling uart.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LD_INIT_MP3?LDCHIP
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LD_PLAY?LDCHIP
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LD_ADJUSTMIX2SPVOLUME?LDCHIP
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_DELAY?LDCHIP
+    CALLER1: ?PR?EXTINT0HANDLER?LDCHIP
+    CALLER2: ?C_C51STARTUP
+Program Size: data=57.0 xdata=0 code=3977
+creating hex file from "LD_TEST_he_wen_hui"...
+"LD_TEST_he_wen_hui" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+compiling LDChip.c...
+compiling LDChip_HardW.c...
+compiling uart.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LD_INIT_MP3?LDCHIP
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LD_PLAY?LDCHIP
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LD_ADJUSTMIX2SPVOLUME?LDCHIP
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_DELAY?LDCHIP
+    CALLER1: ?PR?EXTINT0HANDLER?LDCHIP
+    CALLER2: ?C_C51STARTUP
+Program Size: data=57.0 xdata=0 code=3977
+creating hex file from "LD_TEST_he_wen_hui"...
+"LD_TEST_he_wen_hui" - 0 Error(s), 4 Warning(s).

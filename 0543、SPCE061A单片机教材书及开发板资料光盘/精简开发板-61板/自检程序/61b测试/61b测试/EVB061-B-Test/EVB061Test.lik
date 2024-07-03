@@ -1,0 +1,66 @@
+Version: 3.0
+Options: m37
+Obj: "D:\Program Files\Sunplus\unSPIDE1.8.4\unSPIDE\startupD.obj"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\Resource.obj"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\EVB061Test.obj"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\system.obj"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\isr.obj"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\ad_line.obj"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\hardware.obj"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\main.obj"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\01_48k.res"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\02_48k.res"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\03_48k.res"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\04_48k.res"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\05_48k.res"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\08_48k.res"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\09_48k.res"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\10_48k.res"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\11_48k.res"
+Obj: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\Debug\12_48k.res"
+Lib: "F:\刻录光盘\精简开发板-61板\自检程序\61b测试\61b测试\EVB061-B-Test\.\sacmv25.lib"
+Output: ".\Debug\EVB061Test.S37"
+;Locate: TEXT in "isr.obj" at 8009 
+;Align: TEXT in "isr.obj" with 0 
+;Locate: IRAM in "hardware.obj" at 8E2A  linkat 1B2 
+;Align: IRAM in "hardware.obj" with 0 
+;Locate: ISRAM in "EVB061Test.obj" at 8E60  linkat 0 
+;Align: ISRAM in "EVB061Test.obj" with 0 
+;Locate: RAM in "main.obj" at 1AE 
+;Align: RAM in "main.obj" with 0 
+;Locate: S480_Section in "s480" of "sacmv25.lib"  at A 
+;Align: S480_Section in "s480" of "sacmv25.lib"  with 0 
+;Locate: __sn_section_RES_01_48K in "01_48k.res" at 9A69 
+;Align: __sn_section_RES_01_48K in "01_48k.res" with 0 
+;Locate: __sn_section_RES_02_48K in "02_48k.res" at BE92 
+;Align: __sn_section_RES_02_48K in "02_48k.res" with 0 
+;Locate: __sn_section_RES_03_48K in "03_48k.res" at BA3D 
+;Align: __sn_section_RES_03_48K in "03_48k.res" with 0 
+;Locate: __sn_section_RES_04_48K in "04_48k.res" at A185 
+;Align: __sn_section_RES_04_48K in "04_48k.res" with 0 
+;Locate: __sn_section_RES_05_48K in "05_48k.res" at A715 
+;Align: __sn_section_RES_05_48K in "05_48k.res" with 0 
+;Locate: __sn_section_RES_08_48K in "08_48k.res" at 8E6A 
+;Align: __sn_section_RES_08_48K in "08_48k.res" with 0 
+;Locate: __sn_section_RES_09_48K in "09_48k.res" at ABFA 
+;Align: __sn_section_RES_09_48K in "09_48k.res" with 0 
+;Locate: __sn_section_RES_10_48K in "10_48k.res" at B0DF 
+;Align: __sn_section_RES_10_48K in "10_48k.res" with 0 
+;Locate: __sn_section_RES_11_48K in "11_48k.res" at C2B1 
+;Align: __sn_section_RES_11_48K in "11_48k.res" with 0 
+;Locate: __sn_section_RES_12_48K in "12_48k.res" at B58E 
+;Align: __sn_section_RES_12_48K in "12_48k.res" with 0 
+;Locate: CODE in "s480" of "sacmv25.lib"  at 80C2 
+;Align: CODE in "s480" of "sacmv25.lib"  with 0 
+;Locate: CODE in "hardware.obj" at 8A89 
+;Align: CODE in "hardware.obj" with 0 
+;Locate: CODE in "EVB061Test.obj" at 8BB6 
+;Align: CODE in "EVB061Test.obj" with 0 
+;Locate: CODE in "main.obj" at 8CA5 
+;Align: CODE in "main.obj" with 0 
+;Locate: CODE in "ad_line.obj" at 8D90 
+;Align: CODE in "ad_line.obj" with 0 
+;Locate: CODE in "system.obj" at 8DF8 
+;Align: CODE in "system.obj" with 0 
+;Locate: DATA in "EVB061Test.obj" at C6BE 
+;Align: DATA in "EVB061Test.obj" with 0 

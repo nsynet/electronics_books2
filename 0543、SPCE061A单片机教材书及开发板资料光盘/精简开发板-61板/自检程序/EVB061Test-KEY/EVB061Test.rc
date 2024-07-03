@@ -1,0 +1,88 @@
+# Begin Project
+# Begin SubItem "EVB061Test  Resources"
+# Begin Source File
+SOURCE=voice\09.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_09_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\02.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_02_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\03.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_03_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\04.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_04_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\05.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_05_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\06.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_06_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\07.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_07_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\08.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_08_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\01.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_01_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\12.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_12_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\11.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_11_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=voice\10.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_10_48K
+EXPORT=3
+# End Source File
+# End SubItem
+# End Project

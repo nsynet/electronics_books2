@@ -1,0 +1,431 @@
+Tuesday, May 20, 10:39:32, 2003
+
+                    Sunplus u'nSP Linker (encryption version) - Ver. 1.6.0
+                    -------------------------------------------
+
+Global Symbol Name                             Global Value     Global Filename
+*********************************************************************************************
+_RESET                                             80EA         "E:\Program Files\Sunplus\StudyUnspIDE\startupR.obj"
+__sn_loop                                          8106         "E:\Program Files\Sunplus\StudyUnspIDE\startupR.obj"
+__sn_loop2                                         8105         "E:\Program Files\Sunplus\StudyUnspIDE\startupR.obj"
+_RES_Table                                         8009         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T040_16K_SA                                   8009         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T040_16K_EA                                   800B         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T041_16K_SA                                   800D         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T041_16K_EA                                   800F         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T042_16K_SA                                   8011         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T042_16K_EA                                   8013         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T043_16K_SA                                   8015         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T043_16K_EA                                   8017         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T044_16K_SA                                   8019         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T044_16K_EA                                   801B         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T045_16K_SA                                   801D         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T045_16K_EA                                   801F         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T046_16K_SA                                   8021         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T046_16K_EA                                   8023         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T047_16K_SA                                   8025         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T047_16K_EA                                   8027         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T048_16K_SA                                   8029         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T048_16K_EA                                   802B         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T049_16K_SA                                   802D         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T049_16K_EA                                   802F         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T050_16K_SA                                   8031         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T050_16K_EA                                   8033         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T051_16K_SA                                   8035         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T051_16K_EA                                   8037         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T052_16K_SA                                   8039         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T052_16K_EA                                   803B         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T053_16K_SA                                   803D         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T053_16K_EA                                   803F         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T054_16K_SA                                   8041         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T054_16K_EA                                   8043         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T055_16K_SA                                   8045         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T055_16K_EA                                   8047         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T056_16K_SA                                   8049         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T056_16K_EA                                   804B         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T057_16K_SA                                   804D         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T057_16K_EA                                   804F         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T058_16K_SA                                   8051         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T058_16K_EA                                   8053         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T059_16K_SA                                   8055         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T059_16K_EA                                   8057         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T060_16K_SA                                   8059         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T060_16K_EA                                   805B         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T061_16K_SA                                   805D         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T061_16K_EA                                   805F         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T062_16K_SA                                   8061         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T062_16K_EA                                   8063         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T063_16K_SA                                   8065         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T063_16K_EA                                   8067         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T064_16K_SA                                   8069         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T064_16K_EA                                   806B         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T065_16K_SA                                   806D         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T065_16K_EA                                   806F         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T066_16K_SA                                   8071         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_RES_T066_16K_EA                                   8073         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+T_SACM_A2000_SpeechTable                           8075         "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+_SpeechAdjustTemp                                  339          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_Key                                               33A          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_KeyPressFlag                                      33B          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_TimeCount                                         33C          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_SleepFlag                                         33D          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_TimeChangeCount                                   33E          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_KeyStatus                                         33F          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_KeyAdjust                                         340          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_YearOrTime                                        341          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_TimeChangeKey                                     342          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_KeyCount                                          343          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_SecondAddOne                                      344          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_HourMinTemp                                       345          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_i                                                 346          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_j                                                 347          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_gTimeVSShem                                       348          "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_PlayRespond                                       8D7B         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_Delay3ms                                          8D9F         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_PlayAdjustTime                                    8DAB         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_PlaySpeakYear                                     8DEC         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_PlaySpeakMonth                                    8E32         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_PlaySpeakDay                                      8E5B         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_PlaySpeakHour                                     8E92         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_PlaySpeakMinute                                   8F25         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_PlaySpeakSecond                                   8F66         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_SpeakTime                                         8FA8         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+_main                                              8FD5         "F:\SN03-TG028\语音电子钟\Release\main.obj"
+Year                                               32D          "F:\SN03-TG028\语音电子钟\Release\system.obj"
+MonDayHr                                           32E          "F:\SN03-TG028\语音电子钟\Release\system.obj"
+MinSec                                             32F          "F:\SN03-TG028\语音电子钟\Release\system.obj"
+Per500msSet                                        330          "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_System_Initial                                    9108         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_Clear_WatchDog                                    9132         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_LightOn                                           9136         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_LightOff                                          913D         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_Calendar_Counter                                  9144         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_Adjust_Time_Up                                    91C6         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_Adjust_Time_Down                                  9242         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_ReadRealYear                                      92BC         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_ReadRealMonthDay                                  92C1         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_ReadRealHourMin                                   92CB         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_ReadRealSecond                                    92D9         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_Start256HzRTC                                     92DF         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_Stop256HzRTC                                      92EE         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+_SP_GoSleep                                        92F8         "F:\SN03-TG028\语音电子钟\Release\system.obj"
+F_SP_Send_PWM                                      930D         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Send_DAC1                                     9310         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Send_DAC2                                     9313         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Send_Two_DAC                                  9316         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Send_Out                                      9316         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Get_ADC                                       931B         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Set_P_TimerA_Ctrl                             931E         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Set_P_TimerA_Data                             9321         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Set_P_TimerB_Ctrl                             9324         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Set_P_TimerB_Data                             9327         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Set_P_INT_Ctrl                                932A         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Set_P_INT_Clear                               932D         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Set_P_SystemClock                             9330         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Set_P_DAC_Ctrl                                9333         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Set_P_ADC_Ctrl                                9336         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Write_INT_Status                              9339         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Read_INT_Status                               933C         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_RampUpDAC1                                    9374         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_RampDnDAC1                                    9398         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_RampUpDAC2                                    93AA         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_RampDnDAC2                                    93CE         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+_SP_RampUpDAC1                                     9374         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+_SP_RampDnDAC1                                     9398         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+_SP_RampUpDAC2                                     93AA         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+_SP_RampDnDAC2                                     93CE         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_Delay                                         9439         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_InitQueue                                     93E6         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_ReadQueue                                     93F3         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_WriteQueue                                    9405         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+F_SP_TestQueue                                     9413         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+_SP_Export                                         936A         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+_SP_Import                                         935F         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+_SP_Init_IOB                                       934F         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+_SP_Init_IOA                                       933F         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+_SP_GetResource                                    942B         "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+R_InterruptStatus                                  2F7          "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+R_FIQTemp                                          2F8          "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+_Key_Scan_ServiceLoop                              9442         "F:\SN03-TG028\语音电子钟\Release\Key.obj"
+Key_Scan_Init                                      943A         "F:\SN03-TG028\语音电子钟\Release\Key.obj"
+_FIQ                                               8090         "F:\SN03-TG028\语音电子钟\Release\FIQ.obj"
+_IRQ3                                              80B2         "F:\SN03-TG028\语音电子钟\Release\FIQ.obj"
+_IRQ5                                              80B9         "F:\SN03-TG028\语音电子钟\Release\FIQ.obj"
+_IRQ6                                              80D0         "F:\SN03-TG028\语音电子钟\Release\FIQ.obj"
+__RES_T040_16K_sa                                  AF41         "F:\SN03-TG028\语音电子钟\Release\T040_16k.res"
+__RES_T040_16K_ea                                  B124         "F:\SN03-TG028\语音电子钟\Release\T040_16k.res"
+__RES_T041_16K_sa                                  9543         "F:\SN03-TG028\语音电子钟\Release\T041_16k.res"
+__RES_T041_16K_ea                                  99C6         "F:\SN03-TG028\语音电子钟\Release\T041_16k.res"
+__RES_T042_16K_sa                                  99C6         "F:\SN03-TG028\语音电子钟\Release\T042_16k.res"
+__RES_T042_16K_ea                                  9CC9         "F:\SN03-TG028\语音电子钟\Release\T042_16k.res"
+__RES_T043_16K_sa                                  9F6C         "F:\SN03-TG028\语音电子钟\Release\T043_16k.res"
+__RES_T043_16K_ea                                  A1DF         "F:\SN03-TG028\语音电子钟\Release\T043_16k.res"
+__RES_T044_16K_sa                                  9CC9         "F:\SN03-TG028\语音电子钟\Release\T044_16k.res"
+__RES_T044_16K_ea                                  9F6C         "F:\SN03-TG028\语音电子钟\Release\T044_16k.res"
+__RES_T045_16K_sa                                  A1DF         "F:\SN03-TG028\语音电子钟\Release\T045_16k.res"
+__RES_T045_16K_ea                                  A452         "F:\SN03-TG028\语音电子钟\Release\T045_16k.res"
+__RES_T046_16K_sa                                  AB1B         "F:\SN03-TG028\语音电子钟\Release\T046_16k.res"
+__RES_T046_16K_ea                                  AD2E         "F:\SN03-TG028\语音电子钟\Release\T046_16k.res"
+__RES_T047_16K_sa                                  B124         "F:\SN03-TG028\语音电子钟\Release\T047_16k.res"
+__RES_T047_16K_ea                                  B2D7         "F:\SN03-TG028\语音电子钟\Release\T047_16k.res"
+__RES_T048_16K_sa                                  C315         "F:\SN03-TG028\语音电子钟\Release\T048_16k.res"
+__RES_T048_16K_ea                                  C468         "F:\SN03-TG028\语音电子钟\Release\T048_16k.res"
+__RES_T049_16K_sa                                  B2D7         "F:\SN03-TG028\语音电子钟\Release\T049_16k.res"
+__RES_T049_16K_ea                                  B48A         "F:\SN03-TG028\语音电子钟\Release\T049_16k.res"
+__RES_T050_16K_sa                                  C00F         "F:\SN03-TG028\语音电子钟\Release\T050_16k.res"
+__RES_T050_16K_ea                                  C192         "F:\SN03-TG028\语音电子钟\Release\T050_16k.res"
+__RES_T051_16K_sa                                  B63D         "F:\SN03-TG028\语音电子钟\Release\T051_16k.res"
+__RES_T051_16K_ea                                  B7F0         "F:\SN03-TG028\语音电子钟\Release\T051_16k.res"
+__RES_T052_16K_sa                                  C5BB         "F:\SN03-TG028\语音电子钟\Release\T052_16k.res"
+__RES_T052_16K_ea                                  C70E         "F:\SN03-TG028\语音电子钟\Release\T052_16k.res"
+__RES_T053_16K_sa                                  C70E         "F:\SN03-TG028\语音电子钟\Release\T053_16k.res"
+__RES_T053_16K_ea                                  C861         "F:\SN03-TG028\语音电子钟\Release\T053_16k.res"
+__RES_T054_16K_sa                                  C861         "F:\SN03-TG028\语音电子钟\Release\T054_16k.res"
+__RES_T054_16K_ea                                  C954         "F:\SN03-TG028\语音电子钟\Release\T054_16k.res"
+__RES_T055_16K_sa                                  B9A3         "F:\SN03-TG028\语音电子钟\Release\T055_16k.res"
+__RES_T055_16K_ea                                  BB56         "F:\SN03-TG028\语音电子钟\Release\T055_16k.res"
+__RES_T056_16K_sa                                  C468         "F:\SN03-TG028\语音电子钟\Release\T056_16k.res"
+__RES_T056_16K_ea                                  C5BB         "F:\SN03-TG028\语音电子钟\Release\T056_16k.res"
+__RES_T057_16K_sa                                  AD2E         "F:\SN03-TG028\语音电子钟\Release\T057_16k.res"
+__RES_T057_16K_ea                                  AF41         "F:\SN03-TG028\语音电子钟\Release\T057_16k.res"
+__RES_T058_16K_sa                                  A908         "F:\SN03-TG028\语音电子钟\Release\T058_16k.res"
+__RES_T058_16K_ea                                  AB1B         "F:\SN03-TG028\语音电子钟\Release\T058_16k.res"
+__RES_T059_16K_sa                                  B48A         "F:\SN03-TG028\语音电子钟\Release\T059_16k.res"
+__RES_T059_16K_ea                                  B63D         "F:\SN03-TG028\语音电子钟\Release\T059_16k.res"
+__RES_T060_16K_sa                                  C192         "F:\SN03-TG028\语音电子钟\Release\T060_16k.res"
+__RES_T060_16K_ea                                  C315         "F:\SN03-TG028\语音电子钟\Release\T060_16k.res"
+__RES_T061_16K_sa                                  A452         "F:\SN03-TG028\语音电子钟\Release\T061_16k.res"
+__RES_T061_16K_ea                                  A6C5         "F:\SN03-TG028\语音电子钟\Release\T061_16k.res"
+__RES_T062_16K_sa                                  B7F0         "F:\SN03-TG028\语音电子钟\Release\T062_16k.res"
+__RES_T062_16K_ea                                  B9A3         "F:\SN03-TG028\语音电子钟\Release\T062_16k.res"
+__RES_T063_16K_sa                                  BD09         "F:\SN03-TG028\语音电子钟\Release\T063_16k.res"
+__RES_T063_16K_ea                                  BE8C         "F:\SN03-TG028\语音电子钟\Release\T063_16k.res"
+__RES_T064_16K_sa                                  BE8C         "F:\SN03-TG028\语音电子钟\Release\T064_16k.res"
+__RES_T064_16K_ea                                  C00F         "F:\SN03-TG028\语音电子钟\Release\T064_16k.res"
+__RES_T065_16K_sa                                  A6C5         "F:\SN03-TG028\语音电子钟\Release\T065_16k.res"
+__RES_T065_16K_ea                                  A908         "F:\SN03-TG028\语音电子钟\Release\T065_16k.res"
+__RES_T066_16K_sa                                  BB56         "F:\SN03-TG028\语音电子钟\Release\T066_16k.res"
+__RES_T066_16K_ea                                  BD09         "F:\SN03-TG028\语音电子钟\Release\T066_16k.res"
+*********************************************************************************************
+
+*********************************************************************************************
+*                             S E C T I O N     S U M M A R Y                               *
+*********************************************************************************************
+*     Section Name                             Startting Address   Ending Address    Size   *
+*********************************************************************************************
+* "E:\Program Files\Sunplus\StudyUnspIDE\startupR.obj"                                      *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+*    unSP_StartUp(TEXT)                            80EA                 8106         1D     *
+* "F:\SN03-TG028\语音电子钟\Release\Resource.obj"                                           *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          8009                 808F         87     *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\语音电子钟\Release\main.obj"                                               *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8D7B                 9107         38D    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          80E4                 80E9         6      *
+*    IRAM                                          9524 (339)           9542 (357)   1F     *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\语音电子钟\Release\system.obj"                                             *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          9108                 930C         205    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           32D                  330          4      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\语音电子钟\Release\hardware.obj"                                           *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          930D                 9439         12D    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           2F7                  32C          36     *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\语音电子钟\Release\Key.obj"                                                *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          943A                 9486         4D     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           335                  337          3      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\语音电子钟\Release\FIQ.obj"                                                *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          8090                 80E3         54     *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    NB_DATA                                       ----                 ----         ----   *
+* "F:\SN03-TG028\语音电子钟\Release\T040_16k.res"                                           *
+*    __sn_section_RES_T040_16K(DATA)               AF41                 B123         1E3    *
+* "F:\SN03-TG028\语音电子钟\Release\T041_16k.res"                                           *
+*    __sn_section_RES_T041_16K(DATA)               9543                 99C5         483    *
+* "F:\SN03-TG028\语音电子钟\Release\T042_16k.res"                                           *
+*    __sn_section_RES_T042_16K(DATA)               99C6                 9CC8         303    *
+* "F:\SN03-TG028\语音电子钟\Release\T043_16k.res"                                           *
+*    __sn_section_RES_T043_16K(DATA)               9F6C                 A1DE         273    *
+* "F:\SN03-TG028\语音电子钟\Release\T044_16k.res"                                           *
+*    __sn_section_RES_T044_16K(DATA)               9CC9                 9F6B         2A3    *
+* "F:\SN03-TG028\语音电子钟\Release\T045_16k.res"                                           *
+*    __sn_section_RES_T045_16K(DATA)               A1DF                 A451         273    *
+* "F:\SN03-TG028\语音电子钟\Release\T046_16k.res"                                           *
+*    __sn_section_RES_T046_16K(DATA)               AB1B                 AD2D         213    *
+* "F:\SN03-TG028\语音电子钟\Release\T047_16k.res"                                           *
+*    __sn_section_RES_T047_16K(DATA)               B124                 B2D6         1B3    *
+* "F:\SN03-TG028\语音电子钟\Release\T048_16k.res"                                           *
+*    __sn_section_RES_T048_16K(DATA)               C315                 C467         153    *
+* "F:\SN03-TG028\语音电子钟\Release\T049_16k.res"                                           *
+*    __sn_section_RES_T049_16K(DATA)               B2D7                 B489         1B3    *
+* "F:\SN03-TG028\语音电子钟\Release\T050_16k.res"                                           *
+*    __sn_section_RES_T050_16K(DATA)               C00F                 C191         183    *
+* "F:\SN03-TG028\语音电子钟\Release\T051_16k.res"                                           *
+*    __sn_section_RES_T051_16K(DATA)               B63D                 B7EF         1B3    *
+* "F:\SN03-TG028\语音电子钟\Release\T052_16k.res"                                           *
+*    __sn_section_RES_T052_16K(DATA)               C5BB                 C70D         153    *
+* "F:\SN03-TG028\语音电子钟\Release\T053_16k.res"                                           *
+*    __sn_section_RES_T053_16K(DATA)               C70E                 C860         153    *
+* "F:\SN03-TG028\语音电子钟\Release\T054_16k.res"                                           *
+*    __sn_section_RES_T054_16K(DATA)               C861                 C953         F3     *
+* "F:\SN03-TG028\语音电子钟\Release\T055_16k.res"                                           *
+*    __sn_section_RES_T055_16K(DATA)               B9A3                 BB55         1B3    *
+* "F:\SN03-TG028\语音电子钟\Release\T056_16k.res"                                           *
+*    __sn_section_RES_T056_16K(DATA)               C468                 C5BA         153    *
+* "F:\SN03-TG028\语音电子钟\Release\T057_16k.res"                                           *
+*    __sn_section_RES_T057_16K(DATA)               AD2E                 AF40         213    *
+* "F:\SN03-TG028\语音电子钟\Release\T058_16k.res"                                           *
+*    __sn_section_RES_T058_16K(DATA)               A908                 AB1A         213    *
+* "F:\SN03-TG028\语音电子钟\Release\T059_16k.res"                                           *
+*    __sn_section_RES_T059_16K(DATA)               B48A                 B63C         1B3    *
+* "F:\SN03-TG028\语音电子钟\Release\T060_16k.res"                                           *
+*    __sn_section_RES_T060_16K(DATA)               C192                 C314         183    *
+* "F:\SN03-TG028\语音电子钟\Release\T061_16k.res"                                           *
+*    __sn_section_RES_T061_16K(DATA)               A452                 A6C4         273    *
+* "F:\SN03-TG028\语音电子钟\Release\T062_16k.res"                                           *
+*    __sn_section_RES_T062_16K(DATA)               B7F0                 B9A2         1B3    *
+* "F:\SN03-TG028\语音电子钟\Release\T063_16k.res"                                           *
+*    __sn_section_RES_T063_16K(DATA)               BD09                 BE8B         183    *
+* "F:\SN03-TG028\语音电子钟\Release\T064_16k.res"                                           *
+*    __sn_section_RES_T064_16K(DATA)               BE8C                 C00E         183    *
+* "F:\SN03-TG028\语音电子钟\Release\T065_16k.res"                                           *
+*    __sn_section_RES_T065_16K(DATA)               A6C5                 A907         243    *
+* "F:\SN03-TG028\语音电子钟\Release\T066_16k.res"                                           *
+*    __sn_section_RES_T066_16K(DATA)               BB56                 BD08         1B3    *
+* "d:\working\unsp\mix\release\a2000"                                                       *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          8107                 8D7A         C74    *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           338                  338          1      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+*    A2000_Section(ORAM)                           0                    2F6          2F7    *
+* "modi1"                                                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          94FC                 9523         28     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "divi1"                                                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          94C5                 94FB         37     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "divu1"                                                                                   *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          9487                 94C4         3E     *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           ----                 ----         ----   *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "common"                                                                                  *
+*    DEBUG                                         ----                 ----         ----   *
+*    CODE                                          ----                 ----         ----   *
+*    DATA                                          ----                 ----         ----   *
+*    TEXT                                          ----                 ----         ----   *
+*    IRAM                                          ----                 ----         ----   *
+*    ISRAM                                         ----                 ----         ----   *
+*    RAM                                           331                  334          4      *
+*    SRAM                                          ----                 ----         ----   *
+*    ORAM                                          ----                 ----         ----   *
+*    OSRAM                                         ----                 ----         ----   *
+* "Init Table"                                     8000                 8008         9      *
+*********************************************************************************************
+
+*********************************************************************************************
+*                             M E M O R Y     S U M M A R Y                                 *
+*********************************************************************************************
+*     Type                          Total               Using        Remain                 *
+*********************************************************************************************
+* "SRam/OSRam/ISRam"                40                   0            40                    *
+* "Ram"                             800                  358          4A8                   *
+* "First Bank Rom"                  7C00                 4954         32AC                  *
+* "Other Banks Rom"                 0                    0            0                     *
+*********************************************************************************************
+
+Linker Output Filename : .\Release\Time.S37
+Disk  Mapping Filename : .\Release\Time.map
+Symbol  Table FileName : .\Release\Time.sym
+Format :                 Microtek
+
+Linker Errors :          0
+Output Format :          S37

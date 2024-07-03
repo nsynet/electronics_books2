@@ -1,0 +1,32 @@
+Version: 3.0
+Options: m37
+Obj: "E:\PROGRA~1\Sunplus\UNSPID~3\IDE180\startupD.obj"
+Obj: "E:\usb\example1\061_lib\061_LIB\Debug\Resource.obj"
+Obj: "E:\usb\example1\061_lib\061_LIB\Debug\isr.obj"
+Obj: "E:\usb\example1\061_lib\061_LIB\Debug\System.obj"
+Obj: "E:\usb\example1\061_lib\061_LIB\Debug\main.obj"
+Obj: "E:\usb\example1\061_lib\061_LIB\Debug\D12CI.obj"
+Obj: "E:\usb\example1\061_lib\061_LIB\Debug\chap9.obj"
+Obj: "E:\usb\example1\061_lib\061_LIB\Debug\ExternInt.obj"
+Lib: "E:\usb\example1\061_lib\061_LIB\.\CMacro.lib"
+Output: ".\Debug\usb061.S37"
+;Locate: TEXT in "isr.obj" at 8009 
+;Align: TEXT in "isr.obj" with 0 
+;Locate: IRAM in "chap9.obj" at 8DCC  linkat 98 
+;Align: IRAM in "chap9.obj" with 0 
+;Locate: RAM in "main.obj" at 0 
+;Align: RAM in "main.obj" with 0 
+;Locate: CODE in "chap9.obj" at 8077 
+;Align: CODE in "chap9.obj" with 0 
+;Locate: CODE in "D12CI.obj" at 8608 
+;Align: CODE in "D12CI.obj" with 0 
+;Locate: CODE in "main.obj" at 8A20 
+;Align: CODE in "main.obj" with 0 
+;Locate: CODE in "System.obj" at 8B6C 
+;Align: CODE in "System.obj" with 0 
+;Locate: CODE in "ExternInt.obj" at 8CA4 
+;Align: CODE in "ExternInt.obj" with 0 
+;Locate: CODE in "rshu2" of "CMacro.lib"  at 8D91 
+;Align: CODE in "rshu2" of "CMacro.lib"  with 0 
+;Locate: CODE in "rshu1" of "CMacro.lib"  at 8DB7 
+;Align: CODE in "rshu1" of "CMacro.lib"  with 0 

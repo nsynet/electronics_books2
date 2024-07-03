@@ -1,0 +1,134 @@
+Version: 3.0
+Options: m37
+Obj: "E:\IDE180\startupD.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Resource.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\key.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\key1.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\main.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\irq5.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\single.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\delay.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501DisplayTAB.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\SPLC501Hardware.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501sys.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sram.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\system.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\hardware.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\MICTest.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\sleep.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\uart.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\88ledtest.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\4096.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\serve4096.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Rf_Received.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\Splc501var.obj"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\1_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\2_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\3_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\4_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\5_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\6_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\7_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\8_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\9_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\10_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\11_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\12_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\13_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\14_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\15_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\01_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\16_48k.res"
+Obj: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\Debug\08_48K.res"
+Lib: "D:\2003年工作\tset\实验箱\BoxTest\自检程式\.\sacmv26e.lib"
+Output: ".\Debug\led and key test.S37"
+;Locate: TEXT in "main.obj" at 8009 
+;Align: TEXT in "main.obj" with 0 
+;Locate: IRAM in "hardware.obj" at CC17  linkat 25C 
+;Align: IRAM in "hardware.obj" with 0 
+;Locate: ISRAM in "uart.obj" at CCB9  linkat 0 
+;Align: ISRAM in "uart.obj" with 0 
+;Locate: RAM in "Splc501var.obj" at 1AA 
+;Align: RAM in "Splc501var.obj" with 0 
+;Locate: OVERLAP_RAM_BLOCK in "S480" of "sacmv26e.lib"  at 7 
+;Align: OVERLAP_RAM_BLOCK in "S480" of "sacmv26e.lib"  with 0 
+;Locate: __sn_section_RES_01_48K in "01_48k.res" at D8BF 
+;Align: __sn_section_RES_01_48K in "01_48k.res" with 0 
+;Locate: __sn_section_RES_08_48K in "08_48K.res" at CCC0 
+;Align: __sn_section_RES_08_48K in "08_48K.res" with 0 
+;Locate: __sn_section_RES_10_48K in "10_48k.res" at DFDB 
+;Align: __sn_section_RES_10_48K in "10_48k.res" with 0 
+;Locate: __sn_section_RES_11_48K in "11_48k.res" at E7A3 
+;Align: __sn_section_RES_11_48K in "11_48k.res" with 0 
+;Locate: __sn_section_RES_12_48K in "12_48k.res" at E1FA 
+;Align: __sn_section_RES_12_48K in "12_48k.res" with 0 
+;Locate: __sn_section_RES_13_48K in "13_48k.res" at E5D5 
+;Align: __sn_section_RES_13_48K in "13_48k.res" with 0 
+;Locate: __sn_section_RES_14_48K in "14_48k.res" at ED58 
+;Align: __sn_section_RES_14_48K in "14_48k.res" with 0 
+;Locate: __sn_section_RES_15_48K in "15_48k.res" at F364 
+;Align: __sn_section_RES_15_48K in "15_48k.res" with 0 
+;Locate: __sn_section_RES_16_48K in "16_48k.res" at F43F 
+;Align: __sn_section_RES_16_48K in "16_48k.res" with 0 
+;Locate: __sn_section_RES_1_48K in "1_48k.res" at EE96 
+;Align: __sn_section_RES_1_48K in "1_48k.res" with 0 
+;Locate: __sn_section_RES_2_48K in "2_48k.res" at F094 
+;Align: __sn_section_RES_2_48K in "2_48k.res" with 0 
+;Locate: __sn_section_RES_3_48K in "3_48k.res" at EF95 
+;Align: __sn_section_RES_3_48K in "3_48k.res" with 0 
+;Locate: __sn_section_RES_4_48K in "4_48k.res" at EACA 
+;Align: __sn_section_RES_4_48K in "4_48k.res" with 0 
+;Locate: __sn_section_RES_5_48K in "5_48k.res" at F18A 
+;Align: __sn_section_RES_5_48K in "5_48k.res" with 0 
+;Locate: __sn_section_RES_6_48K in "6_48k.res" at E971 
+;Align: __sn_section_RES_6_48K in "6_48k.res" with 0 
+;Locate: __sn_section_RES_7_48K in "7_48k.res" at F277 
+;Align: __sn_section_RES_7_48K in "7_48k.res" with 0 
+;Locate: __sn_section_RES_8_48K in "8_48k.res" at E3EC 
+;Align: __sn_section_RES_8_48K in "8_48k.res" with 0 
+;Locate: __sn_section_RES_9_48K in "9_48k.res" at EC11 
+;Align: __sn_section_RES_9_48K in "9_48k.res" with 0 
+;Locate: CODE in "SPLC501DisplayTAB.obj" at 83CE 
+;Align: CODE in "SPLC501DisplayTAB.obj" with 0 
+;Locate: CODE in "Splc501sys.obj" at 9A72 
+;Align: CODE in "Splc501sys.obj" with 0 
+;Locate: CODE in "main.obj" at AEE0 
+;Align: CODE in "main.obj" with 0 
+;Locate: CODE in "S480" of "sacmv26e.lib"  at B90C 
+;Align: CODE in "S480" of "sacmv26e.lib"  with 0 
+;Locate: CODE in "SPLC501Hardware.obj" at C306 
+;Align: CODE in "SPLC501Hardware.obj" with 0 
+;Locate: CODE in "hardware.obj" at C518 
+;Align: CODE in "hardware.obj" with 0 
+;Locate: CODE in "serve4096.obj" at C6F7 
+;Align: CODE in "serve4096.obj" with 0 
+;Locate: CODE in "88ledtest.obj" at C871 
+;Align: CODE in "88ledtest.obj" with 0 
+;Locate: CODE in "sram.obj" at C926 
+;Align: CODE in "sram.obj" with 0 
+;Locate: CODE in "single.obj" at C9A5 
+;Align: CODE in "single.obj" with 0 
+;Locate: CODE in "uart.obj" at CA1F 
+;Align: CODE in "uart.obj" with 0 
+;Locate: CODE in "4096.obj" at CA91 
+;Align: CODE in "4096.obj" with 0 
+;Locate: CODE in "delay.obj" at CAFD 
+;Align: CODE in "delay.obj" with 0 
+;Locate: CODE in "irq5.obj" at CB39 
+;Align: CODE in "irq5.obj" with 0 
+;Locate: CODE in "system.obj" at CB71 
+;Align: CODE in "system.obj" with 0 
+;Locate: CODE in "MICTest.obj" at CB9B 
+;Align: CODE in "MICTest.obj" with 0 
+;Locate: CODE in "key.obj" at CBBB 
+;Align: CODE in "key.obj" with 0 
+;Locate: CODE in "key1.obj" at CBD7 
+;Align: CODE in "key1.obj" with 0 
+;Locate: CODE in "Rf_Received.obj" at CBF3 
+;Align: CODE in "Rf_Received.obj" with 0 
+;Locate: CODE in "sleep.obj" at CC05 
+;Align: CODE in "sleep.obj" with 0 
+;Locate: DATA in "single.obj" at F508 
+;Align: DATA in "single.obj" with 0 
+;Locate: DATA in "uart.obj" at F537 
+;Align: DATA in "uart.obj" with 0 

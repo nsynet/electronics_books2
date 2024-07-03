@@ -1,0 +1,6 @@
+"main.obj",
+"LDChip.obj",
+"LDChip_HardW.obj",
+"uart.obj" 
+TO "99ld3320_test" 
+RAMSIZE(256) 

@@ -1,0 +1,11 @@
+Version: 3.0
+Options: m37
+Obj: "D:\PROGRA~1\Sunplus\UNSPID~2\IDE180\startupD.obj"
+Obj: "E:\ele_competition\wakeup_externInterrupt\Debug\Resource.obj"
+Obj: "E:\ele_competition\wakeup_externInterrupt\Debug\main.obj"
+Obj: "E:\ele_competition\wakeup_externInterrupt\Debug\isr.obj"
+Output: ".\Debug\wakeup_externInterrupt.S37"
+;Locate: TEXT in "isr.obj" at 8009 
+;Align: TEXT in "isr.obj" with 0 
+;Locate: CODE in "main.obj" at 8061 
+;Align: CODE in "main.obj" with 0 

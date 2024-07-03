@@ -1,0 +1,127 @@
+.stabs "startup_code.",0x3c,0,0,0
+.stabs "__sn_main:F15",36,0,0,     32865
+.stabs "__sn_end:F15",36,0,0,     32863
+.stabs "__sn_exception:F15",36,0,0,     32864
+.stabs "E:\ele_competition\wakeup_externInterrupt/", 0x64,0,0,0
+.stabs "E:\ele_competition\wakeup_externInterrupt\Resource.asm", 0x64,0,0,0
+.stabs "unsigned int:t1=r1;0;65535;",128,0,0,0
+.stabs "long long int:t2=r1;-2147483648;2147483647;",128,0,0,0
+.stabs "float:t3=r1;2;0;",128,0,0,0
+.stabs "double:t4=r1;4;0;",128,0,0,0
+.stabn 0xc0,0,0,         0
+.stabn 0xe0,0,0,         0
+.stabn 0xc0,0,0,         0
+.stabn 0xe0,0,0,         0
+.stabs "E:\ele_competition\wakeup_externInterrupt/", 0x64,0,0,0
+.stabs "E:\ele_competition\wakeup_externInterrupt\main.asm", 0x64,0,0,0
+.stabs "unsigned int:t1=r1;0;65535;",128,0,0,0
+.stabs "long long int:t2=r1;-2147483648;2147483647;",128,0,0,0
+.stabs "float:t3=r1;2;0;",128,0,0,0
+.stabs "double:t4=r1;4;0;",128,0,0,0
+.stabn 0xc0,0,0,     32865
+.stabn 0xe0,0,0,     32865
+.stabs "E:\ele_competition\wakeup_externInterrupt/", 0x64,0,0,0
+.stabs "E:\ele_competition\wakeup_externInterrupt\hardware.inc", 0x64,0,0,0
+.stabs "unsigned int:t1=r1;0;65535;",128,0,0,0
+.stabs "long long int:t2=r1;-2147483648;2147483647;",128,0,0,0
+.stabs "float:t3=r1;2;0;",128,0,0,0
+.stabs "double:t4=r1;4;0;",128,0,0,0
+.stabn 0xc0,0,0,     32865
+.stabn 0xe0,0,0,     32865
+.stabs "E:\ele_competition\wakeup_externInterrupt/", 0x64,0,0,0
+.stabs "E:\ele_competition\wakeup_externInterrupt\main.asm", 0x64,0,0,0
+.stabs "unsigned int:t1=r1;0;65535;",128,0,0,0
+.stabs "long long int:t2=r1;-2147483648;2147483647;",128,0,0,0
+.stabs "float:t3=r1;2;0;",128,0,0,0
+.stabs "double:t4=r1;4;0;",128,0,0,0
+.stabn 0xc0,0,0,     32865
+.stabn 0xe0,0,0,     32865
+.stabn 0xc0,0,0,     32865
+.stabn 0x44,0,52,     32865
+.stabn 0x44,0,53,     32867
+.stabn 0x44,0,54,     32869
+.stabn 0x44,0,55,     32871
+.stabn 0x44,0,56,     32872
+.stabn 0x44,0,58,     32874
+.stabn 0x44,0,59,     32875
+.stabn 0x44,0,60,     32877
+.stabn 0x44,0,63,     32878
+.stabn 0x44,0,64,     32879
+.stabn 0x44,0,65,     32881
+.stabn 0x44,0,66,     32883
+.stabn 0x44,0,67,     32885
+.stabn 0x44,0,68,     32887
+.stabn 0x44,0,69,     32889
+.stabn 0x44,0,70,     32891
+.stabn 0x44,0,71,     32893
+.stabn 0x44,0,72,     32895
+.stabn 0x44,0,73,     32897
+.stabn 0xe0,0,0,     32898
+.stabs "E:\ele_competition\wakeup_externInterrupt/", 0x64,0,0,0
+.stabs "E:\ele_competition\wakeup_externInterrupt\isr.asm", 0x64,0,0,0
+.stabs "unsigned int:t1=r1;0;65535;",128,0,0,0
+.stabs "long long int:t2=r1;-2147483648;2147483647;",128,0,0,0
+.stabs "float:t3=r1;2;0;",128,0,0,0
+.stabs "double:t4=r1;4;0;",128,0,0,0
+.stabn 0xc0,0,0,         0
+.stabn 0xe0,0,0,         0
+.stabs "E:\ele_competition\wakeup_externInterrupt/", 0x64,0,0,0
+.stabs "E:\ele_competition\wakeup_externInterrupt\hardware.inc", 0x64,0,0,0
+.stabs "unsigned int:t1=r1;0;65535;",128,0,0,0
+.stabs "long long int:t2=r1;-2147483648;2147483647;",128,0,0,0
+.stabs "float:t3=r1;2;0;",128,0,0,0
+.stabs "double:t4=r1;4;0;",128,0,0,0
+.stabn 0xc0,0,0,         0
+.stabn 0xe0,0,0,         0
+.stabs "E:\ele_competition\wakeup_externInterrupt/", 0x64,0,0,0
+.stabs "E:\ele_competition\wakeup_externInterrupt\isr.asm", 0x64,0,0,0
+.stabs "unsigned int:t1=r1;0;65535;",128,0,0,0
+.stabs "long long int:t2=r1;-2147483648;2147483647;",128,0,0,0
+.stabs "float:t3=r1;2;0;",128,0,0,0
+.stabs "double:t4=r1;4;0;",128,0,0,0
+.stabn 0xc0,0,0,         0
+.stabn 0xe0,0,0,         0
+.stabn 0xc0,0,0,     32777
+.stabn 0x44,0,23,     32777
+.stabn 0x44,0,24,     32778
+.stabn 0x44,0,25,     32780
+.stabn 0x44,0,26,     32782
+.stabn 0x44,0,27,     32783
+.stabn 0x44,0,28,     32785
+.stabn 0x44,0,29,     32787
+.stabn 0x44,0,31,     32788
+.stabn 0x44,0,32,     32790
+.stabn 0x44,0,33,     32791
+.stabn 0x44,0,34,     32792
+.stabn 0x44,0,35,     32793
+.stabn 0x44,0,36,     32794
+.stabn 0x44,0,37,     32795
+.stabn 0x44,0,38,     32796
+.stabn 0x44,0,39,     32797
+.stabn 0x44,0,40,     32798
+.stabn 0x44,0,41,     32799
+.stabn 0x44,0,42,     32800
+.stabn 0x44,0,43,     32801
+.stabn 0x44,0,44,     32802
+.stabn 0x44,0,45,     32804
+.stabn 0x44,0,46,     32805
+.stabn 0x44,0,47,     32807
+.stabn 0x44,0,48,     32808
+.stabn 0x44,0,49,     32810
+.stabn 0x44,0,50,     32812
+.stabn 0x44,0,51,     32813
+.stabn 0x44,0,60,     32814
+.stabn 0x44,0,61,     32816
+.stabn 0x44,0,62,     32818
+.stabn 0x44,0,63,     32820
+.stabn 0x44,0,64,     32822
+.stabn 0x44,0,65,     32823
+.stabn 0x44,0,67,     32824
+.stabn 0x44,0,68,     32826
+.stabn 0x44,0,69,     32828
+.stabn 0x44,0,70,     32829
+.stabn 0x44,0,72,     32830
+.stabn 0x44,0,73,     32832
+.stabn 0x44,0,74,     32834
+.stabn 0x44,0,75,     32835
+.stabn 0xe0,0,0,     32836

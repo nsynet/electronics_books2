@@ -1,0 +1,988 @@
+Sunplus u'nSP Assembler - Ver. 1.6.0
+              Listing File Has Been Relocated
+                            	// GCC for SUNPLUS u'nSP version 1.0.9
+                            	// Command: E:\PROGRA~1\Sunplus\STUDYU~1\cc1.exe C:\DOCUME~1\Àî»ªÀö.DOMAIN\LOCALS~1\Temp\cc8waaaa.i -fkeep-inline-functions -quiet -dumpbase main.c -O2 -o .\Release/main.asm
+                            	// gcc2_compiled.:
+                            	
+                            	.public _SpeechAdjustTemp
+00000339                    	.iram
+                            	_SpeechAdjustTemp:
+00000339 00 00              		.dw 0
+                            	.public _Key
+0000033A                    	.iram
+                            	_Key:
+0000033A 00 00              		.dw 0
+                            	.public _KeyPressFlag
+0000033B                    	.iram
+                            	_KeyPressFlag:
+0000033B 00 00              		.dw 0
+                            	.public _TimeCount
+0000033C                    	.iram
+                            	_TimeCount:
+0000033C 00 00              		.dw 0
+                            	.public _SleepFlag
+0000033D                    	.iram
+                            	_SleepFlag:
+0000033D 00 00              		.dw 0
+                            	.public _TimeChangeCount
+0000033E                    	.iram
+                            	_TimeChangeCount:
+0000033E 00 00              		.dw 0
+                            	.public _KeyStatus
+0000033F                    	.iram
+                            	_KeyStatus:
+0000033F 00 00              		.dw 0
+                            	.public _KeyAdjust
+00000340                    	.iram
+                            	_KeyAdjust:
+00000340 00 00              		.dw 0
+                            	.public _YearOrTime
+00000341                    	.iram
+                            	_YearOrTime:
+00000341 00 00              		.dw 0
+                            	.public _TimeChangeKey
+00000342                    	.iram
+                            	_TimeChangeKey:
+00000342 00 00              		.dw 0
+                            	.public _KeyCount
+00000343                    	.iram
+                            	_KeyCount:
+00000343 00 00              		.dw 0
+                            	.public _SecondAddOne
+00000344                    	.iram
+                            	_SecondAddOne:
+00000344 00 00              		.dw 0
+                            	.public _HourMinTemp
+00000345                    	.iram
+                            	_HourMinTemp:
+00000345 00 00              		.dw 0
+                            	.public _i
+00000346                    	.iram
+                            	_i:
+00000346 00 00              		.dw 0
+                            	.public _j
+00000347                    	.iram
+                            	_j:
+00000347 00 00              		.dw 0
+                            	.public _gTimeVSShem
+00000348                    	.iram
+                            	_gTimeVSShem:
+00000348 00 08              		.dw 2048
+00000349 32 08              		.dw 2098
+0000034A 00 09              		.dw 2304
+0000034B 32 09              		.dw 2354
+0000034C 34 09              		.dw 2356
+0000034D 05 0A              		.dw 2565
+0000034E 0A 0A              		.dw 2570
+0000034F 00 0B              		.dw 2816
+00000350 0A 0B              		.dw 2826
+00000351 00 0C              		.dw 3072
+00000352 1E 0D              		.dw 3358
+00000353 14 0E              		.dw 3604
+00000354 1E 0E              		.dw 3614
+00000355 14 0F              		.dw 3860
+00000356 15 0F              		.dw 3861
+00000357 32 0F              		.dw 3890
+00008D7B                    	.code
+                            	.public _PlayRespond
+                            	_PlayRespond:	.proc
+                            		// total=1, vars=1
+                            		// frame_pointer_needed: 1
+00008D7B 88 DA              		push bp to [sp]
+00008D7C 41 20              		sp-=1
+00008D7D 08 0B 01 00        		bp=sp+1
+                            	
+00008D7F 04 92              		R1=[bp+4]	// QImode move
+00008D80 C5 D2              		[BP]=R1	// QImode move
+00008D81 41 92              		R1=1	// QImode move
+00008D82 C8 D2              		[SP--]=R1	// QImode move
+00008D83 40 F0 07 81        		call _SACM_A2000_Initial	// call with return value
+00008D85 43 92              		R1=3	// QImode move
+00008D86 C8 D2              		[SP--]=R1	// QImode move
+00008D87 C8 D2              		[SP--]=R1	// QImode move
+00008D88 C5 92              		R1=[BP]	// QImode move
+00008D89 C8 D2              		[SP--]=R1	// QImode move
+00008D8A 40 F0 51 81        		call _SACM_A2000_Play	// call with return value
+00008D8C 44 00              		SP=SP+4
+00008D8D 0F 9F 93 8D        		pc=L3	// Indirect jump
+                            	L5:
+00008D8F 40 F0 32 91        		call _Clear_WatchDog	// call with return value
+00008D91 40 F0 5D 83        		call _SACM_A2000_ServiceLoop	// call with return value
+                            	L3:
+00008D93 40 F0 81 82        		call _SACM_A2000_Status	// call with return value
+00008D95 41 B2              		R1=R1&1
+00008D96 40 42              		CMP R1,0	// QImode test
+00008D97 02 5E              		JZ L7	// QImode NE
+00008D98 0F 9F 8F 8D        		PC=L5
+                            	L7:
+00008D9A 40 F0 1E 82        		call _SACM_A2000_Stop	// call with return value
+                            	
+00008D9C 41 00              		sp+=1
+00008D9D 88 98              		pop bp from [sp]
+00008D9E 90 9A              		retf
+                            		.endp	// end of PlayRespond
+                            	
+00008D9F                    	.code
+                            	.public _Delay3ms
+                            	_Delay3ms:	.proc
+                            		// total=0, vars=0
+                            		// frame_pointer_needed: 1
+00008D9F 88 DA              		push bp to [sp]
+00008DA0 08 0B 01 00        		bp=sp+1
+                            	
+00008DA2 40 92              		R1=0	// QImode move
+                            	L11:
+00008DA3 41 02              		R1=R1+1
+00008DA4 09 43 FE FF        		CMP R1,(-2)	// QImode compare
+00008DA6 02 9E              		JA L14	// QImode LEU
+00008DA7 0F 9F A3 8D        		PC=L11
+                            	L14:
+                            	
+00008DA9 88 98              		pop bp from [sp]
+00008DAA 90 9A              		retf
+                            		.endp	// end of Delay3ms
+                            	
+00008DAB                    	.code
+                            	.public _PlayAdjustTime
+                            	_PlayAdjustTime:	.proc
+                            		// total=0, vars=0
+                            		// frame_pointer_needed: 1
+00008DAB 88 DA              		push bp to [sp]
+00008DAC 08 0B 01 00        		bp=sp+1
+                            	
+00008DAE 03 92              		R1=[bp+3]	// QImode move
+00008DAF 45 42              		CMP R1,5	// QImode compare
+00008DB0 02 8E              		JNA L26	// QImode GTU
+00008DB1 0F 9F EA 8D        		PC=L16
+                            	L26:
+00008DB3 09 03 E4 80        		R1=R1+L24
+00008DB5 C1 9E              		pc=[R1]	// tablejump
+000080E4                    	.text
+                            	L24:
+000080E4 B6 8D              		.dw L17
+000080E5 BF 8D              		.dw L18
+000080E6 CA 8D              		.dw L19
+000080E7 D5 8D              		.dw L20
+000080E8 E0 8D              		.dw L21
+000080E9 EA 8D              		.dw L16
+00008DB6                    	.code
+                            	L17:
+00008DB6 40 F0 BC 92        		call _ReadRealYear	// call with return value
+00008DB8 19 D3 39 03        		[_SpeechAdjustTemp]=R1	// QImode move
+00008DBA C8 D2              		[SP--]=R1	// QImode move
+00008DBB 40 F0 EC 8D        		call _PlaySpeakYear	// call with return value
+00008DBD 0F 9F E9 8D        		pc=L25	// Indirect jump
+                            	L18:
+00008DBF 40 F0 C1 92        		call _ReadRealMonthDay	// call with return value
+00008DC1 19 D3 39 03        		[_SpeechAdjustTemp]=R1	// QImode move
+00008DC3 79 93              		R1=R1 lsr 4
+00008DC4 79 93              		R1=R1 lsr 4
+00008DC5 C8 D2              		[SP--]=R1	// QImode move
+00008DC6 40 F0 32 8E        		call _PlaySpeakMonth	// call with return value
+00008DC8 0F 9F E9 8D        		pc=L25	// Indirect jump
+                            	L19:
+00008DCA 40 F0 C1 92        		call _ReadRealMonthDay	// call with return value
+00008DCC 19 D3 39 03        		[_SpeechAdjustTemp]=R1	// QImode move
+00008DCE 09 B3 FF 00        		R1=R1&255
+00008DD0 C8 D2              		[SP--]=R1	// QImode move
+00008DD1 40 F0 5B 8E        		call _PlaySpeakDay	// call with return value
+00008DD3 0F 9F E9 8D        		pc=L25	// Indirect jump
+                            	L20:
+00008DD5 40 F0 CB 92        		call _ReadRealHourMin	// call with return value
+00008DD7 19 D3 39 03        		[_SpeechAdjustTemp]=R1	// QImode move
+00008DD9 79 93              		R1=R1 lsr 4
+00008DDA 79 93              		R1=R1 lsr 4
+00008DDB C8 D2              		[SP--]=R1	// QImode move
+00008DDC 40 F0 92 8E        		call _PlaySpeakHour	// call with return value
+00008DDE 0F 9F E9 8D        		pc=L25	// Indirect jump
+                            	L21:
+00008DE0 40 F0 CB 92        		call _ReadRealHourMin	// call with return value
+00008DE2 19 D3 39 03        		[_SpeechAdjustTemp]=R1	// QImode move
+00008DE4 09 B3 FF 00        		R1=R1&255
+00008DE6 C8 D2              		[SP--]=R1	// QImode move
+00008DE7 40 F0 25 8F        		call _PlaySpeakMinute	// call with return value
+                            	L25:
+00008DE9 41 00              		SP=SP+1
+                            	L16:
+                            	
+00008DEA 88 98              		pop bp from [sp]
+00008DEB 90 9A              		retf
+                            		.endp	// end of PlayAdjustTime
+                            	
+00008DEC                    	.code
+                            	.public _PlaySpeakYear
+                            	_PlaySpeakYear:	.proc
+                            		// total=1, vars=1
+                            		// frame_pointer_needed: 1
+00008DEC 88 DA              		push bp to [sp]
+00008DED 41 20              		sp-=1
+00008DEE 08 0B 01 00        		bp=sp+1
+                            	
+00008DF0 04 92              		R1=[bp+4]	// QImode move
+00008DF1 C5 D2              		[BP]=R1	// QImode move
+00008DF2 0A 95 E8 03        		R2=1000	// QImode move
+00008DF4 90 D4              		push R1,R2 to [sp]	// peepholes pushqi2
+00008DF5 40 F0 C5 94        		call __divi1	// call with return value
+00008DF7 42 00              		SP=SP+2
+00008DF8 46 02              		R1=R1+6
+00008DF9 C8 D2              		[SP--]=R1	// QImode move
+00008DFA 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008DFC 09 93 E8 03        		R1=1000	// QImode move
+00008DFE C8 D2              		[SP--]=R1	// QImode move
+00008DFF C5 94              		R2=[BP]	// QImode move
+00008E00 C8 D4              		[SP--]=R2	// QImode move
+00008E01 40 F0 FC 94        		call __modi1	// call with return value
+00008E03 42 00              		SP=SP+2
+00008E04 0A 95 64 00        		R2=100	// QImode move
+00008E06 90 D4              		push R1,R2 to [sp]	// peepholes pushqi2
+00008E07 40 F0 C5 94        		call __divi1	// call with return value
+00008E09 42 00              		SP=SP+2
+00008E0A 46 02              		R1=R1+6
+00008E0B C8 D2              		[SP--]=R1	// QImode move
+00008E0C 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008E0E 09 93 64 00        		R1=100	// QImode move
+00008E10 C8 D2              		[SP--]=R1	// QImode move
+00008E11 C5 94              		R2=[BP]	// QImode move
+00008E12 C8 D4              		[SP--]=R2	// QImode move
+00008E13 40 F0 FC 94        		call __modi1	// call with return value
+00008E15 42 00              		SP=SP+2
+00008E16 4A 94              		R2=10	// QImode move
+00008E17 90 D4              		push R1,R2 to [sp]	// peepholes pushqi2
+00008E18 40 F0 C5 94        		call __divi1	// call with return value
+00008E1A 42 00              		SP=SP+2
+00008E1B 46 02              		R1=R1+6
+00008E1C C8 D2              		[SP--]=R1	// QImode move
+00008E1D 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008E1F 4A 92              		R1=10	// QImode move
+00008E20 C8 D2              		[SP--]=R1	// QImode move
+00008E21 C5 94              		R2=[BP]	// QImode move
+00008E22 C8 D4              		[SP--]=R2	// QImode move
+00008E23 40 F0 FC 94        		call __modi1	// call with return value
+00008E25 42 00              		SP=SP+2
+00008E26 46 02              		R1=R1+6
+00008E27 C8 D2              		[SP--]=R1	// QImode move
+00008E28 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008E2A 55 92              		R1=21	// QImode move
+00008E2B C8 D2              		[SP--]=R1	// QImode move
+00008E2C 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008E2E 45 00              		SP=SP+5
+                            	
+00008E2F 41 00              		sp+=1
+00008E30 88 98              		pop bp from [sp]
+00008E31 90 9A              		retf
+                            		.endp	// end of PlaySpeakYear
+                            	
+00008E32                    	.code
+                            	.public _PlaySpeakMonth
+                            	_PlaySpeakMonth:	.proc
+                            		// total=0, vars=0
+                            		// frame_pointer_needed: 1
+00008E32 88 DA              		push bp to [sp]
+00008E33 08 0B 01 00        		bp=sp+1
+                            	
+00008E35 03 92              		R1=[bp+3]	// QImode move
+00008E36 49 42              		CMP R1,9	// QImode compare
+00008E37 02 AE              		JNG L37	// QImode GT
+00008E38 0F 9F 3D 8E        		PC=L29
+                            	L37:
+00008E3A 46 02              		R1=R1+6
+00008E3B 0F 9F 50 8E        		pc=L36	// Indirect jump
+                            	L29:
+00008E3D 4A 42              		CMP R1,10	// QImode compare
+00008E3E 02 5E              		JZ L38	// QImode NE
+00008E3F 0F 9F 44 8E        		PC=L31
+                            	L38:
+00008E41 50 92              		R1=16	// QImode move
+00008E42 0F 9F 50 8E        		pc=L36	// Indirect jump
+                            	L31:
+00008E44 4B 42              		CMP R1,11	// QImode compare
+00008E45 02 5E              		JZ L39	// QImode NE
+00008E46 0F 9F 4B 8E        		PC=L33
+                            	L39:
+00008E48 51 92              		R1=17	// QImode move
+00008E49 0F 9F 50 8E        		pc=L36	// Indirect jump
+                            	L33:
+00008E4B 4C 42              		CMP R1,12	// QImode compare
+00008E4C 02 5E              		JZ L40	// QImode NE
+00008E4D 0F 9F 54 8E        		PC=L30
+                            	L40:
+00008E4F 52 92              		R1=18	// QImode move
+                            	L36:
+00008E50 C8 D2              		[SP--]=R1	// QImode move
+00008E51 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008E53 41 00              		SP=SP+1
+                            	L30:
+00008E54 56 92              		R1=22	// QImode move
+00008E55 C8 D2              		[SP--]=R1	// QImode move
+00008E56 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008E58 41 00              		SP=SP+1
+                            	
+00008E59 88 98              		pop bp from [sp]
+00008E5A 90 9A              		retf
+                            		.endp	// end of PlaySpeakMonth
+                            	
+00008E5B                    	.code
+                            	.public _PlaySpeakDay
+                            	_PlaySpeakDay:	.proc
+                            		// total=2, vars=2
+                            		// frame_pointer_needed: 1
+00008E5B 88 DA              		push bp to [sp]
+00008E5C 42 20              		sp-=2
+00008E5D 08 0B 01 00        		bp=sp+1
+                            	
+00008E5F 05 92              		R1=[bp+5]	// QImode move
+00008E60 C5 D2              		[BP]=R1	// QImode move
+00008E61 4A 94              		R2=10	// QImode move
+00008E62 90 D4              		push R1,R2 to [sp]	// peepholes pushqi2
+00008E63 40 F0 C5 94        		call __divi1	// call with return value
+00008E65 42 00              		SP=SP+2
+00008E66 01 D2              		[bp+1]=R1	// QImode move
+00008E67 41 42              		CMP R1,1	// QImode compare
+00008E68 02 BE              		JG L45	// QImode LE
+00008E69 0F 9F 70 8E        		PC=L42
+                            	L45:
+00008E6B 46 02              		R1=R1+6
+00008E6C C8 D2              		[SP--]=R1	// QImode move
+00008E6D 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008E6F 41 00              		SP=SP+1
+                            	L42:
+00008E70 01 92              		R1=[bp+1]	// QImode move
+00008E71 40 42              		CMP R1,0	// QImode test
+00008E72 02 BE              		JG L46	// QImode LE
+00008E73 0F 9F 7A 8E        		PC=L43
+                            	L46:
+00008E75 50 94              		R2=16	// QImode move
+00008E76 C8 D4              		[SP--]=R2	// QImode move
+00008E77 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008E79 41 00              		SP=SP+1
+                            	L43:
+00008E7A 4A 92              		R1=10	// QImode move
+00008E7B C8 D2              		[SP--]=R1	// QImode move
+00008E7C C5 94              		R2=[BP]	// QImode move
+00008E7D C8 D4              		[SP--]=R2	// QImode move
+00008E7E 40 F0 FC 94        		call __modi1	// call with return value
+00008E80 42 00              		SP=SP+2
+00008E81 40 42              		CMP R1,0	// QImode test
+00008E82 02 4E              		JNZ L47	// QImode EQ
+00008E83 0F 9F 8A 8E        		PC=L44
+                            	L47:
+00008E85 46 02              		R1=R1+6
+00008E86 C8 D2              		[SP--]=R1	// QImode move
+00008E87 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008E89 41 00              		SP=SP+1
+                            	L44:
+00008E8A 57 92              		R1=23	// QImode move
+00008E8B C8 D2              		[SP--]=R1	// QImode move
+00008E8C 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008E8E 41 00              		SP=SP+1
+                            	
+00008E8F 42 00              		sp+=2
+00008E90 88 98              		pop bp from [sp]
+00008E91 90 9A              		retf
+                            		.endp	// end of PlaySpeakDay
+                            	
+00008E92                    	.code
+                            	.public _PlaySpeakHour
+                            	_PlaySpeakHour:	.proc
+                            		// total=1, vars=1
+                            		// frame_pointer_needed: 1
+00008E92 88 DA              		push bp to [sp]
+00008E93 41 20              		sp-=1
+00008E94 08 0B 01 00        		bp=sp+1
+                            	
+00008E96 04 94              		R2=[bp+4]	// QImode move
+00008E97 0A 03 FF FF        		R1=R2+(-1)
+00008E99 46 42              		CMP R1,6	// QImode compare
+00008E9A 02 8E              		JNA L74	// QImode GTU
+00008E9B 0F 9F AF 8E        		PC=L49
+                            	L74:
+00008E9D 42 92              		R1=2	// QImode move
+00008E9E C8 D2              		[SP--]=R1	// QImode move
+00008E9F C5 D4              		[BP]=R2	// QImode move
+00008EA0 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008EA2 41 00              		SP=SP+1
+00008EA3 C5 94              		R2=[BP]	// QImode move
+00008EA4 42 44              		CMP R2,2	// QImode compare
+00008EA5 02 5E              		JZ L75	// QImode NE
+00008EA6 0F 9F AB 8E        		PC=L50
+                            	L75:
+00008EA8 53 92              		R1=19	// QImode move
+00008EA9 0F 9F 19 8F        		pc=L73	// Indirect jump
+                            	L50:
+00008EAB 0A 03 06 00        		R1=R2+6
+00008EAD 0F 9F 19 8F        		pc=L73	// Indirect jump
+                            	L49:
+00008EAF 0A 03 F8 FF        		R1=R2+(-8)
+00008EB1 44 42              		CMP R1,4	// QImode compare
+00008EB2 02 8E              		JNA L76	// QImode GTU
+00008EB3 0F 9F DA 8E        		PC=L53
+                            	L76:
+00008EB5 43 92              		R1=3	// QImode move
+00008EB6 C8 D2              		[SP--]=R1	// QImode move
+00008EB7 C5 D4              		[BP]=R2	// QImode move
+00008EB8 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008EBA 41 00              		SP=SP+1
+00008EBB C5 94              		R2=[BP]	// QImode move
+00008EBC 4A 44              		CMP R2,10	// QImode compare
+00008EBD 02 4E              		JNZ L77	// QImode EQ
+00008EBE 0F 9F CD 8E        		PC=L55
+                            	L77:
+00008EC0 02 2E              		JNL L78	// QImode LT
+00008EC1 0F 9F D6 8E        		PC=L58
+                            	L78:
+00008EC3 4B 44              		CMP R2,11	// QImode compare
+00008EC4 02 4E              		JNZ L79	// QImode EQ
+00008EC5 0F 9F D0 8E        		PC=L56
+                            	L79:
+00008EC7 4C 44              		CMP R2,12	// QImode compare
+00008EC8 02 4E              		JNZ L80	// QImode EQ
+00008EC9 0F 9F D3 8E        		PC=L57
+                            	L80:
+00008ECB 0F 9F D6 8E        		pc=L58	// Indirect jump
+                            	L55:
+00008ECD 50 92              		R1=16	// QImode move
+00008ECE 0F 9F 19 8F        		pc=L73	// Indirect jump
+                            	L56:
+00008ED0 51 92              		R1=17	// QImode move
+00008ED1 0F 9F 19 8F        		pc=L73	// Indirect jump
+                            	L57:
+00008ED3 52 92              		R1=18	// QImode move
+00008ED4 0F 9F 19 8F        		pc=L73	// Indirect jump
+                            	L58:
+00008ED6 0A 03 06 00        		R1=R2+6
+00008ED8 0F 9F 19 8F        		pc=L73	// Indirect jump
+                            	L53:
+00008EDA 0A 03 F3 FF        		R1=R2+(-13)
+00008EDC 46 42              		CMP R1,6	// QImode compare
+00008EDD 02 8E              		JNA L81	// QImode GTU
+00008EDE 0F 9F EE 8E        		PC=L61
+                            	L81:
+00008EE0 44 92              		R1=4	// QImode move
+00008EE1 C8 D2              		[SP--]=R1	// QImode move
+00008EE2 C5 D4              		[BP]=R2	// QImode move
+00008EE3 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008EE5 41 00              		SP=SP+1
+00008EE6 C5 94              		R2=[BP]	// QImode move
+00008EE7 4E 44              		CMP R2,14	// QImode compare
+00008EE8 02 5E              		JZ L82	// QImode NE
+00008EE9 0F 9F 17 8F        		PC=L70
+                            	L82:
+00008EEB 53 92              		R1=19	// QImode move
+00008EEC 0F 9F 19 8F        		pc=L73	// Indirect jump
+                            	L61:
+00008EEE 0A 03 EC FF        		R1=R2+(-20)
+00008EF0 44 42              		CMP R1,4	// QImode compare
+00008EF1 02 8E              		JNA L83	// QImode GTU
+00008EF2 0F 9F 1D 8F        		PC=L52
+                            	L83:
+00008EF4 45 92              		R1=5	// QImode move
+00008EF5 C8 D2              		[SP--]=R1	// QImode move
+00008EF6 C5 D4              		[BP]=R2	// QImode move
+00008EF7 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008EF9 41 00              		SP=SP+1
+00008EFA C5 94              		R2=[BP]	// QImode move
+00008EFB 57 44              		CMP R2,23	// QImode compare
+00008EFC 02 4E              		JNZ L84	// QImode EQ
+00008EFD 0F 9F 11 8F        		PC=L68
+                            	L84:
+00008EFF 02 AE              		JNG L85	// QImode GT
+00008F00 0F 9F 08 8F        		PC=L72
+                            	L85:
+00008F02 56 44              		CMP R2,22	// QImode compare
+00008F03 02 4E              		JNZ L86	// QImode EQ
+00008F04 0F 9F 0E 8F        		PC=L67
+                            	L86:
+00008F06 0F 9F 17 8F        		pc=L70	// Indirect jump
+                            	L72:
+00008F08 58 44              		CMP R2,24	// QImode compare
+00008F09 02 4E              		JNZ L87	// QImode EQ
+00008F0A 0F 9F 14 8F        		PC=L69
+                            	L87:
+00008F0C 0F 9F 17 8F        		pc=L70	// Indirect jump
+                            	L67:
+00008F0E 50 92              		R1=16	// QImode move
+00008F0F 0F 9F 19 8F        		pc=L73	// Indirect jump
+                            	L68:
+00008F11 51 92              		R1=17	// QImode move
+00008F12 0F 9F 19 8F        		pc=L73	// Indirect jump
+                            	L69:
+00008F14 52 92              		R1=18	// QImode move
+00008F15 0F 9F 19 8F        		pc=L73	// Indirect jump
+                            	L70:
+00008F17 0A 03 FA FF        		R1=R2+(-6)
+                            	L73:
+00008F19 C8 D2              		[SP--]=R1	// QImode move
+00008F1A 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008F1C 41 00              		SP=SP+1
+                            	L52:
+00008F1D 58 92              		R1=24	// QImode move
+00008F1E C8 D2              		[SP--]=R1	// QImode move
+00008F1F 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008F21 41 00              		SP=SP+1
+                            	
+00008F22 41 00              		sp+=1
+00008F23 88 98              		pop bp from [sp]
+00008F24 90 9A              		retf
+                            		.endp	// end of PlaySpeakHour
+                            	
+00008F25                    	.code
+                            	.public _PlaySpeakMinute
+                            	_PlaySpeakMinute:	.proc
+                            		// total=2, vars=2
+                            		// frame_pointer_needed: 1
+00008F25 88 DA              		push bp to [sp]
+00008F26 42 20              		sp-=2
+00008F27 08 0B 01 00        		bp=sp+1
+                            	
+00008F29 05 92              		R1=[bp+5]	// QImode move
+00008F2A C5 D2              		[BP]=R1	// QImode move
+00008F2B 40 42              		CMP R1,0	// QImode test
+00008F2C 02 5E              		JZ L95	// QImode NE
+00008F2D 0F 9F 33 8F        		PC=L89
+                            	L95:
+00008F2F 54 94              		R2=20	// QImode move
+00008F30 C8 D4              		[SP--]=R2	// QImode move
+00008F31 0F 9F 60 8F        		pc=L94	// Indirect jump
+                            	L89:
+00008F33 4A 92              		R1=10	// QImode move
+00008F34 C8 D2              		[SP--]=R1	// QImode move
+00008F35 C5 94              		R2=[BP]	// QImode move
+00008F36 C8 D4              		[SP--]=R2	// QImode move
+00008F37 40 F0 C5 94        		call __divi1	// call with return value
+00008F39 42 00              		SP=SP+2
+00008F3A 01 D2              		[bp+1]=R1	// QImode move
+00008F3B 41 42              		CMP R1,1	// QImode compare
+00008F3C 02 BE              		JG L96	// QImode LE
+00008F3D 0F 9F 44 8F        		PC=L91
+                            	L96:
+00008F3F 46 02              		R1=R1+6
+00008F40 C8 D2              		[SP--]=R1	// QImode move
+00008F41 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008F43 41 00              		SP=SP+1
+                            	L91:
+00008F44 01 92              		R1=[bp+1]	// QImode move
+00008F45 40 42              		CMP R1,0	// QImode test
+00008F46 02 BE              		JG L97	// QImode LE
+00008F47 0F 9F 4E 8F        		PC=L92
+                            	L97:
+00008F49 50 94              		R2=16	// QImode move
+00008F4A C8 D4              		[SP--]=R2	// QImode move
+00008F4B 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008F4D 41 00              		SP=SP+1
+                            	L92:
+00008F4E 4A 92              		R1=10	// QImode move
+00008F4F C8 D2              		[SP--]=R1	// QImode move
+00008F50 C5 94              		R2=[BP]	// QImode move
+00008F51 C8 D4              		[SP--]=R2	// QImode move
+00008F52 40 F0 FC 94        		call __modi1	// call with return value
+00008F54 42 00              		SP=SP+2
+00008F55 40 42              		CMP R1,0	// QImode test
+00008F56 02 4E              		JNZ L98	// QImode EQ
+00008F57 0F 9F 5E 8F        		PC=L93
+                            	L98:
+00008F59 46 02              		R1=R1+6
+00008F5A C8 D2              		[SP--]=R1	// QImode move
+00008F5B 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008F5D 41 00              		SP=SP+1
+                            	L93:
+00008F5E 59 92              		R1=25	// QImode move
+00008F5F C8 D2              		[SP--]=R1	// QImode move
+                            	L94:
+00008F60 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008F62 41 00              		SP=SP+1
+                            	
+00008F63 42 00              		sp+=2
+00008F64 88 98              		pop bp from [sp]
+00008F65 90 9A              		retf
+                            		.endp	// end of PlaySpeakMinute
+                            	
+00008F66                    	.code
+                            	.public _PlaySpeakSecond
+                            	_PlaySpeakSecond:	.proc
+                            		// total=2, vars=2
+                            		// frame_pointer_needed: 1
+00008F66 88 DA              		push bp to [sp]
+00008F67 42 20              		sp-=2
+00008F68 08 0B 01 00        		bp=sp+1
+                            	
+00008F6A 05 92              		R1=[bp+5]	// QImode move
+00008F6B C5 D2              		[BP]=R1	// QImode move
+00008F6C 40 42              		CMP R1,0	// QImode test
+00008F6D 02 5E              		JZ L104	// QImode NE
+00008F6E 0F 9F 75 8F        		PC=L100
+                            	L104:
+00008F70 46 02              		R1=R1+6
+00008F71 C8 D2              		[SP--]=R1	// QImode move
+00008F72 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008F74 41 00              		SP=SP+1
+                            	L100:
+00008F75 4A 94              		R2=10	// QImode move
+00008F76 C8 D4              		[SP--]=R2	// QImode move
+00008F77 C5 92              		R1=[BP]	// QImode move
+00008F78 C8 D2              		[SP--]=R1	// QImode move
+00008F79 40 F0 C5 94        		call __divi1	// call with return value
+00008F7B 42 00              		SP=SP+2
+00008F7C 01 D2              		[bp+1]=R1	// QImode move
+00008F7D 41 42              		CMP R1,1	// QImode compare
+00008F7E 02 BE              		JG L105	// QImode LE
+00008F7F 0F 9F 86 8F        		PC=L101
+                            	L105:
+00008F81 46 02              		R1=R1+6
+00008F82 C8 D2              		[SP--]=R1	// QImode move
+00008F83 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008F85 41 00              		SP=SP+1
+                            	L101:
+00008F86 01 94              		R2=[bp+1]	// QImode move
+00008F87 40 44              		CMP R2,0	// QImode test
+00008F88 02 BE              		JG L106	// QImode LE
+00008F89 0F 9F 90 8F        		PC=L102
+                            	L106:
+00008F8B 50 92              		R1=16	// QImode move
+00008F8C C8 D2              		[SP--]=R1	// QImode move
+00008F8D 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008F8F 41 00              		SP=SP+1
+                            	L102:
+00008F90 4A 94              		R2=10	// QImode move
+00008F91 C8 D4              		[SP--]=R2	// QImode move
+00008F92 C5 92              		R1=[BP]	// QImode move
+00008F93 C8 D2              		[SP--]=R1	// QImode move
+00008F94 40 F0 FC 94        		call __modi1	// call with return value
+00008F96 42 00              		SP=SP+2
+00008F97 40 42              		CMP R1,0	// QImode test
+00008F98 02 4E              		JNZ L107	// QImode EQ
+00008F99 0F 9F A0 8F        		PC=L103
+                            	L107:
+00008F9B 46 02              		R1=R1+6
+00008F9C C8 D2              		[SP--]=R1	// QImode move
+00008F9D 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008F9F 41 00              		SP=SP+1
+                            	L103:
+00008FA0 5A 94              		R2=26	// QImode move
+00008FA1 C8 D4              		[SP--]=R2	// QImode move
+00008FA2 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008FA4 41 00              		SP=SP+1
+                            	
+00008FA5 42 00              		sp+=2
+00008FA6 88 98              		pop bp from [sp]
+00008FA7 90 9A              		retf
+                            		.endp	// end of PlaySpeakSecond
+                            	
+00008FA8                    	.code
+                            	.public _SpeakTime
+                            	_SpeakTime:	.proc
+                            		// total=1, vars=1
+                            		// frame_pointer_needed: 1
+00008FA8 88 DA              		push bp to [sp]
+00008FA9 41 20              		sp-=1
+00008FAA 08 0B 01 00        		bp=sp+1
+                            	
+00008FAC 04 92              		R1=[bp+4]	// QImode move
+00008FAD C5 D2              		[BP]=R1	// QImode move
+00008FAE 41 42              		CMP R1,1	// QImode compare
+00008FAF 02 5E              		JZ L111	// QImode NE
+00008FB0 0F 9F C1 8F        		PC=L109
+                            	L111:
+00008FB2 40 92              		R1=0	// QImode move
+00008FB3 C8 D2              		[SP--]=R1	// QImode move
+00008FB4 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+00008FB6 C5 92              		R1=[BP]	// QImode move
+00008FB7 C8 D2              		[SP--]=R1	// QImode move
+00008FB8 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+00008FBA 42 92              		R1=2	// QImode move
+00008FBB C8 D2              		[SP--]=R1	// QImode move
+00008FBC 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+00008FBE 43 00              		SP=SP+3
+00008FBF 0F 9F D2 8F        		pc=L110	// Indirect jump
+                            	L109:
+00008FC1 40 92              		R1=0	// QImode move
+00008FC2 C8 D2              		[SP--]=R1	// QImode move
+00008FC3 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008FC5 41 92              		R1=1	// QImode move
+00008FC6 C8 D2              		[SP--]=R1	// QImode move
+00008FC7 40 F0 7B 8D        		call _PlayRespond	// call without return value
+00008FC9 43 92              		R1=3	// QImode move
+00008FCA C8 D2              		[SP--]=R1	// QImode move
+00008FCB 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+00008FCD 44 92              		R1=4	// QImode move
+00008FCE C8 D2              		[SP--]=R1	// QImode move
+00008FCF 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+00008FD1 44 00              		SP=SP+4
+                            	L110:
+                            	
+00008FD2 41 00              		sp+=1
+00008FD3 88 98              		pop bp from [sp]
+00008FD4 90 9A              		retf
+                            		.endp	// end of SpeakTime
+                            	
+00008FD5                    	.code
+                            	.public _main
+                            	_main:	.proc
+                            		// total=2, vars=2
+                            		// frame_pointer_needed: 1
+00008FD5 88 DA              		push bp to [sp]
+00008FD6 42 20              		sp-=2
+00008FD7 08 0B 01 00        		bp=sp+1
+                            	
+00008FD9 40 F0 08 91        		call _System_Initial	// call with return value
+                            	L115:
+00008FDB 40 F0 42 94        		call _Key_Scan_ServiceLoop	// call with return value
+00008FDD 12 95 3A 03        		R2=[_Key]	// QImode move
+00008FDF 41 44              		CMP R2,1	// QImode compare
+00008FE0 02 5E              		JZ L151	// QImode NE
+00008FE1 0F 9F ED 8F        		PC=L116
+                            	L151:
+00008FE3 11 93 3F 03        		R1=[_KeyStatus]	// QImode move
+00008FE5 40 42              		CMP R1,0	// QImode test
+00008FE6 02 5E              		JZ L152	// QImode NE
+00008FE7 0F 9F ED 8F        		PC=L116
+                            	L152:
+00008FE9 1A D5 43 03        		[_KeyCount]=R2	// QImode move
+00008FEB 19 D3 3A 03        		[_Key]=R1	// QImode move
+                            	L116:
+00008FED 11 93 3A 03        		R1=[_Key]	// QImode move
+00008FEF 09 43 01 80        		CMP R1,(-32767)	// QImode compare
+00008FF1 02 5E              		JZ L153	// QImode NE
+00008FF2 0F 9F 01 90        		PC=L117
+                            	L153:
+00008FF4 12 95 3F 03        		R2=[_KeyStatus]	// QImode move
+00008FF6 40 44              		CMP R2,0	// QImode test
+00008FF7 02 5E              		JZ L154	// QImode NE
+00008FF8 0F 9F 01 90        		PC=L117
+                            	L154:
+00008FFA 11 93 43 03        		R1=[_KeyCount]	// QImode move
+00008FFC 41 02              		R1=R1+1
+00008FFD 19 D3 43 03        		[_KeyCount]=R1	// QImode move
+00008FFF 1A D5 3A 03        		[_Key]=R2	// QImode move
+                            	L117:
+00009001 12 95 3B 03        		R2=[_KeyPressFlag]	// QImode move
+00009003 40 44              		CMP R2,0	// QImode test
+00009004 02 5E              		JZ L155	// QImode NE
+00009005 0F 9F 30 90        		PC=L118
+                            	L155:
+00009007 11 93 43 03        		R1=[_KeyCount]	// QImode move
+00009009 40 42              		CMP R1,0	// QImode test
+0000900A 02 4E              		JNZ L156	// QImode EQ
+0000900B 0F 9F 30 90        		PC=L118
+                            	L156:
+0000900D 53 42              		CMP R1,19	// QImode compare
+0000900E 02 8E              		JNA L157	// QImode GTU
+0000900F 0F 9F 1F 90        		PC=L148
+                            	L157:
+00009011 11 93 41 03        		R1=[_YearOrTime]	// QImode move
+00009013 41 82              		R1=R1^1
+00009014 19 D3 41 03        		[_YearOrTime]=R1	// QImode move
+00009016 C8 D2              		[SP--]=R1	// QImode move
+00009017 01 D4              		[bp+1]=R2	// QImode move
+00009018 40 F0 A8 8F        		call _SpeakTime	// call without return value
+0000901A 01 94              		R2=[bp+1]	// QImode move
+0000901B 1A D5 43 03        		[_KeyCount]=R2	// QImode move
+0000901D 0F 9F 2F 90        		pc=L149	// Indirect jump
+                            	L148:
+0000901F 1A D5 43 03        		[_KeyCount]=R2	// QImode move
+00009021 41 92              		R1=1	// QImode move
+00009022 19 D3 3F 03        		[_KeyStatus]=R1	// QImode move
+00009024 1A D5 40 03        		[_KeyAdjust]=R2	// QImode move
+00009026 1A D5 3C 03        		[_TimeCount]=R2	// QImode move
+00009028 40 F0 DF 92        		call _Start256HzRTC	// call with return value
+0000902A 11 93 40 03        		R1=[_KeyAdjust]	// QImode move
+0000902C C8 D2              		[SP--]=R1	// QImode move
+0000902D 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+                            	L149:
+0000902F 41 00              		SP=SP+1
+                            	L118:
+00009030 11 93 3F 03        		R1=[_KeyStatus]	// QImode move
+00009032 C5 D2              		[BP]=R1	// QImode move
+00009033 41 42              		CMP R1,1	// QImode compare
+00009034 02 5E              		JZ L158	// QImode NE
+00009035 0F 9F B8 90        		PC=L122
+                            	L158:
+00009037 11 93 3A 03        		R1=[_Key]	// QImode move
+00009039 42 42              		CMP R1,2	// QImode compare
+0000903A 02 4E              		JNZ L159	// QImode EQ
+0000903B 0F 9F 7F 90        		PC=L127
+                            	L159:
+0000903D 02 8E              		JNA L160	// QImode GTU
+0000903E 0F 9F 46 90        		PC=L131
+                            	L160:
+00009040 41 42              		CMP R1,1	// QImode compare
+00009041 02 4E              		JNZ L161	// QImode EQ
+00009042 0F 9F 4C 90        		PC=L124
+                            	L161:
+00009044 0F 9F 97 90        		pc=L123	// Indirect jump
+                            	L131:
+00009046 44 42              		CMP R1,4	// QImode compare
+00009047 02 4E              		JNZ L162	// QImode EQ
+00009048 0F 9F 86 90        		PC=L128
+                            	L162:
+0000904A 0F 9F 97 90        		pc=L123	// Indirect jump
+                            	L124:
+0000904C 11 93 40 03        		R1=[_KeyAdjust]	// QImode move
+0000904E 41 02              		R1=R1+1
+0000904F 19 D3 40 03        		[_KeyAdjust]=R1	// QImode move
+00009051 45 42              		CMP R1,5	// QImode compare
+00009052 02 5E              		JZ L163	// QImode NE
+00009053 0F 9F 72 90        		PC=L125
+                            	L163:
+00009055 40 92              		R1=0	// QImode move
+00009056 19 D3 3F 03        		[_KeyStatus]=R1	// QImode move
+00009058 19 D3 40 03        		[_KeyAdjust]=R1	// QImode move
+0000905A C8 D2              		[SP--]=R1	// QImode move
+0000905B 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+0000905D C5 92              		R1=[BP]	// QImode move
+0000905E C8 D2              		[SP--]=R1	// QImode move
+0000905F 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+00009061 42 92              		R1=2	// QImode move
+00009062 C8 D2              		[SP--]=R1	// QImode move
+00009063 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+00009065 43 92              		R1=3	// QImode move
+00009066 C8 D2              		[SP--]=R1	// QImode move
+00009067 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+00009069 44 92              		R1=4	// QImode move
+0000906A C8 D2              		[SP--]=R1	// QImode move
+0000906B 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+0000906D 40 F0 EE 92        		call _Stop256HzRTC	// call with return value
+0000906F 45 00              		SP=SP+5
+00009070 0F 9F 76 90        		pc=L126	// Indirect jump
+                            	L125:
+00009072 C8 D2              		[SP--]=R1	// QImode move
+00009073 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+00009075 41 00              		SP=SP+1
+                            	L126:
+00009076 40 92              		R1=0	// QImode move
+00009077 19 D3 3A 03        		[_Key]=R1	// QImode move
+00009079 19 D3 3C 03        		[_TimeCount]=R1	// QImode move
+0000907B 19 D3 42 03        		[_TimeChangeKey]=R1	// QImode move
+0000907D 0F 9F 97 90        		pc=L123	// Indirect jump
+                            	L127:
+0000907F 11 93 40 03        		R1=[_KeyAdjust]	// QImode move
+00009081 C8 D2              		[SP--]=R1	// QImode move
+00009082 40 F0 C6 91        		call _Adjust_Time_Up	// call with return value
+00009084 0F 9F 8B 90        		pc=L150	// Indirect jump
+                            	L128:
+00009086 11 93 40 03        		R1=[_KeyAdjust]	// QImode move
+00009088 C8 D2              		[SP--]=R1	// QImode move
+00009089 40 F0 42 92        		call _Adjust_Time_Down	// call with return value
+                            	L150:
+0000908B 40 92              		R1=0	// QImode move
+0000908C 19 D3 3E 03        		[_TimeChangeCount]=R1	// QImode move
+0000908E C5 92              		R1=[BP]	// QImode move
+0000908F 19 D3 42 03        		[_TimeChangeKey]=R1	// QImode move
+00009091 40 92              		R1=0	// QImode move
+00009092 19 D3 3C 03        		[_TimeCount]=R1	// QImode move
+00009094 19 D3 3A 03        		[_Key]=R1	// QImode move
+00009096 41 00              		SP=SP+1
+                            	L123:
+00009097 11 93 42 03        		R1=[_TimeChangeKey]	// QImode move
+00009099 41 42              		CMP R1,1	// QImode compare
+0000909A 02 5E              		JZ L164	// QImode NE
+0000909B 0F 9F AC 90        		PC=L132
+                            	L164:
+0000909D 11 93 3E 03        		R1=[_TimeChangeCount]	// QImode move
+0000909F 68 42              		CMP R1,40	// QImode compare
+000090A0 02 9E              		JA L165	// QImode LEU
+000090A1 0F 9F AC 90        		PC=L132
+                            	L165:
+000090A3 40 92              		R1=0	// QImode move
+000090A4 19 D3 42 03        		[_TimeChangeKey]=R1	// QImode move
+000090A6 11 93 40 03        		R1=[_KeyAdjust]	// QImode move
+000090A8 C8 D2              		[SP--]=R1	// QImode move
+000090A9 40 F0 AB 8D        		call _PlayAdjustTime	// call with return value
+000090AB 41 00              		SP=SP+1
+                            	L132:
+000090AC 11 93 3C 03        		R1=[_TimeCount]	// QImode move
+000090AE 09 43 78 00        		CMP R1,120	// QImode compare
+000090B0 02 9E              		JA L166	// QImode LEU
+000090B1 0F 9F B8 90        		PC=L122
+                            	L166:
+000090B3 40 92              		R1=0	// QImode move
+000090B4 19 D3 3F 03        		[_KeyStatus]=R1	// QImode move
+000090B6 19 D3 40 03        		[_KeyAdjust]=R1	// QImode move
+                            	L122:
+000090B8 40 F0 44 91        		call _Calendar_Counter	// call with return value
+000090BA 11 93 44 03        		R1=[_SecondAddOne]	// QImode move
+000090BC 09 43 FF FF        		CMP R1,(-1)	// QImode compare
+000090BE 02 5E              		JZ L167	// QImode NE
+000090BF 0F 9F F5 90        		PC=L134
+                            	L167:
+000090C1 40 92              		R1=0	// QImode move
+000090C2 19 D3 44 03        		[_SecondAddOne]=R1	// QImode move
+000090C4 40 F0 CB 92        		call _ReadRealHourMin	// call with return value
+000090C6 19 D3 45 03        		[_HourMinTemp]=R1	// QImode move
+000090C8 40 92              		R1=0	// QImode move
+000090C9 19 D3 46 03        		[_i]=R1	// QImode move
+000090CB 0C 99 48 03        		R4=_gTimeVSShem	// QImode move
+                            	L138:
+000090CD 13 97 46 03        		R3=[_i]	// QImode move
+000090CF 03 93              		R1=R3	// QImode move
+000090D0 04 03              		R1+=R4	// addqi3_r0r
+000090D1 12 95 45 03        		R2=[_HourMinTemp]	// QImode move
+000090D3 C1 44              		CMP R2,[R1]	// QImode compare
+000090D4 02 5E              		JZ L168	// QImode NE
+000090D5 0F 9F ED 90        		PC=L137
+                            	L168:
+000090D7 40 92              		R1=0	// QImode move
+000090D8 19 D3 47 03        		[_j]=R1	// QImode move
+                            	L143:
+000090DA 40 F0 36 91        		call _LightOn	// call with return value
+000090DC 40 F0 9F 8D        		call _Delay3ms	// call without return value
+000090DE 40 F0 3D 91        		call _LightOff	// call with return value
+000090E0 40 F0 9F 8D        		call _Delay3ms	// call without return value
+000090E2 11 93 47 03        		R1=[_j]	// QImode move
+000090E4 41 02              		R1=R1+1
+000090E5 19 D3 47 03        		[_j]=R1	// QImode move
+000090E7 4E 42              		CMP R1,14	// QImode compare
+000090E8 02 9E              		JA L169	// QImode LEU
+000090E9 0F 9F DA 90        		PC=L143
+                            	L169:
+000090EB 0F 9F F5 90        		pc=L134	// Indirect jump
+                            	L137:
+000090ED 0B 03 01 00        		R1=R3+1
+000090EF 19 D3 46 03        		[_i]=R1	// QImode move
+000090F1 4F 42              		CMP R1,15	// QImode compare
+000090F2 02 9E              		JA L170	// QImode LEU
+000090F3 0F 9F CD 90        		PC=L138
+                            	L170:
+                            	L134:
+000090F5 11 93 3D 03        		R1=[_SleepFlag]	// QImode move
+000090F7 41 42              		CMP R1,1	// QImode compare
+000090F8 02 5E              		JZ L171	// QImode NE
+000090F9 0F 9F DB 8F        		PC=L115
+                            	L171:
+000090FB 11 93 3F 03        		R1=[_KeyStatus]	// QImode move
+000090FD 40 42              		CMP R1,0	// QImode test
+000090FE 02 5E              		JZ L172	// QImode NE
+000090FF 0F 9F DB 8F        		PC=L115
+                            	L172:
+00009101 40 F0 F8 92        		call _SP_GoSleep	// call with return value
+00009103 0F 9F DB 8F        		pc=L115	// Indirect jump
+                            	
+00009105 42 00              		sp+=2
+00009106 88 98              		pop bp from [sp]
+00009107 90 9A              		retf
+                            		.endp	// end of main
+                            	
+                            	.external _SP_GoSleep
+                            	.external _LightOff
+                            	.external _LightOn
+                            	.external _ReadRealHourMin
+                            	.external _Calendar_Counter
+                            	.external _Adjust_Time_Down
+                            	.external _Adjust_Time_Up
+                            	.external _Stop256HzRTC
+                            	.external _Start256HzRTC
+                            	.external _Key_Scan_ServiceLoop
+                            	.external _System_Initial
+                            	.external _ReadRealMonthDay
+                            	.external _ReadRealYear
+                            	.external _SACM_A2000_Stop
+                            	.external _SACM_A2000_ServiceLoop
+                            	.external _Clear_WatchDog
+                            	.external _SACM_A2000_Status
+                            	.external _SACM_A2000_Play
+                            	.external _SACM_A2000_Initial
+                            	.external __modi1
+                            	.external __divi1
+                            	.external __rshu1
+                            		.end
+0 error(s), 0 warning(s).
+

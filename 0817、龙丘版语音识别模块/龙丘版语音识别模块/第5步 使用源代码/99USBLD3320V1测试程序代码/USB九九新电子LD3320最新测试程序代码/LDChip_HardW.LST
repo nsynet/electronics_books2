@@ -1,0 +1,276 @@
+C51 COMPILER V8.18   LDCHIP_HARDW                                                          08/13/2011 17:58:06 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE LDCHIP_HARDW
+OBJECT MODULE PLACED IN LDChip_HardW.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE LDChip_HardW.c OPTIMIZE(SIZE) BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*
+   2          文件名：LD3320_HardW.C
+   3          描  述：用于实现LD3320底层硬件驱动
+   4          */
+   5          #include "STC10F08XE.H"
+   6          #include "config.h"
+   7          #include "LD3320_HardW.H"
+   8          
+   9          sbit A0=P2^0;      //8位
+  10          sbit CSB=P2^6;     //14位  
+  11          sbit WRB=P3^6;
+  12          sbit RD=P3^7;
+  13          //sbit  LD_MODE = P1^0;
+  14          #define DATA P0
+  15          extern void          _nop_     (void);
+  16          extern void  delay(uint32 uldata);
+  17          
+  18          #define DELAY_NOP _nop_();_nop_();_nop_();
+  19          
+  20          #if (Parallel_Interface)
+  21          /*
+  22          由时序图可以看到，A0负责通知芯片是数据段还是地址段。A0为高时是地
+  23          址，而A0为低时是数据。发送地址时CSB*和WRB*必须有效，写数据时同样
+  24          CSB*和WRB*必须有效，而读数据时CSB*和RDB*必须有效。
+  25          
+  26          在实验板上，利用MCU 自己的读写时序特征，可以很方便地读写LD芯片的
+  27          寄存器。在现有连接中，MCU 的A14 连接到LD 芯片的CSB*，而MCU的A8连
+  28          接到LD 芯片的A0。
+  29          8100: 第14 位=1 第8 位=1 
+  30          8000: 第14 位=1 第8 位=0 
+  31          于是MCU 向LD 芯片的CSB*和A0 发出信号，配合此时的数据线，可以对LD 
+  32          芯片的寄存器进行读写操作，十分方便。第15 位=1 是为了避开低端地址。 
+  33          并行方式的读写函数为： 
+  34          */
+  35          #define LD_INDEX_PORT (*((volatile uint8 xdata*)(0x8100))) 
+  36          #define LD_DATA_PORT (*((volatile uint8 xdata*)(0x8000))) 
+  37          /**************************************************************** 
+  38          函数名称： LD_WriteReg 
+  39          功    能： 根据并行接口写数据
+  40          入口参数： ulAddr,地址；ucVal，数据 
+  41          返回值  ： 无
+  42          ****************************************************************/ 
+  43          void LD_WriteReg( uint8 ulAddr, uint8 ucVal ) 
+  44          { 
+  45   1              //LD_INDEX_PORT = ulAddr; 
+  46   1              //LD_DATA_PORT = ucVal;
+  47   1              A0=1;
+  48   1              CSB=0;
+  49   1              WRB=0;
+  50   1              RD=1;
+  51   1              DATA=ulAddr;
+  52   1              ;;;;;
+  53   1              WRB=1;
+  54   1          A0=0;
+  55   1              CSB=1;
+C51 COMPILER V8.18   LDCHIP_HARDW                                                          08/13/2011 17:58:06 PAGE 2   
+
+  56   1              DATA=ucVal;
+  57   1              CSB=0;
+  58   1              WRB=0;
+  59   1              ;;;
+  60   1              A0=1;
+  61   1              CSB=0;
+  62   1              WRB=1;   
+  63   1      }
+  64          
+  65          /**************************************************************** 
+  66          函数名称： LD_ReadReg 
+  67          功    能： 根据并行接口写数据
+  68          入口参数： ulAddr,地址 
+  69          返回值  ： 读取端口数据
+  70          ****************************************************************/ 
+  71          unsigned char  LD_ReadReg( uint8 ulAddr ) 
+  72          { 
+  73   1      //      LD_INDEX_PORT = ulAddr; 
+  74   1      //      return (uint8)LD_DATA_PORT;
+  75   1              unsigned char redata; 
+  76   1              DATA=ulAddr;
+  77   1              A0=1;
+  78   1              CSB=0;
+  79   1              WRB=0;
+  80   1              DELAY_NOP;
+  81   1      
+  82   1              WRB=1;
+  83   1              CSB=1;
+  84   1              DELAY_NOP;
+  85   1      
+  86   1              A0=0;
+  87   1              CSB=0;
+  88   1              RD=0;
+  89   1              DELAY_NOP;
+  90   1      
+  91   1              redata=DATA;
+  92   1              RD=1;
+  93   1              CSB=1;
+  94   1              DELAY_NOP;       
+  95   1              return redata;  
+  96   1      } 
+  97          #elif  Spi_Interface
+              //对外接口封装使其统一
+              #define LD_WriteReg(ulAddr, ucVal ) LD_SPI_WriteReg(ulAddr, ucVal)
+              #define LD_ReadReg(ulAddr) LD_SPI_ReadReg(ulAddr) 
+              sbit SCS=P2^6; //芯片片选信号
+              sbit SDCK=P0^2; //SPI 时钟信号
+              sbit SDI=P0^0; //SPI 数据输入
+              sbit SDO=P0^1; //SPI 数据输出
+              sbit SPIS=P3^6; //SPI 模式设置：低有效。
+              
+              /**************************************************************** 
+              函数名称： LD_SPI_WriteReg 
+              功    能： 根据SPI 接口写数据
+              入口参数： address,地址；dataout，写入数据
+              返回值  ： 无
+              ****************************************************************/ 
+              void LD_SPI_WriteReg(uint8 address,uint8 dataout) 
+              { 
+                      uint8 i = 0; 
+                      uint8 command=0x04; 
+                      SPIS =0; 
+C51 COMPILER V8.18   LDCHIP_HARDW                                                          08/13/2011 17:58:06 PAGE 3   
+
+                      SCS = 0; 
+                      //write command 
+                      for (i=0;i < 8; i++) 
+                      { 
+                              if ((command & 0x80) == 0x80) 
+                                      SDI = 1; 
+                              else 
+                                      SDI = 0; 
+                              delay(1); 
+                              SDCK = 0; 
+                              command = (command << 1); 
+                              SDCK = 1; 
+                      } 
+                      //write address 
+                      for (i=0;i < 8; i++) 
+                      { 
+                              if ((address & 0x80) == 0x80) 
+                                      SDI = 1; 
+                              else 
+                                      SDI = 0; 
+                              delay(1); 
+                              SDCK = 0; 
+                              address = (address << 1); 
+                              SDCK = 1; 
+                      } 
+                      //write data 
+                      for (i=0;i < 8; i++) 
+                      { 
+                              if ((dataout & 0x80) == 0x80) 
+                                      SDI = 1; 
+                              else 
+                                      SDI = 0; 
+                              delay(1); 
+                              SDCK = 0; 
+                              dataout = (dataout << 1); 
+                              SDCK = 1; 
+                      } 
+                      SCS = 1; 
+              } 
+              /**************************************************************** 
+              函数名称： LD_SPI_ReadReg 
+              功    能： 根据SPI 接口写数据
+              入口参数： address,地址
+              返回值：   读取数据
+              ****************************************************************/ 
+              uint8 LD_SPI_ReadReg(uint8 address) 
+              { 
+                      uint8 i = 0; 
+                      uint8 in =0 ; 
+                      uint8 temp = 0; 
+                      uint8 command=0x05; 
+                      SPIS =0; 
+                      SCS = 0; 
+                      //write command 
+                      for (i=0;i < 8; i++) 
+                      { 
+                              if ((command & 0x80) == 0x80) 
+                                      SDI = 1; 
+                              else 
+                                      SDI = 0; 
+                              delay(1); 
+                              SDCK = 0; 
+C51 COMPILER V8.18   LDCHIP_HARDW                                                          08/13/2011 17:58:06 PAGE 4   
+
+                              command = (command << 1); 
+                              SDCK = 1; 
+                      } 
+                      //write address 
+                      for (i=0;i < 8; i++) 
+                      { 
+                              if ((address & 0x80) == 0x80) 
+                                      SDI = 1; 
+                              else 
+                                      SDI = 0; 
+                              delay(1); 
+                              SDCK = 0; 
+                              address = (address << 1); 
+                              SDCK = 1; 
+                      } 
+                      //Read data 
+                      for (i=0;i < 8; i++) 
+                      { 
+                              in = (in << 1); 
+                              temp = SDO; 
+                              SDCK = 0; 
+                              if (temp == 1) 
+                                      in |= 0x01; 
+                              SDCK = 1; 
+                      } 
+                      SCS = 1; 
+                      return in; 
+              } 
+              #endif
+ 209          
+ 210          /**************************************************************** 
+ 211          函数名称： LD_reset 
+ 212          功    能： LD3320 复位操作
+ 213          入口参数： 无 
+ 214          返回值  ： 无
+ 215          ****************************************************************/ 
+ 216          void LD_reset(void) 
+ 217          { 
+ 218   1              RSTB =1; 
+ 219   1              delay(1); 
+ 220   1              RSTB =0; 
+ 221   1              delay(1); 
+ 222   1              RSTB =1; 
+ 223   1      }
+ 224          
+ 225          /**************************************************************** 
+ 226          函数名称： IO_Send_Byte 
+ 227          功    能： FLASH发送一字节数据
+ 228          入口参数： 无 
+ 229          返回值  ： 无
+ 230          ****************************************************************/ 
+ 231          void IO_Send_Byte(uint8 dataout)
+ 232          {
+ 233   1               uint8 i = 0; 
+ 234   1               FLASH_CS = 0;
+ 235   1               for (i=0; i<8; i++)
+ 236   1               {
+ 237   2                        if ((dataout & 0x80) == 0x80) 
+ 238   2                                 FLASH_DIO = 1;
+ 239   2                        else
+ 240   2                                 FLASH_DIO = 0;
+ 241   2                        FLASH_CLK = 1;
+C51 COMPILER V8.18   LDCHIP_HARDW                                                          08/13/2011 17:58:06 PAGE 5   
+
+ 242   2                        dataout = (dataout << 1); 
+ 243   2                        FLASH_CLK = 0;   
+ 244   2               }
+ 245   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    122    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

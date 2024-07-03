@@ -1,0 +1,74 @@
+# Begin Project
+# Begin SubItem "EVB061Test  Resources"
+# Begin Source File
+SOURCE=01.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_01_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=02.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_02_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=03.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_03_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=04.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_04_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=05.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_05_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=08.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_08_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=09.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_09_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=10.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_10_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=11.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_11_48K
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=12.48k
+USEPARAM=FALSE
+PARAM=
+ID=RES_12_48K
+EXPORT=3
+# End Source File
+# End SubItem
+# End Project

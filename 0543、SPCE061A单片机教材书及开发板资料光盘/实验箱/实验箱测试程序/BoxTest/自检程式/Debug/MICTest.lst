@@ -1,0 +1,57 @@
+Sunplus u'nSP Assembler - Ver. 1.8.0
+              Listing File Has Been Relocated
+                            	
+                            	.define TIMER_DATA_FOR_8KHZ (0xffff - 1500)	 // 时钟频率为Fosc/2,采样率为8kHz
+                            	
+                            	.define		P_TimerA_Ctrl	0x700b 
+                            	.define		P_TimerA_Data	0x700a 
+                            	.define		P_ADC			0x7014 
+                            	.define		P_ADC_Ctrl		0x7015 
+                            	.define		P_DAC1			0x7017
+                            	.define		P_DAC2			0x7016
+                            	.define		P_DAC_Ctrl		0x702A 
+                            	.define		P_INT_Ctrl		0x7010 
+                            	.define		P_INT_Clear		0x7011 
+                            	.define     P_INT_Ctrl_NEW  0x702D;
+                            	.external ClearWatchDog
+0000CB9B                    	.CODE
+                            	.public _MicAD_DA;
+                            	_MicAD_DA: 
+0000CB9B 40 F1              	   		INT OFF;
+                            			
+0000CB9C 7D 92              			R1 = 0x003d;				// 设置AGC 
+0000CB9D 19 D3 15 70        			[P_ADC_Ctrl] = R1;			// 采用自动方式、且通过MIC_IN通道输入,
+0000CB9F 09 93 A8 00        			R1 = 0x00A8;				//通过定时器A的溢出锁存数据，ADC为自动方式
+0000CBA1 19 D3 2A 70        			[P_DAC_Ctrl] = R1;			
+0000CBA3 09 93 E8 03        	        R1=1000
+                            	   loop: 
+0000CBA5 0A 95 40 1F        	           r2=8000  
+                            	      LOOP1:
+0000CBA7 0B 97 A8 03        	         R3=936
+                            	      LOOP2:
+0000CBA9 40 F0 33 CB        	         call ClearWatchDog
+0000CBAB 11 93 14 70        	           	R1 = [P_ADC] 
+0000CBAD 19 D3 17 70        			[P_DAC1] = R1 
+0000CBAF 19 D3 16 70        			[P_DAC2] = R1 
+0000CBB1 41 26              			  R3-=1
+0000CBB2 4A 4E              	          JNZ LOOP2
+0000CBB3 41 24              	          R2-=1
+0000CBB4 4E 4E              	          JNZ LOOP1
+0000CBB5 02 EE              	        JMP TurnoffTimerA;
+0000CBB6 80 FE A5 CB        	          goto loop
+                            	    TurnoffTimerA:        
+0000CBB8 00 EE              	       nop
+0000CBB9 41 F1              	       	INT IRQ;
+0000CBBA 90 9A              	       	retf;
+                            		
+0 error(s), 0 warning(s).
+
+
+
+
+
+
+
+
+
+

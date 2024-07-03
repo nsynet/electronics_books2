@@ -1,0 +1,288 @@
+Sunplus u'nSP Assembler - Ver. 1.6.0
+              Listing File Has Been Relocated
+                            	
+                            	// Resource Table
+                            	// Created by IDE, Do not modify this table
+                            	
+00008009                    	.TEXT
+                            	.public _RES_Table;
+                            	.external __RES_T040_16K_sa
+                            	.public _RES_T040_16K_SA;
+                            	.external __RES_T040_16K_ea;
+                            	.public _RES_T040_16K_EA;
+                            	.external __RES_T041_16K_sa
+                            	.public _RES_T041_16K_SA;
+                            	.external __RES_T041_16K_ea;
+                            	.public _RES_T041_16K_EA;
+                            	.external __RES_T042_16K_sa
+                            	.public _RES_T042_16K_SA;
+                            	.external __RES_T042_16K_ea;
+                            	.public _RES_T042_16K_EA;
+                            	.external __RES_T043_16K_sa
+                            	.public _RES_T043_16K_SA;
+                            	.external __RES_T043_16K_ea;
+                            	.public _RES_T043_16K_EA;
+                            	.external __RES_T044_16K_sa
+                            	.public _RES_T044_16K_SA;
+                            	.external __RES_T044_16K_ea;
+                            	.public _RES_T044_16K_EA;
+                            	.external __RES_T045_16K_sa
+                            	.public _RES_T045_16K_SA;
+                            	.external __RES_T045_16K_ea;
+                            	.public _RES_T045_16K_EA;
+                            	.external __RES_T046_16K_sa
+                            	.public _RES_T046_16K_SA;
+                            	.external __RES_T046_16K_ea;
+                            	.public _RES_T046_16K_EA;
+                            	.external __RES_T047_16K_sa
+                            	.public _RES_T047_16K_SA;
+                            	.external __RES_T047_16K_ea;
+                            	.public _RES_T047_16K_EA;
+                            	.external __RES_T048_16K_sa
+                            	.public _RES_T048_16K_SA;
+                            	.external __RES_T048_16K_ea;
+                            	.public _RES_T048_16K_EA;
+                            	.external __RES_T049_16K_sa
+                            	.public _RES_T049_16K_SA;
+                            	.external __RES_T049_16K_ea;
+                            	.public _RES_T049_16K_EA;
+                            	.external __RES_T050_16K_sa
+                            	.public _RES_T050_16K_SA;
+                            	.external __RES_T050_16K_ea;
+                            	.public _RES_T050_16K_EA;
+                            	.external __RES_T051_16K_sa
+                            	.public _RES_T051_16K_SA;
+                            	.external __RES_T051_16K_ea;
+                            	.public _RES_T051_16K_EA;
+                            	.external __RES_T052_16K_sa
+                            	.public _RES_T052_16K_SA;
+                            	.external __RES_T052_16K_ea;
+                            	.public _RES_T052_16K_EA;
+                            	.external __RES_T053_16K_sa
+                            	.public _RES_T053_16K_SA;
+                            	.external __RES_T053_16K_ea;
+                            	.public _RES_T053_16K_EA;
+                            	.external __RES_T054_16K_sa
+                            	.public _RES_T054_16K_SA;
+                            	.external __RES_T054_16K_ea;
+                            	.public _RES_T054_16K_EA;
+                            	.external __RES_T055_16K_sa
+                            	.public _RES_T055_16K_SA;
+                            	.external __RES_T055_16K_ea;
+                            	.public _RES_T055_16K_EA;
+                            	.external __RES_T056_16K_sa
+                            	.public _RES_T056_16K_SA;
+                            	.external __RES_T056_16K_ea;
+                            	.public _RES_T056_16K_EA;
+                            	.external __RES_T057_16K_sa
+                            	.public _RES_T057_16K_SA;
+                            	.external __RES_T057_16K_ea;
+                            	.public _RES_T057_16K_EA;
+                            	.external __RES_T058_16K_sa
+                            	.public _RES_T058_16K_SA;
+                            	.external __RES_T058_16K_ea;
+                            	.public _RES_T058_16K_EA;
+                            	.external __RES_T059_16K_sa
+                            	.public _RES_T059_16K_SA;
+                            	.external __RES_T059_16K_ea;
+                            	.public _RES_T059_16K_EA;
+                            	.external __RES_T060_16K_sa
+                            	.public _RES_T060_16K_SA;
+                            	.external __RES_T060_16K_ea;
+                            	.public _RES_T060_16K_EA;
+                            	.external __RES_T061_16K_sa
+                            	.public _RES_T061_16K_SA;
+                            	.external __RES_T061_16K_ea;
+                            	.public _RES_T061_16K_EA;
+                            	.external __RES_T062_16K_sa
+                            	.public _RES_T062_16K_SA;
+                            	.external __RES_T062_16K_ea;
+                            	.public _RES_T062_16K_EA;
+                            	.external __RES_T063_16K_sa
+                            	.public _RES_T063_16K_SA;
+                            	.external __RES_T063_16K_ea;
+                            	.public _RES_T063_16K_EA;
+                            	.external __RES_T064_16K_sa
+                            	.public _RES_T064_16K_SA;
+                            	.external __RES_T064_16K_ea;
+                            	.public _RES_T064_16K_EA;
+                            	.external __RES_T065_16K_sa
+                            	.public _RES_T065_16K_SA;
+                            	.external __RES_T065_16K_ea;
+                            	.public _RES_T065_16K_EA;
+                            	.external __RES_T066_16K_sa
+                            	.public _RES_T066_16K_SA;
+                            	.external __RES_T066_16K_ea;
+                            	.public _RES_T066_16K_EA;
+                            	
+                            	
+                            	_RES_Table:
+                            	
+                            	_RES_T040_16K_SA:
+00008009 41 AF 00 00        		.DW offset __RES_T040_16K_sa,seg __RES_T040_16K_sa;
+                            	_RES_T040_16K_EA:
+0000800B 24 B1 00 00        		.DW offset __RES_T040_16K_ea,seg __RES_T040_16K_ea;
+                            	
+                            	_RES_T041_16K_SA:
+0000800D 43 95 00 00        		.DW offset __RES_T041_16K_sa,seg __RES_T041_16K_sa;
+                            	_RES_T041_16K_EA:
+0000800F C6 99 00 00        		.DW offset __RES_T041_16K_ea,seg __RES_T041_16K_ea;
+                            	
+                            	_RES_T042_16K_SA:
+00008011 C6 99 00 00        		.DW offset __RES_T042_16K_sa,seg __RES_T042_16K_sa;
+                            	_RES_T042_16K_EA:
+00008013 C9 9C 00 00        		.DW offset __RES_T042_16K_ea,seg __RES_T042_16K_ea;
+                            	
+                            	_RES_T043_16K_SA:
+00008015 6C 9F 00 00        		.DW offset __RES_T043_16K_sa,seg __RES_T043_16K_sa;
+                            	_RES_T043_16K_EA:
+00008017 DF A1 00 00        		.DW offset __RES_T043_16K_ea,seg __RES_T043_16K_ea;
+                            	
+                            	_RES_T044_16K_SA:
+00008019 C9 9C 00 00        		.DW offset __RES_T044_16K_sa,seg __RES_T044_16K_sa;
+                            	_RES_T044_16K_EA:
+0000801B 6C 9F 00 00        		.DW offset __RES_T044_16K_ea,seg __RES_T044_16K_ea;
+                            	
+                            	_RES_T045_16K_SA:
+0000801D DF A1 00 00        		.DW offset __RES_T045_16K_sa,seg __RES_T045_16K_sa;
+                            	_RES_T045_16K_EA:
+0000801F 52 A4 00 00        		.DW offset __RES_T045_16K_ea,seg __RES_T045_16K_ea;
+                            	
+                            	_RES_T046_16K_SA:
+00008021 1B AB 00 00        		.DW offset __RES_T046_16K_sa,seg __RES_T046_16K_sa;
+                            	_RES_T046_16K_EA:
+00008023 2E AD 00 00        		.DW offset __RES_T046_16K_ea,seg __RES_T046_16K_ea;
+                            	
+                            	_RES_T047_16K_SA:
+00008025 24 B1 00 00        		.DW offset __RES_T047_16K_sa,seg __RES_T047_16K_sa;
+                            	_RES_T047_16K_EA:
+00008027 D7 B2 00 00        		.DW offset __RES_T047_16K_ea,seg __RES_T047_16K_ea;
+                            	
+                            	_RES_T048_16K_SA:
+00008029 15 C3 00 00        		.DW offset __RES_T048_16K_sa,seg __RES_T048_16K_sa;
+                            	_RES_T048_16K_EA:
+0000802B 68 C4 00 00        		.DW offset __RES_T048_16K_ea,seg __RES_T048_16K_ea;
+                            	
+                            	_RES_T049_16K_SA:
+0000802D D7 B2 00 00        		.DW offset __RES_T049_16K_sa,seg __RES_T049_16K_sa;
+                            	_RES_T049_16K_EA:
+0000802F 8A B4 00 00        		.DW offset __RES_T049_16K_ea,seg __RES_T049_16K_ea;
+                            	
+                            	_RES_T050_16K_SA:
+00008031 0F C0 00 00        		.DW offset __RES_T050_16K_sa,seg __RES_T050_16K_sa;
+                            	_RES_T050_16K_EA:
+00008033 92 C1 00 00        		.DW offset __RES_T050_16K_ea,seg __RES_T050_16K_ea;
+                            	
+                            	_RES_T051_16K_SA:
+00008035 3D B6 00 00        		.DW offset __RES_T051_16K_sa,seg __RES_T051_16K_sa;
+                            	_RES_T051_16K_EA:
+00008037 F0 B7 00 00        		.DW offset __RES_T051_16K_ea,seg __RES_T051_16K_ea;
+                            	
+                            	_RES_T052_16K_SA:
+00008039 BB C5 00 00        		.DW offset __RES_T052_16K_sa,seg __RES_T052_16K_sa;
+                            	_RES_T052_16K_EA:
+0000803B 0E C7 00 00        		.DW offset __RES_T052_16K_ea,seg __RES_T052_16K_ea;
+                            	
+                            	_RES_T053_16K_SA:
+0000803D 0E C7 00 00        		.DW offset __RES_T053_16K_sa,seg __RES_T053_16K_sa;
+                            	_RES_T053_16K_EA:
+0000803F 61 C8 00 00        		.DW offset __RES_T053_16K_ea,seg __RES_T053_16K_ea;
+                            	
+                            	_RES_T054_16K_SA:
+00008041 61 C8 00 00        		.DW offset __RES_T054_16K_sa,seg __RES_T054_16K_sa;
+                            	_RES_T054_16K_EA:
+00008043 54 C9 00 00        		.DW offset __RES_T054_16K_ea,seg __RES_T054_16K_ea;
+                            	
+                            	_RES_T055_16K_SA:
+00008045 A3 B9 00 00        		.DW offset __RES_T055_16K_sa,seg __RES_T055_16K_sa;
+                            	_RES_T055_16K_EA:
+00008047 56 BB 00 00        		.DW offset __RES_T055_16K_ea,seg __RES_T055_16K_ea;
+                            	
+                            	_RES_T056_16K_SA:
+00008049 68 C4 00 00        		.DW offset __RES_T056_16K_sa,seg __RES_T056_16K_sa;
+                            	_RES_T056_16K_EA:
+0000804B BB C5 00 00        		.DW offset __RES_T056_16K_ea,seg __RES_T056_16K_ea;
+                            	
+                            	_RES_T057_16K_SA:
+0000804D 2E AD 00 00        		.DW offset __RES_T057_16K_sa,seg __RES_T057_16K_sa;
+                            	_RES_T057_16K_EA:
+0000804F 41 AF 00 00        		.DW offset __RES_T057_16K_ea,seg __RES_T057_16K_ea;
+                            	
+                            	_RES_T058_16K_SA:
+00008051 08 A9 00 00        		.DW offset __RES_T058_16K_sa,seg __RES_T058_16K_sa;
+                            	_RES_T058_16K_EA:
+00008053 1B AB 00 00        		.DW offset __RES_T058_16K_ea,seg __RES_T058_16K_ea;
+                            	
+                            	_RES_T059_16K_SA:
+00008055 8A B4 00 00        		.DW offset __RES_T059_16K_sa,seg __RES_T059_16K_sa;
+                            	_RES_T059_16K_EA:
+00008057 3D B6 00 00        		.DW offset __RES_T059_16K_ea,seg __RES_T059_16K_ea;
+                            	
+                            	_RES_T060_16K_SA:
+00008059 92 C1 00 00        		.DW offset __RES_T060_16K_sa,seg __RES_T060_16K_sa;
+                            	_RES_T060_16K_EA:
+0000805B 15 C3 00 00        		.DW offset __RES_T060_16K_ea,seg __RES_T060_16K_ea;
+                            	
+                            	_RES_T061_16K_SA:
+0000805D 52 A4 00 00        		.DW offset __RES_T061_16K_sa,seg __RES_T061_16K_sa;
+                            	_RES_T061_16K_EA:
+0000805F C5 A6 00 00        		.DW offset __RES_T061_16K_ea,seg __RES_T061_16K_ea;
+                            	
+                            	_RES_T062_16K_SA:
+00008061 F0 B7 00 00        		.DW offset __RES_T062_16K_sa,seg __RES_T062_16K_sa;
+                            	_RES_T062_16K_EA:
+00008063 A3 B9 00 00        		.DW offset __RES_T062_16K_ea,seg __RES_T062_16K_ea;
+                            	
+                            	_RES_T063_16K_SA:
+00008065 09 BD 00 00        		.DW offset __RES_T063_16K_sa,seg __RES_T063_16K_sa;
+                            	_RES_T063_16K_EA:
+00008067 8C BE 00 00        		.DW offset __RES_T063_16K_ea,seg __RES_T063_16K_ea;
+                            	
+                            	_RES_T064_16K_SA:
+00008069 8C BE 00 00        		.DW offset __RES_T064_16K_sa,seg __RES_T064_16K_sa;
+                            	_RES_T064_16K_EA:
+0000806B 0F C0 00 00        		.DW offset __RES_T064_16K_ea,seg __RES_T064_16K_ea;
+                            	
+                            	_RES_T065_16K_SA:
+0000806D C5 A6 00 00        		.DW offset __RES_T065_16K_sa,seg __RES_T065_16K_sa;
+                            	_RES_T065_16K_EA:
+0000806F 08 A9 00 00        		.DW offset __RES_T065_16K_ea,seg __RES_T065_16K_ea;
+                            	
+                            	_RES_T066_16K_SA:
+00008071 56 BB 00 00        		.DW offset __RES_T066_16K_sa,seg __RES_T066_16K_sa;
+                            	_RES_T066_16K_EA:
+00008073 09 BD 00 00        		.DW offset __RES_T066_16K_ea,seg __RES_T066_16K_ea;
+                            	
+                            	
+                            	// End Table
+                            	.public T_SACM_A2000_SpeechTable
+                            	T_SACM_A2000_SpeechTable:
+00008075 09 80              	    .DW  _RES_T040_16K_SA;    //00  嘀
+00008076 0D 80              	    .DW  _RES_T041_16K_SA;    //01  现在时刻
+00008077 11 80              	    .DW  _RES_T042_16K_SA;    //02  凌晨
+00008078 15 80              	    .DW  _RES_T043_16K_SA;    //03  上午
+00008079 19 80              	    .DW  _RES_T044_16K_SA;    //04  下午
+0000807A 1D 80              	    .DW  _RES_T045_16K_SA;    //05  晚上
+0000807B 21 80              	    .DW  _RES_T046_16K_SA;    //06  零
+0000807C 25 80              	    .DW  _RES_T047_16K_SA;    //07  一
+0000807D 29 80              	    .DW  _RES_T048_16K_SA;    //08  二
+0000807E 2D 80              	    .DW  _RES_T049_16K_SA;    //09  三
+0000807F 31 80              	    .DW  _RES_T050_16K_SA;    //10  四
+00008080 35 80              	    .DW  _RES_T051_16K_SA;    //11  五
+00008081 39 80              	    .DW  _RES_T052_16K_SA;    //12  六
+00008082 3D 80              	    .DW  _RES_T053_16K_SA;    //13  七
+00008083 41 80              	    .DW  _RES_T054_16K_SA;    //14  八
+00008084 45 80              	    .DW  _RES_T055_16K_SA;    //15  九
+00008085 49 80              	    .DW  _RES_T056_16K_SA;    //16  十
+00008086 4D 80              	    .DW  _RES_T057_16K_SA;    //17  十一
+00008087 51 80              	    .DW  _RES_T058_16K_SA;    //18  十二
+00008088 55 80              	    .DW  _RES_T059_16K_SA;    //19  两
+00008089 59 80              	    .DW  _RES_T060_16K_SA;    //20  整
+0000808A 5D 80              	    .DW  _RES_T061_16K_SA;    //21  年
+0000808B 61 80              	    .DW  _RES_T062_16K_SA;    //22  月
+0000808C 65 80              	    .DW  _RES_T063_16K_SA;    //23  日
+0000808D 69 80              	    .DW  _RES_T064_16K_SA;    //24  点 
+0000808E 6D 80              	    .DW  _RES_T065_16K_SA;    //25  分
+0000808F 71 80              	    .DW  _RES_T066_16K_SA;    //26  秒
+0 error(s), 0 warning(s).
+

@@ -1,0 +1,21 @@
+Version: 3.0
+Options: m37
+Obj: "D:\PROGRA~1\Sunplus\UNSPID~1\IDE180\startupD.obj"
+Obj: "F:\电子竞赛\KeyPwm\Debug\Resource.obj"
+Obj: "F:\电子竞赛\KeyPwm\Debug\pwm.obj"
+Obj: "F:\电子竞赛\KeyPwm\Debug\main.obj"
+Obj: "F:\电子竞赛\KeyPwm\Debug\key.obj"
+Obj: "F:\电子竞赛\KeyPwm\Debug\IRQ.obj"
+Output: ".\Debug\KeyPwm.S37"
+;Locate: TEXT in "IRQ.obj" at 8009 
+;Align: TEXT in "IRQ.obj" with 0 
+;Locate: IRAM in "key.obj" at 821C  linkat 5 
+;Align: IRAM in "key.obj" with 0 
+;Locate: RAM in "main.obj" at 0 
+;Align: RAM in "main.obj" with 0 
+;Locate: CODE in "main.obj" at 807D 
+;Align: CODE in "main.obj" with 0 
+;Locate: CODE in "key.obj" at 815D 
+;Align: CODE in "key.obj" with 0 
+;Locate: CODE in "pwm.obj" at 81E4 
+;Align: CODE in "pwm.obj" with 0 

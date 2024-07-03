@@ -1,0 +1,117 @@
+Version: 3.0
+Options: m37
+Obj: "E:\Program Files\Sunplus\StudyUnspIDE\startupR.obj"
+Obj: "F:\SN03-TG028\语音电子钟\Release\Resource.obj"
+Obj: "F:\SN03-TG028\语音电子钟\Release\main.obj"
+Obj: "F:\SN03-TG028\语音电子钟\Release\system.obj"
+Obj: "F:\SN03-TG028\语音电子钟\Release\hardware.obj"
+Obj: "F:\SN03-TG028\语音电子钟\Release\Key.obj"
+Obj: "F:\SN03-TG028\语音电子钟\Release\FIQ.obj"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T040_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T041_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T042_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T043_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T044_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T045_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T046_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T047_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T048_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T049_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T050_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T051_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T052_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T053_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T054_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T055_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T056_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T057_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T058_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T059_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T060_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T061_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T062_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T063_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T064_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T065_16k.res"
+Obj: "F:\SN03-TG028\语音电子钟\Release\T066_16k.res"
+Lib: "F:\SN03-TG028\语音电子钟\.\sacmv25.lib"
+Lib: "F:\SN03-TG028\语音电子钟\.\CMacro.lib"
+Output: ".\Release\Time.S37"
+;Locate: TEXT in "Resource.obj" at 8009 
+;Align: TEXT in "Resource.obj" with 0 
+;Locate: IRAM in "main.obj" at 9524  linkat 339 
+;Align: IRAM in "main.obj" with 0 
+;Locate: RAM in "hardware.obj" at 2F7 
+;Align: RAM in "hardware.obj" with 0 
+;Locate: A2000_Section in "a2000" of "sacmv25.lib"  at 0 
+;Align: A2000_Section in "a2000" of "sacmv25.lib"  with 0 
+;Locate: __sn_section_RES_T040_16K in "T040_16k.res" at AF41 
+;Align: __sn_section_RES_T040_16K in "T040_16k.res" with 0 
+;Locate: __sn_section_RES_T041_16K in "T041_16k.res" at 9543 
+;Align: __sn_section_RES_T041_16K in "T041_16k.res" with 0 
+;Locate: __sn_section_RES_T042_16K in "T042_16k.res" at 99C6 
+;Align: __sn_section_RES_T042_16K in "T042_16k.res" with 0 
+;Locate: __sn_section_RES_T043_16K in "T043_16k.res" at 9F6C 
+;Align: __sn_section_RES_T043_16K in "T043_16k.res" with 0 
+;Locate: __sn_section_RES_T044_16K in "T044_16k.res" at 9CC9 
+;Align: __sn_section_RES_T044_16K in "T044_16k.res" with 0 
+;Locate: __sn_section_RES_T045_16K in "T045_16k.res" at A1DF 
+;Align: __sn_section_RES_T045_16K in "T045_16k.res" with 0 
+;Locate: __sn_section_RES_T046_16K in "T046_16k.res" at AB1B 
+;Align: __sn_section_RES_T046_16K in "T046_16k.res" with 0 
+;Locate: __sn_section_RES_T047_16K in "T047_16k.res" at B124 
+;Align: __sn_section_RES_T047_16K in "T047_16k.res" with 0 
+;Locate: __sn_section_RES_T048_16K in "T048_16k.res" at C315 
+;Align: __sn_section_RES_T048_16K in "T048_16k.res" with 0 
+;Locate: __sn_section_RES_T049_16K in "T049_16k.res" at B2D7 
+;Align: __sn_section_RES_T049_16K in "T049_16k.res" with 0 
+;Locate: __sn_section_RES_T050_16K in "T050_16k.res" at C00F 
+;Align: __sn_section_RES_T050_16K in "T050_16k.res" with 0 
+;Locate: __sn_section_RES_T051_16K in "T051_16k.res" at B63D 
+;Align: __sn_section_RES_T051_16K in "T051_16k.res" with 0 
+;Locate: __sn_section_RES_T052_16K in "T052_16k.res" at C5BB 
+;Align: __sn_section_RES_T052_16K in "T052_16k.res" with 0 
+;Locate: __sn_section_RES_T053_16K in "T053_16k.res" at C70E 
+;Align: __sn_section_RES_T053_16K in "T053_16k.res" with 0 
+;Locate: __sn_section_RES_T054_16K in "T054_16k.res" at C861 
+;Align: __sn_section_RES_T054_16K in "T054_16k.res" with 0 
+;Locate: __sn_section_RES_T055_16K in "T055_16k.res" at B9A3 
+;Align: __sn_section_RES_T055_16K in "T055_16k.res" with 0 
+;Locate: __sn_section_RES_T056_16K in "T056_16k.res" at C468 
+;Align: __sn_section_RES_T056_16K in "T056_16k.res" with 0 
+;Locate: __sn_section_RES_T057_16K in "T057_16k.res" at AD2E 
+;Align: __sn_section_RES_T057_16K in "T057_16k.res" with 0 
+;Locate: __sn_section_RES_T058_16K in "T058_16k.res" at A908 
+;Align: __sn_section_RES_T058_16K in "T058_16k.res" with 0 
+;Locate: __sn_section_RES_T059_16K in "T059_16k.res" at B48A 
+;Align: __sn_section_RES_T059_16K in "T059_16k.res" with 0 
+;Locate: __sn_section_RES_T060_16K in "T060_16k.res" at C192 
+;Align: __sn_section_RES_T060_16K in "T060_16k.res" with 0 
+;Locate: __sn_section_RES_T061_16K in "T061_16k.res" at A452 
+;Align: __sn_section_RES_T061_16K in "T061_16k.res" with 0 
+;Locate: __sn_section_RES_T062_16K in "T062_16k.res" at B7F0 
+;Align: __sn_section_RES_T062_16K in "T062_16k.res" with 0 
+;Locate: __sn_section_RES_T063_16K in "T063_16k.res" at BD09 
+;Align: __sn_section_RES_T063_16K in "T063_16k.res" with 0 
+;Locate: __sn_section_RES_T064_16K in "T064_16k.res" at BE8C 
+;Align: __sn_section_RES_T064_16K in "T064_16k.res" with 0 
+;Locate: __sn_section_RES_T065_16K in "T065_16k.res" at A6C5 
+;Align: __sn_section_RES_T065_16K in "T065_16k.res" with 0 
+;Locate: __sn_section_RES_T066_16K in "T066_16k.res" at BB56 
+;Align: __sn_section_RES_T066_16K in "T066_16k.res" with 0 
+;Locate: CODE in "a2000" of "sacmv25.lib"  at 8107 
+;Align: CODE in "a2000" of "sacmv25.lib"  with 0 
+;Locate: CODE in "main.obj" at 8D7B 
+;Align: CODE in "main.obj" with 0 
+;Locate: CODE in "system.obj" at 9108 
+;Align: CODE in "system.obj" with 0 
+;Locate: CODE in "hardware.obj" at 930D 
+;Align: CODE in "hardware.obj" with 0 
+;Locate: CODE in "Key.obj" at 943A 
+;Align: CODE in "Key.obj" with 0 
+;Locate: CODE in "divu1" of "CMacro.lib"  at 9487 
+;Align: CODE in "divu1" of "CMacro.lib"  with 0 
+;Locate: CODE in "divi1" of "CMacro.lib"  at 94C5 
+;Align: CODE in "divi1" of "CMacro.lib"  with 0 
+;Locate: CODE in "modi1" of "CMacro.lib"  at 94FC 
+;Align: CODE in "modi1" of "CMacro.lib"  with 0 

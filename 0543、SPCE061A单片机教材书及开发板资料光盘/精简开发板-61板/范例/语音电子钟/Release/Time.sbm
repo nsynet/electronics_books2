@@ -1,0 +1,4 @@
+.stabs "startup_code.",0x3c,0,0,0
+.stabs "__sn_main:F15",36,0,0,     36821
+.stabs "__sn_end:F15",36,0,0,     33029
+.stabs "__sn_exception:F15",36,0,0,     33030

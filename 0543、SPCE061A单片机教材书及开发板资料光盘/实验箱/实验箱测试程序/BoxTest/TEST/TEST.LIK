@@ -1,0 +1,12 @@
+Version: 3.0
+Options: m37
+Obj: "D:\PROGRA~1\Sunplus\UNSPID~1\IDE180\startupD.obj"
+Obj: "D:\Documents and Settings\ÁõÐÂÑÕ\My Documents\rf\TEST\Debug\Resource.obj"
+Obj: "D:\Documents and Settings\ÁõÐÂÑÕ\My Documents\rf\TEST\Debug\main.obj"
+Output: ".\Debug\TEST.S37"
+;Locate: TEXT in "main.obj" at 8009 
+;Align: TEXT in "main.obj" with 0 
+;Locate: IRAM in "main.obj" at 806C  linkat 0 
+;Align: IRAM in "main.obj" with 0 
+;Locate: CODE in "main.obj" at 8056 
+;Align: CODE in "main.obj" with 0 
